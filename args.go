@@ -67,25 +67,6 @@ func Float[T ~float32 | ~float64](v T) *T { return &v }
 // optional (pointer) fields of the generated argument structs.
 func Bool[T ~bool](v T) *T { return &v }
 
-// EncodeArgs converts an argument value into URL query values.
-//
-// The value may be one of:
-//   - nil,
-//   - an Args map,
-//   - a *Args map,
-//   - a struct (or pointer to struct) whose exported fields carry
-//     `cpanel:"name"` tags.
-//
-// For structs:
-//   - required fields are tagged `cpanel:"name"` and are always encoded,
-//   - optional fields are tagged `cpanel:"name,omitempty"`; optional scalar
-//     fields are pointers so that a nil pointer means "do not send",
-//   - a field tagged `cpanel:"-"` is skipped; a field of type Args with that
-//     tag is used as the catch-all Extra bag and merged into the output,
-//   - slices are encoded as repeated query parameters (OpenAPI form style),
-//     except []byte which is sent as a single string,
-//   - any value implementing fmt.Stringer is encoded via its String method.
-//
 // encodeByBuiltinType handles the well-known argument types (Args, *Args,
 // url.Values, *mergedArgs) and returns handled=true if v was one of them.
 func encodeByBuiltinType(v any) (url.Values, bool, error) {
@@ -120,11 +101,11 @@ func encodeByBuiltinType(v any) (url.Values, bool, error) {
 		}
 		main, err := EncodeArgs(t.args)
 		if err != nil {
-			return nil, false, err
+			return nil, true, err
 		}
 		extra, err := EncodeArgs(t.extra)
 		if err != nil {
-			return nil, false, err
+			return nil, true, err
 		}
 		for k, vs := range main {
 			values[k] = vs
