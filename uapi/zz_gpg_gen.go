@@ -41,6 +41,7 @@ func (c *GPGClient) DeleteKeypair(ctx context.Context, args *GPGDeleteKeypairArg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "GPG", "delete_keypair", args)
 }
 
+
 // GPGExportPublicKeyArgs are the parameters of the UAPI function `GPG::export_public_key`.
 type GPGExportPublicKeyArgs struct {
 	// The ID of the GPG key.
@@ -62,6 +63,7 @@ type GPGExportPublicKeyArgs struct {
 func (c *GPGClient) ExportPublicKey(ctx context.Context, args *GPGExportPublicKeyArgs) (*cpanel.UAPIResult[GPGExportPublicKeyData], error) {
 	return cpanel.UAPICall[GPGExportPublicKeyData](ctx, c.c, http.MethodGet, "GPG", "export_public_key", args)
 }
+
 
 // GPGExportPublicKeyData is a generated payload type.
 type GPGExportPublicKeyData struct {
@@ -93,6 +95,7 @@ type GPGExportSecretKeyArgs struct {
 func (c *GPGClient) ExportSecretKey(ctx context.Context, args *GPGExportSecretKeyArgs) (*cpanel.UAPIResult[GPGExportSecretKeyData], error) {
 	return cpanel.UAPICall[GPGExportSecretKeyData](ctx, c.c, http.MethodGet, "GPG", "export_secret_key", args)
 }
+
 
 // GPGExportSecretKeyData is a generated payload type.
 type GPGExportSecretKeyData struct {
@@ -168,6 +171,7 @@ func (c *GPGClient) GenerateKey(ctx context.Context, args *GPGGenerateKeyArgs) (
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "GPG", "generate_key", args)
 }
 
+
 // GPGImportKeyArgs are the parameters of the UAPI function `GPG::import_key`.
 type GPGImportKeyArgs struct {
 	// The key to import.
@@ -194,6 +198,7 @@ func (c *GPGClient) ImportKey(ctx context.Context, args *GPGImportKeyArgs) (*cpa
 	return cpanel.UAPICall[GPGImportKeyData](ctx, c.c, http.MethodGet, "GPG", "import_key", args)
 }
 
+
 // GPGImportKeyData is a generated payload type.
 type GPGImportKeyData struct {
 	// The key's ID.
@@ -212,6 +217,7 @@ func (c *GPGClient) ListPublicKeys(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[[]GPGListPublicKeysDataItem](ctx, c.c, http.MethodGet, "GPG", "list_public_keys", cpanel.CombineArgs(extra...))
 }
 
+
 // GPGListPublicKeysDataItem is a generated payload type.
 type GPGListPublicKeysDataItem struct {
 	// The key's algorithm.
@@ -224,11 +230,11 @@ type GPGListPublicKeysDataItem struct {
 	// The length of the key, in bits.
 	//
 	// Possible values: `1024`, `2048`, `3072`, `4096`.
-	Bits int64 `json:"bits"`
+	Bits      int64 `json:"bits"`
 
 	// The creation time for the key,
 	// in [Unix time format](http://en.wikipedia.org/wiki/Unix_time).
-	Created string `json:"created"`
+	Created   string `json:"created"`
 
 	// When the key will expire,
 	// in [Unix time format](http://en.wikipedia.org/wiki/Unix_time).
@@ -237,10 +243,10 @@ type GPGListPublicKeysDataItem struct {
 	//
 	// If the key does not expire,
 	// this will be an empty string.
-	Expires string `json:"expires"`
+	Expires   string `json:"expires"`
 
 	// The key's ID.
-	ID string `json:"id"`
+	ID        string `json:"id"`
 
 	// The type of key.
 	//
@@ -249,13 +255,13 @@ type GPGListPublicKeysDataItem struct {
 	// This will always be "pub" because we are listing public keys.
 	//
 	// Possible values: `pub`.
-	Type2 string `json:"type"`
+	Type2     string `json:"type"`
 
 	// The user ID of the key which consists of the following space-separated values:
 	// * The username.
 	// * The key's comment in parentheses.
 	// * The key's email address in angle brackets (<>).
-	UserID string `json:"user_id"`
+	UserID    string `json:"user_id"`
 }
 
 // ListSecretKeys calls the UAPI function `GPG::list_secret_keys` — Return current user's GnuPG secret keys
@@ -269,6 +275,7 @@ func (c *GPGClient) ListSecretKeys(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[[]GPGListSecretKeysDataItem](ctx, c.c, http.MethodGet, "GPG", "list_secret_keys", cpanel.CombineArgs(extra...))
 }
 
+
 // GPGListSecretKeysDataItem is a generated payload type.
 type GPGListSecretKeysDataItem struct {
 	// The key's algorithm.
@@ -279,28 +286,28 @@ type GPGListSecretKeysDataItem struct {
 	Algorithm string `json:"algorithm"`
 
 	// The key's length.
-	Bits int64 `json:"bits"`
+	Bits      int64 `json:"bits"`
 
 	// When the function created the key.
-	Created int64 `json:"created"`
+	Created   int64 `json:"created"`
 
 	// When the key will expire.
-	Expires int64 `json:"expires"`
+	Expires   int64 `json:"expires"`
 
 	// The key's ID.
-	ID string `json:"id"`
+	ID        string `json:"id"`
 
 	// The type of key.
 	//
 	// * `sec` is the only possible value.
 	//
 	// Possible values: `sec`.
-	Type2 string `json:"type"`
+	Type2     string `json:"type"`
 
 	// The user ID of the key. The system returns this value as a space-separated string with the following values:
 	//
 	// * The username.
 	// * A comment in parentheses.
 	// * The key's email address in angle brackets (`<>`).
-	UserID string `json:"user_id"`
+	UserID    string `json:"user_id"`
 }

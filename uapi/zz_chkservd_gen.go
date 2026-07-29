@@ -22,6 +22,7 @@ func (c *ChkservdClient) GetEximPorts(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.UAPICall[ChkservdGetEximPortsData](ctx, c.c, http.MethodGet, "Chkservd", "get_exim_ports", cpanel.CombineArgs(extra...))
 }
 
+
 // ChkservdGetEximPortsData is a generated payload type.
 type ChkservdGetEximPortsData struct {
 	// An array of port numbers on which Exim listens.
@@ -38,6 +39,7 @@ type ChkservdGetEximPortsData struct {
 func (c *ChkservdClient) GetEximPortsSSL(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[ChkservdGetEximPortsSSLData], error) {
 	return cpanel.UAPICall[ChkservdGetEximPortsSSLData](ctx, c.c, http.MethodGet, "Chkservd", "get_exim_ports_ssl", cpanel.CombineArgs(extra...))
 }
+
 
 // ChkservdGetEximPortsSSLData is a generated payload type.
 type ChkservdGetEximPortsSSLData struct {

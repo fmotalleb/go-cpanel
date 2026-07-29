@@ -63,13 +63,14 @@ func (c *TokensClient) CreateFullAccess(ctx context.Context, args *TokensCreateF
 	return cpanel.UAPICall[TokensCreateFullAccessData](ctx, c.c, http.MethodGet, "Tokens", "create_full_access", args)
 }
 
+
 // TokensCreateFullAccessData is a generated payload type.
 type TokensCreateFullAccessData struct {
 	// The API token's creation date and time.
 	CreateTime int64 `json:"create_time"`
 
 	// The generated API token.
-	Token string `json:"token"`
+	Token      string `json:"token"`
 }
 
 // List calls the UAPI function `Tokens::list` — Return cPanel API tokens
@@ -83,20 +84,21 @@ func (c *TokensClient) List(ctx context.Context, extra ...cpanel.Args) (*cpanel.
 	return cpanel.UAPICall[[]TokensListDataItem](ctx, c.c, http.MethodGet, "Tokens", "list", cpanel.CombineArgs(extra...))
 }
 
+
 // TokensListDataItem is a generated payload type.
 type TokensListDataItem struct {
 	// The API token's creation date and time.
-	CreateTime int64 `json:"create_time"`
+	CreateTime    int64 `json:"create_time"`
 
 	// The API token's expiration time.
 	//
 	// * null — The API token does **not** expire.
-	ExpiresAt *int64 `json:"expires_at"`
+	ExpiresAt     *int64 `json:"expires_at"`
 
 	// The account features that the API token has access to.
 	//
 	// * An empty array — The API token has full access.
-	Features []string `json:"features"`
+	Features      []string `json:"features"`
 
 	// Whether the API token has full access to the account's features.
 	//
@@ -108,14 +110,14 @@ type TokensListDataItem struct {
 	HasFullAccess int64 `json:"has_full_access"`
 
 	// The API token's name.
-	Name string `json:"name"`
+	Name          string `json:"name"`
 
 	// Whether the API token is restricted to read-only operations.
 	//
 	// * `1` — The API token may only call operations classified
 	// read-only; write operations are rejected server-side.
 	// * `0` — The API token may perform write operations. …
-	Readonly int64 `json:"readonly"`
+	Readonly      int64 `json:"readonly"`
 }
 
 // TokensRenameArgs are the parameters of the UAPI function `Tokens::rename`.
@@ -149,6 +151,7 @@ func (c *TokensClient) Rename(ctx context.Context, args *TokensRenameArgs) (*cpa
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Tokens", "rename", args)
 }
 
+
 // TokensRevokeArgs are the parameters of the UAPI function `Tokens::revoke`.
 type TokensRevokeArgs struct {
 	// The API token to remove.
@@ -170,3 +173,4 @@ type TokensRevokeArgs struct {
 func (c *TokensClient) Revoke(ctx context.Context, args *TokensRevokeArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Tokens", "revoke", args)
 }
+

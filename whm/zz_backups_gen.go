@@ -23,6 +23,7 @@ func (c *Client) BackupConfigGet(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[BackupConfigGetData](ctx, c.c, http.MethodGet, "backup_config_get", cpanel.CombineArgs(extra...))
 }
 
+
 // A list of backup configuration data.
 type BackupConfigGetDataBackupConfig struct {
 	// Whether daily backups are enabled.
@@ -31,13 +32,13 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BackupDailyEnable int64 `json:"backup_daily_enable"`
+	BackupDailyEnable       int64 `json:"backup_daily_enable"`
 
 	// The number of retained daily backups.
-	BackupDailyRetention int64 `json:"backup_daily_retention"`
+	BackupDailyRetention    int64 `json:"backup_daily_retention"`
 
 	// A comma-seprated list of the days of the month on which the system runs monthly backups.
-	BackupMonthlyDates string `json:"backup_monthly_dates"`
+	BackupMonthlyDates      string `json:"backup_monthly_dates"`
 
 	// Whether monthly backups are enabled.
 	//
@@ -45,10 +46,10 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BackupMonthlyEnable int64 `json:"backup_monthly_enable"`
+	BackupMonthlyEnable     int64 `json:"backup_monthly_enable"`
 
 	// The number of retained monthly backups.
-	BackupMonthlyRetention int64 `json:"backup_monthly_retention"`
+	BackupMonthlyRetention  int64 `json:"backup_monthly_retention"`
 
 	// The day of the week on which the system runs weekly backups.
 	//
@@ -59,7 +60,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `4` — Thursday.
 	// * `5` — Friday.
 	// * `6` — Saturday.
-	BackupWeeklyDay string `json:"backup_weekly_day"`
+	BackupWeeklyDay         string `json:"backup_weekly_day"`
 
 	// Whether weekly backups are enabled.
 	//
@@ -67,10 +68,10 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disable.
 	//
 	// Possible values: `0`, `1`.
-	BackupWeeklyEnable int64 `json:"backup_weekly_enable"`
+	BackupWeeklyEnable      int64 `json:"backup_weekly_enable"`
 
 	// The number of retained weekly backups.
-	BackupWeeklyRetention int64 `json:"backup_weekly_retention"`
+	BackupWeeklyRetention   int64 `json:"backup_weekly_retention"`
 
 	// Whether to back up accounts.
 	//
@@ -86,7 +87,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// documentation.
 	//
 	// Possible values: `1`, `0`.
-	BackupAccts int64 `json:"backupaccts"`
+	BackupAccts             int64 `json:"backupaccts"`
 
 	// Whether bandwidth tracking data backups are enabled.
 	//
@@ -94,7 +95,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BackupBwData int64 `json:"backupbwdata"`
+	BackupBwData            int64 `json:"backupbwdata"`
 
 	// The days of the week on which the system runs daily backups.
 	//
@@ -105,10 +106,10 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `4` — Thursday.
 	// * `5` — Friday.
 	// * `6` — Saturday.
-	BackupDays string `json:"backupdays"`
+	BackupDays              string `json:"backupdays"`
 
 	// The aboslute file path to the server's local backup directory.
-	BackupDir string `json:"backupdir"`
+	BackupDir               string `json:"backupdir"`
 
 	// Whether backups are enabled.
 	//
@@ -116,7 +117,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	BackupEnable int64 `json:"backupenable"`
+	BackupEnable            int64 `json:"backupenable"`
 
 	// Whether system file backups are enabled.
 	//
@@ -124,7 +125,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BackupFiles int64 `json:"backupfiles"`
+	BackupFiles             int64 `json:"backupfiles"`
 
 	// Whether error log backups are enabled.
 	//
@@ -132,7 +133,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BackupLogs int64 `json:"backuplogs"`
+	BackupLogs              int64 `json:"backuplogs"`
 
 	// Whether the system mounts backup partitions as part of the
 	// backup process.
@@ -149,7 +150,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// documentation.
 	//
 	// Possible values: `0`, `1`.
-	BackupMount int64 `json:"backupmount"`
+	BackupMount             int64 `json:"backupmount"`
 
 	// Whether suspended account backups are enabled.
 	//
@@ -166,7 +167,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `incremental` — A full tree of files and directories.
 	//
 	// Possible values: `compressed`, `uncompressed`, `incremental`.
-	BackupType string `json:"backuptype"`
+	BackupType              string `json:"backuptype"`
 
 	// Whether the system performs a check of the minimum free disk space
 	// available on the destination server.
@@ -176,7 +177,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// server.
 	//
 	// Possible values: `0`, `1`.
-	CheckMinFreeSpace int64 `json:"check_min_free_space"`
+	CheckMinFreeSpace       int64 `json:"check_min_free_space"`
 
 	// Whether the backup system creates metadata when a backup runs.
 	//
@@ -184,10 +185,10 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Enables metadata creation.
 	//
 	// Possible values: `1`, `0`.
-	DisableMetadata int64 `json:"disable_metadata"`
+	DisableMetadata         int64 `json:"disable_metadata"`
 
 	// The number of times that the system attempts to use the additional backup destination.
-	ErrorThreshHold int64 `json:"errorthreshhold"`
+	ErrorThreshHold         int64 `json:"errorthreshhold"`
 
 	// Whether the `backup_daily_retention` parameter is strictly enforced.
 	//
@@ -196,7 +197,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// setting after a backup successfully completes.
 	//
 	// Possible values: `0`, `1`.
-	ForcePruneDaily int64 `json:"force_prune_daily"`
+	ForcePruneDaily         int64 `json:"force_prune_daily"`
 
 	// Whether the `backup_monthly_retention` parameter is strictly enforced.
 	//
@@ -205,7 +206,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// setting after a backup successfully completes.
 	//
 	// Possible values: `0`, `1`.
-	ForcePruneMonthly int64 `json:"force_prune_monthly"`
+	ForcePruneMonthly       int64 `json:"force_prune_monthly"`
 
 	// Whether the `backup_weekly_retention` parameter is strictly enforced.
 	//
@@ -214,10 +215,10 @@ type BackupConfigGetDataBackupConfig struct {
 	// setting after a backup successfully completes.
 	//
 	// Possible values: `0`, `1`.
-	ForcePruneWeekly int64 `json:"force_prune_weekly"`
+	ForcePruneWeekly        int64 `json:"force_prune_weekly"`
 
 	// The environment variables passed to the `gzip` application. The system uses these variables to adjust how the `gzip` application runs when compressing backups.
-	GZipRsyncOpts string `json:"gziprsyncopts"`
+	GZipRsyncOpts           string `json:"gziprsyncopts"`
 
 	// Whether the system deletes backups from the local directory.
 	//
@@ -231,7 +232,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// The `backupdir` return value contains the local backup directory.
 	//
 	// Possible values: `0`, `1`.
-	KeepLocal int64 `json:"keeplocal"`
+	KeepLocal               int64 `json:"keeplocal"`
 
 	// Whether the system checks the `rsync` function for hardlink support.
 	//
@@ -239,7 +240,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Linkdest int64 `json:"linkdest"`
+	Linkdest                int64 `json:"linkdest"`
 
 	// Whether the system uses a local zone file from the `dnsadmin` daemon
 	// or `/var/named/domain.tld` file, where `domain.tld` is the target domain.
@@ -248,16 +249,16 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — The system uses the `dnsadmin` daemon.
 	//
 	// Possible values: `0`, `1`.
-	LocalZonesOnly int64 `json:"localzonesonly"`
+	LocalZonesOnly          int64 `json:"localzonesonly"`
 
 	// The maximum interval, in seconds, that the restoration attempts a run to completion. If the restoration takes longer than this interval, the system terminates the restoration.
-	MaximumRestoreTimeout int64 `json:"maximum_restore_timeout"`
+	MaximumRestoreTimeout   int64 `json:"maximum_restore_timeout"`
 
 	// The maximum interval, in seconds, that the backup attempts a run to completion. If the backup takes longer than this interval, the system terminates the backup.
-	MaximumTimeout int64 `json:"maximum_timeout"`
+	MaximumTimeout          int64 `json:"maximum_timeout"`
 
 	// The minimum amount of free disk space the system checks for on the destination server before attempting a backup to that server.
-	MinFreeSpace int64 `json:"min_free_space"`
+	MinFreeSpace            int64 `json:"min_free_space"`
 
 	// The unit of measure of disk space for the `min_free_space` return.
 	//
@@ -265,7 +266,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `percent` — Percentages.
 	//
 	// Possible values: `MB`, `percent`.
-	MinFreeSpaceUnit string `json:"min_free_space_unit"`
+	MinFreeSpaceUnit        string `json:"min_free_space_unit"`
 
 	// The method that the system uses to back up MySQL® databases.
 	//
@@ -273,7 +274,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `dir` — Backs up the entire MySQL directory.
 	// * `both` — Back up databases into each account's archive **and**
 	// the entire MySQL directory.
-	MysqlBackup string `json:"mysqlbackup"`
+	MysqlBackup             string `json:"mysqlbackup"`
 
 	// Whether the `/usr/local/cpanel/scripts/postcpbackup` script runs
 	// after the backup completes.
@@ -282,7 +283,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	PostBackup int64 `json:"postbackup"`
+	PostBackup              int64 `json:"postbackup"`
 
 	// Whether the `/usr/local/cpanel/scripts/precpbackup` script runs before
 	// the system processes backups.
@@ -291,7 +292,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	PreBackup int64 `json:"prebackup"`
+	PreBackup               int64 `json:"prebackup"`
 
 	// Whether backups of PostgreSQL® databases are enabled.
 	//
@@ -299,7 +300,7 @@ type BackupConfigGetDataBackupConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	PSqlBackup int64 `json:"psqlbackup"`
+	PSqlBackup              int64 `json:"psqlbackup"`
 
 	// The directory on the local server where the system temporarily
 	// stores a remote server's backup file during a backup restoration.
@@ -713,6 +714,7 @@ func (c *Client) BackupConfigSet(ctx context.Context, args *BackupConfigSetArgs)
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "backup_config_set", args)
 }
 
+
 // BackupDateList calls the WHM API 1 function `backup_date_list` — Return dates where backup files exist
 //
 // This function lists the dates where backup file exists, whether stored locally or stored on remote backup destinations when local backups are disabled.
@@ -723,6 +725,7 @@ func (c *Client) BackupConfigSet(ctx context.Context, args *BackupConfigSetArgs)
 func (c *Client) BackupDateList(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[BackupDateListData], error) {
 	return cpanel.WHMCall[BackupDateListData](ctx, c.c, http.MethodGet, "backup_date_list", cpanel.CombineArgs(extra...))
 }
+
 
 // BackupDateListData is a generated payload type.
 type BackupDateListData struct {
@@ -1093,6 +1096,7 @@ func (c *Client) BackupDestinationAdd(ctx context.Context, args *BackupDestinati
 	return cpanel.WHMCall[BackupDestinationAddData](ctx, c.c, http.MethodGet, "backup_destination_add", args)
 }
 
+
 // BackupDestinationAddData is a generated payload type.
 type BackupDestinationAddData struct {
 	// The backup destination's ID.
@@ -1121,6 +1125,7 @@ func (c *Client) BackupDestinationDelete(ctx context.Context, args *BackupDestin
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "backup_destination_delete", args)
 }
 
+
 // BackupDestinationGetArgs are the parameters of the WHM API 1 function `backup_destination_get`.
 type BackupDestinationGetArgs struct {
 	// The backup destination's ID.
@@ -1143,6 +1148,7 @@ func (c *Client) BackupDestinationGet(ctx context.Context, args *BackupDestinati
 	return cpanel.WHMCall[BackupDestinationGetResponse](ctx, c.c, http.MethodGet, "backup_destination_get", args)
 }
 
+
 // BackupDestinationGetResponse is a generated payload type.
 // BackupDestinationGetResponse is left as raw JSON because its documented schema
 // is a union of shapes; inspect it with encoding/json.
@@ -1158,6 +1164,7 @@ type BackupDestinationGetResponse = json.RawMessage
 func (c *Client) BackupDestinationList(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[BackupDestinationListData], error) {
 	return cpanel.WHMCall[BackupDestinationListData](ctx, c.c, http.MethodGet, "backup_destination_list", cpanel.CombineArgs(extra...))
 }
+
 
 // BackupDestinationResponseType is a generated payload type.
 // BackupDestinationResponseType is left as raw JSON because its documented schema
@@ -1182,6 +1189,7 @@ type BackupDestinationListData struct {
 func (c *Client) BackupDestinationSet(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "backup_destination_set", cpanel.CombineArgs(extra...))
 }
+
 
 // BackupDestinationValidateArgs are the parameters of the WHM API 1 function `backup_destination_validate`.
 type BackupDestinationValidateArgs struct {
@@ -1215,6 +1223,7 @@ func (c *Client) BackupDestinationValidate(ctx context.Context, args *BackupDest
 	return cpanel.WHMCall[BackupDestinationValidateData](ctx, c.c, http.MethodGet, "backup_destination_validate", args)
 }
 
+
 // BackupDestinationValidateData is a generated payload type.
 type BackupDestinationValidateData struct {
 	// The destination's ID.
@@ -1242,6 +1251,7 @@ type BackupDoesClientIDHaveGoogleCredentialsArgs struct {
 func (c *Client) BackupDoesClientIDHaveGoogleCredentials(ctx context.Context, args *BackupDoesClientIDHaveGoogleCredentialsArgs) (*cpanel.WHMResult[BackupDoesClientIDHaveGoogleCredentialsData], error) {
 	return cpanel.WHMCall[BackupDoesClientIDHaveGoogleCredentialsData](ctx, c.c, http.MethodGet, "backup_does_client_id_have_google_credentials", args)
 }
+
 
 // BackupDoesClientIDHaveGoogleCredentialsData is a generated payload type.
 type BackupDoesClientIDHaveGoogleCredentialsData struct {
@@ -1282,6 +1292,7 @@ type BackupGenerateGoogleOauthUriArgs struct {
 func (c *Client) BackupGenerateGoogleOauthUri(ctx context.Context, args *BackupGenerateGoogleOauthUriArgs) (*cpanel.WHMResult[BackupGenerateGoogleOauthUriData], error) {
 	return cpanel.WHMCall[BackupGenerateGoogleOauthUriData](ctx, c.c, http.MethodGet, "backup_generate_google_oauth_uri", args)
 }
+
 
 // BackupGenerateGoogleOauthUriData is a generated payload type.
 type BackupGenerateGoogleOauthUriData struct {
@@ -1325,13 +1336,14 @@ func (c *Client) BackupGetTransportStatus(ctx context.Context, args *BackupGetTr
 	return cpanel.WHMCall[BackupGetTransportStatusData](ctx, c.c, http.MethodGet, "backup_get_transport_status", args)
 }
 
+
 // BackupGetTransportStatusDataTransportStatusItem is a generated payload type.
 type BackupGetTransportStatusDataTransportStatusItem struct {
 	// The backup transport event's date.
-	Date string `json:"date"`
+	Date           string `json:"date"`
 
 	// The transport event's end time, in `YYYY-MM-DD HH:MM:SS` format.
-	EndTimestamp string `json:"end_timestamp"`
+	EndTimestamp   string `json:"end_timestamp"`
 
 	// The transport event's start time, in `YYYY-MM-DD HH:MM:SS` format.
 	StartTimestamp string `json:"start_timestamp"`
@@ -1342,7 +1354,7 @@ type BackupGetTransportStatusDataTransportStatusItem struct {
 	// * `failed`
 	// * `pending`
 	// * `running`
-	Status string `json:"status"`
+	Status         string `json:"status"`
 
 	// The transport event's name.
 	//
@@ -1350,10 +1362,10 @@ type BackupGetTransportStatusDataTransportStatusItem struct {
 	//
 	// If multiple transports use the same name, the system returns the first
 	// instance of the transport with that name.
-	Transport string `json:"transport"`
+	Transport      string `json:"transport"`
 
 	// The user for whom the system transported the backup.
-	User string `json:"user"`
+	User           string `json:"user"`
 }
 
 // BackupGetTransportStatusData is a generated payload type.
@@ -1365,7 +1377,7 @@ type BackupGetTransportStatusData struct {
 	// This return's value depends on the
 	// [pagination variables](https://go.cpanel.net/paginationvariables)
 	// that you pass when you call the function.
-	Pages int64 `json:"pages"`
+	Pages           int64 `json:"pages"`
 
 	// A list of information about each transport event.
 	TransportStatus []BackupGetTransportStatusDataTransportStatusItem `json:"transport_status"`
@@ -1397,6 +1409,7 @@ func (c *Client) BackupListTransported(ctx context.Context, args *BackupListTran
 	return cpanel.WHMCall[BackupListTransportedData](ctx, c.c, http.MethodGet, "backup_list_transported", args)
 }
 
+
 // BackupListTransportedData is a generated payload type.
 type BackupListTransportedData struct {
 	// An object containing the backup destination information.
@@ -1413,6 +1426,7 @@ type BackupListTransportedData struct {
 func (c *Client) BackupSetList(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[BackupSetListData], error) {
 	return cpanel.WHMCall[BackupSetListData](ctx, c.c, http.MethodGet, "backup_set_list", cpanel.CombineArgs(extra...))
 }
+
 
 // BackupSetListData is a generated payload type.
 type BackupSetListData struct {
@@ -1431,10 +1445,11 @@ func (c *Client) BackupSetListCombined(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[BackupSetListCombinedData](ctx, c.c, http.MethodGet, "backup_set_list_combined", cpanel.CombineArgs(extra...))
 }
 
+
 // An object containing the time and location backup information.
 type BackupSetListCombinedDataBackupSetValueItem struct {
 	// The date the backup was created.
-	When string `json:"when"`
+	When  string `json:"when"`
 
 	// The location of where the backup is located.
 	//
@@ -1452,7 +1467,7 @@ type BackupSetListCombinedDataBackupSetValueItem struct {
 // This return's name is the destination's identification string.
 type BackupSetListCombinedDataDestinationLegendValue struct {
 	// The backup destination's name.
-	Name string `json:"name"`
+	Name  string `json:"name"`
 
 	// The type of backup destination used in the configuration.
 	//
@@ -1474,7 +1489,7 @@ type BackupSetListCombinedDataDestinationLegendValue struct {
 // BackupSetListCombinedData is a generated payload type.
 type BackupSetListCombinedData struct {
 	// An object that contains an object of backup destination information.
-	BackupSet map[string][]BackupSetListCombinedDataBackupSetValueItem `json:"backup_set"`
+	BackupSet         map[string][]BackupSetListCombinedDataBackupSetValueItem `json:"backup_set"`
 
 	// An object containing objects that contain the backup's destination and type information.
 	DestinationLegend map[string]BackupSetListCombinedDataDestinationLegendValue `json:"destination_legend"`
@@ -1516,6 +1531,7 @@ func (c *Client) BackupSkipUsersAll(ctx context.Context, args *BackupSkipUsersAl
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "backup_skip_users_all", args)
 }
 
+
 // BackupSkipUsersAllStatus calls the WHM API 1 function `backup_skip_users_all_status` — Return backup configuration status
 //
 // This function checks each user's backup configuration status while the `backup_skip_users_all` function runs.
@@ -1527,13 +1543,14 @@ func (c *Client) BackupSkipUsersAllStatus(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[BackupSkipUsersAllStatusData](ctx, c.c, http.MethodGet, "backup_skip_users_all_status", cpanel.CombineArgs(extra...))
 }
 
+
 // An object that contains backup configuration status information.
 type BackupSkipUsersAllStatusDataReason struct {
 	// The function's status.
-	Msg string `json:"msg"`
+	Msg     string `json:"msg"`
 
 	// The percentage of users whose backup status has changed.
-	Perc int64 `json:"perc"`
+	Perc    int64 `json:"perc"`
 
 	// Whether user configuration changes are still in progress.
 	//
@@ -1572,6 +1589,7 @@ func (c *Client) BackupUserList(ctx context.Context, args *BackupUserListArgs) (
 	return cpanel.WHMCall[BackupUserListData](ctx, c.c, http.MethodGet, "backup_user_list", args)
 }
 
+
 // BackupUserListDataUserItem is a generated payload type.
 type BackupUserListDataUserItem struct {
 	// The account's backup status
@@ -1580,7 +1598,7 @@ type BackupUserListDataUserItem struct {
 	// * `no_backup`
 	//
 	// Possible values: `active`, `inactive`, `no_backup`.
-	Status string `json:"status"`
+	Status   string `json:"status"`
 
 	// The user's username.
 	Username string `json:"username"`
@@ -1619,6 +1637,7 @@ func (c *Client) ConvertAndMigrateFromLegacyConfig(ctx context.Context, args *Co
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "convert_and_migrate_from_legacy_config", args)
 }
 
+
 // FetchPkgacctMasterLogArgs are the parameters of the WHM API 1 function `fetch_pkgacct_master_log`.
 type FetchPkgacctMasterLogArgs struct {
 	// The `start_background_pkgacct` session ID.
@@ -1640,6 +1659,7 @@ type FetchPkgacctMasterLogArgs struct {
 func (c *Client) FetchPkgacctMasterLog(ctx context.Context, args *FetchPkgacctMasterLogArgs) (*cpanel.WHMResult[FetchPkgacctMasterLogData], error) {
 	return cpanel.WHMCall[FetchPkgacctMasterLogData](ctx, c.c, http.MethodGet, "fetch_pkgacct_master_log", args)
 }
+
 
 // FetchPkgacctMasterLogData is a generated payload type.
 type FetchPkgacctMasterLogData struct {
@@ -1669,6 +1689,7 @@ func (c *Client) GetPkgacctSessionState(ctx context.Context, args *GetPkgacctSes
 	return cpanel.WHMCall[GetPkgacctSessionStateData](ctx, c.c, http.MethodGet, "get_pkgacct_session_state", args)
 }
 
+
 // GetPkgacctSessionStateData is a generated payload type.
 type GetPkgacctSessionStateData struct {
 	// The `start_background_pkgacct` session's state.
@@ -1691,6 +1712,7 @@ func (c *Client) GetUsersAndDomainsWithBackupMetadata(ctx context.Context, extra
 	return cpanel.WHMCall[map[string]string](ctx, c.c, http.MethodGet, "get_users_and_domains_with_backup_metadata", cpanel.CombineArgs(extra...))
 }
 
+
 // GetUsersWithBackupMetadata calls the WHM API 1 function `get_users_with_backup_metadata` — Return users with backup metadata
 //
 // This function lists users with backup metadata.
@@ -1701,6 +1723,7 @@ func (c *Client) GetUsersAndDomainsWithBackupMetadata(ctx context.Context, extra
 func (c *Client) GetUsersWithBackupMetadata(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetUsersWithBackupMetadataData], error) {
 	return cpanel.WHMCall[GetUsersWithBackupMetadataData](ctx, c.c, http.MethodGet, "get_users_with_backup_metadata", cpanel.CombineArgs(extra...))
 }
+
 
 // GetUsersWithBackupMetadataData is a generated payload type.
 type GetUsersWithBackupMetadataData struct {
@@ -1741,6 +1764,7 @@ type GetUsersWithBackupMetadataData struct {
 func (c *Client) ListCparchiveFiles(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListCparchiveFilesData], error) {
 	return cpanel.WHMCall[ListCparchiveFilesData](ctx, c.c, http.MethodGet, "list_cparchive_files", cpanel.CombineArgs(extra...))
 }
+
 
 // ListCparchiveFilesDataQuickrestoreFilesItem is a generated payload type.
 type ListCparchiveFilesDataQuickrestoreFilesItem struct {
@@ -1981,6 +2005,7 @@ func (c *Client) StartBackgroundPkgacct(ctx context.Context, args *StartBackgrou
 	return cpanel.WHMCall[StartBackgroundPkgacctData](ctx, c.c, http.MethodGet, "start_background_pkgacct", args)
 }
 
+
 // StartBackgroundPkgacctData is a generated payload type.
 type StartBackgroundPkgacctData struct {
 	// The name of the master error log.
@@ -1995,10 +2020,10 @@ type StartBackgroundPkgacctData struct {
 	// **Note:**
 	//
 	//  The target system streams the output of this file with the `live_tail_log.cgi` script; however, users should **not** directly call this script.
-	CompleteMasterLog string `json:"complete_master_log"`
+	CompleteMasterLog      string `json:"complete_master_log"`
 
 	// The backup's session ID.
-	SessionID string `json:"session_id"`
+	SessionID              string `json:"session_id"`
 }
 
 // StartLocalCpmoveRestoreArgs are the parameters of the WHM API 1 function `start_local_cpmove_restore`.
@@ -2084,6 +2109,7 @@ func (c *Client) StartLocalCpmoveRestore(ctx context.Context, args *StartLocalCp
 	return cpanel.WHMCall[StartLocalCpmoveRestoreData](ctx, c.c, http.MethodGet, "start_local_cpmove_restore", args)
 }
 
+
 // StartLocalCpmoveRestoreData is a generated payload type.
 type StartLocalCpmoveRestoreData struct {
 	// The background transfer process ID.
@@ -2120,6 +2146,7 @@ type ToggleUserBackupStateArgs struct {
 func (c *Client) ToggleUserBackupState(ctx context.Context, args *ToggleUserBackupStateArgs) (*cpanel.WHMResult[ToggleUserBackupStateData], error) {
 	return cpanel.WHMCall[ToggleUserBackupStateData](ctx, c.c, http.MethodGet, "toggle_user_backup_state", args)
 }
+
 
 // ToggleUserBackupStateData is a generated payload type.
 type ToggleUserBackupStateData struct {

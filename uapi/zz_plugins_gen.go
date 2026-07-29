@@ -37,6 +37,7 @@ func (c *PluginsClient) CanShowPromotions(ctx context.Context, args *PluginsCanS
 	return cpanel.UAPICall[PluginsCanShowPromotionsData](ctx, c.c, http.MethodGet, "Plugins", "can_show_promotions", args)
 }
 
+
 // An object that contains information about the plugin's promotions.
 type PluginsCanShowPromotionsData struct {
 	// Whether the plugin can show promotions.
@@ -66,3 +67,4 @@ type PluginsCreateUserArgs struct {
 func (c *PluginsClient) CreateUser(ctx context.Context, args *PluginsCreateUserArgs) (*cpanel.UAPIResult[map[string]*string], error) {
 	return cpanel.UAPICall[map[string]*string](ctx, c.c, http.MethodGet, "Plugins", "create_user", args)
 }
+

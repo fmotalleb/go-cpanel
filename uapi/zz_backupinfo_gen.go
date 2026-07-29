@@ -22,19 +22,20 @@ func (c *BackupInfoClient) List(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.UAPICall[[]BackupInfoListDataItem](ctx, c.c, http.MethodGet, "BackupInfo", "list", cpanel.CombineArgs(extra...))
 }
 
+
 // BackupInfoListDataItem is a generated payload type.
 type BackupInfoListDataItem struct {
 	// The home-relative file name (basename; safe to echo). Never an absolute path.
-	Fullpath string `json:"fullpath"`
+	Fullpath       string `json:"fullpath"`
 
 	// Archive modification time, epoch seconds.
-	Mtime int64 `json:"mtime"`
+	Mtime          int64 `json:"mtime"`
 
 	// The archive file name (basename only; never an absolute path).
-	Name string `json:"name"`
+	Name           string `json:"name"`
 
 	// Size of the .tar.gz archive in bytes.
-	SizeBytes int64 `json:"sizeBytes"`
+	SizeBytes      int64 `json:"sizeBytes"`
 
 	// Start epoch read from the marker file while a run is active. Null when not running.
 	StartedAtEpoch *int64 `json:"startedAtEpoch"`
@@ -42,7 +43,7 @@ type BackupInfoListDataItem struct {
 	// Archive status derived from the marker file. 'ready' (marker absent), 'inprogress' (marker present, within timeout), or 'timeout' (marker present, stalled past the timeout threshold).
 	//
 	// Possible values: `ready`, `inprogress`, `timeout`.
-	Status string `json:"status"`
+	Status         string `json:"status"`
 }
 
 // Progress calls the UAPI function `BackupInfo::progress` — Get progress for the current user's running full-account backup
@@ -56,35 +57,36 @@ func (c *BackupInfoClient) Progress(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[BackupInfoProgressData](ctx, c.c, http.MethodGet, "BackupInfo", "progress", cpanel.CombineArgs(extra...))
 }
 
+
 // BackupInfoProgressData is a generated payload type.
 type BackupInfoProgressData struct {
 	// Current size in bytes of the growing .tar.gz archive.
-	CurrentBytes int64 `json:"currentBytes"`
+	CurrentBytes        int64 `json:"currentBytes"`
 
 	// Seconds since the run started. 0 when not running.
-	ElapsedSeconds int64 `json:"elapsedSeconds"`
+	ElapsedSeconds      int64 `json:"elapsedSeconds"`
 
 	// Completion percent (0-100). An ESTIMATE while running (clamped to 99; the UI must label it "estimated"); an exact 100 only on a confirmed 'complete' (published archive present).
-	EstimatedPercent float64 `json:"estimatedPercent"`
+	EstimatedPercent    float64 `json:"estimatedPercent"`
 
 	// Estimated final archive size in bytes, (homedir + DB + mailman bytes) multiplied by the gzip compression factor. 0 when quota data is unavailable.
 	EstimatedTotalBytes int64 `json:"estimatedTotalBytes"`
 
 	// Finish epoch. Set only on a confirmed hook 'complete' (published archive present); null otherwise.
-	FinishedAtEpoch *int64 `json:"finishedAtEpoch"`
+	FinishedAtEpoch     *int64 `json:"finishedAtEpoch"`
 
 	// Start epoch (hook record when available, otherwise the marker file). Null when not running.
-	StartedAtEpoch *int64 `json:"startedAtEpoch"`
+	StartedAtEpoch      *int64 `json:"startedAtEpoch"`
 
 	// Current run state. 'inprogress' or 'timeout' while a run is active or finalizing, 'complete' once the published archive is confirmed in the homedir, or 'none' when nothing is running. A confirmed hook 'complete' is sticky - it persists across polls until a new run starts or the reset endpoint is called.
 	//
 	// Possible values: `inprogress`, `timeout`, `complete`, `none`.
-	State string `json:"state"`
+	State               string `json:"state"`
 
 	// Origin of 'state'. 'hook' is the authoritative PkgAcct::Create record (definitive start/finish); 'marker' is the estimated, marker-derived fallback; 'none' when nothing is running.
 	//
 	// Possible values: `hook`, `marker`, `none`.
-	StateSource string `json:"stateSource"`
+	StateSource         string `json:"stateSource"`
 }
 
 // Reset calls the UAPI function `BackupInfo::reset` — Clear the current user's backup run-state record
@@ -97,6 +99,7 @@ type BackupInfoProgressData struct {
 func (c *BackupInfoClient) Reset(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[BackupInfoResetData], error) {
 	return cpanel.UAPICall[BackupInfoResetData](ctx, c.c, http.MethodGet, "BackupInfo", "reset", cpanel.CombineArgs(extra...))
 }
+
 
 // BackupInfoResetData is a generated payload type.
 type BackupInfoResetData struct {

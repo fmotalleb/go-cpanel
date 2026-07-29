@@ -43,6 +43,7 @@ func (c *Client) AddAutoSSLUserExcludedDomains(ctx context.Context, args *AddAut
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "add_autossl_user_excluded_domains", args)
 }
 
+
 // DeleteSSLVhostArgs are the parameters of the WHM API 1 function `delete_ssl_vhost`.
 type DeleteSSLVhostArgs struct {
 	// The hostname whose SSL virtual host you'd like to delete.
@@ -65,32 +66,33 @@ func (c *Client) DeleteSSLVhost(ctx context.Context, args *DeleteSSLVhostArgs) (
 	return cpanel.WHMCall[DeleteSSLVhostData](ctx, c.c, http.MethodGet, "delete_ssl_vhost", args)
 }
 
+
 // DeleteSSLVhostDataRemovedVhostDataItem is a generated payload type.
 type DeleteSSLVhostDataRemovedVhostDataItem struct {
 	// The IP address where the virtual host data resided and its port number.
-	IPPort []string `json:"ip_port"`
+	IPPort          []string `json:"ip_port"`
 
 	// Whether the virtual host was SSL.
 	// * `1` — The host was SSL.
 	// - `0` — The host was **not** SSL.
 	//
 	// Possible values: `0`, `1`.
-	IsSSL int64 `json:"is_ssl"`
+	IsSSL           int64 `json:"is_ssl"`
 
 	// The domain name that the removed virtual host used.
 	PrimaryOnIPPort string `json:"primary_on_ip_port"`
 
 	// The name of the deleted domain.
-	Servername string `json:"servername"`
+	Servername      string `json:"servername"`
 
 	// The output text.
-	VhostEntry string `json:"vhost_entry"`
+	VhostEntry      string `json:"vhost_entry"`
 }
 
 // DeleteSSLVhostData is a generated payload type.
 type DeleteSSLVhostData struct {
 	// Shows the status of the deletion.
-	Output []string `json:"output"`
+	Output           []string `json:"output"`
 
 	// The virtual host data that the script removed.
 	RemovedVhostData []DeleteSSLVhostDataRemovedVhostDataItem `json:"removed_vhost_data"`
@@ -106,6 +108,7 @@ type DeleteSSLVhostData struct {
 func (c *Client) DisableAutoSSL(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "disable_autossl", cpanel.CombineArgs(extra...))
 }
+
 
 // EnqueueDeferredSSLInstallationsArgs are the parameters of the WHM API 1 function `enqueue_deferred_ssl_installations`.
 type EnqueueDeferredSSLInstallationsArgs struct {
@@ -184,6 +187,7 @@ func (c *Client) EnqueueDeferredSSLInstallations(ctx context.Context, args *Enqu
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "enqueue_deferred_ssl_installations", args)
 }
 
+
 // FetchServiceSSLComponents calls the WHM API 1 function `fetch_service_ssl_components` — Return system services and associated certificates
 //
 // This function lists the system's services and their associated certificates.
@@ -195,10 +199,11 @@ func (c *Client) FetchServiceSSLComponents(ctx context.Context, extra ...cpanel.
 	return cpanel.WHMCall[FetchServiceSSLComponentsData](ctx, c.c, http.MethodGet, "fetch_service_ssl_components", cpanel.CombineArgs(extra...))
 }
 
+
 // An object containing certificate information data.
 type FetchServiceSSLComponentsDataServicesItemCertificateInfo struct {
 	// The domains that correspond to the certificate.
-	Domains []string `json:"domains"`
+	Domains                []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -207,12 +212,12 @@ type FetchServiceSSLComponentsDataServicesItemCertificateInfo struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic *string `json:"ecdsa_public"`
+	EcdsaPublic            *string `json:"ecdsa_public"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -220,16 +225,16 @@ type FetchServiceSSLComponentsDataServicesItemCertificateInfo struct {
 	// * `0` — **Not** self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned           int64 `json:"is_self_signed"`
 
 	// The certificate's Common Name.
-	IssuerCommonName string `json:"issuer.commonName"`
+	IssuerCommonName       string `json:"issuer.commonName"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// Information about the issuer.
-	IssuerText string `json:"issuer_text"`
+	IssuerText             string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -237,23 +242,23 @@ type FetchServiceSSLComponentsDataServicesItemCertificateInfo struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm string `json:"key_algorithm"`
+	KeyAlgorithm           string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus *string `json:"modulus"`
+	Modulus                *string `json:"modulus"`
 
 	// The certificate's modulus size.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength *int64 `json:"modulus_length"`
+	ModulusLength          *int64 `json:"modulus_length"`
 
 	// The date the certificate expires.
-	NotAfter int64 `json:"not_after"`
+	NotAfter               int64 `json:"not_after"`
 
 	// The certificate's validation date.
-	NotBefore int64 `json:"not_before"`
+	NotBefore              int64 `json:"not_before"`
 }
 
 // FetchServiceSSLComponentsDataServicesItem is a generated payload type.
@@ -262,16 +267,16 @@ type FetchServiceSSLComponentsDataServicesItem struct {
 	//
 	// This function returns an empty string if no CA bundle exists
 	// for the certificate.
-	Cabundle string `json:"cabundle"`
+	Cabundle        string `json:"cabundle"`
 
 	// The SSL certificate's contents.
-	Certificate string `json:"certificate"`
+	Certificate     string `json:"certificate"`
 
 	// An object containing certificate information data.
 	CertificateInfo FetchServiceSSLComponentsDataServicesItemCertificateInfo `json:"certificate_info"`
 
 	// The certificate's private key.
-	Key string `json:"key"`
+	Key             string `json:"key"`
 
 	// The service that the certificate corresponds to.
 	//
@@ -281,7 +286,7 @@ type FetchServiceSSLComponentsDataServicesItem struct {
 	// * `cpanel`
 	//
 	// Possible values: `ftp`, `exim`, `dovecot`, `cpanel`.
-	Service string `json:"service"`
+	Service         string `json:"service"`
 }
 
 // FetchServiceSSLComponentsData is a generated payload type.
@@ -316,19 +321,20 @@ func (c *Client) FetchSSLCertificatesForFqdns(ctx context.Context, args *FetchSS
 	return cpanel.WHMCall[FetchSSLCertificatesForFqdnsData](ctx, c.c, http.MethodGet, "fetch_ssl_certificates_for_fqdns", args)
 }
 
+
 // FetchSSLCertificatesForFqdnsDataPayloadItem is a generated payload type.
 type FetchSSLCertificatesForFqdnsDataPayloadItem struct {
 	// The CA bundle's contents.
-	Cab *string `json:"cab"`
+	Cab                    *string `json:"cab"`
 
 	// The date the certificate was created.
-	Created int64 `json:"created"`
+	Created                int64 `json:"created"`
 
 	// The certificate's contents.
-	Crt string `json:"crt"`
+	Crt                    string `json:"crt"`
 
 	// The domains that the CSR covers.
-	Domains []string `json:"domains"`
+	Domains                []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -337,18 +343,18 @@ type FetchSSLCertificatesForFqdnsDataPayloadItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic *string `json:"ecdsa_public"`
+	EcdsaPublic            *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName string `json:"friendly_name"`
+	FriendlyName           string `json:"friendly_name"`
 
 	// The certificate's identification.
-	ID string `json:"id"`
+	ID                     string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -356,16 +362,16 @@ type FetchSSLCertificatesForFqdnsDataPayloadItem struct {
 	// * `0` — **Not** self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned           int64 `json:"is_self_signed"`
 
 	// The certificate's Common Name.
-	IssuerCommonName string `json:"issuer.commonName"`
+	IssuerCommonName       string `json:"issuer.commonName"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The private key's text.
-	Key string `json:"key"`
+	Key                    string `json:"key"`
 
 	// The certificate's key's algorithm.
 	//
@@ -373,32 +379,32 @@ type FetchSSLCertificatesForFqdnsDataPayloadItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm string `json:"key_algorithm"`
+	KeyAlgorithm           string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus *string `json:"modulus"`
+	Modulus                *string `json:"modulus"`
 
 	// The certificate's key's modulus length.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength *int64 `json:"modulus_length"`
+	ModulusLength          *int64 `json:"modulus_length"`
 
 	// The date the certificate expired.
-	NotAfter int64 `json:"not_after"`
+	NotAfter               int64 `json:"not_after"`
 
 	// The date the certificate started.
-	NotBefore int64 `json:"not_before"`
+	NotBefore              int64 `json:"not_before"`
 
 	// The certificate's OID hash algorithm signature.
-	SignatureAlgorithm string `json:"signature_algorithm"`
+	SignatureAlgorithm     string `json:"signature_algorithm"`
 
 	// The certificate's Common Name.
-	SubjectCommonName string `json:"subject.commonName"`
+	SubjectCommonName      string `json:"subject.commonName"`
 
 	// A list of cPanel account owners.
-	Users []string `json:"users"`
+	Users                  []string `json:"users"`
 
 	// The certificate's validation type.
 	//
@@ -409,10 +415,10 @@ type FetchSSLCertificatesForFqdnsDataPayloadItem struct {
 	// certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType *string `json:"validation_type"`
+	ValidationType         *string `json:"validation_type"`
 
 	// An error message that explains the reason for a verification error.
-	VerifyError string `json:"verify_error"`
+	VerifyError            string `json:"verify_error"`
 }
 
 // FetchSSLCertificatesForFqdnsData is a generated payload type.
@@ -432,6 +438,7 @@ func (c *Client) FetchSSLVhosts(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.WHMCall[FetchSSLVhostsData](ctx, c.c, http.MethodGet, "fetch_ssl_vhosts", cpanel.CombineArgs(extra...))
 }
 
+
 // An object containing the certificate's Common Name.
 type FetchSSLVhostsDataVhostsItemCrtSubjectCommonName struct {
 	// The certificate's Common Name.
@@ -441,10 +448,10 @@ type FetchSSLVhostsDataVhostsItemCrtSubjectCommonName struct {
 // Information about the certificate.
 type FetchSSLVhostsDataVhostsItemCrt struct {
 	// The date the certificate was created.
-	Created int64 `json:"created"`
+	Created                int64 `json:"created"`
 
 	// A list of the certificate's associated domains.
-	Domains []string `json:"domains"`
+	Domains                []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -453,12 +460,12 @@ type FetchSSLVhostsDataVhostsItemCrt struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic *string `json:"ecdsa_public"`
+	EcdsaPublic            *string `json:"ecdsa_public"`
 
 	// The certificate's key's algorithm.
 	//
@@ -466,10 +473,10 @@ type FetchSSLVhostsDataVhostsItemCrt struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	EncryptionAlgorithm string `json:"encryption_algorithm"`
+	EncryptionAlgorithm    string `json:"encryption_algorithm"`
 
 	// The certificate's ID.
-	ID string `json:"id"`
+	ID                     string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -477,44 +484,44 @@ type FetchSSLVhostsDataVhostsItemCrt struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned           int64 `json:"is_self_signed"`
 
 	// The certificate's issuer.
-	IssuerCommonName string `json:"issuer.commonName"`
+	IssuerCommonName       string `json:"issuer.commonName"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The full text of issuer information.
-	IssuerText string `json:"issuer_text"`
+	IssuerText             string `json:"issuer_text"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus *string `json:"modulus"`
+	Modulus                *string `json:"modulus"`
 
 	// The certificate's key's modulus length.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength *int64 `json:"modulus_length"`
+	ModulusLength          *int64 `json:"modulus_length"`
 
 	// The date the certificate expires.
-	NotAfter int64 `json:"not_after"`
+	NotAfter               int64 `json:"not_after"`
 
 	// The date the certificate became active.
-	NotBefore int64 `json:"not_before"`
+	NotBefore              int64 `json:"not_before"`
 
 	// The certificate's exponent.
-	PublicExponent string `json:"public_exponent"`
+	PublicExponent         string `json:"public_exponent"`
 
 	// The certificate's OID hash algorithm.
-	SignatureAlgorithm string `json:"signature_algorithm"`
+	SignatureAlgorithm     string `json:"signature_algorithm"`
 
 	// An object containing the certificate's Common Name.
-	SubjectCommonName FetchSSLVhostsDataVhostsItemCrtSubjectCommonName `json:"subject.commonName"`
+	SubjectCommonName      FetchSSLVhostsDataVhostsItemCrtSubjectCommonName `json:"subject.commonName"`
 
 	// The certificate's subject text.
-	SubjectText string `json:"subject_text"`
+	SubjectText            string `json:"subject_text"`
 
 	// The certificate's validation type.
 	//
@@ -524,22 +531,22 @@ type FetchSSLVhostsDataVhostsItemCrt struct {
 	// * `null` — Self-signed certificate.
 	//
 	// Possible values: `dv`, `ev`, `ov`.
-	ValidationType *string `json:"validation_type"`
+	ValidationType         *string `json:"validation_type"`
 }
 
 // FetchSSLVhostsDataVhostsItem is a generated payload type.
 type FetchSSLVhostsDataVhostsItem struct {
 	// Information about the certificate.
-	Crt FetchSSLVhostsDataVhostsItemCrt `json:"crt"`
+	Crt           FetchSSLVhostsDataVhostsItemCrt `json:"crt"`
 
 	// The absolute directory path of the primary domain's document root.
-	DocRoot string `json:"docroot"`
+	DocRoot       string `json:"docroot"`
 
 	// A list of the virtual host's domains.
-	Domains []string `json:"domains"`
+	Domains       []string `json:"domains"`
 
 	// The virtual host's IP address.
-	IP string `json:"ip"`
+	IP            string `json:"ip"`
 
 	// The type of IP address.
 	//
@@ -547,10 +554,10 @@ type FetchSSLVhostsDataVhostsItem struct {
 	// * `dedicated`
 	//
 	// Possible values: `shared`, `dedicated`.
-	Iptype string `json:"iptype"`
+	Iptype        string `json:"iptype"`
 
 	// The virtual host's IPv6 address.
-	IPv6 string `json:"ipv6"`
+	IPv6          string `json:"ipv6"`
 
 	// Whether the certificate's domain is the IP address's primary domain.
 	//
@@ -575,10 +582,10 @@ type FetchSSLVhostsDataVhostsItem struct {
 	// * `0` — Does **not** require SNI.
 	//
 	// Possible values: `1`, `0`.
-	NeedsSni int64 `json:"needs_sni"`
+	NeedsSni      int64 `json:"needs_sni"`
 
 	// The virtual host's primary domain.
-	Servername string `json:"servername"`
+	Servername    string `json:"servername"`
 
 	// The virtual host's domain type.
 	//
@@ -588,10 +595,10 @@ type FetchSSLVhostsDataVhostsItem struct {
 	// * `sub` — Subomain.
 	//
 	// Possible values: `addon`, `main`, `parked`, `sub`.
-	Type2 string `json:"type"`
+	Type2         string `json:"type"`
 
 	// The virtual host's username.
-	User string `json:"user"`
+	User          string `json:"user"`
 }
 
 // FetchSSLVhostsData is a generated payload type.
@@ -611,7 +618,7 @@ type FetchSSLVhostsData struct {
 // [sort](https://go.cpanel.net/WHMAPI1SortOutput) the output.
 // * The following example uses the filter and sort options:
 //
-//	`https://hostname.example.com:2087/cpsess##########/json-api/fetch_vhost_ssl_components?api.version=1&api.filter.a.field=servername&api.filter.a.arg0=servername.com&api.filter.a.type=eq&api.filter.enable=1&api.sort.enable=1&api.sort.a.field=servername`
+//   `https://hostname.example.com:2087/cpsess##########/json-api/fetch_vhost_ssl_components?api.version=1&api.filter.a.field=servername&api.filter.a.arg0=servername.com&api.filter.a.type=eq&api.filter.enable=1&api.sort.enable=1&api.sort.a.field=servername`
 //
 // Available since cPanel & WHM version 11.32.
 //
@@ -620,28 +627,29 @@ func (c *Client) FetchVhostSSLComponents(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.WHMCall[FetchVhostSSLComponentsData](ctx, c.c, http.MethodGet, "fetch_vhost_ssl_components", cpanel.CombineArgs(extra...))
 }
 
+
 // FetchVhostSSLComponentsDataComponentsItem is a generated payload type.
 type FetchVhostSSLComponentsDataComponentsItem struct {
 	// The certificate's certificate authority (CA) bundle.
-	Cabundle *string `json:"cabundle"`
+	Cabundle      *string `json:"cabundle"`
 
 	// The ID of the certificate's CA bundle.
-	CabundleID *string `json:"cabundle_id"`
+	CabundleID    *string `json:"cabundle_id"`
 
 	// The certificate's text.
-	Certificate string `json:"certificate"`
+	Certificate   string `json:"certificate"`
 
 	// The certificate's ID.
 	CertificateID string `json:"certificate_id"`
 
 	// The certificate's private key.
-	Key string `json:"key"`
+	Key           string `json:"key"`
 
 	// The ID of the certificate's key.
-	KeyID string `json:"key_id"`
+	KeyID         string `json:"key_id"`
 
 	// The domain or domains that the certificate covers.
-	Servername string `json:"servername"`
+	Servername    string `json:"servername"`
 }
 
 // FetchVhostSSLComponentsData is a generated payload type.
@@ -677,13 +685,14 @@ func (c *Client) FetchCrtInfo(ctx context.Context, args *FetchCrtInfoArgs) (*cpa
 	return cpanel.WHMCall[FetchCrtInfoData](ctx, c.c, http.MethodGet, "fetchcrtinfo", args)
 }
 
+
 // FetchCrtInfoData is a generated payload type.
 type FetchCrtInfoData struct {
 	// The certificate authority (CA) bundle certificate.
-	Cabundle string `json:"cabundle"`
+	Cabundle            string `json:"cabundle"`
 
 	// The certificate's text.
-	Certificate string `json:"certificate"`
+	Certificate         string `json:"certificate"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -691,10 +700,10 @@ type FetchCrtInfoData struct {
 	// * `0` — **Not** self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned        int64 `json:"is_self_signed"`
 
 	// The private key's text.
-	Key string `json:"key"`
+	Key                 string `json:"key"`
 
 	// The certificate's IP address.
 	SubjectCommonNameIP string `json:"subject.commonName_ip"`
@@ -723,34 +732,35 @@ func (c *Client) FetchSSLInfo(ctx context.Context, args *FetchSSLInfoArgs) (*cpa
 	return cpanel.WHMCall[FetchSSLInfoData](ctx, c.c, http.MethodGet, "fetchsslinfo", args)
 }
 
+
 // FetchSSLInfoData is a generated payload type.
 type FetchSSLInfoData struct {
 	// The certificate's certificate authority (CA) bundle.
-	Cab string `json:"cab"`
+	Cab           string `json:"cab"`
 
 	// The certificate's text.
-	Crt string `json:"crt"`
+	Crt           string `json:"crt"`
 
 	// The username of the certificate's creator.
-	CrtOrigin string `json:"crt_origin"`
+	CrtOrigin     string `json:"crt_origin"`
 
 	// The domain name on the certificate.
-	Domain string `json:"domain"`
+	Domain        string `json:"domain"`
 
 	// The certificate's IP address.
-	IP string `json:"ip"`
+	IP            string `json:"ip"`
 
 	// The certificate's private key.
-	Key string `json:"key"`
+	Key           string `json:"key"`
 
 	// The username of the key's creator.
-	KeyOrigin string `json:"key_origin"`
+	KeyOrigin     string `json:"key_origin"`
 
 	// A list of users that the system searched to find certificate information.
 	SearchedUsers []string `json:"searched_users"`
 
 	// The certificate's owner.
-	User string `json:"user"`
+	User          string `json:"user"`
 }
 
 // GenerateSSLArgs are the parameters of the WHM API 1 function `generatessl`.
@@ -830,37 +840,38 @@ func (c *Client) GenerateSSL(ctx context.Context, args *GenerateSSLArgs) (*cpane
 	return cpanel.WHMCall[GenerateSSLData](ctx, c.c, http.MethodGet, "generatessl", args)
 }
 
+
 // GenerateSSLData is a generated payload type.
 type GenerateSSLData struct {
 	// The certificate's text.
-	Cert string `json:"cert"`
+	Cert       string `json:"cert"`
 
 	// The certificate's ID.
-	CertID string `json:"cert_id"`
+	CertID     string `json:"cert_id"`
 
 	// The absolute file path to the certificate's location.
-	Certfile string `json:"certfile"`
+	Certfile   string `json:"certfile"`
 
 	// The CSR's text.
-	Csr string `json:"csr"`
+	Csr        string `json:"csr"`
 
 	// The CSR's ID.
-	CsrID string `json:"csr_id"`
+	CsrID      string `json:"csr_id"`
 
 	// The absolute file path to the CSR.
-	Csrfile string `json:"csrfile"`
+	Csrfile    string `json:"csrfile"`
 
 	// The private key's text.
-	Key string `json:"key"`
+	Key        string `json:"key"`
 
 	// The private key's ID.
-	KeyID string `json:"key_id"`
+	KeyID      string `json:"key_id"`
 
 	// The absolute file path to the private key.
-	Keyfile string `json:"keyfile"`
+	Keyfile    string `json:"keyfile"`
 
 	// The username that generated the request.
-	Sender string `json:"sender"`
+	Sender     string `json:"sender"`
 
 	// The host that generated the request.
 	SenderHost string `json:"sender_host"`
@@ -877,10 +888,11 @@ func (c *Client) GetAutoSSLCheckSchedule(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.WHMCall[GetAutoSSLCheckScheduleData](ctx, c.c, http.MethodGet, "get_autossl_check_schedule", cpanel.CombineArgs(extra...))
 }
 
+
 // GetAutoSSLCheckScheduleData is a generated payload type.
 type GetAutoSSLCheckScheduleData struct {
 	// A list of the time elements of a cron entry that schedules when the script will run. For more information about each element in a cron entry, read the [Cron Wikipedia article](https://en.wikipedia.org/wiki/Cron).
-	Cron []string `json:"cron"`
+	Cron     []string `json:"cron"`
 
 	// The next time that the script will run. A time value, in [ISO-8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
 	NextTime string `json:"next_time"`
@@ -908,21 +920,22 @@ func (c *Client) GetAutoSSLLog(ctx context.Context, args *GetAutoSSLLogArgs) (*c
 	return cpanel.WHMCall[GetAutoSSLLogData](ctx, c.c, http.MethodGet, "get_autossl_log", args)
 }
 
+
 // GetAutoSSLLogDataPayloadItem is a generated payload type.
 type GetAutoSSLLogDataPayloadItem struct {
 	// The contents of an entry.
-	Contents string `json:"contents"`
+	Contents  string `json:"contents"`
 
 	// The level of indentation to display.
-	Indent int64 `json:"indent"`
+	Indent    int64 `json:"indent"`
 
 	// We do not currently use this return.
 	//
 	// Possible values: `0`.
-	Partial int64 `json:"partial"`
+	Partial   int64 `json:"partial"`
 
 	// The AutoSSL process’s ID.
-	Pid int64 `json:"pid"`
+	Pid       int64 `json:"pid"`
 
 	// When the system created the log file entry.
 	Timestamp string `json:"timestamp"`
@@ -935,7 +948,7 @@ type GetAutoSSLLogDataPayloadItem struct {
 	// * `failure`
 	//
 	// Possible values: `out`, `warn`, `success`, `failure`.
-	Type2 string `json:"type"`
+	Type2     string `json:"type"`
 }
 
 // GetAutoSSLLogData is a generated payload type.
@@ -955,6 +968,7 @@ func (c *Client) GetAutoSSLLogsCatalog(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[GetAutoSSLLogsCatalogData](ctx, c.c, http.MethodGet, "get_autossl_logs_catalog", cpanel.CombineArgs(extra...))
 }
 
+
 // GetAutoSSLLogsCatalogDataPayloadItem is a generated payload type.
 type GetAutoSSLLogsCatalogDataPayloadItem struct {
 	// Whether AutoSSL is in progress.
@@ -965,15 +979,15 @@ type GetAutoSSLLogsCatalogDataPayloadItem struct {
 	InProgress int64 `json:"in_progress"`
 
 	// The AutoSSL provider's name.
-	Provider string `json:"provider"`
+	Provider   string `json:"provider"`
 
 	// When the system created the log file.
-	StartTime string `json:"start_time"`
+	StartTime  string `json:"start_time"`
 
 	// The user that corresponds to the AutoSSL log entry.
 	// * The username of a cPanel user that the account owns.
 	// * `*` — All users.
-	Username string `json:"username"`
+	Username   string `json:"username"`
 }
 
 // GetAutoSSLLogsCatalogData is a generated payload type.
@@ -993,6 +1007,7 @@ func (c *Client) GetAutoSSLMetadata(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[GetAutoSSLMetadataData](ctx, c.c, http.MethodGet, "get_autossl_metadata", cpanel.CombineArgs(extra...))
 }
 
+
 // An object containing the user's AutoSSL metadata key values.
 type GetAutoSSLMetadataDataPayload struct {
 	// This option will allow AutoSSL to replace certificates that none of this systems AutoSSL modules issued.
@@ -1001,7 +1016,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** replace the certificate.
 	//
 	// Possible values: `0`, `1`.
-	ClobberExternallySigned int64 `json:"clobber_externally_signed"`
+	ClobberExternallySigned                  int64 `json:"clobber_externally_signed"`
 
 	// This option will send a notification when an AutoSSL certificate expires. This occurs when AutoSSL cannot request a new certificate.
 	//
@@ -1012,7 +1027,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` -  Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLExpiry int64 `json:"notify_autossl_expiry"`
+	NotifyAutoSSLExpiry                      int64 `json:"notify_autossl_expiry"`
 
 	// This option will send a notification if at least one currently-secured domain will lose coverage when the certificate renews.
 	//
@@ -1020,7 +1035,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` -  Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLExpiryCoverage int64 `json:"notify_autossl_expiry_coverage"`
+	NotifyAutoSSLExpiryCoverage              int64 `json:"notify_autossl_expiry_coverage"`
 
 	// This option will send a notification if at least
 	// one of a user's currently-secured domains will lose
@@ -1030,7 +1045,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLExpiryCoverageUser int64 `json:"notify_autossl_expiry_coverage_user"`
+	NotifyAutoSSLExpiryCoverageUser          int64 `json:"notify_autossl_expiry_coverage_user"`
 
 	// This option will send a notification when a
 	// user's AutoSSL certificate expires. This occurs when
@@ -1040,7 +1055,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLExpiryUser int64 `json:"notify_autossl_expiry_user"`
+	NotifyAutoSSLExpiryUser                  int64 `json:"notify_autossl_expiry_user"`
 
 	// This option will send a notification when AutoSSL
 	// successfully renews a certificate.
@@ -1049,7 +1064,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewal int64 `json:"notify_autossl_renewal"`
+	NotifyAutoSSLRenewal                     int64 `json:"notify_autossl_renewal"`
 
 	// This option will send a notification if a currently-secured
 	// domain fails DCV and the certificate has not reached its
@@ -1059,7 +1074,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` -  Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalCoverage int64 `json:"notify_autossl_renewal_coverage"`
+	NotifyAutoSSLRenewalCoverage             int64 `json:"notify_autossl_renewal_coverage"`
 
 	// This option will send a notification when AutoSSL
 	// has renewed a certificate and the new certificate lacks
@@ -1070,7 +1085,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalCoverageReduced int64 `json:"notify_autossl_renewal_coverage_reduced"`
+	NotifyAutoSSLRenewalCoverageReduced      int64 `json:"notify_autossl_renewal_coverage_reduced"`
 
 	// This option will send a notification when AutoSSL
 	// has renewed a certificate for a user and the new certificate
@@ -1081,7 +1096,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalCoverageReducedUser int64 `json:"notify_autossl_renewal_coverage_reduced_user"`
+	NotifyAutoSSLRenewalCoverageReducedUser  int64 `json:"notify_autossl_renewal_coverage_reduced_user"`
 
 	// This option will send a notification if a currently-secured
 	// domain fails DCV and the certificate has not reached its
@@ -1089,7 +1104,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	//
 	// * `1` - Notify.
 	// * `0` - Do **not** notify.
-	NotifyAutoSSLRenewalCoverageUser int64 `json:"notify_autossl_renewal_coverage_user"`
+	NotifyAutoSSLRenewalCoverageUser         int64 `json:"notify_autossl_renewal_coverage_user"`
 
 	// This option will send a notification when AutoSSL
 	// has renewed a certificate and the new certificate lacks
@@ -1099,7 +1114,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalUncoveredDomains int64 `json:"notify_autossl_renewal_uncovered_domains"`
+	NotifyAutoSSLRenewalUncoveredDomains     int64 `json:"notify_autossl_renewal_uncovered_domains"`
 
 	// This option will send a notification when AutoSSL
 	// has renewed a certificate for a user and the new certificate
@@ -1118,7 +1133,7 @@ type GetAutoSSLMetadataDataPayload struct {
 	// * `0` - Do **not** notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalUser int64 `json:"notify_autossl_renewal_user"`
+	NotifyAutoSSLRenewalUser                 int64 `json:"notify_autossl_renewal_user"`
 }
 
 // GetAutoSSLMetadataData is a generated payload type.
@@ -1149,19 +1164,20 @@ func (c *Client) GetAutoSSLProblemsForDomain(ctx context.Context, args *GetAutoS
 	return cpanel.WHMCall[GetAutoSSLProblemsForDomainData](ctx, c.c, http.MethodGet, "get_autossl_problems_for_domain", args)
 }
 
+
 // An object containing information about a DCV problem for a domain.
 type GetAutoSSLProblemsForDomainDataProblemsByDomainItem struct {
 	// The domain queried for problems.
-	Domain string `json:"domain"`
+	Domain  string `json:"domain"`
 
 	// The name of the directory containing the log files for this problem. This directory is located under `/var/cpanel/logs/autossl/`.
-	Log string `json:"log"`
+	Log     string `json:"log"`
 
 	// The problem the domain encountered during DCV.
 	Problem string `json:"problem"`
 
 	// The time that the problem occurred.
-	Time string `json:"time"`
+	Time    string `json:"time"`
 }
 
 // GetAutoSSLProblemsForDomainData is a generated payload type.
@@ -1192,13 +1208,14 @@ func (c *Client) GetAutoSSLProblemsForUser(ctx context.Context, args *GetAutoSSL
 	return cpanel.WHMCall[GetAutoSSLProblemsForUserData](ctx, c.c, http.MethodGet, "get_autossl_problems_for_user", args)
 }
 
+
 // GetAutoSSLProblemsForUserDataProblemsByDomainItem is a generated payload type.
 type GetAutoSSLProblemsForUserDataProblemsByDomainItem struct {
 	// The domain's name
-	Domain string `json:"domain"`
+	Domain  string `json:"domain"`
 
 	// The log folder of the last run in the `/var/cpanel/logs/autossl/` directory.
-	Log string `json:"log"`
+	Log     string `json:"log"`
 
 	// The human readable explanation of the DCV problem.
 	//
@@ -1208,7 +1225,7 @@ type GetAutoSSLProblemsForUserDataProblemsByDomainItem struct {
 	Problem string `json:"problem"`
 
 	// The last run time of the AutoSSL queue.
-	Time string `json:"time"`
+	Time    string `json:"time"`
 }
 
 // GetAutoSSLProblemsForUserData is a generated payload type.
@@ -1228,17 +1245,18 @@ func (c *Client) GetAutoSSLProviders(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.WHMCall[GetAutoSSLProvidersData](ctx, c.c, http.MethodGet, "get_autossl_providers", cpanel.CombineArgs(extra...))
 }
 
+
 // The provider's specifications.
 type GetAutoSSLProvidersDataPayloadItemSpecs struct {
 	// The amount of time in seconds that the provider requires to issue a certificate.
-	AverageDeliveryTime int64 `json:"AVERAGE_DELIVERY_TIME"`
+	AverageDeliveryTime                             int64 `json:"AVERAGE_DELIVERY_TIME"`
 
 	// The methods that the provider uses
 	// to validate the domain.
 	//
 	// * `dns` - DNS Validation Method.
 	// * `http` - HTTP Validation Method.
-	DCVMethods []string `json:"DCV_METHODS"`
+	DCVMethods                                      []string `json:"DCV_METHODS"`
 
 	// The method that the provider uses
 	// to issue the certificate.
@@ -1247,13 +1265,13 @@ type GetAutoSSLProvidersDataPayloadItemSpecs struct {
 	// * `api` - The provider delivers certificates through API calls.
 	//
 	// Possible values: `queue`, `api`.
-	DeliveryMethod string `json:"DELIVERY_METHOD"`
+	DeliveryMethod                                  string `json:"DELIVERY_METHOD"`
 
 	// The maximum number of redirections a domain can use and still pass an HTTP-based DCV.
-	HTTPDCVMaxRedirects int64 `json:"HTTP_DCV_MAX_REDIRECTS"`
+	HTTPDCVMaxRedirects                             int64 `json:"HTTP_DCV_MAX_REDIRECTS"`
 
 	// The number of unique domains each certificate can contain.
-	MaxDomainsPerCertificate int64 `json:"MAX_DOMAINS_PER_CERTIFICATE"`
+	MaxDomainsPerCertificate                        int64 `json:"MAX_DOMAINS_PER_CERTIFICATE"`
 
 	// The maximum number of certificates that the provider will allow per domain in a week.
 	RateLimitCertificatesPerRegisteredDomainPerWeek int64 `json:"RATE_LIMIT_CERTIFICATES_PER_REGISTERED_DOMAIN_PER_WEEK"`
@@ -1266,7 +1284,7 @@ type GetAutoSSLProvidersDataPayloadItemSpecs struct {
 	// * `0` - The provider does **not** support DCV."
 	//
 	// Possible values: `0`, `1`.
-	SupportsAncestorDCV int64 `json:"SUPPORTS_ANCESTOR_DCV"`
+	SupportsAncestorDCV                             int64 `json:"SUPPORTS_ANCESTOR_DCV"`
 
 	// Whether the provider supports wildcard
 	// domains on an SSL certificate.
@@ -1275,7 +1293,7 @@ type GetAutoSSLProvidersDataPayloadItemSpecs struct {
 	// * `0` - The provider does **not** support wildcard domains.
 	//
 	// Possible values: `0`, `1`.
-	SupportsWildcard int64 `json:"SUPPORTS_WILDCARD"`
+	SupportsWildcard                                int64 `json:"SUPPORTS_WILDCARD"`
 
 	// The amount of time before the certificate expired, in seconds.
 	//
@@ -1283,36 +1301,36 @@ type GetAutoSSLProvidersDataPayloadItemSpecs struct {
 	//
 	//
 	//  A valid integer.
-	ValidityPeriod int64 `json:"VALIDITY_PERIOD"`
+	ValidityPeriod                                  int64 `json:"VALIDITY_PERIOD"`
 }
 
 // GetAutoSSLProvidersDataPayloadItem is a generated payload type.
 type GetAutoSSLProvidersDataPayloadItem struct {
 	// The AutoSSL provider module's display name.
-	DisplayName string `json:"display_name"`
+	DisplayName             string `json:"display_name"`
 
 	// Whether the AutoSSL provider is enabled.
 	// * `1` - The provider is enabled.
 	// * `0` - The provider is disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled int64 `json:"enabled"`
+	Enabled                 int64 `json:"enabled"`
 
 	// The AutoSSL provider module's name.
-	ModuleName string `json:"module_name"`
+	ModuleName              string `json:"module_name"`
 
 	// The provider's specifications.
-	Specs GetAutoSSLProvidersDataPayloadItemSpecs `json:"specs"`
+	Specs                   GetAutoSSLProvidersDataPayloadItemSpecs `json:"specs"`
 
 	// The user's account profile URL at the provider.
-	XAccountID string `json:"x_account_id"`
+	XAccountID              string `json:"x_account_id"`
 
 	// The URL of the provider's current terms of service.
 	//
 	// **Note:**
 	//
 	// If the terms of service available at the `x_terms_of_service` location is newer than the `x_terms_of_service_accepted` location, the system administrator will need to accept the new terms of service.
-	XTermsOfService string `json:"x_terms_of_service"`
+	XTermsOfService         string `json:"x_terms_of_service"`
 
 	// Whether the AutoSSL provider is Enabled.
 	//
@@ -1351,6 +1369,7 @@ func (c *Client) GetAutoSSLUserExcludedDomains(ctx context.Context, args *GetAut
 	return cpanel.WHMCall[GetAutoSSLUserExcludedDomainsData](ctx, c.c, http.MethodGet, "get_autossl_user_excluded_domains", args)
 }
 
+
 // GetAutoSSLUserExcludedDomainsDataPayloadItem is a generated payload type.
 type GetAutoSSLUserExcludedDomainsDataPayloadItem struct {
 	// A list of domains excluded from AutoSSL.
@@ -1385,6 +1404,7 @@ func (c *Client) GetBestSsldomainForService(ctx context.Context, args *GetBestSs
 	return cpanel.WHMCall[GetBestSsldomainForServiceData](ctx, c.c, http.MethodGet, "get_best_ssldomain_for_service", args)
 }
 
+
 // GetBestSsldomainForServiceData is a generated payload type.
 type GetBestSsldomainForServiceData struct {
 	// The method that the system used to match the domain with the certificate.
@@ -1393,10 +1413,10 @@ type GetBestSsldomainForServiceData struct {
 	// * `exact-wildcard` — The domain exactly matches the domain of a wildcard certificate.
 	// * `mail-wildcard` — The mail subdomain of the domain matches the domain of the wildcard certificate.
 	// * `www-wildcard` — The `www` subdomai …
-	CertMatchMethod string `json:"cert_match_method"`
+	CertMatchMethod      string `json:"cert_match_method"`
 
 	// The expiration date of the certificate.
-	CertValidNotAfter int64 `json:"cert_valid_not_after"`
+	CertValidNotAfter    int64 `json:"cert_valid_not_after"`
 
 	// Whether the certificate is currently valid.
 	//
@@ -1410,7 +1430,7 @@ type GetBestSsldomainForServiceData struct {
 	// * The certificate is **not** self-signed (the `is_self_signed` value is `0`).
 	// * The certificate matches the SSL domain (the `ssldomain_matches_cert` value is `1`).
 	// * The certificate is within its validi …
-	IsCurrentlyValid int64 `json:"is_currently_valid"`
+	IsCurrentlyValid     int64 `json:"is_currently_valid"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -1423,17 +1443,17 @@ type GetBestSsldomainForServiceData struct {
 	// of `1` for the `is_self_signed return` return, regardless of whether the certificate is actually self-signed.
 	//
 	// Possible values: `0`, `1`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned         int64 `json:"is_self_signed"`
 
 	// Whether the service uses a wildcard certificate.
 	// * `1` — The service uses a wildcard certificate.
 	// * `0` — The service does **not** use a wildcard certificate.
 	//
 	// Possible values: `0`, `1`.
-	IsWildCard int64 `json:"is_wild_card"`
+	IsWildCard           int64 `json:"is_wild_card"`
 
 	// The domain of the service's SSL certificate.
-	Ssldomain string `json:"ssldomain"`
+	Ssldomain            string `json:"ssldomain"`
 
 	// Whether an SSL-encrypted domain matches the certificate.
 	// * `1` — Matches.
@@ -1507,10 +1527,11 @@ func (c *Client) InstallServiceSSLCertificate(ctx context.Context, args *Install
 	return cpanel.WHMCall[InstallServiceSslcertificateData](ctx, c.c, http.MethodGet, "install_service_ssl_certificate", args)
 }
 
+
 // An object containing the service's certificate information.
 type InstallServiceSslcertificateDataCertificateInfo struct {
 	// A list of domains that correspond to the certificate.
-	Domains []string `json:"domains"`
+	Domains                []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -1519,12 +1540,12 @@ type InstallServiceSslcertificateDataCertificateInfo struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic *string `json:"ecdsa_public"`
+	EcdsaPublic            *string `json:"ecdsa_public"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -1532,16 +1553,16 @@ type InstallServiceSslcertificateDataCertificateInfo struct {
 	// * `0` — **Not** self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned           int64 `json:"is_self_signed"`
 
 	// The certificate's Common Name.
-	IssuerCommonName *string `json:"issuer.commonName"`
+	IssuerCommonName       *string `json:"issuer.commonName"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The certificate's issuer information.
-	IssuerText string `json:"issuer_text"`
+	IssuerText             string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -1549,26 +1570,26 @@ type InstallServiceSslcertificateDataCertificateInfo struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm string `json:"key_algorithm"`
+	KeyAlgorithm           string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus *string `json:"modulus"`
+	Modulus                *string `json:"modulus"`
 
 	// The certificate's key's modulus size, in bits.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength int64 `json:"modulus_length"`
+	ModulusLength          int64 `json:"modulus_length"`
 
 	// The date the certificate expires.
-	NotAfter int64 `json:"not_after"`
+	NotAfter               int64 `json:"not_after"`
 
 	// The certificate's validation date.
-	NotBefore int64 `json:"not_before"`
+	NotBefore              int64 `json:"not_before"`
 
 	// The certificate's OID hash algorithm signature.
-	SignatureAlgorithm string `json:"signature_algorithm"`
+	SignatureAlgorithm     string `json:"signature_algorithm"`
 
 	// The certificate's validation type.
 	//
@@ -1578,16 +1599,16 @@ type InstallServiceSslcertificateDataCertificateInfo struct {
 	// * `null` — The certificate does not match one of the system’s recognized validation types.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType *string `json:"validation_type"`
+	ValidationType         *string `json:"validation_type"`
 }
 
 // InstallServiceSslcertificateData is a generated payload type.
 type InstallServiceSslcertificateData struct {
 	// The SSL certificate's contents.
-	Certificate string `json:"certificate"`
+	Certificate        string `json:"certificate"`
 
 	// An object containing the service's certificate information.
-	CertificateInfo InstallServiceSslcertificateDataCertificateInfo `json:"certificate_info"`
+	CertificateInfo    InstallServiceSslcertificateDataCertificateInfo `json:"certificate_info"`
 
 	// The service that the certificate corresponds to.
 	//
@@ -1597,7 +1618,7 @@ type InstallServiceSslcertificateData struct {
 	// * `cpanel`
 	//
 	// Possible values: `ftp`, `exim`, `dovecot`, `cpanel`.
-	Service string `json:"service"`
+	Service            string `json:"service"`
 
 	// The service's description.
 	ServiceDescription string `json:"service_description"`
@@ -1658,33 +1679,34 @@ func (c *Client) InstallSSL(ctx context.Context, args *InstallSSLArgs) (*cpanel.
 	return cpanel.WHMCall[InstallSSLData](ctx, c.c, http.MethodGet, "installssl", args)
 }
 
+
 // InstallSSLData is a generated payload type.
 type InstallSSLData struct {
 	// The action for the function to execute.
 	//
 	// Possible values: `install`.
-	Action string `json:"action"`
+	Action                  string `json:"action"`
 
 	// A list of domain aliases on the account.
-	Aliases []string `json:"aliases"`
+	Aliases                 []string `json:"aliases"`
 
 	// The domain on which the function installed the SSL certificate.
-	Domain string `json:"domain"`
+	Domain                  string `json:"domain"`
 
 	// A list of domains that possess additional SSL certificates.
 	ExtraCertificateDomains []string `json:"extra_certificate_domains"`
 
 	// The function's raw HTML output.
-	HTML string `json:"html"`
+	HTML                    string `json:"html"`
 
 	// The domain's IP address.
-	IP string `json:"ip"`
+	IP                      string `json:"ip"`
 
 	// A message of success or a reason for failure.
-	Message string `json:"message"`
+	Message                 string `json:"message"`
 
 	// The server's hostname.
-	Servername string `json:"servername"`
+	Servername              string `json:"servername"`
 
 	// Whether the function was successful.
 	//
@@ -1692,19 +1714,19 @@ type InstallSSLData struct {
 	// * `0` — Failure.
 	//
 	// Possible values: `1`, `0`.
-	Status int64 `json:"status"`
+	Status                  int64 `json:"status"`
 
 	// A message of success or a reason for failure.
-	StatusMsg string `json:"statusmsg"`
+	StatusMsg               string `json:"statusmsg"`
 
 	// The username for the account on which the function installed the SSL certificate.
-	User string `json:"user"`
+	User                    string `json:"user"`
 
 	// A list of domains associated with the main domain on which the function did **not** install the SSL certificate.
-	WarningDomains []string `json:"warning_domains"`
+	WarningDomains          []string `json:"warning_domains"`
 
 	// An list of domains on which the function installed the SSL certificates.
-	WorkingDomains []string `json:"working_domains"`
+	WorkingDomains          []string `json:"working_domains"`
 }
 
 // ListcrtsArgs are the parameters of the WHM API 1 function `listcrts`.
@@ -1741,16 +1763,17 @@ func (c *Client) Listcrts(ctx context.Context, args *ListcrtsArgs) (*cpanel.WHMR
 	return cpanel.WHMCall[ListcrtsData](ctx, c.c, http.MethodGet, "listcrts", args)
 }
 
+
 // ListcrtsDataCrtItem is a generated payload type.
 type ListcrtsDataCrtItem struct {
 	// The certificate's primary domain.
-	Domain string `json:"domain"`
+	Domain                 string `json:"domain"`
 
 	// A list of the owners of the domain or domains that the certificate covers.
-	DomainOwners []string `json:"domain_owners"`
+	DomainOwners           []string `json:"domain_owners"`
 
 	// A list of the domain or domains that the certificate covers.
-	Domains []string `json:"domains"`
+	Domains                []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -1759,13 +1782,13 @@ type ListcrtsDataCrtItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
 
 	// The certificate's friendly name.
-	FriendlyName string `json:"friendly_name"`
+	FriendlyName           string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID string `json:"id"`
+	ID                     string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -1773,7 +1796,7 @@ type ListcrtsDataCrtItem struct {
 	// * `0` — **Not** self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned           int64 `json:"is_self_signed"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
@@ -1784,15 +1807,15 @@ type ListcrtsDataCrtItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm string `json:"key_algorithm"`
+	KeyAlgorithm           string `json:"key_algorithm"`
 
 	// The certificate's key's modulus length, in bits.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength *int64 `json:"modulus_length"`
+	ModulusLength          *int64 `json:"modulus_length"`
 
 	// The date the certificate expires.
-	NotAfter int64 `json:"not_after"`
+	NotAfter               int64 `json:"not_after"`
 
 	// Whether the certificate is registered with a CA.
 	//
@@ -1800,10 +1823,10 @@ type ListcrtsDataCrtItem struct {
 	// * `0` — **Not** registered.
 	//
 	// Possible values: `1`, `0`.
-	Registered int64 `json:"registered"`
+	Registered             int64 `json:"registered"`
 
 	// The certificate's OID hash algorithm signature.
-	SignatureAlgorithm string `json:"signature_algorithm"`
+	SignatureAlgorithm     string `json:"signature_algorithm"`
 
 	// The certificate's validation type.
 	//
@@ -1814,7 +1837,7 @@ type ListcrtsDataCrtItem struct {
 	// certificate's validation type.
 	//
 	// Possible values: `ev`, `dv`, `ov`.
-	ValidationType *string `json:"validation_type"`
+	ValidationType         *string `json:"validation_type"`
 }
 
 // ListcrtsData is a generated payload type.
@@ -1840,6 +1863,7 @@ func (c *Client) RebuildInstalledSSLDB(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "rebuildinstalledssldb", cpanel.CombineArgs(extra...))
 }
 
+
 // RebuildUserSSLDB calls the WHM API 1 function `rebuilduserssldb` — Update SSL certificate users database
 //
 // This function rebuilds the database of SSL certificate users.
@@ -1850,6 +1874,7 @@ func (c *Client) RebuildInstalledSSLDB(ctx context.Context, extra ...cpanel.Args
 func (c *Client) RebuildUserSSLDB(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[RebuildUserSSLDBData], error) {
 	return cpanel.WHMCall[RebuildUserSSLDBData](ctx, c.c, http.MethodGet, "rebuilduserssldb", cpanel.CombineArgs(extra...))
 }
+
 
 // RebuildUserSSLDBData is a generated payload type.
 type RebuildUserSSLDBData struct {
@@ -1888,6 +1913,7 @@ func (c *Client) RemoveAutoSSLUserExcludedDomains(ctx context.Context, args *Rem
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "remove_autossl_user_excluded_domains", args)
 }
 
+
 // ResetAutoSSLProviderArgs are the parameters of the WHM API 1 function `reset_autossl_provider`.
 type ResetAutoSSLProviderArgs struct {
 	// The AutoSSL provider's name.
@@ -1919,6 +1945,7 @@ func (c *Client) ResetAutoSSLProvider(ctx context.Context, args *ResetAutoSSLPro
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "reset_autossl_provider", args)
 }
 
+
 // ResetServiceSSLCertificateArgs are the parameters of the WHM API 1 function `reset_service_ssl_certificate`.
 type ResetServiceSSLCertificateArgs struct {
 	// The service.
@@ -1948,10 +1975,11 @@ func (c *Client) ResetServiceSSLCertificate(ctx context.Context, args *ResetServ
 	return cpanel.WHMCall[ResetServiceSslcertificateData](ctx, c.c, http.MethodGet, "reset_service_ssl_certificate", args)
 }
 
+
 // Detailed information about the certificate.
 type ResetServiceSslcertificateDataCertificateInfo struct {
 	// The domains that correspond to the certificate.
-	Domains []string `json:"domains"`
+	Domains                []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -1960,28 +1988,28 @@ type ResetServiceSslcertificateDataCertificateInfo struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic *string `json:"ecdsa_public"`
+	EcdsaPublic            *string `json:"ecdsa_public"`
 
 	// This value indicates whether the certificate is a self-signed certificate.
 	// * `1` - Certificate is self-signed.
 	// * `0` - Certificate is **not** self-signed.
 	//
 	// Possible values: `0`, `1`.
-	IsSelfSigned int64 `json:"is_self_signed"`
+	IsSelfSigned           int64 `json:"is_self_signed"`
 
 	// The Common Name of the organization that issued the certificate.
-	IssuerCommonName string `json:"issuer.commonName"`
+	IssuerCommonName       string `json:"issuer.commonName"`
 
 	// The organization that generated the certificate.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// Information about the issuer.
-	IssuerText string `json:"issuer_text"`
+	IssuerText             string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -1989,29 +2017,29 @@ type ResetServiceSslcertificateDataCertificateInfo struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm string `json:"key_algorithm"`
+	KeyAlgorithm           string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus *string `json:"modulus"`
+	Modulus                *string `json:"modulus"`
 
 	// The certificate's key's modulus length, in bits.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength *int64 `json:"modulus_length"`
+	ModulusLength          *int64 `json:"modulus_length"`
 
 	// When the certificate expires.
-	NotAfter int64 `json:"not_after"`
+	NotAfter               int64 `json:"not_after"`
 
 	// The certificate's validation date.
-	NotBefore int64 `json:"not_before"`
+	NotBefore              int64 `json:"not_before"`
 }
 
 // ResetServiceSslcertificateData is a generated payload type.
 type ResetServiceSslcertificateData struct {
 	// The SSL certificate's contents.
-	Certificate string `json:"certificate"`
+	Certificate     string `json:"certificate"`
 
 	// Detailed information about the certificate.
 	CertificateInfo ResetServiceSslcertificateDataCertificateInfo `json:"certificate_info"`
@@ -2023,7 +2051,7 @@ type ResetServiceSslcertificateData struct {
 	// * `cpanel` - The `cpanel` service.
 	//
 	// Possible values: `ftp`, `exim`, `dovecot`, `cpanel`.
-	Service string `json:"service"`
+	Service         string `json:"service"`
 }
 
 // SetAutoSSLMetadataArgs are the parameters of the WHM API 1 function `set_autossl_metadata`.
@@ -2057,6 +2085,7 @@ func (c *Client) SetAutoSSLMetadata(ctx context.Context, args *SetAutoSSLMetadat
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_autossl_metadata", args)
 }
 
+
 // SetAutoSSLMetadataKeyArgs are the parameters of the WHM API 1 function `set_autossl_metadata_key`.
 type SetAutoSSLMetadataKeyArgs struct {
 	// The AutoSSL metadata key that you wish to modify.
@@ -2085,8 +2114,8 @@ type SetAutoSSLMetadataKeyArgs struct {
 //
 // **Note:**
 //
-//   - This function performs the same actions as the WHM API 1 `set_autossl_metadata` function. However, this function accepts a single key and value pair as a parameter instead of JSON. Additionally, you can **only** enter one key and value pair per function call.
-//   - This function **only** accepts a single key and value pair. To set all values, use the WHM API 1 `set_autossl_metadata` function or make multiple calls to this function.
+//   * This function performs the same actions as the WHM API 1 `set_autossl_metadata` function. However, this function accepts a single key and value pair as a parameter instead of JSON. Additionally, you can **only** enter one key and value pair per function call.
+//   * This function **only** accepts a single key and value pair. To set all values, use the WHM API 1 `set_autossl_metadata` function or make multiple calls to this function.
 //
 // Available since cPanel & WHM version 70.
 //
@@ -2094,6 +2123,7 @@ type SetAutoSSLMetadataKeyArgs struct {
 func (c *Client) SetAutoSSLMetadataKey(ctx context.Context, args *SetAutoSSLMetadataKeyArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_autossl_metadata_key", args)
 }
+
 
 // SetAutoSSLProviderArgs are the parameters of the WHM API 1 function `set_autossl_provider`.
 type SetAutoSSLProviderArgs struct {
@@ -2121,7 +2151,7 @@ type SetAutoSSLProviderArgs struct {
 //
 // **Note:**
 //
-//	To disable AutoSSL, call WHM API 1's `disable_autossl` function.
+//   To disable AutoSSL, call WHM API 1's `disable_autossl` function.
 //
 // Available since cPanel & WHM version 58.
 //
@@ -2129,6 +2159,7 @@ type SetAutoSSLProviderArgs struct {
 func (c *Client) SetAutoSSLProvider(ctx context.Context, args *SetAutoSSLProviderArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_autossl_provider", args)
 }
+
 
 // SetAutoSSLUserExcludedDomainsArgs are the parameters of the WHM API 1 function `set_autossl_user_excluded_domains`.
 type SetAutoSSLUserExcludedDomainsArgs struct {
@@ -2156,7 +2187,7 @@ type SetAutoSSLUserExcludedDomainsArgs struct {
 //
 // **Warning:**
 //
-//	This function **replaces** the list of any previously-excluded domains. To add a domain to the list of the user's excluded domains, use the `add_autossl_user_excluded_domains` function.
+//   This function **replaces** the list of any previously-excluded domains. To add a domain to the list of the user's excluded domains, use the `add_autossl_user_excluded_domains` function.
 //
 // Available since cPanel & WHM version 66.
 //
@@ -2164,6 +2195,7 @@ type SetAutoSSLUserExcludedDomainsArgs struct {
 func (c *Client) SetAutoSSLUserExcludedDomains(ctx context.Context, args *SetAutoSSLUserExcludedDomainsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_autossl_user_excluded_domains", args)
 }
+
 
 // StartAutoSSLCheckForAllUsers calls the WHM API 1 function `start_autossl_check_for_all_users` — Start AutoSSL check for all cPanel accounts
 //
@@ -2175,6 +2207,7 @@ func (c *Client) SetAutoSSLUserExcludedDomains(ctx context.Context, args *SetAut
 func (c *Client) StartAutoSSLCheckForAllUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[StartAutoSSLCheckForAllUsersData], error) {
 	return cpanel.WHMCall[StartAutoSSLCheckForAllUsersData](ctx, c.c, http.MethodGet, "start_autossl_check_for_all_users", cpanel.CombineArgs(extra...))
 }
+
 
 // StartAutoSSLCheckForAllUsersData is a generated payload type.
 type StartAutoSSLCheckForAllUsersData struct {
@@ -2203,6 +2236,7 @@ type StartAutoSSLCheckForOneUserArgs struct {
 func (c *Client) StartAutoSSLCheckForOneUser(ctx context.Context, args *StartAutoSSLCheckForOneUserArgs) (*cpanel.WHMResult[StartAutoSSLCheckForOneUserData], error) {
 	return cpanel.WHMCall[StartAutoSSLCheckForOneUserData](ctx, c.c, http.MethodGet, "start_autossl_check_for_one_user", args)
 }
+
 
 // StartAutoSSLCheckForOneUserData is a generated payload type.
 type StartAutoSSLCheckForOneUserData struct {

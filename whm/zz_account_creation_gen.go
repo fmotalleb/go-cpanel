@@ -429,37 +429,38 @@ func (c *Client) CreateAcct(ctx context.Context, args *CreateAcctArgs) (*cpanel.
 	return cpanel.WHMCall[CreateAcctData](ctx, c.c, http.MethodGet, "createacct", args)
 }
 
+
 // CreateAcctData is a generated payload type.
 type CreateAcctData struct {
 	// The account's primary nameserver's IP address.
-	IP string `json:"ip"`
+	IP               string `json:"ip"`
 
 	// The account's primary nameserver.
-	Nameserver string `json:"nameserver"`
+	Nameserver       string `json:"nameserver"`
 
 	// The account's secondary nameserver.
-	Nameserver2 string `json:"nameserver2"`
+	Nameserver2      string `json:"nameserver2"`
 
 	// The account's tertiary nameserver.
-	Nameserver3 string `json:"nameserver3"`
+	Nameserver3      string `json:"nameserver3"`
 
 	// The account's quaternary nameserver.
-	Nameserver4 string `json:"nameserver4"`
+	Nameserver4      string `json:"nameserver4"`
 
 	// The account's primary nameservers' IP address.
-	NameserverA *string `json:"nameservera"`
+	NameserverA      *string `json:"nameservera"`
 
 	// The account's secondary nameservers' IP address.
-	NameserverA2 *string `json:"nameservera2"`
+	NameserverA2     *string `json:"nameservera2"`
 
 	// The account's tertiary nameservers' IP address.
-	NameserverA3 *string `json:"nameservera3"`
+	NameserverA3     *string `json:"nameservera3"`
 
 	// The account's quaternary nameservers' IP address.
-	NameserverA4 *string `json:"nameservera4"`
+	NameserverA4     *string `json:"nameservera4"`
 
 	// The primary nameserver's DNS name.
-	NameserverEntry *string `json:"nameserverentry"`
+	NameserverEntry  *string `json:"nameserverentry"`
 
 	// The secondary nameserver's DNS name.
 	NameserverEntry2 *string `json:"nameserverentry2"`
@@ -471,7 +472,7 @@ type CreateAcctData struct {
 	NameserverEntry4 *string `json:"nameserverentry4"`
 
 	// The account's plan (package) name.
-	Package2 string `json:"package"`
+	Package2         string `json:"package"`
 }
 
 // GetCurrentUsersCount calls the WHM API 1 function `get_current_users_count` — Return cPanel accounts total number
@@ -484,6 +485,7 @@ type CreateAcctData struct {
 func (c *Client) GetCurrentUsersCount(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetCurrentUsersCountData], error) {
 	return cpanel.WHMCall[GetCurrentUsersCountData](ctx, c.c, http.MethodGet, "get_current_users_count", cpanel.CombineArgs(extra...))
 }
+
 
 // GetCurrentUsersCountData is a generated payload type.
 type GetCurrentUsersCountData struct {
@@ -501,6 +503,7 @@ type GetCurrentUsersCountData struct {
 func (c *Client) GetMaximumUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetMaximumUsersData], error) {
 	return cpanel.WHMCall[GetMaximumUsersData](ctx, c.c, http.MethodGet, "get_maximum_users", cpanel.CombineArgs(extra...))
 }
+
 
 // GetMaximumUsersData is a generated payload type.
 type GetMaximumUsersData struct {
@@ -530,3 +533,4 @@ type VerifyNewUsernameArgs struct {
 func (c *Client) VerifyNewUsername(ctx context.Context, args *VerifyNewUsernameArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "verify_new_username", args)
 }
+

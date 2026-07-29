@@ -38,6 +38,7 @@ func (c *SitejetClient) AddAPIToken(ctx context.Context, args *SitejetAddAPIToke
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "add_api_token", args)
 }
 
+
 // CanCreateDomains calls the UAPI function `Sitejet::can_create_domains` — Return Domain Availability
 //
 // This function returns whether a cPanel account can create new subdomains or addon domains.
@@ -53,6 +54,7 @@ func (c *SitejetClient) CanCreateDomains(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "can_create_domains", cpanel.CombineArgs(extra...))
 }
 
+
 // CreateAccount calls the UAPI function `Sitejet::create_account` — Generate a Sitejet API key.
 //
 // This function creates a Sitejet API token for a cPanel account.
@@ -63,6 +65,7 @@ func (c *SitejetClient) CanCreateDomains(ctx context.Context, extra ...cpanel.Ar
 func (c *SitejetClient) CreateAccount(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[SitejetCreateAccountData], error) {
 	return cpanel.UAPICall[SitejetCreateAccountData](ctx, c.c, http.MethodGet, "Sitejet", "create_account", cpanel.CombineArgs(extra...))
 }
+
 
 // SitejetCreateAccountData is a generated payload type.
 type SitejetCreateAccountData struct {
@@ -91,6 +94,7 @@ type SitejetCreateRestorePointArgs struct {
 func (c *SitejetClient) CreateRestorePoint(ctx context.Context, args *SitejetCreateRestorePointArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "create_restore_point", args)
 }
+
 
 // SitejetCreateWebsiteArgs are the parameters of the UAPI function `Sitejet::create_website`.
 type SitejetCreateWebsiteArgs struct {
@@ -162,6 +166,7 @@ func (c *SitejetClient) CreateWebsite(ctx context.Context, args *SitejetCreateWe
 	return cpanel.UAPICall[SitejetCreateWebsiteData](ctx, c.c, http.MethodGet, "Sitejet", "create_website", args)
 }
 
+
 // SitejetCreateWebsiteData is a generated payload type.
 type SitejetCreateWebsiteData struct {
 	// The website ID of the created website.
@@ -188,23 +193,24 @@ func (c *SitejetClient) GetAllUserSitejetInfo(ctx context.Context, args *Sitejet
 	return cpanel.UAPICall[[]SitejetGetAllUserSitejetInfoDataItem](ctx, c.c, http.MethodGet, "Sitejet", "get_all_user_sitejet_info", args)
 }
 
+
 // SitejetGetAllUserSitejetInfoDataItemMetadata is a generated payload type.
 type SitejetGetAllUserSitejetInfoDataItemMetadata struct {
 	// The website's comapany.
-	Company string `json:"company"`
+	Company           string `json:"company"`
 
 	// The cPanel user's domain.
-	CpanelDomainGuid string `json:"cpanelDomainGUID"`
+	CpanelDomainGuid  string `json:"cpanelDomainGUID"`
 
 	// Whether the full Sitejet Content Management System is enabled.
 	// * `1` - Full CMS is enabled.
 	// * `0` - Full CMS is disabled.
 	//
 	// Possible values: `1`, `0`.
-	Fullcms json.RawMessage `json:"fullcms"`
+	Fullcms           json.RawMessage `json:"fullcms"`
 
 	// The language selection for the Sitejet Content Management System.
-	Language string `json:"language"`
+	Language          string `json:"language"`
 
 	// The last successful publication of the Sitejet domain in Unix time format.
 	LatestPublishDate int64 `json:"latest_publish_date"`
@@ -214,10 +220,10 @@ type SitejetGetAllUserSitejetInfoDataItemMetadata struct {
 	// * `0` - Website is not published.
 	//
 	// Possible values: `1`, `0`.
-	PublishStatus int64 `json:"publish_status"`
+	PublishStatus     int64 `json:"publish_status"`
 
 	// The website ID of the created website.
-	WebsiteID int64 `json:"websiteId"`
+	WebsiteID         int64 `json:"websiteId"`
 }
 
 // SitejetGetAllUserSitejetInfoDataItemQuota is a generated payload type.
@@ -230,7 +236,7 @@ type SitejetGetAllUserSitejetInfoDataItemQuota struct {
 	// * `0` - There is not enough space.
 	//
 	// Possible values: `1`, `0`.
-	CanBackup json.RawMessage `json:"can_backup"`
+	CanBackup      json.RawMessage `json:"can_backup"`
 
 	// Whether the document root is empty.
 	// * `1` - Document root is empty.
@@ -240,7 +246,7 @@ type SitejetGetAllUserSitejetInfoDataItemQuota struct {
 	IsEmptyDocRoot json.RawMessage `json:"is_empty_docroot"`
 
 	// The amount of space required in megabytes (MB) for a document root backup.
-	RequiredSpace int64 `json:"required_space"`
+	RequiredSpace  int64 `json:"required_space"`
 }
 
 // SitejetGetAllUserSitejetInfoDataItemStatus is a generated payload type.
@@ -257,27 +263,27 @@ type SitejetGetAllUserSitejetInfoDataItemStatus struct {
 	// * `0` - User has not created a Sitejet website.
 	//
 	// Possible values: `1`, `0`.
-	HasSitejetWebsite int64 `json:"has_sitejet_website"`
+	HasSitejetWebsite   int64 `json:"has_sitejet_website"`
 
 	// Whether the domain's document root diretory's `index.html` file contains Sitejet deployed content.
 	// * `1` - User has a Sitejet website.
 	// * `0` - User does not have a Sitejet website.
 	//
 	// Possible values: `1`, `0`.
-	IsSitejet int64 `json:"is_sitejet"`
+	IsSitejet           int64 `json:"is_sitejet"`
 
 	// Whether the domain has a valid SSL certificate.
 	// * `1` - Domain has a valid SSL certificate.
 	// * `0` - Domain does not have a valid SSL certificate or certificate is invalid.
 	//
 	// Possible values: `1`, `0`.
-	SSLStatus int64 `json:"ssl_status"`
+	SSLStatus           int64 `json:"ssl_status"`
 }
 
 // SitejetGetAllUserSitejetInfoDataItem is a generated payload type.
 type SitejetGetAllUserSitejetInfoDataItem struct {
 	// The name of the cPanel user's domain.
-	Domain string `json:"domain"`
+	Domain                  string `json:"domain"`
 
 	// Whether the sitejet domain has a restore point.
 	// * `1` – Restore point is available.
@@ -291,27 +297,27 @@ type SitejetGetAllUserSitejetInfoDataItem struct {
 	// * `0` – Domain is not a temporary domain.
 	//
 	// Possible values: `1`, `0`.
-	IsTemporaryDomain int64 `json:"is_temporary_domain"`
+	IsTemporaryDomain       int64 `json:"is_temporary_domain"`
 
-	Metadata SitejetGetAllUserSitejetInfoDataItemMetadata `json:"metadata"`
+	Metadata                SitejetGetAllUserSitejetInfoDataItemMetadata `json:"metadata"`
 
-	Quota SitejetGetAllUserSitejetInfoDataItemQuota `json:"quota"`
+	Quota                   SitejetGetAllUserSitejetInfoDataItemQuota `json:"quota"`
 
 	// Whether the domain redirects to another URL.
 	// * 1 - Redirects.
 	// * 0 - Doesn't redirect.
 	//
 	// Possible values: `1`, `0`.
-	RedirectionEnabled int64 `json:"redirection_enabled"`
+	RedirectionEnabled      int64 `json:"redirection_enabled"`
 
 	// whether the sitejet domain is sharing the document_root.
 	// * 1 - document_root is shared.
 	// * 0 - document_root is not shared.
 	//
 	// Possible values: `1`, `0`.
-	SharedDocRoot int64 `json:"shared_doc_root"`
+	SharedDocRoot           int64 `json:"shared_doc_root"`
 
-	Status SitejetGetAllUserSitejetInfoDataItemStatus `json:"status"`
+	Status                  SitejetGetAllUserSitejetInfoDataItemStatus `json:"status"`
 }
 
 // GetAPIToken calls the UAPI function `Sitejet::get_api_token` — Return Sitejet API token
@@ -324,6 +330,7 @@ type SitejetGetAllUserSitejetInfoDataItem struct {
 func (c *SitejetClient) GetAPIToken(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Sitejet", "get_api_token", cpanel.CombineArgs(extra...))
 }
+
 
 // SitejetGetPreviewURLArgs are the parameters of the UAPI function `Sitejet::get_preview_url`.
 type SitejetGetPreviewURLArgs struct {
@@ -346,6 +353,7 @@ type SitejetGetPreviewURLArgs struct {
 func (c *SitejetClient) GetPreviewURL(ctx context.Context, args *SitejetGetPreviewURLArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Sitejet", "get_preview_url", args)
 }
+
 
 // SitejetGetSSOLinkArgs are the parameters of the UAPI function `Sitejet::get_sso_link`.
 type SitejetGetSSOLinkArgs struct {
@@ -379,6 +387,7 @@ func (c *SitejetClient) GetSSOLink(ctx context.Context, args *SitejetGetSSOLinkA
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Sitejet", "get_sso_link", args)
 }
 
+
 // GetTemplates calls the UAPI function `Sitejet::get_templates` — Return Sitejet templates
 //
 // This function fetches the list of available Sitejet templates.
@@ -394,28 +403,29 @@ func (c *SitejetClient) GetTemplates(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[[]SitejetGetTemplatesDataItem](ctx, c.c, http.MethodGet, "Sitejet", "get_templates", cpanel.CombineArgs(extra...))
 }
 
+
 // SitejetGetTemplatesDataItem is a generated payload type.
 type SitejetGetTemplatesDataItem struct {
 	// The templates creation date.
-	CreatedAt string `json:"createdAt"`
+	CreatedAt   string `json:"createdAt"`
 
 	// The template's description.
 	Description string `json:"description"`
 
 	// The template's ID.
-	ID int64 `json:"id"`
+	ID          int64 `json:"id"`
 
 	// The relative path to the template image on the SiteJet CMS website.
-	Image string `json:"image"`
+	Image       string `json:"image"`
 
 	// The template's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 
 	// The website's preview URL.
-	PreviewURL string `json:"previewUrl"`
+	PreviewURL  string `json:"previewUrl"`
 
 	// The template's catagory search tags.
-	Tags []string `json:"tags"`
+	Tags        []string `json:"tags"`
 }
 
 // SitejetRestoreDocumentRootArgs are the parameters of the UAPI function `Sitejet::restore_document_root`.
@@ -439,6 +449,7 @@ type SitejetRestoreDocumentRootArgs struct {
 func (c *SitejetClient) RestoreDocumentRoot(ctx context.Context, args *SitejetRestoreDocumentRootArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "restore_document_root", args)
 }
+
 
 // SitejetSetTemplateArgs are the parameters of the UAPI function `Sitejet::set_template`.
 type SitejetSetTemplateArgs struct {
@@ -476,6 +487,7 @@ func (c *SitejetClient) SetTemplate(ctx context.Context, args *SitejetSetTemplat
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "set_template", args)
 }
 
+
 // SitejetStartPublishArgs are the parameters of the UAPI function `Sitejet::start_publish`.
 type SitejetStartPublishArgs struct {
 	// The domain for the Sitejet website.
@@ -503,6 +515,7 @@ func (c *SitejetClient) StartPublish(ctx context.Context, args *SitejetStartPubl
 	return cpanel.UAPICall[SitejetStartPublishData](ctx, c.c, http.MethodGet, "Sitejet", "start_publish", args)
 }
 
+
 // SitejetStartPublishData is a generated payload type.
 type SitejetStartPublishData struct {
 	// **Deprecated.** The publish process's log file name.
@@ -513,5 +526,5 @@ type SitejetStartPublishData struct {
 	FileName string `json:"file_name"`
 
 	// The publish action's process ID.
-	Pid int64 `json:"pid"`
+	Pid      int64 `json:"pid"`
 }

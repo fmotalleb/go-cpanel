@@ -32,23 +32,24 @@ func (c *Client) AcctCounts(ctx context.Context, args *AcctCountsArgs) (*cpanel.
 	return cpanel.WHMCall[AcctCountsData](ctx, c.c, http.MethodGet, "acctcounts", args)
 }
 
+
 // An object that contains information for an account.
 type AcctCountsDataReseller struct {
 	// The number of active accounts that the reseller account owns.
-	Active int64 `json:"active"`
+	Active    int64 `json:"active"`
 
 	// The maximum number of accounts that the reseller account may create, if a maximum exists.
 	//
 	// **NOTE:**
 	//
 	// A null value indicates that the reseller does not have an account creation limit.
-	Limit *int64 `json:"limit"`
+	Limit     *int64 `json:"limit"`
 
 	// The number of suspended accounts that the reseller account owns.
 	Suspended *int64 `json:"suspended"`
 
 	// The reseller account's username or the `root` user.
-	User string `json:"user"`
+	User      string `json:"user"`
 }
 
 // AcctCountsData is a generated payload type.
@@ -68,13 +69,14 @@ func (c *Client) GetPublicContact(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[GetPublicContactData](ctx, c.c, http.MethodGet, "get_public_contact", cpanel.CombineArgs(extra...))
 }
 
+
 // GetPublicContactData is a generated payload type.
 type GetPublicContactData struct {
 	// The public contact name of the reseller.
 	Name string `json:"name"`
 
 	// The public contact URL.
-	URL string `json:"url"`
+	URL  string `json:"url"`
 }
 
 // GetResellerIPsArgs are the parameters of the WHM API 1 function `getresellerips`.
@@ -102,6 +104,7 @@ func (c *Client) GetResellerIPs(ctx context.Context, args *GetResellerIPsArgs) (
 	return cpanel.WHMCall[GetResellerIPsData](ctx, c.c, http.MethodGet, "getresellerips", args)
 }
 
+
 // GetResellerIPsData is a generated payload type.
 type GetResellerIPsData struct {
 	// Whether all of the reseller's IP addresses are available.
@@ -112,7 +115,7 @@ type GetResellerIPsData struct {
 	All int64 `json:"all"`
 
 	// The reseller's available IP addresses.
-	IP []string `json:"ip"`
+	IP  []string `json:"ip"`
 }
 
 // ListEnhancementLimitsArgs are the parameters of the WHM API 1 function `list_enhancement_limits`.
@@ -137,10 +140,11 @@ func (c *Client) ListEnhancementLimits(ctx context.Context, args *ListEnhancemen
 	return cpanel.WHMCall[ListEnhancementLimitsData](ctx, c.c, http.MethodGet, "list_enhancement_limits", args)
 }
 
+
 // The reseller's limit for the account enhancement.
 type ListEnhancementLimitsDataLimitsValue struct {
 	// The assignment limit amount.
-	Limit int64 `json:"limit"`
+	Limit   int64 `json:"limit"`
 
 	// Whether the assignment limit is unlimited.
 	//
@@ -148,7 +152,7 @@ type ListEnhancementLimitsDataLimitsValue struct {
 	Limited int64 `json:"limited"`
 
 	// The total of cPanel accounts that have the specified Account Enhancement.
-	Usage int64 `json:"usage"`
+	Usage   int64 `json:"usage"`
 }
 
 // ListEnhancementLimitsData is a generated payload type.
@@ -169,6 +173,7 @@ func (c *Client) Listacls(ctx context.Context, extra ...cpanel.Args) (*cpanel.WH
 	return cpanel.WHMCall[ListaclsData](ctx, c.c, http.MethodGet, "listacls", cpanel.CombineArgs(extra...))
 }
 
+
 // A list of ACL privileges, including any third-party ACL privileges
 // that exist for the user.
 type ListaclsDataAclItemPrivileges struct {
@@ -178,7 +183,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AcctSummary int64 `json:"acct-summary"`
+	AcctSummary            int64 `json:"acct-summary"`
 
 	// Whether to allow the reseller to add and remove hosting plans
 	// (packages).
@@ -187,7 +192,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AddPkg int64 `json:"add-pkg"`
+	AddPkg                 int64 `json:"add-pkg"`
 
 	// Whether to allow the reseller to create packages with a
 	// dedicated IP address.
@@ -196,7 +201,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AddPkgIP int64 `json:"add-pkg-ip"`
+	AddPkgIP               int64 `json:"add-pkg-ip"`
 
 	// Whether to allow the reseller to create packages with shell
 	// access.
@@ -205,7 +210,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AddPkgShell int64 `json:"add-pkg-shell"`
+	AddPkgShell            int64 `json:"add-pkg-shell"`
 
 	// Whether to grant the reseller **all** ACL privileges.
 	//
@@ -217,7 +222,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	All int64 `json:"all"`
+	All                    int64 `json:"all"`
 
 	// Whether to allow the reseller to create packages with addon
 	// domains.
@@ -226,7 +231,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowAddoncreate int64 `json:"allow-addoncreate"`
+	AllowAddoncreate       int64 `json:"allow-addoncreate"`
 
 	// Whether to allow the reseller to create packages with email quotas
 	// that are **not** the default quotas.
@@ -235,7 +240,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowEmaillimitsPkgs int64 `json:"allow-emaillimits-pkgs"`
+	AllowEmaillimitsPkgs   int64 `json:"allow-emaillimits-pkgs"`
 
 	// Whether to allow the reseller to create packages with parked
 	// domains (aliases).
@@ -244,7 +249,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowParkedcreate int64 `json:"allow-parkedcreate"`
+	AllowParkedcreate      int64 `json:"allow-parkedcreate"`
 
 	// Whether to allow the reseller to create accounts with shell
 	// access.
@@ -253,7 +258,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowShell int64 `json:"allow-shell"`
+	AllowShell             int64 `json:"allow-shell"`
 
 	// Whether to allow the reseller to create packages with unlimited
 	// bandwidth.
@@ -262,7 +267,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowUnlimitedBwPkgs int64 `json:"allow-unlimited-bw-pkgs"`
+	AllowUnlimitedBwPkgs   int64 `json:"allow-unlimited-bw-pkgs"`
 
 	// Whether to allow the reseller to create packages with unlimited
 	// disk space.
@@ -280,7 +285,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowUnlimitedPkgs int64 `json:"allow-unlimited-pkgs"`
+	AllowUnlimitedPkgs     int64 `json:"allow-unlimited-pkgs"`
 
 	// Whether to allow the user to retrieve basic system information.
 	//
@@ -288,7 +293,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	BasicSystemInfo int64 `json:"basic-system-info"`
+	BasicSystemInfo        int64 `json:"basic-system-info"`
 
 	// Whether to allow the reseller to access basic cPanel & WHM
 	// options.
@@ -297,7 +302,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	BasicWHMFunctions int64 `json:"basic-whm-functions"`
+	BasicWHMFunctions      int64 `json:"basic-whm-functions"`
 
 	// Whether to allow the reseller to use DNS clusters.
 	//
@@ -305,7 +310,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Clustering int64 `json:"clustering"`
+	Clustering             int64 `json:"clustering"`
 
 	// Whether to allow the reseller to perform Cross-Origin Resource
 	// Sharing (CORS) HTTP requests.
@@ -314,7 +319,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	CorsProxyGet int64 `json:"cors-proxy-get"`
+	CorsProxyGet           int64 `json:"cors-proxy-get"`
 
 	// Whether to allow the reseller to execute cPanel API 1, cPanel
 	// API 2 and UAPI functions via WHM.
@@ -323,7 +328,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	CpanelAPI int64 `json:"cpanel-api"`
+	CpanelAPI              int64 `json:"cpanel-api"`
 
 	// Whether to allow the reseller to manage cPanel integration
 	// links.
@@ -332,7 +337,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	CpanelIntegration int64 `json:"cpanel-integration"`
+	CpanelIntegration      int64 `json:"cpanel-integration"`
 
 	// Whether to allow the reseller to create accounts.
 	//
@@ -340,7 +345,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	CreateAcct int64 `json:"create-acct"`
+	CreateAcct             int64 `json:"create-acct"`
 
 	// Whether to allow the reseller to add DNS zones.
 	//
@@ -348,7 +353,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	CreateDNS int64 `json:"create-dns"`
+	CreateDNS              int64 `json:"create-dns"`
 
 	// Whether to allow the reseller to create a new temporary user
 	// session for a specified service.
@@ -365,7 +370,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// documentation.
 	//
 	// Possible values: `1`, `0`.
-	CreateUserSession int64 `json:"create-user-session"`
+	CreateUserSession      int64 `json:"create-user-session"`
 
 	// Whether to allow the reseller to enable demo mode for accounts.
 	//
@@ -373,7 +378,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	DemoSetup int64 `json:"demo-setup"`
+	DemoSetup              int64 `json:"demo-setup"`
 
 	// Whether to allow the reseller to manage Digest Authentication.
 	//
@@ -381,7 +386,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	DigestAuth int64 `json:"digest-auth"`
+	DigestAuth             int64 `json:"digest-auth"`
 
 	// Whether to allow the reseller to edit accounts.
 	//
@@ -389,7 +394,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	EditAccount int64 `json:"edit-account"`
+	EditAccount            int64 `json:"edit-account"`
 
 	// Whether to allow the reseller to edit DNS zones.
 	//
@@ -397,7 +402,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	EditDNS int64 `json:"edit-dns"`
+	EditDNS                int64 `json:"edit-dns"`
 
 	// Whether to allow the reseller to edit MX entries.
 	//
@@ -405,7 +410,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	EditMX int64 `json:"edit-mx"`
+	EditMX                 int64 `json:"edit-mx"`
 
 	// Whether to allow the reseller to edit hosting plans (packages).
 	//
@@ -413,7 +418,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	EditPkg int64 `json:"edit-pkg"`
+	EditPkg                int64 `json:"edit-pkg"`
 
 	// Whether to allow the reseller to manage Microsoft® FrontPage®
 	// Extensions.
@@ -426,7 +431,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// cPanel & WHM ignores all Microsoft FrontPage settings and parameters.
 	//
 	// Possible values: `1`, `0`.
-	FrontPage int64 `json:"frontpage"`
+	FrontPage              int64 `json:"frontpage"`
 
 	// Whether to allow the reseller to generate a mobile configuration
 	// profile for an email account.
@@ -435,7 +440,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	GenerateEmailConfig int64 `json:"generate-email-config"`
+	GenerateEmailConfig    int64 `json:"generate-email-config"`
 
 	// Whether to allow the reseller to terminate accounts.
 	//
@@ -443,7 +448,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	KillAcct int64 `json:"kill-acct"`
+	KillAcct               int64 `json:"kill-acct"`
 
 	// Whether to allow the reseller to remove DNS zones.
 	//
@@ -451,7 +456,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	KillDNS int64 `json:"kill-dns"`
+	KillDNS                int64 `json:"kill-dns"`
 
 	// Whether to allow the reseller to modify bandwidth limits
 	// (quotas).
@@ -465,7 +470,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// resellers to circumvent package limits for disk space.
 	//
 	// Possible values: `1`, `0`.
-	LimitBandwidth int64 `json:"limit-bandwidth"`
+	LimitBandwidth         int64 `json:"limit-bandwidth"`
 
 	// Whether to allow the reseller to view the list of accounts.
 	//
@@ -473,7 +478,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ListAccts int64 `json:"list-accts"`
+	ListAccts              int64 `json:"list-accts"`
 
 	// Whether to allow the reseller to view existing hosting plans.
 	//
@@ -481,7 +486,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ListPkgs int64 `json:"list-pkgs"`
+	ListPkgs               int64 `json:"list-pkgs"`
 
 	// Whether to allow the reseller to create and modify locales on
 	// the server.
@@ -490,7 +495,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	LocaleEdit int64 `json:"locale-edit"`
+	LocaleEdit             int64 `json:"locale-edit"`
 
 	// Whether to allow the reseller to troubleshoot mail delivery.
 	//
@@ -498,7 +503,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Mailcheck int64 `json:"mailcheck"`
+	Mailcheck              int64 `json:"mailcheck"`
 
 	// Whether to allow the reseller to manage API tokens.
 	//
@@ -514,7 +519,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// documentation.
 	//
 	// Possible values: `1`, `0`.
-	ManageAPITokens int64 `json:"manage-api-tokens"`
+	ManageAPITokens        int64 `json:"manage-api-tokens"`
 
 	// Whether to allow the reseller to manage DNS records.
 	//
@@ -522,7 +527,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ManageDNSRecords int64 `json:"manage-dns-records"`
+	ManageDNSRecords       int64 `json:"manage-dns-records"`
 
 	// Whether to allow the reseller to manage external authentication
 	// for their accounts.
@@ -531,7 +536,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ManageOidc int64 `json:"manage-oidc"`
+	ManageOidc             int64 `json:"manage-oidc"`
 
 	// Whether to allow the reseller to manage their server's cPanel
 	// styles.
@@ -540,7 +545,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ManageStyles int64 `json:"manage-styles"`
+	ManageStyles           int64 `json:"manage-styles"`
 
 	// Whether to allow the reseller to retrieve MySQL® database and
 	// user data.
@@ -549,7 +554,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	MysqlInfo int64 `json:"mysql-info"`
+	MysqlInfo              int64 `json:"mysql-info"`
 
 	// Whether to allow the reseller to modify the server's news.
 	//
@@ -557,7 +562,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	News int64 `json:"news"`
+	News                   int64 `json:"news"`
 
 	// Whether to allow the reseller to manage nameserver records.
 	//
@@ -565,7 +570,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	NSConfig int64 `json:"ns-config"`
+	NSConfig               int64 `json:"ns-config"`
 
 	// Whether to allow the reseller to park DNS zones.
 	//
@@ -573,7 +578,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ParkDNS int64 `json:"park-dns"`
+	ParkDNS                int64 `json:"park-dns"`
 
 	// Whether to allow the reseller to change passwords.
 	//
@@ -589,7 +594,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// documentation.
 	//
 	// Possible values: `1`, `0`.
-	Passwd int64 `json:"passwd"`
+	Passwd                 int64 `json:"passwd"`
 
 	// Whether to allow the reseller to modify quotas.
 	//
@@ -602,7 +607,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// allows resellers to circumvent package limits for disk space.
 	//
 	// Possible values: `1`, `0`.
-	Quota int64 `json:"quota"`
+	Quota                  int64 `json:"quota"`
 
 	// Whether to allow the reseller to rearrange accounts.
 	//
@@ -610,7 +615,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	RearrangeAccts int64 `json:"rearrange-accts"`
+	RearrangeAccts         int64 `json:"rearrange-accts"`
 
 	// Whether to allow the reseller to resync FTP passwords.
 	//
@@ -618,7 +623,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Resftp int64 `json:"resftp"`
+	Resftp                 int64 `json:"resftp"`
 
 	// Whether to allow the reseller to restart services.
 	//
@@ -626,7 +631,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Restart int64 `json:"restart"`
+	Restart                int64 `json:"restart"`
 
 	// Whether to allow the reseller to view account bandwidth usage.
 	//
@@ -634,7 +639,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ShowBandwidth int64 `json:"show-bandwidth"`
+	ShowBandwidth          int64 `json:"show-bandwidth"`
 
 	// Whether to allow the reseller to perform SSL site management.
 	//
@@ -642,7 +647,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	SSL int64 `json:"ssl"`
+	SSL                    int64 `json:"ssl"`
 
 	// Whether to allow the reseller to purchase SSL certificates.
 	//
@@ -650,7 +655,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	SSLBuy int64 `json:"ssl-buy"`
+	SSLBuy                 int64 `json:"ssl-buy"`
 
 	// Whether to allow the reseller to generate SSL certificates.
 	//
@@ -658,7 +663,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	SSLGencrt int64 `json:"ssl-gencrt"`
+	SSLGencrt              int64 `json:"ssl-gencrt"`
 
 	// Whether to allow the reseller to view their server's SSL
 	// information.
@@ -667,7 +672,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	SSLInfo int64 `json:"ssl-info"`
+	SSLInfo                int64 `json:"ssl-info"`
 
 	// Whether to allow the reseller to view server information.
 	//
@@ -675,7 +680,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Stats int64 `json:"stats"`
+	Stats                  int64 `json:"stats"`
 
 	// Whether to allow the reseller to view the server's status.
 	//
@@ -683,7 +688,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Status int64 `json:"status"`
+	Status                 int64 `json:"status"`
 
 	// Whether to allow the reseller to suspend or unsuspend accounts.
 	//
@@ -691,7 +696,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	SuspendAcct int64 `json:"suspend-acct"`
+	SuspendAcct            int64 `json:"suspend-acct"`
 
 	// Whether to allow the reseller to manage third-party services.
 	//
@@ -699,7 +704,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	Thirdparty int64 `json:"thirdparty"`
+	Thirdparty             int64 `json:"thirdparty"`
 
 	// Whether to allow resellers to view reports about email message
 	// delivery attempts from their account.
@@ -708,7 +713,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	TrackEmail int64 `json:"track-email"`
+	TrackEmail             int64 `json:"track-email"`
 
 	// Whether to allow the reseller to upgrade or downgrade accounts.
 	//
@@ -716,7 +721,7 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	UpgradeAccount int64 `json:"upgrade-account"`
+	UpgradeAccount         int64 `json:"upgrade-account"`
 
 	// Whether to allow the reseller to use all
 	// [global packages](https://go.cpanel.net/resellerpackages).
@@ -725,13 +730,13 @@ type ListaclsDataAclItemPrivileges struct {
 	// * `0` — Do not allow.
 	//
 	// Possible values: `1`, `0`.
-	ViewGlobalPackages int64 `json:"viewglobalpackages"`
+	ViewGlobalPackages     int64 `json:"viewglobalpackages"`
 }
 
 // ListaclsDataAclItem is a generated payload type.
 type ListaclsDataAclItem struct {
 	// The ACL's name.
-	Name string `json:"name"`
+	Name       string `json:"name"`
 
 	// A list of ACL privileges, including any third-party ACL privileges
 	// that exist for the user.
@@ -754,6 +759,7 @@ type ListaclsData struct {
 func (c *Client) ListResellers(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListResellersData], error) {
 	return cpanel.WHMCall[ListResellersData](ctx, c.c, http.MethodGet, "listresellers", cpanel.CombineArgs(extra...))
 }
+
 
 // ListResellersData is a generated payload type.
 type ListResellersData struct {
@@ -813,6 +819,7 @@ func (c *Client) ResellerStats(ctx context.Context, args *ResellerStatsArgs) (*c
 	return cpanel.WHMCall[ResellerStatsData](ctx, c.c, http.MethodGet, "resellerstats", args)
 }
 
+
 // ResellerStatsDataResellerAcctItem is a generated payload type.
 type ResellerStatsDataResellerAcctItem struct {
 	// The account's bandwidth limit.
@@ -823,7 +830,7 @@ type ResellerStatsDataResellerAcctItem struct {
 
 	// The account's current bandwidth use.
 	// A positive numeric value, encoded as a string, that represents the account's bandwidth use, in megabytes (MB).
-	BandwidthUsed string `json:"bandwidthused"`
+	BandwidthUsed  string `json:"bandwidthused"`
 
 	// Whether the account has been deleted.
 	//
@@ -831,23 +838,23 @@ type ResellerStatsDataResellerAcctItem struct {
 	// * `0` — **Not** deleted.
 	//
 	// Possible values: `0`, `1`.
-	Deleted int64 `json:"deleted"`
+	Deleted        int64 `json:"deleted"`
 
 	// The account's disk space quota.
 	//
 	// * A positive numeric value, encoded as a string, that represents the account's disk space quota, in megabytes (MB).
 	// * `0.00` — The account has unlimited disk space.
-	DiskQuota string `json:"diskquota"`
+	DiskQuota      string `json:"diskquota"`
 
 	// The account's current disk space use.
 	// A positive numeric value, encoded as a string, that represents the account's current disk space use, in megabytes (MB).
-	Diskused string `json:"diskused"`
+	Diskused       string `json:"diskused"`
 
 	// The account's main domain.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// The account's hosting plan (package).
-	Package2 string `json:"package"`
+	Package2       string `json:"package"`
 
 	// Whether the account is suspended.
 	//
@@ -855,10 +862,10 @@ type ResellerStatsDataResellerAcctItem struct {
 	// * `0` — Not suspended.
 	//
 	// Possible values: `0`, `1`.
-	Suspended int64 `json:"suspended"`
+	Suspended      int64 `json:"suspended"`
 
 	// The account's username.
-	User string `json:"user"`
+	User           string `json:"user"`
 }
 
 // Object containing data about a reseller account.
@@ -868,13 +875,13 @@ type ResellerStatsDataReseller struct {
 	// **Note:**
 	//
 	// This array also returns the reseller account.
-	Acct []ResellerStatsDataResellerAcctItem `json:"acct"`
+	Acct            []ResellerStatsDataResellerAcctItem `json:"acct"`
 
 	// The reseller's total bandwidth limit.
 	//
 	// * A positive integer that represents the reseller's bandwidth limit, in megabytes (MB).
 	// * `0` — The reseller has unlimited bandwidth.
-	BandwidthLimit int64 `json:"bandwidthlimit"`
+	BandwidthLimit  int64 `json:"bandwidthlimit"`
 
 	// Whether the reseller can oversell bandwidth.
 	//
@@ -882,7 +889,7 @@ type ResellerStatsDataReseller struct {
 	// * `0` — The reseller **cannot** oversell bandwidth.
 	//
 	// Possible values: `0`, `1`.
-	BwOverselling int64 `json:"bwoverselling"`
+	BwOverselling   int64 `json:"bwoverselling"`
 
 	// Whether the reseller can oversell disk space.
 	//
@@ -896,32 +903,32 @@ type ResellerStatsDataReseller struct {
 	//
 	// * A positive integer that represents the reseller's disk space quota, in megabytes (MB).
 	// * `0` — The reseller has unlimited disk space.
-	DiskQuota int64 `json:"diskquota"`
+	DiskQuota       int64 `json:"diskquota"`
 
 	// The total amount of disk space that the reseller and all of its accounts use, in megabytes (MB).
 	//
 	// **Note:**
 	//
 	// This value does not include disk space the reseller account uses if the root account owns it.
-	Diskused float64 `json:"diskused"`
+	Diskused        float64 `json:"diskused"`
 
 	// The current month or a queried month.
-	Month int64 `json:"month"`
+	Month           int64 `json:"month"`
 
 	// The total amount of bandwidth that the reseller has given to its accounts, in megabytes (MB), encoded as a string.
-	TotalBWallOc string `json:"totalbwalloc"`
+	TotalBWallOc    string `json:"totalbwalloc"`
 
 	// The total amount of bandwidth that the reseller's accounts have used, in megabytes (MB), encoded as a string.
-	TotalBwused string `json:"totalbwused"`
+	TotalBwused     string `json:"totalbwused"`
 
 	// The total amount of disk space that the reseller has given to its accounts, in megabytes (MB), encoded as a string.
-	TotalDiskALLoc string `json:"totaldiskalloc"`
+	TotalDiskALLoc  string `json:"totaldiskalloc"`
 
 	// The reseller account's username.
-	User string `json:"user"`
+	User            string `json:"user"`
 
 	// The current year or a queried year.
-	Year int64 `json:"year"`
+	Year            int64 `json:"year"`
 }
 
 // ResellerStatsData is a generated payload type.
@@ -1395,11 +1402,11 @@ type SaveAcllistArgs struct {
 //
 // **Note:**
 //
-//	For each `acl-*` parameter, a value of `1` adds that privilege to the ACL list and a value of `0` removes that privilege from the ACL list.
+//   For each `acl-*` parameter, a value of `1` adds that privilege to the ACL list and a value of `0` removes that privilege from the ACL list.
 //
 // **Warning:**
 //
-//	We **strongly** recommend that WHM users create and edit ACLs and ACL privileges through WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface ( *WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges* ).
+//   We **strongly** recommend that WHM users create and edit ACLs and ACL privileges through WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface ( *WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges* ).
 //
 // Available since cPanel & WHM version 11.
 //
@@ -1407,6 +1414,7 @@ type SaveAcllistArgs struct {
 func (c *Client) SaveAcllist(ctx context.Context, args *SaveAcllistArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "saveacllist", args)
 }
+
 
 // SetEnhancementLimitArgs are the parameters of the WHM API 1 function `set_enhancement_limit`.
 type SetEnhancementLimitArgs struct {
@@ -1452,6 +1460,7 @@ func (c *Client) SetEnhancementLimit(ctx context.Context, args *SetEnhancementLi
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_enhancement_limit", args)
 }
 
+
 // SetPublicContactArgs are the parameters of the WHM API 1 function `set_public_contact`.
 type SetPublicContactArgs struct {
 	// The public contact name of the reseller. If you do not use this
@@ -1476,6 +1485,7 @@ type SetPublicContactArgs struct {
 func (c *Client) SetPublicContact(ctx context.Context, args *SetPublicContactArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_public_contact", args)
 }
+
 
 // SetaclsArgs are the parameters of the WHM API 1 function `setacls`.
 type SetaclsArgs struct {
@@ -1827,11 +1837,11 @@ type SetaclsArgs struct {
 //
 // **Note:**
 //
-//	For each `acl-*` parameter, any value adds that privilege to the ACL list and no value removes that privilege from the ACL list.
+//   For each `acl-*` parameter, any value adds that privilege to the ACL list and no value removes that privilege from the ACL list.
 //
 // **Warning:**
 //
-//	We **strongly** recommend that WHM users create and edit ACLs and ACL privileges through WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface ( *WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges* ).
+//   We **strongly** recommend that WHM users create and edit ACLs and ACL privileges through WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface ( *WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges* ).
 //
 // Available since cPanel & WHM version 11.
 //
@@ -1839,6 +1849,7 @@ type SetaclsArgs struct {
 func (c *Client) Setacls(ctx context.Context, args *SetaclsArgs) (*cpanel.WHMResult[SetaclsData], error) {
 	return cpanel.WHMCall[SetaclsData](ctx, c.c, http.MethodGet, "setacls", args)
 }
+
 
 // SetaclsData is a generated payload type.
 type SetaclsData struct {
@@ -1892,6 +1903,7 @@ func (c *Client) SetResellerIPs(ctx context.Context, args *SetResellerIPsArgs) (
 	return cpanel.WHMCall[SetResellerIPsData](ctx, c.c, http.MethodGet, "setresellerips", args)
 }
 
+
 // SetResellerIPsData is a generated payload type.
 type SetResellerIPsData struct {
 	// Whether the function allocated all available IP addresses to the reseller. This return **only** appears if you set the `delegate` parameter to `0`.
@@ -1904,7 +1916,7 @@ type SetResellerIPsData struct {
 	All int64 `json:"all"`
 
 	// An array of the reseller's allocated IP addresses.
-	IP []string `json:"ip"`
+	IP  []string `json:"ip"`
 }
 
 // SetResellerLimitsArgs are the parameters of the WHM API 1 function `setresellerlimits`.
@@ -2039,6 +2051,7 @@ func (c *Client) SetResellerLimits(ctx context.Context, args *SetResellerLimitsA
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setresellerlimits", args)
 }
 
+
 // SetResellerMainIPArgs are the parameters of the WHM API 1 function `setresellermainip`.
 type SetResellerMainIPArgs struct {
 	// The IP address to assign to the reseller's account as the main shared IP address.
@@ -2061,7 +2074,7 @@ type SetResellerMainIPArgs struct {
 //
 // **Note:**
 //
-//	To assign additional IP addresses to a reseller's account, call the WHM API 1 `setresellerips` function.
+//   To assign additional IP addresses to a reseller's account, call the WHM API 1 `setresellerips` function.
 //
 // Available since cPanel & WHM version 11.
 //
@@ -2069,6 +2082,7 @@ type SetResellerMainIPArgs struct {
 func (c *Client) SetResellerMainIP(ctx context.Context, args *SetResellerMainIPArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setresellermainip", args)
 }
+
 
 // SetResellerNameserversArgs are the parameters of the WHM API 1 function `setresellernameservers`.
 type SetResellerNameserversArgs struct {
@@ -2099,6 +2113,7 @@ type SetResellerNameserversArgs struct {
 func (c *Client) SetResellerNameservers(ctx context.Context, args *SetResellerNameserversArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setresellernameservers", args)
 }
+
 
 // SetResellerPackageLimitArgs are the parameters of the WHM API 1 function `setresellerpackagelimit`.
 type SetResellerPackageLimitArgs struct {
@@ -2157,6 +2172,7 @@ func (c *Client) SetResellerPackageLimit(ctx context.Context, args *SetResellerP
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setresellerpackagelimit", args)
 }
 
+
 // SetupResellerArgs are the parameters of the WHM API 1 function `setupreseller`.
 type SetupResellerArgs struct {
 	// The account's username.
@@ -2191,6 +2207,7 @@ type SetupResellerArgs struct {
 func (c *Client) SetupReseller(ctx context.Context, args *SetupResellerArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setupreseller", args)
 }
+
 
 // SuspendResellerArgs are the parameters of the WHM API 1 function `suspendreseller`.
 type SuspendResellerArgs struct {
@@ -2239,6 +2256,7 @@ func (c *Client) SuspendReseller(ctx context.Context, args *SuspendResellerArgs)
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "suspendreseller", args)
 }
 
+
 // TerminateResellerArgs are the parameters of the WHM API 1 function `terminatereseller`.
 type TerminateResellerArgs struct {
 	// Whether to terminate the reseller's main account.
@@ -2279,6 +2297,7 @@ func (c *Client) TerminateReseller(ctx context.Context, args *TerminateResellerA
 	return cpanel.WHMCall[TerminateResellerData](ctx, c.c, http.MethodGet, "terminatereseller", args)
 }
 
+
 // An object containing the termination data for the reseller's accounts.
 type TerminateResellerDataAcctItemOutput struct {
 	// Output from the account's removal.
@@ -2306,7 +2325,7 @@ type TerminateResellerDataAcctItem struct {
 	Result int64 `json:"result"`
 
 	// The account username.
-	User string `json:"user"`
+	User   string `json:"user"`
 }
 
 // TerminateResellerData is a generated payload type.
@@ -2336,6 +2355,7 @@ type UnsetupResellerArgs struct {
 func (c *Client) UnsetupReseller(ctx context.Context, args *UnsetupResellerArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unsetupreseller", args)
 }
+
 
 // UnsuspendResellerArgs are the parameters of the WHM API 1 function `unsuspendreseller`.
 type UnsuspendResellerArgs struct {
@@ -2367,3 +2387,4 @@ type UnsuspendResellerArgs struct {
 func (c *Client) UnsuspendReseller(ctx context.Context, args *UnsuspendResellerArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unsuspendreseller", args)
 }
+

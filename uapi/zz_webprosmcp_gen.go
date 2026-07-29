@@ -22,22 +22,23 @@ func (c *WebProsMcpClient) GetConnectionConfig(ctx context.Context, extra ...cpa
 	return cpanel.UAPICall[WebProsMcpGetConnectionConfigData](ctx, c.c, http.MethodGet, "WebProsMCP", "get_connection_config", cpanel.CombineArgs(extra...))
 }
 
+
 // WebProsMcpGetConnectionConfigDataMcpConfigOauth is a generated payload type.
 type WebProsMcpGetConnectionConfigDataMcpConfigOauth struct {
 	CallbackPort int64 `json:"callbackPort"`
 
-	ClientID string `json:"clientId"`
+	ClientID     string `json:"clientId"`
 }
 
 // The MCP connection snippet.
 type WebProsMcpGetConnectionConfigDataMcpConfig struct {
-	Name string `json:"name"`
+	Name  string `json:"name"`
 
 	Oauth WebProsMcpGetConnectionConfigDataMcpConfigOauth `json:"oauth"`
 
 	Type2 string `json:"type"`
 
-	URL string `json:"url"`
+	URL   string `json:"url"`
 }
 
 // WebProsMcpGetConnectionConfigData is a generated payload type.
@@ -46,13 +47,13 @@ type WebProsMcpGetConnectionConfigData struct {
 	Environment string `json:"environment"`
 
 	// 1 if the current user has a WebPros authentication link, 0 otherwise.
-	IsLinked int64 `json:"is_linked"`
+	IsLinked    int64 `json:"is_linked"`
 
 	// Session-relative URL used to initiate the WebPros Account link.
-	LinkURL string `json:"link_url"`
+	LinkURL     string `json:"link_url"`
 
 	// The MCP connection snippet.
-	McpConfig WebProsMcpGetConnectionConfigDataMcpConfig `json:"mcp_config"`
+	McpConfig   WebProsMcpGetConnectionConfigDataMcpConfig `json:"mcp_config"`
 }
 
 // UnlinkWebProsAccount calls the UAPI function `WebProsMCP::unlink_webpros_account` — Unlink the WebPros Account from this cPanel account
@@ -65,6 +66,7 @@ type WebProsMcpGetConnectionConfigData struct {
 func (c *WebProsMcpClient) UnlinkWebProsAccount(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[WebProsMcpUnlinkWebProsAccountData], error) {
 	return cpanel.UAPICall[WebProsMcpUnlinkWebProsAccountData](ctx, c.c, http.MethodGet, "WebProsMCP", "unlink_webpros_account", cpanel.CombineArgs(extra...))
 }
+
 
 // WebProsMcpUnlinkWebProsAccountData is a generated payload type.
 type WebProsMcpUnlinkWebProsAccountData struct {

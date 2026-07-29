@@ -23,6 +23,7 @@ func (c *Client) EA4GetAdditionalPkgPrefixes(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[EA4GetAdditionalPkgPrefixesData](ctx, c.c, http.MethodGet, "ea4_get_additional_pkg_prefixes", cpanel.CombineArgs(extra...))
 }
 
+
 // EA4GetAdditionalPkgPrefixesData is a generated payload type.
 type EA4GetAdditionalPkgPrefixesData struct {
 	// A list of any additional package prefixes, beyond `ea`, that the server is using.
@@ -44,6 +45,7 @@ func (c *Client) EA4GetCurrentlyInstalledPackages(ctx context.Context, extra ...
 	return cpanel.WHMCall[EA4GetCurrentlyInstalledPackagesData](ctx, c.c, http.MethodGet, "ea4_get_currently_installed_packages", cpanel.CombineArgs(extra...))
 }
 
+
 // EA4GetCurrentlyInstalledPackagesData is a generated payload type.
 type EA4GetCurrentlyInstalledPackagesData struct {
 	// A list of the currently installed packages.
@@ -54,9 +56,9 @@ type EA4GetCurrentlyInstalledPackagesData struct {
 //
 // This function returns a list of all [EasyApache 4](https://docs.cpanel.net/ea4/) profiles and the packages that each profile provides.
 //
-//	**Important:**
+//  **Important:**
 //
-//	When you disable the [Web Server](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles) role, the system **disables** this function.
+//  When you disable the [Web Server](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles) role, the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -64,6 +66,7 @@ type EA4GetCurrentlyInstalledPackagesData struct {
 func (c *Client) EA4ListProfiles(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[EA4ListProfilesData], error) {
 	return cpanel.WHMCall[EA4ListProfilesData](ctx, c.c, http.MethodGet, "ea4_list_profiles", cpanel.CombineArgs(extra...))
 }
+
 
 // EA4ListProfilesDataCpanelItemValidationData is a generated payload type.
 type EA4ListProfilesDataCpanelItemValidationData struct {
@@ -78,24 +81,24 @@ type EA4ListProfilesDataCpanelItem struct {
 	// * `0` - Inactive.
 	//
 	// Possible values: `0`, `1`.
-	Active int64 `json:"active"`
+	Active         int64 `json:"active"`
 
 	// A description of the profile.
-	Desc string `json:"desc"`
+	Desc           string `json:"desc"`
 
 	// The profile name.
-	Name string `json:"name"`
+	Name           string `json:"name"`
 
 	// An array of RPM packages that the profile includes.
-	Pkgs []string `json:"pkgs"`
+	Pkgs           []string `json:"pkgs"`
 
 	// Labels that highlight key attributes of a profile.
-	Tags []string `json:"tags"`
+	Tags           []string `json:"tags"`
 
 	ValidationData EA4ListProfilesDataCpanelItemValidationData `json:"validation_data"`
 
 	// The profile's current version ID.
-	Version string `json:"version"`
+	Version        string `json:"version"`
 }
 
 // EA4ListProfilesDataCustomItemValidationData is a generated payload type.
@@ -107,24 +110,24 @@ type EA4ListProfilesDataCustomItemValidationData struct {
 // EA4ListProfilesDataCustomItem is a generated payload type.
 type EA4ListProfilesDataCustomItem struct {
 	// A description of the profile.
-	Desc string `json:"desc"`
+	Desc           string `json:"desc"`
 
 	// The profile name.
-	Name string `json:"name"`
+	Name           string `json:"name"`
 
 	// The file name of the profile.
-	Path string `json:"path"`
+	Path           string `json:"path"`
 
 	// An array of RPM packages that the profile includes.
-	Pkgs []string `json:"pkgs"`
+	Pkgs           []string `json:"pkgs"`
 
 	// Labels that highlight key attributes of a profile.
-	Tags []string `json:"tags"`
+	Tags           []string `json:"tags"`
 
 	ValidationData EA4ListProfilesDataCustomItemValidationData `json:"validation_data"`
 
 	// The profile's current version ID.
-	Version string `json:"version"`
+	Version        string `json:"version"`
 }
 
 // EA4ListProfilesData is a generated payload type.
@@ -151,6 +154,7 @@ func (c *Client) EA4Metainfo(ctx context.Context, extra ...cpanel.Args) (*cpanel
 	return cpanel.WHMCall[map[string]json.RawMessage](ctx, c.c, http.MethodGet, "ea4_metainfo", cpanel.CombineArgs(extra...))
 }
 
+
 // EA4Recommendations calls the WHM API 1 function `ea4_recommendations` — Return EasyApache 4 recommendations
 //
 // This function returns any recommendations attached to your installed
@@ -168,6 +172,7 @@ func (c *Client) EA4Recommendations(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[map[string][]EA4RecommendationsDataValueItem](ctx, c.c, http.MethodGet, "ea4_recommendations", cpanel.CombineArgs(extra...))
 }
 
+
 // EA4RecommendationsDataValueItemOptionsItem is a generated payload type.
 type EA4RecommendationsDataValueItemOptionsItem struct {
 	// An array of information that corresponds with a text value.
@@ -175,7 +180,7 @@ type EA4RecommendationsDataValueItemOptionsItem struct {
 	// **Note:**
 	//
 	// The function **only** returns this value if it exists.
-	Items []string `json:"items"`
+	Items       []string `json:"items"`
 
 	// The level that triggers a recommendation to appear, based on [Bootstrap 3 alert components](http://getbootstrap.com/components/#alerts).
 	//
@@ -191,7 +196,7 @@ type EA4RecommendationsDataValueItemOptionsItem struct {
 	// * This return's value only affects the UI if set to `danger`.
 	//
 	// Possible values: `primary`, `success`, `info`, `warning`, `danger`.
-	Level string `json:"level"`
+	Level       string `json:"level"`
 
 	// The type of recommendation that the interface will return.
 	//
@@ -207,14 +212,14 @@ type EA4RecommendationsDataValueItemOptionsItem struct {
 	ReCommEndEd bool `json:"recommended"`
 
 	// The text returned in the user interface.
-	Text string `json:"text"`
+	Text        string `json:"text"`
 
 	// A URL that provides more information.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value if it exists.
-	URL string `json:"url"`
+	URL         string `json:"url"`
 }
 
 // EA4RecommendationsDataValueItem is a generated payload type.
@@ -224,7 +229,7 @@ type EA4RecommendationsDataValueItem struct {
 	// **Note:**
 	//
 	// * The function **only** returns this value if it exists.
-	Desc string `json:"desc"`
+	Desc    string `json:"desc"`
 
 	// The level that triggers a recommendation to appear, based on [Bootstrap 3 alert components](http://getbootstrap.com/components/#alerts).
 	//
@@ -240,10 +245,10 @@ type EA4RecommendationsDataValueItem struct {
 	// * This return's value only affects the UI if set to `danger`.
 	//
 	// Possible values: `primary`, `success`, `info`, `warning`, `danger`.
-	Level string `json:"level"`
+	Level   string `json:"level"`
 
 	// The recommendation's name.
-	Name string `json:"name"`
+	Name    string `json:"name"`
 
 	// The action that triggers a recommendation.
 	//
@@ -251,7 +256,7 @@ type EA4RecommendationsDataValueItem struct {
 	// * `remove`
 	//
 	// Possible values: `add`, `remove`.
-	On string `json:"on"`
+	On      string `json:"on"`
 
 	// An object that contains each option for the package's recommendations.
 	Options []EA4RecommendationsDataValueItemOptionsItem `json:"options"`
@@ -261,7 +266,7 @@ type EA4RecommendationsDataValueItem struct {
 	// **Note:**
 	//
 	// * The function **only** returns this value if it exists.
-	URL string `json:"url"`
+	URL     string `json:"url"`
 }
 
 // EA4SaveProfileArgs are the parameters of the WHM API 1 function `ea4_save_profile`.
@@ -316,7 +321,7 @@ type EA4SaveProfileArgs struct {
 //
 // **Important**:
 //
-//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 64.
 //
@@ -324,6 +329,7 @@ type EA4SaveProfileArgs struct {
 func (c *Client) EA4SaveProfile(ctx context.Context, args *EA4SaveProfileArgs) (*cpanel.WHMResult[EA4SaveProfileData], error) {
 	return cpanel.WHMCall[EA4SaveProfileData](ctx, c.c, http.MethodGet, "ea4_save_profile", args)
 }
+
 
 // EA4SaveProfileData is a generated payload type.
 type EA4SaveProfileData struct {
@@ -343,7 +349,7 @@ type EA4SaveProfileData struct {
 	// **Note**:
 	//
 	//  The function only returns this field if it succeeds.
-	Path string `json:"path"`
+	Path          string `json:"path"`
 }
 
 // EolPHPSites calls the WHM API 1 function `eol_php_sites` — Count domains using EOL PHP versions
@@ -359,6 +365,7 @@ type EA4SaveProfileData struct {
 func (c *Client) EolPHPSites(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[EolPHPSitesData], error) {
 	return cpanel.WHMCall[EolPHPSitesData](ctx, c.c, http.MethodGet, "eol_php_sites", cpanel.CombineArgs(extra...))
 }
+
 
 // EolPHPSitesData is a generated payload type.
 type EolPHPSitesData struct {

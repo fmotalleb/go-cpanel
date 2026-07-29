@@ -30,9 +30,9 @@ type VersionControlDeploymentCreateArgs struct {
 // **Important:**
 //
 // The system logs messages for this function in the `~/.cpanel/logs/vc_TIMESTAMP_git_deploy.log` file, where TIMESTAMP represents the time in Unix epoch time. The system pulls changes with the `--ff-only` option and will only succeed if the branch's HEAD commit is up-to-date or Git can fast forward it. For more information about our suggested deployment configuration and how users can set it up, read our [Guide to Git™ - Deployment](https://go.cpanel.net/GitDeployment) documentation. Before deployment, repositories must meet the following requirements:
-//   - A valid checked-in `.cpanel.yml` file in the top-level directory.
-//   - One or more local or remote branches.
-//   - A clean working tree.
+//   * A valid checked-in `.cpanel.yml` file in the top-level directory.
+//   * One or more local or remote branches.
+//   * A clean working tree.
 //
 // If a repository does **not** meet these requirements, the system will **not** display deployment information. Also, it will disable deployment functionality. For more information, read our [Guide to Git™ - Deployment](https://go.cpanel.net/GitDeployment) documentation.
 //
@@ -43,6 +43,7 @@ func (c *VersionControlDeploymentClient) Create(ctx context.Context, args *Versi
 	return cpanel.UAPICall[VersionControlDeploymentCreateData](ctx, c.c, http.MethodGet, "VersionControlDeployment", "create", args)
 }
 
+
 // A hash of timestamps for the deployment process.
 type VersionControlDeploymentCreateDataTimestampS struct {
 	// The time at which the deployment process. entered the task queue.
@@ -52,22 +53,22 @@ type VersionControlDeploymentCreateDataTimestampS struct {
 // VersionControlDeploymentCreateData is a generated payload type.
 type VersionControlDeploymentCreateData struct {
 	// The deployment ID number.
-	DeployID string `json:"deploy_id"`
+	DeployID       string `json:"deploy_id"`
 
 	// The absolute path to the task's log file vc_TIMESTAMP_git_deploy.log, where TIMESTAMP represents the time in Unix epoch time.
-	LogPath string `json:"log_path"`
+	LogPath        string `json:"log_path"`
 
 	// The repository's directory.
 	RepositoryRoot string `json:"repository_root"`
 
 	// The SSE interface to track the progress of the deployment process.
-	SseURL string `json:"sse_url"`
+	SseURL         string `json:"sse_url"`
 
 	// The Task Queue system's task ID number.
-	TaskID string `json:"task_id"`
+	TaskID         string `json:"task_id"`
 
 	// A hash of timestamps for the deployment process.
-	TimestampS VersionControlDeploymentCreateDataTimestampS `json:"timestamps"`
+	TimestampS     VersionControlDeploymentCreateDataTimestampS `json:"timestamps"`
 }
 
 // VersionControlDeploymentDeleteArgs are the parameters of the UAPI function `VersionControlDeployment::delete`.
@@ -92,12 +93,13 @@ func (c *VersionControlDeploymentClient) Delete(ctx context.Context, args *Versi
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "VersionControlDeployment", "delete", args)
 }
 
+
 // Retrieve calls the UAPI function `VersionControlDeployment::retrieve` — Return Git deployment task status
 //
 // This function retrieves the status of deployment tasks. Before deployment, repositories must meet the following requirements:
-//   - A valid checked-in `.cpanel.yml` file in the top-level directory.
-//   - One or more local or remote branches.
-//   - A clean working tree.
+//   * A valid checked-in `.cpanel.yml` file in the top-level directory.
+//   * One or more local or remote branches.
+//   * A clean working tree.
 //
 // If a repository does **not** meet these requirements, the system will **not** display deployment information. Also, it will disable deployment functionality. For more information, read our [Guide to Git™ - Deployment](https://go.cpanel.net/GitDeployment) documentation.
 //
@@ -112,28 +114,29 @@ func (c *VersionControlDeploymentClient) Retrieve(ctx context.Context, extra ...
 	return cpanel.UAPICall[[]VersionControlDeploymentRetrieveDataItem](ctx, c.c, http.MethodGet, "VersionControlDeployment", "retrieve", cpanel.CombineArgs(extra...))
 }
 
+
 // An object containing information about the repository's state at the time of deployment.
 type VersionControlDeploymentRetrieveDataItemRepositoryState struct {
 	// The most-recent commit's author's name and email address as they exist in the user's Git configuration files.
-	Author string `json:"author"`
+	Author     string `json:"author"`
 
 	// The repository's current branch.
-	Branch string `json:"branch"`
+	Branch     string `json:"branch"`
 
 	// The timestamp for the most-recent commit, in Unix time format.
-	Date int64 `json:"date"`
+	Date       int64 `json:"date"`
 
 	// The identifier (SHA-1 value) for the most-recent commit.
 	Identifier string `json:"identifier"`
 
 	// The commit message.
-	Message string `json:"message"`
+	Message    string `json:"message"`
 }
 
 // An object containing timestamps for the deployment process.
 type VersionControlDeploymentRetrieveDataItemTimestampS struct {
 	// The time at which the system started the deployment process, in Unix time format.
-	Active string `json:"active"`
+	Active    string `json:"active"`
 
 	// The time at which the system cancelled the deployment process, in Unix time format.
 	//
@@ -141,7 +144,7 @@ type VersionControlDeploymentRetrieveDataItemTimestampS struct {
 	//
 	// * The function only returns this value if the system cancelled the deployment process.
 	// * The system logs messages for this function in the `~/.cpanel/logs/vc_TIMESTAMP_git_deploy.log` file, where `TIMESTAMP` represents the Unix timestamp.
-	Canceled string `json:"canceled"`
+	Canceled  string `json:"canceled"`
 
 	// The time at which the deployment process failed, in Unix time format.
 	//
@@ -149,10 +152,10 @@ type VersionControlDeploymentRetrieveDataItemTimestampS struct {
 	//
 	// * The function only returns this value if the deployment process failed.
 	// * The system logs messages for this function in the `~/.cpanel/logs/vc_TIMESTAMP_git_deploy.log` file, where `TIMESTAMP` represents the Unix timestamp.
-	Failed string `json:"failed"`
+	Failed    string `json:"failed"`
 
 	// The time at which the deployment process entered the task queue, in Unix time format.
-	Queued string `json:"queued"`
+	Queued    string `json:"queued"`
 
 	// The time at which the deployment process finished successfully, in Unix time format.
 	//
@@ -165,23 +168,23 @@ type VersionControlDeploymentRetrieveDataItemTimestampS struct {
 // VersionControlDeploymentRetrieveDataItem is a generated payload type.
 type VersionControlDeploymentRetrieveDataItem struct {
 	// The deployment ID number.
-	DeployID int64 `json:"deploy_id"`
+	DeployID        int64 `json:"deploy_id"`
 
 	// The absolute path to the task's log file.
-	LogPath string `json:"log_path"`
+	LogPath         string `json:"log_path"`
 
 	// The aboslute path to the cPanel-managed repository directory.
-	RepositoryRoot string `json:"repository_root"`
+	RepositoryRoot  string `json:"repository_root"`
 
 	// An object containing information about the repository's state at the time of deployment.
 	RepositoryState VersionControlDeploymentRetrieveDataItemRepositoryState `json:"repository_state"`
 
 	// The SSE interface to track the progress of the deployment process.
-	SseURL string `json:"sse_url"`
+	SseURL          string `json:"sse_url"`
 
 	// The [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor) system's task ID number.
-	TaskID string `json:"task_id"`
+	TaskID          string `json:"task_id"`
 
 	// An object containing timestamps for the deployment process.
-	TimestampS VersionControlDeploymentRetrieveDataItemTimestampS `json:"timestamps"`
+	TimestampS      VersionControlDeploymentRetrieveDataItemTimestampS `json:"timestamps"`
 }

@@ -35,6 +35,7 @@ func (c *DirectoryProtectionClient) ListDirectories(ctx context.Context, args *D
 	return cpanel.UAPICall[DirectoryProtectionListDirectoriesData](ctx, c.c, http.MethodGet, "DirectoryProtection", "list_directories", args)
 }
 
+
 // A object containing the subdirectory's leech protection information.
 type DirectoryProtectionListDirectoriesDataChildrenItemState struct {
 	// The directory's leech protection status.
@@ -49,7 +50,7 @@ type DirectoryProtectionListDirectoriesDataChildrenItemState struct {
 // DirectoryProtectionListDirectoriesDataChildrenItem is a generated payload type.
 type DirectoryProtectionListDirectoriesDataChildrenItem struct {
 	// The subdirectory's absolute directory path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// A object containing the subdirectory's leech protection information.
 	State DirectoryProtectionListDirectoriesDataChildrenItemState `json:"state"`
@@ -69,7 +70,7 @@ type DirectoryProtectionListDirectoriesDataCurrentState struct {
 // The user's current directory and its leech protection information.
 type DirectoryProtectionListDirectoriesDataCurrent struct {
 	// The current directory's absolute file path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// An object containing the current directory's leech protection information.
 	State DirectoryProtectionListDirectoriesDataCurrentState `json:"state"`
@@ -89,7 +90,7 @@ type DirectoryProtectionListDirectoriesDataHomeState struct {
 // The user's `home` directory and its leech protection information.
 type DirectoryProtectionListDirectoriesDataHome struct {
 	// The `home` directory's absolute directory path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// A object containing the `home` directory's leech protection information.
 	State DirectoryProtectionListDirectoriesDataHomeState `json:"state"`
@@ -109,7 +110,7 @@ type DirectoryProtectionListDirectoriesDataParentState struct {
 // The parent directory of the current directory and its leech protection information.
 type DirectoryProtectionListDirectoriesDataParent struct {
 	// The parent directory's absolute directory path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// An object containing the parent directory's leech protection information.
 	State DirectoryProtectionListDirectoriesDataParentState `json:"state"`
@@ -125,11 +126,11 @@ type DirectoryProtectionListDirectoriesData struct {
 	Children []DirectoryProtectionListDirectoriesDataChildrenItem `json:"children"`
 
 	// The user's current directory and its leech protection information.
-	Current DirectoryProtectionListDirectoriesDataCurrent `json:"current"`
+	Current  DirectoryProtectionListDirectoriesDataCurrent `json:"current"`
 
 	// The user's `home` directory and its leech protection information.
-	Home DirectoryProtectionListDirectoriesDataHome `json:"home"`
+	Home     DirectoryProtectionListDirectoriesDataHome `json:"home"`
 
 	// The parent directory of the current directory and its leech protection information.
-	Parent DirectoryProtectionListDirectoriesDataParent `json:"parent"`
+	Parent   DirectoryProtectionListDirectoriesDataParent `json:"parent"`
 }

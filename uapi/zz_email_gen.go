@@ -36,11 +36,11 @@ type EmailAccountNameArgs struct {
 //
 // **Note:**
 //
-//	If you call this function from a Webmail session URL, the system will **only** access data for that email account.
+//   If you call this function from a Webmail session URL, the system will **only** access data for that email account.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -48,6 +48,7 @@ type EmailAccountNameArgs struct {
 func (c *EmailClient) AccountName(ctx context.Context, args *EmailAccountNameArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "account_name", args)
 }
+
 
 // EmailAddAutoResponderArgs are the parameters of the UAPI function `Email::add_auto_responder`.
 type EmailAddAutoResponderArgs struct {
@@ -119,7 +120,7 @@ type EmailAddAutoResponderArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -127,6 +128,7 @@ type EmailAddAutoResponderArgs struct {
 func (c *EmailClient) AddAutoResponder(ctx context.Context, args *EmailAddAutoResponderArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "add_auto_responder", args)
 }
+
 
 // EmailAddDomainForwarderArgs are the parameters of the UAPI function `Email::add_domain_forwarder`.
 type EmailAddDomainForwarderArgs struct {
@@ -150,7 +152,7 @@ type EmailAddDomainForwarderArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -158,6 +160,7 @@ type EmailAddDomainForwarderArgs struct {
 func (c *EmailClient) AddDomainForwarder(ctx context.Context, args *EmailAddDomainForwarderArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "add_domain_forwarder", args)
 }
+
 
 // EmailAddForwarderArgs are the parameters of the UAPI function `Email::add_forwarder`.
 type EmailAddForwarderArgs struct {
@@ -221,9 +224,9 @@ type EmailAddForwarderArgs struct {
 //
 // **Important:**
 //
-//	When you disable the MailReceive role, the system disables this function.
-//	For more information, read our [How to Use Server Profiles](https://go.cpanel.net/howtouseserverprofiles)
-//	documentation.
+//   When you disable the MailReceive role, the system disables this function.
+//   For more information, read our [How to Use Server Profiles](https://go.cpanel.net/howtouseserverprofiles)
+//   documentation.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -232,13 +235,14 @@ func (c *EmailClient) AddForwarder(ctx context.Context, args *EmailAddForwarderA
 	return cpanel.UAPICall[[]EmailAddForwarderDataItem](ctx, c.c, http.MethodGet, "Email", "add_forwarder", args)
 }
 
+
 // EmailAddForwarderDataItem is a generated payload type.
 type EmailAddForwarderDataItem struct {
 	// The domain. A valid domain on the account.
-	Domain string `json:"domain"`
+	Domain  string `json:"domain"`
 
 	// The email address. An email address on the account.
-	Email string `json:"email"`
+	Email   string `json:"email"`
 
 	// The method that the system will use to handle the address's mail.
 	// - An email address  The system forwards mail to this address.
@@ -294,7 +298,7 @@ type EmailAddListArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -302,6 +306,7 @@ type EmailAddListArgs struct {
 func (c *EmailClient) AddList(ctx context.Context, args *EmailAddListArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "add_list", args)
 }
+
 
 // EmailAddMailmanDelegatesArgs are the parameters of the UAPI function `Email::add_mailman_delegates`.
 type EmailAddMailmanDelegatesArgs struct {
@@ -329,7 +334,7 @@ type EmailAddMailmanDelegatesArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -337,6 +342,7 @@ type EmailAddMailmanDelegatesArgs struct {
 func (c *EmailClient) AddMailmanDelegates(ctx context.Context, args *EmailAddMailmanDelegatesArgs) (*cpanel.UAPIResult[EmailAddMailmanDelegatesData], error) {
 	return cpanel.UAPICall[EmailAddMailmanDelegatesData](ctx, c.c, http.MethodGet, "Email", "add_mailman_delegates", args)
 }
+
 
 // EmailAddMailmanDelegatesDataMetadata is a generated payload type.
 type EmailAddMailmanDelegatesDataMetadata struct {
@@ -348,7 +354,7 @@ type EmailAddMailmanDelegatesData struct {
 	// An array of the mailing list's administrators.
 	Delegates []string `json:"delegates"`
 
-	Metadata EmailAddMailmanDelegatesDataMetadata `json:"metadata"`
+	Metadata  EmailAddMailmanDelegatesDataMetadata `json:"metadata"`
 }
 
 // EmailAddMXArgs are the parameters of the UAPI function `Email::add_mx`.
@@ -391,7 +397,7 @@ type EmailAddMXArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -400,6 +406,7 @@ func (c *EmailClient) AddMX(ctx context.Context, args *EmailAddMXArgs) (*cpanel.
 	return cpanel.UAPICall[EmailAddMXData](ctx, c.c, http.MethodGet, "Email", "add_mx", args)
 }
 
+
 // An object of the mail exchanger's data.
 type EmailAddMXDataCheckmx struct {
 	// Whether a change occurred during the function.
@@ -407,7 +414,7 @@ type EmailAddMXDataCheckmx struct {
 	// * `0` - **No** change.
 	//
 	// Possible values: `0`, `1`.
-	Changed int64 `json:"changed"`
+	Changed     int64 `json:"changed"`
 
 	// The mail exchanger type.
 	// * `auto`
@@ -416,14 +423,14 @@ type EmailAddMXDataCheckmx struct {
 	// * `remote`
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Detected string `json:"detected"`
+	Detected    string `json:"detected"`
 
 	// Whether the mail exchanger is the primary mail exchanger.
 	// * `1` - Primary.
 	// * `0` - **Not** primary.
 	//
 	// Possible values: `0`, `1`.
-	IsPrimary int64 `json:"isprimary"`
+	IsPrimary   int64 `json:"isprimary"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` - Secondary.
@@ -437,7 +444,7 @@ type EmailAddMXDataCheckmx struct {
 	// * `0` - **Not** local.
 	//
 	// Possible values: `0`, `1`.
-	Local int64 `json:"local"`
+	Local       int64 `json:"local"`
 
 	// The mail exchanger type.
 	// * `auto`
@@ -446,42 +453,42 @@ type EmailAddMXDataCheckmx struct {
 	// * `remote`
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Mxcheck string `json:"mxcheck"`
+	Mxcheck     string `json:"mxcheck"`
 
 	// Whether the mail exchanger is a remote exchanger.
 	// * `1` - Remote.
 	// * `0` - **Not** remote.
 	//
 	// Possible values: `0`, `1`.
-	Remote int64 `json:"remote"`
+	Remote      int64 `json:"remote"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` - Secondary.
 	// * `0` - **Not** secondary.
 	//
 	// Possible values: `0`, `1`.
-	Secondary int64 `json:"secondary"`
+	Secondary   int64 `json:"secondary"`
 
 	// Warning messages, if any exist.
-	Warnings []string `json:"warnings"`
+	Warnings    []string `json:"warnings"`
 }
 
 // EmailAddMXData is a generated payload type.
 type EmailAddMXData struct {
 	// An object of the mail exchanger's data.
-	Checkmx EmailAddMXDataCheckmx `json:"checkmx"`
+	Checkmx   EmailAddMXDataCheckmx `json:"checkmx"`
 
 	// A message of success, or an error message.
 	// * A message of success that begins with `Added entry:`.
 	// * An error message.
-	Results string `json:"results"`
+	Results   string `json:"results"`
 
 	// Whether the function succeeded.
 	// * `1` - Success.
 	// * `0` - Failure.
 	//
 	// Possible values: `0`, `1`.
-	Status int64 `json:"status"`
+	Status    int64 `json:"status"`
 
 	// A message of success, or an error message.
 	// * A message of success that begins with `Added entry:`.
@@ -560,9 +567,9 @@ type EmailAddPopArgs struct {
 //
 // **Important:**
 //
-//   - When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
-//   - We recommend that you use the UAPI `UserManager::create_user` function to create an email address instead of this function. This function is incompatible with [the *Reset Password* feature](https://go.cpanel.net/resetpassdocs).
-//   - You **must** URI-encode values when using the CLI.
+//   * When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   * We recommend that you use the UAPI `UserManager::create_user` function to create an email address instead of this function. This function is incompatible with [the *Reset Password* feature](https://go.cpanel.net/resetpassdocs).
+//   * You **must** URI-encode values when using the CLI.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -570,6 +577,7 @@ type EmailAddPopArgs struct {
 func (c *EmailClient) AddPop(ctx context.Context, args *EmailAddPopArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "add_pop", args)
 }
+
 
 // EmailAddSpamFilterArgs are the parameters of the UAPI function `Email::add_spam_filter`.
 type EmailAddSpamFilterArgs struct {
@@ -601,12 +609,12 @@ type EmailAddSpamFilterArgs struct {
 //
 // **Notes:**
 //
-//   - To disable spam filtering, use the UAPI `Email::disable_spam_autodelete` fuction.
-//   - For more information, read our [Spam Filters](https://go.cpanel.net/cpaneldocsSpamFilters) documentation.
+//   * To disable spam filtering, use the UAPI `Email::disable_spam_autodelete` fuction.
+//   * For more information, read our [Spam Filters](https://go.cpanel.net/cpaneldocsSpamFilters) documentation.
 //
 // **Important:**
 //
-//   - When you disable the [*Spam Filter* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   * When you disable the [*Spam Filter* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -614,6 +622,7 @@ type EmailAddSpamFilterArgs struct {
 func (c *EmailClient) AddSpamFilter(ctx context.Context, args *EmailAddSpamFilterArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "add_spam_filter", args)
 }
+
 
 // EmailBrowseMailboxArgs are the parameters of the UAPI function `Email::browse_mailbox`.
 type EmailBrowseMailboxArgs struct {
@@ -646,11 +655,11 @@ type EmailBrowseMailboxArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // **Notes:**
 //
-//	If you do not use any input parameters, the function returns a list of items in the cPanel account's main mail directory.
+//   If you do not use any input parameters, the function returns a list of items in the cPanel account's main mail directory.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -659,23 +668,24 @@ func (c *EmailClient) BrowseMailbox(ctx context.Context, args *EmailBrowseMailbo
 	return cpanel.UAPICall[[]EmailBrowseMailboxDataItem](ctx, c.c, http.MethodGet, "Email", "browse_mailbox", args)
 }
 
+
 // EmailBrowseMailboxDataItem is a generated payload type.
 type EmailBrowseMailboxDataItem struct {
 	// The directory depth of the item's path.
-	Depth int64 `json:"depth"`
+	Depth     int64 `json:"depth"`
 
 	// The item's base name.
-	File string `json:"file"`
+	File      string `json:"file"`
 
 	// The item's absolute path.
-	Fullpath string `json:"fullpath"`
+	Fullpath  string `json:"fullpath"`
 
 	// Whether the item is a file or a directory.
 	// * `1` - File.
 	// * `0` - Directory.
 	//
 	// Possible values: `0`, `1`.
-	Isleaf int64 `json:"isleaf"`
+	Isleaf    int64 `json:"isleaf"`
 
 	// Whether the item is a mailbox.
 	// * `1` - Mailbox.
@@ -685,20 +695,20 @@ type EmailBrowseMailboxDataItem struct {
 	IsMailbox int64 `json:"ismailbox"`
 
 	// The item's modification time. A time, in [Unix time](https://en.wikipedia.org/wiki/Unix_time) format.
-	Mtime int64 `json:"mtime"`
+	Mtime     int64 `json:"mtime"`
 
 	// The item's directory's path.
-	Path string `json:"path"`
+	Path      string `json:"path"`
 
 	// The item's relative path.
-	Relpath string `json:"relpath"`
+	Relpath   string `json:"relpath"`
 
 	// The item type.
 	// * `dir` - The item is a directory.
 	// * `file` - The item is a file.
 	//
 	// Possible values: `dir`, `file`.
-	Type2 string `json:"type"`
+	Type2     string `json:"type"`
 }
 
 // EmailChangeMXArgs are the parameters of the UAPI function `Email::change_mx`.
@@ -749,7 +759,7 @@ type EmailChangeMXArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -758,6 +768,7 @@ func (c *EmailClient) ChangeMX(ctx context.Context, args *EmailChangeMXArgs) (*c
 	return cpanel.UAPICall[EmailChangeMXData](ctx, c.c, http.MethodGet, "Email", "change_mx", args)
 }
 
+
 // An object of the mail exchanger's data.
 type EmailChangeMXDataCheckmx struct {
 	// Whether a change occurred during the function.
@@ -765,7 +776,7 @@ type EmailChangeMXDataCheckmx struct {
 	// * `0` - **No** change.
 	//
 	// Possible values: `0`, `1`.
-	Changed int64 `json:"changed"`
+	Changed     int64 `json:"changed"`
 
 	// The mail exchanger type.
 	// * `auto`
@@ -774,14 +785,14 @@ type EmailChangeMXDataCheckmx struct {
 	// * `remote`
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Detected string `json:"detected"`
+	Detected    string `json:"detected"`
 
 	// Whether the mail exchanger is the primary mail exchanger.
 	// * `1` - Primary.
 	// * `0` - **Not** primary.
 	//
 	// Possible values: `0`, `1`.
-	IsPrimary int64 `json:"isprimary"`
+	IsPrimary   int64 `json:"isprimary"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` - Secondary.
@@ -795,7 +806,7 @@ type EmailChangeMXDataCheckmx struct {
 	// * `0` - **Not** local.
 	//
 	// Possible values: `0`, `1`.
-	Local int64 `json:"local"`
+	Local       int64 `json:"local"`
 
 	// The mail exchanger type.
 	// * `auto`
@@ -804,42 +815,42 @@ type EmailChangeMXDataCheckmx struct {
 	// * `remote`
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Mxcheck string `json:"mxcheck"`
+	Mxcheck     string `json:"mxcheck"`
 
 	// Whether the mail exchanger is a remote exchanger.
 	// * `1` - Remote.
 	// * `0` - **Not** remote.
 	//
 	// Possible values: `0`, `1`.
-	Remote int64 `json:"remote"`
+	Remote      int64 `json:"remote"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` - Secondary.
 	// * `0` - **Not** secondary.
 	//
 	// Possible values: `0`, `1`.
-	Secondary int64 `json:"secondary"`
+	Secondary   int64 `json:"secondary"`
 
 	// Warning messages, if any exist.
-	Warnings []string `json:"warnings"`
+	Warnings    []string `json:"warnings"`
 }
 
 // EmailChangeMXData is a generated payload type.
 type EmailChangeMXData struct {
 	// An object of the mail exchanger's data.
-	Checkmx EmailChangeMXDataCheckmx `json:"checkmx"`
+	Checkmx   EmailChangeMXDataCheckmx `json:"checkmx"`
 
 	// A message of success, or an error message.
 	// * A message of success that begins with `Added entry:`.
 	// * An error message.
-	Results string `json:"results"`
+	Results   string `json:"results"`
 
 	// Whether the function succeeded.
 	// * `1` - Success.
 	// * `0` - Failure.
 	//
 	// Possible values: `0`, `1`.
-	Status int64 `json:"status"`
+	Status    int64 `json:"status"`
 
 	// A message of success, or an error message.
 	// * A message of success that begins with `Added entry:`.
@@ -853,7 +864,7 @@ type EmailChangeMXData struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -862,13 +873,14 @@ func (c *EmailClient) CheckFastmail(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "check_fastmail", cpanel.CombineArgs(extra...))
 }
 
+
 // CountAutoResponders calls the UAPI function `Email::count_auto_responders` — Return cPanel account's autoresponders total
 //
 // This function returns the number of [autoresponders](https://go.cpanel.net/Autoresponders) for every email address on a cPanel account.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -877,13 +889,14 @@ func (c *EmailClient) CountAutoResponders(ctx context.Context, extra ...cpanel.A
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "count_auto_responders", cpanel.CombineArgs(extra...))
 }
 
+
 // CountFilters calls the UAPI function `Email::count_filters` — Return cPanel account's email filters total
 //
 // This function returns the number of [email filters](https://go.cpanel.net/cpaneldocsEmailFilters) for every email address on a cPanel account.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles) or the [*IP Blocker*](https://go.cpanel.net/whmdocsFeatureManager) feature, the system **disables** this function. For more information, read our [How to Use Server Profiles](https://go.cpanel.net/howtouseserverprofiles) documentation.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles) or the [*IP Blocker*](https://go.cpanel.net/whmdocsFeatureManager) feature, the system **disables** this function. For more information, read our [How to Use Server Profiles](https://go.cpanel.net/howtouseserverprofiles) documentation.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -892,13 +905,14 @@ func (c *EmailClient) CountFilters(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "count_filters", cpanel.CombineArgs(extra...))
 }
 
+
 // CountForwarders calls the UAPI function `Email::count_forwarders` — Return cPanel account's mail forwarder total
 //
 // This function returns the number of [forwarders](https://go.cpanel.net/Forwarders) for every email address on a cPanel account.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -907,13 +921,14 @@ func (c *EmailClient) CountForwarders(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "count_forwarders", cpanel.CombineArgs(extra...))
 }
 
+
 // CountLists calls the UAPI function `Email::count_lists` — Return cPanel account's mailing list total
 //
 // This function returns the number of [mailing lists](https://go.cpanel.net/MailingLists) for every email address on a cPanel account.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -922,13 +937,14 @@ func (c *EmailClient) CountLists(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "count_lists", cpanel.CombineArgs(extra...))
 }
 
+
 // CountPops calls the UAPI function `Email::count_pops` — Return cPanel account's email account total
 //
 // This function returns the number of [email accounts](https://go.cpanel.net/cpaneldocsEmailAccounts) for a cPanel account.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -936,6 +952,7 @@ func (c *EmailClient) CountLists(ctx context.Context, extra ...cpanel.Args) (*cp
 func (c *EmailClient) CountPops(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "count_pops", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailDeleteAutoResponderArgs are the parameters of the UAPI function `Email::delete_auto_responder`.
 type EmailDeleteAutoResponderArgs struct {
@@ -954,7 +971,7 @@ type EmailDeleteAutoResponderArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -962,6 +979,7 @@ type EmailDeleteAutoResponderArgs struct {
 func (c *EmailClient) DeleteAutoResponder(ctx context.Context, args *EmailDeleteAutoResponderArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "delete_auto_responder", args)
 }
+
 
 // EmailDeleteDomainForwarderArgs are the parameters of the UAPI function `Email::delete_domain_forwarder`.
 type EmailDeleteDomainForwarderArgs struct {
@@ -980,7 +998,7 @@ type EmailDeleteDomainForwarderArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -988,6 +1006,7 @@ type EmailDeleteDomainForwarderArgs struct {
 func (c *EmailClient) DeleteDomainForwarder(ctx context.Context, args *EmailDeleteDomainForwarderArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "delete_domain_forwarder", args)
 }
+
 
 // EmailDeleteFilterArgs are the parameters of the UAPI function `Email::delete_filter`.
 type EmailDeleteFilterArgs struct {
@@ -1011,7 +1030,7 @@ type EmailDeleteFilterArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1019,6 +1038,7 @@ type EmailDeleteFilterArgs struct {
 func (c *EmailClient) DeleteFilter(ctx context.Context, args *EmailDeleteFilterArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "delete_filter", args)
 }
+
 
 // EmailDeleteForwarderArgs are the parameters of the UAPI function `Email::delete_forwarder`.
 type EmailDeleteForwarderArgs struct {
@@ -1045,7 +1065,7 @@ type EmailDeleteForwarderArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1053,6 +1073,7 @@ type EmailDeleteForwarderArgs struct {
 func (c *EmailClient) DeleteForwarder(ctx context.Context, args *EmailDeleteForwarderArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "delete_forwarder", args)
 }
+
 
 // EmailDeleteHeldMessagesArgs are the parameters of the UAPI function `Email::delete_held_messages`.
 type EmailDeleteHeldMessagesArgs struct {
@@ -1071,7 +1092,7 @@ type EmailDeleteHeldMessagesArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 74.
 //
@@ -1079,6 +1100,7 @@ type EmailDeleteHeldMessagesArgs struct {
 func (c *EmailClient) DeleteHeldMessages(ctx context.Context, args *EmailDeleteHeldMessagesArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "delete_held_messages", args)
 }
+
 
 // EmailDeleteListArgs are the parameters of the UAPI function `Email::delete_list`.
 type EmailDeleteListArgs struct {
@@ -1097,7 +1119,7 @@ type EmailDeleteListArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1105,6 +1127,7 @@ type EmailDeleteListArgs struct {
 func (c *EmailClient) DeleteList(ctx context.Context, args *EmailDeleteListArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "delete_list", args)
 }
+
 
 // EmailDeleteMXArgs are the parameters of the UAPI function `Email::delete_mx`.
 type EmailDeleteMXArgs struct {
@@ -1133,7 +1156,7 @@ type EmailDeleteMXArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1142,6 +1165,7 @@ func (c *EmailClient) DeleteMX(ctx context.Context, args *EmailDeleteMXArgs) (*c
 	return cpanel.UAPICall[EmailDeleteMXData](ctx, c.c, http.MethodGet, "Email", "delete_mx", args)
 }
 
+
 // An object containing the mail exchanger's data.
 type EmailDeleteMXDataCheckmx struct {
 	// Whether a change occurred during the function.
@@ -1149,7 +1173,7 @@ type EmailDeleteMXDataCheckmx struct {
 	// * `0` - **No** change.
 	//
 	// Possible values: `0`, `1`.
-	Changed int64 `json:"changed"`
+	Changed     int64 `json:"changed"`
 
 	// The mail exchanger type.
 	// * `auto`
@@ -1158,14 +1182,14 @@ type EmailDeleteMXDataCheckmx struct {
 	// * `remote`
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Detected string `json:"detected"`
+	Detected    string `json:"detected"`
 
 	// Whether the mail exchanger is the primary mail exchanger.
 	// * `1` - Primary.
 	// * `0` - **Not** primary.
 	//
 	// Possible values: `0`, `1`.
-	IsPrimary int64 `json:"isprimary"`
+	IsPrimary   int64 `json:"isprimary"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` - Secondary.
@@ -1179,7 +1203,7 @@ type EmailDeleteMXDataCheckmx struct {
 	// * `0` - **Not** local.
 	//
 	// Possible values: `0`, `1`.
-	Local int64 `json:"local"`
+	Local       int64 `json:"local"`
 
 	// The mail exchanger type.
 	// * `auto`
@@ -1188,42 +1212,42 @@ type EmailDeleteMXDataCheckmx struct {
 	// * `remote`
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Mxcheck string `json:"mxcheck"`
+	Mxcheck     string `json:"mxcheck"`
 
 	// Whether the mail exchanger is a remote exchanger.
 	// * `1` - Remote.
 	// * `0` - **Not** remote.
 	//
 	// Possible values: `0`, `1`.
-	Remote int64 `json:"remote"`
+	Remote      int64 `json:"remote"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` - Secondary.
 	// * `0` - **Not** secondary.
 	//
 	// Possible values: `0`, `1`.
-	Secondary int64 `json:"secondary"`
+	Secondary   int64 `json:"secondary"`
 
 	// Warning messages, if any exist.
-	Warnings string `json:"warnings"`
+	Warnings    string `json:"warnings"`
 }
 
 // EmailDeleteMXData is a generated payload type.
 type EmailDeleteMXData struct {
 	// An object containing the mail exchanger's data.
-	Checkmx EmailDeleteMXDataCheckmx `json:"checkmx"`
+	Checkmx   EmailDeleteMXDataCheckmx `json:"checkmx"`
 
 	// A message of success, or an error message.
 	// * A message of success that begins with `Removed entry:`.
 	// * An error message.
-	Results string `json:"results"`
+	Results   string `json:"results"`
 
 	// Whether the function succeeded.
 	// * `1` - Success.
 	// * `0` - Failure.
 	//
 	// Possible values: `0`, `1`.
-	Status int64 `json:"status"`
+	Status    int64 `json:"status"`
 
 	// A message of success, or an error message.
 	// * A message of success that begins with Added entry.
@@ -1269,7 +1293,7 @@ type EmailDeletePopArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1277,6 +1301,7 @@ type EmailDeletePopArgs struct {
 func (c *EmailClient) DeletePop(ctx context.Context, args *EmailDeletePopArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "delete_pop", args)
 }
+
 
 // EmailDisableFilterArgs are the parameters of the UAPI function `Email::disable_filter`.
 type EmailDisableFilterArgs struct {
@@ -1300,7 +1325,7 @@ type EmailDisableFilterArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1308,6 +1333,7 @@ type EmailDisableFilterArgs struct {
 func (c *EmailClient) DisableFilter(ctx context.Context, args *EmailDisableFilterArgs) (*cpanel.UAPIResult[EmailDisableFilterData], error) {
 	return cpanel.UAPICall[EmailDisableFilterData](ctx, c.c, http.MethodGet, "Email", "disable_filter", args)
 }
+
 
 // EmailDisableFilterData is a generated payload type.
 type EmailDisableFilterData struct {
@@ -1319,7 +1345,7 @@ type EmailDisableFilterData struct {
 	// * `0` - Did **not** update.
 	//
 	// Possible values: `0`, `1`.
-	Updated int64 `json:"updated"`
+	Updated    int64 `json:"updated"`
 }
 
 // EmailDisableMailboxAutocreateArgs are the parameters of the UAPI function `Email::disable_mailbox_autocreate`.
@@ -1339,7 +1365,7 @@ type EmailDisableMailboxAutocreateArgs struct {
 //
 // **Note:**
 //
-//	When you **enable** the UAPI's `Email::enable_mailbox_autocreate` function, the system automatically creates mailboxes. The system creates a new mailbox when it receives an email address in [plus address format](https://en.wikipedia.org/wiki/Email_address#Sub-addressing) and that mailbox does **not** exist. For example, receiving an email from the `user+newmailbox@example.com` address creates the `newmailbox` mailbox if the `newmailbox` mailbox does not exist.
+//   When you **enable** the UAPI's `Email::enable_mailbox_autocreate` function, the system automatically creates mailboxes. The system creates a new mailbox when it receives an email address in [plus address format](https://en.wikipedia.org/wiki/Email_address#Sub-addressing) and that mailbox does **not** exist. For example, receiving an email from the `user+newmailbox@example.com` address creates the `newmailbox` mailbox if the `newmailbox` mailbox does not exist.
 //
 // Available since cPanel & WHM version cPanel 78.
 //
@@ -1348,13 +1374,14 @@ func (c *EmailClient) DisableMailboxAutocreate(ctx context.Context, args *EmailD
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "disable_mailbox_autocreate", args)
 }
 
+
 // DisableSpamAssassin calls the UAPI function `Email::disable_spam_assassin` — Disable Apache SpamAssassin for cPanel account
 //
 // This function disables Apache SpamAssassin™ for a cPanel account.
 //
 // **Important:**
 //
-//	When you disable the [*Spam Filter* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Spam Filter* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1363,13 +1390,14 @@ func (c *EmailClient) DisableSpamAssassin(ctx context.Context, extra ...cpanel.A
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "disable_spam_assassin", cpanel.CombineArgs(extra...))
 }
 
+
 // DisableSpamAutodelete calls the UAPI function `Email::disable_spam_autodelete` — Disable spam box filtering auto-delete
 //
 // This function disables the Apache SpamAssassin™ auto-delete spam feature.
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1377,6 +1405,7 @@ func (c *EmailClient) DisableSpamAssassin(ctx context.Context, extra ...cpanel.A
 func (c *EmailClient) DisableSpamAutodelete(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[EmailDisableSpamAutodeleteData], error) {
 	return cpanel.UAPICall[EmailDisableSpamAutodeleteData](ctx, c.c, http.MethodGet, "Email", "disable_spam_autodelete", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailDisableSpamAutodeleteData is a generated payload type.
 type EmailDisableSpamAutodeleteData struct {
@@ -1392,13 +1421,13 @@ type EmailDisableSpamAutodeleteData struct {
 //
 // **Notes:**
 //
-//   - This function **requires** that your hosting provider enables Apache SpamAssassin™ on the server.
-//   - To **enable** spam box filtering, use the UAPI `Email::enable_spam_box` function.
-//   - For more information, read our [Spam Filters](https://go.cpanel.net/cpaneldocsSpamFilters) documentation.
+//   * This function **requires** that your hosting provider enables Apache SpamAssassin™ on the server.
+//   * To **enable** spam box filtering, use the UAPI `Email::enable_spam_box` function.
+//   * For more information, read our [Spam Filters](https://go.cpanel.net/cpaneldocsSpamFilters) documentation.
 //
 // **Important:**
 //
-//	When you disable the [*Spam Filter* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Spam Filter* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 70.
 //
@@ -1406,6 +1435,7 @@ type EmailDisableSpamAutodeleteData struct {
 func (c *EmailClient) DisableSpamBox(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "disable_spam_box", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailDispatchClientSettingsArgs are the parameters of the UAPI function `Email::dispatch_client_settings`.
 type EmailDispatchClientSettingsArgs struct {
@@ -1437,6 +1467,7 @@ type EmailDispatchClientSettingsArgs struct {
 func (c *EmailClient) DispatchClientSettings(ctx context.Context, args *EmailDispatchClientSettingsArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "dispatch_client_settings", args)
 }
+
 
 // EmailEditPopQuotaArgs are the parameters of the UAPI function `Email::edit_pop_quota`.
 type EmailEditPopQuotaArgs struct {
@@ -1474,6 +1505,7 @@ func (c *EmailClient) EditPopQuota(ctx context.Context, args *EmailEditPopQuotaA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "edit_pop_quota", args)
 }
 
+
 // EmailEnableFilterArgs are the parameters of the UAPI function `Email::enable_filter`.
 type EmailEnableFilterArgs struct {
 	// The email address that owns the filter.
@@ -1496,7 +1528,7 @@ type EmailEnableFilterArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [Receive Mail role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1504,6 +1536,7 @@ type EmailEnableFilterArgs struct {
 func (c *EmailClient) EnableFilter(ctx context.Context, args *EmailEnableFilterArgs) (*cpanel.UAPIResult[EmailEnableFilterData], error) {
 	return cpanel.UAPICall[EmailEnableFilterData](ctx, c.c, http.MethodGet, "Email", "enable_filter", args)
 }
+
 
 // EmailEnableFilterData is a generated payload type.
 type EmailEnableFilterData struct {
@@ -1515,7 +1548,7 @@ type EmailEnableFilterData struct {
 	// * `0` - Did **not** update.
 	//
 	// Possible values: `0`, `1`.
-	Updated int64 `json:"updated"`
+	Updated    int64 `json:"updated"`
 }
 
 // EmailEnableMailboxAutocreateArgs are the parameters of the UAPI function `Email::enable_mailbox_autocreate`.
@@ -1535,7 +1568,7 @@ type EmailEnableMailboxAutocreateArgs struct {
 //
 // **Note:**
 //
-//	To disable this functionality, use the UAPI Email::disable_mailbox_autocreate function.
+//   To disable this functionality, use the UAPI Email::disable_mailbox_autocreate function.
 //
 // Available since cPanel & WHM version cPanel 78.
 //
@@ -1543,6 +1576,7 @@ type EmailEnableMailboxAutocreateArgs struct {
 func (c *EmailClient) EnableMailboxAutocreate(ctx context.Context, args *EmailEnableMailboxAutocreateArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "enable_mailbox_autocreate", args)
 }
+
 
 // EnableSpamAssassin calls the UAPI function `Email::enable_spam_assassin` — Enable Apache SpamAssassin for cPanel account
 //
@@ -1558,6 +1592,7 @@ func (c *EmailClient) EnableMailboxAutocreate(ctx context.Context, args *EmailEn
 func (c *EmailClient) EnableSpamAssassin(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "enable_spam_assassin", cpanel.CombineArgs(extra...))
 }
+
 
 // EnableSpamBox calls the UAPI function `Email::enable_spam_box` — Enable spam box filtering for cPanel account
 //
@@ -1580,6 +1615,7 @@ func (c *EmailClient) EnableSpamBox(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "enable_spam_box", cpanel.CombineArgs(extra...))
 }
 
+
 // ExportLists calls the UAPI function `Email::export_lists` — Export cPanel account's Mailman mailing lists to a file
 //
 // This function exports a cPanel account's Mailman mailing lists into a CSV file.
@@ -1591,6 +1627,7 @@ func (c *EmailClient) EnableSpamBox(ctx context.Context, extra ...cpanel.Args) (
 func (c *EmailClient) ExportLists(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "export_lists", cpanel.CombineArgs(extra...))
 }
+
 
 // FetchCharmaps calls the UAPI function `Email::fetch_charmaps` — Return server's supported character encodings
 //
@@ -1606,6 +1643,7 @@ func (c *EmailClient) ExportLists(ctx context.Context, extra ...cpanel.Args) (*c
 func (c *EmailClient) FetchCharmaps(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]EmailFetchCharmapsDataItem], error) {
 	return cpanel.UAPICall[[]EmailFetchCharmapsDataItem](ctx, c.c, http.MethodGet, "Email", "fetch_charmaps", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailFetchCharmapsDataItem is a generated payload type.
 type EmailFetchCharmapsDataItem struct {
@@ -1647,6 +1685,7 @@ func (c *EmailClient) FTSRescanMailbox(ctx context.Context, args *EmailFTSRescan
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "fts_rescan_mailbox", args)
 }
 
+
 // EmailGenerateMailmanOtpArgs are the parameters of the UAPI function `Email::generate_mailman_otp`.
 type EmailGenerateMailmanOtpArgs struct {
 	// The mailing list.
@@ -1676,6 +1715,7 @@ type EmailGenerateMailmanOtpArgs struct {
 func (c *EmailClient) GenerateMailmanOtp(ctx context.Context, args *EmailGenerateMailmanOtpArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "generate_mailman_otp", args)
 }
+
 
 // EmailGetAutoResponderArgs are the parameters of the UAPI function `Email::get_auto_responder`.
 type EmailGetAutoResponderArgs struct {
@@ -1708,16 +1748,17 @@ func (c *EmailClient) GetAutoResponder(ctx context.Context, args *EmailGetAutoRe
 	return cpanel.UAPICall[EmailGetAutoResponderData](ctx, c.c, http.MethodGet, "Email", "get_auto_responder", args)
 }
 
+
 // EmailGetAutoResponderData is a generated payload type.
 type EmailGetAutoResponderData struct {
 	// The contents of the autoresponder message's `Body` section.
-	Body string `json:"body"`
+	Body     string `json:"body"`
 
 	// The autoresponder's [character set](https://en.wikipedia.org/wiki/Character_encoding).
-	Charset string `json:"charset"`
+	Charset  string `json:"charset"`
 
 	// The contents of the autoresponder message's `From` field.
-	From string `json:"from"`
+	From     string `json:"from"`
 
 	// The amount of time, in hours, that the server waits between autoresponder messages to the same address.
 	//
@@ -1731,16 +1772,16 @@ type EmailGetAutoResponderData struct {
 	// - `0` - Does **not** include an HTML content type declaration.
 	//
 	// Possible values: `0`, `1`.
-	IsHTML int64 `json:"is_html"`
+	IsHTML   int64 `json:"is_html"`
 
 	// When the autoresponder becomes enabled in Unix time.
-	Start int64 `json:"start"`
+	Start    int64 `json:"start"`
 
 	// When the autoresponder becomes disabled in Unix time.
-	Stop int64 `json:"stop"`
+	Stop     int64 `json:"stop"`
 
 	// The contents of the autoresponder message's `Subject` field.
-	Subject string `json:"subject"`
+	Subject  string `json:"subject"`
 }
 
 // GetCharsets calls the UAPI function `Email::get_charsets` — Return mail server's supported character encodings
@@ -1757,6 +1798,7 @@ type EmailGetAutoResponderData struct {
 func (c *EmailClient) GetCharsets(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Email", "get_charsets", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailGetClientSettingsArgs are the parameters of the UAPI function `Email::get_client_settings`.
 type EmailGetClientSettingsArgs struct {
@@ -1786,45 +1828,46 @@ func (c *EmailClient) GetClientSettings(ctx context.Context, args *EmailGetClien
 	return cpanel.UAPICall[EmailGetClientSettingsData](ctx, c.c, http.MethodGet, "Email", "get_client_settings", args)
 }
 
+
 // EmailGetClientSettingsData is a generated payload type.
 type EmailGetClientSettingsData struct {
 	// The account's email address.
-	Account string `json:"account"`
+	Account                    string `json:"account"`
 
 	// Whether the account supports ActiveSync.
 	// * `1` — Supported.
 	// * `0` — **Not** supported.
 	//
 	// Possible values: `1`, `0`.
-	ActivesyncAvailable int64 `json:"activesync_available"`
+	ActivesyncAvailable        int64 `json:"activesync_available"`
 
 	// The account's ActiveSync hostname.
 	//
 	// This return **only** appears if `activesync_available` is `1`.
-	ActivesyncHost string `json:"activesync_host"`
+	ActivesyncHost             string `json:"activesync_host"`
 
 	// The account's ActiveSync SSL/TLS port.
 	//
 	// This return **only** appears if `activesync_available` is `1`.
-	ActivesyncPort int64 `json:"activesync_port"`
+	ActivesyncPort             int64 `json:"activesync_port"`
 
 	// The account's ActiveSync username.
 	//
 	// This return **only** appears if `activesync_available` is `1`.
-	ActivesyncUsername string `json:"activesync_username"`
+	ActivesyncUsername         string `json:"activesync_username"`
 
 	// The account's display name.
-	Display string `json:"display"`
+	Display                    string `json:"display"`
 
 	// The account's domain name.
-	Domain string `json:"domain"`
+	Domain                     string `json:"domain"`
 
 	// Whether the account is a mail archive.
 	// * `1` — The account is a mail archive.
 	// * `0` — The account is **not** a mail archive.
 	//
 	// Possible values: `1`, `0`.
-	FromArchiving int64 `json:"from_archiving"`
+	FromArchiving              int64 `json:"from_archiving"`
 
 	// Whether the account supports plaintext authentication.
 	//
@@ -1835,38 +1878,38 @@ type EmailGetClientSettingsData struct {
 	HasPlaintextAuthentication int64 `json:"has_plaintext_authentication"`
 
 	// The account's hostname.
-	InboxHost string `json:"inbox_host"`
+	InboxHost                  string `json:"inbox_host"`
 
 	// The account's insecure inbound port.
-	InboxInsecurePort int64 `json:"inbox_insecure_port"`
+	InboxInsecurePort          int64 `json:"inbox_insecure_port"`
 
 	// The account's secure inbound port.
-	InboxPort int64 `json:"inbox_port"`
+	InboxPort                  int64 `json:"inbox_port"`
 
 	// The service type that the account uses.
 	// * `imap`
 	// * `pop`
 	//
 	// Possible values: `imap`, `pop`.
-	InboxService string `json:"inbox_service"`
+	InboxService               string `json:"inbox_service"`
 
 	// The account's username.
-	InboxUsername string `json:"inbox_username"`
+	InboxUsername              string `json:"inbox_username"`
 
 	// The account's mail hostname.
-	MailDomain string `json:"mail_domain"`
+	MailDomain                 string `json:"mail_domain"`
 
 	// The account's outbound SMTP hostname.
-	SMTPHost string `json:"smtp_host"`
+	SMTPHost                   string `json:"smtp_host"`
 
 	// The account's insecure outbound SMTP port.
-	SMTPInsecurePort int64 `json:"smtp_insecure_port"`
+	SMTPInsecurePort           int64 `json:"smtp_insecure_port"`
 
 	// The account's secure outbound SMTP port.
-	SMTPPort int64 `json:"smtp_port"`
+	SMTPPort                   int64 `json:"smtp_port"`
 
 	// The account's SMTP username.
-	SMTPUsername string `json:"smtp_username"`
+	SMTPUsername               string `json:"smtp_username"`
 }
 
 // GetDefaultEmailQuota calls the UAPI function `Email::get_default_email_quota` — Return email account's default email quota
@@ -1884,6 +1927,7 @@ func (c *EmailClient) GetDefaultEmailQuota(ctx context.Context, extra ...cpanel.
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_default_email_quota", cpanel.CombineArgs(extra...))
 }
 
+
 // GetDefaultEmailQuotaMib calls the UAPI function `Email::get_default_email_quota_mib` — Return email account's default email quota in MiB
 //
 // This function retrieves the account's default email quota size in [mebibytes](https://en.wikipedia.org/wiki/Mebibyte) (MiB).
@@ -1898,6 +1942,7 @@ func (c *EmailClient) GetDefaultEmailQuota(ctx context.Context, extra ...cpanel.
 func (c *EmailClient) GetDefaultEmailQuotaMib(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_default_email_quota_mib", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailGetDiskUsageArgs are the parameters of the UAPI function `Email::get_disk_usage`.
 type EmailGetDiskUsageArgs struct {
@@ -1930,6 +1975,7 @@ func (c *EmailClient) GetDiskUsage(ctx context.Context, args *EmailGetDiskUsageA
 	return cpanel.UAPICall[EmailGetDiskUsageData](ctx, c.c, http.MethodGet, "Email", "get_disk_usage", args)
 }
 
+
 // EmailGetDiskUsageData is a generated payload type.
 type EmailGetDiskUsageData struct {
 	// The disk space that the email account uses.
@@ -1938,13 +1984,13 @@ type EmailGetDiskUsageData struct {
 	Diskused float64 `json:"diskused"`
 
 	// The email account's domain.
-	Domain string `json:"domain"`
+	Domain   string `json:"domain"`
 
 	// The email address or the main account username.
-	Login string `json:"login"`
+	Login    string `json:"login"`
 
 	// The email account's username.
-	User string `json:"user"`
+	User     string `json:"user"`
 }
 
 // EmailGetFilterArgs are the parameters of the UAPI function `Email::get_filter`.
@@ -1978,6 +2024,7 @@ func (c *EmailClient) GetFilter(ctx context.Context, args *EmailGetFilterArgs) (
 	return cpanel.UAPICall[EmailGetFilterData](ctx, c.c, http.MethodGet, "Email", "get_filter", args)
 }
 
+
 // EmailGetFilterDataActionsItem is a generated payload type.
 type EmailGetFilterDataActionsItem struct {
 	// The filter's action.
@@ -1996,7 +2043,7 @@ type EmailGetFilterDataActionsItem struct {
 	// * A file path.
 	// * An application path.
 	// * A valid email address.
-	Dest string `json:"dest"`
+	Dest   string `json:"dest"`
 
 	// The filter's position in the order of the account's filters.
 	Number int64 `json:"number"`
@@ -2027,7 +2074,7 @@ type EmailGetFilterDataRulesItem struct {
 	// * `is not above`
 	// * `is below`
 	// * `is not below` …
-	Match string `json:"match"`
+	Match  string `json:"match"`
 
 	// The filter's position in the order of the account's filters.
 	Number int64 `json:"number"`
@@ -2038,7 +2085,7 @@ type EmailGetFilterDataRulesItem struct {
 	// * `null` -  There is only one condition.
 	//
 	// Possible values: `and`, `or`, `null`.
-	Opt string `json:"opt"`
+	Opt    string `json:"opt"`
 
 	// The queried email section.
 	// * `$header_from:` -  Matches against the From: section.
@@ -2048,24 +2095,24 @@ type EmailGetFilterDataRulesItem struct {
 	// * `$message_body` -  Matches against the message's body.
 	// * `$message_headers` -  Matches against the message's headers.
 	// * `foranyaddress $h_t …
-	Part string `json:"part"`
+	Part   string `json:"part"`
 
 	// The matched value.
-	Val string `json:"val"`
+	Val    string `json:"val"`
 }
 
 // EmailGetFilterData is a generated payload type.
 type EmailGetFilterData struct {
 	// An array of objects that contains the filter's actions.
-	Actions []EmailGetFilterDataActionsItem `json:"actions"`
+	Actions    []EmailGetFilterDataActionsItem `json:"actions"`
 
 	// The filter's name.
 	FilterName string `json:"filtername"`
 
-	Metadata EmailGetFilterDataMetadata `json:"metadata"`
+	Metadata   EmailGetFilterDataMetadata `json:"metadata"`
 
 	// An array of objects that contains the filter's rules.
-	Rules []EmailGetFilterDataRulesItem `json:"rules"`
+	Rules      []EmailGetFilterDataRulesItem `json:"rules"`
 }
 
 // EmailGetHeldMessageCountArgs are the parameters of the UAPI function `Email::get_held_message_count`.
@@ -2092,6 +2139,7 @@ func (c *EmailClient) GetHeldMessageCount(ctx context.Context, args *EmailGetHel
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_held_message_count", args)
 }
 
+
 // GetListsTotalDiskUsage calls the UAPI function `Email::get_lists_total_disk_usage` — Return cPanel account's mailing list disk usage
 //
 // This function returns the total disk usage for the [mailing lists](https://go.cpanel.net/cpaneldocsMailingLists) of a cPanel account.
@@ -2106,6 +2154,7 @@ func (c *EmailClient) GetHeldMessageCount(ctx context.Context, args *EmailGetHel
 func (c *EmailClient) GetListsTotalDiskUsage(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_lists_total_disk_usage", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailGetMailboxAutocreateArgs are the parameters of the UAPI function `Email::get_mailbox_autocreate`.
 type EmailGetMailboxAutocreateArgs struct {
@@ -2133,6 +2182,7 @@ func (c *EmailClient) GetMailboxAutocreate(ctx context.Context, args *EmailGetMa
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_mailbox_autocreate", args)
 }
 
+
 // EmailGetMailmanDelegatesArgs are the parameters of the UAPI function `Email::get_mailman_delegates`.
 type EmailGetMailmanDelegatesArgs struct {
 	// The name of a Mailman mailing list on the cPanel account.
@@ -2159,6 +2209,7 @@ func (c *EmailClient) GetMailmanDelegates(ctx context.Context, args *EmailGetMai
 	return cpanel.UAPICall[EmailGetMailmanDelegatesData](ctx, c.c, http.MethodGet, "Email", "get_mailman_delegates", args)
 }
 
+
 // EmailGetMailmanDelegatesDataMetadata is a generated payload type.
 type EmailGetMailmanDelegatesDataMetadata struct {
 	TransformEd json.RawMessage `json:"transformed"`
@@ -2169,7 +2220,7 @@ type EmailGetMailmanDelegatesData struct {
 	// An array of the mailing list's administrators.
 	Delegates []string `json:"delegates"`
 
-	Metadata EmailGetMailmanDelegatesDataMetadata `json:"metadata"`
+	Metadata  EmailGetMailmanDelegatesDataMetadata `json:"metadata"`
 }
 
 // GetMainAccountDiskUsage calls the UAPI function `Email::get_main_account_disk_usage` — Return primary email account's disk usage
@@ -2187,6 +2238,7 @@ func (c *EmailClient) GetMainAccountDiskUsage(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "get_main_account_disk_usage", cpanel.CombineArgs(extra...))
 }
 
+
 // GetMainAccountDiskUsageBytes calls the UAPI function `Email::get_main_account_disk_usage_bytes` — Return primary email account's disk usage in bytes
 //
 // This function returns the disk space that the cPanel account uses.
@@ -2202,13 +2254,14 @@ func (c *EmailClient) GetMainAccountDiskUsageBytes(ctx context.Context, extra ..
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_main_account_disk_usage_bytes", cpanel.CombineArgs(extra...))
 }
 
+
 // GetMaxEmailQuota calls the UAPI function `Email::get_max_email_quota` — Return email account's max quota size
 //
 // This function retrieves the account's maximum email quota size, in bytes format.
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system **disables** this function.
+//   When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.48.
 //
@@ -2216,6 +2269,7 @@ func (c *EmailClient) GetMainAccountDiskUsageBytes(ctx context.Context, extra ..
 func (c *EmailClient) GetMaxEmailQuota(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_max_email_quota", cpanel.CombineArgs(extra...))
 }
+
 
 // GetMaxEmailQuotaMib calls the UAPI function `Email::get_max_email_quota_mib` — Return email account's max quota size in MiB
 //
@@ -2233,6 +2287,7 @@ func (c *EmailClient) GetMaxEmailQuota(ctx context.Context, extra ...cpanel.Args
 func (c *EmailClient) GetMaxEmailQuotaMib(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_max_email_quota_mib", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailGetPopQuotaArgs are the parameters of the UAPI function `Email::get_pop_quota`.
 type EmailGetPopQuotaArgs struct {
@@ -2273,6 +2328,7 @@ func (c *EmailClient) GetPopQuota(ctx context.Context, args *EmailGetPopQuotaArg
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "get_pop_quota", args)
 }
 
+
 // EmailGetSpamSettingsArgs are the parameters of the UAPI function `Email::get_spam_settings`.
 type EmailGetSpamSettingsArgs struct {
 	// Retrieve a specific user account's SpamAssassin settings.
@@ -2301,6 +2357,7 @@ func (c *EmailClient) GetSpamSettings(ctx context.Context, args *EmailGetSpamSet
 	return cpanel.UAPICall[EmailGetSpamSettingsData](ctx, c.c, http.MethodGet, "Email", "get_spam_settings", args)
 }
 
+
 // EmailGetSpamSettingsData is a generated payload type.
 type EmailGetSpamSettingsData struct {
 	// The cPanel user's account-wide spam filter setting
@@ -2313,7 +2370,7 @@ type EmailGetSpamSettingsData struct {
 	// This key **only** appears if the `account` parameter is passed **and** the account does **not** have a custom setting
 	//
 	// Possible values: `0`, `1`.
-	CpuserSpamAutoDelete *int64 `json:"cpuser_spam_auto_delete"`
+	CpuserSpamAutoDelete      *int64 `json:"cpuser_spam_auto_delete"`
 
 	// The cPanel user's account-wide spam filter threshold score. For more information, see `Email::add_spam_filter`.
 	//
@@ -2328,7 +2385,7 @@ type EmailGetSpamSettingsData struct {
 	// * `0` -  No rewrites.
 	//
 	// Possible values: `0`, `1`.
-	RewritesSubjects int64 `json:"rewrites_subjects"`
+	RewritesSubjects          int64 `json:"rewrites_subjects"`
 
 	// Whether the user's spam filter uses Apache SpamAssassin as an ACL.
 	//
@@ -2338,7 +2395,7 @@ type EmailGetSpamSettingsData struct {
 	// * `1` -  SpamAssassin is an ACL.
 	//
 	// Possible values: `1`.
-	SpamAsAcl int64 `json:"spam_as_acl"`
+	SpamAsAcl                 int64 `json:"spam_as_acl"`
 
 	// Whether the user's autodelete function is enabled.
 	//
@@ -2350,14 +2407,14 @@ type EmailGetSpamSettingsData struct {
 	// This key does **not** appear if the `cpuser_spam_auto_delete` key appears
 	//
 	// Possible values: `0`, `1`.
-	SpamAutoDelete *int64 `json:"spam_auto_delete"`
+	SpamAutoDelete            *int64 `json:"spam_auto_delete"`
 
 	// Displays the user's spam filter threshold.  For more information, see `Email::add_spam_filter`.
 	//
 	// **Note:**
 	//
 	// This key does **not** appear if the `cpuser_spam_auto_delete_score` key appears
-	SpamAutoDeleteScore *int64 `json:"spam_auto_delete_score"`
+	SpamAutoDeleteScore       *int64 `json:"spam_auto_delete_score"`
 
 	// Whether the user's spam box is enabled.
 	//
@@ -2365,7 +2422,7 @@ type EmailGetSpamSettingsData struct {
 	// * `0` -  Not enabled.
 	//
 	// Possible values: `0`, `1`.
-	SpamBoxEnabled int64 `json:"spam_box_enabled"`
+	SpamBoxEnabled            int64 `json:"spam_box_enabled"`
 
 	// Whether the server's global spam filtering is enabled.
 	//
@@ -2377,7 +2434,7 @@ type EmailGetSpamSettingsData struct {
 	//  This value will **only** return `0` if the cPanel user disables Apache SpamAssassin.
 	//
 	// Possible values: `0`, `1`.
-	SpamEnabled int64 `json:"spam_enabled"`
+	SpamEnabled               int64 `json:"spam_enabled"`
 
 	// Whether the server allows cPanel users to configure Apache SpamAssassin settings.
 	//
@@ -2385,7 +2442,7 @@ type EmailGetSpamSettingsData struct {
 	// * `0` -  Not allowed.
 	//
 	// Possible values: `0`, `1`.
-	SpamStatusChangeable int64 `json:"spam_status_changeable"`
+	SpamStatusChangeable      int64 `json:"spam_status_changeable"`
 }
 
 // EmailGetWebmailSettingsArgs are the parameters of the UAPI function `Email::get_webmail_settings`.
@@ -2416,10 +2473,11 @@ func (c *EmailClient) GetWebmailSettings(ctx context.Context, args *EmailGetWebm
 	return cpanel.UAPICall[EmailGetWebmailSettingsData](ctx, c.c, http.MethodGet, "Email", "get_webmail_settings", args)
 }
 
+
 // EmailGetWebmailSettingsData is a generated payload type.
 type EmailGetWebmailSettingsData struct {
 	// The email account's mail server hostname.
-	Domain string `json:"domain"`
+	Domain     string `json:"domain"`
 
 	// Whether `Maildir` is enabled for the email account.
 	//
@@ -2431,7 +2489,7 @@ type EmailGetWebmailSettingsData struct {
 	HasMaildir int64 `json:"has_maildir"`
 
 	// The email account.
-	User string `json:"user"`
+	User       string `json:"user"`
 }
 
 // EmailHasDelegatedMailmanListsArgs are the parameters of the UAPI function `Email::has_delegated_mailman_lists`.
@@ -2460,13 +2518,14 @@ func (c *EmailClient) HasDelegatedMailmanLists(ctx context.Context, args *EmailH
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "has_delegated_mailman_lists", args)
 }
 
+
 // HasPlaintextAuthentication calls the UAPI function `Email::has_plaintext_authentication` — Return whether plaintext authentication is enabled
 //
 // This function checks whether plaintext authentication is enabled on the Dovecot mail server.
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [Receive Mail role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 56.
 //
@@ -2474,6 +2533,7 @@ func (c *EmailClient) HasDelegatedMailmanLists(ctx context.Context, args *EmailH
 func (c *EmailClient) HasPlaintextAuthentication(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "has_plaintext_authentication", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailHoldOutgoingArgs are the parameters of the UAPI function `Email::hold_outgoing`.
 type EmailHoldOutgoingArgs struct {
@@ -2503,6 +2563,7 @@ func (c *EmailClient) HoldOutgoing(ctx context.Context, args *EmailHoldOutgoingA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "hold_outgoing", args)
 }
 
+
 // EmailListAutoRespondersArgs are the parameters of the UAPI function `Email::list_auto_responders`.
 type EmailListAutoRespondersArgs struct {
 	// The domain name.
@@ -2523,7 +2584,7 @@ type EmailListAutoRespondersArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2532,10 +2593,11 @@ func (c *EmailClient) ListAutoResponders(ctx context.Context, args *EmailListAut
 	return cpanel.UAPICall[[]EmailListAutoRespondersDataItem](ctx, c.c, http.MethodGet, "Email", "list_auto_responders", args)
 }
 
+
 // EmailListAutoRespondersDataItem is a generated payload type.
 type EmailListAutoRespondersDataItem struct {
 	// The autoresponder's email address.
-	Email string `json:"email"`
+	Email   string `json:"email"`
 
 	// The contents of the autoresponder message's `Subject:` field.
 	Subject string `json:"subject"`
@@ -2561,7 +2623,7 @@ type EmailListDefaultAddressArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2569,6 +2631,7 @@ type EmailListDefaultAddressArgs struct {
 func (c *EmailClient) ListDefaultAddress(ctx context.Context, args *EmailListDefaultAddressArgs) (*cpanel.UAPIResult[[]EmailListDefaultAddressDataItem], error) {
 	return cpanel.UAPICall[[]EmailListDefaultAddressDataItem](ctx, c.c, http.MethodGet, "Email", "list_default_address", args)
 }
+
 
 // EmailListDefaultAddressDataItem is a generated payload type.
 type EmailListDefaultAddressDataItem struct {
@@ -2580,7 +2643,7 @@ type EmailListDefaultAddressDataItem struct {
 	DefaultAddress string `json:"defaultaddress"`
 
 	// The domain name.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 }
 
 // EmailListDomainForwardersArgs are the parameters of the UAPI function `Email::list_domain_forwarders`.
@@ -2598,7 +2661,7 @@ type EmailListDomainForwardersArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2607,10 +2670,11 @@ func (c *EmailClient) ListDomainForwarders(ctx context.Context, args *EmailListD
 	return cpanel.UAPICall[[]EmailListDomainForwardersDataItem](ctx, c.c, http.MethodGet, "Email", "list_domain_forwarders", args)
 }
 
+
 // EmailListDomainForwardersDataItem is a generated payload type.
 type EmailListDomainForwardersDataItem struct {
 	// The forwarded domain.
-	Dest string `json:"dest"`
+	Dest    string `json:"dest"`
 
 	// The destination domain.
 	Forward string `json:"forward"`
@@ -2631,7 +2695,7 @@ type EmailListFiltersArgs struct {
 //
 // **Important**:
 //
-//	When you disable the [Mail Receive role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [Mail Receive role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2639,6 +2703,7 @@ type EmailListFiltersArgs struct {
 func (c *EmailClient) ListFilters(ctx context.Context, args *EmailListFiltersArgs) (*cpanel.UAPIResult[[]EmailListFiltersDataItem], error) {
 	return cpanel.UAPICall[[]EmailListFiltersDataItem](ctx, c.c, http.MethodGet, "Email", "list_filters", args)
 }
+
 
 // EmailListFiltersDataItemActionsItem is a generated payload type.
 type EmailListFiltersDataItemActionsItem struct {
@@ -2657,7 +2722,7 @@ type EmailListFiltersDataItemActionsItem struct {
 	// * A file path.
 	// * An application path.
 	// * A valid email address.
-	Dest string `json:"dest"`
+	Dest   string `json:"dest"`
 }
 
 // EmailListFiltersDataItemRulesItem is a generated payload type.
@@ -2673,7 +2738,7 @@ type EmailListFiltersDataItemRulesItem struct {
 	//   * `null` — Only one condition exists.
 	//
 	// Possible values: `and`, `or`, `null`.
-	Opt string `json:"opt"`
+	Opt   string `json:"opt"`
 
 	// The queried email section.
 	//
@@ -2685,27 +2750,27 @@ type EmailListFiltersDataItemRulesItem struct {
 	// * `$reply_address:` — Matches against the `Reply To:` section.
 	// * `$message_body` — Matches against the message’s body.
 	// * `$message_headers` — Matches against the message’s …
-	Part string `json:"part"`
+	Part  string `json:"part"`
 
 	// The matched value. A string value.
-	Val string `json:"val"`
+	Val   string `json:"val"`
 }
 
 // EmailListFiltersDataItem is a generated payload type.
 type EmailListFiltersDataItem struct {
 	// An array of objects that descibe each of the filter’s actions.
-	Actions []EmailListFiltersDataItemActionsItem `json:"actions"`
+	Actions    []EmailListFiltersDataItemActionsItem `json:"actions"`
 
 	// Whether the filter is enabled.
-	Enabled int64 `json:"enabled"`
+	Enabled    int64 `json:"enabled"`
 
 	// The filter’s name.
 	FilterName string `json:"filtername"`
 
 	// An array of objects that descibe each of the filter’s rules.
-	Rules []EmailListFiltersDataItemRulesItem `json:"rules"`
+	Rules      []EmailListFiltersDataItemRulesItem `json:"rules"`
 
-	UnEscapeD bool `json:"unescaped"`
+	UnEscapeD  bool `json:"unescaped"`
 }
 
 // ListFiltersBackups calls the UAPI function `Email::list_filters_backups` — Return domains with domain-level email filters
@@ -2714,7 +2779,7 @@ type EmailListFiltersDataItem struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2722,6 +2787,7 @@ type EmailListFiltersDataItem struct {
 func (c *EmailClient) ListFiltersBackups(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]EmailListFiltersBackupsDataItem], error) {
 	return cpanel.UAPICall[[]EmailListFiltersBackupsDataItem](ctx, c.c, http.MethodGet, "Email", "list_filters_backups", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailListFiltersBackupsDataItem is a generated payload type.
 type EmailListFiltersBackupsDataItem struct {
@@ -2749,7 +2815,7 @@ type EmailListForwardersArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2758,25 +2824,26 @@ func (c *EmailClient) ListForwarders(ctx context.Context, args *EmailListForward
 	return cpanel.UAPICall[[]EmailListForwardersDataItem](ctx, c.c, http.MethodGet, "Email", "list_forwarders", args)
 }
 
+
 // EmailListForwardersDataItem is a generated payload type.
 type EmailListForwardersDataItem struct {
 	// The forwarded address.
-	Dest string `json:"dest"`
+	Dest        string `json:"dest"`
 
 	// The forwarded mail's destination.
-	Forward string `json:"forward"`
+	Forward     string `json:"forward"`
 
 	// The forwarded address in an HTML-compatible format.
-	HTMLDest string `json:"html_dest"`
+	HTMLDest    string `json:"html_dest"`
 
 	// The forwarded mail's destination in an HTML-compatible format.
 	HTMLForward string `json:"html_forward"`
 
 	// The forwarded address in a URI-encoded format.
-	UriDest string `json:"uri_dest"`
+	UriDest     string `json:"uri_dest"`
 
 	// The forwarded mail's destination in a URI-encoded format.
-	UriForward string `json:"uri_forward"`
+	UriForward  string `json:"uri_forward"`
 }
 
 // ListForwardersBackups calls the UAPI function `Email::list_forwarders_backups` — Return domains with domain-level forwarders
@@ -2785,7 +2852,7 @@ type EmailListForwardersDataItem struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2793,6 +2860,7 @@ type EmailListForwardersDataItem struct {
 func (c *EmailClient) ListForwardersBackups(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]EmailListForwardersBackupsDataItem], error) {
 	return cpanel.UAPICall[[]EmailListForwardersBackupsDataItem](ctx, c.c, http.MethodGet, "Email", "list_forwarders_backups", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailListForwardersBackupsDataItem is a generated payload type.
 type EmailListForwardersBackupsDataItem struct {
@@ -2823,6 +2891,7 @@ func (c *EmailClient) ListLists(ctx context.Context, args *EmailListListsArgs) (
 	return cpanel.UAPICall[[]EmailListListsDataItem](ctx, c.c, http.MethodGet, "Email", "list_lists", args)
 }
 
+
 // EmailListListsDataItem is a generated payload type.
 type EmailListListsDataItem struct {
 	// The level of access that users have to the mailing list.
@@ -2834,21 +2903,21 @@ type EmailListListsDataItem struct {
 	//   * The list has public archives.
 	//   * Anyone can subscribe.
 	//   * The M …
-	AccessType string `json:"accesstype"`
+	AccessType      string `json:"accesstype"`
 
 	// Whether the Mailman directory page displays the list.
 	// * `1` - The Mailman directory page displays the list.
 	// * `0` - The Mailman directory page does not display the list.
 	//
 	// Possible values: `0`, `1`.
-	AdvertiseD int64 `json:"advertised"`
+	AdvertiseD      int64 `json:"advertised"`
 
 	// Whether the mailing list archive is `private`.
 	// * `1` - The mailing list archive is `private`.
 	// * `0` - The mailing list archive is `public`.
 	//
 	// Possible values: `0`, `1`.
-	ArchivePrivate int64 `json:"archive_private"`
+	ArchivePrivate  int64 `json:"archive_private"`
 
 	// The IP address or domain name that handles mail for the mailing list's domain.
 	// * A valid hostname.
@@ -2857,22 +2926,22 @@ type EmailListListsDataItem struct {
 	// **Note:**
 	//
 	//   If the function **cannot** resolve the IP address to a hostname, it will return the IP address.
-	Desthost string `json:"desthost"`
+	Desthost        string `json:"desthost"`
 
 	// The disk space that the mailing list currently uses, measured in megabytes (MB).
-	Diskused int64 `json:"diskused"`
+	Diskused        int64 `json:"diskused"`
 
 	// The disk space that the mailing list uses, in human-readable format.
-	HumanDiskused string `json:"humandiskused"`
+	HumanDiskused   string `json:"humandiskused"`
 
 	// The mailing list name and domain.
-	List string `json:"list"`
+	List            string `json:"list"`
 
 	// The mailing list's administrators' email addresses. A comma-separated list of email addresses.
-	ListAdmin string `json:"listadmin"`
+	ListAdmin       string `json:"listadmin"`
 
 	// The mailing list's name and domain. The mailing list name, an underscore (_), and the domain.
-	Listid string `json:"listid"`
+	Listid          string `json:"listid"`
 
 	// The level of control that the mailing list administrator has over new subscribers.
 	// * `1` - Anyone can subscribe. The system sends a confirmation email.
@@ -2924,15 +2993,15 @@ type EmailListMailDomainsArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // **Note:**
 //
-//	This function **always** returns the account's main domain first.
+//   This function **always** returns the account's main domain first.
 //
 // **Additional Note:**
 //
-//	By default, temporary domains (*.cpanel.site) are excluded. Use the `return_temporary_domain` parameter to include them.
+//   By default, temporary domains (*.cpanel.site) are excluded. Use the `return_temporary_domain` parameter to include them.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2941,10 +3010,11 @@ func (c *EmailClient) ListMailDomains(ctx context.Context, args *EmailListMailDo
 	return cpanel.UAPICall[[]EmailListMailDomainsDataItem](ctx, c.c, http.MethodGet, "Email", "list_mail_domains", args)
 }
 
+
 // EmailListMailDomainsDataItem is a generated payload type.
 type EmailListMailDomainsDataItem struct {
 	// The domain name.
-	Domain string `json:"domain"`
+	Domain  string `json:"domain"`
 
 	// The domain that you specified in the `select` input parameter. The function **only** returns this value if you included the `select` parameter when you called the function.
 	//
@@ -2969,7 +3039,7 @@ type EmailListMXsArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*DNS* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*DNS* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -2978,26 +3048,27 @@ func (c *EmailClient) ListMXs(ctx context.Context, args *EmailListMXsArgs) (*cpa
 	return cpanel.UAPICall[[]EmailListMXsDataItem](ctx, c.c, http.MethodGet, "Email", "list_mxs", args)
 }
 
+
 // EmailListMXsDataItemEntriesItem is a generated payload type.
 type EmailListMXsDataItemEntriesItem struct {
 	// The mail exchanger's domain.
-	Domain string `json:"domain"`
+	Domain     string `json:"domain"`
 
 	// The mail exchanger's order in the list of priorities. For example, the mail exchanger with the highest priority returns `1`, and the next highest priority returns `2`.
 	EntryCount int64 `json:"entrycount"`
 
 	// The mail exchanger's name.
-	MX string `json:"mx"`
+	MX         string `json:"mx"`
 
 	// The mail exchanger's [priority value](https://go.cpanel.net/whmdocsEditMXEntry).
-	Priority int64 `json:"priority"`
+	Priority   int64 `json:"priority"`
 
 	// Whether the mail exchanger is an odd or an even entry.
 	// * `even`
 	// * `odd`
 	//
 	// Possible values: `even`, `odd`.
-	Row string `json:"row"`
+	Row        string `json:"row"`
 }
 
 // EmailListMXsDataItem is a generated payload type.
@@ -3016,23 +3087,23 @@ type EmailListMXsDataItem struct {
 	// * `secondary`
 	//
 	// Possible values: `auto`, `local`, `remote`, `secondary`.
-	Detected string `json:"detected"`
+	Detected     string `json:"detected"`
 
 	// The domain name.
-	Domain string `json:"domain"`
+	Domain       string `json:"domain"`
 
 	// An array of objects that contains information about mail exchangers.
-	Entries []EmailListMXsDataItemEntriesItem `json:"entries"`
+	Entries      []EmailListMXsDataItemEntriesItem `json:"entries"`
 
 	// Whether the domain's highest priority mail exchanger is a local mail exchanger.
 	// * `1` - Local.
 	// * `0` - **Not** local.
 	//
 	// Possible values: `0`, `1`.
-	Local int64 `json:"local"`
+	Local        int64 `json:"local"`
 
 	// The domain's highest-priority mail exchanger's name.
-	MX string `json:"mx"`
+	MX           string `json:"mx"`
 
 	// The domain's highest-priority mail exchanger's type.
 	// * `auto`
@@ -3041,33 +3112,33 @@ type EmailListMXsDataItem struct {
 	// * `secondary`
 	//
 	// Possible values: `auto`, `local`, `remote`, `secondary`.
-	Mxcheck string `json:"mxcheck"`
+	Mxcheck      string `json:"mxcheck"`
 
 	// Whether the domain's highest-priority mail exchanger is remote.
 	// * `1` - Remote.
 	// * `0` - **Not** remote.
 	//
 	// Possible values: `0`, `1`.
-	Remote int64 `json:"remote"`
+	Remote       int64 `json:"remote"`
 
 	// Whether the domain's highest-priority mail exchanger is secondary.
 	// * `1` - Secondary.
 	// * `0` - **Not** secondary.
 	//
 	// Possible values: `0`, `1`.
-	Secondary int64 `json:"secondary"`
+	Secondary    int64 `json:"secondary"`
 
 	// Whether the function succeeded.
 	// * `1` - Success.
 	// * `0` - Failure.
 	//
 	// Possible values: `0`, `1`.
-	Status int64 `json:"status"`
+	Status       int64 `json:"status"`
 
 	// A success or error message message.
 	// * A success message.
 	// * An error message.
-	StatusMsg string `json:"statusmsg"`
+	StatusMsg    string `json:"statusmsg"`
 }
 
 // EmailListPopsArgs are the parameters of the UAPI function `Email::list_pops`.
@@ -3103,7 +3174,7 @@ type EmailListPopsArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -3112,17 +3183,18 @@ func (c *EmailClient) ListPops(ctx context.Context, args *EmailListPopsArgs) (*c
 	return cpanel.UAPICall[[]EmailListPopsDataItem](ctx, c.c, http.MethodGet, "Email", "list_pops", args)
 }
 
+
 // EmailListPopsDataItem is a generated payload type.
 type EmailListPopsDataItem struct {
 	// An email address.
 	// * A valid email address on the cPanel account.
 	// * The cPanel account username, for the main account.
-	Email string `json:"email"`
+	Email             string `json:"email"`
 
 	// The email account login.
 	// * A valid email address on the cPanel account.
 	// * `Main Account`, for the main account.
-	Login string `json:"login"`
+	Login             string `json:"login"`
 
 	// Whether incoming email for the email account is suspended.
 	// * `1` - Suspended.
@@ -3136,7 +3208,7 @@ type EmailListPopsDataItem struct {
 	// * `0` - Not suspended.
 	//
 	// Possible values: `0`, `1`.
-	SuspendedLogin int64 `json:"suspended_login"`
+	SuspendedLogin    int64 `json:"suspended_login"`
 }
 
 // EmailListPopsWithDiskArgs are the parameters of the UAPI function `Email::list_pops_with_disk`.
@@ -3212,7 +3284,7 @@ type EmailListPopsWithDiskArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -3221,17 +3293,18 @@ func (c *EmailClient) ListPopsWithDisk(ctx context.Context, args *EmailListPopsW
 	return cpanel.UAPICall[[]EmailListPopsWithDiskDataItem](ctx, c.c, http.MethodGet, "Email", "list_pops_with_disk", args)
 }
 
+
 // EmailListPopsWithDiskDataItem is a generated payload type.
 type EmailListPopsWithDiskDataItem struct {
 	// The disk quota.
 	// * A positive value that represents the disk quota, in bytes.
 	// * `0` - The account possesses an unlimited disk quota.
-	DiskQuota int64 `json:"_diskquota"`
+	DiskQuota            int64 `json:"_diskquota"`
 
 	// The disk space that the email account uses.
 	// * A positive value that represents the used disk space, in bytes.
 	// * `0` - The account possesses an unlimited disk quota.
-	Diskused int64 `json:"_diskused"`
+	Diskused             int64 `json:"_diskused"`
 
 	// The email account's disk quota.
 	// * A positive value that represents the email address's quota, in megabytes (MB).
@@ -3240,22 +3313,22 @@ type EmailListPopsWithDiskDataItem struct {
 	// **Note:**
 	//
 	//   The `infinityimg` and `infinitylang` parameters determine the unlimited value for this return.
-	DiskQuota2 any `json:"diskquota"`
+	DiskQuota2           any `json:"diskquota"`
 
 	// The disk space that the email account uses.
 	// * A positive floating-point value that represents the used disk space, in megabytes (MB).
 	// * `0` - The account possesses an unlimited disk quota.
-	Diskused2 int64 `json:"diskused"`
+	Diskused2            int64 `json:"diskused"`
 
 	// The percentage of disk space that the email account uses.
 	// * A positive value.
 	// * `0` - The account has an unlimited disk quota.
-	Diskusedpercent int64 `json:"diskusedpercent"`
+	Diskusedpercent      int64 `json:"diskusedpercent"`
 
 	// The percentage of disk space that the email account uses.
 	// * A positive value.
 	// * `0` - The account possesses an unlimited disk quota.
-	Diskusedpercent20 int64 `json:"diskusedpercent20"`
+	Diskusedpercent20    int64 `json:"diskusedpercent20"`
 
 	// The floating-point value from which the function derives the `diskusedpercent` return.
 	// * A floating-point value.
@@ -3267,12 +3340,12 @@ type EmailListPopsWithDiskDataItem struct {
 	DiskusedpercentFloat float64 `json:"diskusedpercent_float"`
 
 	// The email account's domain. For example, `example.com` if the email address is `user@example.com`.
-	Domain string `json:"domain"`
+	Domain               string `json:"domain"`
 
 	// The email address, or the string `Main Account`.
 	// * A valid email address.
 	// * `Main Account`
-	Email string `json:"email"`
+	Email                string `json:"email"`
 
 	// Whether the email account possesses one of the following suspension parameters: `suspended_login` `suspended_incoming` `suspended_outgoing` `hold_outgoing`
 	// * `1` - The email account has a suspension.
@@ -3283,7 +3356,7 @@ type EmailListPopsWithDiskDataItem struct {
 	//   The function **only** returns this value if you pass the `get_restrictions=1` parameter.
 	//
 	// Possible values: `0`, `1`.
-	HasSuspended int64 `json:"has_suspended"`
+	HasSuspended         int64 `json:"has_suspended"`
 
 	// Whether the email account's outgoing email is held in Exim's queue.
 	// * `1` - Outgoing email is held in Exim's queue.
@@ -3294,54 +3367,54 @@ type EmailListPopsWithDiskDataItem struct {
 	//   The function **only** returns this value if you pass the `get_restrictions=1` parameter.
 	//
 	// Possible values: `0`, `1`.
-	HoldOutgoing int64 `json:"hold_outgoing"`
+	HoldOutgoing         int64 `json:"hold_outgoing"`
 
 	// The disk quota, in human-readable format.
 	// * The disk quota and the unit of measure.
 	// * `None` - The account possesses an unlimited disk quota.
-	HumanDiskQuota any `json:"humandiskquota"`
+	HumanDiskQuota       any `json:"humandiskquota"`
 
 	// The disk space that the email account uses, in human-readable format.
 	// * The disk space that the email account uses, a non-breaking space (`\u00a0`), and the unit of measure.
 	// * `None` - The account possesses an unlimited disk quota.
-	HumanDiskused string `json:"humandiskused"`
+	HumanDiskused        string `json:"humandiskused"`
 
 	// The email address, or the main account username.
 	// * A valid email address.
 	// * The username for the main account.
-	Login string `json:"login"`
+	Login                string `json:"login"`
 
 	// The email account's last modification time, in [Unix time](https://wikipedia.org/wiki/Unix_time) format.
-	Mtime int64 `json:"mtime"`
+	Mtime                int64 `json:"mtime"`
 
 	// Whether the email account's incoming email is suspended.
 	// * `1` - Suspended.
 	// * `0` - **Not** suspended.
 	//
 	// Possible values: `0`, `1`.
-	SuspendedIncoming int64 `json:"suspended_incoming"`
+	SuspendedIncoming    int64 `json:"suspended_incoming"`
 
 	// Whether the user's ability to log in to, send mail from, and read their email account is suspended.
 	// * `1` - Suspended.
 	// * `0` - **Not** suspended.
 	//
 	// Possible values: `0`, `1`.
-	SuspendedLogin int64 `json:"suspended_login"`
+	SuspendedLogin       int64 `json:"suspended_login"`
 
 	// Whether the email account's outgoing email is suspended.
 	// * `1` - Suspended.
 	// * `0` - **Not** suspended.
 	//
 	// Possible values: `0`, `1`.
-	SuspendedOutgoing int64 `json:"suspended_outgoing"`
+	SuspendedOutgoing    int64 `json:"suspended_outgoing"`
 
 	// The email account's disk quota.
 	// * A positive value that represents the email address's quota, in megabytes (MB).
 	// * `unlimited` - The email account has an unlimited quota.
-	TXTDiskQuota any `json:"txtdiskquota"`
+	TXTDiskQuota         any `json:"txtdiskquota"`
 
 	// The email account username. For example, `user` if the email address is `user@example.com`.
-	User string `json:"user"`
+	User                 string `json:"user"`
 }
 
 // ListSystemFilterInfo calls the UAPI function `Email::list_system_filter_info` — Return system-level email filter file information
@@ -3350,7 +3423,7 @@ type EmailListPopsWithDiskDataItem struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -3358,6 +3431,7 @@ type EmailListPopsWithDiskDataItem struct {
 func (c *EmailClient) ListSystemFilterInfo(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[EmailListSystemFilterInfoData], error) {
 	return cpanel.UAPICall[EmailListSystemFilterInfoData](ctx, c.c, http.MethodGet, "Email", "list_system_filter_info", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailListSystemFilterInfoData is a generated payload type.
 type EmailListSystemFilterInfoData struct {
@@ -3396,6 +3470,7 @@ func (c *EmailClient) PasswdList(ctx context.Context, args *EmailPasswdListArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "passwd_list", args)
 }
 
+
 // EmailPasswdPopArgs are the parameters of the UAPI function `Email::passwd_pop`.
 type EmailPasswdPopArgs struct {
 	// The email account username or address.
@@ -3432,6 +3507,7 @@ func (c *EmailClient) PasswdPop(ctx context.Context, args *EmailPasswdPopArgs) (
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "passwd_pop", args)
 }
 
+
 // EmailReleaseOutgoingArgs are the parameters of the UAPI function `Email::release_outgoing`.
 type EmailReleaseOutgoingArgs struct {
 	// The email account's username.
@@ -3457,6 +3533,7 @@ type EmailReleaseOutgoingArgs struct {
 func (c *EmailClient) ReleaseOutgoing(ctx context.Context, args *EmailReleaseOutgoingArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "release_outgoing", args)
 }
+
 
 // EmailRemoveMailmanDelegatesArgs are the parameters of the UAPI function `Email::remove_mailman_delegates`.
 type EmailRemoveMailmanDelegatesArgs struct {
@@ -3485,6 +3562,7 @@ func (c *EmailClient) RemoveMailmanDelegates(ctx context.Context, args *EmailRem
 	return cpanel.UAPICall[EmailRemoveMailmanDelegatesData](ctx, c.c, http.MethodGet, "Email", "remove_mailman_delegates", args)
 }
 
+
 // EmailRemoveMailmanDelegatesDataMetadata is a generated payload type.
 type EmailRemoveMailmanDelegatesDataMetadata struct {
 	TransformEd json.RawMessage `json:"transformed"`
@@ -3495,7 +3573,7 @@ type EmailRemoveMailmanDelegatesData struct {
 	// An array of the mailing list's administrators. One or more email addresses.
 	Delegates []string `json:"delegates"`
 
-	Metadata EmailRemoveMailmanDelegatesDataMetadata `json:"metadata"`
+	Metadata  EmailRemoveMailmanDelegatesDataMetadata `json:"metadata"`
 }
 
 // EmailReorderFiltersArgs are the parameters of the UAPI function `Email::reorder_filters`.
@@ -3532,6 +3610,7 @@ type EmailReorderFiltersArgs struct {
 func (c *EmailClient) ReorderFilters(ctx context.Context, args *EmailReorderFiltersArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "reorder_filters", args)
 }
+
 
 // EmailSetAlwaysAcceptArgs are the parameters of the UAPI function `Email::set_always_accept`.
 type EmailSetAlwaysAcceptArgs struct {
@@ -3576,7 +3655,7 @@ type EmailSetAlwaysAcceptArgs struct {
 //
 // **Note:**
 //
-//	This function **only** affects the cPanel configuration. You **must** configure the mail exchanger's DNS entry separately.
+//   This function **only** affects the cPanel configuration. You **must** configure the mail exchanger's DNS entry separately.
 //
 // **Important:**
 //
@@ -3589,6 +3668,7 @@ func (c *EmailClient) SetAlwaysAccept(ctx context.Context, args *EmailSetAlwaysA
 	return cpanel.UAPICall[EmailSetAlwaysAcceptData](ctx, c.c, http.MethodGet, "Email", "set_always_accept", args)
 }
 
+
 // An object containing the mail exchanger's data.
 type EmailSetAlwaysAcceptDataCheckmx struct {
 	// Whether a change occurred during the function.
@@ -3596,7 +3676,7 @@ type EmailSetAlwaysAcceptDataCheckmx struct {
 	// * `0` — **No** change.
 	//
 	// Possible values: `0`, `1`.
-	Changed int64 `json:"changed"`
+	Changed     int64 `json:"changed"`
 
 	// The mail exchanger type.
 	// * `auto` — Allow cPanel to determine the appropriate role.
@@ -3605,14 +3685,14 @@ type EmailSetAlwaysAcceptDataCheckmx struct {
 	// * `remote` — Do **not** accept mail.
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Detected string `json:"detected"`
+	Detected    string `json:"detected"`
 
 	// Whether the mail exchanger is the primary mail exchanger.
 	// * `1` —  Primary.
 	// * `0` — **Not** primary.
 	//
 	// Possible values: `0`, `1`.
-	IsPrimary int64 `json:"isprimary"`
+	IsPrimary   int64 `json:"isprimary"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` — Secondary.
@@ -3626,7 +3706,7 @@ type EmailSetAlwaysAcceptDataCheckmx struct {
 	// * `0` — **Not** local.
 	//
 	// Possible values: `0`, `1`.
-	Local int64 `json:"local"`
+	Local       int64 `json:"local"`
 
 	// The mail exchanger type.
 	//   * `auto` — Allow cPanel to determine the appropriate role.
@@ -3635,63 +3715,63 @@ type EmailSetAlwaysAcceptDataCheckmx struct {
 	//   * `remote` — Do **not** accept mail.
 	//
 	// Possible values: `auto`, `local`, `secondary`, `remote`.
-	Mxcheck string `json:"mxcheck"`
+	Mxcheck     string `json:"mxcheck"`
 
 	// Whether the mail exchanger is a remote exchanger.
 	// * `1` — Remote.
 	// * `0` — **Not** remote.
 	//
 	// Possible values: `0`, `1`.
-	Remote int64 `json:"remote"`
+	Remote      int64 `json:"remote"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` — Secondary.
 	// * `0` — **Not** secondary.
 	//
 	// Possible values: `0`, `1`.
-	Secondary int64 `json:"secondary"`
+	Secondary   int64 `json:"secondary"`
 
 	// An array of warning messages, if any exist. One or more warning messages.
-	Warnings []string `json:"warnings"`
+	Warnings    []string `json:"warnings"`
 }
 
 // EmailSetAlwaysAcceptData is a generated payload type.
 type EmailSetAlwaysAcceptData struct {
 	// An object containing the mail exchanger's data.
-	Checkmx EmailSetAlwaysAcceptDataCheckmx `json:"checkmx"`
+	Checkmx   EmailSetAlwaysAcceptDataCheckmx `json:"checkmx"`
 
 	// The mail exchanger type.
 	//   * `auto` — Allow cPanel to determine the appropriate role.
 	//   * `local` — Always accept the domain's mail.
 	//   * `secondary` — Accept mail until a higher priority mail server is available.
 	//   * `remote` — Do **not** accept mail.
-	Detected string `json:"detected"`
+	Detected  string `json:"detected"`
 
 	// Whether the mail exchanger is a local exchanger.
 	// * `1` — Local.
 	// * `0` — **Not** local.
 	//
 	// Possible values: `0`, `1`.
-	Local int64 `json:"local"`
+	Local     int64 `json:"local"`
 
 	// The mail exchanger type.
 	//   * `auto` — Allow cPanel to determine the appropriate role.
 	//   * `local` — Always accept the domain's mail.
 	//   * `secondary` — Accept mail until a higher priority mail server is available.
 	//   * `remote` — Do **not** accept mail.
-	Mxcheck string `json:"mxcheck"`
+	Mxcheck   string `json:"mxcheck"`
 
 	// Whether the mail exchanger is a remote exchanger.
 	// * `1` — Remote.
 	// * `0` — **Not** remote.
 	//
 	// Possible values: `0`, `1`.
-	Remote int64 `json:"remote"`
+	Remote    int64 `json:"remote"`
 
 	// A message of success or a reason for failure.
 	// * A message of success that includes the new type.
 	// * A string that describes an error.
-	Results string `json:"results"`
+	Results   string `json:"results"`
 
 	// Whether the mail exchanger is a secondary exchanger.
 	// * `1` — Secondary.
@@ -3705,7 +3785,7 @@ type EmailSetAlwaysAcceptData struct {
 	// * `0` — Failure.
 	//
 	// Possible values: `0`, `1`.
-	Status int64 `json:"status"`
+	Status    int64 `json:"status"`
 
 	// A message of success or a reason for failure.
 	// * A message of success that includes the new type.
@@ -3768,7 +3848,7 @@ type EmailSetDefaultAddressArgs struct {
 //
 // **Important**:
 //
-//	When you disable the [Mail Receive role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [Mail Receive role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -3777,6 +3857,7 @@ func (c *EmailClient) SetDefaultAddress(ctx context.Context, args *EmailSetDefau
 	return cpanel.UAPICall[[]EmailSetDefaultAddressDataItem](ctx, c.c, http.MethodGet, "Email", "set_default_address", args)
 }
 
+
 // EmailSetDefaultAddressDataItem is a generated payload type.
 type EmailSetDefaultAddressDataItem struct {
 	// The destination to which the system sends unroutable mail.
@@ -3784,7 +3865,7 @@ type EmailSetDefaultAddressDataItem struct {
 	// - :fail:  The system bounces mail back to the sender, and sends a failure message.
 	// - :blackhole:  The system deletes mail without a failure message.
 	// - The path to an application  The system pipes mail to this application.
-	Dest string `json:"dest"`
+	Dest   string `json:"dest"`
 
 	// The domain. A valid domain on the account.
 	Domain string `json:"domain"`
@@ -3844,6 +3925,7 @@ func (c *EmailClient) SetListPrivacyOptions(ctx context.Context, args *EmailSetL
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "set_list_privacy_options", args)
 }
 
+
 // EmailSetManualMXRedirectsArgs are the parameters of the UAPI function `Email::set_manual_mx_redirects`.
 type EmailSetManualMXRedirectsArgs struct {
 	// The domain for which to add a manual MX redirect entry.
@@ -3878,7 +3960,7 @@ type EmailSetManualMXRedirectsArgs struct {
 //
 // **Note:**
 //
-//	To remove a domain's manual MX redirection, use the UAPI Email `unset_manual_mx_redirect` function.
+//   To remove a domain's manual MX redirection, use the UAPI Email `unset_manual_mx_redirect` function.
 //
 // Available since cPanel & WHM version cPanel 96.
 //
@@ -3886,6 +3968,7 @@ type EmailSetManualMXRedirectsArgs struct {
 func (c *EmailClient) SetManualMXRedirects(ctx context.Context, args *EmailSetManualMXRedirectsArgs) (*cpanel.UAPIResult[EmailSetManualMXRedirectsData], error) {
 	return cpanel.UAPICall[EmailSetManualMXRedirectsData](ctx, c.c, http.MethodGet, "Email", "set_manual_mx_redirects", args)
 }
+
 
 // A list of domains and the replaced manual MX redirect entries.
 type EmailSetManualMXRedirectsData struct {
@@ -3913,6 +3996,7 @@ type EmailSetManualMXRedirectsData struct {
 func (c *EmailClient) StatsDBStatus(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Email", "stats_db_status", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailStoreFilterArgs are the parameters of the UAPI function `Email::store_filter`.
 type EmailStoreFilterArgs struct {
@@ -4026,13 +4110,13 @@ type EmailStoreFilterArgs struct {
 // You may create up to 4,096 separate sets of conditions in one filter. To do this, append numbers to the parameter names.
 //
 // To create a filter with two sets of actions and conditions, use the following parameters:
-//   - Assign the information for the first filter rule to the `action1`, `dest1`, `match1`, `opt1`, `part1`, and `val1` parameters.
-//   - Assign the information for the second filter rule to the `action2`, `dest2`, `match2`, `opt2`, `part2`, and `val2` parameters.
+//   * Assign the information for the first filter rule to the `action1`, `dest1`, `match1`, `opt1`, `part1`, and `val1` parameters.
+//   * Assign the information for the second filter rule to the `action2`, `dest2`, `match2`, `opt2`, `part2`, and `val2` parameters.
 //
 // To create a filter that uses one set of actions but two sets of conditions, use the following parameters:
-//   - Assign the actions to the `action1` and `dest1` parameters.
-//   - Assign the first set of conditions to the `match1`, `opt1`, `part1`, and `val1` parameters.
-//   - Assign the second set of conditions to the `match2`, `opt2`, `part2`, and `val2` parameters.
+//   * Assign the actions to the `action1` and `dest1` parameters.
+//   * Assign the first set of conditions to the `match1`, `opt1`, `part1`, and `val1` parameters.
+//   * Assign the second set of conditions to the `match2`, `opt2`, `part2`, and `val2` parameters.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -4040,6 +4124,7 @@ type EmailStoreFilterArgs struct {
 func (c *EmailClient) StoreFilter(ctx context.Context, args *EmailStoreFilterArgs) (*cpanel.UAPIResult[EmailStoreFilterData], error) {
 	return cpanel.UAPICall[EmailStoreFilterData](ctx, c.c, http.MethodGet, "Email", "store_filter", args)
 }
+
 
 // EmailStoreFilterData is a generated payload type.
 type EmailStoreFilterData struct {
@@ -4076,6 +4161,7 @@ func (c *EmailClient) SuspendIncoming(ctx context.Context, args *EmailSuspendInc
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "suspend_incoming", args)
 }
 
+
 // EmailSuspendLoginArgs are the parameters of the UAPI function `Email::suspend_login`.
 type EmailSuspendLoginArgs struct {
 	// The email user's account name.
@@ -4107,6 +4193,7 @@ type EmailSuspendLoginArgs struct {
 func (c *EmailClient) SuspendLogin(ctx context.Context, args *EmailSuspendLoginArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "suspend_login", args)
 }
+
 
 // EmailSuspendOutgoingArgs are the parameters of the UAPI function `Email::suspend_outgoing`.
 type EmailSuspendOutgoingArgs struct {
@@ -4140,6 +4227,7 @@ func (c *EmailClient) SuspendOutgoing(ctx context.Context, args *EmailSuspendOut
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "suspend_outgoing", args)
 }
 
+
 // TerminateMailboxSessions calls the UAPI function `Email::terminate_mailbox_sessions` — Stop cPanel account IMAP and POP3 connections
 //
 // This function terminates all IMAP and POP3 connections for a cPanel account.
@@ -4154,6 +4242,7 @@ func (c *EmailClient) SuspendOutgoing(ctx context.Context, args *EmailSuspendOut
 func (c *EmailClient) TerminateMailboxSessions(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "terminate_mailbox_sessions", cpanel.CombineArgs(extra...))
 }
+
 
 // EmailTraceDeliveryArgs are the parameters of the UAPI function `Email::trace_delivery`.
 type EmailTraceDeliveryArgs struct {
@@ -4176,6 +4265,7 @@ type EmailTraceDeliveryArgs struct {
 func (c *EmailClient) TraceDelivery(ctx context.Context, args *EmailTraceDeliveryArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "trace_delivery", args)
 }
+
 
 // EmailTraceFilterArgs are the parameters of the UAPI function `Email::trace_filter`.
 type EmailTraceFilterArgs struct {
@@ -4209,6 +4299,7 @@ type EmailTraceFilterArgs struct {
 func (c *EmailClient) TraceFilter(ctx context.Context, args *EmailTraceFilterArgs) (*cpanel.UAPIResult[EmailTraceFilterData], error) {
 	return cpanel.UAPICall[EmailTraceFilterData](ctx, c.c, http.MethodGet, "Email", "trace_filter", args)
 }
+
 
 // EmailTraceFilterData is a generated payload type.
 type EmailTraceFilterData struct {
@@ -4244,7 +4335,7 @@ type EmailUnsetManualMXRedirectsArgs struct {
 //
 // **Note:**
 //
-//	To remove a domain's manual MX redirection, use the UAPI Email `unset_manual_mx_redirect` function.
+//   To remove a domain's manual MX redirection, use the UAPI Email `unset_manual_mx_redirect` function.
 //
 // Available since cPanel & WHM version cPanel 96.
 //
@@ -4252,6 +4343,7 @@ type EmailUnsetManualMXRedirectsArgs struct {
 func (c *EmailClient) UnsetManualMXRedirects(ctx context.Context, args *EmailUnsetManualMXRedirectsArgs) (*cpanel.UAPIResult[EmailUnsetManualMXRedirectsData], error) {
 	return cpanel.UAPICall[EmailUnsetManualMXRedirectsData](ctx, c.c, http.MethodGet, "Email", "unset_manual_mx_redirects", args)
 }
+
 
 // A list of domains and the removed manual MX redirect entries.
 type EmailUnsetManualMXRedirectsData struct {
@@ -4289,6 +4381,7 @@ func (c *EmailClient) UnsuspendIncoming(ctx context.Context, args *EmailUnsuspen
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "unsuspend_incoming", args)
 }
 
+
 // EmailUnsuspendLoginArgs are the parameters of the UAPI function `Email::unsuspend_login`.
 type EmailUnsuspendLoginArgs struct {
 	// The email user's account name.
@@ -4318,6 +4411,7 @@ func (c *EmailClient) UnsuspendLogin(ctx context.Context, args *EmailUnsuspendLo
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "unsuspend_login", args)
 }
 
+
 // EmailUnsuspendOutgoingArgs are the parameters of the UAPI function `Email::unsuspend_outgoing`.
 type EmailUnsuspendOutgoingArgs struct {
 	// The email account's username.
@@ -4344,6 +4438,7 @@ type EmailUnsuspendOutgoingArgs struct {
 func (c *EmailClient) UnsuspendOutgoing(ctx context.Context, args *EmailUnsuspendOutgoingArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Email", "unsuspend_outgoing", args)
 }
+
 
 // EmailVerifyPasswordArgs are the parameters of the UAPI function `Email::verify_password`.
 type EmailVerifyPasswordArgs struct {
@@ -4375,3 +4470,4 @@ type EmailVerifyPasswordArgs struct {
 func (c *EmailClient) VerifyPassword(ctx context.Context, args *EmailVerifyPasswordArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Email", "verify_password", args)
 }
+

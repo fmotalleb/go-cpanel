@@ -49,13 +49,14 @@ func (c *EmailAuthClient) ApplyDMARC(ctx context.Context, args *EmailAuthApplyDM
 	return cpanel.UAPICall[[]EmailAuthApplyDMARCDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "apply_dmarc", args)
 }
 
+
 // EmailAuthApplyDMARCDataItem is a generated payload type.
 type EmailAuthApplyDMARCDataItem struct {
 	// The domain for which the DMARC record was applied.
 	Domain string `json:"domain"`
 
 	// The domain's DMARC record status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system applied a DMARC record to the domain.
 	// * `1` - Applied.
@@ -91,13 +92,14 @@ func (c *EmailAuthClient) DisableDKIM(ctx context.Context, args *EmailAuthDisabl
 	return cpanel.UAPICall[[]EmailAuthDisableDKIMDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "disable_dkim", args)
 }
 
+
 // EmailAuthDisableDKIMDataItem is a generated payload type.
 type EmailAuthDisableDKIMDataItem struct {
 	// The domain for which the system removed the DKIM record.
 	Domain string `json:"domain"`
 
 	// Information about the removed DKIM record.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system removed the domain's DKIM record on the DNS server.
 	// * `1` - The system removed the domain's DKIM record.
@@ -140,13 +142,14 @@ func (c *EmailAuthClient) EnableDKIM(ctx context.Context, args *EmailAuthEnableD
 	return cpanel.UAPICall[[]EmailAuthEnableDKIMDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "enable_dkim", args)
 }
 
+
 // EmailAuthEnableDKIMDataItem is a generated payload type.
 type EmailAuthEnableDKIMDataItem struct {
 	// The domain for which the system enabled the DKIM record.
 	Domain string `json:"domain"`
 
 	// The domain's DKIM record status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system enabled the domain's DKIM record on the DNS server.
 	// * `1` - Enabled.
@@ -187,13 +190,14 @@ func (c *EmailAuthClient) EnsureDKIMKeysExist(ctx context.Context, args *EmailAu
 	return cpanel.UAPICall[[]EmailAuthEnsureDKIMKeysExistDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "ensure_dkim_keys_exist", args)
 }
 
+
 // EmailAuthEnsureDKIMKeysExistDataItem is a generated payload type.
 type EmailAuthEnsureDKIMKeysExistDataItem struct {
 	// The domain for which the system confirmed that a valid DKIM key exists.
 	Domain string `json:"domain"`
 
 	// The domain's DKIM key status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system verified that the domain's DKIM key exists.
 	// * `1` - The system verified the existence of the domain's DKIM key.
@@ -233,13 +237,14 @@ func (c *EmailAuthClient) FetchDKIMPrivateKeys(ctx context.Context, args *EmailA
 	return cpanel.UAPICall[[]EmailAuthFetchDKIMPrivateKeysDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "fetch_dkim_private_keys", args)
 }
 
+
 // EmailAuthFetchDKIMPrivateKeysDataItem is a generated payload type.
 type EmailAuthFetchDKIMPrivateKeysDataItem struct {
 	// The queried domain.
 	Domain string `json:"domain"`
 
 	// The domain's DKIM private key, in PEM format.
-	Pem string `json:"pem"`
+	Pem    string `json:"pem"`
 }
 
 // EmailAuthInstallDKIMPrivateKeysArgs are the parameters of the UAPI function `EmailAuth::install_dkim_private_keys`.
@@ -274,7 +279,7 @@ type EmailAuthInstallDKIMPrivateKeysArgs struct {
 //
 // * This function does **not** update the local DNS server's records.
 // * If the local DNS server is authoritative for the domain's DNS records, use the UAPI `EmailAuth::enable_dkim` function to update the local DNS server's DNS records.
-//   - We recommend that you use the UAPI `EmailAuth::install_dkim_private_keys` and `EmailAuth::enable_dkim functions` in a batch UAPI call.
+//   * We recommend that you use the UAPI `EmailAuth::install_dkim_private_keys` and `EmailAuth::enable_dkim functions` in a batch UAPI call.
 //
 // Available since cPanel & WHM version cPanel 78.
 //
@@ -283,13 +288,14 @@ func (c *EmailAuthClient) InstallDKIMPrivateKeys(ctx context.Context, args *Emai
 	return cpanel.UAPICall[[]EmailAuthInstallDKIMPrivateKeysDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "install_dkim_private_keys", args)
 }
 
+
 // EmailAuthInstallDKIMPrivateKeysDataItem is a generated payload type.
 type EmailAuthInstallDKIMPrivateKeysDataItem struct {
 	// The DKIM private key's associated domain.
 	Domain string `json:"domain"`
 
 	// The DKIM private key's installation status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system installed the DKIM private key to the local server.
 	// * `1` - The system installed the DKIM private key.
@@ -334,13 +340,14 @@ func (c *EmailAuthClient) InstallSPFRecords(ctx context.Context, args *EmailAuth
 	return cpanel.UAPICall[[]EmailAuthInstallSPFRecordsDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "install_spf_records", args)
 }
 
+
 // EmailAuthInstallSPFRecordsDataItem is a generated payload type.
 type EmailAuthInstallSPFRecordsDataItem struct {
 	// The SPF record's associated domain on the DNS server.
 	Domain string `json:"domain"`
 
 	// The SPF record's installation status to the DNS server.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system installed the SPF record to the DNS server.
 	// - `1` - The system installed the SPF record on the DNS server.
@@ -378,13 +385,14 @@ func (c *EmailAuthClient) RemoveDMARC(ctx context.Context, args *EmailAuthRemove
 	return cpanel.UAPICall[[]EmailAuthRemoveDMARCDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "remove_dmarc", args)
 }
 
+
 // EmailAuthRemoveDMARCDataItem is a generated payload type.
 type EmailAuthRemoveDMARCDataItem struct {
 	// The domain for which the DMARC record was removed.
 	Domain string `json:"domain"`
 
 	// Information about the removed DMARC record.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system removed the domain's DMARC record.
 	// * `1` - The system removed the domain's DMARC record.
@@ -417,6 +425,7 @@ func (c *EmailAuthClient) ValidateCurrentDkims(ctx context.Context, args *EmailA
 	return cpanel.UAPICall[[]EmailAuthValidateCurrentDkimsDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "validate_current_dkims", args)
 }
 
+
 // EmailAuthValidateCurrentDkimsDataItemRecordsItem is a generated payload type.
 type EmailAuthValidateCurrentDkimsDataItemRecordsItem struct {
 	// The domain's DKIM TXT record data contents.
@@ -431,7 +440,7 @@ type EmailAuthValidateCurrentDkimsDataItemRecordsItem struct {
 	// **Note:**
 	//
 	// This function **only** returns this value when the `state` value is `PERMFAIL`.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// The DKIM TXT record's status:
 	// * `VALID` - The DKIM TXT record matches the local server's public key.
@@ -439,7 +448,7 @@ type EmailAuthValidateCurrentDkimsDataItemRecordsItem struct {
 	// * `PERMFAIL` - Multiple DKIM TXT records for the domain exist or a misconfigured DKIM TXT record exists.
 	//
 	// Possible values: `VALID`, `MISMATCH`, `PERMFAIL`.
-	State string `json:"state"`
+	State   string `json:"state"`
 }
 
 // EmailAuthValidateCurrentDkimsDataItem is a generated payload type.
@@ -447,7 +456,7 @@ type EmailAuthValidateCurrentDkimsDataItem struct {
 	// The domain that the function used to check
 	// the DKIM record. This will be the value of
 	// the domain parameter with a `default._domainkey` prefix.
-	Domain string `json:"domain"`
+	Domain              string `json:"domain"`
 
 	// A message that details the reason why the DNS lookup failed.
 	//
@@ -455,17 +464,17 @@ type EmailAuthValidateCurrentDkimsDataItem struct {
 	//
 	// The function only returns this value when the `state` returned
 	// is the `ERROR` value.
-	Error string `json:"error"`
+	Error               string `json:"error"`
 
 	// The DKIM record's contents.
-	Expected string `json:"expected"`
+	Expected            string `json:"expected"`
 
 	// The domain's DNS DKIM TXT records.
 	//
 	// **Important:**
 	//
 	// This function may fail to preserve whitespace in DKIM records.
-	Records []EmailAuthValidateCurrentDkimsDataItemRecordsItem `json:"records"`
+	Records             []EmailAuthValidateCurrentDkimsDataItemRecordsItem `json:"records"`
 
 	// The domain's DKIM record status.
 	// Possible values:
@@ -476,7 +485,7 @@ type EmailAuthValidateCurrentDkimsDataItem struct {
 	// * `MISSING` No DKIM record exists for the domain.
 	// * `MULTIPLE` Multiple DKIM records exist.
 	// * `NOPUB` No key exists on the l …
-	State string `json:"state"`
+	State               string `json:"state"`
 
 	// The result of the DKIM record's validity cache update operation:
 	// * `set` The domain is invalid but passed its validity check. The validity check now passes the domain as valid.
@@ -510,20 +519,21 @@ func (c *EmailAuthClient) ValidateCurrentDmarcs(ctx context.Context, args *Email
 	return cpanel.UAPICall[[]EmailAuthValidateCurrentDmarcsDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "validate_current_dmarcs", args)
 }
 
+
 // EmailAuthValidateCurrentDmarcsDataItem is a generated payload type.
 type EmailAuthValidateCurrentDmarcsDataItem struct {
 	// The target domain of the DMARC policy.
-	Domain string `json:"domain"`
+	Domain    string `json:"domain"`
 
 	// A message that details either why the DNS lookup failed, or if there is a SPF/DKIM failure.
 	//
 	// **Note:**
 	//
 	// This will be set to `MALFORMED` if there is a syntax issue with this domain's SPF and DKIM records.
-	Error string `json:"error"`
+	Error     string `json:"error"`
 
 	// The domain's DMARC TXT record.
-	Record string `json:"record"`
+	Record    string `json:"record"`
 
 	// The domain's DMARC record status.
 	// Possible values:
@@ -532,7 +542,7 @@ type EmailAuthValidateCurrentDmarcsDataItem struct {
 	// * `MALFORMED` - A DMARC record is set, but it did not pass a syntax check.
 	// * `DKIM_SPF_ERROR` - A DMARC record exists; however, both the DKIM and SPF records for this domain did not pass validation.
 	// * `DKIM_ERROR` - A DMARC recor …
-	State string `json:"state"`
+	State     string `json:"state"`
 
 	// The domain that the function used to check
 	// the DMARC record. This will be the value of
@@ -571,11 +581,12 @@ func (c *EmailAuthClient) ValidateCurrentPtrs(ctx context.Context, args *EmailAu
 	return cpanel.UAPICall[[]EmailAuthValidateCurrentPtrsDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "validate_current_ptrs", args)
 }
 
+
 // EmailAuthValidateCurrentPtrsDataItemPtrRecordsItem is a generated payload type.
 type EmailAuthValidateCurrentPtrsDataItemPtrRecordsItem struct {
 	// The fully-qualified domain name (FQDN)
 	// that a PTR record points to.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// A list of IP addresses that the domain
 	// resolves to for A (IPv4) and AAAA (IPv6) records.
@@ -587,7 +598,7 @@ type EmailAuthValidateCurrentPtrsDataItemPtrRecordsItem struct {
 	// * `FWD_MISMATCH` - The PTR record points to a domain without an A or AAAA record that points back to the IP address.
 	//
 	// Possible values: `VALID`, `MISSING_FWD`, `FWD_MISMATCH`.
-	State string `json:"state"`
+	State          string `json:"state"`
 }
 
 // EmailAuthValidateCurrentPtrsDataItem is a generated payload type.
@@ -599,10 +610,10 @@ type EmailAuthValidateCurrentPtrsDataItem struct {
 	// A valid reversed IP address appended with one of the following:
 	// * in-addr.arpa - An IPv4 address.
 	// * ip6.arpa - An IPv6 address. …
-	ArpaDomain string `json:"arpa_domain"`
+	ArpaDomain  string `json:"arpa_domain"`
 
 	// The queried domain.
-	Domain string `json:"domain"`
+	Domain      string `json:"domain"`
 
 	// A mmessage that details the reason why the domain's IP address validation failed.
 	//
@@ -610,18 +621,18 @@ type EmailAuthValidateCurrentPtrsDataItem struct {
 	//
 	// The function only returns this value when the `state` returned is
 	// the `ERROR` value.
-	Error string `json:"error"`
+	Error       string `json:"error"`
 
 	// The hostname that the domain uses to identify
 	// itself to remote SMTP servers. A valid hostname.
-	Helo string `json:"helo"`
+	Helo        string `json:"helo"`
 
 	// The IP address.
 	//
 	// **Note:**
 	//
 	// The function does **not** return this value for a domain with an invalid IP address.
-	IPAddress string `json:"ip_address"`
+	IPAddress   string `json:"ip_address"`
 
 	// The IP version number.
 	// * 4
@@ -632,7 +643,7 @@ type EmailAuthValidateCurrentPtrsDataItem struct {
 	// The function does **not** return this value for a domain with an invalid IP address.
 	//
 	// Possible values: `4`, `6`.
-	IPVersion int64 `json:"ip_version"`
+	IPVersion   int64 `json:"ip_version"`
 
 	// The authoritative nameservers for the domain's PTR record.
 	Nameservers []string `json:"nameservers"`
@@ -642,7 +653,7 @@ type EmailAuthValidateCurrentPtrsDataItem struct {
 	// **Note:**
 	//
 	// The function does **not** return this for a domain with an invalid IP address.
-	PtrRecords []EmailAuthValidateCurrentPtrsDataItemPtrRecordsItem `json:"ptr_records"`
+	PtrRecords  []EmailAuthValidateCurrentPtrsDataItemPtrRecordsItem `json:"ptr_records"`
 
 	// Whether the PTR records are valid for the domain.
 	// * `ERROR` - The domain's IP address is invalid. The function returns the reason in the error return.
@@ -650,7 +661,7 @@ type EmailAuthValidateCurrentPtrsDataItem struct {
 	// * `VALID` - The PTR record is valid.
 	// * `MISSING_PTR` - No PTR records exist for the IP address.
 	// * `PTR_MISMATCH` - One or more PTR records point to a domain that does …
-	State string `json:"state"`
+	State       string `json:"state"`
 }
 
 // EmailAuthValidateCurrentSpfsArgs are the parameters of the UAPI function `EmailAuth::validate_current_spfs`.
@@ -676,6 +687,7 @@ func (c *EmailAuthClient) ValidateCurrentSpfs(ctx context.Context, args *EmailAu
 	return cpanel.UAPICall[[]EmailAuthValidateCurrentSpfsDataItem](ctx, c.c, http.MethodGet, "EmailAuth", "validate_current_spfs", args)
 }
 
+
 // EmailAuthValidateCurrentSpfsDataItemRecordsItem is a generated payload type.
 type EmailAuthValidateCurrentSpfsDataItemRecordsItem struct {
 	// The SPF record's contents.
@@ -686,30 +698,30 @@ type EmailAuthValidateCurrentSpfsDataItemRecordsItem struct {
 	// **Note:**
 	//
 	// If no errors exist, the function does **not** return this value.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// The SPF record's status:
 	// * `PASS` - The `SPF` record confirms that the `ip_address` value is a valid sender.
 	// * `NEUTRAL` - The current `SPF` record configuration does not determine the `ip_address` value's validity.
 	// * `FAIL` - The `SPF` record states that the `ip_address` value is **not** a valid sender.
 	// * `SOFTFAIL` - The `SPF` record states that the `ip_address` value is **not** a valid sender, …
-	State string `json:"state"`
+	State   string `json:"state"`
 }
 
 // EmailAuthValidateCurrentSpfsDataItem is a generated payload type.
 type EmailAuthValidateCurrentSpfsDataItem struct {
 	// The queried domain.
-	Domain string `json:"domain"`
+	Domain    string `json:"domain"`
 
 	// A message that details the reason why the DNS lookup failed.
 	//
 	// **Note:**
 	//
 	//  The function **only** returns this value when the `state` return is the `ERROR` value.
-	Error string `json:"error"`
+	Error     string `json:"error"`
 
 	// The SPF record for the domain in the DNS.
-	Expected string `json:"expected"`
+	Expected  string `json:"expected"`
 
 	// The domain's IP address.
 	IPAddress string `json:"ip_address"`
@@ -722,7 +734,7 @@ type EmailAuthValidateCurrentSpfsDataItem struct {
 	IPVersion int64 `json:"ip_version"`
 
 	// The SPF records of the domain's DNS.
-	Records []EmailAuthValidateCurrentSpfsDataItemRecordsItem `json:"records"`
+	Records   []EmailAuthValidateCurrentSpfsDataItemRecordsItem `json:"records"`
 
 	// The SPF record's status:
 	// * `VALID` - A single `SPF TXT` record exists in the domain's DNS with the correct `ip_address` value or redirect mechanism.
@@ -730,5 +742,5 @@ type EmailAuthValidateCurrentSpfsDataItem struct {
 	// * `MULTIPLE` - Multiple `SPF TXT` records exist in the domain's DNS.
 	// * `MISSING` - No `SPF TXT` record exists for the domain's DNS.
 	// * `ERROR` - …
-	State string `json:"state"`
+	State     string `json:"state"`
 }

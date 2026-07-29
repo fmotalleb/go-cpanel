@@ -43,6 +43,7 @@ func (c *Client) IsReady(ctx context.Context, args *IsReadyArgs) (*cpanel.WHMRes
 	return cpanel.WHMCall[IsReadyData](ctx, c.c, http.MethodGet, "is_ready", args)
 }
 
+
 // IsReadyData is a generated payload type.
 type IsReadyData struct {
 	// Whether the plugin-based feature is installed and ready.
@@ -93,6 +94,7 @@ func (c *Client) LocalDisable(ctx context.Context, args *LocalDisableArgs) (*cpa
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "local_disable", args)
 }
 
+
 // LocalEnableArgs are the parameters of the WHM API 1 function `local_enable`.
 type LocalEnableArgs struct {
 	// The plugin-based feature's name in the local `/var/cpanel/plugins/` directory.
@@ -132,3 +134,4 @@ type LocalEnableArgs struct {
 func (c *Client) LocalEnable(ctx context.Context, args *LocalEnableArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "local_enable", args)
 }
+

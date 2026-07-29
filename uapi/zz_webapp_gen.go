@@ -98,10 +98,10 @@ type WebAppConfigureArgs struct {
 //
 // **Important:**
 //
-//	The `env` parameter uses **replace-all** semantics — the value you
-//	pass becomes the application's complete set of environment
-//	variables. To change one variable, read the current set first and
-//	resubmit it with your change applied.
+//   The `env` parameter uses **replace-all** semantics — the value you
+//   pass becomes the application's complete set of environment
+//   variables. To change one variable, read the current set first and
+//   resubmit it with your change applied.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -110,31 +110,32 @@ func (c *WebAppClient) Configure(ctx context.Context, args *WebAppConfigureArgs)
 	return cpanel.UAPICall[WebAppConfigureData](ctx, c.c, http.MethodGet, "WebApp", "configure", args)
 }
 
+
 // The application's linked database information, or `null` if no database is linked.
 type WebAppConfigureDataDB struct {
 	// The environment variable names that carry the database credentials.
 	EnvKeys []string `json:"env_keys"`
 
 	// The database server hostname.
-	Host string `json:"host"`
+	Host    string `json:"host"`
 
 	// The database name.
-	Name string `json:"name"`
+	Name    string `json:"name"`
 
 	// The database server port.
-	Port int64 `json:"port"`
+	Port    int64 `json:"port"`
 }
 
 // Suggested configuration values for the detected framework. Present only when this call changed `appdir` and re-ran the preflight.
 type WebAppConfigureDataDefaults struct {
 	// The suggested build command, or `null` if no build step is needed.
-	BuildCommand *string `json:"build_command"`
+	BuildCommand   *string `json:"build_command"`
 
 	// The suggested build output directory, or `null` if not applicable.
-	OutputDir *string `json:"output_dir"`
+	OutputDir      *string `json:"output_dir"`
 
 	// The suggested runtime version tag.
-	RuntimeTag string `json:"runtime_tag"`
+	RuntimeTag     string `json:"runtime_tag"`
 
 	// The suggested startup command, or `null` for `static` applications.
 	StartupCommand *string `json:"startup_command"`
@@ -143,12 +144,12 @@ type WebAppConfigureDataDefaults struct {
 // Information about the most recent deploy, or `null` if the application has never deployed.
 type WebAppConfigureDataLastDeploy struct {
 	// The unique identifier of the deploy.
-	DeployID string `json:"deploy_id"`
+	DeployID  string `json:"deploy_id"`
 
 	// The result of the deploy.
 	//
 	// Possible values: `success`, `failed`.
-	Result string `json:"result"`
+	Result    string `json:"result"`
 
 	// When the deploy finished, in ISO 8601 format.
 	Timestamp string `json:"timestamp"`
@@ -165,10 +166,10 @@ type WebAppConfigureDataSource struct {
 	// * `git` — A Git repository.
 	//
 	// Possible values: `zip`, `git`.
-	Type2 string `json:"type"`
+	Type2  string `json:"type"`
 
 	// The Git repository URL, or `null` for ZIP sources.
-	URL *string `json:"url"`
+	URL    *string `json:"url"`
 }
 
 // The application with its updated configuration.
@@ -181,7 +182,7 @@ type WebAppConfigureData struct {
 	// * `other` — Any other kind of application.
 	//
 	// Possible values: `static`, `server`, `other`.
-	Category string `json:"category"`
+	Category       string `json:"category"`
 
 	// How confident the preflight detection is. Present
 	// only when this call changed `appdir` and re-ran the
@@ -192,7 +193,7 @@ type WebAppConfigureData struct {
 	// * `none` — No recognizable markers; the defaults are generic.
 	//
 	// Possible values: `high`, `low`, `none`.
-	COnFIDEnce string `json:"confidence"`
+	COnFIDEnce     string `json:"confidence"`
 
 	// The name of the deployed container backing this
 	// application, or `null` while it is only staged.
@@ -200,36 +201,36 @@ type WebAppConfigureData struct {
 	// instance, so it identifies the exact deployed
 	// record even when several applications share a base
 	// name.
-	ContainerName *string `json:"container_name"`
+	ContainerName  *string `json:"container_name"`
 
 	// The application's linked database information, or `null` if no database is linked.
-	DB WebAppConfigureDataDB `json:"db"`
+	DB             WebAppConfigureDataDB `json:"db"`
 
 	// Suggested configuration values for the detected framework. Present only when this call changed `appdir` and re-ran the preflight.
-	Defaults WebAppConfigureDataDefaults `json:"defaults"`
+	Defaults       WebAppConfigureDataDefaults `json:"defaults"`
 
 	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
-	Deployed bool `json:"deployed"`
+	Deployed       bool `json:"deployed"`
 
 	// The name used to name the deployment, or `null` when it defaults to the application name.
-	DeployName *string `json:"deployname"`
+	DeployName     *string `json:"deployname"`
 
 	// The domain the application is bound to. This is an existing domain on the account or an automatically generated temporary domain.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// The application's environment variables.
-	Env map[string]string `json:"env"`
+	Env            map[string]string `json:"env"`
 
 	// The application's detected or user-selected framework, or `null` if unknown.
-	Framework *string `json:"framework"`
+	Framework      *string `json:"framework"`
 
 	// Information about the most recent deploy, or `null` if the application has never deployed.
-	LastDeploy WebAppConfigureDataLastDeploy `json:"last_deploy"`
+	LastDeploy     WebAppConfigureDataLastDeploy `json:"last_deploy"`
 
 	// The application's run mode. Only meaningful for the `server` category; `null` otherwise.
 	//
 	// Possible values: `production`, `development`.
-	Mode *string `json:"mode"`
+	Mode           *string `json:"mode"`
 
 	// The application's name (slug), unique across the
 	// account. Use this value to address the application
@@ -239,7 +240,7 @@ type WebAppConfigureData struct {
 	// uses registers the new one under the next free
 	// `<name>-N`, so each application keeps a distinct
 	// name.
-	Name string `json:"name"`
+	Name           string `json:"name"`
 
 	// The package manager the deploy uses to install
 	// dependencies and run scripts. It is detected from
@@ -250,16 +251,16 @@ type WebAppConfigureData struct {
 	PackageManager string `json:"package_manager"`
 
 	// The application's runtime identifier.
-	Runtime string `json:"runtime"`
+	Runtime        string `json:"runtime"`
 
 	// The runtime version tag.
-	RuntimeTag string `json:"runtime_tag"`
+	RuntimeTag     string `json:"runtime_tag"`
 
 	// The application's source information.
-	Source WebAppConfigureDataSource `json:"source"`
+	Source         WebAppConfigureDataSource `json:"source"`
 
 	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
-	Staged bool `json:"staged"`
+	Staged         bool `json:"staged"`
 
 	// The application's current status.
 	//
@@ -270,10 +271,10 @@ type WebAppConfigureData struct {
 	// * `errored` — The last action failed.
 	//
 	// Possible values: `created`, `deploying`, `running`, `stopped`, `errored`.
-	Status string `json:"status"`
+	Status         string `json:"status"`
 
 	// The application's live HTTPS URL.
-	URL string `json:"url"`
+	URL            string `json:"url"`
 }
 
 // WebAppDeleteArgs are the parameters of the UAPI function `WebApp::delete`.
@@ -322,8 +323,8 @@ type WebAppDeleteArgs struct {
 //
 // **Important**:
 //
-//	The `verify` parameter is **required** and has no default. You must
-//	set it to `1` to confirm this irreversible operation.
+//   The `verify` parameter is **required** and has no default. You must
+//   set it to `1` to confirm this irreversible operation.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -331,6 +332,7 @@ type WebAppDeleteArgs struct {
 func (c *WebAppClient) Delete(ctx context.Context, args *WebAppDeleteArgs) (*cpanel.UAPIResult[WebAppDeleteData], error) {
 	return cpanel.UAPICall[WebAppDeleteData](ctx, c.c, http.MethodGet, "WebApp", "delete", args)
 }
+
 
 // WebAppDeleteData is a generated payload type.
 type WebAppDeleteData struct {
@@ -362,18 +364,18 @@ type WebAppDeployArgs struct {
 //
 // **Note**:
 //
-//	This function starts an asynchronous task and returns immediately.
-//	Stream the returned `sse_url` for live progress, or poll the task.
-//	While the task runs, the application's status is `deploying`. When
-//	the task finishes the status transitions to `running` on success or
-//	`errored` on failure. Use `WebApp::list` to read the current status
-//	and inspect `last_deploy` for the outcome and any failure category.
+//   This function starts an asynchronous task and returns immediately.
+//   Stream the returned `sse_url` for live progress, or poll the task.
+//   While the task runs, the application's status is `deploying`. When
+//   the task finishes the status transitions to `running` on success or
+//   `errored` on failure. Use `WebApp::list` to read the current status
+//   and inspect `last_deploy` for the outcome and any failure category.
 //
 // **Important**:
 //
-//	This function is idempotent. If you call it while a deploy for the
-//	same application is already running, it returns the in-flight
-//	task's identifiers instead of starting a new deploy.
+//   This function is idempotent. If you call it while a deploy for the
+//   same application is already running, it returns the in-flight
+//   task's identifiers instead of starting a new deploy.
 //
 // If this call fails before the task is dispatched (for example, when
 // the application does not exist), `metadata.error_category` carries a
@@ -388,16 +390,17 @@ func (c *WebAppClient) Deploy(ctx context.Context, args *WebAppDeployArgs) (*cpa
 	return cpanel.UAPICall[WebAppDeployData](ctx, c.c, http.MethodGet, "WebApp", "deploy", args)
 }
 
+
 // WebAppDeployData is a generated payload type.
 type WebAppDeployData struct {
 	// The unique identifier of this deploy.
 	DeployID string `json:"deploy_id"`
 
 	// The SSE URL to stream the deploy's progress.
-	SseURL string `json:"sse_url"`
+	SseURL   string `json:"sse_url"`
 
 	// The task id of the SSE process.
-	TaskID string `json:"task_id"`
+	TaskID   string `json:"task_id"`
 }
 
 // WebAppFetchLogsArgs are the parameters of the UAPI function `WebApp::fetch_logs`.
@@ -445,6 +448,7 @@ func (c *WebAppClient) FetchLogs(ctx context.Context, args *WebAppFetchLogsArgs)
 	return cpanel.UAPICall[WebAppFetchLogsData](ctx, c.c, http.MethodGet, "WebApp", "fetch_logs", args)
 }
 
+
 // WebAppFetchLogsData is a generated payload type.
 type WebAppFetchLogsData struct {
 	// The requested log lines, oldest first.
@@ -468,16 +472,17 @@ func (c *WebAppClient) GetAvailable(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[WebAppGetAvailableData](ctx, c.c, http.MethodGet, "WebApp", "get_available", cpanel.CombineArgs(extra...))
 }
 
+
 // The account's total application allowance, applied across all App Types together.
 type WebAppGetAvailableDataAccountApps struct {
 	// The number of additional applications the account may still create (`limit` minus `used`, never below zero).
 	Available int64 `json:"available"`
 
 	// The maximum number of applications the account may own.
-	Limit int64 `json:"limit"`
+	Limit     int64 `json:"limit"`
 
 	// The number of applications the account currently owns.
-	Used int64 `json:"used"`
+	Used      int64 `json:"used"`
 }
 
 // The account-wide application capacity, shared across all App Types.
@@ -495,22 +500,22 @@ type WebAppGetAvailableDataRuntimesValueApps struct {
 // An enabled App Type, keyed by its runtime identifier.
 type WebAppGetAvailableDataRuntimesValue struct {
 	// The account's current applications of this App Type.
-	Apps WebAppGetAvailableDataRuntimesValueApps `json:"apps"`
+	Apps        WebAppGetAvailableDataRuntimesValueApps `json:"apps"`
 
 	// The runtime version tag used when the caller does not choose one.
-	DefaultTag string `json:"default_tag"`
+	DefaultTag  string `json:"default_tag"`
 
 	// The runtime's human-readable name.
 	DisplayName string `json:"display_name"`
 
 	// The runtime version tags available on the server, keyed by tag id, each mapping to its available package managers.
-	Tags map[string][]string `json:"tags"`
+	Tags        map[string][]string `json:"tags"`
 }
 
 // WebAppGetAvailableData is a generated payload type.
 type WebAppGetAvailableData struct {
 	// The account-wide application capacity, shared across all App Types.
-	Account WebAppGetAvailableDataAccount `json:"account"`
+	Account  WebAppGetAvailableDataAccount `json:"account"`
 
 	// The App Types enabled on the server, keyed by runtime identifier (for example, `nodejs`). A disabled App Type is absent rather than listed as unavailable.
 	Runtimes map[string]WebAppGetAvailableDataRuntimesValue `json:"runtimes"`
@@ -532,6 +537,7 @@ type WebAppGetAvailableData struct {
 func (c *WebAppClient) HasFeature(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[WebAppHasFeatureData], error) {
 	return cpanel.UAPICall[WebAppHasFeatureData](ctx, c.c, http.MethodGet, "WebApp", "has_feature", cpanel.CombineArgs(extra...))
 }
+
 
 // WebAppHasFeatureData is a generated payload type.
 type WebAppHasFeatureData struct {
@@ -557,30 +563,31 @@ func (c *WebAppClient) List(ctx context.Context, extra ...cpanel.Args) (*cpanel.
 	return cpanel.UAPICall[[]WebAppListDataItem](ctx, c.c, http.MethodGet, "WebApp", "list", cpanel.CombineArgs(extra...))
 }
 
+
 // The application's linked database information, or `null` if no database is linked.
 type WebAppListDataItemDB struct {
 	// The environment variable names that carry the database credentials.
 	EnvKeys []string `json:"env_keys"`
 
 	// The database server hostname.
-	Host string `json:"host"`
+	Host    string `json:"host"`
 
 	// The database name.
-	Name string `json:"name"`
+	Name    string `json:"name"`
 
 	// The database server port.
-	Port int64 `json:"port"`
+	Port    int64 `json:"port"`
 }
 
 // Information about the most recent deploy, or `null` if the application has never deployed.
 type WebAppListDataItemLastDeploy struct {
 	// The unique identifier of the deploy.
-	DeployID string `json:"deploy_id"`
+	DeployID  string `json:"deploy_id"`
 
 	// The result of the deploy.
 	//
 	// Possible values: `success`, `failed`.
-	Result string `json:"result"`
+	Result    string `json:"result"`
 
 	// When the deploy finished, in ISO 8601 format.
 	Timestamp string `json:"timestamp"`
@@ -597,10 +604,10 @@ type WebAppListDataItemSource struct {
 	// * `git` — A Git repository.
 	//
 	// Possible values: `zip`, `git`.
-	Type2 string `json:"type"`
+	Type2  string `json:"type"`
 
 	// The Git repository URL, or `null` for ZIP sources.
-	URL *string `json:"url"`
+	URL    *string `json:"url"`
 }
 
 // WebAppListDataItem is a generated payload type.
@@ -613,7 +620,7 @@ type WebAppListDataItem struct {
 	// * `other` — Any other kind of application.
 	//
 	// Possible values: `static`, `server`, `other`.
-	Category string `json:"category"`
+	Category       string `json:"category"`
 
 	// The name of the deployed container backing this
 	// application, or `null` while it is only staged.
@@ -621,33 +628,33 @@ type WebAppListDataItem struct {
 	// instance, so it identifies the exact deployed
 	// record even when several applications share a
 	// base name.
-	ContainerName *string `json:"container_name"`
+	ContainerName  *string `json:"container_name"`
 
 	// The application's linked database information, or `null` if no database is linked.
-	DB WebAppListDataItemDB `json:"db"`
+	DB             WebAppListDataItemDB `json:"db"`
 
 	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
-	Deployed bool `json:"deployed"`
+	Deployed       bool `json:"deployed"`
 
 	// The name used to name the deployment, or `null` when it defaults to the application name.
-	DeployName *string `json:"deployname"`
+	DeployName     *string `json:"deployname"`
 
 	// The domain the application is bound to. This is an existing domain on the account or an automatically generated temporary domain.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// The application's environment variables.
-	Env map[string]string `json:"env"`
+	Env            map[string]string `json:"env"`
 
 	// The application's detected or user-selected framework, or `null` if unknown.
-	Framework *string `json:"framework"`
+	Framework      *string `json:"framework"`
 
 	// Information about the most recent deploy, or `null` if the application has never deployed.
-	LastDeploy WebAppListDataItemLastDeploy `json:"last_deploy"`
+	LastDeploy     WebAppListDataItemLastDeploy `json:"last_deploy"`
 
 	// The application's run mode. Only meaningful for the `server` category; `null` otherwise.
 	//
 	// Possible values: `production`, `development`.
-	Mode *string `json:"mode"`
+	Mode           *string `json:"mode"`
 
 	// The application's name (slug), unique across the
 	// account. Use this value to address the application
@@ -657,7 +664,7 @@ type WebAppListDataItem struct {
 	// already uses registers the new one under the next
 	// free `<name>-N`, so each application keeps a
 	// distinct name.
-	Name string `json:"name"`
+	Name           string `json:"name"`
 
 	// The package manager the deploy uses to install
 	// dependencies and run scripts. It is detected from
@@ -668,16 +675,16 @@ type WebAppListDataItem struct {
 	PackageManager string `json:"package_manager"`
 
 	// The application's runtime identifier.
-	Runtime string `json:"runtime"`
+	Runtime        string `json:"runtime"`
 
 	// The runtime version tag.
-	RuntimeTag string `json:"runtime_tag"`
+	RuntimeTag     string `json:"runtime_tag"`
 
 	// The application's source information.
-	Source WebAppListDataItemSource `json:"source"`
+	Source         WebAppListDataItemSource `json:"source"`
 
 	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
-	Staged bool `json:"staged"`
+	Staged         bool `json:"staged"`
 
 	// The application's current status.
 	//
@@ -688,10 +695,10 @@ type WebAppListDataItem struct {
 	// * `errored` — The last action failed.
 	//
 	// Possible values: `created`, `deploying`, `running`, `stopped`, `errored`.
-	Status string `json:"status"`
+	Status         string `json:"status"`
 
 	// The application's live HTTPS URL.
-	URL string `json:"url"`
+	URL            string `json:"url"`
 }
 
 // WebAppRedeployArgs are the parameters of the UAPI function `WebApp::redeploy`.
@@ -714,18 +721,18 @@ type WebAppRedeployArgs struct {
 //
 // **Note**:
 //
-//	This function starts an asynchronous task and returns immediately.
-//	Stream the returned `sse_url` for live progress, or poll the task.
-//	While the task runs, the application's status is `deploying`. When
-//	the task finishes the status transitions to `running` on success or
-//	`errored` on failure. Use `WebApp::list` to read the current status
-//	and inspect `last_deploy` for the outcome and any failure category.
+//   This function starts an asynchronous task and returns immediately.
+//   Stream the returned `sse_url` for live progress, or poll the task.
+//   While the task runs, the application's status is `deploying`. When
+//   the task finishes the status transitions to `running` on success or
+//   `errored` on failure. Use `WebApp::list` to read the current status
+//   and inspect `last_deploy` for the outcome and any failure category.
 //
 // **Important**:
 //
-//	This function is idempotent. If you call it while a deploy for the
-//	same application is already running, it returns the in-flight
-//	task's identifiers instead of starting a new deploy.
+//   This function is idempotent. If you call it while a deploy for the
+//   same application is already running, it returns the in-flight
+//   task's identifiers instead of starting a new deploy.
 //
 // If this call fails before the task is dispatched (for example, when
 // the application does not exist), `metadata.error_category` carries a
@@ -740,16 +747,17 @@ func (c *WebAppClient) Redeploy(ctx context.Context, args *WebAppRedeployArgs) (
 	return cpanel.UAPICall[WebAppRedeployData](ctx, c.c, http.MethodGet, "WebApp", "redeploy", args)
 }
 
+
 // WebAppRedeployData is a generated payload type.
 type WebAppRedeployData struct {
 	// The unique identifier of this deploy.
 	DeployID string `json:"deploy_id"`
 
 	// The SSE URL to stream the deploy's progress.
-	SseURL string `json:"sse_url"`
+	SseURL   string `json:"sse_url"`
 
 	// The task id of the SSE process.
-	TaskID string `json:"task_id"`
+	TaskID   string `json:"task_id"`
 }
 
 // WebAppRestartArgs are the parameters of the UAPI function `WebApp::restart`.
@@ -769,9 +777,9 @@ type WebAppRestartArgs struct {
 //
 // **Important**:
 //
-//	This function only applies to applications in the `server`
-//	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//   This function only applies to applications in the `server`
+//   category. Calling it on a `static` application fails with the
+//   `invalid_category` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -779,6 +787,7 @@ type WebAppRestartArgs struct {
 func (c *WebAppClient) Restart(ctx context.Context, args *WebAppRestartArgs) (*cpanel.UAPIResult[WebAppRestartData], error) {
 	return cpanel.UAPICall[WebAppRestartData](ctx, c.c, http.MethodGet, "WebApp", "restart", args)
 }
+
 
 // WebAppRestartData is a generated payload type.
 type WebAppRestartData struct {
@@ -813,9 +822,9 @@ type WebAppSetModeArgs struct {
 //
 // **Important**:
 //
-//	This function only applies to applications in the `server`
-//	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//   This function only applies to applications in the `server`
+//   category. Calling it on a `static` application fails with the
+//   `invalid_category` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -824,12 +833,13 @@ func (c *WebAppClient) SetMode(ctx context.Context, args *WebAppSetModeArgs) (*c
 	return cpanel.UAPICall[WebAppSetModeData](ctx, c.c, http.MethodGet, "WebApp", "set_mode", args)
 }
 
+
 // WebAppSetModeData is a generated payload type.
 type WebAppSetModeData struct {
 	// The application's run mode after the change.
 	//
 	// Possible values: `production`, `development`.
-	Mode string `json:"mode"`
+	Mode      string `json:"mode"`
 
 	// Whether the application restarted to apply the new
 	// mode.
@@ -935,31 +945,32 @@ func (c *WebAppClient) Stage(ctx context.Context, args *WebAppStageArgs) (*cpane
 	return cpanel.UAPICall[WebAppStageData](ctx, c.c, http.MethodGet, "WebApp", "stage", args)
 }
 
+
 // The application's linked database information, or `null` if no database is linked.
 type WebAppStageDataDB struct {
 	// The environment variable names that carry the database credentials.
 	EnvKeys []string `json:"env_keys"`
 
 	// The database server hostname.
-	Host string `json:"host"`
+	Host    string `json:"host"`
 
 	// The database name.
-	Name string `json:"name"`
+	Name    string `json:"name"`
 
 	// The database server port.
-	Port int64 `json:"port"`
+	Port    int64 `json:"port"`
 }
 
 // Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
 type WebAppStageDataDefaults struct {
 	// The suggested build command, or `null` if no build step is needed.
-	BuildCommand *string `json:"build_command"`
+	BuildCommand   *string `json:"build_command"`
 
 	// The suggested build output directory, or `null` if not applicable.
-	OutputDir *string `json:"output_dir"`
+	OutputDir      *string `json:"output_dir"`
 
 	// The suggested runtime version tag.
-	RuntimeTag string `json:"runtime_tag"`
+	RuntimeTag     string `json:"runtime_tag"`
 
 	// The suggested startup command, or `null` for `static` applications.
 	StartupCommand *string `json:"startup_command"`
@@ -968,12 +979,12 @@ type WebAppStageDataDefaults struct {
 // Information about the most recent deploy, or `null` if the application has never deployed.
 type WebAppStageDataLastDeploy struct {
 	// The unique identifier of the deploy.
-	DeployID string `json:"deploy_id"`
+	DeployID  string `json:"deploy_id"`
 
 	// The result of the deploy.
 	//
 	// Possible values: `success`, `failed`.
-	Result string `json:"result"`
+	Result    string `json:"result"`
 
 	// When the deploy finished, in ISO 8601 format.
 	Timestamp string `json:"timestamp"`
@@ -990,10 +1001,10 @@ type WebAppStageDataSource struct {
 	// * `git` — A Git repository.
 	//
 	// Possible values: `zip`, `git`.
-	Type2 string `json:"type"`
+	Type2  string `json:"type"`
 
 	// The Git repository URL, or `null` for ZIP sources.
-	URL *string `json:"url"`
+	URL    *string `json:"url"`
 }
 
 // The newly registered application.
@@ -1006,7 +1017,7 @@ type WebAppStageData struct {
 	// * `other` — Any other kind of application.
 	//
 	// Possible values: `static`, `server`, `other`.
-	Category string `json:"category"`
+	Category       string `json:"category"`
 
 	// How confident the preflight detection is.
 	//
@@ -1015,7 +1026,7 @@ type WebAppStageData struct {
 	// * `none` — No recognizable markers; the defaults are generic.
 	//
 	// Possible values: `high`, `low`, `none`.
-	COnFIDEnce string `json:"confidence"`
+	COnFIDEnce     string `json:"confidence"`
 
 	// The name of the deployed container backing this
 	// application, or `null` while it is only staged.
@@ -1023,33 +1034,33 @@ type WebAppStageData struct {
 	// instance, so it identifies the exact deployed
 	// record even when several applications share a base
 	// name.
-	ContainerName *string `json:"container_name"`
+	ContainerName  *string `json:"container_name"`
 
 	// The application's linked database information, or `null` if no database is linked.
-	DB WebAppStageDataDB `json:"db"`
+	DB             WebAppStageDataDB `json:"db"`
 
 	// Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
-	Defaults WebAppStageDataDefaults `json:"defaults"`
+	Defaults       WebAppStageDataDefaults `json:"defaults"`
 
 	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
-	Deployed bool `json:"deployed"`
+	Deployed       bool `json:"deployed"`
 
 	// The domain the application is bound to. This is an existing domain on the account or an automatically generated temporary domain.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// The application's environment variables.
-	Env map[string]string `json:"env"`
+	Env            map[string]string `json:"env"`
 
 	// The application's detected or user-selected framework, or `null` if unknown.
-	Framework *string `json:"framework"`
+	Framework      *string `json:"framework"`
 
 	// Information about the most recent deploy, or `null` if the application has never deployed.
-	LastDeploy WebAppStageDataLastDeploy `json:"last_deploy"`
+	LastDeploy     WebAppStageDataLastDeploy `json:"last_deploy"`
 
 	// The application's run mode. Only meaningful for the `server` category; `null` otherwise.
 	//
 	// Possible values: `production`, `development`.
-	Mode *string `json:"mode"`
+	Mode           *string `json:"mode"`
 
 	// The application's assigned name (slug), unique
 	// across the account. This may differ from the name
@@ -1057,7 +1068,7 @@ type WebAppStageData struct {
 	// used that name, the application was registered
 	// under the next free `<name>-N`. Use this value for
 	// `WebApp::configure` and `WebApp::deploy`.
-	Name string `json:"name"`
+	Name           string `json:"name"`
 
 	// The package manager the deploy uses to install
 	// dependencies and run scripts. It is detected from
@@ -1068,16 +1079,16 @@ type WebAppStageData struct {
 	PackageManager string `json:"package_manager"`
 
 	// The application's runtime identifier.
-	Runtime string `json:"runtime"`
+	Runtime        string `json:"runtime"`
 
 	// The runtime version tag.
-	RuntimeTag string `json:"runtime_tag"`
+	RuntimeTag     string `json:"runtime_tag"`
 
 	// The application's source information.
-	Source WebAppStageDataSource `json:"source"`
+	Source         WebAppStageDataSource `json:"source"`
 
 	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
-	Staged bool `json:"staged"`
+	Staged         bool `json:"staged"`
 
 	// The application's current status.
 	//
@@ -1088,10 +1099,10 @@ type WebAppStageData struct {
 	// * `errored` — The last action failed.
 	//
 	// Possible values: `created`, `deploying`, `running`, `stopped`, `errored`.
-	Status string `json:"status"`
+	Status         string `json:"status"`
 
 	// The application's live HTTPS URL.
-	URL string `json:"url"`
+	URL            string `json:"url"`
 }
 
 // WebAppStartArgs are the parameters of the UAPI function `WebApp::start`.
@@ -1111,9 +1122,9 @@ type WebAppStartArgs struct {
 //
 // **Important**:
 //
-//	This function only applies to applications in the `server`
-//	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//   This function only applies to applications in the `server`
+//   category. Calling it on a `static` application fails with the
+//   `invalid_category` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -1121,6 +1132,7 @@ type WebAppStartArgs struct {
 func (c *WebAppClient) Start(ctx context.Context, args *WebAppStartArgs) (*cpanel.UAPIResult[WebAppStartData], error) {
 	return cpanel.UAPICall[WebAppStartData](ctx, c.c, http.MethodGet, "WebApp", "start", args)
 }
+
 
 // WebAppStartData is a generated payload type.
 type WebAppStartData struct {
@@ -1147,9 +1159,9 @@ type WebAppStopArgs struct {
 //
 // **Important**:
 //
-//	This function only applies to applications in the `server`
-//	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//   This function only applies to applications in the `server`
+//   category. Calling it on a `static` application fails with the
+//   `invalid_category` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -1157,6 +1169,7 @@ type WebAppStopArgs struct {
 func (c *WebAppClient) Stop(ctx context.Context, args *WebAppStopArgs) (*cpanel.UAPIResult[WebAppStopData], error) {
 	return cpanel.UAPICall[WebAppStopData](ctx, c.c, http.MethodGet, "WebApp", "stop", args)
 }
+
 
 // WebAppStopData is a generated payload type.
 type WebAppStopData struct {

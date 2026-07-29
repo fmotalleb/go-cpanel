@@ -27,6 +27,7 @@ func (c *InProductSurveyClient) GetInProductSurveyURL(ctx context.Context, extra
 	return cpanel.UAPICall[InProductSurveyGetInProductSurveyURLData](ctx, c.c, http.MethodGet, "InProductSurvey", "get_in_product_survey_url", cpanel.CombineArgs(extra...))
 }
 
+
 // The in-product survey banner data.
 type InProductSurveyGetInProductSurveyURLData struct {
 	// Whether to display the in-product survey banner.
@@ -34,23 +35,23 @@ type InProductSurveyGetInProductSurveyURLData struct {
 	// * `0` — Do not display the banner.
 	//
 	// Possible values: `1`, `0`.
-	Display string `json:"display"`
+	Display     string `json:"display"`
 
 	// The fully resolved survey URL.
-	Link string `json:"link"`
+	Link        string `json:"link"`
 
 	// Maximum number of dismissals allowed before the banner is suppressed.
-	MaxDismiss string `json:"max_dismiss"`
+	MaxDismiss  string `json:"max_dismiss"`
 
 	// Whether the authenticated user is considered new.
 	// * `1` — New user experience.
 	// * `0` — Established user.
 	//
 	// Possible values: `1`, `0`.
-	NewUser string `json:"new_user"`
+	NewUser     string `json:"new_user"`
 
 	// Product/server type identifier (e.g., cpanel, whm).
-	ServerType string `json:"server_type"`
+	ServerType  string `json:"server_type"`
 
 	// Client-side analytics or event identifier emitted on successful survey submission.
 	SubmitEvent string `json:"submit_event"`
@@ -58,5 +59,5 @@ type InProductSurveyGetInProductSurveyURLData struct {
 	// Type of authenticated user context.
 	//
 	// Possible values: `cpanel`, `webmail`.
-	UserType string `json:"user_type"`
+	UserType    string `json:"user_type"`
 }

@@ -36,9 +36,8 @@ type MysqlAddHostArgs struct {
 // **Important:**
 //
 // When you disable the [MySQL role](https://go.cpanel.net/serverroles)
-//
-//	and remote MySQL is **not** already configured,
-//	the system **disables** this function.
+//  and remote MySQL is **not** already configured,
+//  the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -46,6 +45,7 @@ type MysqlAddHostArgs struct {
 func (c *MysqlClient) AddHost(ctx context.Context, args *MysqlAddHostArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "add_host", args)
 }
+
 
 // MysqlAddHostNoteArgs are the parameters of the UAPI function `Mysql::add_host_note`.
 type MysqlAddHostNoteArgs struct {
@@ -85,6 +85,7 @@ func (c *MysqlClient) AddHostNote(ctx context.Context, args *MysqlAddHostNoteArg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "add_host_note", args)
 }
 
+
 // MysqlCheckDatabaseArgs are the parameters of the UAPI function `Mysql::check_database`.
 type MysqlCheckDatabaseArgs struct {
 	// The database's name.
@@ -112,6 +113,7 @@ func (c *MysqlClient) CheckDatabase(ctx context.Context, args *MysqlCheckDatabas
 	return cpanel.UAPICall[[]MysqlCheckDatabaseDataItem](ctx, c.c, http.MethodGet, "Mysql", "check_database", args)
 }
 
+
 // MysqlCheckDatabaseDataItem is a generated payload type.
 type MysqlCheckDatabaseDataItem struct {
 	// The message's contents.
@@ -132,7 +134,7 @@ type MysqlCheckDatabaseDataItem struct {
 	MsgType string `json:"msg_type"`
 
 	// The table's name.
-	Table string `json:"table"`
+	Table   string `json:"table"`
 }
 
 // MysqlCreateDatabaseArgs are the parameters of the UAPI function `Mysql::create_database`.
@@ -159,7 +161,7 @@ type MysqlCreateDatabaseArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [MySQL/MariaDB role](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//   When you disable the [MySQL/MariaDB role](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
@@ -167,6 +169,7 @@ type MysqlCreateDatabaseArgs struct {
 func (c *MysqlClient) CreateDatabase(ctx context.Context, args *MysqlCreateDatabaseArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "create_database", args)
 }
+
 
 // MysqlCreateUserArgs are the parameters of the UAPI function `Mysql::create_user`.
 type MysqlCreateUserArgs struct {
@@ -218,6 +221,7 @@ func (c *MysqlClient) CreateUser(ctx context.Context, args *MysqlCreateUserArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "create_user", args)
 }
 
+
 // MysqlDeleteDatabaseArgs are the parameters of the UAPI function `Mysql::delete_database`.
 type MysqlDeleteDatabaseArgs struct {
 	// The database's name.
@@ -244,6 +248,7 @@ type MysqlDeleteDatabaseArgs struct {
 func (c *MysqlClient) DeleteDatabase(ctx context.Context, args *MysqlDeleteDatabaseArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "delete_database", args)
 }
+
 
 // MysqlDeleteHostArgs are the parameters of the UAPI function `Mysql::delete_host`.
 type MysqlDeleteHostArgs struct {
@@ -278,6 +283,7 @@ func (c *MysqlClient) DeleteHost(ctx context.Context, args *MysqlDeleteHostArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "delete_host", args)
 }
 
+
 // MysqlDeleteUserArgs are the parameters of the UAPI function `Mysql::delete_user`.
 type MysqlDeleteUserArgs struct {
 	// The MySQL user's name.
@@ -304,6 +310,7 @@ func (c *MysqlClient) DeleteUser(ctx context.Context, args *MysqlDeleteUserArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "delete_user", args)
 }
 
+
 // MysqlDumpDatabaseSchemaArgs are the parameters of the UAPI function `Mysql::dump_database_schema`.
 type MysqlDumpDatabaseSchemaArgs struct {
 	// The database's name.
@@ -321,7 +328,7 @@ type MysqlDumpDatabaseSchemaArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and** remote MySQL is **not** configured, the system **disables** this function.
+//   When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and** remote MySQL is **not** configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -330,14 +337,15 @@ func (c *MysqlClient) DumpDatabaseSchema(ctx context.Context, args *MysqlDumpDat
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Mysql", "dump_database_schema", args)
 }
 
+
 // GetHostNotes calls the UAPI function `Mysql::get_host_notes` — Return remote MySQL host notes
 //
 // This function returns the notes associated with the account's remote MySQL® hosts.
 //
 // **Important:**
 //
-//	When you disable the [*MySQL/MariaDB* role](https://go.cpanel.net/serverroles)
-//	**and** remote MySQL is **not** already configured, the system **disables** this function.
+//   When you disable the [*MySQL/MariaDB* role](https://go.cpanel.net/serverroles)
+//   **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 74.
 //
@@ -345,6 +353,7 @@ func (c *MysqlClient) DumpDatabaseSchema(ctx context.Context, args *MysqlDumpDat
 func (c *MysqlClient) GetHostNotes(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[map[string]string], error) {
 	return cpanel.UAPICall[map[string]string](ctx, c.c, http.MethodGet, "Mysql", "get_host_notes", cpanel.CombineArgs(extra...))
 }
+
 
 // MysqlGetPrivilegesOnDatabaseArgs are the parameters of the UAPI function `Mysql::get_privileges_on_database`.
 type MysqlGetPrivilegesOnDatabaseArgs struct {
@@ -384,14 +393,15 @@ func (c *MysqlClient) GetPrivilegesOnDatabase(ctx context.Context, args *MysqlGe
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Mysql", "get_privileges_on_database", args)
 }
 
+
 // GetRestrictions calls the UAPI function `Mysql::get_restrictions` — Return MySQL name length restrictions
 //
 // This function lists a MySQL® database's name, username length restrictions, and database prefix.
 //
 // **Important:**
 //
-//	When you disable the [*MySQL/MariaDB* role](https://go.cpanel.net/serverroles)
-//	**and** remote MySQL is **not** already configured, the system **disables** this function.
+//   When you disable the [*MySQL/MariaDB* role](https://go.cpanel.net/serverroles)
+//   **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
@@ -400,18 +410,19 @@ func (c *MysqlClient) GetRestrictions(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.UAPICall[MysqlGetRestrictionsData](ctx, c.c, http.MethodGet, "Mysql", "get_restrictions", cpanel.CombineArgs(extra...))
 }
 
+
 // MysqlGetRestrictionsData is a generated payload type.
 type MysqlGetRestrictionsData struct {
 	// The maximum length of a MySQL database name.
 	MaxDatabaseNameLength int64 `json:"max_database_name_length"`
 
 	// The maximum length of a MySQL database user's name.
-	MaxUsernameLength int64 `json:"max_username_length"`
+	MaxUsernameLength     int64 `json:"max_username_length"`
 
 	// The account's database prefix, if database prefixing is enabled.
 	// * If database prefixing is enabled, a string of up to the first eight characters of the cPanel account username, and an underscore (_).
 	// * If database prefixing is disabled, this is null.
-	Prefix *string `json:"prefix"`
+	Prefix                *string `json:"prefix"`
 }
 
 // GetServerInformation calls the UAPI function `Mysql::get_server_information` — Return MySQL server host information and version
@@ -420,7 +431,7 @@ type MysqlGetRestrictionsData struct {
 //
 // **Important:**
 //
-//	When you disable the [MySQL role](https://go.cpanel.net/serverroles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//   When you disable the [MySQL role](https://go.cpanel.net/serverroles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 54.
 //
@@ -429,10 +440,11 @@ func (c *MysqlClient) GetServerInformation(ctx context.Context, extra ...cpanel.
 	return cpanel.UAPICall[MysqlGetServerInformationData](ctx, c.c, http.MethodGet, "Mysql", "get_server_information", cpanel.CombineArgs(extra...))
 }
 
+
 // MysqlGetServerInformationData is a generated payload type.
 type MysqlGetServerInformationData struct {
 	// The MySQL server's hostname or IP address.
-	Host string `json:"host"`
+	Host     string `json:"host"`
 
 	// Whether the host is a remote MySQL server.
 	// * `1` - Remote host.
@@ -442,7 +454,7 @@ type MysqlGetServerInformationData struct {
 	IsRemote int64 `json:"is_remote"`
 
 	// The MySQL server's version.
-	Version string `json:"version"`
+	Version  string `json:"version"`
 }
 
 // ListDatabases calls the UAPI function `Mysql::list_databases` — Return MySQL databases
@@ -460,10 +472,11 @@ func (c *MysqlClient) ListDatabases(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[[]MysqlListDatabasesDataItem](ctx, c.c, http.MethodGet, "Mysql", "list_databases", cpanel.CombineArgs(extra...))
 }
 
+
 // MysqlListDatabasesDataItem is a generated payload type.
 type MysqlListDatabasesDataItem struct {
 	// The database name.
-	Database string `json:"database"`
+	Database  string `json:"database"`
 
 	// The disk space that the database uses, in bytes.
 	DiskUsage int64 `json:"disk_usage"`
@@ -473,7 +486,7 @@ type MysqlListDatabasesDataItem struct {
 	// **Note:**
 	//
 	// If no users exist on a database, the function returns an empty array.
-	Users []string `json:"users"`
+	Users     []string `json:"users"`
 }
 
 // MysqlListRoutinesArgs are the parameters of the UAPI function `Mysql::list_routines`.
@@ -491,8 +504,8 @@ type MysqlListRoutinesArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and**
-//	remote MySQL is **not** configured, the system **disables** this function.
+//   When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and**
+//   remote MySQL is **not** configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -501,14 +514,15 @@ func (c *MysqlClient) ListRoutines(ctx context.Context, args *MysqlListRoutinesA
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Mysql", "list_routines", args)
 }
 
+
 // ListUsers calls the UAPI function `Mysql::list_users` — Return MySQL users
 //
 // This function lists an account's MySQL® database users.
 //
 // **Important:**
 //
-//	When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and**
-//	remote MySQL is **not** configured, the system **disables** this function.
+//   When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and**
+//   remote MySQL is **not** configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -516,6 +530,7 @@ func (c *MysqlClient) ListRoutines(ctx context.Context, args *MysqlListRoutinesA
 func (c *MysqlClient) ListUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]MysqlListUsersDataItem], error) {
 	return cpanel.UAPICall[[]MysqlListUsersDataItem](ctx, c.c, http.MethodGet, "Mysql", "list_users", cpanel.CombineArgs(extra...))
 }
+
 
 // MysqlListUsersDataItem is a generated payload type.
 type MysqlListUsersDataItem struct {
@@ -532,7 +547,7 @@ type MysqlListUsersDataItem struct {
 	ShortUser string `json:"shortuser"`
 
 	// The database username.
-	User string `json:"user"`
+	User      string `json:"user"`
 }
 
 // LocateServer calls the UAPI function `Mysql::locate_server` — Return MySQL server host information
@@ -550,6 +565,7 @@ func (c *MysqlClient) LocateServer(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[MysqlLocateServerData](ctx, c.c, http.MethodGet, "Mysql", "locate_server", cpanel.CombineArgs(extra...))
 }
 
+
 // MysqlLocateServerData is a generated payload type.
 type MysqlLocateServerData struct {
 	// Whether the host is a remote MySQL server.
@@ -557,7 +573,7 @@ type MysqlLocateServerData struct {
 	// * `0` - Local host.
 	//
 	// Possible values: `0`, `1`.
-	IsRemote int64 `json:"is_remote"`
+	IsRemote   int64 `json:"is_remote"`
 
 	// The remote MySQL server's hostname or IP address.
 	RemoteHost string `json:"remote_host"`
@@ -603,11 +619,11 @@ type MysqlRenameDatabaseArgs struct {
 //
 // * It is potentially dangerous to rename a MySQL database. We **strongly** recommend that you
 // perform a backup of the database before you attempt to rename it.
-//   - If any of the first three steps fail, the system returns an error and attempts to restore the database's original state.
-//     If the restoration process fails, the API function's error response describes these additional failures.
-//   - In rare cases, the system creates the second database successfully, but fails to delete the old database or grants.
-//     The system treats the rename action as a success; however,
-//     the API function returns warnings that describe the failure to delete the old database or grants.
+// * If any of the first three steps fail, the system returns an error and attempts to restore the database's original state.
+//  If the restoration process fails, the API function's error response describes these additional failures.
+// * In rare cases, the system creates the second database successfully, but fails to delete the old database or grants.
+//  The system treats the rename action as a success; however,
+//  the API function returns warnings that describe the failure to delete the old database or grants.
 //
 // **Important:**
 //
@@ -620,6 +636,7 @@ type MysqlRenameDatabaseArgs struct {
 func (c *MysqlClient) RenameDatabase(ctx context.Context, args *MysqlRenameDatabaseArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "rename_database", args)
 }
+
 
 // MysqlRenameUserArgs are the parameters of the UAPI function `Mysql::rename_user`.
 type MysqlRenameUserArgs struct {
@@ -656,9 +673,8 @@ type MysqlRenameUserArgs struct {
 // **Important:**
 //
 // When you disable the [MySQL role](https://go.cpanel.net/serverroles)
-//
-//	and remote MySQL is **not** already configured,
-//	the system **disables** this function.
+//  and remote MySQL is **not** already configured,
+//  the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
@@ -666,6 +682,7 @@ type MysqlRenameUserArgs struct {
 func (c *MysqlClient) RenameUser(ctx context.Context, args *MysqlRenameUserArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "rename_user", args)
 }
+
 
 // MysqlRepairDatabaseArgs are the parameters of the UAPI function `Mysql::repair_database`.
 type MysqlRepairDatabaseArgs struct {
@@ -694,6 +711,7 @@ func (c *MysqlClient) RepairDatabase(ctx context.Context, args *MysqlRepairDatab
 	return cpanel.UAPICall[[]MysqlRepairDatabaseDataItem](ctx, c.c, http.MethodGet, "Mysql", "repair_database", args)
 }
 
+
 // MysqlRepairDatabaseDataItem is a generated payload type.
 type MysqlRepairDatabaseDataItem struct {
 	// The message's contents.
@@ -715,7 +733,7 @@ type MysqlRepairDatabaseDataItem struct {
 	MsgType string `json:"msg_type"`
 
 	// The table's name in the database.
-	Table string `json:"table"`
+	Table   string `json:"table"`
 }
 
 // MysqlRevokeAccessToDatabaseArgs are the parameters of the UAPI function `Mysql::revoke_access_to_database`.
@@ -758,6 +776,7 @@ func (c *MysqlClient) RevokeAccessToDatabase(ctx context.Context, args *MysqlRev
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "revoke_access_to_database", args)
 }
 
+
 // MysqlSetPasswordArgs are the parameters of the UAPI function `Mysql::set_password`.
 type MysqlSetPasswordArgs struct {
 	// The user's new password.
@@ -781,9 +800,8 @@ type MysqlSetPasswordArgs struct {
 // **Important:**
 //
 // When you disable the [MySQL role](https://go.cpanel.net/serverroles)
-//
-//	and remote MySQL is **not** already configured,
-//	the system **disables** this function.
+//  and remote MySQL is **not** already configured,
+//  the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
@@ -792,13 +810,14 @@ func (c *MysqlClient) SetPassword(ctx context.Context, args *MysqlSetPasswordArg
 	return cpanel.UAPICall[MysqlSetPasswordData](ctx, c.c, http.MethodGet, "Mysql", "set_password", args)
 }
 
+
 // MysqlSetPasswordDataFailuresItem is a generated payload type.
 type MysqlSetPasswordDataFailuresItem struct {
 	// The error message.
 	Error string `json:"error"`
 
 	// The hostname that reported the error.
-	Host string `json:"host"`
+	Host  string `json:"host"`
 }
 
 // MysqlSetPasswordData is a generated payload type.
@@ -870,6 +889,7 @@ func (c *MysqlClient) SetPrivilegesOnDatabase(ctx context.Context, args *MysqlSe
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "set_privileges_on_database", args)
 }
 
+
 // MysqlSetupDBAndUserArgs are the parameters of the UAPI function `Mysql::setup_db_and_user`.
 type MysqlSetupDBAndUserArgs struct {
 	// An optional string to prepend to the randomly generated database name. This is in addition to the cPanel user which will appear prior to this. The prefix should be 6 characters or less and be only alphanumeric characters. WARNING: longer prexies lead to less entropy in the random username. Keep it short if you can!
@@ -885,7 +905,7 @@ type MysqlSetupDBAndUserArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [MySQL/MariaDB role](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//   When you disable the [MySQL/MariaDB role](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.116.
 //
@@ -894,22 +914,23 @@ func (c *MysqlClient) SetupDBAndUser(ctx context.Context, args *MysqlSetupDBAndU
 	return cpanel.UAPICall[MysqlSetupDBAndUserData](ctx, c.c, http.MethodGet, "Mysql", "setup_db_and_user", args)
 }
 
+
 // MysqlSetupDBAndUserData is a generated payload type.
 type MysqlSetupDBAndUserData struct {
 	// The randomized name of the database created. This is normally prefixed with the account username and can also be prefixed with application prefix.
-	Database string `json:"database"`
+	Database             string `json:"database"`
 
 	// The randomized username assigned to the database. This is normally prefixed with the account username and can also be prefixed with application prefix.
-	DatabaseUser string `json:"database_user"`
+	DatabaseUser         string `json:"database_user"`
 
 	// A randomly generated password intended to be maximally randomized.
 	DatabaseUserPassword string `json:"database_user_password"`
 
 	// The hostname to connect to from within the server to connect to the MySQL server
-	Hostname string `json:"hostname"`
+	Hostname             string `json:"hostname"`
 
 	// The port to connect to from within the server to connect to the MySQL server
-	Port string `json:"port"`
+	Port                 string `json:"port"`
 }
 
 // UpdatePrivileges calls the UAPI function `Mysql::update_privileges` — Update MySQL® privileges
@@ -927,3 +948,4 @@ type MysqlSetupDBAndUserData struct {
 func (c *MysqlClient) UpdatePrivileges(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mysql", "update_privileges", cpanel.CombineArgs(extra...))
 }
+

@@ -48,6 +48,7 @@ func (c *CPDAVDClient) AddDelegate(ctx context.Context, args *CPDAVDAddDelegateA
 	return cpanel.UAPICall[CPDAVDAddDelegateData](ctx, c.c, http.MethodGet, "CPDAVD", "add_delegate", args)
 }
 
+
 // CPDAVDAddDelegateData is a generated payload type.
 type CPDAVDAddDelegateData struct {
 	// Whether the sharing succeeded.
@@ -69,13 +70,14 @@ func (c *CPDAVDClient) ListDelegates(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[[]CPDAVDListDelegatesDataItem](ctx, c.c, http.MethodGet, "CPDAVD", "list_delegates", cpanel.CombineArgs(extra...))
 }
 
+
 // CPDAVDListDelegatesDataItem is a generated payload type.
 type CPDAVDListDelegatesDataItem struct {
 	// The calendar id.
-	Calendar string `json:"calendar"`
+	Calendar  string `json:"calendar"`
 
 	// The name of the calendar.
-	Calname string `json:"calname"`
+	Calname   string `json:"calname"`
 
 	// The person to whom the owner of the calendar shared it.
 	DelegateE string `json:"delegatee"`
@@ -86,12 +88,12 @@ type CPDAVDListDelegatesDataItem struct {
 	// If set to `1`, the `delegatee` only has read access to the calendar.
 	//
 	// Possible values: `0`, `1`.
-	Readonly int64 `json:"readonly"`
+	Readonly  int64 `json:"readonly"`
 }
 
 // ListUsers calls the UAPI function `CPDAVD::list_users` — List CalDAV and CardDAV users
 //
-// # This function lists the users that are available for use with CalDAV and CardDAV
+// This function lists the users that are available for use with CalDAV and CardDAV
 //
 // Available since cPanel & WHM version cPanel 120.
 //
@@ -100,26 +102,27 @@ func (c *CPDAVDClient) ListUsers(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.UAPICall[[]map[string]map[string]CPDAVDListUsersDataItemValueValue](ctx, c.c, http.MethodGet, "CPDAVD", "list_users", cpanel.CombineArgs(extra...))
 }
 
+
 // The name of this property is the collection id.
 type CPDAVDListUsersDataItemValueValue struct {
 	// For calendars only: The color to use for calendar events.
 	CalendarColor string `json:"calendar-color"`
 
 	// The description of the collection.
-	Description string `json:"description"`
+	Description   string `json:"description"`
 
 	// The name of the collection.
-	DisplayName string `json:"displayname"`
+	DisplayName   string `json:"displayname"`
 
 	// If this value is `1`, then the collection cannot be deleted through the API.
 	//
 	// Possible values: `0`, `1`.
-	Protected int64 `json:"protected"`
+	Protected     int64 `json:"protected"`
 
 	// The type of the collection.
 	//
 	// Possible values: `VADDRESSBOOK`, `VCALENDAR`, `VTODO`.
-	Type2 string `json:"type"`
+	Type2         string `json:"type"`
 }
 
 // CPDAVDManageCollectionArgs are the parameters of the UAPI function `CPDAVD::manage_collection`.
@@ -172,6 +175,7 @@ func (c *CPDAVDClient) ManageCollection(ctx context.Context, args *CPDAVDManageC
 	return cpanel.UAPICall[CPDAVDManageCollectionData](ctx, c.c, http.MethodGet, "CPDAVD", "manage_collection", args)
 }
 
+
 // CPDAVDManageCollectionData is a generated payload type.
 type CPDAVDManageCollectionData struct {
 	// Whether the operation succeeded.
@@ -213,6 +217,7 @@ type CPDAVDRemoveDelegateArgs struct {
 func (c *CPDAVDClient) RemoveDelegate(ctx context.Context, args *CPDAVDRemoveDelegateArgs) (*cpanel.UAPIResult[CPDAVDRemoveDelegateData], error) {
 	return cpanel.UAPICall[CPDAVDRemoveDelegateData](ctx, c.c, http.MethodGet, "CPDAVD", "remove_delegate", args)
 }
+
 
 // CPDAVDRemoveDelegateData is a generated payload type.
 type CPDAVDRemoveDelegateData struct {
@@ -260,6 +265,7 @@ type CPDAVDUpdateDelegateArgs struct {
 func (c *CPDAVDClient) UpdateDelegate(ctx context.Context, args *CPDAVDUpdateDelegateArgs) (*cpanel.UAPIResult[CPDAVDUpdateDelegateData], error) {
 	return cpanel.UAPICall[CPDAVDUpdateDelegateData](ctx, c.c, http.MethodGet, "CPDAVD", "update_delegate", args)
 }
+
 
 // CPDAVDUpdateDelegateData is a generated payload type.
 type CPDAVDUpdateDelegateData struct {

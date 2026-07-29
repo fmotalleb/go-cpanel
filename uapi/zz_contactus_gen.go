@@ -22,6 +22,7 @@ func (c *ContactusClient) IsEnabled(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[ContactusIsEnabledData](ctx, c.c, http.MethodGet, "Contactus", "is_enabled", cpanel.CombineArgs(extra...))
 }
 
+
 // ContactusIsEnabledData is a generated payload type.
 type ContactusIsEnabledData struct {
 	// Whether the cPanel account can contact their hosting provider

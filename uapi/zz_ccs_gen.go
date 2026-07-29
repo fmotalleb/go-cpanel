@@ -52,6 +52,7 @@ func (c *CcsClient) AddDelegate(ctx context.Context, args *CcsAddDelegateArgs) (
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "CCS", "add_delegate", args)
 }
 
+
 // ListDelegates calls the UAPI function `CCS::list_delegates` — List cPanel account's calendar delegates
 //
 // This function lists all [calendar delegates](https://docs.cpanel.net/cpanel/email/calendar-delegation/) on the cPanel account.
@@ -67,6 +68,7 @@ func (c *CcsClient) ListDelegates(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.UAPICall[[]CcsListDelegatesDataItem](ctx, c.c, http.MethodGet, "CCS", "list_delegates", cpanel.CombineArgs(extra...))
 }
 
+
 // CcsListDelegatesDataItem is a generated payload type.
 type CcsListDelegatesDataItem struct {
 	// The user with delegation rights.
@@ -80,7 +82,7 @@ type CcsListDelegatesDataItem struct {
 	// * `0` - Full access.
 	//
 	// Possible values: `1`, `0`.
-	ReadOnly int64 `json:"read_only"`
+	ReadOnly  int64 `json:"read_only"`
 }
 
 // ListUsers calls the UAPI function `CCS::list_users` — List cPanel account's calendar users
@@ -97,6 +99,7 @@ type CcsListDelegatesDataItem struct {
 func (c *CcsClient) ListUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[map[string]json.RawMessage], error) {
 	return cpanel.UAPICall[map[string]json.RawMessage](ctx, c.c, http.MethodGet, "CCS", "list_users", cpanel.CombineArgs(extra...))
 }
+
 
 // CcsRemoveDelegateArgs are the parameters of the UAPI function `CCS::remove_delegate`.
 type CcsRemoveDelegateArgs struct {
@@ -128,6 +131,7 @@ type CcsRemoveDelegateArgs struct {
 func (c *CcsClient) RemoveDelegate(ctx context.Context, args *CcsRemoveDelegateArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "CCS", "remove_delegate", args)
 }
+
 
 // CcsUpdateDelegateArgs are the parameters of the UAPI function `CCS::update_delegate`.
 type CcsUpdateDelegateArgs struct {
@@ -166,3 +170,4 @@ type CcsUpdateDelegateArgs struct {
 func (c *CcsClient) UpdateDelegate(ctx context.Context, args *CcsUpdateDelegateArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "CCS", "update_delegate", args)
 }
+

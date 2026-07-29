@@ -60,6 +60,7 @@ func (c *Client) AddConfigClusterServer(ctx context.Context, args *AddConfigClus
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "add_configclusterserver", args)
 }
 
+
 // ConfigureBackgroundProcessKillerArgs are the parameters of the WHM API 1 function `configurebackgroundprocesskiller`.
 type ConfigureBackgroundProcessKillerArgs struct {
 	// A process to kill in the `/usr/local/cpanel/etc/sym` directory.
@@ -96,6 +97,7 @@ type ConfigureBackgroundProcessKillerArgs struct {
 func (c *Client) ConfigureBackgroundProcessKiller(ctx context.Context, args *ConfigureBackgroundProcessKillerArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "configurebackgroundprocesskiller", args)
 }
+
 
 // ConfigureServiceArgs are the parameters of the WHM API 1 function `configureservice`.
 type ConfigureServiceArgs struct {
@@ -167,6 +169,7 @@ type ConfigureServiceArgs struct {
 func (c *Client) ConfigureService(ctx context.Context, args *ConfigureServiceArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "configureservice", args)
 }
+
 
 // CreateUserSessionArgs are the parameters of the WHM API 1 function `create_user_session`.
 type CreateUserSessionArgs struct {
@@ -245,16 +248,17 @@ func (c *Client) CreateUserSession(ctx context.Context, args *CreateUserSessionA
 	return cpanel.WHMCall[CreateUserSessionData](ctx, c.c, http.MethodGet, "create_user_session", args)
 }
 
+
 // CreateUserSessionData is a generated payload type.
 type CreateUserSessionData struct {
 	// The session's security token.
 	CpSecurityToken string `json:"cp_security_token"`
 
 	// When the security token expires, in Unix time format.
-	Expires int64 `json:"expires"`
+	Expires         int64 `json:"expires"`
 
 	// The security token's service.
-	Service string `json:"service"`
+	Service         string `json:"service"`
 
 	// The session ID.
 	//
@@ -262,11 +266,11 @@ type CreateUserSessionData struct {
 	//
 	// If the `app` parameter contains a valid application, the URL **also**
 	// contains the application information.
-	Session string `json:"session"`
+	Session         string `json:"session"`
 
 	// The security token's URL. The URL contains the values of
 	// the `preferred_domain`, `session`, and `app` parameters.
-	URL string `json:"url"`
+	URL             string `json:"url"`
 }
 
 // DeleteConfigClusterServerArgs are the parameters of the WHM API 1 function `delete_configclusterserver`.
@@ -298,6 +302,7 @@ func (c *Client) DeleteConfigClusterServer(ctx context.Context, args *DeleteConf
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "delete_configclusterserver", args)
 }
 
+
 // EnableMonitorAllEnabledServices calls the WHM API 1 function `enable_monitor_all_enabled_services` — Enable monitoring for all services
 //
 // This function enables monitoring for all enabled services.
@@ -309,6 +314,7 @@ func (c *Client) EnableMonitorAllEnabledServices(ctx context.Context, extra ...c
 	return cpanel.WHMCall[EnableMonitorAllEnabledServicesData](ctx, c.c, http.MethodGet, "enable_monitor_all_enabled_services", cpanel.CombineArgs(extra...))
 }
 
+
 // EnableMonitorAllEnabledServicesDataServicesItem is a generated payload type.
 type EnableMonitorAllEnabledServicesDataServicesItem struct {
 	// Whether the system monitors the service.
@@ -319,7 +325,7 @@ type EnableMonitorAllEnabledServicesDataServicesItem struct {
 	Monitored int64 `json:"monitored"`
 
 	// The service's name. A valid service name.
-	Service string `json:"service"`
+	Service   string `json:"service"`
 }
 
 // EnableMonitorAllEnabledServicesData is a generated payload type.
@@ -355,22 +361,23 @@ func (c *Client) FetchConnectedApplication(ctx context.Context, args *FetchConne
 	return cpanel.WHMCall[FetchConnectedApplicationData](ctx, c.c, http.MethodPost, "fetch_connected_application", args)
 }
 
+
 // Data associated with the connected application. There are a few predefined elements, but any additional data may be stored here as well.
 type FetchConnectedApplicationDataData struct {
 	// The contents of a JSON Web Token used during registration, or updates.
-	Jwt json.RawMessage `json:"jwt"`
+	Jwt               json.RawMessage `json:"jwt"`
 
 	// The name of the private key, if any, used by encryption, signing, or other security schemes used when communicating with this connected application.
-	PrivateKey string `json:"private_key"`
+	PrivateKey        string `json:"private_key"`
 
 	// The actual privileges granted by the user.
 	PrivilegesGranted []string `json:"privileges_granted"`
 
 	// The name of the public key, if any, sent to the connected application during registration.
-	PublicKey string `json:"public_key"`
+	PublicKey         string `json:"public_key"`
 
 	// The name of the API token, if any, sent to the connected application to allow that application to make API calls on this server.
-	TokenName string `json:"token_name"`
+	TokenName         string `json:"token_name"`
 }
 
 // FetchConnectedApplicationData is a generated payload type.
@@ -425,13 +432,14 @@ func (c *Client) ForceDedistributionFromNode(ctx context.Context, args *ForceDed
 	return cpanel.WHMCall[ForceDedistributionFromNodeData](ctx, c.c, http.MethodGet, "force_dedistribution_from_node", args)
 }
 
+
 // ForceDedistributionFromNodeDataLogItem is a generated payload type.
 type ForceDedistributionFromNodeDataLogItem struct {
 	// The message content.
 	Contents string `json:"contents"`
 
 	// The log message’s indent level.
-	Indent int64 `json:"indent"`
+	Indent   int64 `json:"indent"`
 
 	// The log level of the message.
 	//
@@ -441,7 +449,7 @@ type ForceDedistributionFromNodeDataLogItem struct {
 	// * `error` – An error message.
 	//
 	// Possible values: `success`, `out`, `warn`, `error`.
-	Type2 string `json:"type"`
+	Type2    string `json:"type"`
 }
 
 // ForceDedistributionFromNodeDataUserInfoItem is a generated payload type.
@@ -453,7 +461,7 @@ type ForceDedistributionFromNodeDataUserInfoItem struct {
 // ForceDedistributionFromNodeData is a generated payload type.
 type ForceDedistributionFromNodeData struct {
 	// Log entries that indicate the conversion’s progress.
-	Log []ForceDedistributionFromNodeDataLogItem `json:"log"`
+	Log      []ForceDedistributionFromNodeDataLogItem `json:"log"`
 
 	// Information about each newly-converted cPanel account.
 	UserInfo []ForceDedistributionFromNodeDataUserInfoItem `json:"user_info"`
@@ -473,17 +481,18 @@ func (c *Client) GetAllContactImportances(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[GetAllContactImportancesData](ctx, c.c, http.MethodGet, "get_all_contact_importances", cpanel.CombineArgs(extra...))
 }
 
+
 // GetAllContactImportancesDataImportancesItem is a generated payload type.
 type GetAllContactImportancesDataImportancesItem struct {
 	// The cPanel & WHM module's name.
-	App string `json:"app"`
+	App        string `json:"app"`
 
 	// The event's name.
 	//
 	// **Note:**
 	//
 	// An asterisk character (`*`) represents all events in the module.
-	Event string `json:"event"`
+	Event      string `json:"event"`
 
 	// The importance of the contact event:
 	//
@@ -499,7 +508,7 @@ type GetAllContactImportancesDataImportancesItem struct {
 	// * `Medium`
 	// * `Low`
 	// * `Disabled`
-	Name string `json:"name"`
+	Name       string `json:"name"`
 }
 
 // GetAllContactImportancesData is a generated payload type.
@@ -542,18 +551,19 @@ func (c *Client) GetAPICalls(ctx context.Context, args *GetAPICallsArgs) (*cpane
 	return cpanel.WHMCall[GetAPICallsData](ctx, c.c, http.MethodGet, "get_api_calls", args)
 }
 
+
 // GetAPICallsDataResultItem is a generated payload type.
 type GetAPICallsDataResultItem struct {
 	// The total number of times that the system called
 	// the function on the day in the `timestamp` return.
-	Count int64 `json:"count"`
+	Count     int64 `json:"count"`
 
 	// The cPanel API 1 module and function that the system executed.
 	//
 	// For a complete list of cPanel API 1 functions, read our
 	// [Guide to cPanel API 1](https://go.cpanel.net/cpanelapi1)
 	// documentation.
-	Entry string `json:"entry"`
+	Entry     string `json:"entry"`
 
 	// The date that the system called the function, in
 	// [Unix time format](https://wikipedia.org/wiki/Unix_time).
@@ -584,7 +594,7 @@ type GetAPIPagesArgs struct {
 //
 // **Important:**
 //
-//	The function *only* returns cPanel API 1 functions. We *deprecated* cPanel API 1 and plan to remove those functions at a later date. For more information, read our [Guide to Replacing cPanel API 1 Functions with UAPI Equivalents](https://go.cpanel.net/replacecpapi1) documentation.
+//   The function *only* returns cPanel API 1 functions. We *deprecated* cPanel API 1 and plan to remove those functions at a later date. For more information, read our [Guide to Replacing cPanel API 1 Functions with UAPI Equivalents](https://go.cpanel.net/replacecpapi1) documentation.
 //
 // Available since cPanel & WHM version 86.
 //
@@ -593,13 +603,14 @@ func (c *Client) GetAPIPages(ctx context.Context, args *GetAPIPagesArgs) (*cpane
 	return cpanel.WHMCall[GetAPIPagesData](ctx, c.c, http.MethodGet, "get_api_pages", args)
 }
 
+
 // GetAPIPagesData is a generated payload type.
 type GetAPIPagesData struct {
 	// The total number of times that the system called the function on the day in the `timestamp` return.
-	Count int64 `json:"count"`
+	Count     int64 `json:"count"`
 
 	// The path to the file where the function executes.
-	Entry string `json:"entry"`
+	Entry     string `json:"entry"`
 
 	// The date that the system called the function.
 	//
@@ -620,10 +631,11 @@ func (c *Client) GetAppconfigApplicationList(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[GetAppconfigApplicationListData](ctx, c.c, http.MethodGet, "get_appconfig_application_list", cpanel.CombineArgs(extra...))
 }
 
+
 // AppConfig is a generated payload type.
 type AppConfig struct {
 	// The ACL(s) with permission to run the application.
-	Acls []string `json:"acls"`
+	Acls        []string `json:"acls"`
 
 	// The application's WHM display label.
 	//
@@ -637,40 +649,40 @@ type AppConfig struct {
 	// **Note:**
 	//
 	// The function **only** returns this value for plugins that you register with [AppConfig](https://go.cpanel.net/appconfig).
-	Entryurl string `json:"entryurl"`
+	Entryurl    string `json:"entryurl"`
 
 	// The required features to run the application.
-	Features []string `json:"features"`
+	Features    []string `json:"features"`
 
 	// The application's group.
-	Group string `json:"group"`
+	Group       string `json:"group"`
 
 	// The application's icon file, relative to the `/usr/local/cpanel/whostmgr/docroot/addon_plugins/` directory.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value for plugins that you register with [AppConfig](https://go.cpanel.net/appconfig).
-	Icon string `json:"icon"`
+	Icon        string `json:"icon"`
 
 	// The application's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 
 	// The application's configuration file.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value for plugins that you register with [AppConfig](https://go.cpanel.net/appconfig).
-	Origin string `json:"origin"`
+	Origin      string `json:"origin"`
 
 	// The application's `php.ini` file, relative to the `/usr/local/cpanel/3rdparty/etc/` directory.
-	PHPConfig string `json:"phpConfig"`
+	PHPConfig   string `json:"phpConfig"`
 
 	// The action's target directory.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value for plugins that you register with [AppConfig](https://go.cpanel.net/appconfig).
-	Target string `json:"target"`
+	Target      string `json:"target"`
 
 	// The absolute file path to the application's upgrade script.
 	//
@@ -683,19 +695,19 @@ type AppConfig struct {
 	UpgradeCall string `json:"upgradecall"`
 
 	// The application's URL path.
-	URL string `json:"url"`
+	URL         string `json:"url"`
 
 	// The application's username.
-	User string `json:"user"`
+	User        string `json:"user"`
 }
 
 // GetAppconfigApplicationListData is a generated payload type.
 type GetAppconfigApplicationListData struct {
 	// An array of objects representing the values set for application installed for cPanel.
-	Cpanel []AppConfig `json:"cpanel"`
+	Cpanel   []AppConfig `json:"cpanel"`
 
 	// An array of objects representing the values set for application installed for Webmail.
-	Webmail []AppConfig `json:"webmail"`
+	Webmail  []AppConfig `json:"webmail"`
 
 	// An array of objects representing the values set for application installed for WHM.
 	Whostmgr []AppConfig `json:"whostmgr"`
@@ -723,7 +735,7 @@ type GetApplicationContactEventImportanceArgs struct {
 //
 // **Note:**
 //
-//	The system will create a notification setting for the application's events if one does not already exist.
+//   The system will create a notification setting for the application's events if one does not already exist.
 //
 // Available since cPanel & WHM version 58.
 //
@@ -731,6 +743,7 @@ type GetApplicationContactEventImportanceArgs struct {
 func (c *Client) GetApplicationContactEventImportance(ctx context.Context, args *GetApplicationContactEventImportanceArgs) (*cpanel.WHMResult[GetApplicationContactEventImportanceData], error) {
 	return cpanel.WHMCall[GetApplicationContactEventImportanceData](ctx, c.c, http.MethodGet, "get_application_contact_event_importance", args)
 }
+
 
 // GetApplicationContactEventImportanceData is a generated payload type.
 type GetApplicationContactEventImportanceData struct {
@@ -750,7 +763,7 @@ type GetApplicationContactEventImportanceData struct {
 	// - `Disabled`
 	//
 	// Possible values: `High`, `Medium`, `Low`, `Disabled`.
-	Name string `json:"name"`
+	Name       string `json:"name"`
 }
 
 // GetApplicationContactImportanceArgs are the parameters of the WHM API 1 function `get_application_contact_importance`.
@@ -782,6 +795,7 @@ func (c *Client) GetApplicationContactImportance(ctx context.Context, args *GetA
 	return cpanel.WHMCall[GetApplicationContactImportanceData](ctx, c.c, http.MethodGet, "get_application_contact_importance", args)
 }
 
+
 // GetApplicationContactImportanceData is a generated payload type.
 type GetApplicationContactImportanceData struct {
 	// The importance level at which to send the notification.
@@ -800,7 +814,7 @@ type GetApplicationContactImportanceData struct {
 	// * `Disabled`
 	//
 	// Possible values: `High`, `Medium`, `Low`, `Disabled`.
-	Name string `json:"name"`
+	Name       string `json:"name"`
 }
 
 // GetAvailableProfiles calls the WHM API 1 function `get_available_profiles` — Return available server profiles
@@ -814,16 +828,17 @@ func (c *Client) GetAvailableProfiles(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.WHMCall[GetAvailableProfilesData](ctx, c.c, http.MethodGet, "get_available_profiles", cpanel.CombineArgs(extra...))
 }
 
+
 // GetAvailableProfilesDataProfilesItemDisabledRolesItem is a generated payload type.
 type GetAvailableProfilesDataProfilesItemDisabledRolesItem struct {
 	// The role's description.
 	Description string `json:"description"`
 
 	// The role's module name.
-	Module string `json:"module"`
+	Module      string `json:"module"`
 
 	// The role's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 }
 
 // GetAvailableProfilesDataProfilesItemEnabledRolesItem is a generated payload type.
@@ -832,10 +847,10 @@ type GetAvailableProfilesDataProfilesItemEnabledRolesItem struct {
 	Description string `json:"description"`
 
 	// The role's module name.
-	Module string `json:"module"`
+	Module      string `json:"module"`
 
 	// The role's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 }
 
 // GetAvailableProfilesDataProfilesItemOptionalRolesItem is a generated payload type.
@@ -844,35 +859,35 @@ type GetAvailableProfilesDataProfilesItemOptionalRolesItem struct {
 	Description string `json:"description"`
 
 	// The role's module name.
-	Module string `json:"module"`
+	Module      string `json:"module"`
 
 	// The role's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 }
 
 // GetAvailableProfilesDataProfilesItem is a generated payload type.
 type GetAvailableProfilesDataProfilesItem struct {
 	// The profile's ID.
-	Code string `json:"code"`
+	Code          string `json:"code"`
 
 	// The profile's description.
-	Description string `json:"description"`
+	Description   string `json:"description"`
 
 	// The roles that this profile disables. The function returns an empty array if no disabled roles exist.
 	DisabledRoles []GetAvailableProfilesDataProfilesItemDisabledRolesItem `json:"disabled_roles"`
 
 	// The roles that this profile enables.
-	EnabledRoles []GetAvailableProfilesDataProfilesItemEnabledRolesItem `json:"enabled_roles"`
+	EnabledRoles  []GetAvailableProfilesDataProfilesItemEnabledRolesItem `json:"enabled_roles"`
 
 	// Whether the profile is experimental.
 	// * `1` - Experimental.
 	// * `0` - **Not** experimental.
 	//
 	// Possible values: `1`, `0`.
-	ExPerImentAL int64 `json:"experimental"`
+	ExPerImentAL  int64 `json:"experimental"`
 
 	// The profile's name.
-	Name string `json:"name"`
+	Name          string `json:"name"`
 
 	// The optional roles that this profile enables. The function returns an empty array if no optional roles exist.
 	OptionalRoles []GetAvailableProfilesDataProfilesItemOptionalRolesItem `json:"optional_roles"`
@@ -896,16 +911,17 @@ func (c *Client) GetCurrentProfile(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[GetCurrentProfileData](ctx, c.c, http.MethodGet, "get_current_profile", cpanel.CombineArgs(extra...))
 }
 
+
 // GetCurrentProfileDataDisabledRolesItem is a generated payload type.
 type GetCurrentProfileDataDisabledRolesItem struct {
 	// The role's description.
 	Description string `json:"description"`
 
 	// The role's module name.
-	Module string `json:"module"`
+	Module      string `json:"module"`
 
 	// The role's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 }
 
 // GetCurrentProfileDataEnabledRolesItem is a generated payload type.
@@ -914,10 +930,10 @@ type GetCurrentProfileDataEnabledRolesItem struct {
 	Description string `json:"description"`
 
 	// The role's module name.
-	Module string `json:"module"`
+	Module      string `json:"module"`
 
 	// The role's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 }
 
 // GetCurrentProfileDataOptionalRolesItem is a generated payload type.
@@ -926,25 +942,25 @@ type GetCurrentProfileDataOptionalRolesItem struct {
 	Description string `json:"description"`
 
 	// The role's module name.
-	Module string `json:"module"`
+	Module      string `json:"module"`
 
 	// The role's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 }
 
 // GetCurrentProfileData is a generated payload type.
 type GetCurrentProfileData struct {
 	// The code ID of the current profile.
-	Code string `json:"code"`
+	Code          string `json:"code"`
 
 	// A description about the current profile.
-	Description string `json:"description"`
+	Description   string `json:"description"`
 
 	// The disabled roles of the current profile.
 	DisabledRoles []GetCurrentProfileDataDisabledRolesItem `json:"disabled_roles"`
 
 	// The current profile's enabled roles.
-	EnabledRoles []GetCurrentProfileDataEnabledRolesItem `json:"enabled_roles"`
+	EnabledRoles  []GetCurrentProfileDataEnabledRolesItem `json:"enabled_roles"`
 
 	// Whether the profile is experimental.
 	//
@@ -956,10 +972,10 @@ type GetCurrentProfileData struct {
 	// We do **not** recommend using experimental profiles on production environments.
 	//
 	// Possible values: `1`, `0`.
-	ExPerImentAL int64 `json:"experimental"`
+	ExPerImentAL  int64 `json:"experimental"`
 
 	// The name of the system's current server profile.
-	Name string `json:"name"`
+	Name          string `json:"name"`
 
 	// The optional roles of the current server profile.
 	OptionalRoles []GetCurrentProfileDataOptionalRolesItem `json:"optional_roles"`
@@ -987,33 +1003,34 @@ func (c *Client) GetLinkedServerNode(ctx context.Context, args *GetLinkedServerN
 	return cpanel.WHMCall[GetLinkedServerNodeData](ctx, c.c, http.MethodGet, "get_linked_server_node", args)
 }
 
+
 // GetLinkedServerNodeData is a generated payload type.
 type GetLinkedServerNodeData struct {
 	// The services enabled on the linked remote server node.
-	EnabledServices []string `json:"enabled_services"`
+	EnabledServices    []string `json:"enabled_services"`
 
 	// The remote server node's hostname.
-	Hostname string `json:"hostname"`
+	Hostname           string `json:"hostname"`
 
 	// The last time that the server queried the current status of the remote server node.
-	LastCheck int64 `json:"last_check"`
+	LastCheck          int64 `json:"last_check"`
 
 	// A list of the `worker_capabilities` return's system settings.
 	// The key is a role name and the value is an object with system settings for the role.
-	SystemSettings map[string]json.RawMessage `json:"system_settings"`
+	SystemSettings     map[string]json.RawMessage `json:"system_settings"`
 
 	// Whether the remote server node has a valid SSL certificate.
 	// * `1` - The remote server node has a valid SSL certificate.
 	// * `0` - The remote server node does not have a valid SSL certificate.
 	//
 	// Possible values: `0`, `1`.
-	TLSVerified int64 `json:"tls_verified"`
+	TLSVerified        int64 `json:"tls_verified"`
 
 	// The username required to make API calls to the linked remote server node.
-	Username string `json:"username"`
+	Username           string `json:"username"`
 
 	// The version of cPanel & WHM installed on the remote server node.
-	Version string `json:"version"`
+	Version            string `json:"version"`
 
 	// A group of services required for a remote server node to perform a specific task. The key is a role name
 	// and the value is an object with required options for the role.
@@ -1069,6 +1086,7 @@ type GetRemoteAccessHashArgs struct {
 func (c *Client) GetRemoteAccessHash(ctx context.Context, args *GetRemoteAccessHashArgs) (*cpanel.WHMResult[GetRemoteAccessHashData], error) {
 	return cpanel.WHMCall[GetRemoteAccessHashData](ctx, c.c, http.MethodGet, "get_remote_access_hash", args)
 }
+
 
 // GetRemoteAccessHashData is a generated payload type.
 type GetRemoteAccessHashData struct {
@@ -1131,10 +1149,11 @@ func (c *Client) GetServerNodeStatus(ctx context.Context, args *GetServerNodeSta
 	return cpanel.WHMCall[GetServerNodeStatusData](ctx, c.c, http.MethodGet, "get_server_node_status", args)
 }
 
+
 // GetServerNodeStatusData is a generated payload type.
 type GetServerNodeStatusData struct {
 	// An list of the remote server node's enabled services.
-	EnabledServices []string `json:"enabled_services"`
+	EnabledServices    []string `json:"enabled_services"`
 
 	// An array of objects of the remote server's [child nodes](https://go.cpanel.net/cPanelGlossary#child-node). This function returns this information via the `list_linked_server_nodes` function.
 	//
@@ -1144,17 +1163,17 @@ type GetServerNodeStatusData struct {
 	RemoteNodeLinkages []json.RawMessage `json:"remote_node_linkages"`
 
 	// An object containing the remote server's child node system settings.
-	SystemSettings json.RawMessage `json:"system_settings"`
+	SystemSettings     json.RawMessage `json:"system_settings"`
 
 	// Whether the remote server node has a valid [SSL certificate](https://go.cpanel.net/guidetoSSL).
 	// * `1` - The remote server node has a valid SSL certificate.
 	// * `0` - The remote server node does **not** have a valid SSL certificate.
 	//
 	// Possible values: `0`, `1`.
-	TLSVerified int64 `json:"tls_verified"`
+	TLSVerified        int64 `json:"tls_verified"`
 
 	// The installed version of cPanel & WHM on the remote server node.
-	Version string `json:"version"`
+	Version            string `json:"version"`
 }
 
 // GetServiceConfigArgs are the parameters of the WHM API 1 function `get_service_config`.
@@ -1191,6 +1210,7 @@ func (c *Client) GetServiceConfig(ctx context.Context, args *GetServiceConfigArg
 	return cpanel.WHMCall[map[string]json.RawMessage](ctx, c.c, http.MethodGet, "get_service_config", args)
 }
 
+
 // GetServiceConfigKeyArgs are the parameters of the WHM API 1 function `get_service_config_key`.
 type GetServiceConfigKeyArgs struct {
 	// The configuration key's name.
@@ -1218,6 +1238,7 @@ func (c *Client) GetServiceConfigKey(ctx context.Context, args *GetServiceConfig
 	return cpanel.WHMCall[GetServiceConfigKeyData](ctx, c.c, http.MethodGet, "get_service_config_key", args)
 }
 
+
 // GetServiceConfigKeyData is a generated payload type.
 type GetServiceConfigKeyData struct {
 	// configuration key's current setting.
@@ -1225,7 +1246,7 @@ type GetServiceConfigKeyData struct {
 	// **Note:**
 	//
 	//  This return's name is the value that you pass in this function's key parameter. A valid setting.
-	KeyName string `json:"key name"`
+	KeyName         string `json:"key name"`
 
 	MailProcessSize json.RawMessage `json:"mail_process_size"`
 }
@@ -1241,31 +1262,32 @@ func (c *Client) GetTcp4Sockets(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.WHMCall[GetTcp4SocketsData](ctx, c.c, http.MethodGet, "get_tcp4_sockets", cpanel.CombineArgs(extra...))
 }
 
+
 // GetTcp4SocketsDataPayloadItem is a generated payload type.
 type GetTcp4SocketsDataPayloadItem struct {
 	// The source port that the Linux kernel reports for the socket.
-	Dport int64 `json:"dport"`
+	Dport  int64 `json:"dport"`
 
 	// The destination IPv4 address.
-	Dst string `json:"dst"`
+	Dst    string `json:"dst"`
 
 	// The inode number the Linux kernel assigned to the socket.
-	Inode int64 `json:"inode"`
+	Inode  int64 `json:"inode"`
 
 	// The number of bytes in the socket's read buffer.
 	Rqueue int64 `json:"rqueue"`
 
 	// The source port number.
-	Sport int64 `json:"sport"`
+	Sport  int64 `json:"sport"`
 
 	// The source IPv4 address.
-	Src string `json:"src"`
+	Src    string `json:"src"`
 
 	// The socket's current state, in the Linux kernel's numeric format.
-	State int64 `json:"state"`
+	State  int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid string `json:"uid"`
+	Uid    int64 `json:"uid"`
 
 	// The number of bytes the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1288,31 +1310,32 @@ func (c *Client) GetTcp6Sockets(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.WHMCall[GetTcp6SocketsData](ctx, c.c, http.MethodGet, "get_tcp6_sockets", cpanel.CombineArgs(extra...))
 }
 
+
 // GetTcp6SocketsDataPayloadItem is a generated payload type.
 type GetTcp6SocketsDataPayloadItem struct {
 	// The source port that the Linux kernel reports for the socket.
-	Dport int64 `json:"dport"`
+	Dport  int64 `json:"dport"`
 
 	// The destination IPv6 address.
-	Dst string `json:"dst"`
+	Dst    string `json:"dst"`
 
 	// The inode number the Linux kernel assigned to the socket.
-	Inode int64 `json:"inode"`
+	Inode  int64 `json:"inode"`
 
 	// The number of bytes in the socket's read buffer.
 	Rqueue int64 `json:"rqueue"`
 
 	// The source port number.
-	Sport int64 `json:"sport"`
+	Sport  int64 `json:"sport"`
 
 	// The source IPv6 address.
-	Src string `json:"src"`
+	Src    string `json:"src"`
 
 	// The socket's current state, in the Linux kernel's numeric format.
-	State int64 `json:"state"`
+	State  int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid string `json:"uid"`
+	Uid    int64 `json:"uid"`
 
 	// The number of bytes that the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1335,31 +1358,32 @@ func (c *Client) GetUdp4Sockets(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.WHMCall[GetUdp4SocketsData](ctx, c.c, http.MethodGet, "get_udp4_sockets", cpanel.CombineArgs(extra...))
 }
 
+
 // GetUdp4SocketsDataPayloadItem is a generated payload type.
 type GetUdp4SocketsDataPayloadItem struct {
 	// The source port that the Linux kernel reports for the socket.
-	Dport int64 `json:"dport"`
+	Dport  int64 `json:"dport"`
 
 	// The destination IPv4 address.
-	Dst string `json:"dst"`
+	Dst    string `json:"dst"`
 
 	// The inode number the Linux kernel assigned to the socket.
-	Inode int64 `json:"inode"`
+	Inode  int64 `json:"inode"`
 
 	// The number of bytes in the socket's read buffer.
 	Rqueue int64 `json:"rqueue"`
 
 	// The source port number.
-	Sport int64 `json:"sport"`
+	Sport  int64 `json:"sport"`
 
 	// The source IPv4 address.
-	Src string `json:"src"`
+	Src    string `json:"src"`
 
 	// The socket's current state, in the Linux kernel's numeric format.
-	State int64 `json:"state"`
+	State  int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid string `json:"uid"`
+	Uid    int64 `json:"uid"`
 
 	// The number of bytes that the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1377,7 +1401,7 @@ type GetUdp4SocketsData struct {
 //
 // **Important:**
 //
-//	This function may perform slower on a CentOS 6 system with a large number of UDP sockets.
+//   This function may perform slower on a CentOS 6 system with a large number of UDP sockets.
 //
 // Available since cPanel & WHM version 80.
 //
@@ -1386,31 +1410,32 @@ func (c *Client) GetUdp6Sockets(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.WHMCall[GetUdp6SocketsData](ctx, c.c, http.MethodGet, "get_udp6_sockets", cpanel.CombineArgs(extra...))
 }
 
+
 // GetUdp6SocketsDataPayloadItem is a generated payload type.
 type GetUdp6SocketsDataPayloadItem struct {
 	// The source port that the Linux kernel reports for the socket.
-	Dport int64 `json:"dport"`
+	Dport  int64 `json:"dport"`
 
 	// The destination IPv6 address.
-	Dst string `json:"dst"`
+	Dst    string `json:"dst"`
 
 	// The inode number the Linux kernel assigned to the socket.
-	Inode int64 `json:"inode"`
+	Inode  int64 `json:"inode"`
 
 	// The number of bytes in the socket's read buffer.
 	Rqueue int64 `json:"rqueue"`
 
 	// The source port number.
-	Sport int64 `json:"sport"`
+	Sport  int64 `json:"sport"`
 
 	// The source IPv6 address.
-	Src string `json:"src"`
+	Src    string `json:"src"`
 
 	// The socket's current state, in the Linux kernel's numeric format.
-	State int64 `json:"state"`
+	State  int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid string `json:"uid"`
+	Uid    int64 `json:"uid"`
 
 	// The number of bytes that the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1434,13 +1459,14 @@ func (c *Client) GetUpdateAvailability(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[GetUpdateAvailabilityData](ctx, c.c, http.MethodGet, "get_update_availability", cpanel.CombineArgs(extra...))
 }
 
+
 // GetUpdateAvailabilityData is a generated payload type.
 type GetUpdateAvailabilityData struct {
 	// The server's current version of cPanel & WHM.
-	CurrentVersion string `json:"current_version"`
+	CurrentVersion  string `json:"current_version"`
 
 	// The available version of cPanel & WHM available for the server's support tier.
-	NewestVersion string `json:"newest_version"`
+	NewestVersion   string `json:"newest_version"`
 
 	// The server's
 	// [support tier](https://docs.cpanel.net/knowledge-base/cpanel-product/product-versions-and-the-release-process/#release-tiers):
@@ -1452,7 +1478,7 @@ type GetUpdateAvailabilityData struct {
 	// * `lts` — Long-Term Support (LTS).
 	//
 	// Possible values: `edge`, `current`, `release`, `stable`, `lts`.
-	Tier string `json:"tier"`
+	Tier            string `json:"tier"`
 
 	// Whether a new version of cPanel & WHM is available for the server's support tier.
 	//
@@ -1474,43 +1500,44 @@ func (c *Client) GetDiskUsage2(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[GetDiskUsage2Data](ctx, c.c, http.MethodGet, "getdiskusage", cpanel.CombineArgs(extra...))
 }
 
+
 // GetDiskUsage2DataPartitionItem is a generated payload type.
 type GetDiskUsage2DataPartitionItem struct {
 	// The partition's unused disk space, measured in kilobytes.
-	Available int64 `json:"available"`
+	Available         int64 `json:"available"`
 
 	// The partition's device name.
-	Device string `json:"device"`
+	Device            string `json:"device"`
 
 	// The partition's label.
-	Disk string `json:"disk"`
+	Disk              string `json:"disk"`
 
 	// The partition's absolute directory path.
-	FileSystem string `json:"filesystem"`
+	FileSystem        string `json:"filesystem"`
 
 	// The number of unused inodes on the partition.
-	InodesAvailable int64 `json:"inodes_available"`
+	InodesAvailable   int64 `json:"inodes_available"`
 
 	// The percentage of the partition's total
 	InodesIpercentage int64 `json:"inodes_ipercentage"`
 
 	// The total number of inodes that the partition will allow.
-	InodesTotal int64 `json:"inodes_total"`
+	InodesTotal       int64 `json:"inodes_total"`
 
 	// The number of inodes used on the partition.
-	InodesUsed int64 `json:"inodes_used"`
+	InodesUsed        int64 `json:"inodes_used"`
 
 	// The partition's mount point.
-	Mount string `json:"mount"`
+	Mount             string `json:"mount"`
 
 	// The percentage of the partition's total disk space used.
-	Percentage int64 `json:"percentage"`
+	Percentage        int64 `json:"percentage"`
 
 	// The partition's total allocated disk space, measured in kilobytes.
-	Total int64 `json:"total"`
+	Total             int64 `json:"total"`
 
 	// The partition's disk space used, measured in kilobytes.
-	Used int64 `json:"used"`
+	Used              int64 `json:"used"`
 }
 
 // GetDiskUsage2Data is a generated payload type.
@@ -1529,6 +1556,7 @@ type GetDiskUsage2Data struct {
 func (c *Client) Gethostname(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GethostnameData], error) {
 	return cpanel.WHMCall[GethostnameData](ctx, c.c, http.MethodGet, "gethostname", cpanel.CombineArgs(extra...))
 }
+
 
 // GethostnameData is a generated payload type.
 type GethostnameData struct {
@@ -1564,6 +1592,7 @@ type IsRoleEnabledArgs struct {
 func (c *Client) IsRoleEnabled(ctx context.Context, args *IsRoleEnabledArgs) (*cpanel.WHMResult[IsRoleEnabledData], error) {
 	return cpanel.WHMCall[IsRoleEnabledData](ctx, c.c, http.MethodGet, "is_role_enabled", args)
 }
+
 
 // IsRoleEnabledData is a generated payload type.
 type IsRoleEnabledData struct {
@@ -1650,6 +1679,7 @@ func (c *Client) LinkServerNodeWithAPIToken(ctx context.Context, args *LinkServe
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "link_server_node_with_api_token", args)
 }
 
+
 // ListConfigClusterServers calls the WHM API 1 function `list_configclusterservers` — Return all configuration cluster servers
 //
 // This function lists the servers in the server's configuration cluster.
@@ -1667,13 +1697,14 @@ func (c *Client) ListConfigClusterServers(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[map[string]ListConfigClusterServersDataValue](ctx, c.c, http.MethodGet, "list_configclusterservers", cpanel.CombineArgs(extra...))
 }
 
+
 // Each return's name is the server name.
 type ListConfigClusterServersDataValue struct {
 	// A truncated version of the server's remote access key.
 	Signature string `json:"signature"`
 
 	// The `root`-level username for the server.
-	User string `json:"user"`
+	User      string `json:"user"`
 }
 
 // ListConnectedApplications calls the WHM API 1 function `list_connected_applications` — List application connection information
@@ -1692,22 +1723,23 @@ func (c *Client) ListConnectedApplications(ctx context.Context, extra ...cpanel.
 	return cpanel.WHMCall[ListConnectedApplicationsData](ctx, c.c, http.MethodPost, "list_connected_applications", cpanel.CombineArgs(extra...))
 }
 
+
 // Data associated with the connected application. There are a few predefined elements, but any additional data may be stored here as well.
 type ListConnectedApplicationsDataListItem struct {
 	// The contents of a JSON Web Token used during registration or updates.
-	Jwt json.RawMessage `json:"jwt"`
+	Jwt        json.RawMessage `json:"jwt"`
 
 	// The name of the connected application.
-	Name string `json:"name"`
+	Name       string `json:"name"`
 
 	// The name of the private key, if any, used by encryption, signing, or other security schemes used when communicating with this connected application.
 	PrivateKey string `json:"private_key"`
 
 	// The name of the public key, if any, sent to the connected application during registration.
-	PublicKey string `json:"public_key"`
+	PublicKey  string `json:"public_key"`
 
 	// The name of the API token, if any, sent to the connected application to allow that application to make API calls on this server.
-	TokenName string `json:"token_name"`
+	TokenName  string `json:"token_name"`
 }
 
 // ListConnectedApplicationsData is a generated payload type.
@@ -1727,32 +1759,33 @@ func (c *Client) ListLinkedServerNodes(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[ListLinkedServerNodesData](ctx, c.c, http.MethodGet, "list_linked_server_nodes", cpanel.CombineArgs(extra...))
 }
 
+
 // ListLinkedServerNodesDataPayloadItem is a generated payload type.
 type ListLinkedServerNodesDataPayloadItem struct {
 	// The name of a linked remote server node.
-	Alias string `json:"alias"`
+	Alias              string `json:"alias"`
 
 	// An array of the services enabled on the linked remote server node.
-	EnabledServices []string `json:"enabled_services"`
+	EnabledServices    []string `json:"enabled_services"`
 
 	// The remote server node's hostname.
-	Hostname string `json:"hostname"`
+	Hostname           string `json:"hostname"`
 
 	// The last time that the server queried the current status of the remote server node.
-	LastCheck int64 `json:"last_check"`
+	LastCheck          int64 `json:"last_check"`
 
 	// Whether the remote server node has a valid [SSL certificate](https://go.cpanel.net/guidetoSSL).
 	// * `1` — The remote server node has a valid SSL certificate.
 	// * `0` — The remote server does **not** have a valid SSL certificate.
 	//
 	// Possible values: `0`, `1`.
-	TLSVerified int64 `json:"tls_verified"`
+	TLSVerified        int64 `json:"tls_verified"`
 
 	// The username required to make API calls to the linked remote server node.
-	Username string `json:"username"`
+	Username           string `json:"username"`
 
 	// The version of cPanel & WHM installed on the remote server node.
-	Version string `json:"version"`
+	Version            string `json:"version"`
 
 	// An object containing groups of services required for a remote server node to fulfill a specific role.
 	WorkerCapabilities map[string]json.RawMessage `json:"worker_capabilities"`
@@ -1775,6 +1808,7 @@ func (c *Client) ListUserChildNodes(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[ListUserChildNodesData](ctx, c.c, http.MethodGet, "list_user_child_nodes", cpanel.CombineArgs(extra...))
 }
 
+
 // ListUserChildNodesDataPayloadItem is a generated payload type.
 type ListUserChildNodesDataPayloadItem struct {
 	// The name (alias) of the linked cPanel & WHM server.
@@ -1787,7 +1821,7 @@ type ListUserChildNodesDataPayloadItem struct {
 	Type2 string `json:"type"`
 
 	// The cPanel account username.
-	User string `json:"user"`
+	User  string `json:"user"`
 }
 
 // ListUserChildNodesData is a generated payload type.
@@ -1817,6 +1851,7 @@ func (c *Client) PersonalizationGet(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[PersonalizationGetData](ctx, c.c, http.MethodPost, "personalization_get", cpanel.CombineArgs(extra...))
 }
 
+
 // The retrieved NVData information stored on the server.
 //
 // **Note:**
@@ -1825,7 +1860,7 @@ func (c *Client) PersonalizationGet(ctx context.Context, extra ...cpanel.Args) (
 // parameter with WHM API 1's `personalization_set` function.
 type PersonalizationGetDataPersonalizationAdditionalProperties struct {
 	// An error message describing the failure if the `success` Boolean returns a `0` value.
-	Reason json.RawMessage `json:"reason"`
+	Reason  json.RawMessage `json:"reason"`
 
 	// Whether the function successfully retrieved the value from
 	// the server.
@@ -1839,7 +1874,7 @@ type PersonalizationGetDataPersonalizationAdditionalProperties struct {
 	// The value stored in the field.
 	//
 	// * null — The pair is **not** available in the store.
-	Value *string `json:"value"`
+	Value   *string `json:"value"`
 }
 
 // The NVData keys and values stored on the server.
@@ -1883,10 +1918,11 @@ func (c *Client) PersonalizationSet(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[PersonalizationSetData](ctx, c.c, http.MethodPost, "personalization_set", cpanel.CombineArgs(extra...))
 }
 
+
 // The name for this property is one of the properties that you provide in the personalization parameter.
 type PersonalizationSetDataPersonalizationValue struct {
 	// The message that describes the failure if the `success` property returns `0`.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// Whether the function successfully saved the value on the server.
 	// * `1` - Successful.
@@ -1896,7 +1932,7 @@ type PersonalizationSetDataPersonalizationValue struct {
 	Success int64 `json:"success"`
 
 	// The value stored in the field or `null` if the property is not available in the datastore.
-	Value *string `json:"value"`
+	Value   *string `json:"value"`
 }
 
 // PersonalizationSetData is a generated payload type.
@@ -1946,6 +1982,7 @@ func (c *Client) PurchaseALicense(ctx context.Context, args *PurchaseALicenseArg
 	return cpanel.WHMCall[PurchaseALicenseData](ctx, c.c, http.MethodGet, "purchase_a_license", args)
 }
 
+
 // PurchaseALicenseData is a generated payload type.
 type PurchaseALicenseData struct {
 	// An array of checkout URLs. A valid checkout URL.
@@ -1982,6 +2019,7 @@ func (c *Client) Reboot(ctx context.Context, args *RebootArgs) (*cpanel.WHMResul
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "reboot", args)
 }
 
+
 // RemoveConnectedApplicationArgs are the parameters of the WHM API 1 function `remove_connected_application`.
 type RemoveConnectedApplicationArgs struct {
 	// The name of the connected application.
@@ -2009,6 +2047,7 @@ func (c *Client) RemoveConnectedApplication(ctx context.Context, args *RemoveCon
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "remove_connected_application", args)
 }
 
+
 // RemoveInProgressEximConfigEdit calls the WHM API 1 function `remove_in_progress_exim_config_edit` — Remove Exim configuration files after failed update
 //
 // This function removes in-progress Exim configuration files after
@@ -2029,6 +2068,7 @@ func (c *Client) RemoveConnectedApplication(ctx context.Context, args *RemoveCon
 func (c *Client) RemoveInProgressEximConfigEdit(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "remove_in_progress_exim_config_edit", cpanel.CombineArgs(extra...))
 }
+
 
 // RestartServiceArgs are the parameters of the WHM API 1 function `restartservice`.
 type RestartServiceArgs struct {
@@ -2074,6 +2114,7 @@ func (c *Client) RestartService(ctx context.Context, args *RestartServiceArgs) (
 	return cpanel.WHMCall[RestartServiceData](ctx, c.c, http.MethodGet, "restartservice", args)
 }
 
+
 // RestartServiceData is a generated payload type.
 type RestartServiceData struct {
 	// The function's raw output.
@@ -2084,7 +2125,7 @@ type RestartServiceData struct {
 	//
 	// * `1` — Nothing.
 	// * `0` — A string of raw output.
-	Output string `json:"output"`
+	Output  string `json:"output"`
 
 	// The restarted service.
 	Service string `json:"service"`
@@ -2124,6 +2165,7 @@ func (c *Client) RestoreConfigFromFile(ctx context.Context, args *RestoreConfigF
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_config_from_file", args)
 }
 
+
 // RestoreConfigFromUpload calls the WHM API 1 function `restore_config_from_upload` — Update configuration file from backup via POST
 //
 // This function restores a configuration backup file via HTTP POST
@@ -2141,6 +2183,7 @@ func (c *Client) RestoreConfigFromFile(ctx context.Context, args *RestoreConfigF
 func (c *Client) RestoreConfigFromUpload(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "restore_config_from_upload", cpanel.CombineArgs(extra...))
 }
+
 
 // RunCpkeyclt calls the WHM API 1 function `run_cpkeyclt` — Return server's cPanel license status
 //
@@ -2160,6 +2203,7 @@ func (c *Client) RunCpkeyclt(ctx context.Context, extra ...cpanel.Args) (*cpanel
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "run_cpkeyclt", cpanel.CombineArgs(extra...))
 }
 
+
 // SaveConnectedApplication calls the WHM API 1 function `save_connected_application` — Save application connection information.
 //
 // Save or update connection data about a specific connected application.
@@ -2172,6 +2216,7 @@ func (c *Client) RunCpkeyclt(ctx context.Context, extra ...cpanel.Args) (*cpanel
 func (c *Client) SaveConnectedApplication(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "save_connected_application", cpanel.CombineArgs(extra...))
 }
+
 
 // SendTestPosturlArgs are the parameters of the WHM API 1 function `send_test_posturl`.
 type SendTestPosturlArgs struct {
@@ -2210,6 +2255,7 @@ func (c *Client) SendTestPosturl(ctx context.Context, args *SendTestPosturlArgs)
 	return cpanel.WHMCall[SendTestPosturlData](ctx, c.c, http.MethodGet, "send_test_posturl", args)
 }
 
+
 // SendTestPosturlData is a generated payload type.
 type SendTestPosturlData struct {
 	// The test message's ID.
@@ -2239,10 +2285,10 @@ type SendTestPushbulletNoteArgs struct {
 // If the function does not detect the correct ID string in the returned message, the function fails. You can also review the user's Pushbullet channel history to confirm that the server sent and received the message.
 //
 // The test's success or failure depends on various conditions. For example:
-//   - Valid access token.
-//   - Network configuration.
-//   - Service outages.
-//   - External server rate limit.
+//   * Valid access token.
+//   * Network configuration.
+//   * Service outages.
+//   * External server rate limit.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -2251,13 +2297,14 @@ func (c *Client) SendTestPushbulletNote(ctx context.Context, args *SendTestPushb
 	return cpanel.WHMCall[SendTestPushbulletNoteData](ctx, c.c, http.MethodGet, "send_test_pushbullet_note", args)
 }
 
+
 // SendTestPushbulletNoteData is a generated payload type.
 type SendTestPushbulletNoteData struct {
 	// The test message's ID.
 	MessageID string `json:"message_id"`
 
 	// The payload from the Pushbullet server. For more information, visit [Pushbullet's API documentation](https://docs.pushbullet.com/).
-	Payload map[string]json.RawMessage `json:"payload"`
+	Payload   map[string]json.RawMessage `json:"payload"`
 }
 
 // ServiceStatusArgs are the parameters of the WHM API 1 function `servicestatus`.
@@ -2318,6 +2365,7 @@ func (c *Client) ServiceStatus(ctx context.Context, args *ServiceStatusArgs) (*c
 	return cpanel.WHMCall[ServiceStatusData](ctx, c.c, http.MethodGet, "servicestatus", args)
 }
 
+
 // ServiceStatusDataServiceItem is a generated payload type.
 type ServiceStatusDataServiceItem struct {
 	// The service's full name.
@@ -2328,21 +2376,21 @@ type ServiceStatusDataServiceItem struct {
 	// * `0` - Disabled. If a server profile **disables** a service, this returns a `0` value.
 	//
 	// Possible values: `0`, `1`.
-	Enabled int64 `json:"enabled"`
+	Enabled     int64 `json:"enabled"`
 
 	// Whether the service is installed.
 	// * `1` - Installed.
 	// * `0` - Uninstalled. If a server profile **disables** a service, this returns a `0` value.
 	//
 	// Possible values: `0`, `1`.
-	Installed int64 `json:"installed"`
+	Installed   int64 `json:"installed"`
 
 	// Whether the server monitors the service.
 	// * `1` - Monitored.
 	// * `0` - Not monitored. If a server profile **disables** a service, this returns a `0` value.
 	//
 	// Possible values: `0`, `1`.
-	Monitored int64 `json:"monitored"`
+	Monitored   int64 `json:"monitored"`
 
 	// The service's short name.
 	// * apache_php_fpm
@@ -2376,7 +2424,7 @@ type ServiceStatusDataServiceItem struct {
 	// * sshd
 	// * syslogd
 	// * tailwatchd …
-	Name string `json:"name"`
+	Name        string `json:"name"`
 
 	// Whether the service currently runs on the server.
 	//
@@ -2388,7 +2436,7 @@ type ServiceStatusDataServiceItem struct {
 	// * `0` - Not running.
 	//
 	// Possible values: `0`, `1`.
-	Running int64 `json:"running"`
+	Running     int64 `json:"running"`
 }
 
 // ServiceStatusData is a generated payload type.
@@ -2451,6 +2499,7 @@ func (c *Client) SetApplicationContactEventImportance(ctx context.Context, args 
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_application_contact_event_importance", args)
 }
 
+
 // SetApplicationContactImportanceArgs are the parameters of the WHM API 1 function `set_application_contact_importance`.
 type SetApplicationContactImportanceArgs struct {
 	// The cPanel & WHM application module's name.
@@ -2496,6 +2545,7 @@ func (c *Client) SetApplicationContactImportance(ctx context.Context, args *SetA
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_application_contact_importance", args)
 }
 
+
 // SetPrimaryServernameArgs are the parameters of the WHM API 1 function `set_primary_servername`.
 type SetPrimaryServernameArgs struct {
 	// The `ServerName` value in Apache's `VirtualHost` section to set as primary for the IP address and port type.
@@ -2533,6 +2583,7 @@ func (c *Client) SetPrimaryServername(ctx context.Context, args *SetPrimaryServe
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_primary_servername", args)
 }
 
+
 // SetServiceConfigKeyArgs are the parameters of the WHM API 1 function `set_service_config_key`.
 type SetServiceConfigKeyArgs struct {
 	// The configuration key's name.
@@ -2569,6 +2620,7 @@ type SetServiceConfigKeyArgs struct {
 func (c *Client) SetServiceConfigKey(ctx context.Context, args *SetServiceConfigKeyArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_service_config_key", args)
 }
+
 
 // SetHostnameArgs are the parameters of the WHM API 1 function `sethostname`.
 type SetHostnameArgs struct {
@@ -2619,6 +2671,7 @@ func (c *Client) SetHostname(ctx context.Context, args *SetHostnameArgs) (*cpane
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "sethostname", args)
 }
 
+
 // StartCpanelUpdateArgs are the parameters of the WHM API 1 function `start_cpanel_update`.
 type StartCpanelUpdateArgs struct {
 	// The cPanel & WHM update’s mode of operation.
@@ -2648,6 +2701,7 @@ func (c *Client) StartCpanelUpdate(ctx context.Context, args *StartCpanelUpdateA
 	return cpanel.WHMCall[StartCpanelUpdateData](ctx, c.c, http.MethodGet, "start_cpanel_update", args)
 }
 
+
 // StartCpanelUpdateData is a generated payload type.
 type StartCpanelUpdateData struct {
 	// Whether the update process started as a result of this request.
@@ -2656,13 +2710,13 @@ type StartCpanelUpdateData struct {
 	// * `0` — The update process existed prior to this request.
 	//
 	// Possible values: `1`, `0`.
-	IsNew int64 `json:"is_new"`
+	IsNew   int64 `json:"is_new"`
 
 	// The filesystem path to the update process’s log file.
 	LogPath string `json:"log_path"`
 
 	// The update process’s ID.
-	Pid int64 `json:"pid"`
+	Pid     int64 `json:"pid"`
 }
 
 // StartProfileActivationArgs are the parameters of the WHM API 1 function `start_profile_activation`.
@@ -2712,6 +2766,7 @@ func (c *Client) StartProfileActivation(ctx context.Context, args *StartProfileA
 	return cpanel.WHMCall[StartProfileActivationData](ctx, c.c, http.MethodGet, "start_profile_activation", args)
 }
 
+
 // StartProfileActivationData is a generated payload type.
 type StartProfileActivationData struct {
 	// The profile activation log ID. The system creates the log files in the `/var/cpanel/logs/activate_profile/` directory.
@@ -2733,6 +2788,7 @@ func (c *Client) SystemNeedsReboot(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "system_needs_reboot", cpanel.CombineArgs(extra...))
 }
 
+
 // SystemLoadAvg calls the WHM API 1 function `systemloadavg` — Return system load average
 //
 // This function retrieves the system's load average.
@@ -2748,16 +2804,17 @@ func (c *Client) SystemLoadAvg(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[SystemLoadAvgData](ctx, c.c, http.MethodGet, "systemloadavg", cpanel.CombineArgs(extra...))
 }
 
+
 // SystemLoadAvgData is a generated payload type.
 type SystemLoadAvgData struct {
 	// The server's load average over the previous fifteen minutes.
 	Fifteen float64 `json:"fifteen"`
 
 	// The server's load average over the previous five minutes.
-	Five float64 `json:"five"`
+	Five    float64 `json:"five"`
 
 	// The server's load average over the previous minute.
-	One float64 `json:"one"`
+	One     float64 `json:"one"`
 }
 
 // UnlinkServerNodeArgs are the parameters of the WHM API 1 function `unlink_server_node`.
@@ -2787,8 +2844,8 @@ type UnlinkServerNodeArgs struct {
 //
 // **Important:**
 //
-//	This function does **not** unlink mail servers that are currently in use.
-//	You **must** first delete any accounts that use the linked mail server.
+//   This function does **not** unlink mail servers that are currently in use.
+//   You **must** first delete any accounts that use the linked mail server.
 //
 // Available since cPanel & WHM version 86.
 //
@@ -2797,35 +2854,36 @@ func (c *Client) UnlinkServerNode(ctx context.Context, args *UnlinkServerNodeArg
 	return cpanel.WHMCall[UnlinkServerNodeData](ctx, c.c, http.MethodGet, "unlink_server_node", args)
 }
 
+
 // UnlinkServerNodeData is a generated payload type.
 type UnlinkServerNodeData struct {
 	// The name of a linked remote server node.
-	Alias string `json:"alias"`
+	Alias              string `json:"alias"`
 
 	// A list of services enabled on the linked remote server node.
-	EnabledServices []string `json:"enabled_services"`
+	EnabledServices    []string `json:"enabled_services"`
 
 	// The remote server node's hostname.
-	Hostname string `json:"hostname"`
+	Hostname           string `json:"hostname"`
 
 	// The last time that the server queried the current status of the remote server.
-	LastCheck int64 `json:"last_check"`
+	LastCheck          int64 `json:"last_check"`
 
 	// A list of the `worker_capabilities` return's system settings.
-	SystemSettings json.RawMessage `json:"system_settings"`
+	SystemSettings     json.RawMessage `json:"system_settings"`
 
 	// Whether the remote server node has a valid [SSL certificate](https://docs.cpanel.net/knowledge-base/security/guide-to-ssl/).
 	// * `1` - The remote server node has a valid SSL certificate.
 	// * `0` - The remote server node does not have a valid SSL certificate.
 	//
 	// Possible values: `0`, `1`.
-	TLSVerified int64 `json:"tls_verified"`
+	TLSVerified        int64 `json:"tls_verified"`
 
 	// The username required to make API calls to the linked remote server node.
-	Username string `json:"username"`
+	Username           string `json:"username"`
 
 	// The version of cPanel & WHM installed on the remote server node.
-	Version string `json:"version"`
+	Version            string `json:"version"`
 
 	// A group of services required for a remote server node to perform a
 	// specific task.
@@ -2858,8 +2916,8 @@ type UpdateConfigClusterServerArgs struct {
 // * If you log in to a configuration cluster server that is *not* the parent server, *nothing* will indicate that the server is part of a configuration cluster. You can *only* view and modify this information from the master server.
 //
 // * We recommend that you run this function as a `POST` request with SSL enabled:
-//   - The length of the remote access key may cause problems if you run the function with the `GET` method (for example, a URL in your browser).
-//   - You risk security problems if you enter a remote access key through the `GET` method.
+//   * The length of the remote access key may cause problems if you run the function with the `GET` method (for example, a URL in your browser).
+//   * You risk security problems if you enter a remote access key through the `GET` method.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -2867,6 +2925,7 @@ type UpdateConfigClusterServerArgs struct {
 func (c *Client) UpdateConfigClusterServer(ctx context.Context, args *UpdateConfigClusterServerArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "update_configclusterserver", args)
 }
+
 
 // UpdateContactEmailArgs are the parameters of the WHM API 1 function `update_contact_email`.
 type UpdateContactEmailArgs struct {
@@ -2893,6 +2952,7 @@ type UpdateContactEmailArgs struct {
 func (c *Client) UpdateContactEmail(ctx context.Context, args *UpdateContactEmailArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "update_contact_email", args)
 }
+
 
 // UpdateLinkedServerNodeArgs are the parameters of the WHM API 1 function `update_linked_server_node`.
 type UpdateLinkedServerNodeArgs struct {
@@ -2962,6 +3022,7 @@ func (c *Client) UpdateLinkedServerNode(ctx context.Context, args *UpdateLinkedS
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "update_linked_server_node", args)
 }
 
+
 // VerifyPosturlAccess calls the WHM API 1 function `verify_posturl_access` — Send notification URL via POST verification
 //
 // This function calls the WHM API 1 `send_test_posturl` function for
@@ -2985,28 +3046,29 @@ func (c *Client) VerifyPosturlAccess(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.WHMCall[VerifyPosturlAccessData](ctx, c.c, http.MethodGet, "verify_posturl_access", cpanel.CombineArgs(extra...))
 }
 
+
 // A list that contains information about a POST notification URL.
 type VerifyPosturlAccessDataResultsItemResultPayload struct {
 	// The URLs content.
-	Content string `json:"content"`
+	Content  string `json:"content"`
 
 	// An object of the header fields that the request returned.
 	//
 	// **Note:**
 	//
 	// This object's returns vary based on the URL's headers.
-	Headers json.RawMessage `json:"headers"`
+	Headers  json.RawMessage `json:"headers"`
 
 	// The URL's HTTP protocol.
 	Protocol string `json:"protocol"`
 
 	// The response that the server returned.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// The response's
 	// [HTTP status](https://wikipedia.org/wiki/List_of_HTTP_status_codes)
 	// code.
-	Status string `json:"status"`
+	Status   string `json:"status"`
 
 	// Whether the function returned a
 	// [2XX HTTP](https://wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success)
@@ -3016,10 +3078,10 @@ type VerifyPosturlAccessDataResultsItemResultPayload struct {
 	// * `0` — Failure.
 	//
 	// Possible values: `0`, `1`.
-	Success int64 `json:"success"`
+	Success  int64 `json:"success"`
 
 	// The URL that provided the response.
-	URL string `json:"url"`
+	URL      string `json:"url"`
 }
 
 // A list of data about the POST notification URLs.
@@ -3028,7 +3090,7 @@ type VerifyPosturlAccessDataResultsItemResult struct {
 	MessageID string `json:"message_id"`
 
 	// A list that contains information about a POST notification URL.
-	Payload VerifyPosturlAccessDataResultsItemResultPayload `json:"payload"`
+	Payload   VerifyPosturlAccessDataResultsItemResultPayload `json:"payload"`
 }
 
 // VerifyPosturlAccessDataResultsItem is a generated payload type.
@@ -3037,7 +3099,7 @@ type VerifyPosturlAccessDataResultsItem struct {
 	Result VerifyPosturlAccessDataResultsItemResult `json:"result"`
 
 	// The URL and query string for the POST notification URL.
-	URL string `json:"url"`
+	URL    string `json:"url"`
 }
 
 // VerifyPosturlAccessData is a generated payload type.
@@ -3060,6 +3122,7 @@ func (c *Client) VerifyPushbulletAccess(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[VerifyPushbulletAccessData](ctx, c.c, http.MethodGet, "verify_pushbullet_access", cpanel.CombineArgs(extra...))
 }
 
+
 // VerifyPushbulletAccessDataResultsItemResult is a generated payload type.
 type VerifyPushbulletAccessDataResultsItemResult struct {
 	// The test message's ID.
@@ -3069,7 +3132,7 @@ type VerifyPushbulletAccessDataResultsItemResult struct {
 	//
 	// For more information, visit
 	// [Pushbullet's API documentation](https://go.cpanel.net/pushbulletdocs).
-	Payload json.RawMessage `json:"payload"`
+	Payload   json.RawMessage `json:"payload"`
 }
 
 // VerifyPushbulletAccessDataResultsItem is a generated payload type.
@@ -3083,7 +3146,7 @@ type VerifyPushbulletAccessDataResultsItem struct {
 	// * This is confidential information that your server sends via a secure channel.
 	AccessToken string `json:"access_token"`
 
-	Result VerifyPushbulletAccessDataResultsItemResult `json:"result"`
+	Result      VerifyPushbulletAccessDataResultsItemResult `json:"result"`
 }
 
 // VerifyPushbulletAccessData is a generated payload type.
@@ -3102,60 +3165,61 @@ func (c *Client) VerifySlackAccess(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[VerifySlackAccessData](ctx, c.c, http.MethodGet, "verify_slack_access", cpanel.CombineArgs(extra...))
 }
 
+
 // VerifySlackAccessDataResultsItemResultPayloadHeaders is a generated payload type.
 type VerifySlackAccessDataResultsItemResultPayloadHeaders struct {
 	AccessControlAllowOrigin json.RawMessage `json:"access-control-allow-origin"`
 
-	ContentType json.RawMessage `json:"content-type"`
+	ContentType              json.RawMessage `json:"content-type"`
 
-	Date json.RawMessage `json:"date"`
+	Date                     json.RawMessage `json:"date"`
 
-	ReferrerPolicy json.RawMessage `json:"referrer-policy"`
+	ReferrerPolicy           json.RawMessage `json:"referrer-policy"`
 
-	Server json.RawMessage `json:"server"`
+	Server                   json.RawMessage `json:"server"`
 
-	StrictTransportSecurity json.RawMessage `json:"strict-transport-security"`
+	StrictTransportSecurity  json.RawMessage `json:"strict-transport-security"`
 
-	TransferEncoding json.RawMessage `json:"transfer-encoding"`
+	TransferEncoding         json.RawMessage `json:"transfer-encoding"`
 
-	Vary json.RawMessage `json:"vary"`
+	Vary                     json.RawMessage `json:"vary"`
 
-	XFrameOptions json.RawMessage `json:"x-frame-options"`
+	XFrameOptions            json.RawMessage `json:"x-frame-options"`
 
-	XSlackBackend json.RawMessage `json:"x-slack-backend"`
+	XSlackBackend            json.RawMessage `json:"x-slack-backend"`
 
-	XVia json.RawMessage `json:"x-via"`
+	XVia                     json.RawMessage `json:"x-via"`
 }
 
 // VerifySlackAccessDataResultsItemResultPayload is a generated payload type.
 type VerifySlackAccessDataResultsItemResultPayload struct {
-	Content json.RawMessage `json:"content"`
+	Content  json.RawMessage `json:"content"`
 
-	Headers VerifySlackAccessDataResultsItemResultPayloadHeaders `json:"headers"`
+	Headers  VerifySlackAccessDataResultsItemResultPayloadHeaders `json:"headers"`
 
 	Protocol json.RawMessage `json:"protocol"`
 
-	Reason json.RawMessage `json:"reason"`
+	Reason   json.RawMessage `json:"reason"`
 
-	Status json.RawMessage `json:"status"`
+	Status   json.RawMessage `json:"status"`
 
-	Success json.RawMessage `json:"success"`
+	Success  json.RawMessage `json:"success"`
 
-	URL json.RawMessage `json:"url"`
+	URL      json.RawMessage `json:"url"`
 }
 
 // VerifySlackAccessDataResultsItemResult is a generated payload type.
 type VerifySlackAccessDataResultsItemResult struct {
 	MessageID json.RawMessage `json:"message_id"`
 
-	Payload VerifySlackAccessDataResultsItemResultPayload `json:"payload"`
+	Payload   VerifySlackAccessDataResultsItemResultPayload `json:"payload"`
 }
 
 // VerifySlackAccessDataResultsItem is a generated payload type.
 type VerifySlackAccessDataResultsItem struct {
 	Result VerifySlackAccessDataResultsItemResult `json:"result"`
 
-	URL json.RawMessage `json:"url"`
+	URL    json.RawMessage `json:"url"`
 }
 
 // VerifySlackAccessData is a generated payload type.
@@ -3189,22 +3253,23 @@ func (c *Client) WpDashboardCreateLoginLink(ctx context.Context, args *WpDashboa
 	return cpanel.WHMCall[WpDashboardCreateLoginLinkData](ctx, c.c, http.MethodGet, "wp_dashboard_create_login_link", args)
 }
 
+
 // WpDashboardCreateLoginLinkData is a generated payload type.
 type WpDashboardCreateLoginLinkData struct {
 	// The session's security token.
 	CpSecurityToken string `json:"cp_security_token"`
 
 	// The session's expiration time, in [Unix Epoch format](https://go.cpanel.net/unix_time).
-	Expires int64 `json:"expires"`
+	Expires         int64 `json:"expires"`
 
 	// The security token's service.
-	Service string `json:"service"`
+	Service         string `json:"service"`
 
 	// The session ID.
-	Session string `json:"session"`
+	Session         string `json:"session"`
 
 	// The security token's URL, which contains the session ID.
-	URL string `json:"url"`
+	URL             string `json:"url"`
 }
 
 // WpDashboardGetHostname calls the WHM API 1 function `wp_dashboard_get_hostname` — Return server's hostname
@@ -3217,6 +3282,7 @@ type WpDashboardCreateLoginLinkData struct {
 func (c *Client) WpDashboardGetHostname(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[WpDashboardGetHostnameData], error) {
 	return cpanel.WHMCall[WpDashboardGetHostnameData](ctx, c.c, http.MethodGet, "wp_dashboard_get_hostname", cpanel.CombineArgs(extra...))
 }
+
 
 // WpDashboardGetHostnameData is a generated payload type.
 type WpDashboardGetHostnameData struct {

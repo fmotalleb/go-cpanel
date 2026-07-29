@@ -27,6 +27,7 @@ func (c *NginxCachingClient) ClearCache(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "NginxCaching", "clear_cache", cpanel.CombineArgs(extra...))
 }
 
+
 // DisableCache calls the UAPI function `NginxCaching::disable_cache` — Disable the user's NGINX cache
 //
 // This function disables the user's NGINX cache.
@@ -41,6 +42,7 @@ func (c *NginxCachingClient) ClearCache(ctx context.Context, extra ...cpanel.Arg
 func (c *NginxCachingClient) DisableCache(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "NginxCaching", "disable_cache", cpanel.CombineArgs(extra...))
 }
+
 
 // EnableCache calls the UAPI function `NginxCaching::enable_cache` — Enable the user's NGINX cache
 //
@@ -57,6 +59,7 @@ func (c *NginxCachingClient) EnableCache(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "NginxCaching", "enable_cache", cpanel.CombineArgs(extra...))
 }
 
+
 // ResetCacheConfig calls the UAPI function `NginxCaching::reset_cache_config` — Reset the user's NGINX cache configuration
 //
 // This function resets the user's NGINX caching configuration.
@@ -71,3 +74,4 @@ func (c *NginxCachingClient) EnableCache(ctx context.Context, extra ...cpanel.Ar
 func (c *NginxCachingClient) ResetCacheConfig(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "NginxCaching", "reset_cache_config", cpanel.CombineArgs(extra...))
 }
+

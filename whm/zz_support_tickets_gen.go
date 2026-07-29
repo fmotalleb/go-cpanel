@@ -29,6 +29,7 @@ func (c *Client) TicketCreateStubTicket(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[TicketCreateStubTicketData](ctx, c.c, http.MethodGet, "ticket_create_stub_ticket", cpanel.CombineArgs(extra...))
 }
 
+
 // TicketCreateStubTicketData is a generated payload type.
 type TicketCreateStubTicketData struct {
 	// The support ticket's secure ID token.
@@ -59,6 +60,7 @@ func (c *Client) TicketGetSupportAgreement(ctx context.Context, extra ...cpanel.
 	return cpanel.WHMCall[TicketGetSupportAgreementData](ctx, c.c, http.MethodGet, "ticket_get_support_agreement", cpanel.CombineArgs(extra...))
 }
 
+
 // TicketGetSupportAgreementData is a generated payload type.
 type TicketGetSupportAgreementData struct {
 	// Whether the user associated with the OAuth token has already accepted this
@@ -68,7 +70,7 @@ type TicketGetSupportAgreementData struct {
 	// * `0` — **Not** accepted.
 	//
 	// Possible values: `0`, `1`.
-	Accepted int64 `json:"accepted"`
+	Accepted          int64 `json:"accepted"`
 
 	// The [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time)
 	// at which the user associated with the OAuth token accepted the
@@ -76,7 +78,7 @@ type TicketGetSupportAgreementData struct {
 	//
 	// * A valid Unix timestamp.
 	// * `null` — Never accepted.
-	AcceptedDate *int64 `json:"accepted_date"`
+	AcceptedDate      *int64 `json:"accepted_date"`
 
 	// The human-readable date at which the user associated with the OAuth token
 	// accepted the Technical Support Agreement.
@@ -90,25 +92,25 @@ type TicketGetSupportAgreementData struct {
 	// **Note:**
 	//
 	// This returned value may contain HTML.
-	Body string `json:"body"`
+	Body              string `json:"body"`
 
 	// The creation or publication Unix timestamp of the Technical Support Agreement's current version.
-	CreateDate int64 `json:"create_date"`
+	CreateDate        int64 `json:"create_date"`
 
 	// The human-readable date at which the current version of the Technical Support Agreement was created or published, in `MM/DD/YY` format.
-	CreateDateHuman string `json:"create_date_human"`
+	CreateDateHuman   string `json:"create_date_human"`
 
 	// The URL at which the end-user may download the support agreement.
-	DownloadURL string `json:"download_url"`
+	DownloadURL       string `json:"download_url"`
 
 	// The Technical Support Agreement's title.
-	Title string `json:"title"`
+	Title             string `json:"title"`
 
 	// The Technical Support Agreement's version.
-	Version string `json:"version"`
+	Version           string `json:"version"`
 
 	// The URL at which the end-user may view the Technical Support Agreement agreement as a standalone HTML document.
-	ViewURL string `json:"view_url"`
+	ViewURL           string `json:"view_url"`
 }
 
 // TicketGetSupportInfo calls the WHM API 1 function `ticket_get_support_info` — Import customer information from Customer Portal
@@ -131,10 +133,11 @@ func (c *Client) TicketGetSupportInfo(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.WHMCall[TicketGetSupportInfoData](ctx, c.c, http.MethodGet, "ticket_get_support_info", cpanel.CombineArgs(extra...))
 }
 
+
 // TicketGetSupportInfoData is a generated payload type.
 type TicketGetSupportInfoData struct {
 	// The server's CPU architecture retrieved at the last license check.
-	Arch string `json:"arch"`
+	Arch                 string `json:"arch"`
 
 	// Whether cPanel Support provides assistance with the server's CPU architecture.
 	//
@@ -143,16 +146,16 @@ type TicketGetSupportInfoData struct {
 	// * `-1` — Unknown architecture.
 	//
 	// Possible values: `1`, `0`, `-1`.
-	ArchSupported int64 `json:"arch_supported"`
+	ArchSupported        int64 `json:"arch_supported"`
 
 	// A number that represents the company with the licensed IP address.
-	CompanyID int64 `json:"company_id"`
+	CompanyID            int64 `json:"company_id"`
 
 	// The company name associated with the submitted IP address.
-	CompanyName string `json:"company_name"`
+	CompanyName          string `json:"company_name"`
 
 	// The server's operating system retrieved during the last license check.
-	Distro string `json:"distro"`
+	Distro               string `json:"distro"`
 
 	// Whether cPanel Technical Support provides assistance for the server's
 	// operating system.
@@ -162,7 +165,7 @@ type TicketGetSupportInfoData struct {
 	// * `-1` — Unknown OS.
 	//
 	// Possible values: `1`, `0`, `-1`.
-	DistroSupported int64 `json:"distro_supported"`
+	DistroSupported      int64 `json:"distro_supported"`
 
 	// Whether the IP address owner's primary support is WebPros International LLC.
 	//
@@ -170,7 +173,7 @@ type TicketGetSupportInfoData struct {
 	// * `0` — Receives initial support from a partner.
 	//
 	// Possible values: `0`, `1`.
-	GetsDirectSupport int64 `json:"gets_direct_support"`
+	GetsDirectSupport    int64 `json:"gets_direct_support"`
 
 	// Whether the response contains the company information associated with
 	// the licensed IP address.
@@ -179,7 +182,7 @@ type TicketGetSupportInfoData struct {
 	// * `0` — Does **not** contain company info.
 	//
 	// Possible values: `0`, `1`.
-	HasCompanyInfo int64 `json:"has_company_info"`
+	HasCompanyInfo       int64 `json:"has_company_info"`
 
 	// Whether the response contains the server's compatibility information.
 	//
@@ -190,16 +193,16 @@ type TicketGetSupportInfoData struct {
 	HasCompatibilityInfo int64 `json:"has_compatibility_info"`
 
 	// The hostname or IP address of the server, as recorded in the license database.
-	Hostname string `json:"hostname"`
+	Hostname             string `json:"hostname"`
 
 	// The license provider's IP address.
-	IP string `json:"ip"`
+	IP                   string `json:"ip"`
 
 	// The optional URL to the company's brand image file on the partner website.
-	LogoURL string `json:"logo_url"`
+	LogoURL              string `json:"logo_url"`
 
 	// The URL to the company's general support resources, if available.
-	PubSupportContact string `json:"pub_support_contact"`
+	PubSupportContact    string `json:"pub_support_contact"`
 
 	// The optional URL to the company's technical support resources.
 	//
@@ -207,10 +210,10 @@ type TicketGetSupportInfoData struct {
 	//
 	// If the `pub_tech_contact` return does not contain a value, the system
 	// will use the `pub_support_contact` return's value.
-	PubTechContact string `json:"pub_tech_contact"`
+	PubTechContact       string `json:"pub_tech_contact"`
 
 	// The contact email address for the company's technical support.
-	TechContactEmail string `json:"tech_contact_email"`
+	TechContactEmail     string `json:"tech_contact_email"`
 }
 
 // TicketGrantArgs are the parameters of the WHM API 1 function `ticket_grant`.
@@ -254,13 +257,14 @@ func (c *Client) TicketGrant(ctx context.Context, args *TicketGrantArgs) (*cpane
 	return cpanel.WHMCall[TicketGrantData](ctx, c.c, http.MethodGet, "ticket_grant", args)
 }
 
+
 // TicketGrantData is a generated payload type.
 type TicketGrantData struct {
 	// The installation status.
-	AuthStatus string `json:"auth_status"`
+	AuthStatus         string `json:"auth_status"`
 
 	// When the system authorized access.
-	AuthTime int64 `json:"auth_time"`
+	AuthTime           int64 `json:"auth_time"`
 
 	// The status of the
 	// [`iptables`](https://netfilter.org/projects/iptables/index.html)
@@ -273,7 +277,7 @@ type TicketGrantData struct {
 	// * `ERR_SETUP` — The system failed to add the `iptables` whitelist
 	// entries.
 	// * `ERR_UNSETUP` — The s …
-	ChainStatus string `json:"chain_status"`
+	ChainStatus        string `json:"chain_status"`
 
 	// The status of the
 	// [ConfigServer Security & Firewall (CSF)](https://www.configserver.com/)
@@ -285,7 +289,7 @@ type TicketGrantData struct {
 	// were already deleted.
 	// * `ERR_SETUP` — The system failed to add the CSF whitelist entries.
 	// * `ERR_UNSETUP` — The system fai …
-	CsfWlStatus string `json:"csf_wl_status"`
+	CsfWlStatus        string `json:"csf_wl_status"`
 
 	// The status of the `/etc/hosts.allow` file's whitelist entries.
 	//
@@ -308,7 +312,7 @@ type TicketGrantData struct {
 	// were already deleted.
 	// * `ERR_SETUP` — The system failed to add the cPHulk whitelist entries.
 	// * `ERR_UNS …
-	HulkWlStatus string `json:"hulk_wl_status"`
+	HulkWlStatus       string `json:"hulk_wl_status"`
 
 	// Any non-fatal errors.
 	//
@@ -322,20 +326,20 @@ type TicketGrantData struct {
 	// The system stores the local audit log in the
 	// `/var/cpanel/logs/supportauth/audit.log`
 	// file.
-	NonFatals []string `json:"non_fatals"`
+	NonFatals          []string `json:"non_fatals"`
 
 	// The server's human-readable description from the
 	// [cPanel Customer Portal](https://tickets.cpanel.net/).
-	ServerName string `json:"server_name"`
+	ServerName         string `json:"server_name"`
 
 	// The server's ID number.
-	ServerNum int64 `json:"server_num"`
+	ServerNum          int64 `json:"server_num"`
 
 	// The username for incoming SSH connections before they escalate the `root` user.
-	SSHUsername string `json:"ssh_username"`
+	SSHUsername        string `json:"ssh_username"`
 
 	// The support ticket's ID number.
-	TicketID int64 `json:"ticket_id"`
+	TicketID           int64 `json:"ticket_id"`
 
 	// The support ticket's status.
 	//
@@ -344,7 +348,7 @@ type TicketGrantData struct {
 	// * `UNKNOWN`
 	//
 	// Possible values: `OPEN`, `CLOSED`, `UNKNOWN`.
-	TicketStatus string `json:"ticket_status"`
+	TicketStatus       string `json:"ticket_status"`
 }
 
 // TicketListArgs are the parameters of the WHM API 1 function `ticket_list`.
@@ -383,6 +387,7 @@ func (c *Client) TicketList(ctx context.Context, args *TicketListArgs) (*cpanel.
 	return cpanel.WHMCall[TicketListData](ctx, c.c, http.MethodGet, "ticket_list", args)
 }
 
+
 // TicketListDataAuthsItemServersItem is a generated payload type.
 type TicketListDataAuthsItemServersItem struct {
 	// The installation status.
@@ -392,36 +397,36 @@ type TicketListDataAuthsItemServersItem struct {
 	// * `EXPIRED`
 	//
 	// Possible values: `AUTHED`, `NOT_AUTHED`, `EXPIRED`.
-	AuthStatus string `json:"auth_status"`
+	AuthStatus  string `json:"auth_status"`
 
 	// When the grant happened, in
 	// [Unix time format](http://en.wikipedia.org/wiki/Unix_time).
-	AuthTime int64 `json:"auth_time"`
+	AuthTime    int64 `json:"auth_time"`
 
 	// The server's human-readable description, from the
 	// [cPanel Customer Portal](https://tickets.cpanel.net/).
-	ServerName string `json:"server_name"`
+	ServerName  string `json:"server_name"`
 
 	// The server's ID number.
-	ServerNum int64 `json:"server_num"`
+	ServerNum   int64 `json:"server_num"`
 
 	// The server's IP address and port number for SSH connections.
-	SSH string `json:"ssh"`
+	SSH         string `json:"ssh"`
 
 	// The username for incoming SSH connections before they escalate to the `root` user.
 	SSHUsername string `json:"ssh_username"`
 
 	// The server's IP address for WHM connections.
-	WHMIP string `json:"whm_ip"`
+	WHMIP       string `json:"whm_ip"`
 }
 
 // TicketListDataAuthsItem is a generated payload type.
 type TicketListDataAuthsItem struct {
 	// An array of objects containing the server information.
-	Servers []TicketListDataAuthsItemServersItem `json:"servers"`
+	Servers       []TicketListDataAuthsItemServersItem `json:"servers"`
 
 	// The ticket's ID number.
-	TicketID int64 `json:"ticket_id"`
+	TicketID      int64 `json:"ticket_id"`
 
 	// The ticket's status.
 	//
@@ -430,7 +435,7 @@ type TicketListDataAuthsItem struct {
 	// * `UNKNOWN`
 	//
 	// Possible values: `OPEN`, `CLOSED`, `UNKNOWN`.
-	TicketStatus string `json:"ticket_status"`
+	TicketStatus  string `json:"ticket_status"`
 
 	// The ticket's subject line.
 	TicketSubject string `json:"ticket_subject"`
@@ -439,7 +444,7 @@ type TicketListDataAuthsItem struct {
 // TicketListData is a generated payload type.
 type TicketListData struct {
 	// An array of objects containing the ticket authorization information.
-	Auths []TicketListDataAuthsItem `json:"auths"`
+	Auths     []TicketListDataAuthsItem `json:"auths"`
 
 	// Any non-fatal errors.
 	//
@@ -474,6 +479,7 @@ func (c *Client) TicketRemoveClosed(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[TicketRemoveClosedData](ctx, c.c, http.MethodGet, "ticket_remove_closed", cpanel.CombineArgs(extra...))
 }
 
+
 // TicketRemoveClosedData is a generated payload type.
 type TicketRemoveClosedData struct {
 	// The status of the `iptables` whitelist entries.
@@ -484,7 +490,7 @@ type TicketRemoveClosedData struct {
 	// entries, or they did not exist.
 	// * `ERR_SETUP` — The system failed to add the `iptables` whitelist entries.
 	// * `ERR_UNSETUP` — The system failed to remove the `iptables` whitelist …
-	ChainStatus string `json:"chain_status"`
+	ChainStatus        string `json:"chain_status"`
 
 	// The status of the
 	// [ConfigServer Security & Firewall (CSF)](https://www.configserver.com/)
@@ -496,7 +502,7 @@ type TicketRemoveClosedData struct {
 	// were already deleted.
 	// * `ERR_SETUP` — The system failed to add the CSF whitelist entries.
 	// * `ERR_UNSETUP` — The system fai …
-	CsfWlStatus string `json:"csf_wl_status"`
+	CsfWlStatus        string `json:"csf_wl_status"`
 
 	// The status of the `/etc/hosts.allow` file's whitelist entries.
 	//
@@ -519,7 +525,7 @@ type TicketRemoveClosedData struct {
 	// were already deleted.
 	// * `ERR_SETUP` — The system failed to add the cPHulk whitelist entries.
 	// * `ERR_UNS …
-	HulkWlStatus string `json:"hulk_wl_status"`
+	HulkWlStatus       string `json:"hulk_wl_status"`
 
 	// Any non-fatal errors.
 	//
@@ -532,10 +538,10 @@ type TicketRemoveClosedData struct {
 	//
 	// The system stores the local audit log in the
 	// `/var/cpanel/logs/supportauth/audit.log` file.
-	NonFatals []string `json:"non_fatals"`
+	NonFatals          []string `json:"non_fatals"`
 
 	// The total number of SSH keys that the system removed.
-	RevokedKeys int64 `json:"revoked_keys"`
+	RevokedKeys        int64 `json:"revoked_keys"`
 }
 
 // TicketRevokeArgs are the parameters of the WHM API 1 function `ticket_revoke`.
@@ -577,6 +583,7 @@ func (c *Client) TicketRevoke(ctx context.Context, args *TicketRevokeArgs) (*cpa
 	return cpanel.WHMCall[TicketRevokeData](ctx, c.c, http.MethodGet, "ticket_revoke", args)
 }
 
+
 // TicketRevokeData is a generated payload type.
 type TicketRevokeData struct {
 	// The status of the
@@ -589,7 +596,7 @@ type TicketRevokeData struct {
 	// already deleted.
 	// * `ERR_SETUP` — The system failed to add the whitelist entries.
 	// * `ERR_UNSETUP` — The system failed to remove the whitel …
-	ChainStatus string `json:"chain_status"`
+	ChainStatus        string `json:"chain_status"`
 
 	// The status of the
 	// [ConfigServer Security & Firewall (CSF)](https://www.configserver.com/)
@@ -601,7 +608,7 @@ type TicketRevokeData struct {
 	// were already deleted.
 	// * `ERR_SETUP` — The system failed to add the CSF whitelist entries.
 	// * `ERR_UNSETUP` — The system fai …
-	CsfWlStatus string `json:"csf_wl_status"`
+	CsfWlStatus        string `json:"csf_wl_status"`
 
 	// The status of the `/etc/hosts.allow` file's whitelist
 	// entries.
@@ -624,7 +631,7 @@ type TicketRevokeData struct {
 	// were already deleted.
 	// * `ERR_SETUP` — The system failed to add the cPHulk whitelist entries.
 	// * `ERR_UNS …
-	HulkWlStatus string `json:"hulk_wl_status"`
+	HulkWlStatus       string `json:"hulk_wl_status"`
 
 	// Any non-fatal errors.
 	//
@@ -637,19 +644,19 @@ type TicketRevokeData struct {
 	//
 	// The system stores the local audit log in the
 	// `/var/cpanel/logs/supportauth/audit.log` file.
-	NonFatals []string `json:"non_fatals"`
+	NonFatals          []string `json:"non_fatals"`
 
 	// The total number of revoked SSH keys.
-	RevokedKeys int64 `json:"revoked_keys"`
+	RevokedKeys        int64 `json:"revoked_keys"`
 
 	// The server's ID number.
-	ServerNum int64 `json:"server_num"`
+	ServerNum          int64 `json:"server_num"`
 
 	// The username for incoming SSH connections before they escalate to the `root` user.
-	SSHUsername string `json:"ssh_username"`
+	SSHUsername        string `json:"ssh_username"`
 
 	// The revoked support ticket's ID number.
-	TicketID int64 `json:"ticket_id"`
+	TicketID           int64 `json:"ticket_id"`
 }
 
 // TicketSSHTestArgs are the parameters of the WHM API 1 function `ticket_ssh_test`.
@@ -686,6 +693,7 @@ func (c *Client) TicketSSHTest(ctx context.Context, args *TicketSSHTestArgs) (*c
 	return cpanel.WHMCall[TicketSSHTestData](ctx, c.c, http.MethodGet, "ticket_ssh_test", args)
 }
 
+
 // TicketSSHTestData is a generated payload type.
 type TicketSSHTestData struct {
 	// A list of non-fatal errors, if any exist.
@@ -698,7 +706,7 @@ type TicketSSHTestData struct {
 	NonFatals []string `json:"non_fatals"`
 
 	// The SSH test's result.
-	Result string `json:"result"`
+	Result    string `json:"result"`
 }
 
 // TicketSSHTestStartArgs are the parameters of the WHM API 1 function `ticket_ssh_test_start`.
@@ -733,6 +741,7 @@ func (c *Client) TicketSSHTestStart(ctx context.Context, args *TicketSSHTestStar
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "ticket_ssh_test_start", args)
 }
 
+
 // TicketUpdateServiceAgreementApprovalArgs are the parameters of the WHM API 1 function `ticket_update_service_agreement_approval`.
 type TicketUpdateServiceAgreementApprovalArgs struct {
 	// The version of the TSA that the user approved.
@@ -761,6 +770,7 @@ type TicketUpdateServiceAgreementApprovalArgs struct {
 func (c *Client) TicketUpdateServiceAgreementApproval(ctx context.Context, args *TicketUpdateServiceAgreementApprovalArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "ticket_update_service_agreement_approval", args)
 }
+
 
 // TicketValidateOauth2CodeArgs are the parameters of the WHM API 1 function `ticket_validate_oauth2_code`.
 type TicketValidateOauth2CodeArgs struct {
@@ -796,6 +806,7 @@ func (c *Client) TicketValidateOauth2Code(ctx context.Context, args *TicketValid
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "ticket_validate_oauth2_code", args)
 }
 
+
 // TicketWhitelistCheck calls the WHM API 1 function `ticket_whitelist_check` — Validate Support IP addresses on firewall
 //
 // This function checks whether the server's firewall whitelist correlates
@@ -816,6 +827,7 @@ func (c *Client) TicketWhitelistCheck(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.WHMCall[TicketWhitelistCheckData](ctx, c.c, http.MethodGet, "ticket_whitelist_check", cpanel.CombineArgs(extra...))
 }
 
+
 // TicketWhitelistCheckData is a generated payload type.
 type TicketWhitelistCheckData struct {
 	// The status of the server's firewall whitelist.
@@ -832,7 +844,7 @@ type TicketWhitelistCheckData struct {
 	// firewall whitelist does not contain support's IP addresses.
 	// * `NEED_UNSETUP` — The system detected that **no** cPanel Support access
 	// grants exist, but the system's firewall whitelist contains support's IP …
-	Problem string `json:"problem"`
+	Problem     string `json:"problem"`
 }
 
 // TicketWhitelistSetup calls the WHM API 1 function `ticket_whitelist_setup` — Add Support IP addresses to firewall
@@ -856,6 +868,7 @@ type TicketWhitelistCheckData struct {
 func (c *Client) TicketWhitelistSetup(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[TicketWhitelistSetupData], error) {
 	return cpanel.WHMCall[TicketWhitelistSetupData](ctx, c.c, http.MethodGet, "ticket_whitelist_setup", cpanel.CombineArgs(extra...))
 }
+
 
 // TicketWhitelistSetupData is a generated payload type.
 type TicketWhitelistSetupData struct {
@@ -889,6 +902,7 @@ type TicketWhitelistSetupData struct {
 func (c *Client) TicketWhitelistUnsetup(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[TicketWhitelistUnsetupData], error) {
 	return cpanel.WHMCall[TicketWhitelistUnsetupData](ctx, c.c, http.MethodGet, "ticket_whitelist_unsetup", cpanel.CombineArgs(extra...))
 }
+
 
 // TicketWhitelistUnsetupData is a generated payload type.
 type TicketWhitelistUnsetupData struct {

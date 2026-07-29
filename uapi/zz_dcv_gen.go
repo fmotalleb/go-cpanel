@@ -40,13 +40,14 @@ func (c *DCVClient) CheckDomainsViaDNS(ctx context.Context, args *DCVCheckDomain
 	return cpanel.UAPICall[[]DCVCheckDomainsViaDNSDataItem](ctx, c.c, http.MethodPost, "DCV", "check_domains_via_dns", args)
 }
 
+
 // DCVCheckDomainsViaDNSDataItem is a generated payload type.
 type DCVCheckDomainsViaDNSDataItem struct {
 	// The expected value of the queried DNS record.
-	DCVString string `json:"dcv_string"`
+	DCVString     string `json:"dcv_string"`
 
 	// The domain that the system verified.
-	Domain string `json:"domain"`
+	Domain        string `json:"domain"`
 
 	// A message that contains the reason why the DCV check failed.
 	//
@@ -60,17 +61,17 @@ type DCVCheckDomainsViaDNSDataItem struct {
 	// **Note:**
 	//
 	//  If the server fails to update the DNS zone, the system returns the `failure_reason` value.
-	QueryResults []string `json:"query_results"`
+	QueryResults  []string `json:"query_results"`
 
 	// Whether the DCV check succeeded.
 	// - `1` - At least one of the `query_results` values equals the `dcv_string` value.
 	// - `0` - None of the `query_results` values equal the `dcv_string` value.
 	//
 	// Possible values: `1`, `0`.
-	Succeeded int64 `json:"succeeded"`
+	Succeeded     int64 `json:"succeeded"`
 
 	// The altered and queried DNS zone name.
-	Zone string `json:"zone"`
+	Zone          string `json:"zone"`
 }
 
 // DCVCheckDomainsViaHTTPArgs are the parameters of the UAPI function `DCV::check_domains_via_http`.
@@ -133,51 +134,52 @@ func (c *DCVClient) CheckDomainsViaHTTP(ctx context.Context, args *DCVCheckDomai
 	return cpanel.UAPICall[[]DCVCheckDomainsViaHTTPDataItem](ctx, c.c, http.MethodGet, "DCV", "check_domains_via_http", args)
 }
 
+
 // DCVCheckDomainsViaHTTPDataItemRedirectsItem is a generated payload type.
 type DCVCheckDomainsViaHTTPDataItemRedirectsItem struct {
 	// A message that explains why the function failed.
-	Content string `json:"content"`
+	Content   string `json:"content"`
 
 	// An object that contains the [HTTP::Tiny](http://search.cpan.org/~dagolden/HTTP-Tiny-0.070/lib/HTTP/Tiny.pm) CPAN module returns.
 	//
 	// **Note:**
 	//
 	//   This object's contents vary according to the URL's headers.
-	Headers json.RawMessage `json:"headers"`
+	Headers   json.RawMessage `json:"headers"`
 
 	// The URL's HTTP protocol.
-	Protocol string `json:"protocol"`
+	Protocol  string `json:"protocol"`
 
 	// The HTTP response status message.
-	Reason string `json:"reason"`
+	Reason    string `json:"reason"`
 
 	// An array of objects containing the redirects, if the value exists.
 	Redirects []json.RawMessage `json:"redirects"`
 
 	// The [HTTP response status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
-	Status int64 `json:"status"`
+	Status    int64 `json:"status"`
 
 	// Whether the server returns a [2XX HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success).
 	// * `1` — The server returns a 2XX status code.
 	// * `0` or an empty string — The server does **not** return a 2XX status code.
-	Success any `json:"success"`
+	Success   any `json:"success"`
 
 	// The URL that the function searches for the DCV file.
-	URL string `json:"url"`
+	URL       string `json:"url"`
 }
 
 // DCVCheckDomainsViaHTTPDataItem is a generated payload type.
 type DCVCheckDomainsViaHTTPDataItem struct {
 	// The reason that the DCV check failed.
 	// * `null` — The domain passed the DCV check.
-	FailureReason *string `json:"failure_reason"`
+	FailureReason  *string `json:"failure_reason"`
 
 	// An array of objects that contains DCV check redirect information.
 	//
 	// **Note:**
 	//
 	//  This **only** contains data if the `redirects_count` return includes a value greater than zero.
-	Redirects []DCVCheckDomainsViaHTTPDataItemRedirectsItem `json:"redirects"`
+	Redirects      []DCVCheckDomainsViaHTTPDataItemRedirectsItem `json:"redirects"`
 
 	// The number of HTTP redirects that the DCV check follows.
 	RedirectsCount int64 `json:"redirects_count"`
@@ -218,3 +220,4 @@ type DCVEnsureDomainsCanPassDCVArgs struct {
 func (c *DCVClient) EnsureDomainsCanPassDCV(ctx context.Context, args *DCVEnsureDomainsCanPassDCVArgs) (*cpanel.UAPIResult[[]*string], error) {
 	return cpanel.UAPICall[[]*string](ctx, c.c, http.MethodGet, "DCV", "ensure_domains_can_pass_dcv", args)
 }
+

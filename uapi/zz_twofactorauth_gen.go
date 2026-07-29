@@ -22,13 +22,14 @@ func (c *TwoFactorAuthClient) GenerateUserConfiguration(ctx context.Context, ext
 	return cpanel.UAPICall[TwoFactorAuthGenerateUserConfigurationData](ctx, c.c, http.MethodGet, "TwoFactorAuth", "generate_user_configuration", cpanel.CombineArgs(extra...))
 }
 
+
 // TwoFactorAuthGenerateUserConfigurationData is a generated payload type.
 type TwoFactorAuthGenerateUserConfigurationData struct {
 	// A one-time authentication URL to encode as the QR code.
 	OtpauthStr string `json:"otpauth_str"`
 
 	// A generated code for use with two-factor authentication.
-	Secret string `json:"secret"`
+	Secret     string `json:"secret"`
 }
 
 // TwoFactorAuthGetTeamUserConfigurationArgs are the parameters of the UAPI function `TwoFactorAuth::get_team_user_configuration`.
@@ -57,6 +58,7 @@ func (c *TwoFactorAuthClient) GetTeamUserConfiguration(ctx context.Context, args
 	return cpanel.UAPICall[TwoFactorAuthGetTeamUserConfigurationData](ctx, c.c, http.MethodGet, "TwoFactorAuth", "get_team_user_configuration", args)
 }
 
+
 // TwoFactorAuthGetTeamUserConfigurationData is a generated payload type.
 type TwoFactorAuthGetTeamUserConfigurationData struct {
 	// Whether two-factor authentication is enabled for the team user.
@@ -67,7 +69,7 @@ type TwoFactorAuthGetTeamUserConfigurationData struct {
 	IsEnabled int64 `json:"is_enabled"`
 
 	// The authentication code issuer's name.
-	Issuer string `json:"issuer"`
+	Issuer    string `json:"issuer"`
 }
 
 // GetUserConfiguration calls the UAPI function `TwoFactorAuth::get_user_configuration` — Return cPanel account 2FA config
@@ -81,6 +83,7 @@ func (c *TwoFactorAuthClient) GetUserConfiguration(ctx context.Context, extra ..
 	return cpanel.UAPICall[TwoFactorAuthGetUserConfigurationData](ctx, c.c, http.MethodGet, "TwoFactorAuth", "get_user_configuration", cpanel.CombineArgs(extra...))
 }
 
+
 // TwoFactorAuthGetUserConfigurationData is a generated payload type.
 type TwoFactorAuthGetUserConfigurationData struct {
 	// Whether two-factor authentication is enabled for the account.
@@ -91,7 +94,7 @@ type TwoFactorAuthGetUserConfigurationData struct {
 	IsEnabled int64 `json:"is_enabled"`
 
 	// The authentication code issuer's name.
-	Issuer string `json:"issuer"`
+	Issuer    string `json:"issuer"`
 }
 
 // RemoveUserConfiguration calls the UAPI function `TwoFactorAuth::remove_user_configuration` — Remove 2FA config
@@ -104,6 +107,7 @@ type TwoFactorAuthGetUserConfigurationData struct {
 func (c *TwoFactorAuthClient) RemoveUserConfiguration(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[TwoFactorAuthRemoveUserConfigurationData], error) {
 	return cpanel.UAPICall[TwoFactorAuthRemoveUserConfigurationData](ctx, c.c, http.MethodGet, "TwoFactorAuth", "remove_user_configuration", cpanel.CombineArgs(extra...))
 }
+
 
 // TwoFactorAuthRemoveUserConfigurationData is a generated payload type.
 type TwoFactorAuthRemoveUserConfigurationData struct {
@@ -144,6 +148,7 @@ type TwoFactorAuthSetUserConfigurationArgs struct {
 func (c *TwoFactorAuthClient) SetUserConfiguration(ctx context.Context, args *TwoFactorAuthSetUserConfigurationArgs) (*cpanel.UAPIResult[TwoFactorAuthSetUserConfigurationData], error) {
 	return cpanel.UAPICall[TwoFactorAuthSetUserConfigurationData](ctx, c.c, http.MethodGet, "TwoFactorAuth", "set_user_configuration", args)
 }
+
 
 // TwoFactorAuthSetUserConfigurationData is a generated payload type.
 type TwoFactorAuthSetUserConfigurationData struct {

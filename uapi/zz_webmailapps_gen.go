@@ -37,17 +37,18 @@ func (c *WebmailAppsClient) ListWebmailApps(ctx context.Context, args *WebmailAp
 	return cpanel.UAPICall[[]WebmailAppsListWebmailAppsDataItem](ctx, c.c, http.MethodGet, "WebmailApps", "list_webmail_apps", args)
 }
 
+
 // WebmailAppsListWebmailAppsDataItem is a generated payload type.
 type WebmailAppsListWebmailAppsDataItem struct {
 	// The webmail client name, as it will display in the interface.
 	DisplayName string `json:"displayname"`
 
 	// An icon file's path, relative to the `/usr/local/cpanel/base/frontend` directory.
-	Icon string `json:"icon"`
+	Icon        string `json:"icon"`
 
 	// The webmail client's ID.
-	ID string `json:"id"`
+	ID          string `json:"id"`
 
 	// The webmail client's URL.
-	URL string `json:"url"`
+	URL         string `json:"url"`
 }

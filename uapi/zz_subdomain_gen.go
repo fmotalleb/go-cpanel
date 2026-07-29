@@ -70,6 +70,7 @@ func (c *SubDomainClient) Addsubdomain(ctx context.Context, args *SubDomainAddsu
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SubDomain", "addsubdomain", args)
 }
 
+
 // SubDomainChangedocrootArgs are the parameters of the UAPI function `SubDomain::changedocroot`.
 type SubDomainChangedocrootArgs struct {
 	// The new document root as a path relative to the user's home
@@ -97,18 +98,18 @@ type SubDomainChangedocrootArgs struct {
 //
 // **Important:**
 //
-//   - This function does **not** apply to the account's primary domain.
-//     Use the WHM API `set_primary_domain_docroot` function to change the document root for a primary domain.
-//   - The target directory must already exist before you call this function.
-//     The function does not create it.
-//   - This function does **not** move any files. You must ensure that the files
-//     exist in the new path when you call this function.
-//   - Any parked domains (`ServerAlias` entries) on the affected domain will
-//     inherit the new document root.
-//   - AutoSSL HTTP-01 renewals will fail if the new document root is empty
-//     or missing at renewal time.
-//   - To revert a document root change, call this function again with the
-//     original path.
+// - This function does **not** apply to the account's primary domain.
+//   Use the WHM API `set_primary_domain_docroot` function to change the document root for a primary domain.
+// - The target directory must already exist before you call this function.
+//   The function does not create it.
+// - This function does **not** move any files. You must ensure that the files
+//   exist in the new path when you call this function.
+// - Any parked domains (`ServerAlias` entries) on the affected domain will
+//   inherit the new document root.
+// - AutoSSL HTTP-01 renewals will fail if the new document root is empty
+//   or missing at renewal time.
+// - To revert a document root change, call this function again with the
+//   original path.
 //
 // When you disable the [Web Server role](https://go.cpanel.net/serverroles#roles),
 // the system **disables** this function.
@@ -119,6 +120,7 @@ type SubDomainChangedocrootArgs struct {
 func (c *SubDomainClient) Changedocroot(ctx context.Context, args *SubDomainChangedocrootArgs) (*cpanel.UAPIResult[SubDomainChangedocrootData], error) {
 	return cpanel.UAPICall[SubDomainChangedocrootData](ctx, c.c, http.MethodGet, "SubDomain", "changedocroot", args)
 }
+
 
 // SubDomainChangedocrootData is a generated payload type.
 type SubDomainChangedocrootData struct {

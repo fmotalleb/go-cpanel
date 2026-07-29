@@ -43,6 +43,7 @@ func (c *UserTasksClient) Delete(ctx context.Context, args *UserTasksDeleteArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "UserTasks", "delete", args)
 }
 
+
 // Retrieve calls the UAPI function `UserTasks::retrieve` — Return task queue information
 //
 // This function retrieves a cPanel account's user task queue information.
@@ -62,6 +63,7 @@ func (c *UserTasksClient) Delete(ctx context.Context, args *UserTasksDeleteArgs)
 func (c *UserTasksClient) Retrieve(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]UserTasksRetrieveDataItem], error) {
 	return cpanel.UAPICall[[]UserTasksRetrieveDataItem](ctx, c.c, http.MethodGet, "UserTasks", "retrieve", cpanel.CombineArgs(extra...))
 }
+
 
 // An object containing one or more action- and subsystem-specific
 // arguments, if any exist.
@@ -85,7 +87,7 @@ type UserTasksRetrieveDataItem struct {
 	// `create` is the only possible value.
 	//
 	// Possible values: `create`.
-	Action string `json:"action"`
+	Action    string `json:"action"`
 
 	// An object containing one or more action- and subsystem-specific
 	// arguments, if any exist.
@@ -93,10 +95,10 @@ type UserTasksRetrieveDataItem struct {
 	// For example, a task that returns an `action` value of `create` and
 	// a `subsystem` value of `VersionControl` will include the
 	// `repository_root` argument.
-	Args UserTasksRetrieveDataItemArgs `json:"args"`
+	Args      UserTasksRetrieveDataItemArgs `json:"args"`
 
 	// The task's ID number.
-	ID string `json:"id"`
+	ID        string `json:"id"`
 
 	// The subsystem that will handle the process.
 	//

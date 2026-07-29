@@ -38,7 +38,7 @@ type BoxTrapperBlacklistMessagesArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system disables this function.
+//   When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system disables this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -47,10 +47,11 @@ func (c *BoxTrapperClient) BlacklistMessages(ctx context.Context, args *BoxTrapp
 	return cpanel.UAPICall[[]BoxTrapperBlacklistMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "blacklist_messages", args)
 }
 
+
 // BoxTrapperBlacklistMessagesDataItem is a generated payload type.
 type BoxTrapperBlacklistMessagesDataItem struct {
 	// The email address that sent the blacklisted message.
-	Email string `json:"email"`
+	Email    string `json:"email"`
 
 	// Whether the system failed to blacklist the message.
 	//
@@ -59,10 +60,10 @@ type BoxTrapperBlacklistMessagesDataItem struct {
 	//  The function only returns this value if it doesn't blacklist the message.
 	//
 	// Possible values: `1`.
-	Failed int64 `json:"failed"`
+	Failed   int64 `json:"failed"`
 
 	// An array of messages that the system deleted.
-	Matches []string `json:"matches"`
+	Matches  []string `json:"matches"`
 
 	// The action that the function performed.
 	//
@@ -74,7 +75,7 @@ type BoxTrapperBlacklistMessagesDataItem struct {
 	// **Note:**
 	//
 	//  The function only returns this value if it doesn't delete the message or experiences issues when it deletes the message.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// Whether the system experienced issues when it blacklisted the message.
 	//
@@ -83,7 +84,7 @@ type BoxTrapperBlacklistMessagesDataItem struct {
 	//  The function only returns this value if it doesn't blacklist the message.
 	//
 	// Possible values: `1`.
-	Warning int64 `json:"warning"`
+	Warning  int64 `json:"warning"`
 }
 
 // BoxTrapperDeleteMessagesArgs are the parameters of the UAPI function `BoxTrapper::delete_messages`.
@@ -135,10 +136,11 @@ func (c *BoxTrapperClient) DeleteMessages(ctx context.Context, args *BoxTrapperD
 	return cpanel.UAPICall[[]BoxTrapperDeleteMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "delete_messages", args)
 }
 
+
 // BoxTrapperDeleteMessagesDataItem is a generated payload type.
 type BoxTrapperDeleteMessagesDataItem struct {
 	// The deleted email message's sender.
-	Email string `json:"email"`
+	Email    string `json:"email"`
 
 	// Whether the system failed to delete the messages.
 	//
@@ -147,10 +149,10 @@ type BoxTrapperDeleteMessagesDataItem struct {
 	// The function only returns this value if it doesn't delete the message.
 	//
 	// Possible values: `1`.
-	Failed int64 `json:"failed"`
+	Failed   int64 `json:"failed"`
 
 	// An array of messages that the system deleted.
-	Matches []string `json:"matches"`
+	Matches  []string `json:"matches"`
 
 	// The operation that the system performed.
 	//
@@ -162,7 +164,7 @@ type BoxTrapperDeleteMessagesDataItem struct {
 	// **Note:**
 	//
 	// The function only returns this value if it doesn't delete the message or experiences issues when it deletes the message.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// Whether the system experienced issues when it deleted the message.
 	//
@@ -171,7 +173,7 @@ type BoxTrapperDeleteMessagesDataItem struct {
 	// The function only returns this value if it experiences issues when it deletes the message.
 	//
 	// Possible values: `1`.
-	Warning int64 `json:"warning"`
+	Warning  int64 `json:"warning"`
 }
 
 // BoxTrapperDeliverMessagesArgs are the parameters of the UAPI function `BoxTrapper::deliver_messages`.
@@ -226,10 +228,11 @@ func (c *BoxTrapperClient) DeliverMessages(ctx context.Context, args *BoxTrapper
 	return cpanel.UAPICall[[]BoxTrapperDeliverMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "deliver_messages", args)
 }
 
+
 // BoxTrapperDeliverMessagesDataItem is a generated payload type.
 type BoxTrapperDeliverMessagesDataItem struct {
 	// The delivered email message's sender.
-	Email string `json:"email"`
+	Email    string `json:"email"`
 
 	// Whether the system could not deliver the message.
 	//
@@ -239,10 +242,10 @@ type BoxTrapperDeliverMessagesDataItem struct {
 	//  * `1` is the only possible value.
 	//
 	// Possible values: `1`.
-	Failed int64 `json:"failed"`
+	Failed   int64 `json:"failed"`
 
 	// A list of delivered email messages.
-	Matches []string `json:"matches"`
+	Matches  []string `json:"matches"`
 
 	// The action that the function performed.
 	//
@@ -258,7 +261,7 @@ type BoxTrapperDeliverMessagesDataItem struct {
 	//
 	// The function only returns this value if it doesn't delete the message or experiences
 	// issues when it deletes the message.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// Whether the system experienced issues when it delivered the message.
 	//
@@ -268,7 +271,7 @@ type BoxTrapperDeliverMessagesDataItem struct {
 	//  * `1` is the only possible value.
 	//
 	// Possible values: `1`.
-	Warning int64 `json:"warning"`
+	Warning  int64 `json:"warning"`
 }
 
 // BoxTrapperGetAllowlistArgs are the parameters of the UAPI function `BoxTrapper::get_allowlist`.
@@ -304,6 +307,7 @@ func (c *BoxTrapperClient) GetAllowlist(ctx context.Context, args *BoxTrapperGet
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BoxTrapper", "get_allowlist", args)
 }
 
+
 // BoxTrapperGetBlocklistArgs are the parameters of the UAPI function `BoxTrapper::get_blocklist`.
 type BoxTrapperGetBlocklistArgs struct {
 	// A valid email address on the cPanel account.
@@ -337,6 +341,7 @@ func (c *BoxTrapperClient) GetBlocklist(ctx context.Context, args *BoxTrapperGet
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BoxTrapper", "get_blocklist", args)
 }
 
+
 // BoxTrapperGetConfigurationArgs are the parameters of the UAPI function `BoxTrapper::get_configuration`.
 type BoxTrapperGetConfigurationArgs struct {
 	// The account's email address.
@@ -358,7 +363,7 @@ type BoxTrapperGetConfigurationArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system disables this function.
+//   When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system disables this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -367,6 +372,7 @@ func (c *BoxTrapperClient) GetConfiguration(ctx context.Context, args *BoxTrappe
 	return cpanel.UAPICall[BoxTrapperGetConfigurationData](ctx, c.c, http.MethodGet, "BoxTrapper", "get_configuration", args)
 }
 
+
 // BoxTrapperGetConfigurationData is a generated payload type.
 type BoxTrapperGetConfigurationData struct {
 	// Whether whitelisting is enabled.
@@ -374,19 +380,19 @@ type BoxTrapperGetConfigurationData struct {
 	// * 0 - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	EnableAutoWhitelist int64 `json:"enable_auto_whitelist"`
+	EnableAutoWhitelist    int64 `json:"enable_auto_whitelist"`
 
 	// The email addresses that send emails from the account. A comma-separated list of email addresses.
-	FromAddresses string `json:"from_addresses"`
+	FromAddresses          string `json:"from_addresses"`
 
 	// The name of the person who owns the email account.
-	FromName string `json:"from_name"`
+	FromName               string `json:"from_name"`
 
 	// The number of days that the system retains log files and queued messages.
-	QueueDays int64 `json:"queue_days"`
+	QueueDays              int64 `json:"queue_days"`
 
 	// The account's [Apache SpamAssassin](https://go.cpanel.net/cpaneldocsSpamFilters) threshold score.
-	SpamScore float64 `json:"spam_score"`
+	SpamScore              float64 `json:"spam_score"`
 
 	// Whether the system whitelisted the email addresses in a message's `To` and `From` sections, including carbon-copied (CC) recipients.
 	//
@@ -433,9 +439,9 @@ type BoxTrapperGetEmailTemplateArgs struct {
 //
 // **Important:**
 //
-//	When you disable the
-//	[*Receive Mail* role](https://go.cpanel.net/serverroles),
-//	the system **disables** this function.
+//   When you disable the
+//   [*Receive Mail* role](https://go.cpanel.net/serverroles),
+//   the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 84.
 //
@@ -443,6 +449,7 @@ type BoxTrapperGetEmailTemplateArgs struct {
 func (c *BoxTrapperClient) GetEmailTemplate(ctx context.Context, args *BoxTrapperGetEmailTemplateArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "BoxTrapper", "get_email_template", args)
 }
+
 
 // BoxTrapperGetForwardersArgs are the parameters of the UAPI function `BoxTrapper::get_forwarders`.
 type BoxTrapperGetForwardersArgs struct {
@@ -473,6 +480,7 @@ type BoxTrapperGetForwardersArgs struct {
 func (c *BoxTrapperClient) GetForwarders(ctx context.Context, args *BoxTrapperGetForwardersArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BoxTrapper", "get_forwarders", args)
 }
+
 
 // BoxTrapperGetIgnorelistArgs are the parameters of the UAPI function `BoxTrapper::get_ignorelist`.
 type BoxTrapperGetIgnorelistArgs struct {
@@ -506,6 +514,7 @@ type BoxTrapperGetIgnorelistArgs struct {
 func (c *BoxTrapperClient) GetIgnorelist(ctx context.Context, args *BoxTrapperGetIgnorelistArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BoxTrapper", "get_ignorelist", args)
 }
+
 
 // BoxTrapperGetLogArgs are the parameters of the UAPI function `BoxTrapper::get_log`.
 type BoxTrapperGetLogArgs struct {
@@ -544,16 +553,17 @@ func (c *BoxTrapperClient) GetLog(ctx context.Context, args *BoxTrapperGetLogArg
 	return cpanel.UAPICall[BoxTrapperGetLogData](ctx, c.c, http.MethodGet, "BoxTrapper", "get_log", args)
 }
 
+
 // BoxTrapperGetLogData is a generated payload type.
 type BoxTrapperGetLogData struct {
 	// The date for which the system returned the log.
-	Date int64 `json:"date"`
+	Date  int64 `json:"date"`
 
 	// An array of lines from the log file. If the log file doesn't exist or if no log lines exist in the file, the function returns an empty array.
 	Lines []string `json:"lines"`
 
 	// The log file's filepath. If the log file doesn't exist, the function returns an empty string.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 }
 
 // BoxTrapperGetMessageArgs are the parameters of the UAPI function `BoxTrapper::get_message`.
@@ -591,12 +601,13 @@ func (c *BoxTrapperClient) GetMessage(ctx context.Context, args *BoxTrapperGetMe
 	return cpanel.UAPICall[BoxTrapperGetMessageData](ctx, c.c, http.MethodGet, "BoxTrapper", "get_message", args)
 }
 
+
 // BoxTrapperGetMessageData is a generated payload type.
 type BoxTrapperGetMessageData struct {
 	// The email message's contents. Up to the first 200 lines of an email message.
-	Content string `json:"content"`
+	Content   string `json:"content"`
 
-	Contents json.RawMessage `json:"contents"`
+	Contents  json.RawMessage `json:"contents"`
 
 	// The message's filename.
 	QueueFile string `json:"queuefile"`
@@ -631,6 +642,7 @@ type BoxTrapperGetStatusArgs struct {
 func (c *BoxTrapperClient) GetStatus(ctx context.Context, args *BoxTrapperGetStatusArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "BoxTrapper", "get_status", args)
 }
+
 
 // BoxTrapperIgnoreMessagesArgs are the parameters of the UAPI function `BoxTrapper::ignore_messages`.
 type BoxTrapperIgnoreMessagesArgs struct {
@@ -672,10 +684,11 @@ func (c *BoxTrapperClient) IgnoreMessages(ctx context.Context, args *BoxTrapperI
 	return cpanel.UAPICall[[]BoxTrapperIgnoreMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "ignore_messages", args)
 }
 
+
 // BoxTrapperIgnoreMessagesDataItem is a generated payload type.
 type BoxTrapperIgnoreMessagesDataItem struct {
 	// The ignored email message's sender.
-	Email string `json:"email"`
+	Email    string `json:"email"`
 
 	// Whether the system failed to ignore the messages.
 	//
@@ -694,10 +707,10 @@ type BoxTrapperIgnoreMessagesDataItem struct {
 	//  The function only returns this value if it experiences issues when it ignores the message.
 	//
 	// Possible values: `1`.
-	Failed int64 `json:"failed"`
+	Failed   int64 `json:"failed"`
 
 	// An array containing ignored message files.
-	Matches []string `json:"matches"`
+	Matches  []string `json:"matches"`
 
 	// The operation that the system performed.
 	//
@@ -711,7 +724,7 @@ type BoxTrapperIgnoreMessagesDataItem struct {
 	// **Note:**
 	//
 	//  The function only returns this value if it doesn't ignore the message or experiences issues when it ignores the message.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// Whether the system experienced issues when it ignored the message.
 	//
@@ -722,7 +735,7 @@ type BoxTrapperIgnoreMessagesDataItem struct {
 	//  The function only returns this value if it experiences issues when it ignores the message.
 	//
 	// Possible values: `1`.
-	Warning int64 `json:"warning"`
+	Warning  int64 `json:"warning"`
 }
 
 // ListEmailTemplates calls the UAPI function `BoxTrapper::list_email_templates` — Return BoxTrapper email templates
@@ -739,6 +752,7 @@ type BoxTrapperIgnoreMessagesDataItem struct {
 func (c *BoxTrapperClient) ListEmailTemplates(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BoxTrapper", "list_email_templates", cpanel.CombineArgs(extra...))
 }
+
 
 // BoxTrapperListQueuedMessagesArgs are the parameters of the UAPI function `BoxTrapper::list_queued_messages`.
 type BoxTrapperListQueuedMessagesArgs struct {
@@ -764,8 +778,8 @@ type BoxTrapperListQueuedMessagesArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables**
-//	this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/serverroles), the system **disables**
+//   this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -774,19 +788,20 @@ func (c *BoxTrapperClient) ListQueuedMessages(ctx context.Context, args *BoxTrap
 	return cpanel.UAPICall[[]BoxTrapperListQueuedMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "list_queued_messages", args)
 }
 
+
 // BoxTrapperListQueuedMessagesDataItem is a generated payload type.
 type BoxTrapperListQueuedMessagesDataItem struct {
 	// The sender's email address.
-	From string `json:"from"`
+	From      string `json:"from"`
 
 	// The message's unique ID.
 	QueueFile string `json:"queuefile"`
 
 	// The message's subject.
-	Subject string `json:"subject"`
+	Subject   string `json:"subject"`
 
 	// The message's creation time.
-	Time int64 `json:"time"`
+	Time      int64 `json:"time"`
 }
 
 // BoxTrapperProcessMessagesArgs are the parameters of the UAPI function `BoxTrapper::process_messages`.
@@ -837,11 +852,12 @@ func (c *BoxTrapperClient) ProcessMessages(ctx context.Context, args *BoxTrapper
 	return cpanel.UAPICall[[]BoxTrapperProcessMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "process_messages", args)
 }
 
+
 // BoxTrapperProcessMessagesDataItem is a generated payload type.
 type BoxTrapperProcessMessagesDataItem struct {
 	// The email address for which the system
 	// processed an email message.
-	Email *string `json:"email"`
+	Email    *string `json:"email"`
 
 	// Whether the system failed to process the message.
 	//
@@ -853,10 +869,10 @@ type BoxTrapperProcessMessagesDataItem struct {
 	// The function only returns this value if it fails to process the message.
 	//
 	// Possible values: `1`.
-	Failed int64 `json:"failed"`
+	Failed   int64 `json:"failed"`
 
 	// An array of email messages that the system processed.
-	Matches []string `json:"matches"`
+	Matches  []string `json:"matches"`
 
 	// The operation that the system performed.
 	// * `deliver` - Delivered a specific message.
@@ -873,7 +889,7 @@ type BoxTrapperProcessMessagesDataItem struct {
 	// **Note:**
 	//
 	// The function only returns this value if it fails to processes the message or experiences issues when it processes the message.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 }
 
 // BoxTrapperResetEmailTemplateArgs are the parameters of the UAPI function `BoxTrapper::reset_email_template`.
@@ -914,6 +930,7 @@ type BoxTrapperResetEmailTemplateArgs struct {
 func (c *BoxTrapperClient) ResetEmailTemplate(ctx context.Context, args *BoxTrapperResetEmailTemplateArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "reset_email_template", args)
 }
+
 
 // BoxTrapperSaveConfigurationArgs are the parameters of the UAPI function `BoxTrapper::save_configuration`.
 type BoxTrapperSaveConfigurationArgs struct {
@@ -985,6 +1002,7 @@ func (c *BoxTrapperClient) SaveConfiguration(ctx context.Context, args *BoxTrapp
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "save_configuration", args)
 }
 
+
 // BoxTrapperSaveEmailTemplateArgs are the parameters of the UAPI function `BoxTrapper::save_email_template`.
 type BoxTrapperSaveEmailTemplateArgs struct {
 	// The template file's contents.
@@ -1055,6 +1073,7 @@ func (c *BoxTrapperClient) SaveEmailTemplate(ctx context.Context, args *BoxTrapp
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "save_email_template", args)
 }
 
+
 // BoxTrapperSetAllowlistArgs are the parameters of the UAPI function `BoxTrapper::set_allowlist`.
 type BoxTrapperSetAllowlistArgs struct {
 	// A valid email address on the cPanel account.
@@ -1097,6 +1116,7 @@ type BoxTrapperSetAllowlistArgs struct {
 func (c *BoxTrapperClient) SetAllowlist(ctx context.Context, args *BoxTrapperSetAllowlistArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "set_allowlist", args)
 }
+
 
 // BoxTrapperSetBlocklistArgs are the parameters of the UAPI function `BoxTrapper::set_blocklist`.
 type BoxTrapperSetBlocklistArgs struct {
@@ -1141,6 +1161,7 @@ func (c *BoxTrapperClient) SetBlocklist(ctx context.Context, args *BoxTrapperSet
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "set_blocklist", args)
 }
 
+
 // BoxTrapperSetForwardersArgs are the parameters of the UAPI function `BoxTrapper::set_forwarders`.
 type BoxTrapperSetForwardersArgs struct {
 	// The account's email address.
@@ -1169,7 +1190,7 @@ type BoxTrapperSetForwardersArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system **disables** this function.
+//   When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 86.
 //
@@ -1177,6 +1198,7 @@ type BoxTrapperSetForwardersArgs struct {
 func (c *BoxTrapperClient) SetForwarders(ctx context.Context, args *BoxTrapperSetForwardersArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "set_forwarders", args)
 }
+
 
 // BoxTrapperSetIgnorelistArgs are the parameters of the UAPI function `BoxTrapper::set_ignorelist`.
 type BoxTrapperSetIgnorelistArgs struct {
@@ -1221,6 +1243,7 @@ func (c *BoxTrapperClient) SetIgnorelist(ctx context.Context, args *BoxTrapperSe
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "set_ignorelist", args)
 }
 
+
 // BoxTrapperSetStatusArgs are the parameters of the UAPI function `BoxTrapper::set_status`.
 type BoxTrapperSetStatusArgs struct {
 	// The account's name. This can be an email address or the cPanel user’s username.
@@ -1252,7 +1275,7 @@ type BoxTrapperSetStatusArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system **disables** this function.
+//   When you disable the [Receive Mail](https://go.cpanel.net/serverroles) role, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 82.
 //
@@ -1260,6 +1283,7 @@ type BoxTrapperSetStatusArgs struct {
 func (c *BoxTrapperClient) SetStatus(ctx context.Context, args *BoxTrapperSetStatusArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "BoxTrapper", "set_status", args)
 }
+
 
 // BoxTrapperWhitelistMessagesArgs are the parameters of the UAPI function `BoxTrapper::whitelist_messages`.
 type BoxTrapperWhitelistMessagesArgs struct {
@@ -1306,10 +1330,11 @@ func (c *BoxTrapperClient) WhitelistMessages(ctx context.Context, args *BoxTrapp
 	return cpanel.UAPICall[[]BoxTrapperWhitelistMessagesDataItem](ctx, c.c, http.MethodGet, "BoxTrapper", "whitelist_messages", args)
 }
 
+
 // BoxTrapperWhitelistMessagesDataItem is a generated payload type.
 type BoxTrapperWhitelistMessagesDataItem struct {
 	// A whitelisted email address.
-	Email string `json:"email"`
+	Email    string `json:"email"`
 
 	// The system failed to whitelist the message.
 	//
@@ -1320,14 +1345,14 @@ type BoxTrapperWhitelistMessagesDataItem struct {
 	// The function only returns this property if it failed to whitelist the message.
 	//
 	// Possible values: `1`.
-	Failed string `json:"failed"`
+	Failed   string `json:"failed"`
 
 	// An array of message files that the system whitelisted.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value if it whitelists the message.
-	Matches []string `json:"matches"`
+	Matches  []string `json:"matches"`
 
 	// The action that the system performed.
 	//
@@ -1335,7 +1360,7 @@ type BoxTrapperWhitelistMessagesDataItem struct {
 	Operator string `json:"operator"`
 
 	// The reason the function skipped the message during whitelisting. The `reason` property is returned only if the function failed to whitelist the message.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// Whether the system experienced issues when it whitelisted the message.
 	//
@@ -1346,5 +1371,5 @@ type BoxTrapperWhitelistMessagesDataItem struct {
 	// The function only returns this property if it failed to whitelist the message.
 	//
 	// Possible values: `1`.
-	Warning int64 `json:"warning"`
+	Warning  int64 `json:"warning"`
 }

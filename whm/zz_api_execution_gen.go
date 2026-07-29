@@ -58,19 +58,20 @@ func (c *Client) Batch(ctx context.Context, args *BatchArgs) (*cpanel.WHMResult[
 	return cpanel.WHMCall[BatchData](ctx, c.c, http.MethodGet, "batch", args)
 }
 
+
 // The metadata returned by the command.
 type BatchDataResultItemMetadata struct {
 	// The method name called.
 	Command string `json:"command"`
 
 	// The reason the API function failed when the `metadata.result` field is `0`. This field may display a success message when a function succeeds.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// * `1` - Success.
 	// * `0` - Failed. Check the `reason` field for more details.
 	//
 	// Possible values: `0`, `1`.
-	Result int64 `json:"result"`
+	Result  int64 `json:"result"`
 
 	// The version of the API function.
 	Version int64 `json:"version"`
@@ -79,7 +80,7 @@ type BatchDataResultItemMetadata struct {
 // BatchDataResultItem is a generated payload type.
 type BatchDataResultItem struct {
 	// The data returned by the command.
-	Data json.RawMessage `json:"data"`
+	Data     json.RawMessage `json:"data"`
 
 	// The metadata returned by the command.
 	Metadata BatchDataResultItemMetadata `json:"metadata"`
@@ -113,6 +114,7 @@ func (c *Client) CorsProxyGet(ctx context.Context, args *CorsProxyGetArgs) (*cpa
 	return cpanel.WHMCall[CorsProxyGetData](ctx, c.c, http.MethodGet, "cors_proxy_get", args)
 }
 
+
 // CorsProxyGetDataCpRedirectsItem is a generated payload type.
 type CorsProxyGetDataCpRedirectsItem struct {
 	// An object containing the header fields that the request returned.
@@ -120,26 +122,26 @@ type CorsProxyGetDataCpRedirectsItem struct {
 	// **Note:**
 	//
 	// This object's keys vary based on the URL's headers.
-	Headers map[string]any `json:"headers"`
+	Headers  map[string]any `json:"headers"`
 
 	// The URL's HTTP protocol.
 	Protocol *string `json:"protocol"`
 
 	// The response that the server returned.
-	Reason *string `json:"reason"`
+	Reason   *string `json:"reason"`
 
 	// The response's HTTP status code.
-	Status *string `json:"status"`
+	Status   *string `json:"status"`
 
 	// Whether the function returned a 2XX HTTP status code.
 	// - `1` -  Success.
 	// - `0` -  Failure.
 	//
 	// Possible values: `0`, `1`.
-	Success *int64 `json:"success"`
+	Success  *int64 `json:"success"`
 
 	// The URL that provided the response.
-	URL *string `json:"url"`
+	URL      *string `json:"url"`
 }
 
 // CorsProxyGetData is a generated payload type.
@@ -160,7 +162,7 @@ type CorsProxyGetData struct {
 	// **Note:**
 	//
 	//  We strongly recommend that you confirm the content's type before you use the content return's value. The function may also return this value in the _cp_redirects array of hashes. A valid string.
-	Content string `json:"content"`
+	Content     string `json:"content"`
 }
 
 // CpanelArgs are the parameters of the WHM API 1 function `cpanel`.
@@ -232,6 +234,7 @@ func (c *Client) Cpanel(ctx context.Context, args *CpanelArgs) (*cpanel.WHMResul
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "cpanel", args)
 }
 
+
 // ExecuteRemoteWHMAPI1WithPasswordArgs are the parameters of the WHM API 1 function `execute_remote_whmapi1_with_password`.
 type ExecuteRemoteWHMAPI1WithPasswordArgs struct {
 	// The name of the function to call on the remote server.
@@ -294,9 +297,10 @@ func (c *Client) ExecuteRemoteWHMAPI1WithPassword(ctx context.Context, args *Exe
 	return cpanel.WHMCall[ExecuteRemoteWHMAPI1WithPasswordData](ctx, c.c, http.MethodGet, "execute_remote_whmapi1_with_password", args)
 }
 
+
 // ExecuteRemoteWHMAPI1WithPasswordData is a generated payload type.
 type ExecuteRemoteWHMAPI1WithPasswordData struct {
-	App []string `json:"app"`
+	App     []string `json:"app"`
 
 	// The function's output.
 	//
@@ -346,6 +350,7 @@ func (c *Client) UapiCpanel(ctx context.Context, args *UapiCpanelArgs) (*cpanel.
 	return cpanel.WHMCall[UapiCpanelData](ctx, c.c, http.MethodGet, "uapi_cpanel", args)
 }
 
+
 // UapiCpanelDataUapiMetadata is a generated payload type.
 type UapiCpanelDataUapiMetadata struct {
 	// - 1 - A transform was applied.
@@ -358,10 +363,10 @@ type UapiCpanelDataUapiMetadata struct {
 // hash of function output. Each hash contains the returns from the called UAPI function. For information about a function's returns, read the function's documentation.
 type UapiCpanelDataUapi struct {
 	// The UAPI response. This value varies based on the UAPI function requested.
-	Data json.RawMessage `json:"data"`
+	Data     json.RawMessage `json:"data"`
 
 	// List of errors produced the by the API if any.
-	Errors []string `json:"errors"`
+	Errors   []string `json:"errors"`
 
 	// List of messages produced the by the API if any.
 	Messages []string `json:"messages"`
@@ -372,7 +377,7 @@ type UapiCpanelDataUapi struct {
 	// - 0 - Failed: Check the errors field for more details.
 	//
 	// Possible values: `0`, `1`.
-	Status int64 `json:"status"`
+	Status   int64 `json:"status"`
 
 	// List of warnings produced the by the API if any.
 	Warnings []string `json:"warnings"`

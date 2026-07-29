@@ -22,10 +22,11 @@ func (c *WebVhostsClient) ListDomains(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.UAPICall[[]WebVhostsListDomainsDataItem](ctx, c.c, http.MethodGet, "WebVhosts", "list_domains", cpanel.CombineArgs(extra...))
 }
 
+
 // WebVhostsListDomainsDataItem is a generated payload type.
 type WebVhostsListDomainsDataItem struct {
 	// The domain name.
-	Domain string `json:"domain"`
+	Domain          string `json:"domain"`
 
 	// An array of service subdomains (proxy subdomains) listed for the domain.
 	//
@@ -39,10 +40,10 @@ type WebVhostsListDomainsDataItem struct {
 	// * `0` - **Not** secured.
 	//
 	// Possible values: `0`, `1`.
-	VhostIsSSL int64 `json:"vhost_is_ssl"`
+	VhostIsSSL      int64 `json:"vhost_is_ssl"`
 
 	// The name of the virtual host.
-	VhostName string `json:"vhost_name"`
+	VhostName       string `json:"vhost_name"`
 }
 
 // WebVhostsListSSLCapableDomainsArgs are the parameters of the UAPI function `WebVhosts::list_ssl_capable_domains`.
@@ -76,10 +77,11 @@ func (c *WebVhostsClient) ListSSLCapableDomains(ctx context.Context, args *WebVh
 	return cpanel.UAPICall[[]WebVhostsListSSLCapableDomainsDataItem](ctx, c.c, http.MethodGet, "WebVhosts", "list_ssl_capable_domains", args)
 }
 
+
 // WebVhostsListSSLCapableDomainsDataItem is a generated payload type.
 type WebVhostsListSSLCapableDomainsDataItem struct {
 	// A valid domain name on the virtual host.
-	Domain string `json:"domain"`
+	Domain    string `json:"domain"`
 
 	// Whether the system automatically created the service subdomain or a user manually created the domain.
 	// * `1` - The system automatically created the service subdomain.
@@ -90,7 +92,7 @@ type WebVhostsListSSLCapableDomainsDataItem struct {
 	// If a user manually creates a subdomain that matches a preassigned subdomain (for example, cpanel or whm), then the function returns `0`.
 	//
 	// Possible values: `0`, `1`.
-	IsProxy int64 `json:"is_proxy"`
+	IsProxy   int64 `json:"is_proxy"`
 
 	// The name of the virtual host or website.
 	VhostName string `json:"vhost_name"`

@@ -25,10 +25,11 @@ func (c *ServiceProxyClient) GetServiceProxyBackends(ctx context.Context, extra 
 	return cpanel.UAPICall[[]ServiceProxyGetServiceProxyBackendsDataItem](ctx, c.c, http.MethodGet, "ServiceProxy", "get_service_proxy_backends", cpanel.CombineArgs(extra...))
 }
 
+
 // ServiceProxyGetServiceProxyBackendsDataItem is a generated payload type.
 type ServiceProxyGetServiceProxyBackendsDataItem struct {
 	// The name of the server to which the system will proxy requests for this service group.
-	Backend string `json:"backend"`
+	Backend      string `json:"backend"`
 
 	// The name of the proxying service group, if applicable.
 	//
@@ -96,6 +97,7 @@ func (c *ServiceProxyClient) SetServiceProxyBackends(ctx context.Context, args *
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ServiceProxy", "set_service_proxy_backends", args)
 }
 
+
 // UnsetAllServiceProxyBackends calls the UAPI function `ServiceProxy::unset_all_service_proxy_backends` — Remove cPanel account service proxying
 //
 // This function removes a cPanel account's
@@ -117,3 +119,4 @@ func (c *ServiceProxyClient) SetServiceProxyBackends(ctx context.Context, args *
 func (c *ServiceProxyClient) UnsetAllServiceProxyBackends(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ServiceProxy", "unset_all_service_proxy_backends", cpanel.CombineArgs(extra...))
 }
+

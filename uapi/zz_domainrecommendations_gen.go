@@ -54,70 +54,71 @@ func (c *DomainRecommendationsClient) DomainAvailability(ctx context.Context, ar
 	return cpanel.UAPICall[DomainRecommendationsDomainAvailabilityData](ctx, c.c, http.MethodGet, "DomainRecommendations", "domain_availability", args)
 }
 
+
 // The registration price for this period.
 type PricingPeriodRegister struct {
 	// The ISO 4217 currency code.
-	Code string `json:"code"`
+	Code         string `json:"code"`
 
 	// The formatted price string including prefix and suffix.
 	DisplayValue string `json:"display_value"`
 
 	// The currency symbol that appears before the value.
-	Prefix string `json:"prefix"`
+	Prefix       string `json:"prefix"`
 
 	// The currency label that appears after the value.
-	Suffix string `json:"suffix"`
+	Suffix       string `json:"suffix"`
 
 	// The numeric price as a decimal string.
-	Value string `json:"value"`
+	Value        string `json:"value"`
 }
 
 // The renewal price for this period.
 type PricingPeriodRenew struct {
 	// The ISO 4217 currency code.
-	Code string `json:"code"`
+	Code         string `json:"code"`
 
 	// The formatted price string including prefix and suffix.
 	DisplayValue string `json:"display_value"`
 
 	// The currency symbol that appears before the value.
-	Prefix string `json:"prefix"`
+	Prefix       string `json:"prefix"`
 
 	// The currency label that appears after the value.
-	Suffix string `json:"suffix"`
+	Suffix       string `json:"suffix"`
 
 	// The numeric price as a decimal string.
-	Value string `json:"value"`
+	Value        string `json:"value"`
 }
 
 // The transfer price for this period.
 type PricingPeriodTransfer struct {
 	// The ISO 4217 currency code.
-	Code string `json:"code"`
+	Code         string `json:"code"`
 
 	// The formatted price string including prefix and suffix.
 	DisplayValue string `json:"display_value"`
 
 	// The currency symbol that appears before the value.
-	Prefix string `json:"prefix"`
+	Prefix       string `json:"prefix"`
 
 	// The currency label that appears after the value.
-	Suffix string `json:"suffix"`
+	Suffix       string `json:"suffix"`
 
 	// The numeric price as a decimal string.
-	Value string `json:"value"`
+	Value        string `json:"value"`
 }
 
 // Pricing for a single registration period.
 type PricingPeriod struct {
 	// The registration period in years.
-	Period int64 `json:"period"`
+	Period   int64 `json:"period"`
 
 	// The registration price for this period.
 	Register PricingPeriodRegister `json:"register"`
 
 	// The renewal price for this period.
-	Renew PricingPeriodRenew `json:"renew"`
+	Renew    PricingPeriodRenew `json:"renew"`
 
 	// The transfer price for this period.
 	Transfer PricingPeriodTransfer `json:"transfer"`
@@ -127,55 +128,55 @@ type PricingPeriod struct {
 // from the configured domain store.
 type DomainRecommendationsDomainAvailabilityData struct {
 	// The fully-qualified domain name (FQDN) that the function checked.
-	DomainName string `json:"domain_name"`
+	DomainName         string `json:"domain_name"`
 
 	// The domain group, if applicable.
-	Group *string `json:"group"`
+	Group              *string `json:"group"`
 
 	// The internationalized domain name (IDN) of the checked domain.
-	IdnDomainName string `json:"idn_domain_name"`
+	IdnDomainName      string `json:"idn_domain_name"`
 
 	// The internationalized second-level domain (SLD) portion of the checked domain.
-	IdnSld string `json:"idn_sld"`
+	IdnSld             string `json:"idn_sld"`
 
 	// Whether the domain is available for
 	// registration.
 	//
 	// * `true` — Available.
 	// * `false` — Not available.
-	IsDomainAvailable bool `json:"is_domain_available"`
+	IsDomainAvailable  bool `json:"is_domain_available"`
 
 	// Whether the domain is a premium domain with
 	// special pricing.
 	//
 	// * `true` — The domain is a premium domain.
 	// * `false` — The domain is not a premium domain.
-	IsPremium bool `json:"is_premium"`
+	IsPremium          bool `json:"is_premium"`
 
 	// Whether the TLD is available for registration
 	// through the configured store.
 	//
 	// * `true` — The TLD is available.
 	// * `false` — The TLD is not available.
-	IsTldAvailable bool `json:"is_tld_available"`
+	IsTldAvailable     bool `json:"is_tld_available"`
 
 	// The pricing structure for the premium domain, if applicable.
 	PremiumCostPricing json.RawMessage `json:"premium_cost_pricing"`
 
 	// An array of pricing options for each
 	// registration period (in years).
-	Pricing []PricingPeriod `json:"pricing"`
+	Pricing            []PricingPeriod `json:"pricing"`
 
-	ShortestPeriod json.RawMessage `json:"shortest_period"`
+	ShortestPeriod     json.RawMessage `json:"shortest_period"`
 
 	// The second-level domain (SLD) portion of the checked domain.
-	Sld string `json:"sld"`
+	Sld                string `json:"sld"`
 
 	// A string describing the availability status of the domain.
-	Status string `json:"status"`
+	Status             string `json:"status"`
 
 	// The top-level domain (TLD) portion of the checked domain.
-	Tld string `json:"tld"`
+	Tld                string `json:"tld"`
 }
 
 // DomainRecommendationsDomainSuggestionsArgs are the parameters of the UAPI function `DomainRecommendations::domain_suggestions`.
@@ -230,13 +231,14 @@ func (c *DomainRecommendationsClient) DomainSuggestions(ctx context.Context, arg
 	return cpanel.UAPICall[DomainRecommendationsDomainSuggestionsData](ctx, c.c, http.MethodGet, "DomainRecommendations", "domain_suggestions", args)
 }
 
+
 // Pagination and result metadata that the store returns.
 type DomainRecommendationsDomainSuggestionsDataMeta struct {
 	// The current page number (1-indexed).
-	Page int64 `json:"page"`
+	Page       int64 `json:"page"`
 
 	// The number of results per page.
-	PageSize int64 `json:"page_size"`
+	PageSize   int64 `json:"page_size"`
 
 	// The total number of available matching domain suggestions.
 	TotalItems int64 `json:"total_items"`
@@ -247,15 +249,15 @@ type DomainRecommendationsDomainSuggestionsDataMeta struct {
 
 // Premium registration price for this term.
 type DomainRecommendationsDomainSuggestionsDataSuggestionsValuePremiumCostPricingRegisterValue struct {
-	Code string `json:"code"`
+	Code         string `json:"code"`
 
 	DisplayValue string `json:"display_value"`
 
-	Prefix string `json:"prefix"`
+	Prefix       string `json:"prefix"`
 
-	Suffix string `json:"suffix"`
+	Suffix       string `json:"suffix"`
 
-	Value string `json:"value"`
+	Value        string `json:"value"`
 }
 
 // Premium pricing details for premium domains.
@@ -271,19 +273,19 @@ type DomainRecommendationsDomainSuggestionsDataSuggestionsValue struct {
 	// * `0` — Non-premium domain.
 	//
 	// Possible values: `0`, `1`.
-	IsPremium int64 `json:"is_premium"`
+	IsPremium          int64 `json:"is_premium"`
 
 	// Premium pricing details for premium domains.
 	PremiumCostPricing DomainRecommendationsDomainSuggestionsDataSuggestionsValuePremiumCostPricing `json:"premium_cost_pricing"`
 
 	// An array of available pricing periods for the domain.
-	Pricing []PricingPeriod `json:"pricing"`
+	Pricing            []PricingPeriod `json:"pricing"`
 }
 
 // An object containing pagination metadata and domain suggestions.
 type DomainRecommendationsDomainSuggestionsData struct {
 	// Pagination and result metadata that the store returns.
-	Meta DomainRecommendationsDomainSuggestionsDataMeta `json:"meta"`
+	Meta        DomainRecommendationsDomainSuggestionsDataMeta `json:"meta"`
 
 	// A mapping of available domain names to pricing periods.
 	//
@@ -317,6 +319,7 @@ func (c *DomainRecommendationsClient) GetStoreConfig(ctx context.Context, extra 
 	return cpanel.UAPICall[DomainRecommendationsGetStoreConfigData](ctx, c.c, http.MethodGet, "DomainRecommendations", "get_store_config", cpanel.CombineArgs(extra...))
 }
 
+
 // An object containing the allowlisted store configuration values.
 // Returns an empty object (`{}`) if no store is configured.
 type DomainRecommendationsGetStoreConfigData struct {
@@ -340,6 +343,7 @@ type DomainRecommendationsGetStoreConfigData struct {
 func (c *DomainRecommendationsClient) IsEnabled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[DomainRecommendationsIsEnabledData], error) {
 	return cpanel.UAPICall[DomainRecommendationsIsEnabledData](ctx, c.c, http.MethodGet, "DomainRecommendations", "is_enabled", cpanel.CombineArgs(extra...))
 }
+
 
 // An object containing the enabled status of the Domain Recommendations feature.
 type DomainRecommendationsIsEnabledData struct {
@@ -387,6 +391,7 @@ func (c *DomainRecommendationsClient) PurchaseDomain(ctx context.Context, args *
 	return cpanel.UAPICall[DomainRecommendationsPurchaseDomainData](ctx, c.c, http.MethodGet, "DomainRecommendations", "purchase_domain", args)
 }
 
+
 // An object that contains the URL to complete the domain purchase.
 type DomainRecommendationsPurchaseDomainData struct {
 	// The URL to redirect the user to in order to complete the domain purchase through the configured store.
@@ -425,6 +430,7 @@ type DomainRecommendationsSupportedTldsArgs struct {
 func (c *DomainRecommendationsClient) SupportedTlds(ctx context.Context, args *DomainRecommendationsSupportedTldsArgs) (*cpanel.UAPIResult[DomainRecommendationsSupportedTldsData], error) {
 	return cpanel.UAPICall[DomainRecommendationsSupportedTldsData](ctx, c.c, http.MethodGet, "DomainRecommendations", "supported_tlds", args)
 }
+
 
 // An object containing the list of supported TLDs.
 type DomainRecommendationsSupportedTldsData struct {

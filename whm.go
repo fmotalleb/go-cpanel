@@ -129,12 +129,15 @@ func decodeWHMResult[T any](body []byte, function string) (*WHMResult[T], error)
 	}
 	if len(env.Data) > 0 && !jsonIsNull(env.Data) {
 		if err := json.Unmarshal(env.Data, &res.Data); err != nil {
-			anyRaw := env.Data
-			if setAny(&res.Data, anyRaw) {
-				return res, nil
+			// Type mismatch — try relaxed coercion before giving up.
+			if relaxedErr := relaxedUnmarshal(env.Data, &res.Data); relaxedErr != nil {
+				anyRaw := env.Data
+				if setAny(&res.Data, anyRaw) {
+					return res, nil
+				}
+				return nil, &Error{Op: "whm " + function, Errors: []string{"cannot decode data payload into " +
+					typeNameOf[T]() + ": " + err.Error()}}
 			}
-			return nil, &Error{Op: "whm " + function, Errors: []string{"cannot decode data payload into " +
-				typeNameOf[T]() + ": " + err.Error()}}
 		}
 	}
 	if !res.OK() {

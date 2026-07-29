@@ -46,3 +46,4 @@ type GetUsersLinksArgs struct {
 func (c *Client) GetUsersLinks(ctx context.Context, args *GetUsersLinksArgs) (*cpanel.WHMResult[map[string]string], error) {
 	return cpanel.WHMCall[map[string]string](ctx, c.c, http.MethodGet, "get_users_links", args)
 }
+

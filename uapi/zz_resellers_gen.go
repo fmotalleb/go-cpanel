@@ -22,10 +22,11 @@ func (c *ResellersClient) ListAccounts(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[[]ResellersListAccountsDataItem](ctx, c.c, http.MethodGet, "Resellers", "list_accounts", cpanel.CombineArgs(extra...))
 }
 
+
 // ResellersListAccountsDataItem is a generated payload type.
 type ResellersListAccountsDataItem struct {
 	// The cPanel account's domain.
-	Domain string `json:"domain"`
+	Domain  string `json:"domain"`
 
 	// Whether the cPanel account's user is currently logged in.
 	//
@@ -36,5 +37,5 @@ type ResellersListAccountsDataItem struct {
 	Select2 string `json:"select"`
 
 	// The cPanel account's username.
-	User string `json:"user"`
+	User    string `json:"user"`
 }

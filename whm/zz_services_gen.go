@@ -36,10 +36,11 @@ func (c *Client) GetServiceProxyBackends(ctx context.Context, args *GetServicePr
 	return cpanel.WHMCall[GetServiceProxyBackendsData](ctx, c.c, http.MethodGet, "get_service_proxy_backends", args)
 }
 
+
 // GetServiceProxyBackendsDataPayloadItem is a generated payload type.
 type GetServiceProxyBackendsDataPayloadItem struct {
 	// The name of the server to which the system will proxy requests for this service group.
-	Backend string `json:"backend"`
+	Backend      string `json:"backend"`
 
 	// The name of the proxying service group, if applicable.
 	// * null — The account’s general service proxying backend.
@@ -120,6 +121,7 @@ func (c *Client) SetServiceProxyBackends(ctx context.Context, args *SetServicePr
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_service_proxy_backends", args)
 }
 
+
 // UnsetAllServiceProxyBackendsArgs are the parameters of the WHM API 1 function `unset_all_service_proxy_backends`.
 type UnsetAllServiceProxyBackendsArgs struct {
 	// The cPanel account's username.
@@ -155,3 +157,4 @@ type UnsetAllServiceProxyBackendsArgs struct {
 func (c *Client) UnsetAllServiceProxyBackends(ctx context.Context, args *UnsetAllServiceProxyBackendsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unset_all_service_proxy_backends", args)
 }
+

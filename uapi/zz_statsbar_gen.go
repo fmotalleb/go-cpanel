@@ -82,13 +82,14 @@ func (c *StatsBarClient) GetStats(ctx context.Context, args *StatsBarGetStatsArg
 	return cpanel.UAPICall[[]StatsBarGetStatsDataItem](ctx, c.c, http.MethodGet, "StatsBar", "get_stats", args)
 }
 
+
 // StatsBarGetStatsDataItem is a generated payload type.
 type StatsBarGetStatsDataItem struct {
 	// The queried data's value.
-	Count string `json:"_count"`
+	Count           string `json:"_count"`
 
 	// The queried parameter's limit.
-	Max string `json:"_max"`
+	Max             string `json:"_max"`
 
 	// Whether the queried value reached its maximum value.
 	//
@@ -96,7 +97,7 @@ type StatsBarGetStatsDataItem struct {
 	// * `0` — Has **not** reached maximum value.
 	//
 	// Possible values: `1`, `0`.
-	Maxed int64 `json:"_maxed"`
+	Maxed           int64 `json:"_maxed"`
 
 	// Whether the queried data's value possesses a conditional requirement.
 	//
@@ -109,16 +110,16 @@ type StatsBarGetStatsDataItem struct {
 	// related statistic meets the subsystem installation requirements.
 	//
 	// Possible values: `1`, `0`.
-	Condition int64 `json:"condition"`
+	Condition       int64 `json:"condition"`
 
 	// The queried data's value.
-	Count2 string `json:"count"`
+	Count2          string `json:"count"`
 
 	// The queried item's feature name.
-	Feature string `json:"feature"`
+	Feature         string `json:"feature"`
 
 	// The queried item's reference name.
-	ID string `json:"id"`
+	ID              string `json:"id"`
 
 	// Whether the queried value has reached its maximum value.
 	//
@@ -126,24 +127,24 @@ type StatsBarGetStatsDataItem struct {
 	// * `0` — The queried value has **not** reached its maximum value.
 	//
 	// Possible values: `1`, `0`.
-	IsMaxed int64 `json:"is_maxed"`
+	IsMaxed         int64 `json:"is_maxed"`
 
 	// A human-readable version of the queried item.
-	Item string `json:"item"`
+	Item            string `json:"item"`
 
 	// The queried value's maximum limit.
-	Max2 string `json:"max"`
+	Max2            string `json:"max"`
 
 	// The [`maketext`-formatted](https://go.cpanel.net/locale) message
 	// that the interface displays when the user reaches their maximum
 	// allowed value.
-	MaxedPhrase string `json:"maxed_phrase"`
+	MaxedPhrase     string `json:"maxed_phrase"`
 
 	// The module that retrieved the information.
-	Module string `json:"module"`
+	Module          string `json:"module"`
 
 	// The display key.
-	Name string `json:"name"`
+	Name            string `json:"name"`
 
 	// The [`maketext`-formatted](https://go.cpanel.net/locale) message
 	// that the interface displays when the user approaches their
@@ -156,22 +157,22 @@ type StatsBarGetStatsDataItem struct {
 	// * `0` — Did **not** normalize.
 	//
 	// Possible values: `1`, `0`.
-	NormalizeD int64 `json:"normalized"`
+	NormalizeD      int64 `json:"normalized"`
 
 	// The percentage of value, if applicable.
-	Percent int64 `json:"percent"`
+	Percent         int64 `json:"percent"`
 
 	// The percentage of value that the system rounds to the nearest ten, if applicable.
-	Percent10 int64 `json:"percent10"`
+	Percent10       int64 `json:"percent10"`
 
 	// The percentage of value that the system rounds to the nearest twenty, if applicable.
-	Percent20 int64 `json:"percent20"`
+	Percent20       int64 `json:"percent20"`
 
 	// The percentage of value that the system rounds to the nearest five, if applicable.
-	Percent5 int64 `json:"percent5"`
+	Percent5        int64 `json:"percent5"`
 
 	// The human-readable name of the queried item.
-	Phrase string `json:"phrase"`
+	Phrase          string `json:"phrase"`
 
 	// The queried value's role.
 	//
@@ -190,7 +191,7 @@ type StatsBarGetStatsDataItem struct {
 	// * `WebServer`
 	//
 	// Possible values: `CalendarContact`, `DNS`, `FileStorage`, `FTP`, `MailLocal`, `MailReceive`, `MailSend`, `MySQL`, `Postgres`, `SpamFilter`, `Webmail`, `WebDisk`, `WebServer`.
-	Role string `json:"role"`
+	Role            string `json:"role"`
 
 	// The queried value's row type.
 	//
@@ -198,10 +199,10 @@ type StatsBarGetStatsDataItem struct {
 	// * `odd`
 	//
 	// Possible values: `even`, `odd`.
-	Rowtype string `json:"rowtype"`
+	Rowtype         string `json:"rowtype"`
 
 	// The queried value's unit of measure.
-	Units string `json:"units"`
+	Units           string `json:"units"`
 
 	// Whether a value of `0` means unlimited or zero.
 	//

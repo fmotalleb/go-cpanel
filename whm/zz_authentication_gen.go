@@ -81,19 +81,20 @@ func (c *Client) APITokenCreate(ctx context.Context, args *APITokenCreateArgs) (
 	return cpanel.WHMCall[APITokenCreateData](ctx, c.c, http.MethodGet, "api_token_create", args)
 }
 
+
 // APITokenCreateData is a generated payload type.
 type APITokenCreateData struct {
 	// An array of privileges that the token possesses.
-	Acls []string `json:"acls"`
+	Acls         []string `json:"acls"`
 
 	// The API token's creation time, in Unix time format.
-	CreateTime int64 `json:"create_time"`
+	CreateTime   int64 `json:"create_time"`
 
 	// The API token's expiration time.
 	//
 	// * A valid timestamp, in Unix time format.
 	// * A `null` value.
-	ExpiresAt *int64 `json:"expires_at"`
+	ExpiresAt    *int64 `json:"expires_at"`
 
 	// The new API token's name.
 	//
@@ -101,7 +102,7 @@ type APITokenCreateData struct {
 	//
 	// Use this value to revoke an API token with WHM API 1's
 	// `api_token_revoke` function.
-	Name string `json:"name"`
+	Name         string `json:"name"`
 
 	// The new API token to use to authenticate to WHM.
 	//
@@ -109,7 +110,7 @@ type APITokenCreateData struct {
 	//
 	// Make **certain** that you save your API token in a safe location.
 	// You **cannot** access the token again after you use this function.
-	Token string `json:"token"`
+	Token        string `json:"token"`
 
 	// List of remote IP or CIDR IP ranges this token may be used from.
 	WhitelistIPs []string `json:"whitelist_ips"`
@@ -137,6 +138,7 @@ func (c *Client) APITokenGetDetails(ctx context.Context, args *APITokenGetDetail
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "api_token_get_details", args)
 }
 
+
 // APITokenList calls the WHM API 1 function `api_token_list` — Return WHM API tokens
 //
 // This function lists a WHM account's API tokens.
@@ -148,19 +150,20 @@ func (c *Client) APITokenList(ctx context.Context, extra ...cpanel.Args) (*cpane
 	return cpanel.WHMCall[APITokenListData](ctx, c.c, http.MethodGet, "api_token_list", cpanel.CombineArgs(extra...))
 }
 
+
 // An object of API token details.
 type APITokenListDataTokensValue struct {
 	// An object of privileges available to the user.
-	Acls map[string]int64 `json:"acls"`
+	Acls         map[string]int64 `json:"acls"`
 
 	// The API token's creation time.
-	CreateTime int64 `json:"create_time"`
+	CreateTime   int64 `json:"create_time"`
 
 	// The API token's expiration time. If the API token does not expire, the value is `null`.
-	ExpiresAt *int64 `json:"expires_at"`
+	ExpiresAt    *int64 `json:"expires_at"`
 
 	// The API token's name.
-	Name string `json:"name"`
+	Name         string `json:"name"`
 
 	// List of remote IP or CIDR IP ranges this token may be used from.
 	WhitelistIPs []string `json:"whitelist_ips"`
@@ -197,6 +200,7 @@ type APITokenRevokeArgs struct {
 func (c *Client) APITokenRevoke(ctx context.Context, args *APITokenRevokeArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "api_token_revoke", args)
 }
+
 
 // APITokenUpdateArgs are the parameters of the WHM API 1 function `api_token_update`.
 type APITokenUpdateArgs struct {
@@ -269,20 +273,21 @@ func (c *Client) APITokenUpdate(ctx context.Context, args *APITokenUpdateArgs) (
 	return cpanel.WHMCall[APITokenUpdateData](ctx, c.c, http.MethodGet, "api_token_update", args)
 }
 
+
 // APITokenUpdateData is a generated payload type.
 type APITokenUpdateData struct {
 	// A list of privileges assigned to the token.
-	Acls []string `json:"acls"`
+	Acls         []string `json:"acls"`
 
 	// The API token's creation time.
-	CreateTime int64 `json:"create_time"`
+	CreateTime   int64 `json:"create_time"`
 
 	// The API token's expiration time.
 	//
 	// **Note:**
 	//
 	// A `null` value means that the API token does **not** expire.
-	ExpiresAt *int64 `json:"expires_at"`
+	ExpiresAt    *int64 `json:"expires_at"`
 
 	// The API token's name.
 	//
@@ -293,7 +298,7 @@ type APITokenUpdateData struct {
 	//
 	// * Use this value to revoke an API token with WHM API 1's `api_token_revoke`
 	// function.
-	Name string `json:"name"`
+	Name         string `json:"name"`
 
 	// List of remote IP or CIDR IP ranges this token may be used from.
 	WhitelistIPs []string `json:"whitelist_ips"`
@@ -332,6 +337,7 @@ func (c *Client) DisableAuthenticationProvider(ctx context.Context, args *Disabl
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "disable_authentication_provider", args)
 }
 
+
 // DisableFailingAuthenticationProviders calls the WHM API 1 function `disable_failing_authentication_providers` — Disable identity provider modules that fail to load
 //
 // This function disables any enabled identity provider modules that fail to load.
@@ -343,10 +349,11 @@ func (c *Client) DisableFailingAuthenticationProviders(ctx context.Context, extr
 	return cpanel.WHMCall[DisableFailingAuthenticationProvidersData](ctx, c.c, http.MethodGet, "disable_failing_authentication_providers", cpanel.CombineArgs(extra...))
 }
 
+
 // DisableFailingAuthenticationProvidersDataPayloadItemFailuresToDisableItem is a generated payload type.
 type DisableFailingAuthenticationProvidersDataPayloadItemFailuresToDisableItem struct {
 	// A description of the failure to disable the identity provider module for that module.
-	Failure string `json:"failure"`
+	Failure     string `json:"failure"`
 
 	// A cPanel service for which the system failed to disable the external authentication identity provider.
 	ServiceName string `json:"service_name"`
@@ -355,16 +362,16 @@ type DisableFailingAuthenticationProvidersDataPayloadItemFailuresToDisableItem s
 // DisableFailingAuthenticationProvidersDataPayloadItem is a generated payload type.
 type DisableFailingAuthenticationProvidersDataPayloadItem struct {
 	// An array of the cPanel services for which the external authentication identity provider was previously disabled.
-	DisabledServices []string `json:"disabled_services"`
+	DisabledServices  []string `json:"disabled_services"`
 
 	// An array of objects containing the cPanel services for which the system fails to disable the module.
 	FailuresToDisable []DisableFailingAuthenticationProvidersDataPayloadItemFailuresToDisableItem `json:"failures_to_disable"`
 
 	// A description of the failure.
-	ProviderFailure string `json:"provider_failure"`
+	ProviderFailure   string `json:"provider_failure"`
 
 	// The external authentication identity provider to disable.
-	ProviderName string `json:"provider_name"`
+	ProviderName      string `json:"provider_name"`
 
 	// The external authentication identity provider module's namespace.
 	ProviderNamespace string `json:"provider_namespace"`
@@ -409,6 +416,7 @@ func (c *Client) EnableAuthenticationProvider(ctx context.Context, args *EnableA
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "enable_authentication_provider", args)
 }
 
+
 // GetAvailableAuthenticationProviders calls the WHM API 1 function `get_available_authentication_providers` — Return available identity providers
 //
 // This function lists available external authentication identity providers for all services.
@@ -420,71 +428,72 @@ func (c *Client) GetAvailableAuthenticationProviders(ctx context.Context, extra 
 	return cpanel.WHMCall[GetAvailableAuthenticationProvidersData](ctx, c.c, http.MethodGet, "get_available_authentication_providers", cpanel.CombineArgs(extra...))
 }
 
+
 // GetAvailableAuthenticationProvidersDataProvidersItem is a generated payload type.
 type GetAvailableAuthenticationProvidersDataProvidersItem struct {
 	// The background color of the button on the cPanel interface. A valid RGB hexadecimal color value.
-	Color string `json:"color"`
+	Color            string `json:"color"`
 
 	// Whether the identity provider is configured on the server.
 	// - 1  The provider is configured.
 	// - 0  The provider is not configured.
 	//
 	// Possible values: `0`, `1`.
-	Configured int64 `json:"configured"`
+	Configured       int64 `json:"configured"`
 
 	// Whether the identity provider is enabled for the cpaneld service.
 	// - 1  The provider is enabled for the cpaneld service..
 	// - 0  The provider is not enabled for the cpaneld service.
 	//
 	// Possible values: `0`, `1`.
-	CpaneldEnabled int64 `json:"cpaneld_enabled"`
+	CpaneldEnabled   int64 `json:"cpaneld_enabled"`
 
 	// link to the identity provider's configuration for the cpaneld service on the system. A valid URL .
-	CpaneldLink string `json:"cpaneld_link"`
+	CpaneldLink      string `json:"cpaneld_link"`
 
 	// The display name of the identity provider. A valid string.
-	DisplayName string `json:"display_name"`
+	DisplayName      string `json:"display_name"`
 
 	// The URL to the identity provider's documentation. A valid URL.
 	DocumentationURL string `json:"documentation_url"`
 
 	// The icon file to display in the button on the cPanel login interface. A valid Base64-encoded, JPG or PNG-formatted image file.
-	Icon string `json:"icon"`
+	Icon             string `json:"icon"`
 
 	// The icon file's MIME type. A valid image format's MIME type.
-	IconType string `json:"icon_type"`
+	IconType         string `json:"icon_type"`
 
 	// The ID of the identity provider. A valid string.
-	ID string `json:"id"`
+	ID               string `json:"id"`
 
 	// The text label that will appear on the cPanel login interface. A valid string.
-	Label string `json:"label"`
+	Label            string `json:"label"`
 
 	// The name of the identity provider. A valid string.
-	ProviderName string `json:"provider_name"`
+	ProviderName     string `json:"provider_name"`
 
 	// The color of the text label on the cPanel login interface. A valid RGB hexadecimal color value.
-	TextColor string `json:"textcolor"`
+	TextColor        string `json:"textcolor"`
 
 	// Whether the identity provider is enabled for the webmaild service.
 	// - 1  The provider is enabled for the webmaild service.
 	// - 0  The provider is not enabled for the webmaild service.
 	//
 	// Possible values: `0`, `1`.
-	WebmaildEnabled int64 `json:"webmaild_enabled"`
+	WebmaildEnabled  int64 `json:"webmaild_enabled"`
 
 	// link to the identity provider's configuration for the webmaild service on the system. A valid URL .
-	WebmaildLink string `json:"webmaild_link"`
+	WebmaildLink     string `json:"webmaild_link"`
 
 	// Whether the identity provider is enabled for the whostmgr service.
 	// - 1  The provider is enabled for the whostmgr service.
 	// - 0  The provider is not enabled for the whostmgr service.
 	//
 	// Possible values: `0`, `1`.
-	WhostmgrEnabled int64 `json:"whostmgr_enabled"`
+	WhostmgrEnabled  int64 `json:"whostmgr_enabled"`
 
 	// link to the identity provider's configuration for the whostmgrd service on the system. A valid URL.
-	WhostmgrdLink string `json:"whostmgrd_link"`
+	WhostmgrdLink    string `json:"whostmgrd_link"`
 }
 
 // GetAvailableAuthenticationProvidersData is a generated payload type.
@@ -521,6 +530,7 @@ type GetLoginURLArgs struct {
 func (c *Client) GetLoginURL(ctx context.Context, args *GetLoginURLArgs) (*cpanel.WHMResult[GetLoginURLData], error) {
 	return cpanel.WHMCall[GetLoginURLData](ctx, c.c, http.MethodGet, "get_login_url", args)
 }
+
 
 // GetLoginURLData is a generated payload type.
 type GetLoginURLData struct {
@@ -560,10 +570,11 @@ func (c *Client) GetProviderClientConfigurations(ctx context.Context, args *GetP
 	return cpanel.WHMCall[GetProviderClientConfigurationsData](ctx, c.c, http.MethodGet, "get_provider_client_configurations", args)
 }
 
+
 // An object that contains the client configuration information.
 type GetProviderClientConfigurationsDataClientConfigurations struct {
 	// The client ID for the identity provider.
-	ClientID string `json:"client_id"`
+	ClientID     string `json:"client_id"`
 
 	// The secret for the client ID.
 	ClientSecret string `json:"client_secret"`
@@ -611,22 +622,23 @@ func (c *Client) GetProviderConfigurationFields(ctx context.Context, args *GetPr
 	return cpanel.WHMCall[GetProviderConfigurationFieldsData](ctx, c.c, http.MethodGet, "get_provider_configuration_fields", args)
 }
 
+
 // GetProviderConfigurationFieldsDataConfigurationFieldsItem is a generated payload type.
 type GetProviderConfigurationFieldsDataConfigurationFieldsItem struct {
 	// The description of the configuration field.
-	Description string `json:"description"`
+	Description  string `json:"description"`
 
 	// The display order of the configuration field.
 	DisplayOrder int64 `json:"display_order"`
 
 	// The name of the configuration field.
-	FieldID string `json:"field_id"`
+	FieldID      string `json:"field_id"`
 
 	// The label of the configuration field.
-	Label string `json:"label"`
+	Label        string `json:"label"`
 
 	// The value of the configuration field, if available.
-	Value *string `json:"value"`
+	Value        *string `json:"value"`
 }
 
 // GetProviderConfigurationFieldsData is a generated payload type.
@@ -657,31 +669,32 @@ func (c *Client) GetProviderDisplayConfigurations(ctx context.Context, args *Get
 	return cpanel.WHMCall[GetProviderDisplayConfigurationsData](ctx, c.c, http.MethodGet, "get_provider_display_configurations", args)
 }
 
+
 // GetProviderDisplayConfigurationsDataConfigurationsItem is a generated payload type.
 type GetProviderDisplayConfigurationsDataConfigurationsItem struct {
 	// The background color of the button in the cPanel interface.
-	Color string `json:"color"`
+	Color            string `json:"color"`
 
 	// The display name of the identity provider.
-	DisplayName string `json:"display_name"`
+	DisplayName      string `json:"display_name"`
 
 	// The URL to the identity provider's documentation.
 	DocumentationURL string `json:"documentation_url"`
 
 	// The icon file in the button that the cPanel login interface displays.
-	Icon string `json:"icon"`
+	Icon             string `json:"icon"`
 
 	// The icon file's MIME type.
-	IconType string `json:"icon_type"`
+	IconType         string `json:"icon_type"`
 
 	// The text label in the button that the cPanel login interface displays.
-	Label string `json:"label"`
+	Label            string `json:"label"`
 
 	// A reference URL to the identity provider's configuration for the system.
-	Link string `json:"link"`
+	Link             string `json:"link"`
 
 	// The name of the identity provider.
-	ProviderName string `json:"provider_name"`
+	ProviderName     string `json:"provider_name"`
 
 	// The service's name.
 	//
@@ -690,10 +703,10 @@ type GetProviderDisplayConfigurationsDataConfigurationsItem struct {
 	// * `webmaild`
 	//
 	// Possible values: `cpaneld`, `whostmgrd`, `webmaild`.
-	Service string `json:"service"`
+	Service          string `json:"service"`
 
 	// The color of the text label in the button that the cPanel login interface displays.
-	TextColor string `json:"textcolor"`
+	TextColor        string `json:"textcolor"`
 }
 
 // GetProviderDisplayConfigurationsData is a generated payload type.
@@ -713,25 +726,26 @@ func (c *Client) GetUsersAuthnLinkedAccounts(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[GetUsersAuthnLinkedAccountsData](ctx, c.c, http.MethodGet, "get_users_authn_linked_accounts", cpanel.CombineArgs(extra...))
 }
 
+
 // GetUsersAuthnLinkedAccountsDataUsernameLinkedAccountsItem is a generated payload type.
 type GetUsersAuthnLinkedAccountsDataUsernameLinkedAccountsItem struct {
 	// When the user linked the account.
-	LinkTime int64 `json:"link_time"`
+	LinkTime                int64 `json:"link_time"`
 
 	// The preferred username of the account on the identity provider that the interface will display.
-	PreferredUsername string `json:"preferred_username"`
+	PreferredUsername       string `json:"preferred_username"`
 
 	// The system's internal key for the identity provider.
-	ProviderID string `json:"provider_id"`
+	ProviderID              string `json:"provider_id"`
 
 	// The identity provider's protocol.
-	ProviderProtocol string `json:"provider_protocol"`
+	ProviderProtocol        string `json:"provider_protocol"`
 
 	// The unique identifier for the user at the identity provider.
 	SubjectUniqueIdentifier string `json:"subject_unique_identifier"`
 
 	// The cPanel account's username.
-	Username string `json:"username"`
+	Username                string `json:"username"`
 }
 
 // GetUsersAuthnLinkedAccountsData is a generated payload type.
@@ -777,6 +791,7 @@ func (c *Client) LinkUserAuthnProvider(ctx context.Context, args *LinkUserAuthnP
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "link_user_authn_provider", args)
 }
 
+
 // SetProviderClientConfigurationsArgs are the parameters of the WHM API 1 function `set_provider_client_configurations`.
 type SetProviderClientConfigurationsArgs struct {
 	// The configuration values to set for the identity provider.
@@ -818,6 +833,7 @@ func (c *Client) SetProviderClientConfigurations(ctx context.Context, args *SetP
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_provider_client_configurations", args)
 }
 
+
 // SetProviderDisplayConfigurationsArgs are the parameters of the WHM API 1 function `set_provider_display_configurations`.
 type SetProviderDisplayConfigurationsArgs struct {
 	// The display configuration in JSON-encoded key-value format.
@@ -855,6 +871,7 @@ func (c *Client) SetProviderDisplayConfigurations(ctx context.Context, args *Set
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_provider_display_configurations", args)
 }
 
+
 // TwofactorauthDisablePolicy calls the WHM API 1 function `twofactorauth_disable_policy` — Disable 2FA
 //
 // This function disables the Two-Factor Authentication (2FA) security policy on the server.
@@ -865,6 +882,7 @@ func (c *Client) SetProviderDisplayConfigurations(ctx context.Context, args *Set
 func (c *Client) TwofactorauthDisablePolicy(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "twofactorauth_disable_policy", cpanel.CombineArgs(extra...))
 }
+
 
 // TwofactorauthEnablePolicy calls the WHM API 1 function `twofactorauth_enable_policy` — Enable 2FA
 //
@@ -877,6 +895,7 @@ func (c *Client) TwofactorauthEnablePolicy(ctx context.Context, extra ...cpanel.
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "twofactorauth_enable_policy", cpanel.CombineArgs(extra...))
 }
 
+
 // TwofactorauthGenerateTFAConfig calls the WHM API 1 function `twofactorauth_generate_tfa_config` — Create a one-time authentication secret and code
 //
 // This function generates a random secret and a one-time password authentication (OTP auth) URL for the user. Use the secret that this function returns and a valid verification token with WHM API 1's `twofactorauth_set_tfa_config` function to configure Two-Factor Authentication (2FA) on an account.
@@ -888,13 +907,14 @@ func (c *Client) TwofactorauthGenerateTFAConfig(ctx context.Context, extra ...cp
 	return cpanel.WHMCall[TwofactorauthGenerateTFAConfigData](ctx, c.c, http.MethodGet, "twofactorauth_generate_tfa_config", cpanel.CombineArgs(extra...))
 }
 
+
 // TwofactorauthGenerateTFAConfigData is a generated payload type.
 type TwofactorauthGenerateTFAConfigData struct {
 	// A one-time authentication URL to encode as the QR code.
 	OtpauthStr string `json:"otpauth_str"`
 
 	// A generated security code for use with 2FA.
-	Secret string `json:"secret"`
+	Secret     string `json:"secret"`
 }
 
 // TwofactorauthGetIssuer calls the WHM API 1 function `twofactorauth_get_issuer` — Return configured issuer for current user
@@ -908,10 +928,11 @@ func (c *Client) TwofactorauthGetIssuer(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[TwofactorauthGetIssuerData](ctx, c.c, http.MethodGet, "twofactorauth_get_issuer", cpanel.CombineArgs(extra...))
 }
 
+
 // TwofactorauthGetIssuerData is a generated payload type.
 type TwofactorauthGetIssuerData struct {
 	// The issuer's name for the currently-authenticated user.
-	Issuer string `json:"issuer"`
+	Issuer           string `json:"issuer"`
 
 	// The system's default issuer's name.
 	//
@@ -943,6 +964,7 @@ func (c *Client) TwofactorauthGetTFAConfigForUser(ctx context.Context, args *Two
 	return cpanel.WHMCall[map[string]TwofactorauthGetTFAConfigForUserDataValue](ctx, c.c, http.MethodGet, "twofactorauth_get_tfa_config_for_user", args)
 }
 
+
 // An object that contains a hash of the email account's data.
 type TwofactorauthGetTFAConfigForUserDataValueEmailValue struct {
 	// The 2FA secret for the account.
@@ -964,13 +986,13 @@ type TwofactorauthGetTFAConfigForUserDataValueTeamValue struct {
 // TwofactorauthGetTFAConfigForUserDataValue is a generated payload type.
 type TwofactorauthGetTFAConfigForUserDataValue struct {
 	// The email data for the user.
-	Email map[string]TwofactorauthGetTFAConfigForUserDataValueEmailValue `json:"email"`
+	Email          map[string]TwofactorauthGetTFAConfigForUserDataValueEmailValue `json:"email"`
 
 	// An object containing the secret for the cPanel user if 2FA is enabled for the user.
 	PrimaryAccount TwofactorauthGetTFAConfigForUserDataValuePrimaryAccount `json:"primary_account"`
 
 	// The cPanel user's team user account data.
-	Team map[string]TwofactorauthGetTFAConfigForUserDataValueTeamValue `json:"team"`
+	Team           map[string]TwofactorauthGetTFAConfigForUserDataValueTeamValue `json:"team"`
 }
 
 // TwofactorauthGetUserConfigsArgs are the parameters of the WHM API 1 function `twofactorauth_get_user_configs`.
@@ -997,6 +1019,7 @@ func (c *Client) TwofactorauthGetUserConfigs(ctx context.Context, args *Twofacto
 	return cpanel.WHMCall[map[string]TwofactorauthGetUserConfigsDataValue](ctx, c.c, http.MethodGet, "twofactorauth_get_user_configs", args)
 }
 
+
 // An object that contains a hash of the account's data.
 type TwofactorauthGetUserConfigsDataValue struct {
 	// Whether the account has 2FA enabled.
@@ -1004,7 +1027,7 @@ type TwofactorauthGetUserConfigsDataValue struct {
 	// * `0` - **Not** enabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEnabled int64 `json:"is_enabled"`
+	IsEnabled     int64 `json:"is_enabled"`
 
 	// The account's primary domain.
 	PrimaryDomain string `json:"primary_domain"`
@@ -1020,6 +1043,7 @@ type TwofactorauthGetUserConfigsDataValue struct {
 func (c *Client) TwofactorauthPolicyStatus(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[TwofactorauthPolicyStatusData], error) {
 	return cpanel.WHMCall[TwofactorauthPolicyStatusData](ctx, c.c, http.MethodGet, "twofactorauth_policy_status", cpanel.CombineArgs(extra...))
 }
+
 
 // TwofactorauthPolicyStatusData is a generated payload type.
 type TwofactorauthPolicyStatusData struct {
@@ -1067,10 +1091,11 @@ func (c *Client) TwofactorauthRemoveUserConfig(ctx context.Context, args *Twofac
 	return cpanel.WHMCall[TwofactorauthRemoveUserConfigData](ctx, c.c, http.MethodGet, "twofactorauth_remove_user_config", args)
 }
 
+
 // TwofactorauthRemoveUserConfigData is a generated payload type.
 type TwofactorauthRemoveUserConfigData struct {
 	// An object that contains the user accounts for which removal failed.
-	Failed map[string]string `json:"failed"`
+	Failed        map[string]string `json:"failed"`
 
 	// An array of the user accounts for which you successfully removed 2FA settings.
 	UsersModified []string `json:"users_modified"`
@@ -1097,6 +1122,7 @@ type TwofactorauthSetIssuerArgs struct {
 func (c *Client) TwofactorauthSetIssuer(ctx context.Context, args *TwofactorauthSetIssuerArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "twofactorauth_set_issuer", args)
 }
+
 
 // TwofactorauthSetTFAConfigArgs are the parameters of the WHM API 1 function `twofactorauth_set_tfa_config`.
 type TwofactorauthSetTFAConfigArgs struct {
@@ -1125,6 +1151,7 @@ func (c *Client) TwofactorauthSetTFAConfig(ctx context.Context, args *Twofactora
 	return cpanel.WHMCall[TwofactorauthSetTFAConfigData](ctx, c.c, http.MethodGet, "twofactorauth_set_tfa_config", args)
 }
 
+
 // TwofactorauthSetTFAConfigData is a generated payload type.
 type TwofactorauthSetTFAConfigData struct {
 	// Whether the account successfully enabled 2FA.
@@ -1147,6 +1174,7 @@ type TwofactorauthSetTFAConfigData struct {
 func (c *Client) TwofactorauthSetTFAConfigForUser(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "twofactorauth_set_tfa_config_for_user", cpanel.CombineArgs(extra...))
 }
+
 
 // UnlinkUserAuthnProviderArgs are the parameters of the WHM API 1 function `unlink_user_authn_provider`.
 type UnlinkUserAuthnProviderArgs struct {
@@ -1180,6 +1208,7 @@ func (c *Client) UnlinkUserAuthnProvider(ctx context.Context, args *UnlinkUserAu
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unlink_user_authn_provider", args)
 }
 
+
 // ValidateLoginTokenArgs are the parameters of the WHM API 1 function `validate_login_token`.
 type ValidateLoginTokenArgs struct {
 	// The login token to validate.
@@ -1212,10 +1241,11 @@ func (c *Client) ValidateLoginToken(ctx context.Context, args *ValidateLoginToke
 	return cpanel.WHMCall[ValidateLoginTokenData](ctx, c.c, http.MethodGet, "validate_login_token", args)
 }
 
+
 // ValidateLoginTokenDataPayloadItem is a generated payload type.
 type ValidateLoginTokenDataPayloadItem struct {
 	// The access token that the cPanel Store or cPanel Market provider returns after you log in.
-	AccessToken string `json:"access_token"`
+	AccessToken  string `json:"access_token"`
 
 	// The refresh token that the cPanel Store or cPanel Market provider returns after you log in .
 	RefreshToken string `json:"refresh_token"`
@@ -1282,26 +1312,27 @@ func (c *Client) WpDashboardCreateAPIToken(ctx context.Context, args *WpDashboar
 	return cpanel.WHMCall[WpDashboardCreateAPITokenData](ctx, c.c, http.MethodGet, "wp_dashboard_create_api_token", args)
 }
 
+
 // WpDashboardCreateAPITokenData is a generated payload type.
 type WpDashboardCreateAPITokenData struct {
 	// An array of privileges that the token possesses.
-	Acls []string `json:"acls"`
+	Acls         []string `json:"acls"`
 
 	// The API token's creation time, in [Unix Epoch format](https://go.cpanel.net/unix_time).
-	CreateTime int64 `json:"create_time"`
+	CreateTime   int64 `json:"create_time"`
 
 	// The API token's expiration time, in [Unix Epoch format](https://go.cpanel.net/unix_time).
-	ExpiresAt *int64 `json:"expires_at"`
+	ExpiresAt    *int64 `json:"expires_at"`
 
 	// The new API token's name.
-	Name string `json:"name"`
+	Name         string `json:"name"`
 
 	// The new API token to use to authenticate to WHM.
 	//
 	// **Note:**
 	//
 	// You **cannot** access the token again after you use this function. Save the token in a safe location.
-	Token string `json:"token"`
+	Token        string `json:"token"`
 
 	// The list of remote IP addresses or CIDR IP address ranges that can use this token.
 	WhitelistIPs []string `json:"whitelist_ips"`

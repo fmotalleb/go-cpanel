@@ -49,6 +49,7 @@ func (c *ExternalAuthenticationClient) AddAuthnLink(ctx context.Context, args *E
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ExternalAuthentication", "add_authn_link", args)
 }
 
+
 // ConfiguredModules calls the UAPI function `ExternalAuthentication::configured_modules` — Return server's external authentication providers
 //
 // This function lists the display information for your server's available and configured external authentication identity provider modules.
@@ -60,34 +61,35 @@ func (c *ExternalAuthenticationClient) ConfiguredModules(ctx context.Context, ex
 	return cpanel.UAPICall[[]ExternalAuthenticationConfiguredModulesDataItem](ctx, c.c, http.MethodGet, "ExternalAuthentication", "configured_modules", cpanel.CombineArgs(extra...))
 }
 
+
 // ExternalAuthenticationConfiguredModulesDataItem is a generated payload type.
 type ExternalAuthenticationConfiguredModulesDataItem struct {
 	// The background color of the button on the cPanel interface.
-	Color string `json:"color"`
+	Color            string `json:"color"`
 
 	// The identity provider's friendly name. cPanel & WHM interfaces will display this value.
-	DisplayName string `json:"display_name"`
+	DisplayName      string `json:"display_name"`
 
 	// The public URL of the identity provider's implementation documentation.
 	DocumentationURL string `json:"documentation_url"`
 
 	// The icon file to display on the button in the cPanel login interface.
-	Icon string `json:"icon"`
+	Icon             string `json:"icon"`
 
 	// The icon file's MIME type.
-	IconType string `json:"icon_type"`
+	IconType         string `json:"icon_type"`
 
 	// The text label of the login icon in the cPanel login interface.
-	Label string `json:"label"`
+	Label            string `json:"label"`
 
 	// link to the identity provider's configuration for the appropriate service on the system.
-	Link string `json:"link"`
+	Link             string `json:"link"`
 
 	// The identity provider's system name.
-	ProviderName string `json:"provider_name"`
+	ProviderName     string `json:"provider_name"`
 
 	// The color of the text label in the cPanel login interface.
-	TextColor string `json:"textcolor"`
+	TextColor        string `json:"textcolor"`
 }
 
 // GetAuthnLinks calls the UAPI function `ExternalAuthentication::get_authn_links` — Return external authentication links
@@ -101,19 +103,20 @@ func (c *ExternalAuthenticationClient) GetAuthnLinks(ctx context.Context, extra 
 	return cpanel.UAPICall[[]ExternalAuthenticationGetAuthnLinksDataItem](ctx, c.c, http.MethodGet, "ExternalAuthentication", "get_authn_links", cpanel.CombineArgs(extra...))
 }
 
+
 // ExternalAuthenticationGetAuthnLinksDataItem is a generated payload type.
 type ExternalAuthenticationGetAuthnLinksDataItem struct {
 	// When the user linked their account to the identity provider.
-	LinkTime int64 `json:"link_time"`
+	LinkTime                int64 `json:"link_time"`
 
 	// The preferred username of the account on the identity provider.
-	PreferredUsername string `json:"preferred_username"`
+	PreferredUsername       string `json:"preferred_username"`
 
 	// The system's unique key for the identity provider.
-	ProviderID string `json:"provider_id"`
+	ProviderID              string `json:"provider_id"`
 
 	// The identity provider's protocol.
-	ProviderProtocol string `json:"provider_protocol"`
+	ProviderProtocol        string `json:"provider_protocol"`
 
 	// The unique identifier for the user at the identity provider.
 	SubjectUniqueIdentifier int64 `json:"subject_unique_identifier"`
@@ -129,6 +132,7 @@ type ExternalAuthenticationGetAuthnLinksDataItem struct {
 func (c *ExternalAuthenticationClient) HasExternalAuthModulesConfigured(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "ExternalAuthentication", "has_external_auth_modules_configured", cpanel.CombineArgs(extra...))
 }
+
 
 // ExternalAuthenticationRemoveAuthnLinkArgs are the parameters of the UAPI function `ExternalAuthentication::remove_authn_link`.
 type ExternalAuthenticationRemoveAuthnLinkArgs struct {
@@ -156,3 +160,4 @@ type ExternalAuthenticationRemoveAuthnLinkArgs struct {
 func (c *ExternalAuthenticationClient) RemoveAuthnLink(ctx context.Context, args *ExternalAuthenticationRemoveAuthnLinkArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ExternalAuthentication", "remove_authn_link", args)
 }
+

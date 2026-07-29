@@ -43,6 +43,7 @@ func (c *Client) ActivateZoneKey(ctx context.Context, args *ActivateZoneKeyArgs)
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "activate_zone_key", args)
 }
 
+
 // AddZoneKeyArgs are the parameters of the WHM API 1 function `add_zone_key`.
 type AddZoneKeyArgs struct {
 	// The algorithm that the system uses to generate the security key.
@@ -140,6 +141,7 @@ func (c *Client) AddZoneKey(ctx context.Context, args *AddZoneKeyArgs) (*cpanel.
 	return cpanel.WHMCall[AddZoneKeyData](ctx, c.c, http.MethodGet, "add_zone_key", args)
 }
 
+
 // AddZoneKeyData is a generated payload type.
 type AddZoneKeyData struct {
 	// The security key's ID.
@@ -203,6 +205,7 @@ func (c *Client) AddDNS(ctx context.Context, args *AddDNSArgs) (*cpanel.WHMResul
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "adddns", args)
 }
 
+
 // AddZoneRecord calls the WHM API 1 function `addzonerecord` — Create DNS zone record
 //
 // This function adds a DNS zone record.
@@ -215,8 +218,8 @@ func (c *Client) AddDNS(ctx context.Context, args *AddDNSArgs) (*cpanel.WHMResul
 // **Note:**
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of SPF resource records on DNS.
-//   - This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
-//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   * This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
+//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // This function requires an HTTP POST request.
 //
@@ -226,6 +229,7 @@ func (c *Client) AddDNS(ctx context.Context, args *AddDNSArgs) (*cpanel.WHMResul
 func (c *Client) AddZoneRecord(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "addzonerecord", cpanel.CombineArgs(extra...))
 }
+
 
 // ClusterMemberHasTrustWithArgs are the parameters of the WHM API 1 function `cluster_member_has_trust_with`.
 type ClusterMemberHasTrustWithArgs struct {
@@ -249,7 +253,7 @@ type ClusterMemberHasTrustWithArgs struct {
 //
 // **Note:**
 //
-//	DNS servers in a Write-Only role do not need to exist in a Reverse Trust relationship. For more information, read our [Guide to DNS Cluster Configurations](https://go.cpanel.net/DNSClusterConfig) documentation.
+//   DNS servers in a Write-Only role do not need to exist in a Reverse Trust relationship. For more information, read our [Guide to DNS Cluster Configurations](https://go.cpanel.net/DNSClusterConfig) documentation.
 //
 // Available since cPanel & WHM version 84.
 //
@@ -257,6 +261,7 @@ type ClusterMemberHasTrustWithArgs struct {
 func (c *Client) ClusterMemberHasTrustWith(ctx context.Context, args *ClusterMemberHasTrustWithArgs) (*cpanel.WHMResult[ClusterMemberHasTrustWithData], error) {
 	return cpanel.WHMCall[ClusterMemberHasTrustWithData](ctx, c.c, http.MethodGet, "cluster_member_has_trust_with", args)
 }
+
 
 // ClusterMemberHasTrustWithData is a generated payload type.
 type ClusterMemberHasTrustWithData struct {
@@ -304,6 +309,7 @@ func (c *Client) CreateParkedDomainForUser(ctx context.Context, args *CreatePark
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "create_parked_domain_for_user", args)
 }
 
+
 // CreateSubdomainArgs are the parameters of the WHM API 1 function `create_subdomain`.
 type CreateSubdomainArgs struct {
 	// The subdomain's document root within the home directory.
@@ -345,6 +351,7 @@ type CreateSubdomainArgs struct {
 func (c *Client) CreateSubdomain(ctx context.Context, args *CreateSubdomainArgs) (*cpanel.WHMResult[CreateSubdomainData], error) {
 	return cpanel.WHMCall[CreateSubdomainData](ctx, c.c, http.MethodGet, "create_subdomain", args)
 }
+
 
 // CreateSubdomainData is a generated payload type.
 type CreateSubdomainData struct {
@@ -393,6 +400,7 @@ func (c *Client) DeactivateZoneKey(ctx context.Context, args *DeactivateZoneKeyA
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "deactivate_zone_key", args)
 }
 
+
 // DeleteDomainArgs are the parameters of the WHM API 1 function `delete_domain`.
 type DeleteDomainArgs struct {
 	// The name of the domain to delete.
@@ -419,6 +427,7 @@ func (c *Client) DeleteDomain(ctx context.Context, args *DeleteDomainArgs) (*cpa
 	return cpanel.WHMCall[DeleteDomainData](ctx, c.c, http.MethodGet, "delete_domain", args)
 }
 
+
 // DeleteDomainData is a generated payload type.
 type DeleteDomainData struct {
 	// The type of domain that the function deleted.
@@ -428,7 +437,7 @@ type DeleteDomainData struct {
 	// * `null` — The domain does not exist on the server.
 	//
 	// Possible values: `addon`, `parked`, `sub`.
-	Type2 *string `json:"type"`
+	Type2    *string `json:"type"`
 
 	// The cPanel user that owned the domain.
 	// * A cPanel account username.
@@ -460,12 +469,12 @@ type DisableDNSSECForDomainsArgs struct {
 //
 // **Note:**
 //
-//	Only servers that run PowerDNS can use DNSSEC. If you call this function on a server that doesn't use PowerDNS, you will receive an error.
+//   Only servers that run PowerDNS can use DNSSEC. If you call this function on a server that doesn't use PowerDNS, you will receive an error.
 //
 // **Warning:**
 //
-//   - This action is **irreversible**. If you disable DNSSEC on the domain, you will lose the associated keys. You can only retrieve the keys by restoring them from a full back up of the account.
-//   - If you disable DNSSEC, you **must** remove the Delegation of Signing (DS) records on your DNS server and with your registrar.
+//  - This action is **irreversible**. If you disable DNSSEC on the domain, you will lose the associated keys. You can only retrieve the keys by restoring them from a full back up of the account.
+//  - If you disable DNSSEC, you **must** remove the Delegation of Signing (DS) records on your DNS server and with your registrar.
 //
 // Available since cPanel & WHM version 86.
 //
@@ -473,6 +482,7 @@ type DisableDNSSECForDomainsArgs struct {
 func (c *Client) DisableDNSSECForDomains(ctx context.Context, args *DisableDNSSECForDomainsArgs) (*cpanel.WHMResult[DisableDNSSECForDomainsData], error) {
 	return cpanel.WHMCall[DisableDNSSECForDomainsData](ctx, c.c, http.MethodGet, "disable_dnssec_for_domains", args)
 }
+
 
 // DisableDNSSECForDomainsDataDomainsItem is a generated payload type.
 type DisableDNSSECForDomainsDataDomainsItem struct {
@@ -484,7 +494,7 @@ type DisableDNSSECForDomainsDataDomainsItem struct {
 	Disabled int64 `json:"disabled"`
 
 	// The domain for which the system disabled DNSSEC.
-	Domain string `json:"domain"`
+	Domain   string `json:"domain"`
 }
 
 // DisableDNSSECForDomainsData is a generated payload type.
@@ -522,14 +532,14 @@ type DumpZoneArgs struct {
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of
 // SPF resource records on DNS.
-//   - This warning is **not** relevant on CentOS 7 servers, because
-//     [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7
-//     servers use TXT records instead of SPF records.
-//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an
-//     updated version of BIND that complies with RFC 7208. To resolve this issue,
-//     update your operating system to a version that contains the updated version of
-//     BIND. For more information, read the
-//     [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   * This warning is **not** relevant on CentOS 7 servers, because
+//   [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7
+//   servers use TXT records instead of SPF records.
+//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an
+//   updated version of BIND that complies with RFC 7208. To resolve this issue,
+//   update your operating system to a version that contains the updated version of
+//   BIND. For more information, read the
+//   [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // This function is deprecated upstream.
 //
@@ -541,6 +551,7 @@ type DumpZoneArgs struct {
 func (c *Client) DumpZone(ctx context.Context, args *DumpZoneArgs) (*cpanel.WHMResult[DumpZoneData], error) {
 	return cpanel.WHMCall[DumpZoneData](ctx, c.c, http.MethodGet, "dumpzone", args)
 }
+
 
 // DumpZoneData is a generated payload type.
 type DumpZoneData struct {
@@ -564,8 +575,8 @@ type DumpZoneData struct {
 // **Note:**
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of SPF resource records on DNS.
-//   - This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
-//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   * This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
+//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // **Important:** …
 //
@@ -577,6 +588,7 @@ type DumpZoneData struct {
 func (c *Client) EditZoneRecord(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "editzonerecord", cpanel.CombineArgs(extra...))
 }
+
 
 // EnableDNSSECForDomainsArgs are the parameters of the WHM API 1 function `enable_dnssec_for_domains`.
 type EnableDNSSECForDomainsArgs struct {
@@ -700,10 +712,11 @@ func (c *Client) EnableDNSSECForDomains(ctx context.Context, args *EnableDNSSECF
 	return cpanel.WHMCall[EnableDNSSECForDomainsData](ctx, c.c, http.MethodGet, "enable_dnssec_for_domains", args)
 }
 
+
 // EnableDNSSECForDomainsDataDomainsItem is a generated payload type.
 type EnableDNSSECForDomainsDataDomainsItem struct {
 	// The domain for which the system enabled DNSSEC.
-	Domain string `json:"domain"`
+	Domain      string `json:"domain"`
 
 	// Whether the system enabled DNSSEC.
 	// * `1` - Enabled.
@@ -714,17 +727,17 @@ type EnableDNSSECForDomainsDataDomainsItem struct {
 	// This function will **not** return the `nsec_version` and `new_key_id` returns if this return is a `0` value.
 	//
 	// Possible values: `0`, `1`.
-	Enabled int64 `json:"enabled"`
+	Enabled     int64 `json:"enabled"`
 
 	// The assigned security key ID. A valid ID.
-	NewKeyID string `json:"new_key_id"`
+	NewKeyID    string `json:"new_key_id"`
 
 	// The domain has a NSEC3 configuration error.
 	//
 	// **Note:**
 	//
 	// The function **only** displays this return if there is a NSEC3 configuration error. An error message.
-	NsecError string `json:"nsec_error"`
+	NsecError   string `json:"nsec_error"`
 
 	// The version of DNSSEC the system used.
 	// * `NSEC3`
@@ -771,13 +784,14 @@ func (c *Client) ExportZoneDnskey(ctx context.Context, args *ExportZoneDnskeyArg
 	return cpanel.WHMCall[ExportZoneDnskeyData](ctx, c.c, http.MethodGet, "export_zone_dnskey", args)
 }
 
+
 // ExportZoneDnskeyData is a generated payload type.
 type ExportZoneDnskeyData struct {
 	// The DNSKEY record value.
 	Dnskey string `json:"dnskey"`
 
 	// The security key's ID.
-	KeyID int64 `json:"key_id"`
+	KeyID  int64 `json:"key_id"`
 }
 
 // ExportZoneFilesArgs are the parameters of the WHM API 1 function `export_zone_files`.
@@ -807,13 +821,14 @@ func (c *Client) ExportZoneFiles(ctx context.Context, args *ExportZoneFilesArgs)
 	return cpanel.WHMCall[ExportZoneFilesData](ctx, c.c, http.MethodGet, "export_zone_files", args)
 }
 
+
 // ExportZoneFilesDataPayloadItem is a generated payload type.
 type ExportZoneFilesDataPayloadItem struct {
 	// The DNS zone’s text representation.
 	TextB64 string `json:"text_b64"`
 
 	// The DNS zone’s name.
-	Zone string `json:"zone"`
+	Zone    string `json:"zone"`
 }
 
 // ExportZoneFilesData is a generated payload type.
@@ -858,10 +873,11 @@ func (c *Client) ExportZoneKey(ctx context.Context, args *ExportZoneKeyArgs) (*c
 	return cpanel.WHMCall[ExportZoneKeyData](ctx, c.c, http.MethodGet, "export_zone_key", args)
 }
 
+
 // ExportZoneKeyData is a generated payload type.
 type ExportZoneKeyData struct {
 	// The security key's integer value.
-	KeyTag int64 `json:"key_tag"`
+	KeyTag  int64 `json:"key_tag"`
 
 	// The type of security key.
 	//
@@ -903,16 +919,17 @@ func (c *Client) FetchDsRecordsForDomains(ctx context.Context, args *FetchDsReco
 	return cpanel.WHMCall[FetchDsRecordsForDomainsData](ctx, c.c, http.MethodGet, "fetch_ds_records_for_domains", args)
 }
 
+
 // FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValueDigestsItem is a generated payload type.
 type FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValueDigestsItem struct {
 	// A description of the algorithm that the DS record uses.
 	AlgoDesc string `json:"algo_desc"`
 
 	// The IETF-recognized DNSSEC Algorithm Number.
-	AlgoNum int64 `json:"algo_num"`
+	AlgoNum  int64 `json:"algo_num"`
 
 	// The actual digest in the DS record.
-	Digest string `json:"digest"`
+	Digest   string `json:"digest"`
 }
 
 // Each key/value property includes information related the domain's DNSSEC record.
@@ -922,10 +939,10 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValue struct {
 	// * `0` - Inactive.
 	//
 	// Possible values: `0`, `1`.
-	Active int64 `json:"active"`
+	Active     int64 `json:"active"`
 
 	// A description of the algorithm that the DS key uses.
-	AlgoDesc string `json:"algo_desc"`
+	AlgoDesc   string `json:"algo_desc"`
 
 	// The [Internet Engineering Task Force](https://www.ietf.org/) (IETF)-recognized DNSSEC Digest Algorithm Number.
 	// * `5` - RSA/SHA-1
@@ -937,34 +954,34 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValue struct {
 	// * `14` - ECDSA Curve P-384 with SHA-384
 	//
 	// Possible values: `5`, `6`, `7`, `8`, `10`, `13`, `14`.
-	AlgoNum int64 `json:"algo_num"`
+	AlgoNum    int64 `json:"algo_num"`
 
 	// The short-form reference to the algorithm.
-	AlgoTag string `json:"algo_tag"`
+	AlgoTag    string `json:"algo_tag"`
 
 	// The DS key's size, in bits.
-	Bits int64 `json:"bits"`
+	Bits       int64 `json:"bits"`
 
 	// The key's creation time, in [Unix time format](https://en.wikipedia.org/wiki/Unix_time).
 	// * `0` - The creation time is unknown.
 	// * A valid timestamp, in Unix epoch time.
-	Created int64 `json:"created"`
+	Created    int64 `json:"created"`
 
 	// An array of objects of information the registrar uses to populate DS records.
-	Digests []FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValueDigestsItem `json:"digests"`
+	Digests    []FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValueDigestsItem `json:"digests"`
 
 	// An integer that determines the `key_type` value.
 	// * `256` - A Zone Signing Key (ZSK).
 	// * `257` - A Combined Signing Key (CSK) or Key Signing Key (KSK).
 	//
 	// Possible values: `256`, `257`.
-	Flags int64 `json:"flags"`
+	Flags      int64 `json:"flags"`
 
 	// PowerDNS's internal identifier.
-	KeyID int64 `json:"key_id"`
+	KeyID      int64 `json:"key_id"`
 
 	// The DS key's integer value.
-	KeyTag int64 `json:"key_tag"`
+	KeyTag     int64 `json:"key_tag"`
 
 	// The DS key's signing type.
 	// * `CSK` - Combined Signing Key.
@@ -972,7 +989,7 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValue struct {
 	// * `ZSK` - Zone Signing Key.
 	//
 	// Possible values: `CSK`, `KSK`, `ZSK`.
-	KeyType string `json:"key_type"`
+	KeyType    string `json:"key_type"`
 
 	// The private key in ISC format.
 	PrivateKey string `json:"privatekey"`
@@ -988,10 +1005,10 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecordsNsecDetails struct {
 	Nsec3HashAlgoDesc string `json:"nsec3_hash_algo_desc"`
 
 	// The DNSSEC ([Domain Name Security Extensions](https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions)) Digest Algorithm Number.
-	Nsec3HashAlgoNum int64 `json:"nsec3_hash_algo_num"`
+	Nsec3HashAlgoNum  int64 `json:"nsec3_hash_algo_num"`
 
 	// The number of times that the system rehashes the first hash operation.
-	Nsec3Iterations int64 `json:"nsec3_iterations"`
+	Nsec3Iterations   int64 `json:"nsec3_iterations"`
 
 	// Whether NSEC3 will operate in Narrow or Inclusive mode.
 	//
@@ -1002,26 +1019,26 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecordsNsecDetails struct {
 	// * `0` - Inclusive mode.
 	//
 	// Possible values: `0`, `1`.
-	Nsec3Narrow int64 `json:"nsec3_narrow"`
+	Nsec3Narrow       int64 `json:"nsec3_narrow"`
 
 	// Whether NSEC3 will create records for all delegations or only for secure delegations.
 	// * `1` - Create records for all delegations.
 	// * `0` - Create records **only** for secure delegations.
 	//
 	// Possible values: `0`, `1`.
-	Nsec3OptOut int64 `json:"nsec3_opt_out"`
+	Nsec3OptOut       int64 `json:"nsec3_opt_out"`
 
 	// The salt value that PowerDNS uses in the hashes.
 	//
 	// **Note:**
 	//
 	// For more information about salt values, read [RFC 5155](https://tools.ietf.org/html/rfc5155#section-3.1.5).
-	Nsec3Salt string `json:"nsec3_salt"`
+	Nsec3Salt         string `json:"nsec3_salt"`
 
 	// Whether the domain uses NSEC or NSEC3 ([Next Secure Record version 3](https://tools.ietf.org/html/rfc5155)) DNSSEC semantics.
 	//
 	// Possible values: `NSEC`, `NSEC3`.
-	NsecVersion string `json:"nsec_version"`
+	NsecVersion       string `json:"nsec_version"`
 }
 
 // An object that contains domain's DS records.
@@ -1031,7 +1048,7 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecordsNsecDetails struct {
 // If the domain does **not** have a DS record, this function returns an empty object.
 type FetchDsRecordsForDomainsDataDomainsItemDsRecords struct {
 	// An object containing the DS keys on the requested domain.
-	Keys map[string]FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValue `json:"keys"`
+	Keys        map[string]FetchDsRecordsForDomainsDataDomainsItemDsRecordsKeysValue `json:"keys"`
 
 	// An object with of the domain's [Next Secure Record](https://tools.ietf.org/html/rfc4470) (NSEC) information.
 	//
@@ -1044,7 +1061,7 @@ type FetchDsRecordsForDomainsDataDomainsItemDsRecords struct {
 // FetchDsRecordsForDomainsDataDomainsItem is a generated payload type.
 type FetchDsRecordsForDomainsDataDomainsItem struct {
 	// The domain name.
-	Domain string `json:"domain"`
+	Domain    string `json:"domain"`
 
 	// An object that contains domain's DS records.
 	//
@@ -1070,6 +1087,7 @@ type FetchDsRecordsForDomainsData struct {
 func (c *Client) GetNameserverConfig(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetNameserverConfigData], error) {
 	return cpanel.WHMCall[GetNameserverConfigData](ctx, c.c, http.MethodGet, "get_nameserver_config", cpanel.CombineArgs(extra...))
 }
+
 
 // GetNameserverConfigData is a generated payload type.
 type GetNameserverConfigData struct {
@@ -1100,12 +1118,12 @@ type GetzonerecordArgs struct {
 // **Note:**
 //
 // On servers that run CentOS 7, you may see a named warning about the absence of SPF resource records on DNS.
-//   - This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
-//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//  * This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
+//  * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // **Important:**
 //
-//	When you disable the [DNS Role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [DNS Role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.
 //
@@ -1114,19 +1132,20 @@ func (c *Client) Getzonerecord(ctx context.Context, args *GetzonerecordArgs) (*c
 	return cpanel.WHMCall[GetzonerecordData](ctx, c.c, http.MethodGet, "getzonerecord", args)
 }
 
+
 // GetzonerecordResponseBase is a generated payload type.
 type GetzonerecordResponseBase struct {
 	// The zone record's file line number.
-	Line int64 `json:"Line"`
+	Line  int64 `json:"Line"`
 
 	// The record's class.
 	Class string `json:"class"`
 
 	// The record's name.
-	Name string `json:"name"`
+	Name  string `json:"name"`
 
 	// The record's Time To Live (TTL), in seconds.
-	TTL int64 `json:"ttl"`
+	TTL   int64 `json:"ttl"`
 
 	// The DNS record type.
 	// * `A` - A records store IPv4 addresses. Use them to map a hostname to an IPv4 address.
@@ -1173,17 +1192,18 @@ func (c *Client) HasLocalAuthority(ctx context.Context, args *HasLocalAuthorityA
 	return cpanel.WHMCall[HasLocalAuthorityData](ctx, c.c, http.MethodGet, "has_local_authority", args)
 }
 
+
 // HasLocalAuthorityDataRecordsItem is a generated payload type.
 type HasLocalAuthorityDataRecordsItem struct {
 	// The queried domain.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// A message that details the reason why the local server's authoritative check failed.
 	//
 	// **Note:**
 	//
 	//  The function **only** returns this value when the check fails.
-	Error string `json:"error"`
+	Error          string `json:"error"`
 
 	// Whether the local server is authoritative for the domain's DNS records.
 	// * `1` — The local server is authoritative for the domain's DNS records.
@@ -1193,10 +1213,10 @@ type HasLocalAuthorityDataRecordsItem struct {
 	LocalAuthority int64 `json:"local_authority"`
 
 	// The domain's authoritative nameservers, if any exist.
-	Nameservers []string `json:"nameservers"`
+	Nameservers    []string `json:"nameservers"`
 
 	// The DNS zone that contains the domain's DNS records, if one exists.
-	Zone *string `json:"zone"`
+	Zone           *string `json:"zone"`
 }
 
 // HasLocalAuthorityData is a generated payload type.
@@ -1251,6 +1271,7 @@ func (c *Client) ImportZoneKey(ctx context.Context, args *ImportZoneKeyArgs) (*c
 	return cpanel.WHMCall[ImportZoneKeyData](ctx, c.c, http.MethodGet, "import_zone_key", args)
 }
 
+
 // ImportZoneKeyData is a generated payload type.
 type ImportZoneKeyData struct {
 	// The system's assigned ID for the imported security key.
@@ -1269,6 +1290,7 @@ func (c *Client) IsAliasAvailable(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[IsAliasAvailableData](ctx, c.c, http.MethodGet, "is_alias_available", cpanel.CombineArgs(extra...))
 }
 
+
 // IsAliasAvailableData is a generated payload type.
 type IsAliasAvailableData struct {
 	// Whether `ALIAS` records are available.
@@ -1279,7 +1301,7 @@ type IsAliasAvailableData struct {
 	// When `ALIAS` records are enabled, they may work in API calls that accept `A` and `AAAA` records. However, the `ALIAS` record must use a fully qualified domain name (FQDN) rather than an IP address.
 	//
 	// Possible values: `1`, `0`.
-	Alias int64 `json:"alias"`
+	Alias    int64 `json:"alias"`
 
 	// Whether `ANAME` records are available.
 	//
@@ -1291,7 +1313,7 @@ type IsAliasAvailableData struct {
 	// The `aname` value is always set to false (i.e. Not available). The `ANAME` record is currently not supported. It is included for completeness and future proofing.
 	//
 	// Possible values: `1`, `0`.
-	Aname int64 `json:"aname"`
+	Aname    int64 `json:"aname"`
 
 	// The value (if any) of the running PDNS’s `resolver` setting.
 	Resolver string `json:"resolver"`
@@ -1310,6 +1332,7 @@ func (c *Client) IsHTTPSAvailable(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[IsHTTPSAvailableData](ctx, c.c, http.MethodGet, "is_https_available", cpanel.CombineArgs(extra...))
 }
 
+
 // IsHTTPSAvailableData is a generated payload type.
 type IsHTTPSAvailableData struct {
 	// The DNS server type currently in use (bind, pdns, etc.).
@@ -1320,7 +1343,7 @@ type IsHTTPSAvailableData struct {
 	// * `0` - Not supported.
 	//
 	// Possible values: `1`, `0`.
-	HTTPS int64 `json:"https"`
+	HTTPS     int64 `json:"https"`
 }
 
 // IsSvcbAvailable calls the WHM API 1 function `is_svcb_available` — Return SVCB DNS record support information
@@ -1336,6 +1359,7 @@ func (c *Client) IsSvcbAvailable(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[IsSvcbAvailableData](ctx, c.c, http.MethodGet, "is_svcb_available", cpanel.CombineArgs(extra...))
 }
 
+
 // IsSvcbAvailableData is a generated payload type.
 type IsSvcbAvailableData struct {
 	// The DNS server type currently in use (bind, pdns, etc.).
@@ -1346,7 +1370,7 @@ type IsSvcbAvailableData struct {
 	// * `0` - Not supported.
 	//
 	// Possible values: `1`, `0`.
-	Svcb int64 `json:"svcb"`
+	Svcb      int64 `json:"svcb"`
 }
 
 // KillDNSArgs are the parameters of the WHM API 1 function `killdns`.
@@ -1367,10 +1391,9 @@ type KillDNSArgs struct {
 // **Important:**
 //
 // - The WHM API 1 adddns function adds an XDNS entry for a domain in the following locations:
-//   - The `/var/cpanel/users/USER` file, where `USER` represents the domain's owner.
-//   - The `/etc/vdomainaliases/DOMAIN` directory, where `DOMAIN` represents the new zone's domain.
-//   - The `/etc/vfilters/DOMAIN` directory, where `DOMAIN` represents the new zone's domain.
-//
+//  - The `/var/cpanel/users/USER` file, where `USER` represents the domain's owner.
+//  - The `/etc/vdomainaliases/DOMAIN` directory, where `DOMAIN` represents the new zone's domain.
+//  - The `/etc/vfilters/DOMAIN` directory, where `DOMAIN` represents the new zone's domain.
 // - This function does **not** automatically delete these entries. You **must** manually delete these entries, or you **cannot** use this domain as a value in other API functions.
 // - You cannot delete other DNS zones that reside on *Write-only* servers in a DNS cluster.
 //
@@ -1388,6 +1411,7 @@ type KillDNSArgs struct {
 func (c *Client) KillDNS(ctx context.Context, args *KillDNSArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "killdns", args)
 }
+
 
 // ListMXsArgs are the parameters of the WHM API 1 function `listmxs`.
 type ListMXsArgs struct {
@@ -1415,19 +1439,20 @@ func (c *Client) ListMXs(ctx context.Context, args *ListMXsArgs) (*cpanel.WHMRes
 	return cpanel.WHMCall[ListMXsData](ctx, c.c, http.MethodGet, "listmxs", args)
 }
 
+
 // ListMXsDataRecordItem is a generated payload type.
 type ListMXsDataRecordItem struct {
 	// The zone record's line number.
-	Line int64 `json:"Line"`
+	Line       int64 `json:"Line"`
 
 	// The record's class.
-	Class string `json:"class"`
+	Class      string `json:"class"`
 
 	// The domain's mail exchanger.
-	Exchange string `json:"exchange"`
+	Exchange   string `json:"exchange"`
 
 	// The record's name.
-	Name string `json:"name"`
+	Name       string `json:"name"`
 
 	// The MX record's priority order.
 	//
@@ -1437,10 +1462,10 @@ type ListMXsDataRecordItem struct {
 	Preference int64 `json:"preference"`
 
 	// The record's Time To Live (TTL) in seconds.
-	TTL int64 `json:"ttl"`
+	TTL        int64 `json:"ttl"`
 
 	// The DNS record's type.
-	Type2 string `json:"type"`
+	Type2      string `json:"type"`
 }
 
 // ListMXsData is a generated payload type.
@@ -1464,10 +1489,11 @@ func (c *Client) ListZones(ctx context.Context, extra ...cpanel.Args) (*cpanel.W
 	return cpanel.WHMCall[ListZonesData](ctx, c.c, http.MethodGet, "listzones", cpanel.CombineArgs(extra...))
 }
 
+
 // ListZonesDataZoneItem is a generated payload type.
 type ListZonesDataZoneItem struct {
 	// The domain name.
-	Domain string `json:"domain"`
+	Domain   string `json:"domain"`
 
 	// The zone file's name.
 	Zonefile string `json:"zonefile"`
@@ -1501,6 +1527,7 @@ func (c *Client) LookupNSIP(ctx context.Context, args *LookupNSIPArgs) (*cpanel.
 	return cpanel.WHMCall[LookupNSIPData](ctx, c.c, http.MethodGet, "lookupnsip", args)
 }
 
+
 // LookupNSIPData is a generated payload type.
 type LookupNSIPData struct {
 	// The nameserver's IP address.
@@ -1528,6 +1555,7 @@ type LookupNSIPsArgs struct {
 func (c *Client) LookupNSIPs(ctx context.Context, args *LookupNSIPsArgs) (*cpanel.WHMResult[LookupNSIPsData], error) {
 	return cpanel.WHMCall[LookupNSIPsData](ctx, c.c, http.MethodGet, "lookupnsips", args)
 }
+
 
 // LookupNSIPsData is a generated payload type.
 type LookupNSIPsData struct {
@@ -1607,6 +1635,7 @@ func (c *Client) MassEditDNSZone(ctx context.Context, args *MassEditDNSZoneArgs)
 	return cpanel.WHMCall[MassEditDNSZoneData](ctx, c.c, http.MethodGet, "mass_edit_dns_zone", args)
 }
 
+
 // MassEditDNSZoneData is a generated payload type.
 type MassEditDNSZoneData struct {
 	// The DNS zone’s SOA record’s new serial number.
@@ -1644,6 +1673,7 @@ type ParseDNSZoneArgs struct {
 func (c *Client) ParseDNSZone(ctx context.Context, args *ParseDNSZoneArgs) (*cpanel.WHMResult[ParseDNSZoneData], error) {
 	return cpanel.WHMCall[ParseDNSZoneData](ctx, c.c, http.MethodGet, "parse_dns_zone", args)
 }
+
 
 // The zone’s content.
 type Payload []string
@@ -1690,6 +1720,7 @@ func (c *Client) RemoveZoneKey(ctx context.Context, args *RemoveZoneKeyArgs) (*c
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "remove_zone_key", args)
 }
 
+
 // RemoveZoneRecordArgs are the parameters of the WHM API 1 function `removezonerecord`.
 type RemoveZoneRecordArgs struct {
 	// The DNS zone record file's line number.
@@ -1726,8 +1757,8 @@ type RemoveZoneRecordArgs struct {
 //
 // **Important:**
 //
-//   - When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
-//   - You **cannot** use this function to modify temporary domains.
+//  * When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//  * You **cannot** use this function to modify temporary domains.
 //
 // Available since cPanel & WHM version 11.
 //
@@ -1735,6 +1766,7 @@ type RemoveZoneRecordArgs struct {
 func (c *Client) RemoveZoneRecord(ctx context.Context, args *RemoveZoneRecordArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "removezonerecord", args)
 }
+
 
 // ResetZoneArgs are the parameters of the WHM API 1 function `resetzone`.
 type ResetZoneArgs struct {
@@ -1774,6 +1806,7 @@ func (c *Client) ResetZone(ctx context.Context, args *ResetZoneArgs) (*cpanel.WH
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "resetzone", args)
 }
 
+
 // ResolveDomainNameArgs are the parameters of the WHM API 1 function `resolvedomainname`.
 type ResolveDomainNameArgs struct {
 	// The domain.
@@ -1795,6 +1828,7 @@ type ResolveDomainNameArgs struct {
 func (c *Client) ResolveDomainName(ctx context.Context, args *ResolveDomainNameArgs) (*cpanel.WHMResult[ResolveDomainNameData], error) {
 	return cpanel.WHMCall[ResolveDomainNameData](ctx, c.c, http.MethodGet, "resolvedomainname", args)
 }
+
 
 // ResolveDomainNameData is a generated payload type.
 type ResolveDomainNameData struct {
@@ -1857,6 +1891,7 @@ func (c *Client) Savemxs(ctx context.Context, args *SavemxsArgs) (*cpanel.WHMRes
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "savemxs", args)
 }
 
+
 // SetNameserverArgs are the parameters of the WHM API 1 function `set_nameserver`.
 type SetNameserverArgs struct {
 	// The nameserver software.
@@ -1884,10 +1919,11 @@ func (c *Client) SetNameserver(ctx context.Context, args *SetNameserverArgs) (*c
 	return cpanel.WHMCall[SetNameserverData](ctx, c.c, http.MethodGet, "set_nameserver", args)
 }
 
+
 // SetNameserverData is a generated payload type.
 type SetNameserverData struct {
 	// A confirmation message from the system.
-	Message string `json:"message"`
+	Message    string `json:"message"`
 
 	// The nameserver software.
 	// * `bind`
@@ -1965,10 +2001,11 @@ func (c *Client) SetNsec3ForDomains(ctx context.Context, args *SetNsec3ForDomain
 	return cpanel.WHMCall[SetNsec3ForDomainsData](ctx, c.c, http.MethodGet, "set_nsec3_for_domains", args)
 }
 
+
 // SetNsec3ForDomainsDataDomainsItem is a generated payload type.
 type SetNsec3ForDomainsDataDomainsItem struct {
 	// The domain for which the system enabled NSEC3.
-	Domain string `json:"domain"`
+	Domain  string `json:"domain"`
 
 	// Whether the system enabled NSEC3.
 	// - `1` — Enabled.
@@ -1982,7 +2019,7 @@ type SetNsec3ForDomainsDataDomainsItem struct {
 	// **Note:**
 	//
 	//  The function **only** displays this return when the enabled return is a `0` value.
-	Error string `json:"error"`
+	Error   string `json:"error"`
 }
 
 // SetNsec3ForDomainsData is a generated payload type.
@@ -2006,6 +2043,7 @@ func (c *Client) SetUpDNSResolverWorkarounds(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[SetUpDNSResolverWorkaroundsData](ctx, c.c, http.MethodGet, "set_up_dns_resolver_workarounds", cpanel.CombineArgs(extra...))
 }
 
+
 // An object that contains of [`libunbound` configuration options](https://www.nlnetlabs.nl/documentation/unbound/unbound.conf/).
 //
 // **Note:**
@@ -2013,10 +2051,10 @@ func (c *Client) SetUpDNSResolverWorkarounds(ctx context.Context, extra ...cpane
 // The function **only** returns an option if the system finds a configuration issue.
 type SetUpDNSResolverWorkaroundsDataFlags struct {
 	// The system **cannot** create an [IPv6](https://en.wikipedia.org/wiki/IPv6) socket.
-	DoIP6 string `json:"do-ip6"`
+	DoIP6          string `json:"do-ip6"`
 
 	// The system **cannot** receive a [User Datagram Protocol (UDP)](https://en.wikipedia.org/wiki/User_Datagram_Protocol) DNS response.
-	DoUdp string `json:"do-udp"`
+	DoUdp          string `json:"do-udp"`
 
 	// The [extension mechanism for DNS (EDNS)](https://en.wikipedia.org/wiki/Extension_mechanisms_for_DNS) length size is at or exceeds 512 bytes.
 	EdnsBufferSize string `json:"edns-buffer-size"`
@@ -2069,6 +2107,7 @@ func (c *Client) SetResolverS(ctx context.Context, args *SetResolverSArgs) (*cpa
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setresolvers", args)
 }
 
+
 // UnsetNsec3ForDomainsArgs are the parameters of the WHM API 1 function `unset_nsec3_for_domains`.
 type UnsetNsec3ForDomainsArgs struct {
 	// The domain for which to disable NSEC3 semantics and use NSEC semantics.
@@ -2095,6 +2134,7 @@ func (c *Client) UnsetNsec3ForDomains(ctx context.Context, args *UnsetNsec3ForDo
 	return cpanel.WHMCall[UnsetNsec3ForDomainsData](ctx, c.c, http.MethodGet, "unset_nsec3_for_domains", args)
 }
 
+
 // UnsetNsec3ForDomainsDataDomainsItem is a generated payload type.
 type UnsetNsec3ForDomainsDataDomainsItem struct {
 	// Whether the system disabled NSEC3.
@@ -2105,14 +2145,14 @@ type UnsetNsec3ForDomainsDataDomainsItem struct {
 	Disabled int64 `json:"disabled"`
 
 	// The domain for which to disable NSEC3.
-	Domain string `json:"domain"`
+	Domain   string `json:"domain"`
 
 	// An error message that describes why the system could not disable NSEC3.
 	//
 	// **Note:**
 	//
 	// The function **only** displays this return when the `disabled` return is a `0` value.
-	Error string `json:"error"`
+	Error    string `json:"error"`
 }
 
 // UnsetNsec3ForDomainsData is a generated payload type.
@@ -2150,6 +2190,7 @@ func (c *Client) UpdateNameserversConfig(ctx context.Context, args *UpdateNamese
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "update_nameservers_config", args)
 }
 
+
 // UpdateReverseDNSCache calls the WHM API 1 function `update_reverse_dns_cache` — Update reverse DNS cache
 //
 // This function queries DNS and updates the map of local IP addresses to reverse DNS names.
@@ -2161,6 +2202,7 @@ func (c *Client) UpdateReverseDNSCache(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "update_reverse_dns_cache", cpanel.CombineArgs(extra...))
 }
 
+
 // UpdateUserDomains calls the WHM API 1 function `updateuserdomains` — Update /etc/userdomains file
 //
 // This function updates the `/etc/userdomains` file based on the entries in `/var/cpanel/users` directory.
@@ -2171,3 +2213,4 @@ func (c *Client) UpdateReverseDNSCache(ctx context.Context, extra ...cpanel.Args
 func (c *Client) UpdateUserDomains(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "updateuserdomains", cpanel.CombineArgs(extra...))
 }
+

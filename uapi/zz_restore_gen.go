@@ -41,6 +41,7 @@ func (c *RestoreClient) DirectoryListing(ctx context.Context, args *RestoreDirec
 	return cpanel.UAPICall[[]RestoreDirectoryListingDataItem](ctx, c.c, http.MethodGet, "Restore", "directory_listing", args)
 }
 
+
 // RestoreDirectoryListingDataItem is a generated payload type.
 type RestoreDirectoryListingDataItem struct {
 	// Whether a difference exists between the `type` and `onDiskType` returns.
@@ -48,17 +49,17 @@ type RestoreDirectoryListingDataItem struct {
 	// * `0` - **No** conflict exists.
 	//
 	// Possible values: `0`, `1`.
-	Conflict int64 `json:"conflict"`
+	Conflict   int64 `json:"conflict"`
 
 	// Whether the file exists in the user's directory or **only** in the backup.
 	// * `1` - File exists in the user's directory.
 	// * `0` - File exists **only** in the backup.
 	//
 	// Possible values: `0`, `1`.
-	Exists int64 `json:"exists"`
+	Exists     int64 `json:"exists"`
 
 	// The name of the file or directory.
-	Name string `json:"name"`
+	Name       string `json:"name"`
 
 	// The item type stored on the disk.
 	// * `dir` - A directory.
@@ -76,7 +77,7 @@ type RestoreDirectoryListingDataItem struct {
 	// * `unknown` - An unknown file type.
 	//
 	// Possible values: `dir`, `file`, `symlink`, `unknown`.
-	Type2 string `json:"type"`
+	Type2      string `json:"type"`
 }
 
 // GetUsers calls the UAPI function `Restore::get_users` — Return cPanel accounts with backup metadata
@@ -93,6 +94,7 @@ type RestoreDirectoryListingDataItem struct {
 func (c *RestoreClient) GetUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Restore", "get_users", cpanel.CombineArgs(extra...))
 }
+
 
 // RestoreQueryFileInfoArgs are the parameters of the UAPI function `Restore::query_file_info`.
 type RestoreQueryFileInfoArgs struct {
@@ -135,6 +137,7 @@ func (c *RestoreClient) QueryFileInfo(ctx context.Context, args *RestoreQueryFil
 	return cpanel.UAPICall[[]RestoreQueryFileInfoDataItem](ctx, c.c, http.MethodGet, "Restore", "query_file_info", args)
 }
 
+
 // RestoreQueryFileInfoDataItem is a generated payload type.
 type RestoreQueryFileInfoDataItem struct {
 	// The date when the system created the backup.
@@ -146,7 +149,7 @@ type RestoreQueryFileInfoDataItem struct {
 	// * `incremental` — An incremental daily backup.
 	// * The backup frequency (`weekly` or `monthly`) , a slash character (`/`), and the value `incremental`.
 	// * The backup frequency (`weekly` or `monthly`), a slash character (`/`), and the backup date, in `YYYY-MM-DD` format.
-	BackupID string `json:"backupID"`
+	BackupID   string `json:"backupID"`
 
 	// The backup type.
 	//
@@ -167,20 +170,20 @@ type RestoreQueryFileInfoDataItem struct {
 	// This return appears **only** if you set the `exists` parameter to `1`.
 	//
 	// Possible values: `1`, `0`.
-	Exists int64 `json:"exists"`
+	Exists     int64 `json:"exists"`
 
 	// The size, in bytes, of the file in the backup.
 	//
 	// **Note:**
 	//
 	// The function returns this value **only** if the item is a file.
-	FileSize int64 `json:"fileSize"`
+	FileSize   int64 `json:"fileSize"`
 
 	// The file's last modification time.
-	Mtime int64 `json:"mtime"`
+	Mtime      int64 `json:"mtime"`
 
 	// The identical file path value that the system passed in the function.
-	Path string `json:"path"`
+	Path       string `json:"path"`
 
 	// The item type stored in the backup.
 	//
@@ -190,7 +193,7 @@ type RestoreQueryFileInfoDataItem struct {
 	// * `unknown` — An unknown file type.
 	//
 	// Possible values: `dir`, `file`, `symlink`, `unknown`.
-	Type2 string `json:"type"`
+	Type2      string `json:"type"`
 }
 
 // RestoreRestoreFileArgs are the parameters of the UAPI function `Restore::restore_file`.
@@ -245,6 +248,7 @@ type RestoreRestoreFileArgs struct {
 func (c *RestoreClient) RestoreFile(ctx context.Context, args *RestoreRestoreFileArgs) (*cpanel.UAPIResult[RestoreRestoreFileData], error) {
 	return cpanel.UAPICall[RestoreRestoreFileData](ctx, c.c, http.MethodGet, "Restore", "restore_file", args)
 }
+
 
 // An object containing the status of the operation.
 type RestoreRestoreFileData struct {

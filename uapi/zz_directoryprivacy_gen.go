@@ -44,6 +44,7 @@ func (c *DirectoryPrivacyClient) AddUser(ctx context.Context, args *DirectoryPri
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "DirectoryPrivacy", "add_user", args)
 }
 
+
 // DirectoryPrivacyConfigureDirectoryProtectionArgs are the parameters of the UAPI function `DirectoryPrivacy::configure_directory_protection`.
 type DirectoryPrivacyConfigureDirectoryProtectionArgs struct {
 	// The name of the directory protection authorization instance.
@@ -84,17 +85,18 @@ func (c *DirectoryPrivacyClient) ConfigureDirectoryProtection(ctx context.Contex
 	return cpanel.UAPICall[DirectoryPrivacyConfigureDirectoryProtectionData](ctx, c.c, http.MethodGet, "DirectoryPrivacy", "configure_directory_protection", args)
 }
 
+
 // DirectoryPrivacyConfigureDirectoryProtectionData is a generated payload type.
 type DirectoryPrivacyConfigureDirectoryProtectionData struct {
 	// The authentication resource name.
-	AuthName string `json:"auth_name"`
+	AuthName   string `json:"auth_name"`
 
 	// The directory's authentication type.
 	// * `Basic`
 	// * `None`
 	//
 	// Possible values: `Basic`, `None`.
-	AuthType string `json:"auth_type"`
+	AuthType   string `json:"auth_type"`
 
 	// The path to the directory's password file.
 	PasswdFile string `json:"passwd_file"`
@@ -104,7 +106,7 @@ type DirectoryPrivacyConfigureDirectoryProtectionData struct {
 	// * `0` - **Not** protected.
 	//
 	// Possible values: `0`, `1`.
-	Protected int64 `json:"protected"`
+	Protected  int64 `json:"protected"`
 }
 
 // DirectoryPrivacyDeleteUserArgs are the parameters of the UAPI function `DirectoryPrivacy::delete_user`.
@@ -134,6 +136,7 @@ func (c *DirectoryPrivacyClient) DeleteUser(ctx context.Context, args *Directory
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "DirectoryPrivacy", "delete_user", args)
 }
 
+
 // DirectoryPrivacyIsDirectoryProtectedArgs are the parameters of the UAPI function `DirectoryPrivacy::is_directory_protected`.
 type DirectoryPrivacyIsDirectoryProtectedArgs struct {
 	// The absolute directory path on the cPanel account to check for password protection.
@@ -156,17 +159,18 @@ func (c *DirectoryPrivacyClient) IsDirectoryProtected(ctx context.Context, args 
 	return cpanel.UAPICall[DirectoryPrivacyIsDirectoryProtectedData](ctx, c.c, http.MethodGet, "DirectoryPrivacy", "is_directory_protected", args)
 }
 
+
 // DirectoryPrivacyIsDirectoryProtectedData is a generated payload type.
 type DirectoryPrivacyIsDirectoryProtectedData struct {
 	// The authentication resource name.
-	AuthName string `json:"auth_name"`
+	AuthName   string `json:"auth_name"`
 
 	// The directory's authentication type.
 	// * `Basic`
 	// * `None`
 	//
 	// Possible values: `Basic`, `None`.
-	AuthType string `json:"auth_type"`
+	AuthType   string `json:"auth_type"`
 
 	// The path to the directory's password file.
 	PasswdFile string `json:"passwd_file"`
@@ -176,7 +180,7 @@ type DirectoryPrivacyIsDirectoryProtectedData struct {
 	// * `0` - **Not** protected.
 	//
 	// Possible values: `0`, `1`.
-	Protected int64 `json:"protected"`
+	Protected  int64 `json:"protected"`
 }
 
 // DirectoryPrivacyListDirectoriesArgs are the parameters of the UAPI function `DirectoryPrivacy::list_directories`.
@@ -201,10 +205,11 @@ func (c *DirectoryPrivacyClient) ListDirectories(ctx context.Context, args *Dire
 	return cpanel.UAPICall[DirectoryPrivacyListDirectoriesData](ctx, c.c, http.MethodGet, "DirectoryPrivacy", "list_directories", args)
 }
 
+
 // The subdirectory's privacy information.
 type DirectoryPrivacyListDirectoriesDataChildrenItemState struct {
 	// The authentication resource name.
-	AuthName string `json:"auth_name"`
+	AuthName   string `json:"auth_name"`
 
 	// The subdirectory's authentication type.
 	//
@@ -212,7 +217,7 @@ type DirectoryPrivacyListDirectoriesDataChildrenItemState struct {
 	// * `None`
 	//
 	// Possible values: `Basic`, `None`.
-	AuthType string `json:"auth_type"`
+	AuthType   string `json:"auth_type"`
 
 	// The absolute file path to the subdirectory's password file.
 	PasswdFile string `json:"passwd_file"`
@@ -223,13 +228,13 @@ type DirectoryPrivacyListDirectoriesDataChildrenItemState struct {
 	// * `0` — **Not** protected.
 	//
 	// Possible values: `1`, `0`.
-	Protected int64 `json:"protected"`
+	Protected  int64 `json:"protected"`
 }
 
 // DirectoryPrivacyListDirectoriesDataChildrenItem is a generated payload type.
 type DirectoryPrivacyListDirectoriesDataChildrenItem struct {
 	// The subdirectory's directory path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The subdirectory's privacy information.
 	State DirectoryPrivacyListDirectoriesDataChildrenItemState `json:"state"`
@@ -238,7 +243,7 @@ type DirectoryPrivacyListDirectoriesDataChildrenItem struct {
 // The current subdirectory's privacy information.
 type DirectoryPrivacyListDirectoriesDataCurrentState struct {
 	// The authentication resource name.
-	AuthName string `json:"auth_name"`
+	AuthName   string `json:"auth_name"`
 
 	// The directory's authentication type.
 	//
@@ -246,7 +251,7 @@ type DirectoryPrivacyListDirectoriesDataCurrentState struct {
 	// * `None`
 	//
 	// Possible values: `Basic`, `None`.
-	AuthType string `json:"auth_type"`
+	AuthType   string `json:"auth_type"`
 
 	// The absolute file path to the directory's password file.
 	PasswdFile string `json:"passwd_file"`
@@ -257,13 +262,13 @@ type DirectoryPrivacyListDirectoriesDataCurrentState struct {
 	// * `0` — **Not** protected.
 	//
 	// Possible values: `1`, `0`.
-	Protected int64 `json:"protected"`
+	Protected  int64 `json:"protected"`
 }
 
 // The user's current directory and its privacy information.
 type DirectoryPrivacyListDirectoriesDataCurrent struct {
 	// The current directory's path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The current subdirectory's privacy information.
 	State DirectoryPrivacyListDirectoriesDataCurrentState `json:"state"`
@@ -272,7 +277,7 @@ type DirectoryPrivacyListDirectoriesDataCurrent struct {
 // The home directory's privacy information.
 type DirectoryPrivacyListDirectoriesDataHomeState struct {
 	// The authentication resource name.
-	AuthName string `json:"auth_name"`
+	AuthName   string `json:"auth_name"`
 
 	// The home directory's authentication type.
 	//
@@ -280,7 +285,7 @@ type DirectoryPrivacyListDirectoriesDataHomeState struct {
 	// * `None`
 	//
 	// Possible values: `Basic`, `None`.
-	AuthType string `json:"auth_type"`
+	AuthType   string `json:"auth_type"`
 
 	// The absolute file path to the home directory's password file.
 	PasswdFile string `json:"passwd_file"`
@@ -291,13 +296,13 @@ type DirectoryPrivacyListDirectoriesDataHomeState struct {
 	// * `0` — **Not** protected.
 	//
 	// Possible values: `1`, `0`.
-	Protected int64 `json:"protected"`
+	Protected  int64 `json:"protected"`
 }
 
 // The user's home directory and its privacy information.
 type DirectoryPrivacyListDirectoriesDataHome struct {
 	// The home directory's absolute path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The home directory's privacy information.
 	State DirectoryPrivacyListDirectoriesDataHomeState `json:"state"`
@@ -306,7 +311,7 @@ type DirectoryPrivacyListDirectoriesDataHome struct {
 // The parent directory's privacy information.
 type DirectoryPrivacyListDirectoriesDataParentState struct {
 	// The authentication resource name.
-	AuthName string `json:"auth_name"`
+	AuthName   string `json:"auth_name"`
 
 	// The parent directory's authentication type.
 	//
@@ -314,7 +319,7 @@ type DirectoryPrivacyListDirectoriesDataParentState struct {
 	// * `None`
 	//
 	// Possible values: `Basic`, `None`.
-	AuthType string `json:"auth_type"`
+	AuthType   string `json:"auth_type"`
 
 	// The absolute file path to the parent directory's password file.
 	PasswdFile string `json:"passwd_file"`
@@ -325,13 +330,13 @@ type DirectoryPrivacyListDirectoriesDataParentState struct {
 	// * `0` — **Not** protected.
 	//
 	// Possible values: `1`, `0`.
-	Protected int64 `json:"protected"`
+	Protected  int64 `json:"protected"`
 }
 
 // The parent directory of the current directory and its privacy information.
 type DirectoryPrivacyListDirectoriesDataParent struct {
 	// The parent directory's absolute directory path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The parent directory's privacy information.
 	State DirectoryPrivacyListDirectoriesDataParentState `json:"state"`
@@ -348,13 +353,13 @@ type DirectoryPrivacyListDirectoriesData struct {
 	Children []DirectoryPrivacyListDirectoriesDataChildrenItem `json:"children"`
 
 	// The user's current directory and its privacy information.
-	Current DirectoryPrivacyListDirectoriesDataCurrent `json:"current"`
+	Current  DirectoryPrivacyListDirectoriesDataCurrent `json:"current"`
 
 	// The user's home directory and its privacy information.
-	Home DirectoryPrivacyListDirectoriesDataHome `json:"home"`
+	Home     DirectoryPrivacyListDirectoriesDataHome `json:"home"`
 
 	// The parent directory of the current directory and its privacy information.
-	Parent DirectoryPrivacyListDirectoriesDataParent `json:"parent"`
+	Parent   DirectoryPrivacyListDirectoriesDataParent `json:"parent"`
 }
 
 // DirectoryPrivacyListUsersArgs are the parameters of the UAPI function `DirectoryPrivacy::list_users`.
@@ -378,3 +383,4 @@ type DirectoryPrivacyListUsersArgs struct {
 func (c *DirectoryPrivacyClient) ListUsers(ctx context.Context, args *DirectoryPrivacyListUsersArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "DirectoryPrivacy", "list_users", args)
 }
+

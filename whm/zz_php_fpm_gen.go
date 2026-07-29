@@ -31,6 +31,7 @@ func (c *Client) ConvertAllDomainsToFPM(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[ConvertAllDomainsToFPMData](ctx, c.c, http.MethodGet, "convert_all_domains_to_fpm", cpanel.CombineArgs(extra...))
 }
 
+
 // ConvertAllDomainsToFPMData is a generated payload type.
 type ConvertAllDomainsToFPMData struct {
 	// The ID of the log file for the conversion process.
@@ -62,16 +63,17 @@ func (c *Client) GetFPMCountAndUtilization(ctx context.Context, extra ...cpanel.
 	return cpanel.WHMCall[GetFPMCountAndUtilizationData](ctx, c.c, http.MethodGet, "get_fpm_count_and_utilization", cpanel.CombineArgs(extra...))
 }
 
+
 // GetFPMCountAndUtilizationData is a generated payload type.
 type GetFPMCountAndUtilizationData struct {
 	// The number of domains that you will enable with PHP-FPM when you run the `/scripts/php_fpm_config_convert` script.
-	DomainsToBeEnabled int64 `json:"domains_to_be_enabled"`
+	DomainsToBeEnabled                int64 `json:"domains_to_be_enabled"`
 
 	// The number of domains with PHP-FPM enabled.
-	DomainsUsingFPM int64 `json:"domains_using_fpm"`
+	DomainsUsingFPM                   int64 `json:"domains_using_fpm"`
 
 	// The approximate number of megabytes of memory that your system will require to convert the remaining domains to PHP-FPM.
-	MemoryNeeded int64 `json:"memory_needed"`
+	MemoryNeeded                      int64 `json:"memory_needed"`
 
 	// The approximate number of domains on which you can enable PHP-FPM without a server overload.
 	NumberOfNewFPMAccountsWeCanHandle int64 `json:"number_of_new_fpm_accounts_we_can_handle"`
@@ -83,10 +85,10 @@ type GetFPMCountAndUtilizationData struct {
 	// * `0` — **Low** risk of server overload when you enable PHP-FPM.
 	//
 	// Possible values: `1`, `0`.
-	ShowWarning int64 `json:"show_warning"`
+	ShowWarning                       int64 `json:"show_warning"`
 
 	// The total number of domains on the server.
-	TotalDomains int64 `json:"total_domains"`
+	TotalDomains                      int64 `json:"total_domains"`
 }
 
 // IsConversionInProgress calls the WHM API 1 function `is_conversion_in_progress` — Return PHP-FPM conversion status
@@ -108,6 +110,7 @@ func (c *Client) IsConversionInProgress(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[IsConversionInProgressData](ctx, c.c, http.MethodGet, "is_conversion_in_progress", cpanel.CombineArgs(extra...))
 }
 
+
 // IsConversionInProgressData is a generated payload type.
 type IsConversionInProgressData struct {
 	// Whether the system's process to convert all of WHM's accounts to use PHP-FPM is in progress.
@@ -122,13 +125,13 @@ type IsConversionInProgressData struct {
 //
 // This function retrieves the PHP INI directives and pool options for a system's or domain's PHP-FPM configuration.
 //
-//	**Important:**
+//  **Important:**
 //
-//	  When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//    When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
-//	**Warning:**
+//  **Warning:**
 //
-//	  We **strongly** recommend that you only activate Apache PHP-FPM if your server has at least 2 GB of RAM available, or at least 30 MB of RAM per domain. If you enable PHP-FPM on a server with less than the required RAM, your server may experience severe performance issues.
+//    We **strongly** recommend that you only activate Apache PHP-FPM if your server has at least 2 GB of RAM available, or at least 30 MB of RAM per domain. If you enable PHP-FPM on a server with less than the required RAM, your server may experience severe performance issues.
 //
 // This function requires an HTTP POST request.
 //
@@ -138,6 +141,7 @@ type IsConversionInProgressData struct {
 func (c *Client) PHPFPMConfigGet(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PHPFPMConfigGetData], error) {
 	return cpanel.WHMCall[PHPFPMConfigGetData](ctx, c.c, http.MethodPost, "php_fpm_config_get", cpanel.CombineArgs(extra...))
 }
+
 
 // PHPFPMConfigGetDataConfigItem is a generated payload type.
 type PHPFPMConfigGetDataConfigItem struct {
@@ -152,7 +156,7 @@ type PHPFPMConfigGetDataConfigItem struct {
 	// * `error_reporting` - The errors that the system reports on.
 	// * `log_errors` - Whether the system will log errors.
 	// * `short_open_ta …
-	BaseFlagName string `json:"base_flag_name"`
+	BaseFlagName      string `json:"base_flag_name"`
 
 	// Whether the PHP value is a PHP INI directive value (`php_value`), a PHP INI ADMIN value (`php_admin_value`), or a PHP-FPM pool option (`pm_*`).
 	//
@@ -164,7 +168,7 @@ type PHPFPMConfigGetDataConfigItem struct {
 	TrinaryAdminValue int64 `json:"trinary_admin_value"`
 
 	// An argument value for `base_flag_name`.
-	Value string `json:"value"`
+	Value             string `json:"value"`
 }
 
 // PHPFPMConfigGetData is a generated payload type.
@@ -197,6 +201,7 @@ func (c *Client) PHPFPMConfigSet(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "php_fpm_config_set", cpanel.CombineArgs(extra...))
 }
 
+
 // PHPGetDefaultAccountsToFPM calls the WHM API 1 function `php_get_default_accounts_to_fpm` — Return PHP-FPM status on new accounts
 //
 // This function determines whether the system enables PHP-FPM for new domains and accounts.
@@ -220,6 +225,7 @@ func (c *Client) PHPFPMConfigSet(ctx context.Context, extra ...cpanel.Args) (*cp
 func (c *Client) PHPGetDefaultAccountsToFPM(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PHPGetDefaultAccountsToFPMData], error) {
 	return cpanel.WHMCall[PHPGetDefaultAccountsToFPMData](ctx, c.c, http.MethodGet, "php_get_default_accounts_to_fpm", cpanel.CombineArgs(extra...))
 }
+
 
 // PHPGetDefaultAccountsToFPMData is a generated payload type.
 type PHPGetDefaultAccountsToFPMData struct {
@@ -245,6 +251,7 @@ type PHPGetDefaultAccountsToFPMData struct {
 func (c *Client) PHPGetOldFPMFlag(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PHPGetOldFPMFlagData], error) {
 	return cpanel.WHMCall[PHPGetOldFPMFlagData](ctx, c.c, http.MethodGet, "php_get_old_fpm_flag", cpanel.CombineArgs(extra...))
 }
+
 
 // PHPGetOldFPMFlagData is a generated payload type.
 type PHPGetOldFPMFlagData struct {
@@ -292,6 +299,7 @@ func (c *Client) PHPSetDefaultAccountsToFPM(ctx context.Context, args *PHPSetDef
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "php_set_default_accounts_to_fpm", args)
 }
 
+
 // PHPSetOldFPMFlag calls the WHM API 1 function `php_set_old_fpm_flag` — Enable PHP-FPM preconfigured status
 //
 // This function creates the `/etc/cpanel/ea4/old_fpm_flag` touch file.
@@ -310,6 +318,7 @@ func (c *Client) PHPSetDefaultAccountsToFPM(ctx context.Context, args *PHPSetDef
 func (c *Client) PHPSetOldFPMFlag(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PHPSetOldFPMFlagData], error) {
 	return cpanel.WHMCall[PHPSetOldFPMFlagData](ctx, c.c, http.MethodGet, "php_set_old_fpm_flag", cpanel.CombineArgs(extra...))
 }
+
 
 // PHPSetOldFPMFlagData is a generated payload type.
 type PHPSetOldFPMFlagData struct {

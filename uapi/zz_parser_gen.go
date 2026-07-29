@@ -22,6 +22,7 @@ func (c *ParserClient) FirstfileRelativeUri(ctx context.Context, extra ...cpanel
 	return cpanel.UAPICall[ParserFirstfileRelativeUriData](ctx, c.c, http.MethodGet, "Parser", "firstfile_relative_uri", cpanel.CombineArgs(extra...))
 }
 
+
 // ParserFirstfileRelativeUriData is a generated payload type.
 type ParserFirstfileRelativeUriData struct {
 	// The file's absolute file path.

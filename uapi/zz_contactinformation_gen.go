@@ -21,21 +21,22 @@ func (c *ContactInformationClient) GetNotificationPreferences(ctx context.Contex
 	return cpanel.UAPICall[[]ContactInformationGetNotificationPreferencesDataItem](ctx, c.c, http.MethodGet, "ContactInformation", "get_notification_preferences", cpanel.CombineArgs(extra...))
 }
 
+
 // ContactInformationGetNotificationPreferencesDataItem is a generated payload type.
 type ContactInformationGetNotificationPreferencesDataItem struct {
 	AdditionalProperties string `json:"additionalProperties"`
 
 	// A description of the notification setting.
-	Descp string `json:"descp"`
+	Descp                string `json:"descp"`
 
 	// - 1 - Notification is enabled
 	// - 0 - Notification is disabled
 	//
 	// Possible values: `0`, `1`.
-	Enabled int64 `json:"enabled"`
+	Enabled              int64 `json:"enabled"`
 
 	// The notification preference key name.
-	Name string `json:"name"`
+	Name                 string `json:"name"`
 }
 
 // GetPushbulletAccessToken calls the UAPI function `ContactInformation::get_pushbullet_access_token` — Return Pushbullet access token
@@ -48,6 +49,7 @@ type ContactInformationGetNotificationPreferencesDataItem struct {
 func (c *ContactInformationClient) GetPushbulletAccessToken(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "ContactInformation", "get_pushbullet_access_token", cpanel.CombineArgs(extra...))
 }
+
 
 // ContactInformationSetEmailAddressesArgs are the parameters of the UAPI function `ContactInformation::set_email_addresses`.
 type ContactInformationSetEmailAddressesArgs struct {
@@ -87,6 +89,7 @@ func (c *ContactInformationClient) SetEmailAddresses(ctx context.Context, args *
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ContactInformation", "set_email_addresses", args)
 }
 
+
 // SetNotificationPreferences calls the UAPI function `ContactInformation::set_notification_preferences` — Set the account's notification preferences.
 //
 // Use this function to set the logged in cPanel or Webmail account's notification preferences.
@@ -103,21 +106,22 @@ func (c *ContactInformationClient) SetNotificationPreferences(ctx context.Contex
 	return cpanel.UAPICall[[]ContactInformationSetNotificationPreferencesDataItem](ctx, c.c, http.MethodPost, "ContactInformation", "set_notification_preferences", cpanel.CombineArgs(extra...))
 }
 
+
 // ContactInformationSetNotificationPreferencesDataItem is a generated payload type.
 type ContactInformationSetNotificationPreferencesDataItem struct {
 	AdditionalProperties string `json:"additionalProperties"`
 
 	// A description of the notification setting.
-	Descp string `json:"descp"`
+	Descp                string `json:"descp"`
 
 	// - 1 - Notification is enabled
 	// - 0 - Notification is disabled
 	//
 	// Possible values: `0`, `1`.
-	Enabled int64 `json:"enabled"`
+	Enabled              int64 `json:"enabled"`
 
 	// The notification preference key name.
-	Name string `json:"name"`
+	Name                 string `json:"name"`
 }
 
 // ContactInformationSetPushbulletAccessTokenArgs are the parameters of the UAPI function `ContactInformation::set_pushbullet_access_token`.
@@ -141,6 +145,7 @@ type ContactInformationSetPushbulletAccessTokenArgs struct {
 func (c *ContactInformationClient) SetPushbulletAccessToken(ctx context.Context, args *ContactInformationSetPushbulletAccessTokenArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ContactInformation", "set_pushbullet_access_token", args)
 }
+
 
 // ContactInformationUnsetEmailAddressesArgs are the parameters of the UAPI function `ContactInformation::unset_email_addresses`.
 type ContactInformationUnsetEmailAddressesArgs struct {
@@ -174,3 +179,4 @@ type ContactInformationUnsetEmailAddressesArgs struct {
 func (c *ContactInformationClient) UnsetEmailAddresses(ctx context.Context, args *ContactInformationUnsetEmailAddressesArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ContactInformation", "unset_email_addresses", args)
 }
+

@@ -22,6 +22,7 @@ func (c *Client) GetInProductSurveyURL(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[GetInProductSurveyURLData](ctx, c.c, http.MethodGet, "get_in_product_survey_url", cpanel.CombineArgs(extra...))
 }
 
+
 // GetInProductSurveyURLData is a generated payload type.
 type GetInProductSurveyURLData struct {
 	// Indicates whether the banner should be displayed.
@@ -29,23 +30,23 @@ type GetInProductSurveyURLData struct {
 	// * `0` — Do not display the banner.
 	//
 	// Possible values: `0`, `1`.
-	Display string `json:"display"`
+	Display     string `json:"display"`
 
 	// The fully-resolved survey URL.
-	Link string `json:"link"`
+	Link        string `json:"link"`
 
 	// Maximum number of times the banner may be dismissed before it is suppressed.
-	MaxDismiss string `json:"max_dismiss"`
+	MaxDismiss  string `json:"max_dismiss"`
 
 	// Indicates whether the authenticated user is considered new.
 	// * `1` — New user.
 	// * `0` — Existing user.
 	//
 	// Possible values: `0`, `1`.
-	NewUser string `json:"new_user"`
+	NewUser     string `json:"new_user"`
 
 	// Product/server type identifier.
-	ServerType string `json:"server_type"`
+	ServerType  string `json:"server_type"`
 
 	// Event identifier emitted on successful survey submission for analytics.
 	SubmitEvent string `json:"submit_event"`
@@ -53,5 +54,5 @@ type GetInProductSurveyURLData struct {
 	// The user context type. Always "whm" for this endpoint.
 	//
 	// Possible values: `whm`.
-	UserType string `json:"user_type"`
+	UserType    string `json:"user_type"`
 }

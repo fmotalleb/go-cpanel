@@ -58,7 +58,7 @@ type FilemanAutocompletedirArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 54.
 //
@@ -66,6 +66,7 @@ type FilemanAutocompletedirArgs struct {
 func (c *FilemanClient) Autocompletedir(ctx context.Context, args *FilemanAutocompletedirArgs) (*cpanel.UAPIResult[[]FilemanAutocompletedirDataItem], error) {
 	return cpanel.UAPICall[[]FilemanAutocompletedirDataItem](ctx, c.c, http.MethodGet, "Fileman", "autocompletedir", args)
 }
+
 
 // FilemanAutocompletedirDataItem is a generated payload type.
 type FilemanAutocompletedirDataItem struct {
@@ -95,7 +96,7 @@ type FilemanCopyFileArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 136.
 //
@@ -104,13 +105,14 @@ func (c *FilemanClient) CopyFile(ctx context.Context, args *FilemanCopyFileArgs)
 	return cpanel.UAPICall[FilemanCopyFileData](ctx, c.c, http.MethodGet, "Fileman", "copy_file", args)
 }
 
+
 // FilemanCopyFileData is a generated payload type.
 type FilemanCopyFileData struct {
 	// The resolved destination path.
 	Dest string `json:"dest"`
 
 	// The resolved source path.
-	Src string `json:"src"`
+	Src  string `json:"src"`
 }
 
 // FilemanDeleteFileArgs are the parameters of the UAPI function `Fileman::delete_file`.
@@ -130,7 +132,7 @@ type FilemanDeleteFileArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 136.
 //
@@ -138,6 +140,7 @@ type FilemanDeleteFileArgs struct {
 func (c *FilemanClient) DeleteFile(ctx context.Context, args *FilemanDeleteFileArgs) (*cpanel.UAPIResult[FilemanDeleteFileData], error) {
 	return cpanel.UAPICall[FilemanDeleteFileData](ctx, c.c, http.MethodGet, "Fileman", "delete_file", args)
 }
+
 
 // FilemanDeleteFileData is a generated payload type.
 type FilemanDeleteFileData struct {
@@ -166,7 +169,7 @@ type FilemanEmptyTrashArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [FileStorage role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
+//   When you disable the [FileStorage role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 60.
 //
@@ -174,6 +177,7 @@ type FilemanEmptyTrashArgs struct {
 func (c *FilemanClient) EmptyTrash(ctx context.Context, args *FilemanEmptyTrashArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Fileman", "empty_trash", args)
 }
+
 
 // FilemanGetFileContentArgs are the parameters of the UAPI function `Fileman::get_file_content`.
 type FilemanGetFileContentArgs struct {
@@ -239,6 +243,7 @@ func (c *FilemanClient) GetFileContent(ctx context.Context, args *FilemanGetFile
 	return cpanel.UAPICall[FilemanGetFileContentData](ctx, c.c, http.MethodGet, "Fileman", "get_file_content", args)
 }
 
+
 // FilemanGetFileContentData is a generated payload type.
 type FilemanGetFileContentData struct {
 	// The file's contents. A string value.
@@ -252,26 +257,26 @@ type FilemanGetFileContentData struct {
 	// UTF-8 (as is the case with JSON), the system may
 	// apply an extra layer of UTF-8 encoding in order
 	// to satisfy the request.
-	Content string `json:"content"`
+	Content     string `json:"content"`
 
 	// The absolute path to the directory that contains the selected file.
-	Dir string `json:"dir"`
+	Dir         string `json:"dir"`
 
 	// The file's name.
-	Filename string `json:"filename"`
+	Filename    string `json:"filename"`
 
 	// The file's previous character encoding. If the request’s `from_charset` was `_DETECT_`, this will contain the detected encoding. Otherwise, it will contain the request’s `from_charset` value.
-	FromChar string `json:"from_char"`
+	FromChar    string `json:"from_char"`
 
 	FromCharset json.RawMessage `json:"from_charset"`
 
 	// The absolute path to the file.
-	Path string `json:"path"`
+	Path        string `json:"path"`
 
 	// The file's new character encoding. If the request’s `from_charset` was `_LOCALE_`, this will contain the locale’s encoding. Otherwise, it will contain the request’s `to_charset` value.
-	ToChar string `json:"to_char"`
+	ToChar      string `json:"to_char"`
 
-	ToCharset json.RawMessage `json:"to_charset"`
+	ToCharset   json.RawMessage `json:"to_charset"`
 }
 
 // FilemanGetFileInformationArgs are the parameters of the UAPI function `Fileman::get_file_information`.
@@ -340,60 +345,61 @@ func (c *FilemanClient) GetFileInformation(ctx context.Context, args *FilemanGet
 	return cpanel.UAPICall[FilemanGetFileInformationData](ctx, c.c, http.MethodGet, "Fileman", "get_file_information", args)
 }
 
+
 // FilemanGetFileInformationData is a generated payload type.
 type FilemanGetFileInformationData struct {
 	// The path to the user's home directory.
-	Absdir string `json:"absdir"`
+	Absdir      string `json:"absdir"`
 
 	// The file's creation time, Unix time format.
-	Ctime int64 `json:"ctime"`
+	Ctime       int64 `json:"ctime"`
 
 	// Whether the file exists in the directory.
 	// * `1` - Exists.
 	// * `0` - Does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	Exists int64 `json:"exists"`
+	Exists      int64 `json:"exists"`
 
 	// The filename.
-	File string `json:"file"`
+	File        string `json:"file"`
 
 	// The file's full filepath.
-	Fullpath string `json:"fullpath"`
+	Fullpath    string `json:"fullpath"`
 
 	// The file owner's system group ID.
-	Gid int64 `json:"gid"`
+	Gid         int64 `json:"gid"`
 
 	// The file's formatted size, followed by one of the following symbols:
 	// * `KB` - kilobytes
 	// * `MB` - megabytes
 	// * `GB` - gigabytes
-	HumanSize string `json:"humansize"`
+	HumanSize   string `json:"humansize"`
 
 	// Whether the directory contains subdirectories.
 	// * `1` - Contains subdirectories.
 	// * `0` - Does **not** contain subdirectories.
 	//
 	// Possible values: `0`, `1`.
-	Isleaf int64 `json:"isleaf"`
+	Isleaf      int64 `json:"isleaf"`
 
 	// The file's MIME name.
-	Mimename string `json:"mimename"`
+	Mimename    string `json:"mimename"`
 
 	// The file's MIME type.
-	Mimetype string `json:"mimetype"`
+	Mimetype    string `json:"mimetype"`
 
 	// The file's textual permissions in [Unix format](https://en.wikipedia.org/wiki/File-system_permissions#Notation_of_traditional_Unix_permissions).
-	Mode string `json:"mode"`
+	Mode        string `json:"mode"`
 
 	// The file's last modification time, in Unix time format.
-	Mtime int64 `json:"mtime"`
+	Mtime       int64 `json:"mtime"`
 
 	// The file's numerical permissions in [octal notation](https://en.wikipedia.org/wiki/File-system_permissions#Notation_of_traditional_Unix_permissions).
-	Nicemode int64 `json:"nicemode"`
+	Nicemode    int64 `json:"nicemode"`
 
 	// The file's path.
-	Path string `json:"path"`
+	Path        string `json:"path"`
 
 	// The file's raw MIME name.
 	RawMimename string `json:"rawmimename"`
@@ -406,10 +412,10 @@ type FilemanGetFileInformationData struct {
 	// * `0` - **Not** readable.
 	//
 	// Possible values: `0`, `1`.
-	Read int64 `json:"read"`
+	Read        int64 `json:"read"`
 
 	// The file's size, in bytes.
-	Size int64 `json:"size"`
+	Size        int64 `json:"size"`
 
 	// The item's type.
 	// * `file` - File.
@@ -421,17 +427,17 @@ type FilemanGetFileInformationData struct {
 	// * `socket` - Unix domain socket.
 	//
 	// Possible values: `file`, `dir`, `char`, `block`, `fifo`, `link`, `socket`.
-	Type2 string `json:"type"`
+	Type2       string `json:"type"`
 
 	// The file owner's system user ID.
-	Uid string `json:"uid"`
+	Uid         int64 `json:"uid"`
 
 	// Whether the file is writable. The function only returns this value if you set the `include_permissions` value to 1 .
 	// * `1` - Writable.
 	// * `0` - Not writable.
 	//
 	// Possible values: `0`, `1`.
-	Write int64 `json:"write"`
+	Write       int64 `json:"write"`
 }
 
 // FilemanListFilesArgs are the parameters of the UAPI function `Fileman::list_files`.
@@ -546,13 +552,14 @@ func (c *FilemanClient) ListFiles(ctx context.Context, args *FilemanListFilesArg
 	return cpanel.UAPICall[FilemanListFilesData](ctx, c.c, http.MethodGet, "Fileman", "list_files", args)
 }
 
+
 // FilemanListFilesDataDirsItem is a generated payload type.
 type FilemanListFilesDataDirsItem struct {
 	// The file path to the user's home directory.
-	Absdir string `json:"absdir"`
+	Absdir      string `json:"absdir"`
 
 	// The directory's creation date.
-	Ctime int64 `json:"ctime"`
+	Ctime       int64 `json:"ctime"`
 
 	// Whether the directory exists in the directory.
 	//
@@ -560,16 +567,16 @@ type FilemanListFilesDataDirsItem struct {
 	// * `0` — Does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	Exists int64 `json:"exists"`
+	Exists      int64 `json:"exists"`
 
 	// The directory name.
-	File string `json:"file"`
+	File        string `json:"file"`
 
 	// The directory's full directory path.
-	Fullpath string `json:"fullpath"`
+	Fullpath    string `json:"fullpath"`
 
 	// The directory owner's system group ID.
-	Gid int64 `json:"gid"`
+	Gid         int64 `json:"gid"`
 
 	// The formatted size of the directory. The function returns the size with
 	// one of the following symbols:
@@ -577,7 +584,7 @@ type FilemanListFilesDataDirsItem struct {
 	// * `KB` — Kilobytes.
 	// * `MB` — Megabytes.
 	// * `GB` — Gigabytes.
-	HumanSize string `json:"humansize"`
+	HumanSize   string `json:"humansize"`
 
 	// Whether the directory contains subdirectories.
 	//
@@ -585,7 +592,7 @@ type FilemanListFilesDataDirsItem struct {
 	// * `0` — Does **not** contain subdirectories.
 	//
 	// Possible values: `0`, `1`.
-	Isleaf int64 `json:"isleaf"`
+	Isleaf      int64 `json:"isleaf"`
 
 	// Whether the directory is a parent record.
 	//
@@ -593,25 +600,25 @@ type FilemanListFilesDataDirsItem struct {
 	// * `0` — **Not** a parent record.
 	//
 	// Possible values: `0`, `1`.
-	Isparent int64 `json:"isparent"`
+	Isparent    int64 `json:"isparent"`
 
 	// The MIME type's name.
-	Mimename string `json:"mimename"`
+	Mimename    string `json:"mimename"`
 
 	// The directory's MIME's type.
-	Mimetype string `json:"mimetype"`
+	Mimetype    string `json:"mimetype"`
 
 	// The directory's textual permissions in [Unix format](http://en.wikipedia.org/wiki/File_system_permissions#Notation_of_traditional_Unix_permissions).
-	Mode string `json:"mode"`
+	Mode        string `json:"mode"`
 
 	// The directory's last modification time.
-	Mtime int64 `json:"mtime"`
+	Mtime       int64 `json:"mtime"`
 
 	// The directory's numerical permissions.
-	Nicemode int64 `json:"nicemode"`
+	Nicemode    int64 `json:"nicemode"`
 
 	// The path to the directory.
-	Path string `json:"path"`
+	Path        string `json:"path"`
 
 	// The directory's raw MIME type's name.
 	RawMimename string `json:"rawmimename"`
@@ -629,10 +636,10 @@ type FilemanListFilesDataDirsItem struct {
 	// The function only returns this value if the `include_permissions` value is `1`.
 	//
 	// Possible values: `0`, `1`.
-	Read int64 `json:"read"`
+	Read        int64 `json:"read"`
 
 	// The directory's size, in bytes.
-	Size int64 `json:"size"`
+	Size        int64 `json:"size"`
 
 	// The item's type.
 	//
@@ -645,10 +652,10 @@ type FilemanListFilesDataDirsItem struct {
 	// * `socket` — A Unix domain socket.
 	//
 	// Possible values: `file`, `dir`, `char`, `block`, `fifo`, `link`, `socket`.
-	Type2 string `json:"type"`
+	Type2       string `json:"type"`
 
 	// The directory owner's system user ID.
-	Uid string `json:"uid"`
+	Uid         int64 `json:"uid"`
 
 	// Whether the directory is writable.
 	//
@@ -660,16 +667,16 @@ type FilemanListFilesDataDirsItem struct {
 	// The function only returns this value if the `include_permissions` value is `1`.
 	//
 	// Possible values: `0`, `1`.
-	Write int64 `json:"write"`
+	Write       int64 `json:"write"`
 }
 
 // FilemanListFilesDataFilesItem is a generated payload type.
 type FilemanListFilesDataFilesItem struct {
 	// The file path to the user's home directory.
-	Absdir string `json:"absdir"`
+	Absdir      string `json:"absdir"`
 
 	// The file's creation time.
-	Ctime int64 `json:"ctime"`
+	Ctime       int64 `json:"ctime"`
 
 	// Whether the file exists in the directory.
 	//
@@ -677,16 +684,16 @@ type FilemanListFilesDataFilesItem struct {
 	// * `0` — Does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	Exists int64 `json:"exists"`
+	Exists      int64 `json:"exists"`
 
 	// The filename.
-	File string `json:"file"`
+	File        string `json:"file"`
 
 	// The file's full file path.
-	Fullpath string `json:"fullpath"`
+	Fullpath    string `json:"fullpath"`
 
 	// The file owner's system group ID.
-	Gid int64 `json:"gid"`
+	Gid         int64 `json:"gid"`
 
 	// The formatted size of the file. The function returns the size with
 	// one of the following symbols:
@@ -694,7 +701,7 @@ type FilemanListFilesDataFilesItem struct {
 	// * `KB` — Kilobytes.
 	// * `MB` — Megabytes.
 	// * `GB` — Gigabytes.
-	HumanSize string `json:"humansize"`
+	HumanSize   string `json:"humansize"`
 
 	// Whether the directory contains subdirectories.
 	//
@@ -702,7 +709,7 @@ type FilemanListFilesDataFilesItem struct {
 	// * `0` — Does **not** contain subdirectories.
 	//
 	// Possible values: `0`, `1`.
-	Isleaf int64 `json:"isleaf"`
+	Isleaf      int64 `json:"isleaf"`
 
 	// Whether the file is a parent record.
 	//
@@ -710,25 +717,25 @@ type FilemanListFilesDataFilesItem struct {
 	// * `0` — **Not** a parent record.
 	//
 	// Possible values: `0`, `1`.
-	Isparent int64 `json:"isparent"`
+	Isparent    int64 `json:"isparent"`
 
 	// The file's MIME type name.
-	Mimename string `json:"mimename"`
+	Mimename    string `json:"mimename"`
 
 	// The file's MIME type.
-	Mimetype string `json:"mimetype"`
+	Mimetype    string `json:"mimetype"`
 
 	// The file's textual permissions.
-	Mode string `json:"mode"`
+	Mode        string `json:"mode"`
 
 	// The file's last modification time.
-	Mtime int64 `json:"mtime"`
+	Mtime       int64 `json:"mtime"`
 
 	// The file's numerical permissions.
-	Nicemode int64 `json:"nicemode"`
+	Nicemode    int64 `json:"nicemode"`
 
 	// The absolute path to the file.
-	Path string `json:"path"`
+	Path        string `json:"path"`
 
 	// The file's raw MIME type's name.
 	RawMimename string `json:"rawmimename"`
@@ -746,10 +753,10 @@ type FilemanListFilesDataFilesItem struct {
 	// The function only returns this value if the `include_permissions` value is `1`.
 	//
 	// Possible values: `0`, `1`.
-	Read int64 `json:"read"`
+	Read        int64 `json:"read"`
 
 	// The file's size, in bytes.
-	Size int64 `json:"size"`
+	Size        int64 `json:"size"`
 
 	// The item's type.
 	//
@@ -762,10 +769,10 @@ type FilemanListFilesDataFilesItem struct {
 	// * `socket` — A Unix domain socket.
 	//
 	// Possible values: `file`, `dir`, `char`, `block`, `fifo`, `link`, `socket`.
-	Type2 string `json:"type"`
+	Type2       string `json:"type"`
 
 	// The file owner's system user ID.
-	Uid string `json:"uid"`
+	Uid         int64 `json:"uid"`
 
 	// Whether the file is writable.
 	//
@@ -777,13 +784,13 @@ type FilemanListFilesDataFilesItem struct {
 	// The function only returns this value if the `include_permissions` value is `1`.
 	//
 	// Possible values: `0`, `1`.
-	Write int64 `json:"write"`
+	Write       int64 `json:"write"`
 }
 
 // FilemanListFilesData is a generated payload type.
 type FilemanListFilesData struct {
 	// An array of objects containing information about each directory.
-	Dirs []FilemanListFilesDataDirsItem `json:"dirs"`
+	Dirs  []FilemanListFilesDataDirsItem `json:"dirs"`
 
 	// An array of objects containing information about each file.
 	Files []FilemanListFilesDataFilesItem `json:"files"`
@@ -811,7 +818,7 @@ type FilemanMoveFileArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 136.
 //
@@ -820,13 +827,14 @@ func (c *FilemanClient) MoveFile(ctx context.Context, args *FilemanMoveFileArgs)
 	return cpanel.UAPICall[FilemanMoveFileData](ctx, c.c, http.MethodGet, "Fileman", "move_file", args)
 }
 
+
 // FilemanMoveFileData is a generated payload type.
 type FilemanMoveFileData struct {
 	// The resolved destination path.
 	Dest string `json:"dest"`
 
 	// The resolved source path.
-	Src string `json:"src"`
+	Src  string `json:"src"`
 }
 
 // FilemanRenameFileArgs are the parameters of the UAPI function `Fileman::rename_file`.
@@ -851,7 +859,7 @@ type FilemanRenameFileArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 136.
 //
@@ -860,13 +868,14 @@ func (c *FilemanClient) RenameFile(ctx context.Context, args *FilemanRenameFileA
 	return cpanel.UAPICall[FilemanRenameFileData](ctx, c.c, http.MethodGet, "Fileman", "rename_file", args)
 }
 
+
 // FilemanRenameFileData is a generated payload type.
 type FilemanRenameFileData struct {
 	// The resolved destination path.
 	Dest string `json:"dest"`
 
 	// The resolved source path.
-	Src string `json:"src"`
+	Src  string `json:"src"`
 }
 
 // FilemanRestoreFromTrashArgs are the parameters of the UAPI function `Fileman::restore_from_trash`.
@@ -886,7 +895,7 @@ type FilemanRestoreFromTrashArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 136.
 //
@@ -895,10 +904,11 @@ func (c *FilemanClient) RestoreFromTrash(ctx context.Context, args *FilemanResto
 	return cpanel.UAPICall[FilemanRestoreFromTrashData](ctx, c.c, http.MethodGet, "Fileman", "restore_from_trash", args)
 }
 
+
 // FilemanRestoreFromTrashData is a generated payload type.
 type FilemanRestoreFromTrashData struct {
 	// The restored path.
-	Path string `json:"path"`
+	Path      string `json:"path"`
 
 	// The trash directory name that the function restored from.
 	TrashLeaf string `json:"trash_leaf"`
@@ -952,7 +962,7 @@ type FilemanSaveFileContentArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
@@ -961,16 +971,17 @@ func (c *FilemanClient) SaveFileContent(ctx context.Context, args *FilemanSaveFi
 	return cpanel.UAPICall[FilemanSaveFileContentData](ctx, c.c, http.MethodGet, "Fileman", "save_file_content", args)
 }
 
+
 // FilemanSaveFileContentData is a generated payload type.
 type FilemanSaveFileContentData struct {
 	// The file's character set.
 	FromCharset string `json:"from_charset"`
 
 	// The path to the file.
-	Path string `json:"path"`
+	Path        string `json:"path"`
 
 	// The file's new character set.
-	ToCharset string `json:"to_charset"`
+	ToCharset   string `json:"to_charset"`
 }
 
 // FilemanTranscodeArgs are the parameters of the UAPI function `Fileman::transcode`.
@@ -1010,7 +1021,7 @@ type FilemanTranscodeArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
@@ -1018,6 +1029,7 @@ type FilemanTranscodeArgs struct {
 func (c *FilemanClient) Transcode(ctx context.Context, args *FilemanTranscodeArgs) (*cpanel.UAPIResult[FilemanTranscodeData], error) {
 	return cpanel.UAPICall[FilemanTranscodeData](ctx, c.c, http.MethodGet, "Fileman", "transcode", args)
 }
+
 
 // FilemanTranscodeData is a generated payload type.
 type FilemanTranscodeData struct {
@@ -1045,7 +1057,7 @@ type FilemanTrashFileArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [File Storage role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 136.
 //
@@ -1054,10 +1066,11 @@ func (c *FilemanClient) TrashFile(ctx context.Context, args *FilemanTrashFileArg
 	return cpanel.UAPICall[FilemanTrashFileData](ctx, c.c, http.MethodGet, "Fileman", "trash_file", args)
 }
 
+
 // FilemanTrashFileData is a generated payload type.
 type FilemanTrashFileData struct {
 	// The resolved original path.
-	Path string `json:"path"`
+	Path      string `json:"path"`
 
 	// The name of the item inside the trash directory.
 	TrashLeaf string `json:"trash_leaf"`
@@ -1069,13 +1082,13 @@ type FilemanTrashFileData struct {
 //
 // **Note:**
 //
-//	For more information about how to use this function in your custom code,
-//	read our [Use UAPI's `Fileman::upload_files`
-//	Function in Custom Code tutorial](https://go.cpanel.net/tutorial-use-uapis-fileman-upload-files-function-in-custom-code).
+//   For more information about how to use this function in your custom code,
+//   read our [Use UAPI's `Fileman::upload_files`
+//   Function in Custom Code tutorial](https://go.cpanel.net/tutorial-use-uapis-fileman-upload-files-function-in-custom-code).
 //
 // **Important:**
 //
-//	When you disable the [File Storage](https://go.cpanel.net/serverroles) role, the system **disables** this function.
+//  When you disable the [File Storage](https://go.cpanel.net/serverroles) role, the system **disables** this function.
 //
 // You cannot call this function through WHM API 1's [uapi_cpanel](https://go.cpanel.net/UseWHMAPItoCallcPanelAPIandUAPI) function.
 //
@@ -1086,9 +1099,10 @@ func (c *FilemanClient) UploadFiles(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[FilemanUploadFilesData](ctx, c.c, http.MethodGet, "Fileman", "upload_files", cpanel.CombineArgs(extra...))
 }
 
+
 // FilemanUploadFilesData is a generated payload type.
 type FilemanUploadFilesData struct {
-	Content string `json:"content"`
+	Content  string `json:"content"`
 
 	// The file's name.
 	Filename string `json:"filename"`

@@ -23,6 +23,7 @@ func (c *LocaleClient) GetAttributes(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[LocaleGetAttributesData](ctx, c.c, http.MethodGet, "Locale", "get_attributes", cpanel.CombineArgs(extra...))
 }
 
+
 // LocaleGetAttributesData is a generated payload type.
 type LocaleGetAttributesData struct {
 	// The locale's text direction.
@@ -33,13 +34,13 @@ type LocaleGetAttributesData struct {
 	DirectIOn string `json:"direction"`
 
 	// The user's character set.
-	Encoding string `json:"encoding"`
+	Encoding  string `json:"encoding"`
 
 	// The locale's two-letter ISO-3166 code.
-	Locale string `json:"locale"`
+	Locale    string `json:"locale"`
 
 	// The locale's full name.
-	Name string `json:"name"`
+	Name      string `json:"name"`
 }
 
 // ListLocales calls the UAPI function `Locale::list_locales` — Return available locales
@@ -52,6 +53,7 @@ type LocaleGetAttributesData struct {
 func (c *LocaleClient) ListLocales(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]LocaleListLocalesDataItem], error) {
 	return cpanel.UAPICall[[]LocaleListLocalesDataItem](ctx, c.c, http.MethodGet, "Locale", "list_locales", cpanel.CombineArgs(extra...))
 }
+
 
 // LocaleListLocalesDataItem is a generated payload type.
 type LocaleListLocalesDataItem struct {
@@ -66,10 +68,10 @@ type LocaleListLocalesDataItem struct {
 	LocalName string `json:"local_name"`
 
 	// The locale's two-letter [ISO-3166 code](http://www.iso.org/iso/country_codes.htm).
-	Locale string `json:"locale"`
+	Locale    string `json:"locale"`
 
 	// The locale's full name.
-	Name string `json:"name"`
+	Name      string `json:"name"`
 }
 
 // LocaleSetLocaleArgs are the parameters of the UAPI function `Locale::set_locale`.
@@ -93,3 +95,4 @@ type LocaleSetLocaleArgs struct {
 func (c *LocaleClient) SetLocale(ctx context.Context, args *LocaleSetLocaleArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Locale", "set_locale", args)
 }
+

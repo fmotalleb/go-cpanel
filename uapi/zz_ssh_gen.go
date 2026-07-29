@@ -22,6 +22,7 @@ func (c *SSHClient) GetPort(ctx context.Context, extra ...cpanel.Args) (*cpanel.
 	return cpanel.UAPICall[SSHGetPortData](ctx, c.c, http.MethodGet, "SSH", "get_port", cpanel.CombineArgs(extra...))
 }
 
+
 // SSHGetPortData is a generated payload type.
 type SSHGetPortData struct {
 	// The server's SSH port.
@@ -39,6 +40,7 @@ func (c *SSHClient) GetShell(ctx context.Context, extra ...cpanel.Args) (*cpanel
 	return cpanel.UAPICall[SSHGetShellData](ctx, c.c, http.MethodGet, "SSH", "get_shell", cpanel.CombineArgs(extra...))
 }
 
+
 // SSHGetShellData is a generated payload type.
 type SSHGetShellData struct {
 	// Whether the cPanel account has shell access.
@@ -48,5 +50,5 @@ type SSHGetShellData struct {
 	HasTerminalAccess bool `json:"has_terminal_access"`
 
 	// The cPanel account's shell path.
-	Shell string `json:"shell"`
+	Shell             string `json:"shell"`
 }

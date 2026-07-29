@@ -84,6 +84,7 @@ func (c *FTPClient) AddFTP(ctx context.Context, args *FTPAddFTPArgs) (*cpanel.UA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "add_ftp", args)
 }
 
+
 // AllowsAnonymousFTP calls the UAPI function `Ftp::allows_anonymous_ftp` — Return if anonymous FTP connections allowed
 //
 // This function checks whether the account allows anonymous FTP connections.
@@ -98,6 +99,7 @@ func (c *FTPClient) AddFTP(ctx context.Context, args *FTPAddFTPArgs) (*cpanel.UA
 func (c *FTPClient) AllowsAnonymousFTP(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[FTPAllowsAnonymousFTPData], error) {
 	return cpanel.UAPICall[FTPAllowsAnonymousFTPData](ctx, c.c, http.MethodGet, "Ftp", "allows_anonymous_ftp", cpanel.CombineArgs(extra...))
 }
+
 
 // FTPAllowsAnonymousFTPData is a generated payload type.
 type FTPAllowsAnonymousFTPData struct {
@@ -115,7 +117,7 @@ type FTPAllowsAnonymousFTPData struct {
 //
 // **Important:**
 //
-//	When you disable the [*FTP* role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [*FTP* role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -123,6 +125,7 @@ type FTPAllowsAnonymousFTPData struct {
 func (c *FTPClient) AllowsAnonymousFTPIncoming(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[FTPAllowsAnonymousFTPIncomingData], error) {
 	return cpanel.UAPICall[FTPAllowsAnonymousFTPIncomingData](ctx, c.c, http.MethodGet, "Ftp", "allows_anonymous_ftp_incoming", cpanel.CombineArgs(extra...))
 }
+
 
 // FTPAllowsAnonymousFTPIncomingData is a generated payload type.
 type FTPAllowsAnonymousFTPIncomingData struct {
@@ -177,6 +180,7 @@ func (c *FTPClient) DeleteFTP(ctx context.Context, args *FTPDeleteFTPArgs) (*cpa
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "delete_ftp", args)
 }
 
+
 // FTPFTPExistsArgs are the parameters of the UAPI function `Ftp::ftp_exists`.
 type FTPFTPExistsArgs struct {
 	// The FTP account's username.
@@ -210,6 +214,7 @@ func (c *FTPClient) FTPExists(ctx context.Context, args *FTPFTPExistsArgs) (*cpa
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "ftp_exists", args)
 }
 
+
 // GetFTPDaemonInfo calls the UAPI function `Ftp::get_ftp_daemon_info` — Return FTP server's information
 //
 // This function retrieves the extended information about the server's FTP daemon.
@@ -220,6 +225,7 @@ func (c *FTPClient) FTPExists(ctx context.Context, args *FTPFTPExistsArgs) (*cpa
 func (c *FTPClient) GetFTPDaemonInfo(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[FTPGetFTPDaemonInfoData], error) {
 	return cpanel.UAPICall[FTPGetFTPDaemonInfoData](ctx, c.c, http.MethodGet, "Ftp", "get_ftp_daemon_info", cpanel.CombineArgs(extra...))
 }
+
 
 // This object contains the features that the FTP daemon supports.
 type FTPGetFTPDaemonInfoDataSupports struct {
@@ -237,7 +243,7 @@ type FTPGetFTPDaemonInfoDataSupports struct {
 	// * `0` – **Not** supported.
 	//
 	// Possible values: `0`, `1`.
-	Quota int64 `json:"quota"`
+	Quota              int64 `json:"quota"`
 }
 
 // FTPGetFTPDaemonInfoData is a generated payload type.
@@ -248,7 +254,7 @@ type FTPGetFTPDaemonInfoData struct {
 	// * `0` – Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled int64 `json:"enabled"`
+	Enabled  int64 `json:"enabled"`
 
 	// The FTP server's name.
 	//
@@ -257,7 +263,7 @@ type FTPGetFTPDaemonInfoData struct {
 	// * An empty string.
 	//
 	// Possible values: `pure-ftpd`, `proftpd`, ``.
-	Name string `json:"name"`
+	Name     string `json:"name"`
 
 	// This object contains the features that the FTP daemon supports.
 	Supports FTPGetFTPDaemonInfoDataSupports `json:"supports"`
@@ -269,7 +275,7 @@ type FTPGetFTPDaemonInfoData struct {
 //
 // **Important:**
 //
-//	When you disable the [*FTP* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*FTP* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -277,6 +283,7 @@ type FTPGetFTPDaemonInfoData struct {
 func (c *FTPClient) GetPort(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[FTPGetPortData], error) {
 	return cpanel.UAPICall[FTPGetPortData](ctx, c.c, http.MethodGet, "Ftp", "get_port", cpanel.CombineArgs(extra...))
 }
+
 
 // FTPGetPortData is a generated payload type.
 type FTPGetPortData struct {
@@ -308,7 +315,7 @@ type FTPGetQuotaArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [_FTP role_](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [_FTP role_](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -317,13 +324,14 @@ func (c *FTPClient) GetQuota(ctx context.Context, args *FTPGetQuotaArgs) (*cpane
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Ftp", "get_quota", args)
 }
 
+
 // GetWelcomeMessage calls the UAPI function `Ftp::get_welcome_message` — Return FTP account's welcome message
 //
 // This function retrieves the cPanel account's FTP welcome message.
 //
 // **Important:**
 //
-//	When you disable the [*FTP* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*FTP* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -331,6 +339,7 @@ func (c *FTPClient) GetQuota(ctx context.Context, args *FTPGetQuotaArgs) (*cpane
 func (c *FTPClient) GetWelcomeMessage(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Ftp", "get_welcome_message", cpanel.CombineArgs(extra...))
 }
+
 
 // FTPKillSessionArgs are the parameters of the UAPI function `Ftp::kill_session`.
 type FTPKillSessionArgs struct {
@@ -353,7 +362,7 @@ type FTPKillSessionArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*FTP* Role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [*FTP* Role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -361,6 +370,7 @@ type FTPKillSessionArgs struct {
 func (c *FTPClient) KillSession(ctx context.Context, args *FTPKillSessionArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "kill_session", args)
 }
+
 
 // FTPListFTPArgs are the parameters of the UAPI function `Ftp::list_ftp`.
 type FTPListFTPArgs struct {
@@ -416,6 +426,7 @@ func (c *FTPClient) ListFTP(ctx context.Context, args *FTPListFTPArgs) (*cpanel.
 	return cpanel.UAPICall[[]FTPListFTPDataItem](ctx, c.c, http.MethodGet, "Ftp", "list_ftp", args)
 }
 
+
 // FTPListFTPDataItem is a generated payload type.
 type FTPListFTPDataItem struct {
 	// The absolute path to the FTP account's document root.
@@ -429,10 +440,10 @@ type FTPListFTPDataItem struct {
 	// * `sub`
 	//
 	// Possible values: `anonymous`, `logaccess`, `main`, `sub`.
-	Type2 string `json:"type"`
+	Type2   string `json:"type"`
 
 	// The username for an FTP account on the cPanel account.
-	User string `json:"user"`
+	User    string `json:"user"`
 }
 
 // FTPListFTPWithDiskArgs are the parameters of the UAPI function `Ftp::list_ftp_with_disk`.
@@ -479,6 +490,7 @@ func (c *FTPClient) ListFTPWithDisk(ctx context.Context, args *FTPListFTPWithDis
 	return cpanel.UAPICall[[]FTPListFTPWithDiskDataItem](ctx, c.c, http.MethodGet, "Ftp", "list_ftp_with_disk", args)
 }
 
+
 // FTPListFTPWithDiskDataItem is a generated payload type.
 type FTPListFTPWithDiskDataItem struct {
 	// The FTP account's quota in megabytes, with two digits of fractional precision,
@@ -487,7 +499,7 @@ type FTPListFTPWithDiskDataItem struct {
 	// **Note:**
 	//
 	// This value is different from the value for `diskquota`.
-	DiskQuota string `json:"_diskquota"`
+	DiskQuota         string `json:"_diskquota"`
 
 	// The amount of disk space in megabytes that the account currently uses,
 	// with two digits of fractional precision, encoded as a string.
@@ -495,7 +507,7 @@ type FTPListFTPWithDiskDataItem struct {
 	// **Note:**
 	//
 	// This value is the same as the value for `diskused`.
-	Diskused string `json:"_diskused"`
+	Diskused          string `json:"_diskused"`
 
 	// The type of FTP account.
 	//
@@ -505,7 +517,7 @@ type FTPListFTPWithDiskDataItem struct {
 	// * `sub`
 	//
 	// Possible values: `anonymous`, `logaccess`, `main`, `sub`.
-	Accttype string `json:"accttype"`
+	Accttype          string `json:"accttype"`
 
 	// Whether the function's caller can delete the account.
 	//
@@ -513,10 +525,10 @@ type FTPListFTPWithDiskDataItem struct {
 	// * `0` – The caller **cannot** delete the account.
 	//
 	// Possible values: `0`, `1`.
-	DeleteAble int64 `json:"deleteable"`
+	DeleteAble        int64 `json:"deleteable"`
 
 	// The absolute path to the FTP account's document root.
-	Dir string `json:"dir"`
+	Dir               string `json:"dir"`
 
 	// The FTP account's quota.
 	//
@@ -526,7 +538,7 @@ type FTPListFTPWithDiskDataItem struct {
 	// **Note:**
 	//
 	// This value is different from the value for `_diskquota`.
-	DiskQuota2 string `json:"diskquota"`
+	DiskQuota2        string `json:"diskquota"`
 
 	// The amount of disk space in megabytes that the account currently uses,
 	// with two digits of fractional precision, encoded as a string.
@@ -534,37 +546,37 @@ type FTPListFTPWithDiskDataItem struct {
 	// **Note:**
 	//
 	// This value is the same as the value for `_diskused`.
-	Diskused2 string `json:"diskused"`
+	Diskused2         string `json:"diskused"`
 
 	// The percentage of the disk space quota that the account currently uses.
-	Diskusedpercent int64 `json:"diskusedpercent"`
+	Diskusedpercent   int64 `json:"diskusedpercent"`
 
 	// The percentage of disk space that the account currently uses, rounded in 20 percent increments.
 	Diskusedpercent20 int64 `json:"diskusedpercent20"`
 
 	// The path to the FTP account's HTML directory.
-	Htmldir *string `json:"htmldir"`
+	Htmldir           *string `json:"htmldir"`
 
 	// The FTP account's quota, in human-readable format.
 	//
 	// * `None` — The function returns this value if the account has an unlimited quota.
 	// * The quota in megabytes (MB), a space, and the characters `MB`.
-	HumanDiskQuota string `json:"humandiskquota"`
+	HumanDiskQuota    string `json:"humandiskquota"`
 
 	// The amount of disk space that the account currently uses, in
 	// human-readable format. The function formats this value as the
 	// quota's size, a space, and the characters `MB`.
-	HumanDiskused string `json:"humandiskused"`
+	HumanDiskused     string `json:"humandiskused"`
 
 	// The FTP account username.
-	Login string `json:"login"`
+	Login             string `json:"login"`
 
 	// The path to the FTP account's document root,
 	// relative to the cPanel account's home directory.
-	Reldir string `json:"reldir"`
+	Reldir            string `json:"reldir"`
 
 	// The full FTP login username.
-	ServerLogin string `json:"serverlogin"`
+	ServerLogin       string `json:"serverlogin"`
 }
 
 // ListSessions calls the UAPI function `Ftp::list_sessions` — Return FTP server's active sessions
@@ -573,7 +585,7 @@ type FTPListFTPWithDiskDataItem struct {
 //
 // **Important:**
 //
-//	When you disable the [FTP role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   When you disable the [FTP role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -581,6 +593,7 @@ type FTPListFTPWithDiskDataItem struct {
 func (c *FTPClient) ListSessions(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]FTPListSessionsDataItem], error) {
 	return cpanel.UAPICall[[]FTPListSessionsDataItem](ctx, c.c, http.MethodGet, "Ftp", "list_sessions", cpanel.CombineArgs(extra...))
 }
+
 
 // FTPListSessionsDataItem is a generated payload type.
 type FTPListSessionsDataItem struct {
@@ -592,16 +605,16 @@ type FTPListSessionsDataItem struct {
 	// **Note:**
 	//
 	// The function returns a blank value if the session is idle.
-	File string `json:"file"`
+	File    string `json:"file"`
 
 	// The IP address or hostname that connected to the FTP server.
-	Host string `json:"host"`
+	Host    string `json:"host"`
 
 	// The FTP session login time.
-	Login string `json:"login"`
+	Login   string `json:"login"`
 
 	// The session's PID.
-	Pid int64 `json:"pid"`
+	Pid     int64 `json:"pid"`
 
 	// The session's status.
 	// - `IDLE` - The session is connected, but idle.
@@ -609,10 +622,10 @@ type FTPListSessionsDataItem struct {
 	// - `UL` - An upload is in progress.
 	//
 	// Possible values: `IDLE`, `DL`, `UL`.
-	Status string `json:"status"`
+	Status  string `json:"status"`
 
 	// The FTP account username.
-	User string `json:"user"`
+	User    string `json:"user"`
 }
 
 // FTPPasswdArgs are the parameters of the UAPI function `Ftp::passwd`.
@@ -653,6 +666,7 @@ func (c *FTPClient) Passwd(ctx context.Context, args *FTPPasswdArgs) (*cpanel.UA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "passwd", args)
 }
 
+
 // ServerName calls the UAPI function `Ftp::server_name` — Return whether server uses ProFTPD or Pure-FTPd
 //
 // This function checks whether the server uses ProFTPD or Pure-FTPd.
@@ -667,6 +681,7 @@ func (c *FTPClient) Passwd(ctx context.Context, args *FTPPasswdArgs) (*cpanel.UA
 func (c *FTPClient) ServerName(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Ftp", "server_name", cpanel.CombineArgs(extra...))
 }
+
 
 // FTPSetAnonymousFTPArgs are the parameters of the UAPI function `Ftp::set_anonymous_ftp`.
 type FTPSetAnonymousFTPArgs struct {
@@ -699,6 +714,7 @@ func (c *FTPClient) SetAnonymousFTP(ctx context.Context, args *FTPSetAnonymousFT
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "set_anonymous_ftp", args)
 }
 
+
 // FTPSetAnonymousFTPIncomingArgs are the parameters of the UAPI function `Ftp::set_anonymous_ftp_incoming`.
 type FTPSetAnonymousFTPIncomingArgs struct {
 	// Whether to enable or disable inbound anonymous FTP transfers.
@@ -729,6 +745,7 @@ type FTPSetAnonymousFTPIncomingArgs struct {
 func (c *FTPClient) SetAnonymousFTPIncoming(ctx context.Context, args *FTPSetAnonymousFTPIncomingArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "set_anonymous_ftp_incoming", args)
 }
+
 
 // FTPSetHomedirArgs are the parameters of the UAPI function `Ftp::set_homedir`.
 type FTPSetHomedirArgs struct {
@@ -771,6 +788,7 @@ type FTPSetHomedirArgs struct {
 func (c *FTPClient) SetHomedir(ctx context.Context, args *FTPSetHomedirArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "set_homedir", args)
 }
+
 
 // FTPSetQuotaArgs are the parameters of the UAPI function `Ftp::set_quota`.
 type FTPSetQuotaArgs struct {
@@ -827,6 +845,7 @@ func (c *FTPClient) SetQuota(ctx context.Context, args *FTPSetQuotaArgs) (*cpane
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "set_quota", args)
 }
 
+
 // FTPSetWelcomeMessageArgs are the parameters of the UAPI function `Ftp::set_welcome_message`.
 type FTPSetWelcomeMessageArgs struct {
 	// The cPanel account's new FTP welcome message.
@@ -852,3 +871,4 @@ type FTPSetWelcomeMessageArgs struct {
 func (c *FTPClient) SetWelcomeMessage(ctx context.Context, args *FTPSetWelcomeMessageArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Ftp", "set_welcome_message", args)
 }
+

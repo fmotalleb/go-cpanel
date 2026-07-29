@@ -2,6 +2,7 @@
 // cPanel & WHM OpenAPI documents. DO NOT EDIT.
 // Source: https://api.docs.cpanel.net (cPanel & WHM version 138)
 
+
 // Package uapi provides fully-typed access to every cPanel UAPI
 // function documented in cPanel's official OpenAPI document (version 138):
 //

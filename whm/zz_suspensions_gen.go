@@ -24,6 +24,7 @@ func (c *Client) ListLockedAccounts(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[ListLockedAccountsData](ctx, c.c, http.MethodGet, "listlockedaccounts", cpanel.CombineArgs(extra...))
 }
 
+
 // ListLockedAccountsData is a generated payload type.
 type ListLockedAccountsData struct {
 	// A list of locked accounts on the server.
@@ -41,6 +42,7 @@ func (c *Client) ListSuspended(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[ListSuspendedData](ctx, c.c, http.MethodGet, "listsuspended", cpanel.CombineArgs(extra...))
 }
 
+
 // ListSuspendedDataAccountItem is a generated payload type.
 type ListSuspendedDataAccountItem struct {
 	// Whether the account is locked.
@@ -54,10 +56,10 @@ type ListSuspendedDataAccountItem struct {
 	// - `root`
 	// - A reseller's username.
 	// - The account's username.
-	Owner string `json:"owner"`
+	Owner    string `json:"owner"`
 
 	// The reason why the account is suspended, if one exists.
-	Reason string `json:"reason"`
+	Reason   string `json:"reason"`
 
 	// The current date and time in `Day Mon DD HH:mm:SS YYYY` human-readable format, where:
 	// * `Day` - represents the day of the week as a three-letter abbreviation.
@@ -67,13 +69,13 @@ type ListSuspendedDataAccountItem struct {
 	// * `mm` - represents the minute.
 	// * `SS` - represents the second.
 	// * `YYYY` - represents the year.
-	Time string `json:"time"`
+	Time     string `json:"time"`
 
 	// The current date and time.
 	Unixtime int64 `json:"unixtime"`
 
 	// The cPanel account's username.
-	User string `json:"user"`
+	User     string `json:"user"`
 }
 
 // ListSuspendedData is a generated payload type.
@@ -131,6 +133,7 @@ func (c *Client) SuspendAcct(ctx context.Context, args *SuspendAcctArgs) (*cpane
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "suspendacct", args)
 }
 
+
 // UnsuspendAcctArgs are the parameters of the WHM API 1 function `unsuspendacct`.
 type UnsuspendAcctArgs struct {
 	// The account to unsuspend.
@@ -165,3 +168,4 @@ type UnsuspendAcctArgs struct {
 func (c *Client) UnsuspendAcct(ctx context.Context, args *UnsuspendAcctArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unsuspendacct", args)
 }
+

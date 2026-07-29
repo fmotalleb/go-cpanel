@@ -53,6 +53,7 @@ func (c *MailboxesClient) ExpungeMailboxMessages(ctx context.Context, args *Mail
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mailboxes", "expunge_mailbox_messages", args)
 }
 
+
 // MailboxesExpungeMessagesForMailboxGuidArgs are the parameters of the UAPI function `Mailboxes::expunge_messages_for_mailbox_guid`.
 type MailboxesExpungeMessagesForMailboxGuidArgs struct {
 	// The email account's name.
@@ -87,6 +88,7 @@ func (c *MailboxesClient) ExpungeMessagesForMailboxGuid(ctx context.Context, arg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mailboxes", "expunge_messages_for_mailbox_guid", args)
 }
 
+
 // MailboxesGetMailboxStatusListArgs are the parameters of the UAPI function `Mailboxes::get_mailbox_status_list`.
 type MailboxesGetMailboxStatusListArgs struct {
 	// The email account for which you you wish to request the status.
@@ -109,19 +111,20 @@ func (c *MailboxesClient) GetMailboxStatusList(ctx context.Context, args *Mailbo
 	return cpanel.UAPICall[[]MailboxesGetMailboxStatusListDataItem](ctx, c.c, http.MethodGet, "Mailboxes", "get_mailbox_status_list", args)
 }
 
+
 // MailboxesGetMailboxStatusListDataItem is a generated payload type.
 type MailboxesGetMailboxStatusListDataItem struct {
 	// The mailbox GUID.
-	Guid string `json:"guid"`
+	Guid     string `json:"guid"`
 
 	// The mailbox name.
-	Mailbox string `json:"mailbox"`
+	Mailbox  string `json:"mailbox"`
 
 	// The number of messages in the folder.
 	Messages int64 `json:"messages"`
 
 	// The size of the folder, in bytes.
-	Vsize int64 `json:"vsize"`
+	Vsize    int64 `json:"vsize"`
 }
 
 // MailboxesHasUTF8MailboxNamesArgs are the parameters of the UAPI function `Mailboxes::has_utf8_mailbox_names`.
@@ -148,6 +151,7 @@ type MailboxesHasUTF8MailboxNamesArgs struct {
 func (c *MailboxesClient) HasUTF8MailboxNames(ctx context.Context, args *MailboxesHasUTF8MailboxNamesArgs) (*cpanel.UAPIResult[MailboxesHasUTF8MailboxNamesData], error) {
 	return cpanel.UAPICall[MailboxesHasUTF8MailboxNamesData](ctx, c.c, http.MethodGet, "Mailboxes", "has_utf8_mailbox_names", args)
 }
+
 
 // MailboxesHasUTF8MailboxNamesData is a generated payload type.
 type MailboxesHasUTF8MailboxNamesData struct {
@@ -186,6 +190,7 @@ type MailboxesSetUTF8MailboxNamesArgs struct {
 func (c *MailboxesClient) SetUTF8MailboxNames(ctx context.Context, args *MailboxesSetUTF8MailboxNamesArgs) (*cpanel.UAPIResult[MailboxesSetUTF8MailboxNamesData], error) {
 	return cpanel.UAPICall[MailboxesSetUTF8MailboxNamesData](ctx, c.c, http.MethodGet, "Mailboxes", "set_utf8_mailbox_names", args)
 }
+
 
 // MailboxesSetUTF8MailboxNamesData is a generated payload type.
 type MailboxesSetUTF8MailboxNamesData struct {

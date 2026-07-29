@@ -46,7 +46,7 @@ type ApplyDMARCArgs struct {
 //
 // **Note:**
 //
-//	You **cannot** modify DMARC records on temporary domains.
+//  You **cannot** modify DMARC records on temporary domains.
 //
 // Available since cPanel & WHM version 124.
 //
@@ -55,13 +55,14 @@ func (c *Client) ApplyDMARC(ctx context.Context, args *ApplyDMARCArgs) (*cpanel.
 	return cpanel.WHMCall[ApplyDMARCData](ctx, c.c, http.MethodGet, "apply_dmarc", args)
 }
 
+
 // ApplyDMARCDataPayloadItem is a generated payload type.
 type ApplyDMARCDataPayloadItem struct {
 	// The domain for which the DMARC record was applied.
 	Domain string `json:"domain"`
 
 	// The domain's DMARC record status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system applied a DMARC record to the domain.
 	// * `1` - The system applied a DMARC record.
@@ -106,6 +107,7 @@ func (c *Client) BlockIncomingEmailFromCountry(ctx context.Context, args *BlockI
 	return cpanel.WHMCall[BlockIncomingEmailFromCountryData](ctx, c.c, http.MethodGet, "block_incoming_email_from_country", args)
 }
 
+
 // BlockIncomingEmailFromCountryData is a generated payload type.
 type BlockIncomingEmailFromCountryData struct {
 	// Whether the function blocked one or more countries.
@@ -148,6 +150,7 @@ func (c *Client) BlockIncomingEmailFromDomain(ctx context.Context, args *BlockIn
 	return cpanel.WHMCall[BlockIncomingEmailFromDomainData](ctx, c.c, http.MethodGet, "block_incoming_email_from_domain", args)
 }
 
+
 // BlockIncomingEmailFromDomainData is a generated payload type.
 type BlockIncomingEmailFromDomainData struct {
 	// Whether the function blocked one or more domains.
@@ -184,13 +187,14 @@ func (c *Client) DisableDKIM(ctx context.Context, args *DisableDKIMArgs) (*cpane
 	return cpanel.WHMCall[DisableDKIMData](ctx, c.c, http.MethodGet, "disable_dkim", args)
 }
 
+
 // DisableDKIMDataPayloadItem is a generated payload type.
 type DisableDKIMDataPayloadItem struct {
 	// The domain for which the system removed the DKIM record.
 	Domain string `json:"domain"`
 
 	// Information about the removed DKIM record.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system removed the domain's DKIM record on the DNS server.
 	// - `1`  — The system removed the domain's DKIM record.
@@ -240,6 +244,7 @@ type DisableMailSniArgs struct {
 func (c *Client) DisableMailSni(ctx context.Context, args *DisableMailSniArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "disable_mail_sni", args)
 }
+
 
 // EmailtrackSearchArgs are the parameters of the WHM API 1 function `emailtrack_search`.
 type EmailtrackSearchArgs struct {
@@ -313,7 +318,7 @@ type EmailtrackSearchArgs struct {
 // [sort](https://go.cpanel.net/WHMAPI1SortOutput) the output.
 // * The following example uses the filter and sort options:
 //
-//	`https://hostname.example.com:2087/cpsess##########/json-api/emailtrack_search?api.version=1&api.filter.enable=1&api.filter.a.field=sendunixtime&api.filter.a.arg0=1628889719&api.filter.a.type=gt&api.filter.b.field=sendunixtime&api.filter.b.arg0=1629847321&api.filter.b.type=lt&api.sort.enable=1&api.sort.a.field=sendunixtime&api.sort.a.reverse=0&api.chunk.enable=1&api.chunk.size=25&api.chunk.start=1&success=1`
+//   `https://hostname.example.com:2087/cpsess##########/json-api/emailtrack_search?api.version=1&api.filter.enable=1&api.filter.a.field=sendunixtime&api.filter.a.arg0=1628889719&api.filter.a.type=gt&api.filter.b.field=sendunixtime&api.filter.b.arg0=1629847321&api.filter.b.type=lt&api.sort.enable=1&api.sort.a.field=sendunixtime&api.sort.a.reverse=0&api.chunk.enable=1&api.chunk.size=25&api.chunk.start=1&success=1`
 //
 // Available since cPanel & WHM version 11.
 //
@@ -322,75 +327,76 @@ func (c *Client) EmailtrackSearch(ctx context.Context, args *EmailtrackSearchArg
 	return cpanel.WHMCall[EmailtrackSearchData](ctx, c.c, http.MethodGet, "emailtrack_search", args)
 }
 
+
 // EmailtrackSearchDataRecordsItem is a generated payload type.
 type EmailtrackSearchDataRecordsItem struct {
 	// When the delivery attempt happened in `YYYY-MM-DD HH-mm-SS` format.
-	ActionTime string `json:"actiontime"`
+	ActionTime        string `json:"actiontime"`
 
 	// When the delivery attempt happened.
-	ActionUnixtime int64 `json:"actionunixtime"`
+	ActionUnixtime    int64 `json:"actionunixtime"`
 
 	// The delivery attempt's final end point.
 	//
 	// **Note:**
 	//
 	//  If the message went to a mailing list, the address will be the mailing list member's address.
-	DeliverEdTo *string `json:"deliveredto"`
+	DeliverEdTo       *string `json:"deliveredto"`
 
 	// The recipient's domain.
-	DeliveryDomain *string `json:"deliverydomain"`
+	DeliveryDomain    *string `json:"deliverydomain"`
 
 	// The recipient's username.
-	DeliveryUser *string `json:"deliveryuser"`
+	DeliveryUser      *string `json:"deliveryuser"`
 
 	// The sender's domain.
-	Domain string `json:"domain"`
+	Domain            string `json:"domain"`
 
 	// The hostname that received the message.
-	Host *string `json:"host"`
+	Host              *string `json:"host"`
 
 	// The recipient's IP address.
-	IP *string `json:"ip"`
+	IP                *string `json:"ip"`
 
 	// The action taken.
-	Message string `json:"message"`
+	Message           string `json:"message"`
 
 	// The message ID.
-	Msgid string `json:"msgid"`
+	Msgid             string `json:"msgid"`
 
 	// The recipient's mail address.
-	Recipient string `json:"recipient"`
+	Recipient         string `json:"recipient"`
 
 	// The mail server's internal router name.
-	Router string `json:"router"`
+	Router            string `json:"router"`
 
 	// The sender's full email address.
-	Sender string `json:"sender"`
+	Sender            string `json:"sender"`
 
 	// The user authentication.
-	SenderAuth string `json:"senderauth"`
+	SenderAuth        string `json:"senderauth"`
 
 	// The sender's hostname.
-	SenderHost string `json:"senderhost"`
+	SenderHost        string `json:"senderhost"`
 
 	// The sender's IP address.
-	Senderip string `json:"senderip"`
+	Senderip          string `json:"senderip"`
 
 	// When the message was sent.
-	SendUnixtime int64 `json:"sendunixtime"`
+	SendUnixtime      int64 `json:"sendunixtime"`
 
 	// The message's size.
-	Size int64 `json:"size"`
+	Size              int64 `json:"size"`
 
 	// The message's spam score.
 	//
 	// **Note:**
 	//
 	// If the spam prevention engine uses a result range from `0` to `1` , the system multiplies the result by `10`.
-	SpamScore int64 `json:"spamscore"`
+	SpamScore         int64 `json:"spamscore"`
 
 	// The mail transfer agent (MTA).
-	Transport *string `json:"transport"`
+	Transport         *string `json:"transport"`
 
 	// Whether the mail transfer agent (MTA) is remote.
 	// * `1` — Remote.
@@ -406,10 +412,10 @@ type EmailtrackSearchDataRecordsItem struct {
 	// * `inprogress`
 	//
 	// Possible values: `success`, `defer`, `failure`, `inprogress`.
-	Type2 string `json:"type"`
+	Type2             string `json:"type"`
 
 	// The sender's username.
-	User string `json:"user"`
+	User              string `json:"user"`
 }
 
 // EmailtrackSearchData is a generated payload type.
@@ -497,36 +503,37 @@ func (c *Client) EmailtrackStats(ctx context.Context, args *EmailtrackStatsArgs)
 	return cpanel.WHMCall[EmailtrackStatsData](ctx, c.c, http.MethodGet, "emailtrack_stats", args)
 }
 
+
 // EmailtrackStatsDataRecordsItem is a generated payload type.
 type EmailtrackStatsDataRecordsItem struct {
 	// The number of deferral events.
-	DeferCount int64 `json:"DEFERCOUNT"`
+	DeferCount      int64 `json:"DEFERCOUNT"`
 
 	// The number of messages that the system deferred and failed to deliver.
-	DeferFailCount int64 `json:"DEFERFAILCOUNT"`
+	DeferFailCount  int64 `json:"DEFERFAILCOUNT"`
 
 	// The number of delivery failures.
 	//
 	// **Note:**
 	//
 	//  If a message has three recipients, it can have a total of three failed deliveries.
-	FailCount int64 `json:"FAILCOUNT"`
+	FailCount       int64 `json:"FAILCOUNT"`
 
 	// The number of messages currently in progress.
 	InProgressCount int64 `json:"INPROGRESSCOUNT"`
 
 	// The number of sent messages.
-	SendCount int64 `json:"SENDCOUNT"`
+	SendCount       int64 `json:"SENDCOUNT"`
 
 	// The number of successful deliveries.
 	//
 	// **Note:**
 	//
 	//  If a message has three recipients, it can have a total of three successful deliveries.
-	SuccessCount int64 `json:"SUCCESSCOUNT"`
+	SuccessCount    int64 `json:"SUCCESSCOUNT"`
 
 	// The total size of messages that the server sent.
-	TotalSize int64 `json:"TOTALSIZE"`
+	TotalSize       int64 `json:"TOTALSIZE"`
 }
 
 // EmailtrackStatsData is a generated payload type.
@@ -572,29 +579,30 @@ func (c *Client) EmailtrackUserStats(ctx context.Context, args *EmailtrackUserSt
 	return cpanel.WHMCall[EmailtrackUserStatsData](ctx, c.c, http.MethodGet, "emailtrack_user_stats", args)
 }
 
+
 // EmailtrackUserStatsDataRecordsItem is a generated payload type.
 type EmailtrackUserStatsDataRecordsItem struct {
 	// The number of deferral events.
-	DeferCount int64 `json:"DEFERCOUNT"`
+	DeferCount          int64 `json:"DEFERCOUNT"`
 
 	// The number of messages that the system deferred and failed to deliver.
-	DeferFailCount int64 `json:"DEFERFAILCOUNT"`
+	DeferFailCount      int64 `json:"DEFERFAILCOUNT"`
 
 	// The mailbox's domain.
-	Domain string `json:"DOMAIN"`
+	Domain              string `json:"DOMAIN"`
 
 	// The number of delivery failures.
 	//
 	// **Note:**
 	//
 	//  If you assign a message three recipients, the system can fail to deliver the message three times.
-	FailCount int64 `json:"FAILCOUNT"`
+	FailCount           int64 `json:"FAILCOUNT"`
 
 	// The mailbox's account owner.
-	Owner string `json:"OWNER"`
+	Owner               string `json:"OWNER"`
 
 	// The mailbox account's primary domain.
-	PrimaryDomain string `json:"PRIMARY_DOMAIN"`
+	PrimaryDomain       string `json:"PRIMARY_DOMAIN"`
 
 	// Whether the mailbox reached the maximum number of failed deferred messages.
 	// * `1` — Reached.
@@ -608,23 +616,23 @@ type EmailtrackUserStatsDataRecordsItem struct {
 	// * `0` — Has **not** reached.
 	//
 	// Possible values: `0`, `1`.
-	ReachedMaxemails int64 `json:"REACHED_MAXEMAILS"`
+	ReachedMaxemails    int64 `json:"REACHED_MAXEMAILS"`
 
 	// The number of sent messages.
-	SendCount int64 `json:"SENDCOUNT"`
+	SendCount           int64 `json:"SENDCOUNT"`
 
 	// The number of successful deliveries.
 	//
 	// **Note:**
 	//
 	//  If you assign a message three recipients, the system can successfully deliver the message three times.
-	SuccessCount int64 `json:"SUCCESSCOUNT"`
+	SuccessCount        int64 `json:"SUCCESSCOUNT"`
 
 	// The total size of messages sent by the server.
-	TotalSize int64 `json:"TOTALSIZE"`
+	TotalSize           int64 `json:"TOTALSIZE"`
 
 	// The mailbox's owner.
-	User string `json:"USER"`
+	User                string `json:"USER"`
 }
 
 // EmailtrackUserStatsData is a generated payload type.
@@ -659,13 +667,14 @@ func (c *Client) EnableDKIM(ctx context.Context, args *EnableDKIMArgs) (*cpanel.
 	return cpanel.WHMCall[EnableDKIMData](ctx, c.c, http.MethodGet, "enable_dkim", args)
 }
 
+
 // EnableDKIMDataPayloadItem is a generated payload type.
 type EnableDKIMDataPayloadItem struct {
 	// The domain for which the system enabled the DKIM record.
 	Domain string `json:"domain"`
 
 	// The domain's DKIM record status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system enabled the domain's DKIM record on the DNS server.
 	// * `1` — The system enabled the domain's DKIM record.
@@ -710,12 +719,13 @@ func (c *Client) EnableMailSni(ctx context.Context, args *EnableMailSniArgs) (*c
 	return cpanel.WHMCall[EnableMailSniData](ctx, c.c, http.MethodGet, "enable_mail_sni", args)
 }
 
+
 // EnableMailSniData is a generated payload type.
 type EnableMailSniData struct {
 	// An object containing the domains that failed to enable mail SNI.
 	// **Note:**
 	// This object only includes domains that you do not own.
-	FailedDomains map[string]string `json:"failed_domains"`
+	FailedDomains  map[string]string `json:"failed_domains"`
 
 	// An object containing the domains with updated mail SNI status.
 	// **Note:**
@@ -754,13 +764,14 @@ func (c *Client) EnsureDKIMKeysExist(ctx context.Context, args *EnsureDKIMKeysEx
 	return cpanel.WHMCall[EnsureDKIMKeysExistData](ctx, c.c, http.MethodGet, "ensure_dkim_keys_exist", args)
 }
 
+
 // EnsureDKIMKeysExistDataPayloadItem is a generated payload type.
 type EnsureDKIMKeysExistDataPayloadItem struct {
 	// The domain for which the system confirmed that a valid DKIM key exists.
 	Domain string `json:"domain"`
 
 	// The domain's DKIM key status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system verified that the domain's DKIM key exists.
 	// * `1` — The system verified the existence of the domain's DKIM key.
@@ -786,6 +797,7 @@ type EnsureDKIMKeysExistData struct {
 func (c *Client) EximConfigurationCheck(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[EximConfigurationCheckData], error) {
 	return cpanel.WHMCall[EximConfigurationCheckData](ctx, c.c, http.MethodGet, "exim_configuration_check", cpanel.CombineArgs(extra...))
 }
+
 
 // EximConfigurationCheckData is a generated payload type.
 type EximConfigurationCheckData struct {
@@ -828,7 +840,7 @@ type ExpungeMailboxMessagesArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
+//   When you disable the [Receive Mail role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 58.
 //
@@ -836,6 +848,7 @@ type ExpungeMailboxMessagesArgs struct {
 func (c *Client) ExpungeMailboxMessages(ctx context.Context, args *ExpungeMailboxMessagesArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "expunge_mailbox_messages", args)
 }
+
 
 // ExpungeMessagesForMailboxGuidArgs are the parameters of the WHM API 1 function `expunge_messages_for_mailbox_guid`.
 type ExpungeMessagesForMailboxGuidArgs struct {
@@ -868,7 +881,7 @@ type ExpungeMessagesForMailboxGuidArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
+//   When you disable the [Receive Mail role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 64.
 //
@@ -876,6 +889,7 @@ type ExpungeMessagesForMailboxGuidArgs struct {
 func (c *Client) ExpungeMessagesForMailboxGuid(ctx context.Context, args *ExpungeMessagesForMailboxGuidArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "expunge_messages_for_mailbox_guid", args)
 }
+
 
 // FetchDKIMPrivateKeysArgs are the parameters of the WHM API 1 function `fetch_dkim_private_keys`.
 type FetchDKIMPrivateKeysArgs struct {
@@ -898,7 +912,7 @@ type FetchDKIMPrivateKeysArgs struct {
 //
 // **Warning:**
 //
-//	We **strongly** recommend that you protect your private key. If others obtain your private DKIM key, they could sign emails and impersonate you as a sender.
+//   We **strongly** recommend that you protect your private key. If others obtain your private DKIM key, they could sign emails and impersonate you as a sender.
 //
 // Available since cPanel & WHM version 78.
 //
@@ -907,13 +921,14 @@ func (c *Client) FetchDKIMPrivateKeys(ctx context.Context, args *FetchDKIMPrivat
 	return cpanel.WHMCall[FetchDKIMPrivateKeysData](ctx, c.c, http.MethodGet, "fetch_dkim_private_keys", args)
 }
 
+
 // FetchDKIMPrivateKeysDataPayloadItem is a generated payload type.
 type FetchDKIMPrivateKeysDataPayloadItem struct {
 	// The queried domain.
 	Domain string `json:"domain"`
 
 	// The domain's DKIM private key, in PEM format.
-	Pem string `json:"pem"`
+	Pem    string `json:"pem"`
 }
 
 // FetchDKIMPrivateKeysData is a generated payload type.
@@ -933,6 +948,7 @@ func (c *Client) FetchMailQueue(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.WHMCall[FetchMailQueueData](ctx, c.c, http.MethodGet, "fetch_mail_queue", cpanel.CombineArgs(extra...))
 }
 
+
 // FetchMailQueueDataRecordsItem is a generated payload type.
 type FetchMailQueueDataRecordsItem struct {
 	// Whether the mail message is frozen.
@@ -940,25 +956,25 @@ type FetchMailQueueDataRecordsItem struct {
 	// * `0` — **Not** frozen.
 	//
 	// Possible values: `0`, `1`.
-	Frozen int64 `json:"frozen"`
+	Frozen     int64 `json:"frozen"`
 
 	// The mail message's ID.
-	Msgid string `json:"msgid"`
+	Msgid      string `json:"msgid"`
 
 	// An array of the mail message's recipients.
 	RecipientS []string `json:"recipients"`
 
 	// The mail message's sender.
-	Sender string `json:"sender"`
+	Sender     string `json:"sender"`
 
 	// The mail message's size in bytes.
-	Size int64 `json:"size"`
+	Size       int64 `json:"size"`
 
 	// The mail message's timestamp.
-	Time int64 `json:"time"`
+	Time       int64 `json:"time"`
 
 	// The mail message's owner.
-	User *string `json:"user"`
+	User       *string `json:"user"`
 }
 
 // FetchMailQueueData is a generated payload type.
@@ -1016,6 +1032,7 @@ func (c *Client) GenerateMobileconfig(ctx context.Context, args *GenerateMobilec
 	return cpanel.WHMCall[GenerateMobileconfigData](ctx, c.c, http.MethodGet, "generate_mobileconfig", args)
 }
 
+
 // GenerateMobileconfigData is a generated payload type.
 type GenerateMobileconfigData struct {
 	// The function's raw output. This function returns this value as a binary of an Apple mobile configuration file containing a series of sub-tags and keys. For more information, read [Apple's key reference](https://developer.apple.com/business/documentation/Configuration-Profile-Reference.pdf).
@@ -1034,6 +1051,7 @@ type GenerateMobileconfigData struct {
 func (c *Client) GetDefaultDMARCRecord(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetDefaultDMARCRecordData], error) {
 	return cpanel.WHMCall[GetDefaultDMARCRecordData](ctx, c.c, http.MethodGet, "get_default_dmarc_record", cpanel.CombineArgs(extra...))
 }
+
 
 // An object that contains the server's default DMARC record.
 type GetDefaultDMARCRecordDataPayload struct {
@@ -1068,7 +1086,7 @@ type GetMailboxStatusArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [*Receive Mail* role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [*Receive Mail* role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 58.
 //
@@ -1077,6 +1095,7 @@ func (c *Client) GetMailboxStatus(ctx context.Context, args *GetMailboxStatusArg
 	return cpanel.WHMCall[map[string]GetMailboxStatusDataValue](ctx, c.c, http.MethodGet, "get_mailbox_status", args)
 }
 
+
 // An object containing information about the mailbox's contents.
 //
 // **Note:**
@@ -1084,13 +1103,13 @@ func (c *Client) GetMailboxStatus(ctx context.Context, args *GetMailboxStatusArg
 // The mailbox name is the return's name.
 type GetMailboxStatusDataValue struct {
 	// The mailbox globally unique identifier (GUID).
-	Guid string `json:"guid"`
+	Guid     string `json:"guid"`
 
 	// The total number of messages in the mailbox.
 	Messages int64 `json:"messages"`
 
 	// The total virtual size of the mailbox's contents with `CRLF` line terminators.
-	Vsize int64 `json:"vsize"`
+	Vsize    int64 `json:"vsize"`
 }
 
 // GetMailboxStatusListArgs are the parameters of the WHM API 1 function `get_mailbox_status_list`.
@@ -1110,7 +1129,7 @@ type GetMailboxStatusListArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   When you disable the [Receive Mail role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 64.
 //
@@ -1119,19 +1138,20 @@ func (c *Client) GetMailboxStatusList(ctx context.Context, args *GetMailboxStatu
 	return cpanel.WHMCall[GetMailboxStatusListData](ctx, c.c, http.MethodGet, "get_mailbox_status_list", args)
 }
 
+
 // GetMailboxStatusListDataMailboxesItem is a generated payload type.
 type GetMailboxStatusListDataMailboxesItem struct {
 	// The alpha-numeric 32-byte mailbox GUID.
-	Guid string `json:"guid"`
+	Guid     string `json:"guid"`
 
 	// The mailbox name.
-	Mailbox string `json:"mailbox"`
+	Mailbox  string `json:"mailbox"`
 
 	// The total number of messages in the mailbox.
 	Messages int64 `json:"messages"`
 
 	// The total virtual size of the mailbox's contents, computed with CRLF line terminators.
-	Vsize int64 `json:"vsize"`
+	Vsize    int64 `json:"vsize"`
 }
 
 // GetMailboxStatusListData is a generated payload type.
@@ -1172,10 +1192,11 @@ func (c *Client) GetUniqueRecipientCountPerSenderForUser(ctx context.Context, ar
 	return cpanel.WHMCall[GetUniqueRecipientCountPerSenderForUserData](ctx, c.c, http.MethodGet, "get_unique_recipient_count_per_sender_for_user", args)
 }
 
+
 // GetUniqueRecipientCountPerSenderForUserDataPayloadItem is a generated payload type.
 type GetUniqueRecipientCountPerSenderForUserDataPayloadItem struct {
 	// The user's email address.
-	Sender string `json:"sender"`
+	Sender               string `json:"sender"`
 
 	// The number of unique recipients that the email account sent mail to.
 	UniqueRecipientCount int64 `json:"unique_recipient_count"`
@@ -1214,13 +1235,14 @@ func (c *Client) GetUniqueSenderRecipientCountPerUser(ctx context.Context, args 
 	return cpanel.WHMCall[GetUniqueSenderRecipientCountPerUserData](ctx, c.c, http.MethodGet, "get_unique_sender_recipient_count_per_user", args)
 }
 
+
 // GetUniqueSenderRecipientCountPerUserDataPayloadItem is a generated payload type.
 type GetUniqueSenderRecipientCountPerUserDataPayloadItem struct {
 	// A count of the unique sender-recipient pairs for mail sent during a period of time.
 	UniqueSenderRecipientCount int64 `json:"unique_sender_recipient_count"`
 
 	// A system user's username.
-	User string `json:"user"`
+	User                       string `json:"user"`
 }
 
 // GetUniqueSenderRecipientCountPerUserData is a generated payload type.
@@ -1256,6 +1278,7 @@ func (c *Client) GetUserEmailForwardDestination(ctx context.Context, args *GetUs
 	return cpanel.WHMCall[GetUserEmailForwardDestinationData](ctx, c.c, http.MethodGet, "get_user_email_forward_destination", args)
 }
 
+
 // GetUserEmailForwardDestinationData is a generated payload type.
 type GetUserEmailForwardDestinationData struct {
 	// The system accounts or email addresses to which the system forwards the account's email.
@@ -1283,7 +1306,7 @@ type HoldOutgoingEmailArgs struct {
 //
 // **Note:**
 //
-//	If mail for a cPanel user's account is suspended, the system will reject their email before the mail server puts it in the queue.
+//   If mail for a cPanel user's account is suspended, the system will reject their email before the mail server puts it in the queue.
 //
 // Available since cPanel & WHM version 56.
 //
@@ -1291,6 +1314,7 @@ type HoldOutgoingEmailArgs struct {
 func (c *Client) HoldOutgoingEmail(ctx context.Context, args *HoldOutgoingEmailArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "hold_outgoing_email", args)
 }
+
 
 // InstallDKIMPrivateKeysArgs are the parameters of the WHM API 1 function `install_dkim_private_keys`.
 type InstallDKIMPrivateKeysArgs struct {
@@ -1340,13 +1364,14 @@ func (c *Client) InstallDKIMPrivateKeys(ctx context.Context, args *InstallDKIMPr
 	return cpanel.WHMCall[InstallDKIMPrivateKeysData](ctx, c.c, http.MethodGet, "install_dkim_private_keys", args)
 }
 
+
 // InstallDKIMPrivateKeysDataPayloadItem is a generated payload type.
 type InstallDKIMPrivateKeysDataPayloadItem struct {
 	// The RSA private key's associated domain.
 	Domain string `json:"domain"`
 
 	// The RSA private key's installation status message.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system installed the RSA private key to the local server's DKIM record.
 	// * `1` — The system installed the RSA private key.
@@ -1395,13 +1420,14 @@ func (c *Client) InstallSPFRecords(ctx context.Context, args *InstallSPFRecordsA
 	return cpanel.WHMCall[InstallSPFRecordsData](ctx, c.c, http.MethodGet, "install_spf_records", args)
 }
 
+
 // InstallSPFRecordsDataPayloadItem is a generated payload type.
 type InstallSPFRecordsDataPayloadItem struct {
 	// The SPF record's associated domain on the DNS server.
 	Domain string `json:"domain"`
 
 	// The SPF record's installation status to the DNS server.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system installed the SPF record to the DNS server.
 	// * `1` — The system installed the SPF record on the DNS server.
@@ -1423,8 +1449,8 @@ type InstallSPFRecordsData struct {
 //
 // **Note:**
 //
-//   - Functions that enable Mail SNI succeed with a warning that Mail SNI is always enabled.
-//   - Functions that disable Mail SNI fail and make no changes.
+//   * Functions that enable Mail SNI succeed with a warning that Mail SNI is always enabled.
+//   * Functions that disable Mail SNI fail and make no changes.
 //
 // Available since cPanel & WHM version 11.40.
 //
@@ -1432,6 +1458,7 @@ type InstallSPFRecordsData struct {
 func (c *Client) IsSniSupported(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[IsSniSupportedData], error) {
 	return cpanel.WHMCall[IsSniSupportedData](ctx, c.c, http.MethodGet, "is_sni_supported", cpanel.CombineArgs(extra...))
 }
+
 
 // IsSniSupportedData is a generated payload type.
 type IsSniSupportedData struct {
@@ -1453,6 +1480,7 @@ type IsSniSupportedData struct {
 func (c *Client) ListBlockedIncomingEmailCountries(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListBlockedIncomingEmailCountriesData], error) {
 	return cpanel.WHMCall[ListBlockedIncomingEmailCountriesData](ctx, c.c, http.MethodGet, "list_blocked_incoming_email_countries", cpanel.CombineArgs(extra...))
 }
+
 
 // ListBlockedIncomingEmailCountriesDataCountriesItem is a generated payload type.
 type ListBlockedIncomingEmailCountriesDataCountriesItem struct {
@@ -1476,6 +1504,7 @@ type ListBlockedIncomingEmailCountriesData struct {
 func (c *Client) ListBlockedIncomingEmailDomains(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListBlockedIncomingEmailDomainsData], error) {
 	return cpanel.WHMCall[ListBlockedIncomingEmailDomainsData](ctx, c.c, http.MethodGet, "list_blocked_incoming_email_domains", cpanel.CombineArgs(extra...))
 }
+
 
 // ListBlockedIncomingEmailDomainsDataDomainsItem is a generated payload type.
 type ListBlockedIncomingEmailDomainsDataDomainsItem struct {
@@ -1506,7 +1535,7 @@ type ListPopsForArgs struct {
 //
 // **Important:**
 //
-//	When you disable the [Receive Mail role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
+//   When you disable the [Receive Mail role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.50.
 //
@@ -1514,6 +1543,7 @@ type ListPopsForArgs struct {
 func (c *Client) ListPopsFor(ctx context.Context, args *ListPopsForArgs) (*cpanel.WHMResult[ListPopsForData], error) {
 	return cpanel.WHMCall[ListPopsForData](ctx, c.c, http.MethodGet, "list_pops_for", args)
 }
+
 
 // ListPopsForData is a generated payload type.
 type ListPopsForData struct {
@@ -1547,6 +1577,7 @@ func (c *Client) MailSniStatus(ctx context.Context, args *MailSniStatusArgs) (*c
 	return cpanel.WHMCall[MailSniStatusData](ctx, c.c, http.MethodGet, "mail_sni_status", args)
 }
 
+
 // MailSniStatusData is a generated payload type.
 type MailSniStatusData struct {
 	// Whether SNI for mail is enabled.
@@ -1579,6 +1610,7 @@ func (c *Client) NormalizeUserEmailConfiguration(ctx context.Context, args *Norm
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "normalize_user_email_configuration", args)
 }
 
+
 // RebuildMailSniConfigArgs are the parameters of the WHM API 1 function `rebuild_mail_sni_config`.
 type RebuildMailSniConfigArgs struct {
 	// Whether to reload the Dovecot service after the system rebuilds the configuration files.
@@ -1605,6 +1637,7 @@ func (c *Client) RebuildMailSniConfig(ctx context.Context, args *RebuildMailSniC
 	return cpanel.WHMCall[RebuildMailSniConfigData](ctx, c.c, http.MethodGet, "rebuild_mail_sni_config", args)
 }
 
+
 // RebuildMailSniConfigData is a generated payload type.
 type RebuildMailSniConfigData struct {
 	// list of configuration files that this function rebuilt.
@@ -1619,7 +1652,7 @@ type RebuildMailSniConfigData struct {
 	// * `0` - The system did **not** rebuild the configuration files.
 	//
 	// Possible values: `0`, `1`.
-	Success int64 `json:"success"`
+	Success      int64 `json:"success"`
 }
 
 // ReleaseOutgoingEmailArgs are the parameters of the WHM API 1 function `release_outgoing_email`.
@@ -1647,6 +1680,7 @@ type ReleaseOutgoingEmailArgs struct {
 func (c *Client) ReleaseOutgoingEmail(ctx context.Context, args *ReleaseOutgoingEmailArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "release_outgoing_email", args)
 }
+
 
 // RemoveDMARCArgs are the parameters of the WHM API 1 function `remove_dmarc`.
 type RemoveDMARCArgs struct {
@@ -1678,13 +1712,14 @@ func (c *Client) RemoveDMARC(ctx context.Context, args *RemoveDMARCArgs) (*cpane
 	return cpanel.WHMCall[RemoveDMARCData](ctx, c.c, http.MethodGet, "remove_dmarc", args)
 }
 
+
 // RemoveDMARCDataPayloadItem is a generated payload type.
 type RemoveDMARCDataPayloadItem struct {
 	// The domain for which the system removed the DMARC record.
 	Domain string `json:"domain"`
 
 	// Information about the removed DMARC record.
-	Msg string `json:"msg"`
+	Msg    string `json:"msg"`
 
 	// Whether the system removed the domain's DMARC record on the DNS server.
 	// - `1`  — The system removed the domain's DMARC record.
@@ -1760,6 +1795,7 @@ func (c *Client) SaveSpamdConfig(ctx context.Context, args *SaveSpamdConfigArgs)
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "save_spamd_config", args)
 }
 
+
 // SetDefaultDMARCRecordArgs are the parameters of the WHM API 1 function `set_default_dmarc_record`.
 type SetDefaultDMARCRecordArgs struct {
 	// The DMARC record to set as the server default.
@@ -1785,7 +1821,7 @@ type SetDefaultDMARCRecordArgs struct {
 //
 // **Note:**
 //
-//	You can pass an empty string to remove the custom default and revert to the built-in default record.
+//  You can pass an empty string to remove the custom default and revert to the built-in default record.
 //
 // Available since cPanel & WHM version 124.
 //
@@ -1793,6 +1829,7 @@ type SetDefaultDMARCRecordArgs struct {
 func (c *Client) SetDefaultDMARCRecord(ctx context.Context, args *SetDefaultDMARCRecordArgs) (*cpanel.WHMResult[SetDefaultDMARCRecordData], error) {
 	return cpanel.WHMCall[SetDefaultDMARCRecordData](ctx, c.c, http.MethodGet, "set_default_dmarc_record", args)
 }
+
 
 // An object that contains the operation result.
 type SetDefaultDMARCRecordDataPayload struct {
@@ -1837,7 +1874,7 @@ type SetManualMXRedirectsArgs struct {
 //
 // **Note:**
 //
-//	To remove a domain's manual MX redirection, use the WHM API 1 unset_manual_mx_redirect function.
+//   To remove a domain's manual MX redirection, use the WHM API 1 unset_manual_mx_redirect function.
 //
 // Available since cPanel & WHM version 90.
 //
@@ -1845,6 +1882,7 @@ type SetManualMXRedirectsArgs struct {
 func (c *Client) SetManualMXRedirects(ctx context.Context, args *SetManualMXRedirectsArgs) (*cpanel.WHMResult[SetManualMXRedirectsData], error) {
 	return cpanel.WHMCall[SetManualMXRedirectsData](ctx, c.c, http.MethodGet, "set_manual_mx_redirects", args)
 }
+
 
 // SetManualMXRedirectsData is a generated payload type.
 type SetManualMXRedirectsData struct {
@@ -1888,6 +1926,7 @@ func (c *Client) SetUserEmailForwardDestination(ctx context.Context, args *SetUs
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_user_email_forward_destination", args)
 }
 
+
 // SuspendOutgoingEmailArgs are the parameters of the WHM API 1 function `suspend_outgoing_email`.
 type SuspendOutgoingEmailArgs struct {
 	// The cPanel account.
@@ -1909,7 +1948,7 @@ type SuspendOutgoingEmailArgs struct {
 //
 // **Note:**
 //
-//	If mail for a cPanel user's account is suspended, the system will reject their email before the mail server puts it in queue.
+//   If mail for a cPanel user's account is suspended, the system will reject their email before the mail server puts it in queue.
 //
 // Available since cPanel & WHM version 56.
 //
@@ -1917,6 +1956,7 @@ type SuspendOutgoingEmailArgs struct {
 func (c *Client) SuspendOutgoingEmail(ctx context.Context, args *SuspendOutgoingEmailArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "suspend_outgoing_email", args)
 }
+
 
 // TerminateCpuserMailboxSessionsArgs are the parameters of the WHM API 1 function `terminate_cpuser_mailbox_sessions`.
 type TerminateCpuserMailboxSessionsArgs struct {
@@ -1944,6 +1984,7 @@ func (c *Client) TerminateCpuserMailboxSessions(ctx context.Context, args *Termi
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "terminate_cpuser_mailbox_sessions", args)
 }
 
+
 // UnblockIncomingEmailFromCountryArgs are the parameters of the WHM API 1 function `unblock_incoming_email_from_country`.
 type UnblockIncomingEmailFromCountryArgs struct {
 	// The country to unblock. A valid [ISO 3166-1 alpha-2 code](https://www.iso.org/iso-3166-country-codes.html) two-letter country code.
@@ -1969,6 +2010,7 @@ type UnblockIncomingEmailFromCountryArgs struct {
 func (c *Client) UnblockIncomingEmailFromCountry(ctx context.Context, args *UnblockIncomingEmailFromCountryArgs) (*cpanel.WHMResult[UnblockIncomingEmailFromCountryData], error) {
 	return cpanel.WHMCall[UnblockIncomingEmailFromCountryData](ctx, c.c, http.MethodGet, "unblock_incoming_email_from_country", args)
 }
+
 
 // UnblockIncomingEmailFromCountryData is a generated payload type.
 type UnblockIncomingEmailFromCountryData struct {
@@ -2012,6 +2054,7 @@ func (c *Client) UnblockIncomingEmailFromDomain(ctx context.Context, args *Unblo
 	return cpanel.WHMCall[UnblockIncomingEmailFromDomainData](ctx, c.c, http.MethodGet, "unblock_incoming_email_from_domain", args)
 }
 
+
 // UnblockIncomingEmailFromDomainData is a generated payload type.
 type UnblockIncomingEmailFromDomainData struct {
 	// Whether the function unblocked one or more domains.
@@ -2043,7 +2086,7 @@ type UnsetManualMXRedirectsArgs struct {
 //
 // **Note:**
 //
-//	To set a domain's manual MX redirection, use the WHM API 1  set_manual_mx_redirects function.
+//   To set a domain's manual MX redirection, use the WHM API 1  set_manual_mx_redirects function.
 //
 // Available since cPanel & WHM version 90.
 //
@@ -2051,6 +2094,7 @@ type UnsetManualMXRedirectsArgs struct {
 func (c *Client) UnsetManualMXRedirects(ctx context.Context, args *UnsetManualMXRedirectsArgs) (*cpanel.WHMResult[UnsetManualMXRedirectsData], error) {
 	return cpanel.WHMCall[UnsetManualMXRedirectsData](ctx, c.c, http.MethodGet, "unset_manual_mx_redirects", args)
 }
+
 
 // UnsetManualMXRedirectsData is a generated payload type.
 type UnsetManualMXRedirectsData struct {
@@ -2080,6 +2124,7 @@ func (c *Client) UnsuspendOutgoingEmail(ctx context.Context, args *UnsuspendOutg
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unsuspend_outgoing_email", args)
 }
 
+
 // ValidateCurrentDkimsArgs are the parameters of the WHM API 1 function `validate_current_dkims`.
 type ValidateCurrentDkimsArgs struct {
 	// The domain for which to check the DKIM records.
@@ -2107,6 +2152,7 @@ func (c *Client) ValidateCurrentDkims(ctx context.Context, args *ValidateCurrent
 	return cpanel.WHMCall[ValidateCurrentDkimsData](ctx, c.c, http.MethodGet, "validate_current_dkims", args)
 }
 
+
 // ValidateCurrentDkimsDataPayloadItemRecordsItem is a generated payload type.
 type ValidateCurrentDkimsDataPayloadItemRecordsItem struct {
 	// The full contents of the domain's `DKIM TXT` record data.
@@ -2122,13 +2168,13 @@ type ValidateCurrentDkimsDataPayloadItemRecordsItem struct {
 	// exist or a misconfigured `DKIM TXT` record exists.
 	//
 	// Possible values: `VALID`, `MISMATCH`, `PERMFAIL`.
-	State string `json:"state"`
+	State   string `json:"state"`
 }
 
 // ValidateCurrentDkimsDataPayloadItem is a generated payload type.
 type ValidateCurrentDkimsDataPayloadItem struct {
 	// The domain that the function used to check the DKIM record with a `default._domainkey` prefix.
-	Domain string `json:"domain"`
+	Domain              string `json:"domain"`
 
 	// An error message that details the reason why the DNS lookup failed.
 	//
@@ -2136,13 +2182,13 @@ type ValidateCurrentDkimsDataPayloadItem struct {
 	//
 	// The function **only** returns this value when the `state` return
 	// is the `ERROR` value.
-	Error string `json:"error"`
+	Error               string `json:"error"`
 
 	// The DKIM record's contents.
-	Expected string `json:"expected"`
+	Expected            string `json:"expected"`
 
 	// The domain's DNS `DKIM TXT` records.
-	Records []ValidateCurrentDkimsDataPayloadItemRecordsItem `json:"records"`
+	Records             []ValidateCurrentDkimsDataPayloadItemRecordsItem `json:"records"`
 
 	// The domain's DKIM record status.
 	//
@@ -2154,7 +2200,7 @@ type ValidateCurrentDkimsDataPayloadItem struct {
 	// * `MISSING` — No DKIM record exists for the domain.
 	// * `MULTIPLE` — Multiple DKIM records exist.
 	// * `NOPUB` — No key exists on th …
-	State string `json:"state"`
+	State               string `json:"state"`
 
 	// The result of the DKIM record's validity cache update operation.
 	//
@@ -2201,16 +2247,17 @@ func (c *Client) ValidateCurrentDmarcs(ctx context.Context, args *ValidateCurren
 	return cpanel.WHMCall[ValidateCurrentDmarcsData](ctx, c.c, http.MethodGet, "validate_current_dmarcs", args)
 }
 
+
 // ValidateCurrentDmarcsDataPayloadItem is a generated payload type.
 type ValidateCurrentDmarcsDataPayloadItem struct {
 	// The target domain of the DMARC policy.
-	Domain string `json:"domain"`
+	Domain    string `json:"domain"`
 
 	// A message that details either why the DNS lookup failed, or if there is a SPF/DKIM failure.
-	Error string `json:"error"`
+	Error     string `json:"error"`
 
 	// The domain's DMARC TXT record.
-	Record string `json:"record"`
+	Record    string `json:"record"`
 
 	// The domain's DMARC record status.
 	// Possible values:
@@ -2219,7 +2266,7 @@ type ValidateCurrentDmarcsDataPayloadItem struct {
 	// * `MALFORMED` - A DMARC record is set, but it did not pass a syntax check.
 	// * `DKIM_SPF_ERROR` - A DMARC record exists; however, both the DKIM and SPF records for this domain did not pass validation.
 	// * `DKIM_ERROR` - A DMARC recor …
-	State string `json:"state"`
+	State     string `json:"state"`
 
 	// The domain that the function used to check
 	// the DMARC record. This will be the value of
@@ -2246,6 +2293,7 @@ type ValidateCurrentDmarcsData struct {
 func (c *Client) ValidateCurrentInstalledEximConfig(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ValidateCurrentInstalledEximConfigData], error) {
 	return cpanel.WHMCall[ValidateCurrentInstalledEximConfigData](ctx, c.c, http.MethodGet, "validate_current_installed_exim_config", cpanel.CombineArgs(extra...))
 }
+
 
 // ValidateCurrentInstalledEximConfigData is a generated payload type.
 type ValidateCurrentInstalledEximConfigData struct {
@@ -2280,10 +2328,11 @@ func (c *Client) ValidateCurrentPtrs(ctx context.Context, args *ValidateCurrentP
 	return cpanel.WHMCall[ValidateCurrentPtrsData](ctx, c.c, http.MethodGet, "validate_current_ptrs", args)
 }
 
+
 // ValidateCurrentPtrsDataPayloadItemPtrRecordsItem is a generated payload type.
 type ValidateCurrentPtrsDataPayloadItemPtrRecordsItem struct {
 	// The fully qualified domain name (FQDN) that a PTR record points to.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// An array of IP addresses that the domain resolves to for A (IPv4) and AAAA (IPv6) records.
 	ForwardRecords []string `json:"forward_records"`
@@ -2298,7 +2347,7 @@ type ValidateCurrentPtrsDataPayloadItemPtrRecordsItem struct {
 	// an A or AAAA record that points back to the IP address.
 	//
 	// Possible values: `VALID`, `MISSING_FWD`, `FWD_MISMATCH`.
-	State string `json:"state"`
+	State          string `json:"state"`
 }
 
 // ValidateCurrentPtrsDataPayloadItem is a generated payload type.
@@ -2315,10 +2364,10 @@ type ValidateCurrentPtrsDataPayloadItem struct {
 	// article.
 	//
 	// **Note:** …
-	ArpaDomain string `json:"arpa_domain"`
+	ArpaDomain  string `json:"arpa_domain"`
 
 	// The queried domain.
-	Domain string `json:"domain"`
+	Domain      string `json:"domain"`
 
 	// An error message that details the reason why the domain's IP address
 	// validation failed.
@@ -2327,10 +2376,10 @@ type ValidateCurrentPtrsDataPayloadItem struct {
 	//
 	// The function **only** returns this value when the `state` return is
 	// the `ERROR` value.
-	Error string `json:"error"`
+	Error       string `json:"error"`
 
 	// The hostname that the domain uses to identify itself to remote SMTP servers.
-	Helo string `json:"helo"`
+	Helo        string `json:"helo"`
 
 	// The IPv4 or IPv6 address.
 	//
@@ -2338,7 +2387,7 @@ type ValidateCurrentPtrsDataPayloadItem struct {
 	//
 	// The function does **not** return this value for a domain with an
 	// invalid IP address.
-	IPAddress string `json:"ip_address"`
+	IPAddress   string `json:"ip_address"`
 
 	// The IP version number.
 	//
@@ -2349,7 +2398,7 @@ type ValidateCurrentPtrsDataPayloadItem struct {
 	//
 	// The function does **not** return this value for a domain with an
 	// invalid IP address.
-	IPVersion int64 `json:"ip_version"`
+	IPVersion   int64 `json:"ip_version"`
 
 	// An array of the authoritative nameservers for the domain's PTR record.
 	Nameservers []string `json:"nameservers"`
@@ -2360,7 +2409,7 @@ type ValidateCurrentPtrsDataPayloadItem struct {
 	//
 	// The function does **not** return this array for a domain with an
 	// invalid IP address.
-	PtrRecords []ValidateCurrentPtrsDataPayloadItemPtrRecordsItem `json:"ptr_records"`
+	PtrRecords  []ValidateCurrentPtrsDataPayloadItemPtrRecordsItem `json:"ptr_records"`
 
 	// Whether the PTR records are valid for the domain.
 	//
@@ -2371,7 +2420,7 @@ type ValidateCurrentPtrsDataPayloadItem struct {
 	// addresses.
 	// * `VALID` — The PTR record is valid. The function **only** returns
 	// this response if **all** of an IP a …
-	State string `json:"state"`
+	State       string `json:"state"`
 }
 
 // ValidateCurrentPtrsData is a generated payload type.
@@ -2402,13 +2451,14 @@ func (c *Client) ValidateCurrentSpfs(ctx context.Context, args *ValidateCurrentS
 	return cpanel.WHMCall[ValidateCurrentSpfsData](ctx, c.c, http.MethodGet, "validate_current_spfs", args)
 }
 
+
 // ValidateCurrentSpfsDataPayloadItemRecordsItem is a generated payload type.
 type ValidateCurrentSpfsDataPayloadItemRecordsItem struct {
 	// The SPF record's contents.
 	Current string `json:"current"`
 
 	// The reason for the SPF record's status.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// The SPF record's status.
 	//
@@ -2420,13 +2470,13 @@ type ValidateCurrentSpfsDataPayloadItemRecordsItem struct {
 	// is **not** a valid sender.
 	// * `SOFTFAIL` — The SPF record states that the `ip_address` value
 	// is **not** a valid sender, but doe …
-	State string `json:"state"`
+	State   string `json:"state"`
 }
 
 // ValidateCurrentSpfsDataPayloadItem is a generated payload type.
 type ValidateCurrentSpfsDataPayloadItem struct {
 	// The queried domain.
-	Domain string `json:"domain"`
+	Domain    string `json:"domain"`
 
 	// An error message that details the reason why the DNS lookup failed.
 	//
@@ -2434,10 +2484,10 @@ type ValidateCurrentSpfsDataPayloadItem struct {
 	//
 	// The function **only** returns this value when the `state` return is
 	// the `ERROR` value.
-	Error string `json:"error"`
+	Error     string `json:"error"`
 
 	// The SPF record for the domain in the DNS.
-	Expected string `json:"expected"`
+	Expected  string `json:"expected"`
 
 	// The domain's IPv4 or IPv6 address.
 	IPAddress string `json:"ip_address"`
@@ -2451,7 +2501,7 @@ type ValidateCurrentSpfsDataPayloadItem struct {
 	IPVersion int64 `json:"ip_version"`
 
 	// The SPF records of the domain's DNS.
-	Records []ValidateCurrentSpfsDataPayloadItemRecordsItem `json:"records"`
+	Records   []ValidateCurrentSpfsDataPayloadItemRecordsItem `json:"records"`
 
 	// The SPF record's status.
 	//
@@ -2462,7 +2512,7 @@ type ValidateCurrentSpfsDataPayloadItem struct {
 	// * `MULTIPLE` — Multiple `SPF TXT` records exist in the domain's DNS.
 	// * `MISSING` — No `SPF TXT` record exists for the domain's DNS.
 	// * `ERROR` — …
-	State string `json:"state"`
+	State     string `json:"state"`
 }
 
 // ValidateCurrentSpfsData is a generated payload type.
@@ -2500,13 +2550,13 @@ type ValidateEximConfigurationSyntaxArgs struct {
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of SPF resource
 // records on DNS.
-//   - This warning is not relevant on CentOS 7 servers, because
-//     [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208).
-//     CentOS 7 servers use TXT records instead of SPF records.
-//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of
-//     BIND that complies with RFC 7208. To resolve this issue, update your operating system to a
-//     version that contains the updated version of BIND. For more information, read the
-//     [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   * This warning is not relevant on CentOS 7 servers, because
+//   [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208).
+//   CentOS 7 servers use TXT records instead of SPF records.
+//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of
+//   BIND that complies with RFC 7208. To resolve this issue, update your operating system to a
+//   version that contains the updated version of BIND. For more information, read the
+//   [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // Available since cPanel & WHM version 11.
 //
@@ -2514,3 +2564,4 @@ type ValidateEximConfigurationSyntaxArgs struct {
 func (c *Client) ValidateEximConfigurationSyntax(ctx context.Context, args *ValidateEximConfigurationSyntaxArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "validate_exim_configuration_syntax", args)
 }
+

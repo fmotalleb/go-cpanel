@@ -34,6 +34,7 @@ func (c *DirectoryIndexesClient) GetIndexing(ctx context.Context, args *Director
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "DirectoryIndexes", "get_indexing", args)
 }
 
+
 // DirectoryIndexesListDirectoriesArgs are the parameters of the UAPI function `DirectoryIndexes::list_directories`.
 type DirectoryIndexesListDirectoriesArgs struct {
 	// The absolute path of the directory for which to return indexing information.
@@ -56,6 +57,7 @@ func (c *DirectoryIndexesClient) ListDirectories(ctx context.Context, args *Dire
 	return cpanel.UAPICall[DirectoryIndexesListDirectoriesData](ctx, c.c, http.MethodGet, "DirectoryIndexes", "list_directories", args)
 }
 
+
 // The directory's indexing type.
 //
 // * `standard` - The directory uses directory indexing with standard formatting.
@@ -74,7 +76,7 @@ type DirectoryIndexesListDirectoriesDataChildrenItemState struct {
 // DirectoryIndexesListDirectoriesDataChildrenItem is a generated payload type.
 type DirectoryIndexesListDirectoriesDataChildrenItem struct {
 	// The subdirectory's absolute path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The subdirectory's indexing information.
 	State DirectoryIndexesListDirectoriesDataChildrenItemState `json:"state"`
@@ -88,7 +90,7 @@ type DirectoryIndexesListDirectoriesDataCurrentState struct {
 // The user's current directory and its indexing information.
 type DirectoryIndexesListDirectoriesDataCurrent struct {
 	// The current directory's absolute path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The current directory's indexing information.
 	State DirectoryIndexesListDirectoriesDataCurrentState `json:"state"`
@@ -102,7 +104,7 @@ type DirectoryIndexesListDirectoriesDataHomeState struct {
 // The user's home directory and its indexing information.
 type DirectoryIndexesListDirectoriesDataHome struct {
 	// The home directory's absolute path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// An object containing the home directory's indexing information.
 	State DirectoryIndexesListDirectoriesDataHomeState `json:"state"`
@@ -116,7 +118,7 @@ type DirectoryIndexesListDirectoriesDataParentState struct {
 // The current directory’s parent directory and its indexing information.
 type DirectoryIndexesListDirectoriesDataParent struct {
 	// The parent directory's absolute path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 
 	// The parent directory's indexing information.
 	State DirectoryIndexesListDirectoriesDataParentState `json:"state"`
@@ -132,13 +134,13 @@ type DirectoryIndexesListDirectoriesData struct {
 	Children []DirectoryIndexesListDirectoriesDataChildrenItem `json:"children"`
 
 	// The user's current directory and its indexing information.
-	Current DirectoryIndexesListDirectoriesDataCurrent `json:"current"`
+	Current  DirectoryIndexesListDirectoriesDataCurrent `json:"current"`
 
 	// The user's home directory and its indexing information.
-	Home DirectoryIndexesListDirectoriesDataHome `json:"home"`
+	Home     DirectoryIndexesListDirectoriesDataHome `json:"home"`
 
 	// The current directory’s parent directory and its indexing information.
-	Parent DirectoryIndexesListDirectoriesDataParent `json:"parent"`
+	Parent   DirectoryIndexesListDirectoriesDataParent `json:"parent"`
 }
 
 // DirectoryIndexesSetIndexingArgs are the parameters of the UAPI function `DirectoryIndexes::set_indexing`.
@@ -174,3 +176,4 @@ type DirectoryIndexesSetIndexingArgs struct {
 func (c *DirectoryIndexesClient) SetIndexing(ctx context.Context, args *DirectoryIndexesSetIndexingArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "DirectoryIndexes", "set_indexing", args)
 }
+

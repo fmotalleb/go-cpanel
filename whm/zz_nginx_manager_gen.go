@@ -29,7 +29,7 @@ type NginxmanagerClearCacheArgs struct {
 
 // NginxmanagerClearCache calls the WHM API 1 function `nginxmanager_clear_cache` — Delete the user's NGINX cache.
 //
-// # This function clears a user's NGINX cache
+// This function clears a user's NGINX cache
 //
 // Available since cPanel & WHM version 11.
 //
@@ -37,6 +37,7 @@ type NginxmanagerClearCacheArgs struct {
 func (c *Client) NginxmanagerClearCache(ctx context.Context, args *NginxmanagerClearCacheArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "nginxmanager_clear_cache", args)
 }
+
 
 // NginxmanagerGetCacheConfigSystemArgs are the parameters of the WHM API 1 function `nginxmanager_get_cache_config_system`.
 type NginxmanagerGetCacheConfigSystemArgs struct {
@@ -63,6 +64,7 @@ type NginxmanagerGetCacheConfigSystemArgs struct {
 func (c *Client) NginxmanagerGetCacheConfigSystem(ctx context.Context, args *NginxmanagerGetCacheConfigSystemArgs) (*cpanel.WHMResult[NginxmanagerGetCacheConfigSystemData], error) {
 	return cpanel.WHMCall[NginxmanagerGetCacheConfigSystemData](ctx, c.c, http.MethodGet, "nginxmanager_get_cache_config_system", args)
 }
+
 
 // The default configuration values.
 type NginxmanagerGetCacheConfigSystemDataDefault2 struct {
@@ -98,7 +100,7 @@ type NginxmanagerGetCacheConfigSystemData struct {
 	Default2 NginxmanagerGetCacheConfigSystemDataDefault2 `json:"default"`
 
 	// The system's configuration values.
-	System NginxmanagerGetCacheConfigSystemDataSystem `json:"system"`
+	System   NginxmanagerGetCacheConfigSystemDataSystem `json:"system"`
 }
 
 // NginxmanagerGetCacheConfigUsersArgs are the parameters of the WHM API 1 function `nginxmanager_get_cache_config_users`.
@@ -136,6 +138,7 @@ func (c *Client) NginxmanagerGetCacheConfigUsers(ctx context.Context, args *Ngin
 	return cpanel.WHMCall[NginxmanagerGetCacheConfigUsersData](ctx, c.c, http.MethodGet, "nginxmanager_get_cache_config_users", args)
 }
 
+
 // The user's configuration values.
 type NginxmanagerGetCacheConfigUsersDataUsersItemConfig struct {
 	// Caching is enabled or disabled.
@@ -165,10 +168,10 @@ type NginxmanagerGetCacheConfigUsersDataUsersItem struct {
 	Merged int64 `json:"merged"`
 
 	// The reseller who owns this account.
-	Owner string `json:"owner"`
+	Owner  string `json:"owner"`
 
 	// The user's name.
-	User string `json:"user"`
+	User   string `json:"user"`
 }
 
 // NginxmanagerGetCacheConfigUsersData is a generated payload type.
@@ -203,6 +206,7 @@ func (c *Client) NginxmanagerRebuildCacheConfig(ctx context.Context, args *Nginx
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "nginxmanager_rebuild_cache_config", args)
 }
 
+
 // NginxmanagerResetUsersCacheConfigArgs are the parameters of the WHM API 1 function `nginxmanager_reset_users_cache_config`.
 type NginxmanagerResetUsersCacheConfigArgs struct {
 	// A list of users to reset to the NGINX system default.
@@ -228,6 +232,7 @@ type NginxmanagerResetUsersCacheConfigArgs struct {
 func (c *Client) NginxmanagerResetUsersCacheConfig(ctx context.Context, args *NginxmanagerResetUsersCacheConfigArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "nginxmanager_reset_users_cache_config", args)
 }
+
 
 // NginxmanagerSetCacheConfigArgs are the parameters of the WHM API 1 function `nginxmanager_set_cache_config`.
 type NginxmanagerSetCacheConfigArgs struct {
@@ -266,3 +271,4 @@ type NginxmanagerSetCacheConfigArgs struct {
 func (c *Client) NginxmanagerSetCacheConfig(ctx context.Context, args *NginxmanagerSetCacheConfigArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "nginxmanager_set_cache_config", args)
 }
+

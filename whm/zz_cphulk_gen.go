@@ -25,6 +25,7 @@ func (c *Client) BatchCreateCPHulkRecords(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[BatchCreateCPHulkRecordsData](ctx, c.c, http.MethodPost, "batch_create_cphulk_records", cpanel.CombineArgs(extra...))
 }
 
+
 // IPAddress is a generated payload type.
 // IPAddress is left as raw JSON because its documented schema
 // is a union of shapes; inspect it with encoding/json.
@@ -33,26 +34,26 @@ type IPAddress = json.RawMessage
 // BatchCreateCPHulkRecordsData is a generated payload type.
 type BatchCreateCPHulkRecordsData struct {
 	// The comment that you included when you called the function.
-	Comment string `json:"comment"`
+	Comment                  string `json:"comment"`
 
 	// The number of IP address blocks that the function deleted.
-	IPBlocksRemoved int64 `json:"ip_blocks_removed"`
+	IPBlocksRemoved          int64 `json:"ip_blocks_removed"`
 
 	// An array of IP addresses that the function added from the list. This function will always returns ranges in the IP1-IP2 format.
-	IPsAdded []IPAddress `json:"ips_added"`
+	IPsAdded                 []IPAddress `json:"ips_added"`
 
 	// An object of IP addresses that the system failed to add to the list. This object contains one or more IP address returns.
-	IPsFailed map[string]string `json:"ips_failed"`
+	IPsFailed                map[string]string `json:"ips_failed"`
 
 	// The number of `iptables` temporary block rules that the function deleted.
-	IptableBansRemoved int64 `json:"iptable_bans_removed"`
+	IptableBansRemoved       int64 `json:"iptable_bans_removed"`
 
 	// The cPHulk list's name.
 	// * `black`
 	// * `white`
 	//
 	// Possible values: `black`, `white`.
-	ListName string `json:"list_name"`
+	ListName                 string `json:"list_name"`
 
 	// An array of IP addresses that the function added from the list.
 	//   The system will return the one of the following formats:
@@ -60,10 +61,10 @@ type BatchCreateCPHulkRecordsData struct {
 	//  - A IPv4 address (192.168.0.1).
 	//  - A simple IPv4 address range (192.168.1.1-192.168.1.4).
 	//  - A CIDR IPv4 address range (192.168.1.0/30).
-	OriginalIPsAdded []IPAddress `json:"original_ips_added"`
+	OriginalIPsAdded         []IPAddress `json:"original_ips_added"`
 
 	// The IP address of the user or system that requested the addition.
-	RequesterIP string `json:"requester_ip"`
+	RequesterIP              string `json:"requester_ip"`
 
 	// Whether the requester's IP address exists on cPHulk's whitelist.
 	// * `1` - Whitelisted.
@@ -84,6 +85,7 @@ func (c *Client) CPHulkStatus(ctx context.Context, extra ...cpanel.Args) (*cpane
 	return cpanel.WHMCall[CPHulkStatusData](ctx, c.c, http.MethodGet, "cphulk_status", cpanel.CombineArgs(extra...))
 }
 
+
 // CPHulkStatusData is a generated payload type.
 type CPHulkStatusData struct {
 	// Whether the cPHulk service is enabled.
@@ -94,7 +96,7 @@ type CPHulkStatusData struct {
 	IsEnabled int64 `json:"is_enabled"`
 
 	// The cPHulk service's name.
-	Service string `json:"service"`
+	Service   string `json:"service"`
 }
 
 // CreateCPHulkRecordArgs are the parameters of the WHM API 1 function `create_cphulk_record`.
@@ -150,32 +152,33 @@ func (c *Client) CreateCPHulkRecord(ctx context.Context, args *CreateCPHulkRecor
 	return cpanel.WHMCall[CreateCPHulkRecordData](ctx, c.c, http.MethodGet, "create_cphulk_record", args)
 }
 
+
 // CreateCPHulkRecordData is a generated payload type.
 type CreateCPHulkRecordData struct {
 	// The comment that you included when you called the function.
-	Comment string `json:"comment"`
+	Comment                  string `json:"comment"`
 
 	// The number of IP address blocks that the function deleted.
-	IPBlocksRemoved int64 `json:"ip_blocks_removed"`
+	IPBlocksRemoved          int64 `json:"ip_blocks_removed"`
 
 	// An array of IP addresses that the function added to the list.
-	IPsAdded []IPAddress `json:"ips_added"`
+	IPsAdded                 []IPAddress `json:"ips_added"`
 
 	// A object of IP addresses that the system failed to add to the list. This object contains one or more IP address returns.
-	IPsFailed map[string]string `json:"ips_failed"`
+	IPsFailed                map[string]string `json:"ips_failed"`
 
 	// The number of `iptables` temporary block rules that the function deleted.
-	IptableBansRemoved int64 `json:"iptable_bans_removed"`
+	IptableBansRemoved       int64 `json:"iptable_bans_removed"`
 
 	// The cPHulk list's name.
 	// * `black`
 	// * `white`
 	//
 	// Possible values: `black`, `white`.
-	ListName string `json:"list_name"`
+	ListName                 string `json:"list_name"`
 
 	// The IP address of the user or system that requested the addition.
-	RequesterIP string `json:"requester_ip"`
+	RequesterIP              string `json:"requester_ip"`
 
 	// Whether the requester's IP address exists on cPHulk's whitelist.
 	// * `1` - Whitelisted.
@@ -236,23 +239,24 @@ func (c *Client) DeleteCPHulkRecord(ctx context.Context, args *DeleteCPHulkRecor
 	return cpanel.WHMCall[DeleteCPHulkRecordData](ctx, c.c, http.MethodGet, "delete_cphulk_record", args)
 }
 
+
 // DeleteCPHulkRecordData is a generated payload type.
 type DeleteCPHulkRecordData struct {
 	// Information about IP addresses that the system failed to add to the list.
-	IPsFailed map[string]string `json:"ips_failed"`
+	IPsFailed                map[string]string `json:"ips_failed"`
 
 	// The IP addresses that the function removed from the list.
-	IPsRemoved []string `json:"ips_removed"`
+	IPsRemoved               []string `json:"ips_removed"`
 
 	// The cPHulk list's name.
 	// * `black`
 	// * `white`
 	//
 	// Possible values: `black`, `white`.
-	ListName string `json:"list_name"`
+	ListName                 string `json:"list_name"`
 
 	// The requester's IP address.
-	RequesterIP string `json:"requester_ip"`
+	RequesterIP              string `json:"requester_ip"`
 
 	// Whether the requester's IP address exists on cPHulk's whitelist.
 	// * `1` - Whitelisted.
@@ -273,6 +277,7 @@ func (c *Client) DisableCPHulk(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "disable_cphulk", cpanel.CombineArgs(extra...))
 }
 
+
 // EnableCPHulk calls the WHM API 1 function `enable_cphulk` — Enable login security
 //
 // This function enables the cPHulk service.
@@ -283,6 +288,7 @@ func (c *Client) DisableCPHulk(ctx context.Context, extra ...cpanel.Args) (*cpan
 func (c *Client) EnableCPHulk(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "enable_cphulk", cpanel.CombineArgs(extra...))
 }
+
 
 // FlushCPHulkLoginHistory calls the WHM API 1 function `flush_cphulk_login_history` — Remove all login security records
 //
@@ -295,6 +301,7 @@ func (c *Client) EnableCPHulk(ctx context.Context, extra ...cpanel.Args) (*cpane
 func (c *Client) FlushCPHulkLoginHistory(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[FlushCPHulkLoginHistoryData], error) {
 	return cpanel.WHMCall[FlushCPHulkLoginHistoryData](ctx, c.c, http.MethodGet, "flush_cphulk_login_history", cpanel.CombineArgs(extra...))
 }
+
 
 // FlushCPHulkLoginHistoryData is a generated payload type.
 type FlushCPHulkLoginHistoryData struct {
@@ -329,13 +336,14 @@ func (c *Client) FlushCPHulkLoginHistoryForIPs(ctx context.Context, args *FlushC
 	return cpanel.WHMCall[FlushCPHulkLoginHistoryForIPsData](ctx, c.c, http.MethodGet, "flush_cphulk_login_history_for_ips", args)
 }
 
+
 // FlushCPHulkLoginHistoryForIPsData is a generated payload type.
 type FlushCPHulkLoginHistoryForIPsData struct {
 	// The number of `iptables` temporary block rules that the function deleted.
 	IptableBansRemoved int64 `json:"iptable_bans_removed"`
 
 	// The number of entries that the function deleted.
-	RecordsRemoved int64 `json:"records_removed"`
+	RecordsRemoved     int64 `json:"records_removed"`
 }
 
 // GetCountriesWithKnownIPRanges calls the WHM API 1 function `get_countries_with_known_ip_ranges` — Return login security country codes
@@ -348,6 +356,7 @@ type FlushCPHulkLoginHistoryForIPsData struct {
 func (c *Client) GetCountriesWithKnownIPRanges(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetCountriesWithKnownIPRangesData], error) {
 	return cpanel.WHMCall[GetCountriesWithKnownIPRangesData](ctx, c.c, http.MethodGet, "get_countries_with_known_ip_ranges", cpanel.CombineArgs(extra...))
 }
+
 
 // GetCountriesWithKnownIPRangesDataCountriesItem is a generated payload type.
 type GetCountriesWithKnownIPRangesDataCountriesItem struct {
@@ -377,22 +386,23 @@ func (c *Client) GetCPHulkBrutes(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[GetCPHulkBrutesData](ctx, c.c, http.MethodGet, "get_cphulk_brutes", cpanel.CombineArgs(extra...))
 }
 
+
 // GetCPHulkBrutesDataBrutesItem is a generated payload type.
 type GetCPHulkBrutesDataBrutesItem struct {
 	// When the login request will time out.
-	Exptime string `json:"exptime"`
+	Exptime   string `json:"exptime"`
 
 	// The IP address of the login attempt.
-	IP string `json:"ip"`
+	IP        string `json:"ip"`
 
 	// When the login attempt occurred.
 	LoginTime string `json:"logintime"`
 
 	// The login entry's notes.
-	Notes string `json:"notes"`
+	Notes     string `json:"notes"`
 
 	// The number of minutes that remain before cPHulk removes the block.
-	Timeleft int64 `json:"timeleft"`
+	Timeleft  int64 `json:"timeleft"`
 }
 
 // GetCPHulkBrutesData is a generated payload type.
@@ -412,22 +422,23 @@ func (c *Client) GetCPHulkExcessiveBrutes(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[GetCPHulkExcessiveBrutesData](ctx, c.c, http.MethodGet, "get_cphulk_excessive_brutes", cpanel.CombineArgs(extra...))
 }
 
+
 // GetCPHulkExcessiveBrutesDataExcessiveBrutesItem is a generated payload type.
 type GetCPHulkExcessiveBrutesDataExcessiveBrutesItem struct {
 	// When the login request will time out.
-	Exptime string `json:"exptime"`
+	Exptime   string `json:"exptime"`
 
 	// The IP address of the login attempt.
-	IP string `json:"ip"`
+	IP        string `json:"ip"`
 
 	// When the login attempt occurred.
 	LoginTime string `json:"logintime"`
 
 	// The login entry's notes.
-	Notes string `json:"notes"`
+	Notes     string `json:"notes"`
 
 	// The number of minutes that remain before cPHulk removes the block.
-	Timeleft float64 `json:"timeleft"`
+	Timeleft  float64 `json:"timeleft"`
 }
 
 // GetCPHulkExcessiveBrutesData is a generated payload type.
@@ -447,28 +458,29 @@ func (c *Client) GetCPHulkFailedLogins(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[GetCPHulkFailedLoginsData](ctx, c.c, http.MethodGet, "get_cphulk_failed_logins", cpanel.CombineArgs(extra...))
 }
 
+
 // GetCPHulkFailedLoginsDataFailedLoginsItem is a generated payload type.
 type GetCPHulkFailedLoginsDataFailedLoginsItem struct {
 	// The name of the authentication service that the login attempt used.
 	AuthService string `json:"authservice"`
 
 	// When the login request will time out.
-	Exptime string `json:"exptime"`
+	Exptime     string `json:"exptime"`
 
 	// The login attempt's IP address.
-	IP string `json:"ip"`
+	IP          string `json:"ip"`
 
 	// When the login attempt occurred.
-	LoginTime string `json:"logintime"`
+	LoginTime   string `json:"logintime"`
 
 	// The login attempt's service. name.
-	Service string `json:"service"`
+	Service     string `json:"service"`
 
 	// The number of minutes that remain before cPHulk removes the block.
-	Timeleft int64 `json:"timeleft"`
+	Timeleft    int64 `json:"timeleft"`
 
 	// The login attempt's username.
-	User string `json:"user"`
+	User        string `json:"user"`
 }
 
 // GetCPHulkFailedLoginsData is a generated payload type.
@@ -488,28 +500,29 @@ func (c *Client) GetCPHulkUserBrutes(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.WHMCall[GetCPHulkUserBrutesData](ctx, c.c, http.MethodGet, "get_cphulk_user_brutes", cpanel.CombineArgs(extra...))
 }
 
+
 // GetCPHulkUserBrutesDataUserBrutesItem is a generated payload type.
 type GetCPHulkUserBrutesDataUserBrutesItem struct {
 	// The authentication service on which the login attempt occurred.
 	AuthService string `json:"authservice"`
 
 	// When the login request will time out.
-	Exptime string `json:"exptime"`
+	Exptime     string `json:"exptime"`
 
 	// The IP address of the login attempt.
-	IP string `json:"ip"`
+	IP          string `json:"ip"`
 
 	// When the login attempt occurred.
-	LoginTime string `json:"logintime"`
+	LoginTime   string `json:"logintime"`
 
 	// The name of the service on which the login attempt occurred.
-	Service string `json:"service"`
+	Service     string `json:"service"`
 
 	// The number of minutes that remain before cPHulk removes the block.
-	Timeleft int64 `json:"timeleft"`
+	Timeleft    int64 `json:"timeleft"`
 
 	// The username for which login attempt occurred.
-	User string `json:"user"`
+	User        string `json:"user"`
 }
 
 // GetCPHulkUserBrutesData is a generated payload type.
@@ -529,6 +542,7 @@ func (c *Client) LoadCPHulkConfig(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[LoadCPHulkConfigData](ctx, c.c, http.MethodGet, "load_cphulk_config", cpanel.CombineArgs(extra...))
 }
 
+
 // An object that contains cPHulk's current settings.
 type LoadCPHulkConfigDataCPHulkConfig struct {
 	// Whether to use the server's firewall to block brute force attacks.
@@ -536,7 +550,7 @@ type LoadCPHulkConfigDataCPHulkConfig struct {
 	// * `0` - Don't block.
 	//
 	// Possible values: `0`, `1`.
-	BlockBruteForceWithFirewall int64 `json:"block_brute_force_with_firewall"`
+	BlockBruteForceWithFirewall          int64 `json:"block_brute_force_with_firewall"`
 
 	// Whether to use the server's firewall to block excessive brute force attacks.
 	// * `1` - Block.
@@ -546,100 +560,100 @@ type LoadCPHulkConfigDataCPHulkConfig struct {
 	BlockExcessiveBruteForceWithFirewall int64 `json:"block_excessive_brute_force_with_firewall"`
 
 	// The number of minutes during which cPHulk measures all login attempts to a specific user's account.
-	BruteForcePeriodMins int64 `json:"brute_force_period_mins"`
+	BruteForcePeriodMins                 int64 `json:"brute_force_period_mins"`
 
 	// The number of seconds over which cPHulk measures all login attempts to a specific user's account.
-	BruteForcePeriodSec int64 `json:"brute_force_period_sec"`
+	BruteForcePeriodSec                  int64 `json:"brute_force_period_sec"`
 
 	// Whether to add temporary IP bans via the server's firewall.
 	// * `1` - Add.
 	// * `0` - Don't add.
 	//
 	// Possible values: `0`, `1`.
-	CanTempBanFirewall int64 `json:"can_temp_ban_firewall"`
+	CanTempBanFirewall                   int64 `json:"can_temp_ban_firewall"`
 
 	// The command to run when the system detects a brute force attack. A valid BASH command.
-	CommandToRunOnBruteForce string `json:"command_to_run_on_brute_force"`
+	CommandToRunOnBruteForce             string `json:"command_to_run_on_brute_force"`
 
 	// The command to run when the system detects an excessive brute force attack. A valid BASH command.
-	CommandToRunOnExcessiveBruteForce string `json:"command_to_run_on_excessive_brute_force"`
+	CommandToRunOnExcessiveBruteForce    string `json:"command_to_run_on_excessive_brute_force"`
 
 	// Whether cPHulk will track failed login attempts via IP addresses.
 	// * `1` - Track.
 	// * `0` - Don't track.
 	//
 	// Possible values: `0`, `1`.
-	IPBasedProtection int64 `json:"ip_based_protection"`
+	IPBasedProtection                    int64 `json:"ip_based_protection"`
 
 	// The number of minutes during which cPHulk measures an attacker's login attempts.
-	IPBruteForcePeriodMins int64 `json:"ip_brute_force_period_mins"`
+	IPBruteForcePeriodMins               int64 `json:"ip_brute_force_period_mins"`
 
 	// The number of seconds during which cPHulk measures an attacker's login attempts.
-	IPBruteForcePeriodSec int64 `json:"ip_brute_force_period_sec"`
+	IPBruteForcePeriodSec                int64 `json:"ip_brute_force_period_sec"`
 
 	// Whether the cPHulk service is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEnabled int64 `json:"is_enabled"`
+	IsEnabled                            int64 `json:"is_enabled"`
 
 	// The number of minutes during which cPHulk counts failed logins against a user.
-	LookbackPeriodMin int64 `json:"lookback_period_min"`
+	LookbackPeriodMin                    int64 `json:"lookback_period_min"`
 
 	// The number of seconds during which cPHulk counts failed logins against a user.
-	LookbackTime int64 `json:"lookback_time"`
+	LookbackTime                         int64 `json:"lookback_time"`
 
 	// The maximum number of failures that cPHulk will allow per account from a specific IP address before the system locks out that address for two weeks.
-	MarkAsBrute int64 `json:"mark_as_brute"`
+	MarkAsBrute                          int64 `json:"mark_as_brute"`
 
 	// The maximum number of failures that cPHulk will allow per account within the defined time range.
-	MaxFailures int64 `json:"max_failures"`
+	MaxFailures                          int64 `json:"max_failures"`
 
 	// The maximum number of failures that cPHulk will allow per account from a specific IP address within the defined time range.
-	MaxFailuresByip int64 `json:"max_failures_byip"`
+	MaxFailuresByip                      int64 `json:"max_failures_byip"`
 
 	// Whether cPHulk will send a notification when it detects a brute force attack.
 	// * `1` - Send.
 	// * `0` - Do not send.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnBrute int64 `json:"notify_on_brute"`
+	NotifyOnBrute                        int64 `json:"notify_on_brute"`
 
 	// Whether cPHulk will send a notification when the root user successfully logs in from an IP address that is not on the whitelist.
 	// * `1` - Send.
 	// * `0` - Do not send.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnRootLogin int64 `json:"notify_on_root_login"`
+	NotifyOnRootLogin                    int64 `json:"notify_on_root_login"`
 
 	// Whether cPHulk will send a notification when the root user successfully logs in from an IP address in the same netblock.
 	// * `1` - Send.
 	// * `0` - Do not send.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnRootLoginForKnownNetblock int64 `json:"notify_on_root_login_for_known_netblock"`
+	NotifyOnRootLoginForKnownNetblock    int64 `json:"notify_on_root_login_for_known_netblock"`
 
 	// Whether cPHulk will track failed logins by username.
 	// * `1` - Track.
 	// * `0` - Don't track.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtection int64 `json:"username_based_protection"`
+	UsernameBasedProtection              int64 `json:"username_based_protection"`
 
 	// Whether cPHulk will track the root user's failed logins.
 	// * `1` - Track.
 	// * `0` - Don't track.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtectionForRoot int64 `json:"username_based_protection_for_root"`
+	UsernameBasedProtectionForRoot       int64 `json:"username_based_protection_for_root"`
 
 	// Whether cPHulk will only track failed logins for requests originating locally.
 	// * `1` - Track.
 	// * `0` - Don't track.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtectionLocalOrigin int64 `json:"username_based_protection_local_origin"`
+	UsernameBasedProtectionLocalOrigin   int64 `json:"username_based_protection_local_origin"`
 }
 
 // LoadCPHulkConfigData is a generated payload type.
@@ -687,20 +701,21 @@ func (c *Client) ReadCPHulkRecords(ctx context.Context, args *ReadCPHulkRecordsA
 	return cpanel.WHMCall[ReadCPHulkRecordsData](ctx, c.c, http.MethodGet, "read_cphulk_records", args)
 }
 
+
 // ReadCPHulkRecordsData is a generated payload type.
 type ReadCPHulkRecordsData struct {
 	// IP address information.
-	IPsInList map[string]string `json:"ips_in_list"`
+	IPsInList                map[string]string `json:"ips_in_list"`
 
 	// The cPHulk list's name.
 	// * `black`
 	// * `white`
 	//
 	// Possible values: `black`, `white`.
-	ListName string `json:"list_name"`
+	ListName                 string `json:"list_name"`
 
 	// The requester's IP address.
-	RequesterIP string `json:"requester_ip"`
+	RequesterIP              string `json:"requester_ip"`
 
 	// Whether the requester's IP address exists on cPHulk's whitelist.
 	// * `1` - The IP address exists on the whitelist.
@@ -719,17 +734,17 @@ type ReadCPHulkRecordsData struct {
 	// This return **only** appears if `sshd`’s `UseDNS` setting is enabled. Because `UseDNS` and cPHulk are incompatible, the system disables `UseDNS` when you enable cPHulk.
 	// * `1` - You must restart `sshd`.
 	// * `0` - The s …
-	RestartSSH int64 `json:"restart_ssh"`
+	RestartSSH               int64 `json:"restart_ssh"`
 
 	// A localized warning message, if the requester's IP address does not exist on the whitelist.
-	WarningIP string `json:"warning_ip"`
+	WarningIP                string `json:"warning_ip"`
 
 	// A message that explains why you must restart `sshd`.
 	//
 	// **Note:**
 	//
 	//  This return **only** appears if the `restart_ssh` return's value is `1`.
-	WarningSSH string `json:"warning_ssh"`
+	WarningSSH               string `json:"warning_ssh"`
 }
 
 // SaveCPHulkConfigArgs are the parameters of the WHM API 1 function `save_cphulk_config`.
@@ -899,6 +914,7 @@ func (c *Client) SaveCPHulkConfig(ctx context.Context, args *SaveCPHulkConfigArg
 	return cpanel.WHMCall[SaveCPHulkConfigData](ctx, c.c, http.MethodGet, "save_cphulk_config", args)
 }
 
+
 // An object containing cPHulk configuration settings.
 type SaveCPHulkConfigDataCPHulkConfig struct {
 	// Whether to use cPanel & WHM's firewall to block brute force attacks.
@@ -906,7 +922,7 @@ type SaveCPHulkConfigDataCPHulkConfig struct {
 	// * `0` - Do **not** use the firewall.
 	//
 	// Possible values: `0`, `1`.
-	BlockBruteForceWithFirewall int64 `json:"block_brute_force_with_firewall"`
+	BlockBruteForceWithFirewall          int64 `json:"block_brute_force_with_firewall"`
 
 	// Whether to use cPanel & WHM's firewall to block excessive brute force attacks.
 	// * `1` - Use the firewall.
@@ -916,10 +932,10 @@ type SaveCPHulkConfigDataCPHulkConfig struct {
 	BlockExcessiveBruteForceWithFirewall int64 `json:"block_excessive_brute_force_with_firewall"`
 
 	// The number of minutes over which cPHulk measures all login attempts to a specific user's account.
-	BruteForcePeriodMins int64 `json:"brute_force_period_mins"`
+	BruteForcePeriodMins                 int64 `json:"brute_force_period_mins"`
 
 	// The number of seconds over which cPHulk measures all login attempts to a specific user's account.
-	BruteForcePeriodSec int64 `json:"brute_force_period_sec"`
+	BruteForcePeriodSec                  int64 `json:"brute_force_period_sec"`
 
 	// Whether the system firewall can apply temporary IP address bans.
 	// * `1` - Can temporarily apply IP address bans.
@@ -930,90 +946,90 @@ type SaveCPHulkConfigDataCPHulkConfig struct {
 	// If this return's value is `0`, then the `ip_based_protection` parameter is **not** available, which means that you cannot use the following parameters:
 	// * `block_brute_force_with_firewall`
 	// * `block_excessive_brute_force_wit …
-	CanTempBanFirewall int64 `json:"can_temp_ban_firewall"`
+	CanTempBanFirewall                   int64 `json:"can_temp_ban_firewall"`
 
 	// The command to run when an IP address triggers brute force protection.
-	CommandToRunOnBruteForce string `json:"command_to_run_on_brute_force"`
+	CommandToRunOnBruteForce             string `json:"command_to_run_on_brute_force"`
 
 	// The command to run when the system blocks an IP address blocked for a one day period.
-	CommandToRunOnExcessiveBruteForce string `json:"command_to_run_on_excessive_brute_force"`
+	CommandToRunOnExcessiveBruteForce    string `json:"command_to_run_on_excessive_brute_force"`
 
 	// Whether IP address-based protection on all requests is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IPBasedProtection int64 `json:"ip_based_protection"`
+	IPBasedProtection                    int64 `json:"ip_based_protection"`
 
 	// The number of minutes in which cPHulk measures an attacker's login attempts.
-	IPBruteForcePeriodMins int64 `json:"ip_brute_force_period_mins"`
+	IPBruteForcePeriodMins               int64 `json:"ip_brute_force_period_mins"`
 
 	// The number of seconds in which cPHulk measures an attacker's login attempts.
-	IPBruteForcePeriodSec int64 `json:"ip_brute_force_period_sec"`
+	IPBruteForcePeriodSec                int64 `json:"ip_brute_force_period_sec"`
 
 	// Whether the cPHulk service is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEnabled int64 `json:"is_enabled"`
+	IsEnabled                            int64 `json:"is_enabled"`
 
 	// The number of minutes over which cPHulk counts failed logins against a user.
-	LookbackPeriodMin int64 `json:"lookback_period_min"`
+	LookbackPeriodMin                    int64 `json:"lookback_period_min"`
 
 	// The number of seconds over which cPHulk counts failed logins against a user.
-	LookbackTime int64 `json:"lookback_time"`
+	LookbackTime                         int64 `json:"lookback_time"`
 
 	// The maximum number of failures from a specific IP address before cPHulk blocks that address for a two-week period.
-	MarkAsBrute int64 `json:"mark_as_brute"`
+	MarkAsBrute                          int64 `json:"mark_as_brute"`
 
 	// The maximum number of failures that cPHulk allows per account within the defined time range.
-	MaxFailures int64 `json:"max_failures"`
+	MaxFailures                          int64 `json:"max_failures"`
 
 	// The maximum number of failures from a specific IP address before cPHulk locks out that address.
-	MaxFailuresByip int64 `json:"max_failures_byip"`
+	MaxFailuresByip                      int64 `json:"max_failures_byip"`
 
 	// Whether cPHulk will send a notification when it detects a brute force attack.
 	// * `1` - Send the notification.
 	// * `0` - Do **not** send the notification.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnBrute int64 `json:"notify_on_brute"`
+	NotifyOnBrute                        int64 `json:"notify_on_brute"`
 
 	// Whether cPHulk will send a notification when the `root` user successfully logs in from an IP address that is not on the whitelist.
 	// * `1` - Send the notification.
 	// * `0` - Do **not** send the notification.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnRootLogin int64 `json:"notify_on_root_login"`
+	NotifyOnRootLogin                    int64 `json:"notify_on_root_login"`
 
 	// Whether cPHulk sends a notification upon successful `root` login when the IP address is not on the whitelist, but from a known netblock.
 	// * `1` - Send the notification.
 	// * `0` - Do **not** send the notification.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnRootLoginForKnownNetblock int64 `json:"notify_on_root_login_for_known_netblock"`
+	NotifyOnRootLoginForKnownNetblock    int64 `json:"notify_on_root_login_for_known_netblock"`
 
 	// Whether username-based protection on all requests is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtection int64 `json:"username_based_protection"`
+	UsernameBasedProtection              int64 `json:"username_based_protection"`
 
 	// Whether username-based protection can lock out the `root` user.
 	// * `1` - Allowed.
 	// * `0` - **Not** allowed.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtectionForRoot int64 `json:"username_based_protection_for_root"`
+	UsernameBasedProtectionForRoot       int64 `json:"username_based_protection_for_root"`
 
 	// Whether username-based protection **only** on requests that originate from a local IP address.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtectionLocalOrigin int64 `json:"username_based_protection_local_origin"`
+	UsernameBasedProtectionLocalOrigin   int64 `json:"username_based_protection_local_origin"`
 }
 
 // SaveCPHulkConfigData is a generated payload type.
@@ -1027,14 +1043,14 @@ type SaveCPHulkConfigData struct {
 	//
 	//  This return **only** appears if the `UseDNS` setting is `yes` in the `/etc/ssh/sshd_config` file. Because UseDNS and cPHulk are incompatible, the system sets the `UseDNS` setting to `no` when you enable cPHulk.
 	// * `1` - Disabled UseDNS in the …
-	RestartSSH int64 `json:"restart_ssh"`
+	RestartSSH   int64 `json:"restart_ssh"`
 
 	// A warning message about the restart.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value if the `restart_ssh` return's value is `1`.
-	Warning *string `json:"warning"`
+	Warning      *string `json:"warning"`
 }
 
 // SetCPHulkConfigKeyArgs are the parameters of the WHM API 1 function `set_cphulk_config_key`.
@@ -1082,6 +1098,7 @@ func (c *Client) SetCPHulkConfigKey(ctx context.Context, args *SetCPHulkConfigKe
 	return cpanel.WHMCall[SetCPHulkConfigKeyData](ctx, c.c, http.MethodGet, "set_cphulk_config_key", args)
 }
 
+
 // cPHulk configuration settings.
 type SetCPHulkConfigKeyDataCPHulkConfig struct {
 	// Whether to use cPanel & WHM's firewall to block brute force attacks.
@@ -1089,7 +1106,7 @@ type SetCPHulkConfigKeyDataCPHulkConfig struct {
 	// * `0` - Do **not** use the firewall.
 	//
 	// Possible values: `0`, `1`.
-	BlockBruteForceWithFirewall int64 `json:"block_brute_force_with_firewall"`
+	BlockBruteForceWithFirewall          int64 `json:"block_brute_force_with_firewall"`
 
 	// Whether to use cPanel & WHM's firewall to block excessive brute force attacks.
 	// * `1` - Use the firewall.
@@ -1099,10 +1116,10 @@ type SetCPHulkConfigKeyDataCPHulkConfig struct {
 	BlockExcessiveBruteForceWithFirewall int64 `json:"block_excessive_brute_force_with_firewall"`
 
 	// The number of minutes over which cPHulk measures all login attempts to a specific user's account.
-	BruteForcePeriodMins int64 `json:"brute_force_period_mins"`
+	BruteForcePeriodMins                 int64 `json:"brute_force_period_mins"`
 
 	// The number of seconds over which cPHulk measures all login attempts to a specific user's account.
-	BruteForcePeriodSec int64 `json:"brute_force_period_sec"`
+	BruteForcePeriodSec                  int64 `json:"brute_force_period_sec"`
 
 	// Whether the system firewall can apply temporary IP address bans.
 	// * `1` - Can temporarily apply IP address bans.
@@ -1113,100 +1130,100 @@ type SetCPHulkConfigKeyDataCPHulkConfig struct {
 	// If this return's value is 0, then the `ip_based_protection parameter` is **not** available, which means that you cannot use the following parameters:
 	// * `block_brute_force_with_firewall`
 	// * `block_excessive_brute_force_with_fire …
-	CanTempBanFirewall int64 `json:"can_temp_ban_firewall"`
+	CanTempBanFirewall                   int64 `json:"can_temp_ban_firewall"`
 
 	// The command to run when an IP address triggers brute force protection.
 	// - A valid command.
 	// - An empty string.
-	CommandToRunOnBruteForce string `json:"command_to_run_on_brute_force"`
+	CommandToRunOnBruteForce             string `json:"command_to_run_on_brute_force"`
 
 	// The command to run when the system blocks an IP address blocked for a one day period.
 	// * A valid command.
 	// * An empty string.
-	CommandToRunOnExcessiveBruteForce string `json:"command_to_run_on_excessive_brute_force"`
+	CommandToRunOnExcessiveBruteForce    string `json:"command_to_run_on_excessive_brute_force"`
 
 	// The countries to blacklist. A comma-separated list of valid ISO 3166-1 alpha-2 country codes. This value may be empty.
-	CountryBlacklist string `json:"country_blacklist"`
+	CountryBlacklist                     string `json:"country_blacklist"`
 
 	// The countries to whitelist. A comma-separated list of valid ISO 3166-1 alpha-2 country codes. This value may be empty.
-	CountryWhitelist string `json:"country_whitelist"`
+	CountryWhitelist                     string `json:"country_whitelist"`
 
 	// Whether IP address-based protection on all requests is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IPBasedProtection int64 `json:"ip_based_protection"`
+	IPBasedProtection                    int64 `json:"ip_based_protection"`
 
 	// The number of minutes in which cPHulk measures an attacker's login attempts.
-	IPBruteForcePeriodMins int64 `json:"ip_brute_force_period_mins"`
+	IPBruteForcePeriodMins               int64 `json:"ip_brute_force_period_mins"`
 
 	// The number of seconds in which cPHulk measures an attacker's login attempts.
-	IPBruteForcePeriodSec int64 `json:"ip_brute_force_period_sec"`
+	IPBruteForcePeriodSec                int64 `json:"ip_brute_force_period_sec"`
 
 	// Whether the cPHulk service is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEnabled int64 `json:"is_enabled"`
+	IsEnabled                            int64 `json:"is_enabled"`
 
 	// The number of minutes over which cPHulk counts failed logins against a user.
-	LookbackPeriodMin int64 `json:"lookback_period_min"`
+	LookbackPeriodMin                    int64 `json:"lookback_period_min"`
 
 	// The number of seconds over which cPHulk counts failed logins against a user.
-	LookbackTime int64 `json:"lookback_time"`
+	LookbackTime                         int64 `json:"lookback_time"`
 
 	// The maximum number of failures from a specific IP address before cPHulk blocks that address for a two-week period.
-	MarkAsBrute int64 `json:"mark_as_brute"`
+	MarkAsBrute                          int64 `json:"mark_as_brute"`
 
 	// The maximum number of failures that cPHulk allows per account within the defined time range.
-	MaxFailures int64 `json:"max_failures"`
+	MaxFailures                          int64 `json:"max_failures"`
 
 	// The maximum number of failures from a specific IP address before cPHulk locks out that address.
-	MaxFailuresByip int64 `json:"max_failures_byip"`
+	MaxFailuresByip                      int64 `json:"max_failures_byip"`
 
 	// Whether cPHulk will send a notification when it detects a brute force attack.
 	// * `1` - Send the notification.
 	// * `0` - Do **not** send the notification.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnBrute int64 `json:"notify_on_brute"`
+	NotifyOnBrute                        int64 `json:"notify_on_brute"`
 
 	// Whether cPHulk will send a notification when the root user successfully logs in from an IP address that is **not** on the whitelist.
 	// * `1` - Send the notification.
 	// * `0` - Do **not** send the notification.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnRootLogin int64 `json:"notify_on_root_login"`
+	NotifyOnRootLogin                    int64 `json:"notify_on_root_login"`
 
 	// Whether cPHulk sends a notification upon successful root login when the IP address is **not** on the whitelist, but from a known netblock
 	// * `1` - Send the notification.
 	// * `0` - Do **not** send the notification.
 	//
 	// Possible values: `0`, `1`.
-	NotifyOnRootLoginForKnownNetblock int64 `json:"notify_on_root_login_for_known_netblock"`
+	NotifyOnRootLoginForKnownNetblock    int64 `json:"notify_on_root_login_for_known_netblock"`
 
 	// Whether username-based protection on all requests is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtection int64 `json:"username_based_protection"`
+	UsernameBasedProtection              int64 `json:"username_based_protection"`
 
 	// Whether username-based protection can lock out the root user.
 	// * `1` - Allowed.
 	// * `0` - Not allowed.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtectionForRoot int64 `json:"username_based_protection_for_root"`
+	UsernameBasedProtectionForRoot       int64 `json:"username_based_protection_for_root"`
 
 	// Whether username-based protection only on requests that originate from a local IP address.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UsernameBasedProtectionLocalOrigin int64 `json:"username_based_protection_local_origin"`
+	UsernameBasedProtectionLocalOrigin   int64 `json:"username_based_protection_local_origin"`
 }
 
 // SetCPHulkConfigKeyData is a generated payload type.

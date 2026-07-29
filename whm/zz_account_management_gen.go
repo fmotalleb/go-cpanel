@@ -30,6 +30,7 @@ func (c *Client) GetHomedirRoots(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[GetHomedirRootsData](ctx, c.c, http.MethodGet, "get_homedir_roots", cpanel.CombineArgs(extra...))
 }
 
+
 // GetHomedirRootsDataPayloadItem is a generated payload type.
 type GetHomedirRootsDataPayloadItem struct {
 	// directory where the system can store users' home directories. A valid directory path.
@@ -52,6 +53,7 @@ type GetHomedirRootsData struct {
 func (c *Client) ListUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListUsersData], error) {
 	return cpanel.WHMCall[ListUsersData](ctx, c.c, http.MethodGet, "list_users", cpanel.CombineArgs(extra...))
 }
+
 
 // ListUsersData is a generated payload type.
 type ListUsersData struct {
@@ -96,6 +98,7 @@ func (c *Client) RemoveAcct(ctx context.Context, args *RemoveAcctArgs) (*cpanel.
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "removeacct", args)
 }
 
+
 // SetPrimaryDomainDocRootArgs are the parameters of the WHM API 1 function `set_primary_domain_docroot`.
 type SetPrimaryDomainDocRootArgs struct {
 	// The new document root as a path relative to the account's home
@@ -123,16 +126,16 @@ type SetPrimaryDomainDocRootArgs struct {
 //
 // **Important:**
 //
-//   - The target directory must already exist before you call this function.
-//     The API function does not create it.
-//   - This function does **not** move any files. You must ensure that the files
-//     exist in the new path when you call this function.
-//   - Any parked domains (`ServerAlias` entries) on the affected domain will
-//     inherit the new document root.
-//   - AutoSSL HTTP-01 renewals will fail if the new document root is empty
-//     or missing at renewal time.
-//   - To revert a document root change, call this function again with the
-//     original path.
+// - The target directory must already exist before you call this function.
+//   The API function does not create it.
+// - This function does **not** move any files. You must ensure that the files
+//   exist in the new path when you call this function.
+// - Any parked domains (`ServerAlias` entries) on the affected domain will
+//   inherit the new document root.
+// - AutoSSL HTTP-01 renewals will fail if the new document root is empty
+//   or missing at renewal time.
+// - To revert a document root change, call this function again with the
+//   original path.
 //
 // Available since cPanel & WHM version 11.
 //
@@ -140,6 +143,7 @@ type SetPrimaryDomainDocRootArgs struct {
 func (c *Client) SetPrimaryDomainDocRoot(ctx context.Context, args *SetPrimaryDomainDocRootArgs) (*cpanel.WHMResult[SetPrimaryDomainDocRootData], error) {
 	return cpanel.WHMCall[SetPrimaryDomainDocRootData](ctx, c.c, http.MethodGet, "set_primary_domain_docroot", args)
 }
+
 
 // SetPrimaryDomainDocRootData is a generated payload type.
 type SetPrimaryDomainDocRootData struct {

@@ -33,37 +33,38 @@ func (c *BrandingClient) GetApplicationInformation(ctx context.Context, args *Br
 	return cpanel.UAPICall[BrandingGetApplicationInformationData](ctx, c.c, http.MethodGet, "Branding", "get_application_information", args)
 }
 
+
 // BrandingGetApplicationInformationData is a generated payload type.
 type BrandingGetApplicationInformationData struct {
 	// The application's feature name. The `app_key` parameter's value.
-	Feature string `json:"feature"`
+	Feature    string `json:"feature"`
 
 	// The application's icon's filename.
-	File string `json:"file"`
+	File       string `json:"file"`
 
 	// The application's group.
-	Group string `json:"group"`
+	Group      string `json:"group"`
 
 	// The application's icon's height, in pixels.
-	Height int64 `json:"height"`
+	Height     int64 `json:"height"`
 
 	// Conditional arguments that determine whether to display the item, if any exist. Conditional arguments that determine whether to display the item. For example, $isreseller indicates that the item only displays for reseller accounts. For more information, read our Guide to cPanel Variables documentation.
-	If2 string `json:"if"`
+	If2        string `json:"if"`
 
 	// The item's image type.
 	//  `icon` is the only possible value.
 	//
 	// Possible values: `icon`.
-	Imgtype string `json:"imgtype"`
+	Imgtype    string `json:"imgtype"`
 
 	// The application's display name.
-	Itemdesc string `json:"itemdesc"`
+	Itemdesc   string `json:"itemdesc"`
 
 	// The application's order in the `dynamicui.conf` file representing the application's display order in cPanel's Home interface. For example, the first item on the cPanel Home interface has an `itemorder` value of `1`.
-	ItemOrder int64 `json:"itemorder"`
+	ItemOrder  int64 `json:"itemorder"`
 
 	// The application's module. A valid module name.
-	Module string `json:"module"`
+	Module     string `json:"module"`
 
 	// One or more search terms. The application's icon will display when users enter these search terms in the Quick Find text box. A space-separated list of search terms.
 	SearchText string `json:"searchtext"`
@@ -72,19 +73,19 @@ type BrandingGetApplicationInformationData struct {
 	//  `img` is the only possible value .
 	//
 	// Possible values: `img`.
-	Subtype string `json:"subtype"`
+	Subtype    string `json:"subtype"`
 
 	// The application's type.
 	//  `image` is the only possible value.
 	//
 	// Possible values: `image`.
-	Type2 string `json:"type"`
+	Type2      string `json:"type"`
 
 	// The location to which the application's icon links. A valid filepath or URL.
-	URL string `json:"url"`
+	URL        string `json:"url"`
 
 	// The application's icon's width representing an image width, in pixels.
-	Width int64 `json:"width"`
+	Width      int64 `json:"width"`
 }
 
 // BrandingGetApplicationsArgs are the parameters of the UAPI function `Branding::get_applications`.
@@ -113,6 +114,7 @@ func (c *BrandingClient) GetApplications(ctx context.Context, args *BrandingGetA
 	return cpanel.UAPICall[map[string]BrandingGetApplicationsDataValue](ctx, c.c, http.MethodGet, "Branding", "get_applications", args)
 }
 
+
 // The feature's details. The function returns an object for each
 // application feature.
 //
@@ -122,16 +124,16 @@ func (c *BrandingClient) GetApplications(ctx context.Context, args *BrandingGetA
 // in the `app_keys` parameter.
 type BrandingGetApplicationsDataValue struct {
 	// The feature name. The item will **only** display if the cPanel user has access to this feature.
-	Feature string `json:"feature"`
+	Feature    string `json:"feature"`
 
 	// The application's icon's filename.
-	File string `json:"file"`
+	File       string `json:"file"`
 
 	// The item's group.
-	Group string `json:"group"`
+	Group      string `json:"group"`
 
 	// The application's icon's height, in pixels.
-	Height int64 `json:"height"`
+	Height     int64 `json:"height"`
 
 	// Conditional arguments that determine whether to display the item, if any exist.
 	//
@@ -141,20 +143,20 @@ type BrandingGetApplicationsDataValue struct {
 	// For more information, read our
 	// [Guide to cPanel Variables](https://go.cpanel.net/guidetovariables)
 	// documentation.
-	If2 string `json:"if"`
+	If2        string `json:"if"`
 
 	// The item's image type.
 	//
 	// * `icon` is the only possible value.
 	//
 	// Possible values: `icon`.
-	Imgtype string `json:"imgtype"`
+	Imgtype    string `json:"imgtype"`
 
 	// The `implements` value for the application. This corresponds to the `implements` field in the `dynamicui.conf` file.
 	ImplementS string `json:"implements"`
 
 	// The application's display name. value.
-	Itemdesc string `json:"itemdesc"`
+	Itemdesc   string `json:"itemdesc"`
 
 	// The application's order in the `dynamicui.conf`
 	// file, representing the application's display order in
@@ -162,7 +164,7 @@ type BrandingGetApplicationsDataValue struct {
 	//
 	// For example, the first item on the cPanel *Home* interface
 	// has an `itemorder` value of `1`.
-	ItemOrder int64 `json:"itemorder"`
+	ItemOrder  int64 `json:"itemorder"`
 
 	// A space-separated list of search terms. The item will display when users enter these search terms in the *Quick Find* textbox.
 	SearchText string `json:"searchtext"`
@@ -172,23 +174,23 @@ type BrandingGetApplicationsDataValue struct {
 	// * `img` is the only possible value.
 	//
 	// Possible values: `img`.
-	Subtype string `json:"subtype"`
+	Subtype    string `json:"subtype"`
 
 	// Conditional arguments that determine whether to display the item, if the touch file exists.
-	Touch string `json:"touch"`
+	Touch      string `json:"touch"`
 
 	// The application's type.
 	//
 	// * `image` is the only possible value.
 	//
 	// Possible values: `image`.
-	Type2 string `json:"type"`
+	Type2      string `json:"type"`
 
 	// The location to which the application's icon links.
-	URL string `json:"url"`
+	URL        string `json:"url"`
 
 	// The application's icon's width.
-	Width int64 `json:"width"`
+	Width      int64 `json:"width"`
 }
 
 // BrandingGetAvailableApplicationsArgs are the parameters of the UAPI function `Branding::get_available_applications`.
@@ -216,25 +218,26 @@ func (c *BrandingClient) GetAvailableApplications(ctx context.Context, args *Bra
 	return cpanel.UAPICall[BrandingGetAvailableApplicationsData](ctx, c.c, http.MethodGet, "Branding", "get_available_applications", args)
 }
 
+
 // BrandingGetAvailableApplicationsDataGroupsItemItemsItem is a generated payload type.
 type BrandingGetAvailableApplicationsDataGroupsItemItemsItem struct {
 	// The content of a tag in the application's link.
-	Acontent string `json:"acontent"`
+	Acontent       string `json:"acontent"`
 
 	// The application's icon in Base64 format.
 	Base64PngImage string `json:"base64_png_image"`
 
 	// A feature name. The icon **only** displays if the cPanel user can access this feature.
-	Feature string `json:"feature"`
+	Feature        string `json:"feature"`
 
 	// The application's icon's filename.
-	File string `json:"file"`
+	File           string `json:"file"`
 
 	// The item's group.
-	Group string `json:"group"`
+	Group          string `json:"group"`
 
 	// The application icon height, in pixels.
-	Height string `json:"height"`
+	Height         string `json:"height"`
 
 	// An expression containing cPanel variables that determine whether
 	// to display the item. The function **only** returns this value if
@@ -245,64 +248,64 @@ type BrandingGetAvailableApplicationsDataGroupsItemItemsItem struct {
 	//
 	// For more information, read our
 	// [Guide to cPanel Variables documentation](https://go.cpanel.net/guidetovariables).
-	If2 string `json:"if"`
+	If2            string `json:"if"`
 
 	// The item's image type.
 	//
 	// `icon` is the only possible value.
 	//
 	// Possible values: `icon`.
-	Imgtype string `json:"imgtype"`
+	Imgtype        string `json:"imgtype"`
 
 	// The `implements` name of the application. WHM API 1's `create_user_session` and `get_users_links` functions use this value.
-	ImplementS string `json:"implements"`
+	ImplementS     string `json:"implements"`
 
 	// The application's display name.
-	Itemdesc string `json:"itemdesc"`
+	Itemdesc       string `json:"itemdesc"`
 
 	// The application's order in the `dynamicui.conf` file. This value represents the application's display order in cPanel's *Home* interface.
-	ItemOrder string `json:"itemorder"`
+	ItemOrder      string `json:"itemorder"`
 
 	// The Perl module that the application requires.
-	Module string `json:"module"`
+	Module         string `json:"module"`
 
 	// JavaScript function that the browser calls before or instead of URL navigation.
-	Onclick string `json:"onclick"`
+	Onclick        string `json:"onclick"`
 
 	// One or more space-separated search terms.  The icon will display when users enter these search terms in the *Quick Find* text box in the cPanel interface.
-	SearchText string `json:"searchtext"`
+	SearchText     string `json:"searchtext"`
 
 	// The item's subtype.
 	//
 	// `img` is the only possible value.
 	//
 	// Possible values: `img`.
-	Subtype string `json:"subtype"`
+	Subtype        string `json:"subtype"`
 
 	// The target of the application's link.
-	Target string `json:"target"`
+	Target         string `json:"target"`
 
 	// Conditional arguments that determine whether to display the item, if a specified touch file exists.
-	Touch string `json:"touch"`
+	Touch          string `json:"touch"`
 
 	// The application's type.
 	//
 	// `image` is the only possible value.
 	//
 	// Possible values: `image`.
-	Type2 string `json:"type"`
+	Type2          string `json:"type"`
 
 	// The path to which the application's icon links.
-	URL string `json:"url"`
+	URL            string `json:"url"`
 
 	// The application's icon's width, in pixels.
-	Width string `json:"width"`
+	Width          string `json:"width"`
 }
 
 // BrandingGetAvailableApplicationsDataGroupsItem is a generated payload type.
 type BrandingGetAvailableApplicationsDataGroupsItem struct {
 	// The group's description.
-	Desc string `json:"desc"`
+	Desc  string `json:"desc"`
 
 	// The group's ID.
 	Group string `json:"group"`
@@ -317,10 +320,10 @@ type BrandingGetAvailableApplicationsData struct {
 	DefaultGroupOrder map[string]int64 `json:"default_group_order"`
 
 	// A list of group IDs, in the order in which the groups appear.
-	GroupOrder []string `json:"grouporder"`
+	GroupOrder        []string `json:"grouporder"`
 
 	// Information about each group in the cPanel interface.
-	Groups []BrandingGetAvailableApplicationsDataGroupsItem `json:"groups"`
+	Groups            []BrandingGetAvailableApplicationsDataGroupsItem `json:"groups"`
 
 	// An object mapping the `implements` names to Appkey values for applications in cPanel.
 	//
@@ -328,10 +331,10 @@ type BrandingGetAvailableApplicationsData struct {
 	// value `SSL_TLS_Status` maps to the Appkey value `tls_status`.
 	//
 	// **Note:** …
-	ImplementS map[string]string `json:"implements"`
+	ImplementS        map[string]string `json:"implements"`
 
 	// The applications and the order in which they appear in the cPanel interface.
-	Index map[string][]int64 `json:"index"`
+	Index             map[string][]int64 `json:"index"`
 }
 
 // BrandingGetInformationForApplicationsArgs are the parameters of the UAPI function `Branding::get_information_for_applications`.
@@ -370,6 +373,7 @@ func (c *BrandingClient) GetInformationForApplications(ctx context.Context, args
 	return cpanel.UAPICall[map[string]BrandingGetInformationForApplicationsDataValue](ctx, c.c, http.MethodGet, "Branding", "get_information_for_applications", args)
 }
 
+
 // An object containing the application's conditions.
 type BrandingGetInformationForApplicationsDataValueCondition struct {
 	// The feature that the user must have access to in order to see the application in their cPanel *Home* interface.
@@ -384,10 +388,10 @@ type BrandingGetInformationForApplicationsDataValueCondition struct {
 	// For more information, read our
 	// [Guide to cPanel Variables](https://go.cpanel.net/guidetovariables)
 	// documentation.
-	If2 string `json:"if"`
+	If2     string `json:"if"`
 
 	// The name of the module that provides the application.
-	Module string `json:"module"`
+	Module  string `json:"module"`
 }
 
 // The application's icon information.
@@ -396,10 +400,10 @@ type BrandingGetInformationForApplicationsDataValueIcon struct {
 	Height int64 `json:"height"`
 
 	// The file path or URL location of the application's icon.
-	URL string `json:"url"`
+	URL    string `json:"url"`
 
 	// The application's icon's width, in pixels.
-	Width int64 `json:"width"`
+	Width  int64 `json:"width"`
 }
 
 // An object containing information about the queried `app_keys` application.
@@ -409,38 +413,38 @@ type BrandingGetInformationForApplicationsDataValueIcon struct {
 // The object's name is the value specified in the `app_keys` parameter.
 type BrandingGetInformationForApplicationsDataValue struct {
 	// An object containing the application's conditions.
-	Condition BrandingGetInformationForApplicationsDataValueCondition `json:"condition"`
+	Condition   BrandingGetInformationForApplicationsDataValueCondition `json:"condition"`
 
 	// The application's display name.
 	Description string `json:"description"`
 
 	// The application's icon information.
-	Icon BrandingGetInformationForApplicationsDataValueIcon `json:"icon"`
+	Icon        BrandingGetInformationForApplicationsDataValueIcon `json:"icon"`
 
 	// The module namespace for the specific application.
-	ImplementS string `json:"implements"`
+	ImplementS  string `json:"implements"`
 
 	// The application's Appkey name.
-	Key string `json:"key"`
+	Key         string `json:"key"`
 
 	// The application's name.
-	Name string `json:"name"`
+	Name        string `json:"name"`
 
 	// The application's order in the `sitemap.json` file. This value represents the application's display order in cPanel's *Home* interface.
-	Order int64 `json:"order"`
+	Order       int64 `json:"order"`
 
 	// Search keywords for the application.
-	Terms []string `json:"terms"`
+	Terms       []string `json:"terms"`
 
 	// The application's type.
 	//
 	// `item` is the only possible value.
 	//
 	// Possible values: `item`.
-	Type2 string `json:"type"`
+	Type2       string `json:"type"`
 
 	// The file path or URL to the the application's file.
-	URL string `json:"url"`
+	URL         string `json:"url"`
 }
 
 // BrandingIncludeArgs are the parameters of the UAPI function `Branding::include`.
@@ -498,3 +502,4 @@ type BrandingIncludeArgs struct {
 func (c *BrandingClient) Include(ctx context.Context, args *BrandingIncludeArgs) (*cpanel.UAPIResult[*string], error) {
 	return cpanel.UAPICall[*string](ctx, c.c, http.MethodGet, "Branding", "include", args)
 }
+

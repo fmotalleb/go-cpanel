@@ -196,17 +196,20 @@ func decodeUAPIResult[T any](body []byte, module, function string) (*UAPIResult[
 	}
 	if len(env.data) > 0 {
 		if err := json.Unmarshal(env.data, &res.Data); err != nil {
-			// Type mismatch between documented schema and live data: keep the
-			// raw payload accessible instead of failing the call outright.
-			var raw json.RawMessage
-			if uerr := json.Unmarshal(env.data, &raw); uerr == nil {
-				anyRaw := raw
-				if setAny(&res.Data, anyRaw) {
-					return res, nil
+			// Type mismatch — try relaxed coercion before giving up.
+			if relaxedErr := relaxedUnmarshal(env.data, &res.Data); relaxedErr != nil {
+				// Type mismatch between documented schema and live data: keep the
+				// raw payload accessible instead of failing the call outright.
+				var raw json.RawMessage
+				if uerr := json.Unmarshal(env.data, &raw); uerr == nil {
+					anyRaw := raw
+					if setAny(&res.Data, anyRaw) {
+						return res, nil
+					}
 				}
+				return nil, &Error{Op: "uapi " + module + "::" + function, Body: "cannot decode data payload into " +
+					typeNameOf[T]() + ": " + err.Error()}
 			}
-			return nil, &Error{Op: "uapi " + module + "::" + function, Body: "cannot decode data payload into " +
-				typeNameOf[T]() + ": " + err.Error()}
 		}
 	}
 	if !res.OK() {

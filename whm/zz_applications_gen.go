@@ -22,6 +22,7 @@ func (c *Client) Applist(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHM
 	return cpanel.WHMCall[ApplistData](ctx, c.c, http.MethodGet, "applist", cpanel.CombineArgs(extra...))
 }
 
+
 // ApplistData is a generated payload type.
 type ApplistData struct {
 	// An array of available WHM API 1 functions.

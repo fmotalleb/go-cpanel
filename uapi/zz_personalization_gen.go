@@ -31,10 +31,11 @@ func (c *PersonalizationClient) Get(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[PersonalizationGetData](ctx, c.c, http.MethodPost, "Personalization", "get", cpanel.CombineArgs(extra...))
 }
 
+
 // PersonalizationGetDataPersonalizationValue is a generated payload type.
 type PersonalizationGetDataPersonalizationValue struct {
 	// The message that describes the failure if `success` returns `0`, or `OK` if `success` returns `1`.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// Whether the function successfully retrieved the value from the server.
 	//   - `1` — Successful.
@@ -44,7 +45,7 @@ type PersonalizationGetDataPersonalizationValue struct {
 	Success int64 `json:"success"`
 
 	// The value stored for the associated NVData key, or a null value if the key does not exist in the store.
-	Value *string `json:"value"`
+	Value   *string `json:"value"`
 }
 
 // PersonalizationGetData is a generated payload type.
@@ -78,10 +79,11 @@ func (c *PersonalizationClient) Set(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[PersonalizationSetData](ctx, c.c, http.MethodPost, "Personalization", "set", cpanel.CombineArgs(extra...))
 }
 
+
 // PersonalizationSetDataPersonalizationValue is a generated payload type.
 type PersonalizationSetDataPersonalizationValue struct {
 	// The message that describes the failure if `success` returns `0`, or `OK` if `success` returns `1`.
-	Reason string `json:"reason"`
+	Reason  string `json:"reason"`
 
 	// Whether the function successfully saved the value on the server.
 	//   - `1` — Successful.
@@ -91,7 +93,7 @@ type PersonalizationSetDataPersonalizationValue struct {
 	Success int64 `json:"success"`
 
 	// The value stored for the associated NVData key, or a null value if the key does not exist in the store.
-	Value *string `json:"value"`
+	Value   *string `json:"value"`
 }
 
 // PersonalizationSetData is a generated payload type.

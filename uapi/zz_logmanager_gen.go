@@ -37,6 +37,7 @@ func (c *LogManagerClient) DeleteArchive(ctx context.Context, args *LogManagerDe
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "LogManager", "delete_archive", args)
 }
 
+
 // GetSettings calls the UAPI function `LogManager::get_settings` — Retrieve cPanel account's log archival settings
 //
 // This function retrieves the account's log archival settings.
@@ -48,6 +49,7 @@ func (c *LogManagerClient) GetSettings(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[LogManagerGetSettingsData](ctx, c.c, http.MethodGet, "LogManager", "get_settings", cpanel.CombineArgs(extra...))
 }
 
+
 // LogManagerGetSettingsData is a generated payload type.
 type LogManagerGetSettingsData struct {
 	// Whether the system archives log files to your home directory.
@@ -55,14 +57,14 @@ type LogManagerGetSettingsData struct {
 	// * `0` — Does **not** archive the logs.
 	//
 	// Possible values: `1`, `0`.
-	ArchiveLogs int64 `json:"archive_logs"`
+	ArchiveLogs   int64 `json:"archive_logs"`
 
 	// Whether the system removes the previous month's archived log files from your home directory.
 	// * `1` — Removes the logs.
 	// * `0` — Does **not** remove the logs.
 	//
 	// Possible values: `1`, `0`.
-	PruneArchive int64 `json:"prune_archive"`
+	PruneArchive  int64 `json:"prune_archive"`
 
 	// The number of days the system retains archived log files before automatic removal.
 	// A value of `0` means the system retains logs indefinitely.
@@ -74,7 +76,7 @@ type LogManagerGetSettingsData struct {
 	// * `0` — Uses a custom retention value.
 	//
 	// Possible values: `1`, `0`.
-	UsingDefault int64 `json:"using_default"`
+	UsingDefault  int64 `json:"using_default"`
 }
 
 // ListArchives calls the UAPI function `LogManager::list_archives` — Return cPanel account's archive files list
@@ -88,16 +90,17 @@ func (c *LogManagerClient) ListArchives(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[[]LogManagerListArchivesDataItem](ctx, c.c, http.MethodGet, "LogManager", "list_archives", cpanel.CombineArgs(extra...))
 }
 
+
 // LogManagerListArchivesDataItem is a generated payload type.
 type LogManagerListArchivesDataItem struct {
 	// The archive file's name.
-	File string `json:"file"`
+	File  string `json:"file"`
 
 	// The archive file's last modified date.
 	Mtime int64 `json:"mtime"`
 
 	// The archive file's path.
-	Path string `json:"path"`
+	Path  string `json:"path"`
 }
 
 // LogManagerListErrorLogsArgs are the parameters of the UAPI function `LogManager::list_error_logs`.
@@ -123,11 +126,12 @@ func (c *LogManagerClient) ListErrorLogs(ctx context.Context, args *LogManagerLi
 	return cpanel.UAPICall[[]LogManagerListErrorLogsDataItem](ctx, c.c, http.MethodGet, "LogManager", "list_error_logs", args)
 }
 
+
 // LogManagerListErrorLogsDataItem is a generated payload type.
 type LogManagerListErrorLogsDataItem struct {
 	// An error message that describes why the system could not
 	// return metadata for this log file.
-	Error *string `json:"error"`
+	Error         *string `json:"error"`
 
 	// The `file_id` value for each log file.
 	//
@@ -140,7 +144,7 @@ type LogManagerListErrorLogsDataItem struct {
 	// * `homedir_error_log` — The home directory
 	//   error log file located in the user's home
 	//   directory. …
-	FileID string `json:"file_id"`
+	FileID        string `json:"file_id"`
 
 	// Whether the log file was last modified today
 	// (server local time).
@@ -153,13 +157,13 @@ type LogManagerListErrorLogsDataItem struct {
 
 	// The log file's last-modified time as a unix
 	// timestamp.
-	Mtime *int64 `json:"mtime"`
+	Mtime         *int64 `json:"mtime"`
 
 	// The absolute path to the log file.
-	Path string `json:"path"`
+	Path          string `json:"path"`
 
 	// The log file's size, in bytes.
-	Size *int64 `json:"size"`
+	Size          *int64 `json:"size"`
 }
 
 // LogManagerSetSettingsArgs are the parameters of the UAPI function `LogManager::set_settings`.
@@ -214,6 +218,7 @@ func (c *LogManagerClient) SetSettings(ctx context.Context, args *LogManagerSetS
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "LogManager", "set_settings", args)
 }
 
+
 // LogManagerViewErrorLogArgs are the parameters of the UAPI function `LogManager::view_error_log`.
 type LogManagerViewErrorLogArgs struct {
 	// A domain owned by the current cPanel user.
@@ -258,6 +263,7 @@ func (c *LogManagerClient) ViewErrorLog(ctx context.Context, args *LogManagerVie
 	return cpanel.UAPICall[LogManagerViewErrorLogData](ctx, c.c, http.MethodGet, "LogManager", "view_error_log", args)
 }
 
+
 // An object describing the requested log file
 // and its content.
 type LogManagerViewErrorLogData struct {
@@ -268,17 +274,17 @@ type LogManagerViewErrorLogData struct {
 	// * `php_fpm_error_log` — The PHP FPM error log. This file is located in the `logs/` directory within the cPanel account's home directory.
 	// * `docroot_error_log` — The PHP error log. This file is located in the domain's document root directory.
 	// * `homedir_error_log` — The cPanel account PHP error log. This fil …
-	FileID string `json:"file_id"`
+	FileID        string `json:"file_id"`
 
 	// The number of lines returned in the `log_content` return's value.
-	LinesRead int64 `json:"lines_read"`
+	LinesRead     int64 `json:"lines_read"`
 
 	// The end of the error log file in chronological order.
 	//
 	// **Note:**
 	//
 	// This array will return an empty value if the log file is empty.
-	LogContent []string `json:"log_content"`
+	LogContent    []string `json:"log_content"`
 
 	// Whether the log file was modified today. The function determines the time and date with the cPanel & WHM server's time.
 	//
@@ -293,7 +299,7 @@ type LogManagerViewErrorLogData struct {
 	// **Note:**
 	//
 	// This return value is determined via a `fstat` system call on the log file.
-	Mtime int64 `json:"mtime"`
+	Mtime         int64 `json:"mtime"`
 
 	// Whether the log file contains more lines than the `limit` parameter's value.
 	//
@@ -301,15 +307,15 @@ type LogManagerViewErrorLogData struct {
 	// * `0` — The file did not exceed the `limit` parameter's value.
 	//
 	// Possible values: `1`, `0`.
-	Partial int64 `json:"partial"`
+	Partial       int64 `json:"partial"`
 
 	// The absolute path to the log file on disk.
-	Path string `json:"path"`
+	Path          string `json:"path"`
 
 	// The log file's size, in bytes.
 	//
 	// **Note:**
 	//
 	// This return value is determined via a `fstat` system call on the log file.
-	Size int64 `json:"size"`
+	Size          int64 `json:"size"`
 }

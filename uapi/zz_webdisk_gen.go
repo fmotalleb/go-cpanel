@@ -48,6 +48,7 @@ func (c *WebDiskClient) DeleteUser(ctx context.Context, args *WebDiskDeleteUserA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "WebDisk", "delete_user", args)
 }
 
+
 // WebDiskSetHomedirArgs are the parameters of the UAPI function `WebDisk::set_homedir`.
 type WebDiskSetHomedirArgs struct {
 	// The Web Disk account's home directory.
@@ -88,6 +89,7 @@ type WebDiskSetHomedirArgs struct {
 func (c *WebDiskClient) SetHomedir(ctx context.Context, args *WebDiskSetHomedirArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "WebDisk", "set_homedir", args)
 }
+
 
 // WebDiskSetPasswordArgs are the parameters of the UAPI function `WebDisk::set_password`.
 type WebDiskSetPasswordArgs struct {
@@ -130,6 +132,7 @@ func (c *WebDiskClient) SetPassword(ctx context.Context, args *WebDiskSetPasswor
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "WebDisk", "set_password", args)
 }
 
+
 // WebDiskSetPermissionsArgs are the parameters of the UAPI function `WebDisk::set_permissions`.
 type WebDiskSetPermissionsArgs struct {
 	// The Web Disk account's home directory file permissions.
@@ -165,3 +168,4 @@ type WebDiskSetPermissionsArgs struct {
 func (c *WebDiskClient) SetPermissions(ctx context.Context, args *WebDiskSetPermissionsArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "WebDisk", "set_permissions", args)
 }
+

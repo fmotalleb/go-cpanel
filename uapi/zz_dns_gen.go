@@ -39,6 +39,7 @@ func (c *DNSClient) EnsureDomainsResideOnlyLocally(ctx context.Context, args *DN
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "DNS", "ensure_domains_reside_only_locally", args)
 }
 
+
 // DNSFetchCpanelGeneratedDomainsArgs are the parameters of the UAPI function `DNS::fetch_cpanel_generated_domains`.
 type DNSFetchCpanelGeneratedDomainsArgs struct {
 	// The domain for which to retrieve cPanel-generated subdomains.
@@ -63,6 +64,7 @@ type DNSFetchCpanelGeneratedDomainsArgs struct {
 func (c *DNSClient) FetchCpanelGeneratedDomains(ctx context.Context, args *DNSFetchCpanelGeneratedDomainsArgs) (*cpanel.UAPIResult[[]DNSFetchCpanelGeneratedDomainsDataItem], error) {
 	return cpanel.UAPICall[[]DNSFetchCpanelGeneratedDomainsDataItem](ctx, c.c, http.MethodGet, "DNS", "fetch_cpanel_generated_domains", args)
 }
+
 
 // DNSFetchCpanelGeneratedDomainsDataItem is a generated payload type.
 type DNSFetchCpanelGeneratedDomainsDataItem struct {
@@ -99,10 +101,11 @@ func (c *DNSClient) HasLocalAuthority(ctx context.Context, args *DNSHasLocalAuth
 	return cpanel.UAPICall[[]DNSHasLocalAuthorityDataItem](ctx, c.c, http.MethodGet, "DNS", "has_local_authority", args)
 }
 
+
 // DNSHasLocalAuthorityDataItem is a generated payload type.
 type DNSHasLocalAuthorityDataItem struct {
 	// The queried domain.
-	Domain string `json:"domain"`
+	Domain         string `json:"domain"`
 
 	// An error message that details the reason why the local server's
 	// authoritative check failed.
@@ -110,7 +113,7 @@ type DNSHasLocalAuthorityDataItem struct {
 	// **Note:**
 	//
 	// The function **only** returns this value when the check fails.
-	Error string `json:"error"`
+	Error          string `json:"error"`
 
 	// Whether the local server is authoritative for the domain's DNS
 	// records.
@@ -124,12 +127,12 @@ type DNSHasLocalAuthorityDataItem struct {
 	LocalAuthority int64 `json:"local_authority"`
 
 	// The domain's nameservers, if any exist.
-	Nameservers []string `json:"nameservers"`
+	Nameservers    []string `json:"nameservers"`
 
 	// The domain's DNS zone, if one exists.
 	//
 	// * `null` — No valid DNS zone.
-	Zone *string `json:"zone"`
+	Zone           *string `json:"zone"`
 }
 
 // IsAliasAvailable calls the UAPI function `DNS::is_alias_available` — Return `ALIAS` DNS record availability & resolver
@@ -144,6 +147,7 @@ func (c *DNSClient) IsAliasAvailable(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[DNSIsAliasAvailableData](ctx, c.c, http.MethodGet, "DNS", "is_alias_available", cpanel.CombineArgs(extra...))
 }
 
+
 // DNSIsAliasAvailableData is a generated payload type.
 type DNSIsAliasAvailableData struct {
 	// Whether `ALIAS` records are available.
@@ -154,7 +158,7 @@ type DNSIsAliasAvailableData struct {
 	// When `ALIAS` records are enabled, they may work in API calls that accept `A` and `AAAA` records. However, the `ALIAS` record must use a fully qualified domain name (FQDN) rather than an IP address.
 	//
 	// Possible values: `1`, `0`.
-	Alias int64 `json:"alias"`
+	Alias    int64 `json:"alias"`
 
 	// Whether `ANAME` records are available.
 	//
@@ -166,7 +170,7 @@ type DNSIsAliasAvailableData struct {
 	// The `aname` value is always set to false (i.e. Not available). The `ANAME` record is currently not supported. It is included for completeness and future proofing.
 	//
 	// Possible values: `1`, `0`.
-	Aname int64 `json:"aname"`
+	Aname    int64 `json:"aname"`
 
 	// The value (if any) of the running PDNS’s `resolver` setting.
 	Resolver string `json:"resolver"`
@@ -185,6 +189,7 @@ func (c *DNSClient) IsHTTPSAvailable(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[DNSIsHTTPSAvailableData](ctx, c.c, http.MethodGet, "DNS", "is_https_available", cpanel.CombineArgs(extra...))
 }
 
+
 // DNSIsHTTPSAvailableData is a generated payload type.
 type DNSIsHTTPSAvailableData struct {
 	// The DNS server type currently in use (bind, pdns, etc.).
@@ -195,7 +200,7 @@ type DNSIsHTTPSAvailableData struct {
 	// * `0` - Not supported.
 	//
 	// Possible values: `1`, `0`.
-	HTTPS int64 `json:"https"`
+	HTTPS     int64 `json:"https"`
 }
 
 // IsSvcbAvailable calls the UAPI function `DNS::is_svcb_available` — Return DNS SVCB record support information
@@ -211,6 +216,7 @@ func (c *DNSClient) IsSvcbAvailable(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[DNSIsSvcbAvailableData](ctx, c.c, http.MethodGet, "DNS", "is_svcb_available", cpanel.CombineArgs(extra...))
 }
 
+
 // DNSIsSvcbAvailableData is a generated payload type.
 type DNSIsSvcbAvailableData struct {
 	// The DNS server type currently in use (bind, pdns, etc.).
@@ -221,7 +227,7 @@ type DNSIsSvcbAvailableData struct {
 	// * `0` - Not supported.
 	//
 	// Possible values: `1`, `0`.
-	Svcb int64 `json:"svcb"`
+	Svcb      int64 `json:"svcb"`
 }
 
 // DNSLookupArgs are the parameters of the UAPI function `DNS::lookup`.
@@ -245,6 +251,7 @@ type DNSLookupArgs struct {
 func (c *DNSClient) Lookup(ctx context.Context, args *DNSLookupArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "DNS", "lookup", args)
 }
+
 
 // DNSMassEditZoneArgs are the parameters of the UAPI function `DNS::mass_edit_zone`.
 type DNSMassEditZoneArgs struct {
@@ -304,6 +311,7 @@ func (c *DNSClient) MassEditZone(ctx context.Context, args *DNSMassEditZoneArgs)
 	return cpanel.UAPICall[DNSMassEditZoneData](ctx, c.c, http.MethodGet, "DNS", "mass_edit_zone", args)
 }
 
+
 // DNSMassEditZoneData is a generated payload type.
 type DNSMassEditZoneData struct {
 	// The DNS zone’s SOA record’s new serial number.
@@ -341,6 +349,7 @@ type DNSParseZoneArgs struct {
 func (c *DNSClient) ParseZone(ctx context.Context, args *DNSParseZoneArgs) (*cpanel.UAPIResult[Payload], error) {
 	return cpanel.UAPICall[Payload](ctx, c.c, http.MethodGet, "DNS", "parse_zone", args)
 }
+
 
 // The zone’s content.
 type Payload []string
@@ -390,13 +399,14 @@ func (c *DNSClient) SwapIPInZones(ctx context.Context, args *DNSSwapIPInZonesArg
 	return cpanel.UAPICall[[]DNSSwapIPInZonesDataItem](ctx, c.c, http.MethodGet, "DNS", "swap_ip_in_zones", args)
 }
 
+
 // DNSSwapIPInZonesDataItem is a generated payload type.
 type DNSSwapIPInZonesDataItem struct {
 	// The value of the DNS record after it was updated.
-	NewValue string `json:"new_value"`
+	NewValue   string `json:"new_value"`
 
 	// The value of the DNS record before it was updated.
-	OldValue string `json:"old_value"`
+	OldValue   string `json:"old_value"`
 
 	// The name of the domain's updated DNS record.
 	RecordName string `json:"record_name"`
@@ -405,5 +415,5 @@ type DNSSwapIPInZonesDataItem struct {
 	RecordType string `json:"record_type"`
 
 	// The DNS zone in which the system updated the domain's record.
-	ZoneName string `json:"zone_name"`
+	ZoneName   string `json:"zone_name"`
 }
