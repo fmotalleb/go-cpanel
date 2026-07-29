@@ -424,7 +424,7 @@ type FilemanGetFileInformationData struct {
 	Type2 string `json:"type"`
 
 	// The file owner's system user ID.
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// Whether the file is writable. The function only returns this value if you set the `include_permissions` value to 1 .
 	// * `1` - Writable.
@@ -648,7 +648,7 @@ type FilemanListFilesDataDirsItem struct {
 	Type2 string `json:"type"`
 
 	// The directory owner's system user ID.
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// Whether the directory is writable.
 	//
@@ -765,7 +765,7 @@ type FilemanListFilesDataFilesItem struct {
 	Type2 string `json:"type"`
 
 	// The file owner's system user ID.
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// Whether the file is writable.
 	//

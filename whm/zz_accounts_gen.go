@@ -260,7 +260,7 @@ type AccountSummaryDataAcctItem struct {
 	Theme string `json:"theme"`
 
 	// The account's user ID on the system.
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// The account creation date. The account creation date and time, in Unix time format.
 	UnixStartdate int64 `json:"unix_startdate"`
@@ -728,7 +728,7 @@ type ListAcctsDataAcctItem struct {
 	Theme string `json:"theme"`
 
 	// The account's user ID on the system.
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// The account creation date.
 	UnixStartdate int64 `json:"unix_startdate"`

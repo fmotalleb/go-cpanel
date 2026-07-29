@@ -133,8 +133,8 @@ func decodeWHMResult[T any](body []byte, function string) (*WHMResult[T], error)
 			if setAny(&res.Data, anyRaw) {
 				return res, nil
 			}
-			return nil, &Error{Op: "whm " + function, Body: "cannot decode data payload into " +
-				typeNameOf[T]() + ": " + err.Error()}
+			return nil, &Error{Op: "whm " + function, Errors: []string{"cannot decode data payload into " +
+				typeNameOf[T]() + ": " + err.Error()}}
 		}
 	}
 	if !res.OK() {

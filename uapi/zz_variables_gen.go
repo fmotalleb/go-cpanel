@@ -860,7 +860,7 @@ type VariablesGetUserInformationData struct {
 	Theme string `json:"theme"`
 
 	// The account's user ID on the system.
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// An existing account's username.
 	User string `json:"user"`

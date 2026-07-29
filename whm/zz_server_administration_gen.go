@@ -1265,7 +1265,7 @@ type GetTcp4SocketsDataPayloadItem struct {
 	State int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// The number of bytes the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1312,7 +1312,7 @@ type GetTcp6SocketsDataPayloadItem struct {
 	State int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// The number of bytes that the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1359,7 +1359,7 @@ type GetUdp4SocketsDataPayloadItem struct {
 	State int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// The number of bytes that the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
@@ -1410,7 +1410,7 @@ type GetUdp6SocketsDataPayloadItem struct {
 	State int64 `json:"state"`
 
 	// The socket's user ID (UID).
-	Uid int64 `json:"uid"`
+	Uid string `json:"uid"`
 
 	// The number of bytes that the system is waiting to send.
 	Wqueue int64 `json:"wqueue"`
