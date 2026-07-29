@@ -229,6 +229,66 @@ func encodeField(values url.Values, name string, fv reflect.Value, omitempty boo
 	return encodeByKind(values, name, fv, omitempty)
 }
 
+func encodeSliceOrArray(values url.Values, name string, fv reflect.Value, omitempty bool) error {
+	// []byte is sent as a single string; everything else is repeated params.
+	if fv.Kind() == reflect.Slice && fv.Type().Elem().Kind() == reflect.Uint8 {
+		b := fv.Bytes()
+		if omitempty && len(b) == 0 {
+			return nil
+		}
+		values.Add(name, string(b))
+		return nil
+	}
+	for j := 0; j < fv.Len(); j++ {
+		el := fv.Index(j)
+		if el.Kind() == reflect.Pointer {
+			if el.IsNil() {
+				continue
+			}
+			el = el.Elem()
+		}
+		if !el.CanInterface() {
+			continue
+		}
+		values.Add(name, fmt.Sprint(el.Interface()))
+	}
+	return nil
+}
+
+func encodeInterface(values url.Values, name string, fv reflect.Value, omitempty bool) error {
+	if fv.IsNil() {
+		if omitempty {
+			return nil
+		}
+		values.Add(name, "")
+		return nil
+	}
+	// Unwrap pointers stored inside the interface so that helpers such
+	// as cpanel.Int can also populate `any` fields.
+	ev := fv.Elem()
+	for ev.Kind() == reflect.Pointer {
+		if ev.IsNil() {
+			if omitempty {
+				return nil
+			}
+			values.Add(name, "")
+			return nil
+		}
+		ev = ev.Elem()
+	}
+	switch ev.Kind() {
+	case reflect.Map, reflect.Slice, reflect.Struct:
+		b, err := marshalJSON(fv.Interface())
+		if err != nil {
+			return err
+		}
+		values.Add(name, string(b))
+	default:
+		values.Add(name, fmt.Sprint(ev.Interface()))
+	}
+	return nil
+}
+
 func encodeByKind(values url.Values, name string, fv reflect.Value, omitempty bool) error {
 	switch fv.Kind() {
 	case reflect.String:
@@ -261,59 +321,9 @@ func encodeByKind(values url.Values, name string, fv reflect.Value, omitempty bo
 		}
 		values.Add(name, strconv.FormatFloat(f, 'f', -1, 64))
 	case reflect.Slice, reflect.Array:
-		if fv.Kind() == reflect.Slice && fv.Type().Elem().Kind() == reflect.Uint8 {
-			b := fv.Bytes()
-			if omitempty && len(b) == 0 {
-				return nil
-			}
-			values.Add(name, string(b))
-			return nil
-		}
-		for j := 0; j < fv.Len(); j++ {
-			el := fv.Index(j)
-			if el.Kind() == reflect.Pointer {
-				if el.IsNil() {
-					continue
-				}
-				el = el.Elem()
-			}
-			if !el.CanInterface() {
-				continue
-			}
-			values.Add(name, fmt.Sprint(el.Interface()))
-		}
+		return encodeSliceOrArray(values, name, fv, omitempty)
 	case reflect.Interface:
-		if fv.IsNil() {
-			if omitempty {
-				return nil
-			}
-			values.Add(name, "")
-			return nil
-		}
-		// Unwrap pointers stored inside the interface so that helpers such
-		// as cpanel.Int can also populate `any` fields.
-		ev := fv.Elem()
-		for ev.Kind() == reflect.Pointer {
-			if ev.IsNil() {
-				if omitempty {
-					return nil
-				}
-				values.Add(name, "")
-				return nil
-			}
-			ev = ev.Elem()
-		}
-		switch ev.Kind() {
-		case reflect.Map, reflect.Slice, reflect.Struct:
-			b, err := marshalJSON(fv.Interface())
-			if err != nil {
-				return err
-			}
-			values.Add(name, string(b))
-		default:
-			values.Add(name, fmt.Sprint(ev.Interface()))
-		}
-		return nil
+		return encodeInterface(values, name, fv, omitempty)
 	case reflect.Map, reflect.Struct:
 		// Nested structured values are sent as JSON by convention; very few
 		// cPanel & WHM functions need them (e.g. UAPI Batch).
