@@ -1,0 +1,34 @@
+client_test.go:16:2: import 'github.com/fmotalleb/go-cpanel' is not allowed from list 'stdlib-only' (depguard)
+	cpanel "github.com/fmotalleb/go-cpanel"
+	^
+uapi/uapi_test.go:10:2: import 'github.com/fmotalleb/go-cpanel' is not allowed from list 'stdlib-only' (depguard)
+	cpanel "github.com/fmotalleb/go-cpanel"
+	^
+uapi/uapi_test.go:11:2: import 'github.com/fmotalleb/go-cpanel/uapi' is not allowed from list 'stdlib-only' (depguard)
+	"github.com/fmotalleb/go-cpanel/uapi"
+	^
+whm/whm_test.go:10:2: import 'github.com/fmotalleb/go-cpanel' is not allowed from list 'stdlib-only' (depguard)
+	cpanel "github.com/fmotalleb/go-cpanel"
+	^
+whm/whm_test.go:11:2: import 'github.com/fmotalleb/go-cpanel/whm' is not allowed from list 'stdlib-only' (depguard)
+	"github.com/fmotalleb/go-cpanel/whm"
+	^
+args.go:169:23: type assertion must be checked (forcetypeassert)
+				for k, v := range fv.Interface().(Args) {
+				                  ^
+args.go:173:8: type assertion must be checked (forcetypeassert)
+				if p := fv.Interface().(*Args); p != nil {
+				   ^
+client.go:57:4: right hand must be only type assertion (forcetypeassert)
+			tr = http.DefaultTransport.(*http.Transport).Clone()
+			^
+args.go:88:1: cyclomatic complexity 21 of func `EncodeArgs` is high (> 20) (gocyclo)
+func EncodeArgs(v any) (url.Values, error) {
+^
+args.go:189:1: cyclomatic complexity 41 of func `encodeField` is high (> 20) (gocyclo)
+func encodeField(values url.Values, name string, fv reflect.Value, omitempty bool) error {
+^
+10 issues:
+* depguard: 5
+* forcetypeassert: 3
+* gocyclo: 2

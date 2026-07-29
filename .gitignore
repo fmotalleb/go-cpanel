@@ -1,0 +1,25 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+go-cpanel
+
+# Test artifacts
+*.test
+*.out
+coverage.*
+
+# Toolchain
+.go/
+.vendor/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Generator downloads
+tools/gen/*.openapi.yaml
+tools/gen/*.openapi.md
