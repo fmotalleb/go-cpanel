@@ -2,7 +2,6 @@
 // cPanel & WHM OpenAPI documents. DO NOT EDIT.
 // Source: https://api.docs.cpanel.net (cPanel & WHM version 138)
 
-
 // Package whm provides fully-typed access to every WHM API 1
 // function documented in cPanel's official OpenAPI document (version 138):
 //

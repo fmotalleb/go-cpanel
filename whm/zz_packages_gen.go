@@ -45,7 +45,6 @@ func (c *Client) GetPkgExtensionForm(ctx context.Context, args *GetPkgExtensionF
 	return cpanel.WHMCall[GetPkgExtensionFormData](ctx, c.c, http.MethodGet, "_getpkgextensionform", args)
 }
 
-
 // GetPkgExtensionFormData is a generated payload type.
 type GetPkgExtensionFormData struct {
 	// The HTML and Template Toolkit soure code for the hosting plan's extensions' templates.
@@ -78,7 +77,6 @@ type AddOverrideFeaturesForUserArgs struct {
 func (c *Client) AddOverrideFeaturesForUser(ctx context.Context, args *AddOverrideFeaturesForUserArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "add_override_features_for_user", args)
 }
-
 
 // AddpkgArgs are the parameters of the WHM API 1 function `addpkg`.
 type AddpkgArgs struct {
@@ -319,7 +317,6 @@ func (c *Client) Addpkg(ctx context.Context, args *AddpkgArgs) (*cpanel.WHMResul
 	return cpanel.WHMCall[AddpkgData](ctx, c.c, http.MethodGet, "addpkg", args)
 }
 
-
 // AddpkgData is a generated payload type.
 type AddpkgData struct {
 	// The new hosting plan's name.
@@ -361,9 +358,9 @@ type AddpkgExTArgs struct {
 // * If you need to edit a package extension's parameters, call this function again
 // with the same package extension name and the updated package extension variables.
 //
-// * You can include the extension's variables in your function call, in `key=value` format.
-//   Consult the extension's documentation for a list of possible variables. Extension variables
-//   are case-sensitive.
+//   - You can include the extension's variables in your function call, in `key=value` format.
+//     Consult the extension's documentation for a list of possible variables. Extension variables
+//     are case-sensitive.
 //
 // Available since cPanel & WHM version 68.
 //
@@ -371,7 +368,6 @@ type AddpkgExTArgs struct {
 func (c *Client) AddpkgExT(ctx context.Context, args *AddpkgExTArgs) (*cpanel.WHMResult[AddpkgExTData], error) {
 	return cpanel.WHMCall[AddpkgExTData](ctx, c.c, http.MethodGet, "addpkgext", args)
 }
-
 
 // AddpkgExTData is a generated payload type.
 type AddpkgExTData struct {
@@ -405,7 +401,6 @@ type ChangePackageArgs struct {
 func (c *Client) ChangePackage(ctx context.Context, args *ChangePackageArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "changepackage", args)
 }
-
 
 // CreateFeaturelistArgs are the parameters of the WHM API 1 function `create_featurelist`.
 type CreateFeaturelistArgs struct {
@@ -462,7 +457,6 @@ func (c *Client) CreateFeaturelist(ctx context.Context, args *CreateFeaturelistA
 	return cpanel.WHMCall[CreateFeaturelistData](ctx, c.c, http.MethodGet, "create_featurelist", args)
 }
 
-
 // CreateFeaturelistData is a generated payload type.
 type CreateFeaturelistData struct {
 	// The feature list's name.
@@ -490,7 +484,6 @@ type DeleteFeaturelistArgs struct {
 func (c *Client) DeleteFeaturelist(ctx context.Context, args *DeleteFeaturelistArgs) (*cpanel.WHMResult[DeleteFeaturelistData], error) {
 	return cpanel.WHMCall[DeleteFeaturelistData](ctx, c.c, http.MethodGet, "delete_featurelist", args)
 }
-
 
 // DeleteFeaturelistData is a generated payload type.
 type DeleteFeaturelistData struct {
@@ -526,8 +519,8 @@ type DelPkgExTArgs struct {
 //
 // **Note:**
 //
-// * You can additionally include extension's variables in your function call, in `key=value` format.
-//   Consult the extension's documentation for a list of possible variables. Extension variable names are case-sensitive.
+//   - You can additionally include extension's variables in your function call, in `key=value` format.
+//     Consult the extension's documentation for a list of possible variables. Extension variable names are case-sensitive.
 //
 // Available since cPanel & WHM version 68.
 //
@@ -535,7 +528,6 @@ type DelPkgExTArgs struct {
 func (c *Client) DelPkgExT(ctx context.Context, args *DelPkgExTArgs) (*cpanel.WHMResult[DelPkgExTData], error) {
 	return cpanel.WHMCall[DelPkgExTData](ctx, c.c, http.MethodGet, "delpkgext", args)
 }
-
 
 // DelPkgExTData is a generated payload type.
 type DelPkgExTData struct {
@@ -783,7 +775,6 @@ func (c *Client) Editpkg(ctx context.Context, args *EditpkgArgs) (*cpanel.WHMRes
 	return cpanel.WHMCall[EditpkgData](ctx, c.c, http.MethodGet, "editpkg", args)
 }
 
-
 // EditpkgData is a generated payload type.
 type EditpkgData struct {
 	// The new hosting plan's name.
@@ -825,7 +816,6 @@ func (c *Client) GetAvailableApplications(ctx context.Context, args *GetAvailabl
 	return cpanel.WHMCall[GetAvailableApplicationsData](ctx, c.c, http.MethodGet, "get_available_applications", args)
 }
 
-
 // The feature's server role.
 //
 // **Warning:**
@@ -863,7 +853,7 @@ type Subitem struct {
 	// * Only WHM users who possess the specified ACLs can view or use the item.
 	// * System administrators can configure users' ACLs in WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface (*WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges*).
 	// * For a complete …
-	Acl        *string `json:"acl"`
+	Acl *string `json:"acl"`
 
 	// A subitem's parent feature's location.
 	//
@@ -877,7 +867,7 @@ type Subitem struct {
 	// * `` - The subitem does not appear on cPanel DNSOnly servers.
 	//
 	// Possible values: `dns`.
-	DnsonlyOk  *string `json:"dnsonly_ok"`
+	DnsonlyOk *string `json:"dnsonly_ok"`
 
 	// The icon file to display for the subitem.
 	//
@@ -885,27 +875,27 @@ type Subitem struct {
 	//
 	// * Icons for any WHM plugins exist separately from the server's theme. For more information, read our [Guide to WHM Plugins - Plugin Files](https://go.cpanel.net/whmpluginfiles) documentation.
 	// * A valid `.png` or `.svg` image file, relative to the theme's icon directory.
-	File       string `json:"file"`
+	File string `json:"file"`
 
 	// The group in which the subitem appears. This is a value of an existing group object.
-	Group      string `json:"group"`
+	Group string `json:"group"`
 
 	// The subitem's display name.
 	//
 	// **Note:**
 	//
 	// * You can localize this string to display it in the user's preferred language in the WHM interface. For more information, read our [Guide to Locales](https://go.cpanel.net/guide-to-locales) documentation.
-	Itemdesc   string `json:"itemdesc"`
+	Itemdesc string `json:"itemdesc"`
 
 	// A key to uniquely identify WHM interfaces and their associated assets for the [cPanel Analytics](https://go.cpanel.net/analytics) program.
 	//
 	// **Note:**
 	//
 	// Generally, this value matches the `file` parameter's value without the file's extension.
-	Key        string `json:"key"`
+	Key string `json:"key"`
 
 	// The subitem's parent feature's display order in the WHM interface. This is the parent feature's `itemorder` value.
-	Parent     int64 `json:"parent"`
+	Parent int64 `json:"parent"`
 
 	// A list search terms for the subitem, space delimited.
 	SearchText string `json:"searchtext"`
@@ -913,17 +903,17 @@ type Subitem struct {
 	// The area of the interface in which the subitem displays.
 	//
 	// A valid HTML `<a>` target attribute.
-	Target     string `json:"target"`
+	Target string `json:"target"`
 
 	// The object's type.
 	//
 	// * `subitem` - The only possible value.
 	//
 	// Possible values: `subitem`.
-	Type2      string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The subitem's interface location. This path is relative to the `/usr/local/cpanel/` directory.
-	URL        string `json:"url"`
+	URL string `json:"url"`
 }
 
 // An individual WHM feature.
@@ -935,14 +925,14 @@ type Image struct {
 	// * Only WHM users who possess the specified ACLs can view or use the item.
 	// * System administrators can configure users' ACLs in WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface (*WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges*).
 	// * For a complete …
-	Acl                   *string `json:"acl"`
+	Acl *string `json:"acl"`
 
 	// The feature's description that displays when the feature appears on the WHM Home interface.
 	//
 	// **Note:**
 	//
 	// You can localize this string to display it in the user's preferred language in the WHM interface. For more information, read our [Guide to Locales](https://go.cpanel.net/guide-to-locales) documentation.
-	Description           string `json:"description"`
+	Description string `json:"description"`
 
 	// The group's status for [cPanel DNSOnly](https://go.cpanel.net/cpanel-dnsonly)™ servers.
 	//
@@ -950,7 +940,7 @@ type Image struct {
 	// * `` - The group does not appear on cPanel DNSOnly servers.
 	//
 	// Possible values: `dns`.
-	DnsonlyOk             *string `json:"dnsonly_ok"`
+	DnsonlyOk *string `json:"dnsonly_ok"`
 
 	// The icon file to display for the group.
 	//
@@ -958,17 +948,17 @@ type Image struct {
 	//
 	// * Icons for any WHM plugins exist separately from the server's theme. For more information, read our [Guide to WHM Plugins - Plugin Files](https://go.cpanel.net/whmpluginfiles) documentation.
 	// * A valid `.png` or `.svg` image file, relative to the theme's icon directory.
-	File                  string `json:"file"`
+	File string `json:"file"`
 
 	// The group in which the item appears. This is a value of an existing group object.
-	Group                 string `json:"group"`
+	Group string `json:"group"`
 
 	// The feature's image type.
 	//
 	// * `icon` - The only possible value.
 	//
 	// Possible values: `icon`.
-	Imgtype               string `json:"imgtype"`
+	Imgtype string `json:"imgtype"`
 
 	// The feature's display name.
 	//
@@ -976,21 +966,21 @@ type Image struct {
 	//
 	// * You can localize this string to display it in the user's preferred language in the WHM interface. For more information, read our [Guide to Locales](https://go.cpanel.net/guide-to-locales) documentation.
 	// * This should be a [Template Toolkit](https://go.cpanel.net/tmpltoolkit) directive.
-	Itemdesc              string `json:"itemdesc"`
+	Itemdesc string `json:"itemdesc"`
 
 	// The feature's display order within its group.
 	//
 	// **Note:**
 	//
 	// Lower values appear earlier in the group.
-	ItemOrder             int64 `json:"itemorder"`
+	ItemOrder int64 `json:"itemorder"`
 
 	// A key to uniquely identify WHM interfaces and their associated assets for the [cPanel Analytics](https://go.cpanel.net/analytics) program.
 	//
 	// **Note:**
 	//
 	// Generally, this value matches the `file` parameter's value without the file's extension.
-	Key                   string `json:"key"`
+	Key string `json:"key"`
 
 	// The minimum number of accounts required to display the feature icon.
 	MinimumAccountsNeeded int64 `json:"minimum_accounts_needed"`
@@ -1005,38 +995,38 @@ type Image struct {
 	// You **cannot** use this parameter on servers with a [cPanel Solo License](https://go.cpanel.net/cpanel-solo-license).
 	//
 	// Possible values: `1`.
-	MultiuserRequired     int64 `json:"multiuser_required"`
+	MultiuserRequired int64 `json:"multiuser_required"`
 
-	Role                  Role `json:"role"`
+	Role Role `json:"role"`
 
 	// A list search terms for the feature, space delimited.
-	SearchText            string `json:"searchtext"`
+	SearchText string `json:"searchtext"`
 
-	Service               Service `json:"service"`
+	Service Service `json:"service"`
 
-	Subitems              []Subitem `json:"subitems"`
+	Subitems []Subitem `json:"subitems"`
 
 	// The icon type to use.
 	//
 	// * `img` - The only possible value.
 	//
 	// Possible values: `img`.
-	Subtype               string `json:"subtype"`
+	Subtype string `json:"subtype"`
 
 	// The area of the interface in which the feature appears.
 	//
 	// A valid HTML `<a>` target attribute.
-	Target                string `json:"target"`
+	Target string `json:"target"`
 
 	// The object's type.
 	//
 	// * `image` - The only possible value.
 	//
 	// Possible values: `image`.
-	Type2                 string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The feature's interface location. This path is relative to the `/usr/local/cpanel/` directory.
-	URL                   string `json:"url"`
+	URL string `json:"url"`
 }
 
 // A group of features.
@@ -1048,7 +1038,7 @@ type Group struct {
 	// * Only WHM users who possess the specified ACLs can view or use the item.
 	// * System administrators can configure users' ACLs in WHM's [*Edit Reseller Nameservers and Privileges*](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) interface (*WHM >> Home >> Resellers >> Edit Reseller Nameservers and Privileges*).
 	// * For a complete l …
-	Acl        *string `json:"acl"`
+	Acl *string `json:"acl"`
 
 	// The group's status for [cPanel DNSOnly](https://go.cpanel.net/cpanel-dnsonly)™ servers.
 	//
@@ -1056,7 +1046,7 @@ type Group struct {
 	// * `` - The group does not appear on cPanel DNSOnly servers.
 	//
 	// Possible values: `dns`.
-	DnsonlyOk  *string `json:"dnsonly_ok"`
+	DnsonlyOk *string `json:"dnsonly_ok"`
 
 	// The icon file to display for the group.
 	//
@@ -1064,17 +1054,17 @@ type Group struct {
 	//
 	// * Icons for any WHM plugins exist separately from the server's theme. For more information, read our [Guide to WHM Plugins - Plugin Files](https://go.cpanel.net/whmpluginfiles) documentation.
 	// * A valid `.png` or `.svg` image file, relative to the theme's icon directory.
-	File       string `json:"file"`
+	File string `json:"file"`
 
 	// The group name.
-	Group      string `json:"group"`
+	Group string `json:"group"`
 
 	// The group's display name.
 	//
 	// **Note:**
 	//
 	// You can localize this string to display it in the user's preferred language in the WHM interface. For more information, read our [Guide to Locales](https://go.cpanel.net/guide-to-locales) documentation
-	GroupDesc  string `json:"groupdesc"`
+	GroupDesc string `json:"groupdesc"`
 
 	// The group's display order in the WHM interface.
 	//
@@ -1088,16 +1078,16 @@ type Group struct {
 	// * `icon` - The only possible value.
 	//
 	// Possible values: `icon`.
-	Imgtype    string `json:"imgtype"`
+	Imgtype string `json:"imgtype"`
 
-	Items      []Image `json:"items"`
+	Items []Image `json:"items"`
 
 	// A key to uniquely identify WHM interfaces and their associated assets for the [cPanel Analytics](https://go.cpanel.net/analytics) program.
 	//
 	// **Note:**
 	//
 	// Generally, this value matches the `file` parameter's value without the file's extension.
-	Key        string `json:"key"`
+	Key string `json:"key"`
 
 	// A list of the group's search terms, space delimited.
 	SearchText string `json:"searchtext"`
@@ -1107,15 +1097,15 @@ type Group struct {
 	// * `img` - The only possible value.
 	//
 	// Possible values: `img`.
-	Subtype    string `json:"subtype"`
+	Subtype string `json:"subtype"`
 
 	// The area of the interface in which the feature appears.
 	//
 	// A valid HTML `<a>` target attribute.
-	Target     string `json:"target"`
+	Target string `json:"target"`
 
 	// The object's type.
-	Type2      string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // Raw data for template directives.
@@ -1128,7 +1118,7 @@ type Raw struct {
 	// * `raw` - The only possible value. Raw data for template directives.
 	//
 	// Possible values: `raw`.
-	Type2    string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // GetAvailableApplicationsData is a generated payload type.
@@ -1137,7 +1127,7 @@ type GetAvailableApplicationsData struct {
 	Groups []Group `json:"groups"`
 
 	// An array of objects containing the file's raw data for template directives.
-	Raw    []Raw `json:"raw"`
+	Raw []Raw `json:"raw"`
 }
 
 // GetAvailableFeaturelists calls the WHM API 1 function `get_available_featurelists` — (Deprecated) Get available feature lists
@@ -1163,7 +1153,6 @@ func (c *Client) GetAvailableFeaturelists(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[GetAvailableFeaturelistsData](ctx, c.c, http.MethodGet, "get_available_featurelists", cpanel.CombineArgs(extra...))
 }
 
-
 // GetAvailableFeaturelistsData is a generated payload type.
 type GetAvailableFeaturelistsData struct {
 	// An array of available feature lists.
@@ -1181,11 +1170,10 @@ func (c *Client) GetFeatureMetadata(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.WHMCall[GetFeatureMetadataData](ctx, c.c, http.MethodGet, "get_feature_metadata", cpanel.CombineArgs(extra...))
 }
 
-
 // GetFeatureMetadataDataFeaturesItem is a generated payload type.
 type GetFeatureMetadataDataFeaturesItem struct {
 	// The feature's ID.
-	ID       string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the feature is a plugin.
 	//
@@ -1196,7 +1184,7 @@ type GetFeatureMetadataDataFeaturesItem struct {
 	IsPlugin int64 `json:"is_plugin"`
 
 	// The feature's name.
-	Name     string `json:"name"`
+	Name string `json:"name"`
 }
 
 // GetFeatureMetadataData is a generated payload type.
@@ -1216,11 +1204,10 @@ func (c *Client) GetFeatureNames(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[GetFeatureNamesData](ctx, c.c, http.MethodGet, "get_feature_names", cpanel.CombineArgs(extra...))
 }
 
-
 // GetFeatureNamesDataFeatureItem is a generated payload type.
 type GetFeatureNamesDataFeatureItem struct {
 	// The feature's ID.
-	ID   string `json:"id"`
+	ID string `json:"id"`
 
 	// The feature's name.
 	Name string `json:"name"`
@@ -1254,20 +1241,19 @@ func (c *Client) GetFeaturelistData(ctx context.Context, args *GetFeaturelistDat
 	return cpanel.WHMCall[GetFeaturelistDataData](ctx, c.c, http.MethodGet, "get_featurelist_data", args)
 }
 
-
 // GetFeaturelistDataDataFeaturesItem is a generated payload type.
 type GetFeaturelistDataDataFeaturesItem struct {
 	// CSS class name to apply styling to the custom label in the feature manager interfaces.
-	BadgeClass               string `json:"badge_class"`
+	BadgeClass string `json:"badge_class"`
 
 	// Custom label shown on the feature manager interfaces. This label will be localized into the current users language.
-	BadgeLabel               string `json:"badge_label"`
+	BadgeLabel string `json:"badge_label"`
 
 	// List of feature names that are required dependencies for this feature to function properly.
-	DependEncies             []string `json:"dependencies"`
+	DependEncies []string `json:"dependencies"`
 
 	// The feature's ID.
-	ID                       string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the feature is disabled.
 	//
@@ -1283,7 +1269,7 @@ type GetFeaturelistDataDataFeaturesItem struct {
 	// documentation.
 	//
 	// Possible values: `1`, `0`.
-	IsDisabled               int64 `json:"is_disabled"`
+	IsDisabled int64 `json:"is_disabled"`
 
 	// Whether this feature is a Meridian (theme-integrated) experience.
 	//
@@ -1293,7 +1279,7 @@ type GetFeaturelistDataDataFeaturesItem struct {
 	// `badge_label` for features shipped before this attribute existed.
 	//
 	// Possible values: `1`, `0`, `None`.
-	IsMeridianOnly           *int64 `json:"is_meridian_only"`
+	IsMeridianOnly *int64 `json:"is_meridian_only"`
 
 	// Whether the system auto-redirects the user to the redirect_url when this feature is enabled. Only one such feature may be enabled for a feature list.
 	//
@@ -1301,16 +1287,16 @@ type GetFeaturelistDataDataFeaturesItem struct {
 	// * `0` — The feature does not support standalone mode.
 	//
 	// Possible values: `1`, `0`.
-	IsStandaloneExperience   int64 `json:"is_standalone_experience"`
+	IsStandaloneExperience int64 `json:"is_standalone_experience"`
 
 	// The feature's name.
-	Name                     string `json:"name"`
+	Name string `json:"name"`
 
 	// Array of regular expression patterns used to enforce mutual exclusion with other features. When this feature is enabled, any features matching these patterns cannot be enabled simultaneously. This is primarily used for standalone experiences where only one feature should redirect users upon login. …
-	OnlyOneRules             []string `json:"only_one_rules"`
+	OnlyOneRules []string `json:"only_one_rules"`
 
 	// The URL where users should be redirected to when logging into cPanel.
-	RedirectURL              string `json:"redirect_url"`
+	RedirectURL string `json:"redirect_url"`
 
 	// The ID of a package extension this feature depends on. Empty if the feature needs no extension.
 	RequiredPackageExtension string `json:"required_package_extension"`
@@ -1321,7 +1307,7 @@ type GetFeaturelistDataDataFeaturesItem struct {
 	// * `0` — Show the plugin label.
 	//
 	// Possible values: `1`, `0`.
-	SuppressPluginLabel      int64 `json:"suppress_plugin_label"`
+	SuppressPluginLabel int64 `json:"suppress_plugin_label"`
 
 	// Whether the feature list includes the feature.
 	//
@@ -1336,7 +1322,7 @@ type GetFeaturelistDataDataFeaturesItem struct {
 	// * `0` — The `disabled` feature list includes this feature.
 	//
 	// Possible values: `1`, `0`.
-	Value                    int64 `json:"value"`
+	Value int64 `json:"value"`
 }
 
 // GetFeaturelistDataData is a generated payload type.
@@ -1345,7 +1331,7 @@ type GetFeaturelistDataData struct {
 	Featurelist string `json:"featurelist"`
 
 	// An array of objects containing the feature's information.
-	Features    []GetFeaturelistDataDataFeaturesItem `json:"features"`
+	Features []GetFeaturelistDataDataFeaturesItem `json:"features"`
 }
 
 // GetFeaturelists calls the WHM API 1 function `get_featurelists` — Return current user's available feature lists
@@ -1364,7 +1350,6 @@ func (c *Client) GetFeaturelists(ctx context.Context, extra ...cpanel.Args) (*cp
 	return cpanel.WHMCall[GetFeaturelistsData](ctx, c.c, http.MethodGet, "get_featurelists", cpanel.CombineArgs(extra...))
 }
 
-
 // GetFeaturelistsData is a generated payload type.
 type GetFeaturelistsData struct {
 	// An array of available feature lists.
@@ -1382,11 +1367,10 @@ func (c *Client) GetFeaturelistsByPackageTypes(ctx context.Context, extra ...cpa
 	return cpanel.WHMCall[GetFeaturelistsByPackageTypesData](ctx, c.c, http.MethodGet, "get_featurelists_by_package_types", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains package types as keys and arrays of feature list names as values.
 type GetFeaturelistsByPackageTypesDataPackageTypesFeatureLists struct {
 	// An array of feature list names associated with this package type.
-	Nova     []string `json:"nova"`
+	Nova []string `json:"nova"`
 
 	// An array of feature list names associated with this package type.
 	Standard []string `json:"standard"`
@@ -1432,7 +1416,6 @@ func (c *Client) GetUsersFeaturesSettings(ctx context.Context, args *GetUsersFea
 	return cpanel.WHMCall[GetUsersFeaturesSettingsData](ctx, c.c, http.MethodGet, "get_users_features_settings", args)
 }
 
-
 // GetUsersFeaturesSettingsDataUsersFeaturesSettingsItem is a generated payload type.
 type GetUsersFeaturesSettingsDataUsersFeaturesSettingsItem struct {
 	// The user's setting for the feature in their `cpuser` file, which overrides the `feature_list_setting` return.
@@ -1441,13 +1424,13 @@ type GetUsersFeaturesSettingsDataUsersFeaturesSettingsItem struct {
 	// * `null` — The feature is **not** defined in the feature list.
 	//
 	// Possible values: `1`, `0`.
-	CpuserSetting      *int64 `json:"cpuser_setting"`
+	CpuserSetting *int64 `json:"cpuser_setting"`
 
 	// The feature name.
-	Feature            string `json:"feature"`
+	Feature string `json:"feature"`
 
 	// The feature list's name.
-	FeatureList        string `json:"feature_list"`
+	FeatureList string `json:"feature_list"`
 
 	// The user's feature list setting.
 	// * `1` - Enabled.
@@ -1457,7 +1440,7 @@ type GetUsersFeaturesSettingsDataUsersFeaturesSettingsItem struct {
 	FeatureListSetting int64 `json:"feature_list_setting"`
 
 	// The user's username.
-	User               string `json:"user"`
+	User string `json:"user"`
 }
 
 // GetUsersFeaturesSettingsData is a generated payload type.
@@ -1488,7 +1471,6 @@ func (c *Client) GetPkgInfo(ctx context.Context, args *GetPkgInfoArgs) (*cpanel.
 	return cpanel.WHMCall[GetPkgInfoData](ctx, c.c, http.MethodGet, "getpkginfo", args)
 }
 
-
 // A list of the hosting plan's settings.
 //
 // **Note:**
@@ -1500,7 +1482,7 @@ type GetPkgInfoDataPkg struct {
 	// The hosting plan's bandwidth limit, in megabytes (MB).
 	//
 	// * `unlimited` — The hosting plan allows unlimited bandwidth.
-	Bwlimit                any `json:"BWLIMIT"`
+	Bwlimit any `json:"BWLIMIT"`
 
 	// Whether CGI is enabled for the hosting plan.
 	//
@@ -1508,19 +1490,19 @@ type GetPkgInfoDataPkg struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	CGI                    int64 `json:"CGI"`
+	CGI int64 `json:"CGI"`
 
 	// The hosting plan's cPanel interface theme.
-	Cpmod                  string `json:"CPMOD"`
+	Cpmod string `json:"CPMOD"`
 
 	// Whether the hosting plan enables Digest Authentication.
 	//
 	// * `y` — Enabled.
 	// * `n` — Disabled.
-	DigestAuth             string `json:"DIGESTAUTH"`
+	DigestAuth string `json:"DIGESTAUTH"`
 
 	// The hosting plan's [feature list](https://go.cpanel.net/whmdocsFeatureManager).
-	Featurelist            string `json:"FEATURELIST"`
+	Featurelist string `json:"FEATURELIST"`
 
 	// Whether Microsoft® FrontPage Extensions are enabled for the account.
 	//
@@ -1529,7 +1511,7 @@ type GetPkgInfoDataPkg struct {
 	// cPanel & WHM ignores all FrontPage settings and parameters.
 	//
 	// Possible values: `1`, `0`.
-	FrontPage              int64 `json:"FRONTPAGE"`
+	FrontPage int64 `json:"FRONTPAGE"`
 
 	// Whether shell access is enabled for the hosting plan.
 	//
@@ -1537,7 +1519,7 @@ type GetPkgInfoDataPkg struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	Hasshell               int64 `json:"HASSHELL"`
+	Hasshell int64 `json:"HASSHELL"`
 
 	// Whether the hosting plan grants accounts a dedicated IP address.
 	//
@@ -1545,45 +1527,45 @@ type GetPkgInfoDataPkg struct {
 	// * `0` — Shared IP address.
 	//
 	// Possible values: `1`, `0`.
-	IP                     int64 `json:"IP"`
+	IP int64 `json:"IP"`
 
 	// The hosting plan's locale.
-	Lang                   string `json:"LANG"`
+	Lang string `json:"LANG"`
 
 	// The hosting plan's maximum number of addon domains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited addon domains.
-	Maxaddon               any `json:"MAXADDON"`
+	Maxaddon any `json:"MAXADDON"`
 
 	// The hosting plan's maximum number of FTP accounts.
 	//
 	// * `unlimited` — The hosting plan allows unlimited FTP accounts.
-	Maxftp                 any `json:"MAXFTP"`
+	Maxftp any `json:"MAXFTP"`
 
 	// The hosting plan's maximum number of mailing lists.
 	//
 	// * `unlimited` — The hosting plan allows unlimited mailing lists.
-	Maxlst                 any `json:"MAXLST"`
+	Maxlst any `json:"MAXLST"`
 
 	// The hosting plan's maximum number of parked domains (aliases).
 	//
 	// * `unlimited` — The hosting plan allows unlimited parked domains.
-	Maxpark                any `json:"MAXPARK"`
+	Maxpark any `json:"MAXPARK"`
 
 	// The hosting plan's maximum number of email accounts.
 	//
 	// * `unlimited` — The hosting plan allows unlimited email accounts.
-	Maxpop                 any `json:"MAXPOP"`
+	Maxpop any `json:"MAXPOP"`
 
 	// The hosting plan's maximum number of SQL databases.
 	//
 	// * `unlimited` — The hosting plan allows unlimited SQL databases.
-	Maxsql                 any `json:"MAXSQL"`
+	Maxsql any `json:"MAXSQL"`
 
 	// The hosting plan's maximum number of subdomains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited subdomains.
-	Maxsub                 any `json:"MAXSUB"`
+	Maxsub any `json:"MAXSUB"`
 
 	// The
 	// [percentage of failed or deferred email messages](https://go.cpanel.net/howtopreventspam)
@@ -1596,24 +1578,24 @@ type GetPkgInfoDataPkg struct {
 	// The hosting plan's maximum email account quota size, in megabytes (MB).
 	//
 	// * `unlimited` — The hosting plan allows an unlimited email account quota size.
-	MaxEmailacctQuota      any `json:"MAX_EMAILACCT_QUOTA"`
+	MaxEmailacctQuota any `json:"MAX_EMAILACCT_QUOTA"`
 
 	// The [maximum number of emails](https://go.cpanel.net/howtopreventspam)
 	// that the hosting plan can send in one hour.
 	//
 	// * `unlimited` — The hosting plan allows unlimited emails per hour.
-	MaxEmailPerHour        any `json:"MAX_EMAIL_PER_HOUR"`
+	MaxEmailPerHour any `json:"MAX_EMAIL_PER_HOUR"`
 
 	// The hosting plan's maximum number of Team users.
-	MaxTeamUsers           *int64 `json:"MAX_TEAM_USERS"`
+	MaxTeamUsers *int64 `json:"MAX_TEAM_USERS"`
 
 	// The hosting plan's disk space limit, in megabytes (MB).
 	//
 	//  * `unlimited` — The hosting plan has unlimited disk space.
-	Quota                  any `json:"QUOTA"`
+	Quota any `json:"QUOTA"`
 
 	// A list of one or more of the hosting plan's package extensions, if any exist.
-	PackageExtensions      string `json:"_PACKAGE_EXTENSIONS"`
+	PackageExtensions string `json:"_PACKAGE_EXTENSIONS"`
 }
 
 // GetPkgInfoData is a generated payload type.
@@ -1654,7 +1636,6 @@ func (c *Client) Killpkg(ctx context.Context, args *KillpkgArgs) (*cpanel.WHMRes
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "killpkg", args)
 }
 
-
 // ListpkgsArgs are the parameters of the WHM API 1 function `listpkgs`.
 type ListpkgsArgs struct {
 	// The permissions of packages that you wish to list.
@@ -1689,13 +1670,12 @@ func (c *Client) Listpkgs(ctx context.Context, args *ListpkgsArgs) (*cpanel.WHMR
 	return cpanel.WHMCall[ListpkgsData](ctx, c.c, http.MethodGet, "listpkgs", args)
 }
 
-
 // ListpkgsDataPkgItem is a generated payload type.
 type ListpkgsDataPkgItem struct {
 	// The hosting plan's bandwidth limit, in megabytes (MB).
 	//
 	// * `unlimited` — The hosting plan allows unlimited bandwidth.
-	Bwlimit                any `json:"BWLIMIT"`
+	Bwlimit any `json:"BWLIMIT"`
 
 	// Whether CGI is enabled for the hosting plan.
 	//
@@ -1703,10 +1683,10 @@ type ListpkgsDataPkgItem struct {
 	// * `n` — Disabled.
 	//
 	// Possible values: `y`, `n`.
-	CGI                    string `json:"CGI"`
+	CGI string `json:"CGI"`
 
 	// The hosing plan's cPanel interface theme.
-	Cpmod                  string `json:"CPMOD"`
+	Cpmod string `json:"CPMOD"`
 
 	// Whether the hosting plan enables Digest Authentication.
 	//
@@ -1714,10 +1694,10 @@ type ListpkgsDataPkgItem struct {
 	// * `n` — Disabled.
 	//
 	// Possible values: `y`, `n`.
-	DigestAuth             string `json:"DIGESTAUTH"`
+	DigestAuth string `json:"DIGESTAUTH"`
 
 	// The hosting plan's [feature list](https://go.cpanel.net/whmdocsFeatureManager).
-	Featurelist            string `json:"FEATURELIST"`
+	Featurelist string `json:"FEATURELIST"`
 
 	// Whether shell access is enabled for the hosting plan.
 	//
@@ -1725,7 +1705,7 @@ type ListpkgsDataPkgItem struct {
 	// * `n` — Disabled.
 	//
 	// Possible values: `y`, `n`.
-	Hasshell               string `json:"HASSHELL"`
+	Hasshell string `json:"HASSHELL"`
 
 	// Whether the hosting plan grants accounts a dedicated IP address.
 	//
@@ -1733,35 +1713,35 @@ type ListpkgsDataPkgItem struct {
 	// * `n` — Shared IP address.
 	//
 	// Possible values: `y`, `n`.
-	IP                     string `json:"IP"`
+	IP string `json:"IP"`
 
 	// The hosting plan's locale.
-	Lang                   string `json:"LANG"`
+	Lang string `json:"LANG"`
 
 	// The hosting plan's maximum number of addon domains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited addon domains.
-	Maxaddon               any `json:"MAXADDON"`
+	Maxaddon any `json:"MAXADDON"`
 
 	// The hosting plan's maximum number of FTP accounts.
 	//
 	// * `unlimited` — The hosting plan allows unlimited FTP accounts.
-	Maxftp                 any `json:"MAXFTP"`
+	Maxftp any `json:"MAXFTP"`
 
 	// The hosting plan's maximum number of mailing lists.
 	//
 	// * `unlimited` — The hosting plan allows an unlimited number of mailing lists.
-	Maxlst                 any `json:"MAXLST"`
+	Maxlst any `json:"MAXLST"`
 
 	// The hosting plan's maximum number of parked domains (aliases).
 	//
 	// * `unlimited` — The hosting plan allows unlimited parked domains.
-	Maxpark                any `json:"MAXPARK"`
+	Maxpark any `json:"MAXPARK"`
 
 	// The hosting plan's maximum number of email accounts.
 	//
 	// * `unlimited` — The hosting plan allows unlimited email accounts.
-	Maxpop                 any `json:"MAXPOP"`
+	Maxpop any `json:"MAXPOP"`
 
 	// The hosting plan's maximum number of each available type of SQL
 	// database.
@@ -1771,12 +1751,12 @@ type ListpkgsDataPkgItem struct {
 	// five MySQL databases and up to five PostgreSQL databases.
 	//
 	// * `unlimited` — The hosting plan allows unlimited SQL databases.
-	Maxsql                 any `json:"MAXSQL"`
+	Maxsql any `json:"MAXSQL"`
 
 	// The hosting plan's maximum number of subdomains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited subdomains.
-	Maxsub                 any `json:"MAXSUB"`
+	Maxsub any `json:"MAXSUB"`
 
 	// The
 	// [percentage of failed or deferred email messages](https://go.cpanel.net/howtopreventspam)
@@ -1789,28 +1769,28 @@ type ListpkgsDataPkgItem struct {
 	// The hosting plan's maximum email account quota size, in megabytes (MB).
 	//
 	// * `unlimited` — The hosting plan allows an unlimited email account quota size.
-	MaxEmailacctQuota      any `json:"MAX_EMAILACCT_QUOTA"`
+	MaxEmailacctQuota any `json:"MAX_EMAILACCT_QUOTA"`
 
 	// The
 	// [maximum number of emails](https://go.cpanel.net/howtopreventspam)
 	// that the hosting plan can send in one hour.
 	//
 	// * `unlimited` — The hosting plan allows unlimited emails per hour.
-	MaxEmailPerHour        any `json:"MAX_EMAIL_PER_HOUR"`
+	MaxEmailPerHour any `json:"MAX_EMAIL_PER_HOUR"`
 
 	// The hosting plan's maximum number of Team users.
-	MaxTeamUsers           *int64 `json:"MAX_TEAM_USERS"`
+	MaxTeamUsers *int64 `json:"MAX_TEAM_USERS"`
 
 	// The hosting plan's disk space limit, in megabytes (MB).
 	//
 	// * `unlimited` — The hosting plan allows unlimited disk space.
-	Quota                  any `json:"QUOTA"`
+	Quota any `json:"QUOTA"`
 
 	// A space-separated list of one or more of the hosting plan's package extensions, if any exist.
-	PackageExtensions      string `json:"_PACKAGE_EXTENSIONS"`
+	PackageExtensions string `json:"_PACKAGE_EXTENSIONS"`
 
 	// The hosting plan's name.
-	Name                   string `json:"name"`
+	Name string `json:"name"`
 }
 
 // ListpkgsData is a generated payload type.
@@ -1863,14 +1843,13 @@ func (c *Client) ManageFeatures(ctx context.Context, args *ManageFeaturesArgs) (
 	return cpanel.WHMCall[ManageFeaturesData](ctx, c.c, http.MethodGet, "manage_features", args)
 }
 
-
 // ManageFeaturesDataActionItem is a generated payload type.
 type ManageFeaturesDataActionItem struct {
 	// The feature's ID.
 	Feature string `json:"feature"`
 
 	// The feature's state.
-	Status  string `json:"status"`
+	Status string `json:"status"`
 }
 
 // ManageFeaturesDataFeatureItem is a generated payload type.
@@ -1894,7 +1873,7 @@ type ManageFeaturesDataFeatureItem struct {
 	// or `list` values to the `action` parameter.
 	//
 	// Possible values: `1`, `0`.
-	Enabled     int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The feature's ID.
 	//
@@ -1902,7 +1881,7 @@ type ManageFeaturesDataFeatureItem struct {
 	//
 	// The function **only** returns this value if you pass the `info`
 	// or `list` values to the `action` parameter.
-	FeatureKey  string `json:"feature_key"`
+	FeatureKey string `json:"feature_key"`
 
 	// The feature's documentation link.
 	//
@@ -1910,7 +1889,7 @@ type ManageFeaturesDataFeatureItem struct {
 	//
 	// The function **only** returns this value if you pass the `info`
 	// value to the `action` parameter.
-	Link        string `json:"link"`
+	Link string `json:"link"`
 
 	// The feature's name.
 	//
@@ -1918,7 +1897,7 @@ type ManageFeaturesDataFeatureItem struct {
 	//
 	// The function **only** returns this value if you pass the `info`
 	// value to the `action` parameter.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 
 	// Whether we recommend that you install the feature.
 	//
@@ -1939,7 +1918,7 @@ type ManageFeaturesDataFeatureItem struct {
 	//
 	// The function **only** returns this value if you pass the `info`
 	// value to the `action` parameter.
-	Vendor      string `json:"vendor"`
+	Vendor string `json:"vendor"`
 }
 
 // ManageFeaturesData is a generated payload type.
@@ -1950,7 +1929,7 @@ type ManageFeaturesData struct {
 	//
 	// The function **only** returns this array if you pass the `enabled`
 	// or `disabled` values to the `action` parameter.
-	Action  []ManageFeaturesDataActionItem `json:"action"`
+	Action []ManageFeaturesDataActionItem `json:"action"`
 
 	// An array of objects containing feature information.
 	//
@@ -2095,13 +2074,12 @@ func (c *Client) MatchPkgs(ctx context.Context, args *MatchPkgsArgs) (*cpanel.WH
 	return cpanel.WHMCall[MatchPkgsData](ctx, c.c, http.MethodGet, "matchpkgs", args)
 }
 
-
 // A list of hosting plan settings.
 type MatchPkgsDataPkg struct {
 	// The hosting plan's bandwidth limit, in megabytes (MB).
 	//
 	// * `unlimited` — The hosting plan allows unlimited bandwidth.
-	Bwlimit                any `json:"BWLIMIT"`
+	Bwlimit any `json:"BWLIMIT"`
 
 	// Whether CGI is enabled for the hosting plan.
 	//
@@ -2109,10 +2087,10 @@ type MatchPkgsDataPkg struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	CGI                    int64 `json:"CGI"`
+	CGI int64 `json:"CGI"`
 
 	// The hosting plan's cPanel interface theme.
-	Cpmod                  string `json:"CPMOD"`
+	Cpmod string `json:"CPMOD"`
 
 	// Whether the hosting plan enables Digest Authentication.
 	//
@@ -2120,11 +2098,11 @@ type MatchPkgsDataPkg struct {
 	// * `n` — Disable.
 	//
 	// Possible values: `y`, `n`.
-	DigestAuth             string `json:"DIGESTAUTH"`
+	DigestAuth string `json:"DIGESTAUTH"`
 
 	// The hosting plan's
 	// [feature list](https://go.cpanel.net/whmdocsFeatureManager).
-	Featurelist            string `json:"FEATURELIST"`
+	Featurelist string `json:"FEATURELIST"`
 
 	// Whether Microsoft® FrontPage Extensions are enabled for the account.
 	//
@@ -2133,13 +2111,13 @@ type MatchPkgsDataPkg struct {
 	// cPanel & WHM ignores all FrontPage settings and parameters.
 	//
 	// Possible values: `0`.
-	FrontPage              int64 `json:"FRONTPAGE"`
+	FrontPage int64 `json:"FRONTPAGE"`
 
 	// Whether shell access is enabled for the hosting plan.
 	// * `y` — Enabled. * `n` — Disabled.
 	//
 	// Possible values: `y`, `n`.
-	Hasshell               string `json:"HASSHELL"`
+	Hasshell string `json:"HASSHELL"`
 
 	// Whether the hosting plan grants accounts a dedicated IP address.
 	//
@@ -2147,45 +2125,45 @@ type MatchPkgsDataPkg struct {
 	// * `n` — Shared IP address.
 	//
 	// Possible values: `y`, `n`.
-	IP                     string `json:"IP"`
+	IP string `json:"IP"`
 
 	// The hosting plan's locale.
-	Lang                   string `json:"LANG"`
+	Lang string `json:"LANG"`
 
 	// The hosting plan's maximum number of addon domains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited addon domains.
-	Maxaddon               any `json:"MAXADDON"`
+	Maxaddon any `json:"MAXADDON"`
 
 	// The hosting plan's maximum number of FTP accounts.
 	//
 	// * `unlimited` — The hosting plan allows for unlimited FTP accounts.
-	Maxftp                 any `json:"MAXFTP"`
+	Maxftp any `json:"MAXFTP"`
 
 	// The hosting plan's maximum number of mailing lists.
 	//
 	// * `unlimited` — The hosting plan allows an unlimited number of mailing lists.
-	Maxlst                 any `json:"MAXLST"`
+	Maxlst any `json:"MAXLST"`
 
 	// The hosting plan's maximum number of parked domains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited parked domains.
-	Maxpark                any `json:"MAXPARK"`
+	Maxpark any `json:"MAXPARK"`
 
 	// The hosting plan's maximum number of email accounts.
 	//
 	// * `unlimited` — The hosting plan's can create unlimited email accounts.
-	Maxpop                 any `json:"MAXPOP"`
+	Maxpop any `json:"MAXPOP"`
 
 	// The hosting plan's maximum number of SQL databases.
 	//
 	// * `unlimited` — The hosting plan allows unlimited SQL databases.
-	Maxsql                 any `json:"MAXSQL"`
+	Maxsql any `json:"MAXSQL"`
 
 	// The hosting plan's maximum number of subdomains.
 	//
 	// * `unlimited` — The hosting plan allows unlimited subdomains.
-	Maxsub                 any `json:"MAXSUB"`
+	Maxsub any `json:"MAXSUB"`
 
 	// The
 	// [percentage of failed or deferred email messages](https://go.cpanel.net/howtopreventspam)
@@ -2198,21 +2176,21 @@ type MatchPkgsDataPkg struct {
 	// creates an email account.
 	//
 	// * `unlimited` — The hosting plan allows an unlimited email account quota size.
-	MaxEmailacctQuota      any `json:"MAX_EMAILACCT_QUOTA"`
+	MaxEmailacctQuota any `json:"MAX_EMAILACCT_QUOTA"`
 
 	// The [maximum number of emails](https://go.cpanel.net/howtopreventspam)
 	// that the hosting plan can send in one hour.
 	//
 	// * `unlimited` — The hosting plan allows unlimited emails per hour.
-	MaxEmailPerHour        any `json:"MAX_EMAIL_PER_HOUR"`
+	MaxEmailPerHour any `json:"MAX_EMAIL_PER_HOUR"`
 
 	// The hosting plan's disk space limit.
 	//
 	// * `unlimited` — The hosting plan has unlimited disk space.
-	Quota                  any `json:"QUOTA"`
+	Quota any `json:"QUOTA"`
 
 	// A list of one or more of the hosting plan's package extensions.
-	PackageExtensions      string `json:"_PACKAGE_EXTENSIONS"`
+	PackageExtensions string `json:"_PACKAGE_EXTENSIONS"`
 }
 
 // MatchPkgsData is a generated payload type.
@@ -2254,14 +2232,13 @@ func (c *Client) ReadFeaturelist(ctx context.Context, args *ReadFeaturelistArgs)
 	return cpanel.WHMCall[ReadFeaturelistData](ctx, c.c, http.MethodGet, "read_featurelist", args)
 }
 
-
 // ReadFeaturelistData is a generated payload type.
 type ReadFeaturelistData struct {
 	// The name of the feature list that was read.
 	Featurelist string `json:"featurelist"`
 
 	// A map of feature IDs to their enabled status.
-	Features    map[string]int64 `json:"features"`
+	Features map[string]int64 `json:"features"`
 }
 
 // RemoveOverrideFeaturesForUserArgs are the parameters of the WHM API 1 function `remove_override_features_for_user`.
@@ -2295,7 +2272,6 @@ func (c *Client) RemoveOverrideFeaturesForUser(ctx context.Context, args *Remove
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "remove_override_features_for_user", args)
 }
 
-
 // UpdateFeaturelistArgs are the parameters of the WHM API 1 function `update_featurelist`.
 type UpdateFeaturelistArgs struct {
 	// The feature list's name.
@@ -2327,7 +2303,6 @@ func (c *Client) UpdateFeaturelist(ctx context.Context, args *UpdateFeaturelistA
 	return cpanel.WHMCall[UpdateFeaturelistData](ctx, c.c, http.MethodGet, "update_featurelist", args)
 }
 
-
 // UpdateFeaturelistDataInvalidFeaturesItem is a generated payload type.
 type UpdateFeaturelistDataInvalidFeaturesItem struct {
 	// Whether the feature exists in the feature list.
@@ -2355,13 +2330,13 @@ type UpdateFeaturelistDataUpdatedFeatures struct {
 	// - 0  The feature does not exist in the feature list.
 	//
 	// Possible values: `0`, `1`.
-	FeatureName    int64 `json:"feature name"`
+	FeatureName int64 `json:"feature name"`
 }
 
 // UpdateFeaturelistData is a generated payload type.
 type UpdateFeaturelistData struct {
 	// The feature list's name. A valid string.
-	Featurelist     string `json:"featurelist"`
+	Featurelist string `json:"featurelist"`
 
 	// An array of invalid feature names. This array includes the invalid  feature return.
 	InvalidFeatures []UpdateFeaturelistDataInvalidFeaturesItem `json:"invalid_features"`
@@ -2401,7 +2376,6 @@ func (c *Client) VerifyUserHasFeature(ctx context.Context, args *VerifyUserHasFe
 	return cpanel.WHMCall[VerifyUserHasFeatureData](ctx, c.c, http.MethodGet, "verify_user_has_feature", args)
 }
 
-
 // VerifyUserHasFeatureData is a generated payload type.
 type VerifyUserHasFeatureData struct {
 	// Whether the user can access the feature.
@@ -2415,7 +2389,7 @@ type VerifyUserHasFeatureData struct {
 	// a [feature list](https://go.cpanel.net/whmdocsFeatureManager). This is because
 	// the system presumes users have access to features that exist outside of the
 	// system's feature lists. …
-	HasFeature   int64 `json:"has_feature"`
+	HasFeature int64 `json:"has_feature"`
 
 	// The queried feature's ID.
 	QueryFeature string `json:"query_feature"`

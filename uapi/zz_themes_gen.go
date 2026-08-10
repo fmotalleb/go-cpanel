@@ -27,7 +27,6 @@ func (c *ThemesClient) GetThemeBase(ctx context.Context, extra ...cpanel.Args) (
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Themes", "get_theme_base", cpanel.CombineArgs(extra...))
 }
 
-
 // ThemesListArgs are the parameters of the UAPI function `Themes::list`.
 type ThemesListArgs struct {
 	// Whether to list the account's mail themes.
@@ -49,7 +48,7 @@ type ThemesListArgs struct {
 //
 // **Note:**
 //
-//   The `/usr/local/cpanel/scripts/modify_accounts` script allows you to modify the style and theme for many or all accounts on the server. For more information, read our [The modify_accounts Script](https://go.cpanel.net/modifyaccounts) documentation.
+//	The `/usr/local/cpanel/scripts/modify_accounts` script allows you to modify the style and theme for many or all accounts on the server. For more information, read our [The modify_accounts Script](https://go.cpanel.net/modifyaccounts) documentation.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -57,7 +56,6 @@ type ThemesListArgs struct {
 func (c *ThemesClient) List(ctx context.Context, args *ThemesListArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Themes", "list", args)
 }
-
 
 // ThemesUpdateArgs are the parameters of the UAPI function `Themes::update`.
 type ThemesUpdateArgs struct {
@@ -76,7 +74,7 @@ type ThemesUpdateArgs struct {
 //
 // **Note:**
 //
-//   The `/usr/local/cpanel/scripts/modify_accounts` script allows you to modify the theme for many or all accounts on the server. For more information, read our [The modify_accounts Script](https://go.cpanel.net/modifyaccounts) documentation.
+//	The `/usr/local/cpanel/scripts/modify_accounts` script allows you to modify the theme for many or all accounts on the server. For more information, read our [The modify_accounts Script](https://go.cpanel.net/modifyaccounts) documentation.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -84,4 +82,3 @@ type ThemesUpdateArgs struct {
 func (c *ThemesClient) Update(ctx context.Context, args *ThemesUpdateArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Themes", "update", args)
 }
-

@@ -57,14 +57,13 @@ func (c *ClamScannerClient) CheckDisinfectionStatus(ctx context.Context, args *C
 	return cpanel.UAPICall[ClamScannerCheckDisinfectionStatusData](ctx, c.c, http.MethodGet, "ClamScanner", "check_disinfection_status", args)
 }
 
-
 // ClamScannerCheckDisinfectionStatusData is a generated payload type.
 type ClamScannerCheckDisinfectionStatusData struct {
 	// The list of events recorded in the log. If you pass the `last_id` parameter, only records in the log after that id are returned.
 	Details []json.RawMessage `json:"details"`
 
 	// Path to the disinfection log file. The log file will contain a list of JSON objects one per line.  If the last line includes `"type":"done"`, the file disinfection is complete.
-	Log     string `json:"log"`
+	Log string `json:"log"`
 
 	// * `done` - The disinfection is finished.
 	// * `none` - There is no disinfection scheduled.
@@ -72,7 +71,7 @@ type ClamScannerCheckDisinfectionStatusData struct {
 	// * `running` - The disinfection is in progress.
 	//
 	// Possible values: `done`, `queued`, `running`.
-	Status  string `json:"status"`
+	Status string `json:"status"`
 }
 
 // DisinfectFiles calls the UAPI function `ClamScanner::disinfect_files` — Start disinfecting files with viruses
@@ -100,7 +99,6 @@ func (c *ClamScannerClient) DisinfectFiles(ctx context.Context, extra ...cpanel.
 	return cpanel.UAPICall[ClamScannerDisinfectFilesData](ctx, c.c, http.MethodPost, "ClamScanner", "disinfect_files", cpanel.CombineArgs(extra...))
 }
 
-
 // ClamScannerDisinfectFilesData is a generated payload type.
 type ClamScannerDisinfectFilesData struct {
 	// Path to the disinfection log file. The log file will contain a list of JSON objects one per line.
@@ -111,7 +109,7 @@ type ClamScannerDisinfectFilesData struct {
 	//
 	// the requested files with viruses have be handled as requested.  Use the /ClamScanner/check_disinfection_status
 	// API to check the status of a running or finished disinfection.
-	Log    string `json:"log"`
+	Log string `json:"log"`
 
 	// The Task Queue system's task ID number.
 	TaskID string `json:"task_id"`
@@ -143,7 +141,6 @@ func (c *ClamScannerClient) GetScanPaths(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.UAPICall[ClamScannerGetScanPathsData](ctx, c.c, http.MethodGet, "ClamScanner", "get_scan_paths", cpanel.CombineArgs(extra...))
 }
 
-
 // ClamScannerGetScanPathsData is a generated payload type.
 type ClamScannerGetScanPathsData struct {
 	// The type of path
@@ -153,7 +150,7 @@ type ClamScannerGetScanPathsData struct {
 	// * `public_ftp` — The cPanel account's FTP directory.
 	//
 	// Possible values: `home`, `mail`, `public_html`, `public_ftp`.
-	ID      string `json:"id"`
+	ID string `json:"id"`
 
 	// Short description of the path
 	Message string `json:"message"`
@@ -181,33 +178,32 @@ func (c *ClamScannerClient) GetScanStatus(ctx context.Context, extra ...cpanel.A
 	return cpanel.UAPICall[ClamScannerGetScanStatusData](ctx, c.c, http.MethodGet, "ClamScanner", "get_scan_status", cpanel.CombineArgs(extra...))
 }
 
-
 // ClamScannerGetScanStatusData is a generated payload type.
 type ClamScannerGetScanStatusData struct {
 	// The current file being scanned.
-	CurrentFile      string `json:"current_file"`
+	CurrentFile string `json:"current_file"`
 
 	// List of files scanned and found to be infected.
-	InfectedFiles    []string `json:"infected_files"`
+	InfectedFiles []string `json:"infected_files"`
 
 	// Whether the last scan has completed.
 	// * `1` - scan has completed.
 	// * `0` - scan has **not** completed.
 	//
 	// Possible values: `0`, `1`.
-	ScanComplete     int64 `json:"scan_complete"`
+	ScanComplete int64 `json:"scan_complete"`
 
 	// The number of files already scanned.
 	ScannedFileCount int64 `json:"scanned_file_count"`
 
 	// The number of bytes of data scanned.
-	ScannedFileSize  int64 `json:"scanned_file_size"`
+	ScannedFileSize int64 `json:"scanned_file_size"`
 
 	// The epoch timestamp of the beginning of the last scan.
-	TimeStarted      string `json:"time_started"`
+	TimeStarted string `json:"time_started"`
 
 	// The total number of files found to scan.
-	TotalFileCount   int64 `json:"total_file_count"`
+	TotalFileCount int64 `json:"total_file_count"`
 
 	// The total number of megabytes of data found to scan.
 	TotalFileSizeMiB int64 `json:"total_file_size_MiB"`
@@ -235,11 +231,10 @@ func (c *ClamScannerClient) ListInfectedFiles(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[[]ClamScannerListInfectedFilesDataItem](ctx, c.c, http.MethodGet, "ClamScanner", "list_infected_files", cpanel.CombineArgs(extra...))
 }
 
-
 // ClamScannerListInfectedFilesDataItem is a generated payload type.
 type ClamScannerListInfectedFilesDataItem struct {
 	// An absolute path to the infected file on the system.
-	File      string `json:"file"`
+	File string `json:"file"`
 
 	// A virus type.
 	VirusType string `json:"virus_type"`
@@ -284,4 +279,3 @@ type ClamScannerStartScanArgs struct {
 func (c *ClamScannerClient) StartScan(ctx context.Context, args *ClamScannerStartScanArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ClamScanner", "start_scan", args)
 }
-

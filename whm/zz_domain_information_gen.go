@@ -42,11 +42,10 @@ func (c *Client) ConvertAddonFetchConversionDetails(ctx context.Context, args *C
 	return cpanel.WHMCall[ConvertAddonFetchConversionDetailsData](ctx, c.c, http.MethodGet, "convert_addon_fetch_conversion_details", args)
 }
 
-
 // ConvertAddonFetchConversionDetailsDataStepsItem is a generated payload type.
 type ConvertAddonFetchConversionDetailsDataStepsItem struct {
 	// The date when the step ended.
-	EndTime   int64 `json:"end_time"`
+	EndTime int64 `json:"end_time"`
 
 	// The date when the step started.
 	StartTime int64 `json:"start_time"`
@@ -58,25 +57,25 @@ type ConvertAddonFetchConversionDetailsDataStepsItem struct {
 	// * `FAILED` — The step failed.
 	//
 	// Possible values: `DONE`, `IN PROGRESS`, `FAILED`.
-	Status    string `json:"status"`
+	Status string `json:"status"`
 
 	// A step of the conversion process.
-	StepName  string `json:"step_name"`
+	StepName string `json:"step_name"`
 
 	// The warning message for the step that describes a potential problem, if any exist.
-	Warnings  string `json:"warnings"`
+	Warnings string `json:"warnings"`
 }
 
 // ConvertAddonFetchConversionDetailsData is a generated payload type.
 type ConvertAddonFetchConversionDetailsData struct {
 	// The addon domain you converted into a cPanel account.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// A date that indicates when the convertion ended.
-	JobEndTime   int64 `json:"job_end_time"`
+	JobEndTime int64 `json:"job_end_time"`
 
 	// The conversion's job identification number.
-	JobID        int64 `json:"job_id"`
+	JobID int64 `json:"job_id"`
 
 	// A date that indicates when the conversion started.
 	JobStartTime int64 `json:"job_start_time"`
@@ -88,16 +87,16 @@ type ConvertAddonFetchConversionDetailsData struct {
 	// * `SKIPPED` — The system skipped at least one step in the conversion process.
 	// * `FAILED` — At least one step in the conversion process failed.
 	// * `DONE` — The conversion process finished successfully. …
-	JobStatus    string `json:"job_status"`
+	JobStatus string `json:"job_status"`
 
 	// The source cPanel user account that you converted into an account.
-	SourceAcct   string `json:"source_acct"`
+	SourceAcct string `json:"source_acct"`
 
 	// An array of objects containing the steps taken by the conversion process.
-	Steps        []ConvertAddonFetchConversionDetailsDataStepsItem `json:"steps"`
+	Steps []ConvertAddonFetchConversionDetailsDataStepsItem `json:"steps"`
 
 	// The destination cPanel user account for the conversion.
-	TargetAcct   string `json:"target_acct"`
+	TargetAcct string `json:"target_acct"`
 }
 
 // ConvertAddonFetchDomainDetailsArgs are the parameters of the WHM API 1 function `convert_addon_fetch_domain_details`.
@@ -128,11 +127,10 @@ func (c *Client) ConvertAddonFetchDomainDetails(ctx context.Context, args *Conve
 	return cpanel.WHMCall[ConvertAddonFetchDomainDetailsData](ctx, c.c, http.MethodGet, "convert_addon_fetch_domain_details", args)
 }
 
-
 // ConvertAddonFetchDomainDetailsData is a generated payload type.
 type ConvertAddonFetchDomainDetailsData struct {
 	// The absolute file path of the addon domain.
-	DocRoot                  string `json:"docroot"`
+	DocRoot string `json:"docroot"`
 
 	// Whether the domain uses a dedicated IP address.
 	//
@@ -140,7 +138,7 @@ type ConvertAddonFetchDomainDetailsData struct {
 	// * `0` — The domain does **not** use a dedicated IP address.
 	//
 	// Possible values: `1`, `0`.
-	HasDedicatedIP           int64 `json:"has_dedicated_ip"`
+	HasDedicatedIP int64 `json:"has_dedicated_ip"`
 
 	// Whether an SSL certificate secures the domain.
 	//
@@ -148,10 +146,10 @@ type ConvertAddonFetchDomainDetailsData struct {
 	// * `0` — An SSL certificate does **not** secure the domain.
 	//
 	// Possible values: `1`, `0`.
-	HasSSLCertInstalled      int64 `json:"has_ssl_cert_installed"`
+	HasSSLCertInstalled int64 `json:"has_ssl_cert_installed"`
 
 	// The domain's IP address.
-	IP                       string `json:"ip"`
+	IP string `json:"ip"`
 
 	// Whether the domain supports Server Name Indication (SNI).
 	//
@@ -159,22 +157,22 @@ type ConvertAddonFetchDomainDetailsData struct {
 	// * `0` — The domain does **not** support SNI.
 	//
 	// Possible values: `1`, `0`.
-	IsSniSupported           int64 `json:"is_sni_supported"`
+	IsSniSupported int64 `json:"is_sni_supported"`
 
 	// The number of the domain's autoresponders.
-	NumberOfAutoresponders   int64 `json:"number_of_autoresponders"`
+	NumberOfAutoresponders int64 `json:"number_of_autoresponders"`
 
 	// The number of the domain's domain forwarders.
 	NumberOfDomainForwarders int64 `json:"number_of_domain_forwarders"`
 
 	// The number of the domain's email accounts.
-	NumberOfEmailAccounts    int64 `json:"number_of_email_accounts"`
+	NumberOfEmailAccounts int64 `json:"number_of_email_accounts"`
 
 	// The number of the domain's email forwarders.
-	NumberOfEmailForwarders  int64 `json:"number_of_email_forwarders"`
+	NumberOfEmailForwarders int64 `json:"number_of_email_forwarders"`
 
 	// The addon domain owner's cPanel account username.
-	Owner                    string `json:"owner"`
+	Owner string `json:"owner"`
 }
 
 // ConvertAddonGetConversionStatusArgs are the parameters of the WHM API 1 function `convert_addon_get_conversion_status`.
@@ -212,7 +210,6 @@ func (c *Client) ConvertAddonGetConversionStatus(ctx context.Context, args *Conv
 	return cpanel.WHMCall[map[string]ConvertAddonGetConversionStatusDataValue](ctx, c.c, http.MethodGet, "convert_addon_get_conversion_status", args)
 }
 
-
 // The converion job's identification number.
 //
 // **Note:**
@@ -227,7 +224,7 @@ type ConvertAddonGetConversionStatusDataValue struct {
 	// **Note:**
 	//
 	// The system stores this numeric value as a string.
-	JobID      string `json:"job_id"`
+	JobID string `json:"job_id"`
 
 	// The status of the conversion process.
 	//
@@ -236,7 +233,7 @@ type ConvertAddonGetConversionStatusDataValue struct {
 	// * `FAILED` — The converion failed for some reason.
 	//
 	// Possible values: `DONE`, `IN PROGRESS`, `FAILED`.
-	JobStatus  string `json:"job_status"`
+	JobStatus string `json:"job_status"`
 
 	// The addon domain to convert into a cPanel account.
 	SourceAcct string `json:"source_acct"`
@@ -319,7 +316,6 @@ func (c *Client) ConvertAddonInitiateConversion(ctx context.Context, args *Conve
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "convert_addon_initiate_conversion", args)
 }
 
-
 // ConvertAddonListAddonDomains calls the WHM API 1 function `convert_addon_list_addon_domains` — Return current user's additional domains
 //
 // This function returns a list of addon domains that belong to the current user.
@@ -334,32 +330,31 @@ func (c *Client) ConvertAddonListAddonDomains(ctx context.Context, extra ...cpan
 	return cpanel.WHMCall[map[string]ConvertAddonListAddonDomainsDataValue](ctx, c.c, http.MethodGet, "convert_addon_list_addon_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // An object containing the domain's data.
 //
 // **Note:**
 // The domain's name is the return's name.
 type ConvertAddonListAddonDomainsDataValue struct {
 	// The document root for the addon domain.
-	DocRoot    string `json:"docroot"`
+	DocRoot string `json:"docroot"`
 
 	// The domain's type.
 	DomainType string `json:"domain_type"`
 
 	// The domain's IPv4 address.
-	IP         string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The domain's IPv6 address.
-	IPv6       string `json:"ipv6"`
+	IPv6 string `json:"ipv6"`
 
 	// The domain's owner.
-	Owner      string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// The domain's reseller.
-	Reseller   string `json:"reseller"`
+	Reseller string `json:"reseller"`
 
 	// The domain's subdomain.
-	Subdomain  string `json:"subdomain"`
+	Subdomain string `json:"subdomain"`
 }
 
 // ConvertAddonListConversions calls the WHM API 1 function `convert_addon_list_conversions` — Return additional domains conversion queue
@@ -378,23 +373,22 @@ func (c *Client) ConvertAddonListConversions(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[ConvertAddonListConversionsData](ctx, c.c, http.MethodGet, "convert_addon_list_conversions", cpanel.CombineArgs(extra...))
 }
 
-
 // ConvertAddonListConversionsDataConversionsItem is a generated payload type.
 type ConvertAddonListConversionsDataConversionsItem struct {
 	// The addon domain to convert into a cPanel account.
-	Domain     string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// A date in Unix time format that indicates when the process ended.
-	EndTime    int64 `json:"end_time"`
+	EndTime int64 `json:"end_time"`
 
 	// The conversion's job number.
-	JobID      int64 `json:"job_id"`
+	JobID int64 `json:"job_id"`
 
 	// The cPanel account username that owned the domain at the time of conversion.
 	SourceAcct string `json:"source_acct"`
 
 	// A date in Unix time format that indicates when the process started.
-	StartTime  int64 `json:"start_time"`
+	StartTime int64 `json:"start_time"`
 
 	// The status of the conversion process.
 	// * `DONE` — The conversion is finished.
@@ -402,7 +396,7 @@ type ConvertAddonListConversionsDataConversionsItem struct {
 	// * `FAILED` — The conversion failed.
 	//
 	// Possible values: `DONE`, `IN PROGRESS`, `FAILED`.
-	Status     string `json:"status"`
+	Status string `json:"status"`
 
 	// The destination user account for the conversion.
 	TargetAcct string `json:"target_acct"`
@@ -436,7 +430,6 @@ func (c *Client) DomainUserdata(ctx context.Context, args *DomainUserdataArgs) (
 	return cpanel.WHMCall[DomainUserdataData](ctx, c.c, http.MethodGet, "domainuserdata", args)
 }
 
-
 // DomainUserdataDataUserdataCustomLogItem is a generated payload type.
 type DomainUserdataDataUserdataCustomLogItem struct {
 	// The custom log's format. A valid Apache log format.
@@ -452,35 +445,35 @@ type DomainUserdataDataUserdataScriptAliasItem struct {
 	Path string `json:"path"`
 
 	// The alias URL. This URL redirects to the path URL. A valid URL or file path.
-	URL  string `json:"url"`
+	URL string `json:"url"`
 }
 
 // The domain information.
 type DomainUserdataDataUserdata struct {
 	// A list of objects of Apache log information.
-	CustomLog             []DomainUserdataDataUserdataCustomLogItem `json:"customlog"`
+	CustomLog []DomainUserdataDataUserdataCustomLogItem `json:"customlog"`
 
 	// The path to the domain's document root. A valid filepath.
-	Documentroot          string `json:"documentroot"`
+	Documentroot string `json:"documentroot"`
 
 	// The account's group name. A valid group name.
-	Group                 string `json:"group"`
+	Group string `json:"group"`
 
 	// Whether CGI is enabled for the account.
 	// - 1  Enabled.
 	// - 0  Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Hascgi                int64 `json:"hascgi"`
+	Hascgi int64 `json:"hascgi"`
 
 	// The path to the domain's home directory. The absolute path to the domain's home directory.
-	Homedir               string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// The domain's IP address. A valid IP address.
-	IP                    string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The WHM user who owns the cPanel account. A valid WHM username.
-	Owner                 string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// Whether the PHP open_basedir tweak is enabled.
 	// - 1  Enabled.
@@ -490,32 +483,32 @@ type DomainUserdataDataUserdata struct {
 	PHPOpenBasedirProtect int64 `json:"phpopenbasedirprotect"`
 
 	// Apache's port to access the domain. A valid port number.
-	Port                  int64 `json:"port"`
+	Port int64 `json:"port"`
 
 	// an object containing Apache ScriptAlias information.
-	ScriptAlias           []DomainUserdataDataUserdataScriptAliasItem `json:"scriptalias"`
+	ScriptAlias []DomainUserdataDataUserdataScriptAliasItem `json:"scriptalias"`
 
 	// The account owner's contact email address. A valid email address.
-	ServerAdmin           string `json:"serveradmin"`
+	ServerAdmin string `json:"serveradmin"`
 
 	// The domain's aliases. A space-separated list of domain aliases.
-	ServerAlias           string `json:"serveralias"`
+	ServerAlias string `json:"serveralias"`
 
 	// The main domain on the domain's account. A valid domain name.
-	Servername            string `json:"servername"`
+	Servername string `json:"servername"`
 
 	// The domain's setting for canonical names (CNAMEs).
 	// - On
 	// - Off
-	UseCanonicalName      string `json:"usecanonicalname"`
+	UseCanonicalName string `json:"usecanonicalname"`
 
 	// The cPanel account username. A valid cPanel username.
-	User                  string `json:"user"`
+	User string `json:"user"`
 
 	// The domain's setting for the Apache mod_userdir Tweak.
 	// - On
 	// - Off
-	UserdirProtect        string `json:"userdirprotect"`
+	UserdirProtect string `json:"userdirprotect"`
 }
 
 // DomainUserdataData is a generated payload type.
@@ -535,35 +528,34 @@ func (c *Client) GetDomainInfo(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[GetDomainInfoData](ctx, c.c, http.MethodGet, "get_domain_info", cpanel.CombineArgs(extra...))
 }
 
-
 // GetDomainInfoDataDomainsItem is a generated payload type.
 type GetDomainInfoDataDomainsItem struct {
 	// The document root for the addon domain. An absolute file path.
-	DocRoot            string `json:"docroot"`
+	DocRoot string `json:"docroot"`
 
 	// The account's main domain. A valid domain.
-	Domain             string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The domain's type.
-	DomainType         string `json:"domain_type"`
+	DomainType string `json:"domain_type"`
 
 	// The domain's IPv4 address. A valid IPv4 address.
-	IPv4               string `json:"ipv4"`
+	IPv4 string `json:"ipv4"`
 
 	// The domain's secure IPv4 address. A valid IPv4 address.
-	IPv4SSL            string `json:"ipv4_ssl"`
+	IPv4SSL string `json:"ipv4_ssl"`
 
 	// The domain's IPv6 address.
 	// * A valid IPv6 address.
 	// * `null` An IPv6 address does not exist for this domain.
-	IPv6               *string `json:"ipv6"`
+	IPv6 *string `json:"ipv6"`
 
 	// The domain possesses an IPv6 address.
 	// * `1` An IPv6 address exists for this domain.
 	// * `0` An IPv6 address does not exist for this domain.
 	//
 	// Possible values: `0`, `1`.
-	IPv6IsDedicated    int64 `json:"ipv6_is_dedicated"`
+	IPv6IsDedicated int64 `json:"ipv6_is_dedicated"`
 
 	// Whether ModSecurity is enabled on the server.
 	// * `1` ModSecurity is enabled.
@@ -573,22 +565,22 @@ type GetDomainInfoDataDomainsItem struct {
 	ModsecurityEnabled int64 `json:"modsecurity_enabled"`
 
 	// The parent domain. A valid domain name.
-	ParentDomain       string `json:"parent_domain"`
+	ParentDomain string `json:"parent_domain"`
 
 	// The installed PHP versions.
-	PHPVersion         string `json:"php_version"`
+	PHPVersion string `json:"php_version"`
 
 	// The server's port number.
-	Port               int64 `json:"port"`
+	Port int64 `json:"port"`
 
 	// The server's secure port number.
-	PortSSL            int64 `json:"port_ssl"`
+	PortSSL int64 `json:"port_ssl"`
 
 	// The account username. A cPanel account or reseller username on the server.
-	User               string `json:"user"`
+	User string `json:"user"`
 
 	// The domain's owner.
-	UserOwner          string `json:"user_owner"`
+	UserOwner string `json:"user_owner"`
 }
 
 // GetDomainInfoData is a generated payload type.
@@ -622,7 +614,6 @@ type GetDomainOwnerArgs struct {
 func (c *Client) GetDomainOwner(ctx context.Context, args *GetDomainOwnerArgs) (*cpanel.WHMResult[GetDomainOwnerData], error) {
 	return cpanel.WHMCall[GetDomainOwnerData](ctx, c.c, http.MethodGet, "getdomainowner", args)
 }
-
 
 // GetDomainOwnerData is a generated payload type.
 type GetDomainOwnerData struct {

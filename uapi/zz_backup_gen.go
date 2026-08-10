@@ -84,7 +84,6 @@ func (c *BackupClient) FullbackupToFTP(ctx context.Context, args *BackupFullback
 	return cpanel.UAPICall[BackupFullbackupToFTPData](ctx, c.c, http.MethodGet, "Backup", "fullbackup_to_ftp", args)
 }
 
-
 // BackupFullbackupToFTPData is a generated payload type.
 type BackupFullbackupToFTPData struct {
 	// The backup's process identifier.
@@ -124,7 +123,6 @@ type BackupFullbackupToHomedirArgs struct {
 func (c *BackupClient) FullbackupToHomedir(ctx context.Context, args *BackupFullbackupToHomedirArgs) (*cpanel.UAPIResult[BackupFullbackupToHomedirData], error) {
 	return cpanel.UAPICall[BackupFullbackupToHomedirData](ctx, c.c, http.MethodGet, "Backup", "fullbackup_to_homedir", args)
 }
-
 
 // BackupFullbackupToHomedirData is a generated payload type.
 type BackupFullbackupToHomedirData struct {
@@ -200,7 +198,6 @@ func (c *BackupClient) FullbackupToScpWithKey(ctx context.Context, args *BackupF
 	return cpanel.UAPICall[BackupFullbackupToScpWithKeyData](ctx, c.c, http.MethodGet, "Backup", "fullbackup_to_scp_with_key", args)
 }
 
-
 // BackupFullbackupToScpWithKeyData is a generated payload type.
 type BackupFullbackupToScpWithKeyData struct {
 	// The backup's process identifier.
@@ -268,7 +265,6 @@ func (c *BackupClient) FullbackupToScpWithPassword(ctx context.Context, args *Ba
 	return cpanel.UAPICall[BackupFullbackupToScpWithPasswordData](ctx, c.c, http.MethodGet, "Backup", "fullbackup_to_scp_with_password", args)
 }
 
-
 // BackupFullbackupToScpWithPasswordData is a generated payload type.
 type BackupFullbackupToScpWithPasswordData struct {
 	// The backup's process identifier.
@@ -285,7 +281,6 @@ type BackupFullbackupToScpWithPasswordData struct {
 func (c *BackupClient) ListBackups(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Backup", "list_backups", cpanel.CombineArgs(extra...))
 }
-
 
 // BackupRestoreDatabasesArgs are the parameters of the UAPI function `Backup::restore_databases`.
 type BackupRestoreDatabasesArgs struct {
@@ -340,14 +335,13 @@ func (c *BackupClient) RestoreDatabases(ctx context.Context, args *BackupRestore
 	return cpanel.UAPICall[BackupRestoreDatabasesData](ctx, c.c, http.MethodPost, "Backup", "restore_databases", args)
 }
 
-
 // BackupRestoreDatabasesData is a generated payload type.
 type BackupRestoreDatabasesData struct {
 	// The log file's restoration identification (ID). The system uses the backup restoration's date to create this ID. The ID is in [ISO-8601 Date Time](https://en.wikipedia.org/wiki/ISO_8601) format with the log's revision number appended.
-	LogID    string `json:"log_id"`
+	LogID string `json:"log_id"`
 
 	// The filepath to the backup restoration's log file.
-	LogPath  string `json:"log_path"`
+	LogPath string `json:"log_path"`
 
 	// An array of statements about the database's restoration.
 	Messages []string `json:"messages"`
@@ -408,14 +402,13 @@ func (c *BackupClient) RestoreEmailFilters(ctx context.Context, args *BackupRest
 	return cpanel.UAPICall[BackupRestoreEmailFiltersData](ctx, c.c, http.MethodPost, "Backup", "restore_email_filters", args)
 }
 
-
 // BackupRestoreEmailFiltersData is a generated payload type.
 type BackupRestoreEmailFiltersData struct {
 	// The log file's restoration identification (ID). The system uses the backup restoration's date to create this ID. The ID is in [ISO-8601 Date Time](https://en.wikipedia.org/wiki/ISO_8601) format with the log's revision number appended.
-	LogID    string `json:"log_id"`
+	LogID string `json:"log_id"`
 
 	// The filepath to the backup restoration's log file.
-	LogPath  string `json:"log_path"`
+	LogPath string `json:"log_path"`
 
 	// An array of statements about the database's restoration.
 	Messages []string `json:"messages"`
@@ -476,14 +469,13 @@ func (c *BackupClient) RestoreEmailForwarders(ctx context.Context, args *BackupR
 	return cpanel.UAPICall[BackupRestoreEmailForwardersData](ctx, c.c, http.MethodPost, "Backup", "restore_email_forwarders", args)
 }
 
-
 // BackupRestoreEmailForwardersData is a generated payload type.
 type BackupRestoreEmailForwardersData struct {
 	// The log file's restoration identification (ID). The system uses the backup restoration's date to create this ID. The ID is in [ISO-8601 Date Time](https://en.wikipedia.org/wiki/ISO_8601) format with the log's revision number appended.
-	LogID    string `json:"log_id"`
+	LogID string `json:"log_id"`
 
 	// The filepath to the backup restoration's log file.
-	LogPath  string `json:"log_path"`
+	LogPath string `json:"log_path"`
 
 	// An array of statements about the database's restoration.
 	Messages []string `json:"messages"`
@@ -547,14 +539,13 @@ func (c *BackupClient) RestoreFiles(ctx context.Context, args *BackupRestoreFile
 	return cpanel.UAPICall[BackupRestoreFilesData](ctx, c.c, http.MethodPost, "Backup", "restore_files", args)
 }
 
-
 // BackupRestoreFilesData is a generated payload type.
 type BackupRestoreFilesData struct {
 	// The log file's restoration identification (ID). The system uses the backup restoration's date to create this ID. The ID is in [ISO-8601 Date Time](https://en.wikipedia.org/wiki/ISO_8601) format with the log's revision number appended.
-	LogID    string `json:"log_id"`
+	LogID string `json:"log_id"`
 
 	// The filepath to the backup restoration's log file.
-	LogPath  string `json:"log_path"`
+	LogPath string `json:"log_path"`
 
 	// An array of statements about the database's restoration.
 	Messages []string `json:"messages"`

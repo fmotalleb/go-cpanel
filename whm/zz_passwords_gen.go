@@ -42,7 +42,6 @@ func (c *Client) ForcePasswordChange(ctx context.Context, args *ForcePasswordCha
 	return cpanel.WHMCall[ForcePasswordChangeData](ctx, c.c, http.MethodGet, "forcepasswordchange", args)
 }
 
-
 // ForcePasswordChangeData is a generated payload type.
 type ForcePasswordChangeData struct {
 	// A list of usernames that the system will force to change their passwords. One or more valid usernames.
@@ -70,7 +69,6 @@ type GetPasswordStrengthArgs struct {
 func (c *Client) GetPasswordStrength(ctx context.Context, args *GetPasswordStrengthArgs) (*cpanel.WHMResult[GetPasswordStrengthData], error) {
 	return cpanel.WHMCall[GetPasswordStrengthData](ctx, c.c, http.MethodGet, "get_password_strength", args)
 }
-
 
 // GetPasswordStrengthData is a generated payload type.
 type GetPasswordStrengthData struct {
@@ -139,7 +137,6 @@ type PasswdArgs struct {
 func (c *Client) Passwd(ctx context.Context, args *PasswdArgs) (*cpanel.WHMResult[PasswdData], error) {
 	return cpanel.WHMCall[PasswdData](ctx, c.c, http.MethodGet, "passwd", args)
 }
-
 
 // PasswdData is a generated payload type.
 type PasswdData struct {

@@ -22,15 +22,14 @@ func (c *TeamRolesClient) ListFeatureDescriptions(ctx context.Context, extra ...
 	return cpanel.UAPICall[FeatureDescriptions](ctx, c.c, http.MethodGet, "TeamRoles", "list_feature_descriptions", cpanel.CombineArgs(extra...))
 }
 
-
 // FeatureDescriptions is a generated payload type.
 type FeatureDescriptions struct {
 	// The list of features in a role.
 	Features []string `json:"features"`
 
 	// The role's ID.
-	ID       string `json:"id"`
+	ID string `json:"id"`
 
 	// The role's title.
-	Title    string `json:"title"`
+	Title string `json:"title"`
 }

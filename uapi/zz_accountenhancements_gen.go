@@ -37,7 +37,6 @@ func (c *AccountEnhancementsClient) HasEnhancement(ctx context.Context, args *Ac
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "AccountEnhancements", "has_enhancement", args)
 }
 
-
 // List calls the UAPI function `AccountEnhancements::list` — Return all cPanel account's Account Enhancements
 //
 // This function lists a cPanel account's [Account Enhancements](https://go.cpanel.net/account-enhancements).
@@ -49,11 +48,10 @@ func (c *AccountEnhancementsClient) List(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.UAPICall[[]AccountEnhancementsListDataItem](ctx, c.c, http.MethodGet, "AccountEnhancements", "list", cpanel.CombineArgs(extra...))
 }
 
-
 // AccountEnhancementsListDataItem is a generated payload type.
 type AccountEnhancementsListDataItem struct {
 	// The Account Enhancement's id.
-	ID   string `json:"id"`
+	ID string `json:"id"`
 
 	// The Account Enhancement's name.
 	Name string `json:"name"`

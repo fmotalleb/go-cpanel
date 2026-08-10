@@ -11,7 +11,7 @@ import (
 
 // Client is the entry point of the typed WHM API 1 API. Obtain one with
 // New and call functions directly on it, for example c.CreateAcct(...).
-type Client struct { c *cpanel.Client }
+type Client struct{ c *cpanel.Client }
 
 // New wraps a core cpanel.Client (pointed at a WHM server,
 // typically https://host:2087) with typed WHM API 1 access.
@@ -19,4 +19,3 @@ func New(c *cpanel.Client) *Client { return &Client{c: c} }
 
 // Core returns the underlying core client.
 func (c *Client) Core() *cpanel.Client { return c.c }
-

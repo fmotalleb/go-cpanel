@@ -28,7 +28,6 @@ func (c *WordPressRestoreClient) AnyRunning(ctx context.Context, extra ...cpanel
 	return cpanel.UAPICall[WordPressRestoreAnyRunningData](ctx, c.c, http.MethodGet, "WordPressRestore", "any_running", cpanel.CombineArgs(extra...))
 }
 
-
 // WordPressRestoreAnyRunningData is a generated payload type.
 type WordPressRestoreAnyRunningData struct {
 	Items json.RawMessage `json:"items"`
@@ -60,7 +59,6 @@ func (c *WordPressRestoreClient) Cleanup(ctx context.Context, args *WordPressRes
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "WordPressRestore", "cleanup", args)
 }
 
-
 // WordPressRestoreStartArgs are the parameters of the UAPI function `WordPressRestore::start`.
 type WordPressRestoreStartArgs struct {
 	// The file path to the backup archive.
@@ -91,7 +89,6 @@ type WordPressRestoreStartArgs struct {
 func (c *WordPressRestoreClient) Start(ctx context.Context, args *WordPressRestoreStartArgs) (*cpanel.UAPIResult[WordPressRestoreStartData], error) {
 	return cpanel.UAPICall[WordPressRestoreStartData](ctx, c.c, http.MethodGet, "WordPressRestore", "start", args)
 }
-
 
 // WordPressRestoreStartData is a generated payload type.
 type WordPressRestoreStartData struct {

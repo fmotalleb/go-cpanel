@@ -34,11 +34,11 @@ type ModSecAddRuleArgs struct {
 //
 // **Important:**
 //
-//   This function does not actually deploy the rule. To deploy the rule, use the WHM API 1 Functions - modsec_deploy_all_rule_changes function.
+//	This function does not actually deploy the rule. To deploy the rule, use the WHM API 1 Functions - modsec_deploy_all_rule_changes function.
 //
 // **Important:**
 //
-//   When you disable the Web Server role, the system disables this function.
+//	When you disable the Web Server role, the system disables this function.
 //
 // Available since cPanel & WHM version 11.46.
 //
@@ -47,10 +47,9 @@ func (c *Client) ModSecAddRule(ctx context.Context, args *ModSecAddRuleArgs) (*c
 	return cpanel.WHMCall[ModSecAddRuleData](ctx, c.c, http.MethodGet, "modsec_add_rule", args)
 }
 
-
 // hash that contains information about the new ModSecurity rule. This hash includes the id , rule , disabled , meta_msg , and duplicate returns.
 type ModSecAddRuleDataRule struct {
-	Config       json.RawMessage `json:"config"`
+	Config json.RawMessage `json:"config"`
 
 	ConfigActive json.RawMessage `json:"config_active"`
 
@@ -59,29 +58,29 @@ type ModSecAddRuleDataRule struct {
 	// - 0  Enabled.
 	//
 	// Possible values: `0`, `1`.
-	Disabled     int64 `json:"disabled"`
+	Disabled int64 `json:"disabled"`
 
 	// Whether the rule already exists in the ModSecurity configuration staging file.
 	// - 1  Exists.
 	// - 0  Does not exist.
 	//
 	// Possible values: `0`, `1`.
-	Duplicate    int64 `json:"duplicate"`
+	Duplicate int64 `json:"duplicate"`
 
 	// The ModSecurity rule's ID. A valid ModSecurity rule ID.
-	ID           int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The ModSecurity rule's description. A valid string.
-	MetaMsg      string `json:"meta_msg"`
+	MetaMsg string `json:"meta_msg"`
 
 	// The ModSecurity rule's text. A valid ModSecurity rule.
-	Rule         string `json:"rule"`
+	Rule string `json:"rule"`
 
-	Staged       json.RawMessage `json:"staged"`
+	Staged json.RawMessage `json:"staged"`
 
 	VendorActive json.RawMessage `json:"vendor_active"`
 
-	VendorID     json.RawMessage `json:"vendor_id"`
+	VendorID json.RawMessage `json:"vendor_id"`
 }
 
 // ModSecAddRuleData is a generated payload type.
@@ -128,7 +127,6 @@ func (c *Client) ModSecAddVendor(ctx context.Context, args *ModSecAddVendorArgs)
 	return cpanel.WHMCall[ModSecAddVendorData](ctx, c.c, http.MethodGet, "modsec_add_vendor", args)
 }
 
-
 // ModSecAddVendorData is a generated payload type.
 type ModSecAddVendorData struct {
 	// The URL to the vendor's rule set archive.
@@ -137,7 +135,7 @@ type ModSecAddVendorData struct {
 	//
 	// The system will download a set of rules that is compatible with your version
 	// of ModSecurity.
-	ArchiveURL        string `json:"archive_url"`
+	ArchiveURL string `json:"archive_url"`
 
 	// Whether WebPros International, LLC provided the vendor.
 	//
@@ -145,16 +143,16 @@ type ModSecAddVendorData struct {
 	// * `0` — **Not** cPanel-provided.
 	//
 	// Possible values: `1`, `0`.
-	CpanelProvided    int64 `json:"cpanel_provided"`
+	CpanelProvided int64 `json:"cpanel_provided"`
 
 	// The vendor's description.
-	Description       string `json:"description"`
+	Description string `json:"description"`
 
 	// The download's [MD5](https://en.wikipedia.org/wiki/MD5) checksum value.
-	DistMD5           string `json:"dist_md5"`
+	DistMD5 string `json:"dist_md5"`
 
 	// The download's [sha512](https://en.wikipedia.org/wiki/SHA-2) hash.
-	DistSHA512        string `json:"dist_sha512"`
+	DistSHA512 string `json:"dist_sha512"`
 
 	// Whether the function enabled the vendor.
 	//
@@ -162,10 +160,10 @@ type ModSecAddVendorData struct {
 	// * `0` — **Not** enabled.
 	//
 	// Possible values: `1`, `0`.
-	Enabled           int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The rule set's unique identifier.
-	InstDist          string `json:"inst_dist"`
+	InstDist string `json:"inst_dist"`
 
 	// Whether the function installed the vendor.
 	//
@@ -173,28 +171,28 @@ type ModSecAddVendorData struct {
 	// * `0` — **Not** installed.
 	//
 	// Possible values: `1`, `0`.
-	Installed         int64 `json:"installed"`
+	Installed int64 `json:"installed"`
 
 	// The vendor's metadata file URL.
-	InstalledFrom     string `json:"installed_from"`
+	InstalledFrom string `json:"installed_from"`
 
 	// The vendor's name.
-	Name              string `json:"name"`
+	Name string `json:"name"`
 
 	// The absolute path to the directory that contains the vendor's configuration files.
-	Path              string `json:"path"`
+	Path string `json:"path"`
 
 	// The URL to which the system will send reports.
-	ReportURL         string `json:"report_url"`
+	ReportURL string `json:"report_url"`
 
 	// A list of the ModSecurity versions that the vendor supports.
 	SupportedVersions []string `json:"supported_versions"`
 
 	// The vendor's unique short name.
-	VendorID          string `json:"vendor_id"`
+	VendorID string `json:"vendor_id"`
 
 	// The vendor's website URL.
-	VendorURL         string `json:"vendor_url"`
+	VendorURL string `json:"vendor_url"`
 }
 
 // ModSecAssembleConfigTextArgs are the parameters of the WHM API 1 function `modsec_assemble_config_text`.
@@ -274,7 +272,6 @@ func (c *Client) ModSecAssembleConfigText(ctx context.Context, args *ModSecAssem
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_assemble_config_text", args)
 }
 
-
 // ModSecBatchSettingsArgs are the parameters of the WHM API 1 function `modsec_batch_settings`.
 type ModSecBatchSettingsArgs struct {
 	// The configuration setting's ID.
@@ -335,14 +332,15 @@ type ModSecBatchSettingsArgs struct {
 // This function **only** supports the following ModSecurity™ configuration directives:
 //
 // <table>
-//   <tr><th>setting_id</th><th>Documentation</th></tr>
-//   <tr><td>0</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secauditengine">SecAuditEngine</a></td></tr>
-//   <tr><td>1</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secconnengine">SecConnEngine</a></td></tr>
-//   <tr><td>2</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secruleengine">SecRuleEngine</a></td></tr>
-//   <tr><td>3</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secdisablebackendcompression">SecDisableBackendCompression</a></td></tr>
-//   <tr><td>4</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secgeolookupdb">SecGeoLookupDb</a></td></tr>
-//   <tr><td>5</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secgsblookupdb">SecGsbLookupDb</a></td></tr>
-//   <tr><td>6</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x% …
+//
+//	<tr><th>setting_id</th><th>Documentation</th></tr>
+//	<tr><td>0</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secauditengine">SecAuditEngine</a></td></tr>
+//	<tr><td>1</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secconnengine">SecConnEngine</a></td></tr>
+//	<tr><td>2</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secruleengine">SecRuleEngine</a></td></tr>
+//	<tr><td>3</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secdisablebackendcompression">SecDisableBackendCompression</a></td></tr>
+//	<tr><td>4</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secgeolookupdb">SecGeoLookupDb</a></td></tr>
+//	<tr><td>5</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x%29#secgsblookupdb">SecGsbLookupDb</a></td></tr>
+//	<tr><td>6</td><td><a href="https://github.com/SpiderLabs/ModSecurity/wiki/Reference-Manual-%28v2.x% …
 //
 // Available since cPanel & WHM version 11.46.
 //
@@ -351,11 +349,10 @@ func (c *Client) ModSecBatchSettings(ctx context.Context, args *ModSecBatchSetti
 	return cpanel.WHMCall[ModSecBatchSettingsData](ctx, c.c, http.MethodGet, "modsec_batch_settings", args)
 }
 
-
 // ModSecBatchSettingsDataUpdatedSettingsItemRadioOptionsItem is a generated payload type.
 type ModSecBatchSettingsDataUpdatedSettingsItemRadioOptionsItem struct {
 	// The option's display name.
-	Name   string `json:"name"`
+	Name string `json:"name"`
 
 	// The option.
 	Option string `json:"option"`
@@ -368,13 +365,13 @@ type ModSecBatchSettingsDataUpdatedSettingsItem struct {
 	// **Note:**
 	//
 	// The `modsec2.cpanel.conf` file defines this value.
-	Default2     int64 `json:"default"`
+	Default2 int64 `json:"default"`
 
 	// The setting's description.
-	Description  string `json:"description"`
+	Description string `json:"description"`
 
 	// The setting's Apache configuration directive.
-	DirectIve    string `json:"directive"`
+	DirectIve string `json:"directive"`
 
 	// Whether the setting is an engine directive.
 	//
@@ -382,19 +379,19 @@ type ModSecBatchSettingsDataUpdatedSettingsItem struct {
 	// * `0` — Normal directive.
 	//
 	// Possible values: `1`, `0`.
-	Engine       int64 `json:"engine"`
+	Engine int64 `json:"engine"`
 
 	// The setting's name.
-	Name         string `json:"name"`
+	Name string `json:"name"`
 
 	// An array of objects that contain the setting's options display information.
 	RadioOptions []ModSecBatchSettingsDataUpdatedSettingsItemRadioOptionsItem `json:"radio_options"`
 
 	// The setting ID.
-	SettingID    int64 `json:"setting_id"`
+	SettingID int64 `json:"setting_id"`
 
 	// The setting's current state, as set by the `state` parameter's input value.
-	State        string `json:"state"`
+	State string `json:"state"`
 
 	// The form element that the WHM interface uses to display this setting.
 	//
@@ -402,10 +399,10 @@ type ModSecBatchSettingsDataUpdatedSettingsItem struct {
 	// * `radio` — WHM users modify this setting via a radio button.
 	// * `number` — WHM users modify this setting via a text box that **only**
 	// allows numeric values.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The URL of the setting's entry in the ModSecurity reference manual.
-	URL          string `json:"url"`
+	URL string `json:"url"`
 }
 
 // ModSecBatchSettingsData is a generated payload type.
@@ -442,7 +439,6 @@ func (c *Client) ModSecCheckRule(ctx context.Context, args *ModSecCheckRuleArgs)
 	return cpanel.WHMCall[ModSecCheckRuleData](ctx, c.c, http.MethodGet, "modsec_check_rule", args)
 }
 
-
 // ModSecCheckRuleData is a generated payload type.
 type ModSecCheckRuleData struct {
 	// A string that describes any errors with the ModSecurity
@@ -459,7 +455,7 @@ type ModSecCheckRuleData struct {
 	// * `0` — Invalid rule.
 	//
 	// Possible values: `1`, `0`.
-	Valid   int64 `json:"valid"`
+	Valid int64 `json:"valid"`
 }
 
 // ModSecCloneRuleArgs are the parameters of the WHM API 1 function `modsec_clone_rule`.
@@ -495,11 +491,10 @@ func (c *Client) ModSecCloneRule(ctx context.Context, args *ModSecCloneRuleArgs)
 	return cpanel.WHMCall[ModSecCloneRuleData](ctx, c.c, http.MethodGet, "modsec_clone_rule", args)
 }
 
-
 // A list of information about the cloned ModSecurity rule.
 type ModSecCloneRuleDataRule struct {
 	// The rule's ModSecurity configuration file.
-	Config       string `json:"config"`
+	Config string `json:"config"`
 
 	// Whether the configuration file is active.
 	//
@@ -515,16 +510,16 @@ type ModSecCloneRuleDataRule struct {
 	// * `0` — Enabled.
 	//
 	// Possible values: `1`, `0`.
-	Disabled     int64 `json:"disabled"`
+	Disabled int64 `json:"disabled"`
 
 	// The rule's ID number.
-	ID           int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The rule's description.
-	MetaMsg      string `json:"meta_msg"`
+	MetaMsg string `json:"meta_msg"`
 
 	// The rule's text that includes the new rule ID.
-	Rule         string `json:"rule"`
+	Rule string `json:"rule"`
 
 	// Whether the rule is staged.
 	//
@@ -532,7 +527,7 @@ type ModSecCloneRuleDataRule struct {
 	// * `0` — **Not** staged.
 	//
 	// Possible values: `1`, `0`.
-	Staged       int64 `json:"staged"`
+	Staged int64 `json:"staged"`
 
 	// Whether the vendor is active.
 	//
@@ -548,7 +543,7 @@ type ModSecCloneRuleDataRule struct {
 	//
 	// Any rule that does not belong to a vendor rule set will **not**
 	// return a value.
-	VendorID     string `json:"vendor_id"`
+	VendorID string `json:"vendor_id"`
 }
 
 // ModSecCloneRuleData is a generated payload type.
@@ -577,13 +572,12 @@ func (c *Client) ModSecDeployAllRuleChanges(ctx context.Context, extra ...cpanel
 	return cpanel.WHMCall[ModSecDeployAllRuleChangesData](ctx, c.c, http.MethodGet, "modsec_deploy_all_rule_changes", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecDeployAllRuleChangesDataOutcomesItem is a generated payload type.
 type ModSecDeployAllRuleChangesDataOutcomesItem struct {
 	// The file path to the configuration file.
 	//
 	// * EasyApache 4 — A valid path, relative to the `/etc/apache2/conf.d/modsec/` directory.
-	Config    string `json:"config"`
+	Config string `json:"config"`
 
 	// The error message for a failed deployment.
 	//
@@ -598,7 +592,7 @@ type ModSecDeployAllRuleChangesDataOutcomesItem struct {
 	// * `0` — Unsuccessful deployment.
 	//
 	// Possible values: `1`, `0`.
-	Ok        int64 `json:"ok"`
+	Ok int64 `json:"ok"`
 }
 
 // ModSecDeployAllRuleChangesData is a generated payload type.
@@ -608,7 +602,7 @@ type ModSecDeployAllRuleChangesData struct {
 	// **Note:**
 	//
 	// The function **only** returns this value if an error occurs.
-	Failed   []string `json:"failed"`
+	Failed []string `json:"failed"`
 
 	// An array of objects containing information about the configuration deployment.
 	Outcomes []ModSecDeployAllRuleChangesDataOutcomesItem `json:"outcomes"`
@@ -648,7 +642,6 @@ func (c *Client) ModSecDeployRuleChanges(ctx context.Context, args *ModSecDeploy
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_deploy_rule_changes", args)
 }
 
-
 // ModSecDeploySettingsChanges calls the WHM API 1 function `modsec_deploy_settings_changes` — Enable staged ModSecurity configuration files
 //
 // This function deploys the staged changes to your `modsec2.cpanel.conf` file and
@@ -672,7 +665,6 @@ func (c *Client) ModSecDeployRuleChanges(ctx context.Context, args *ModSecDeploy
 func (c *Client) ModSecDeploySettingsChanges(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_deploy_settings_changes", cpanel.CombineArgs(extra...))
 }
-
 
 // ModSecDisableRuleArgs are the parameters of the WHM API 1 function `modsec_disable_rule`.
 type ModSecDisableRuleArgs struct {
@@ -707,7 +699,6 @@ func (c *Client) ModSecDisableRule(ctx context.Context, args *ModSecDisableRuleA
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_disable_rule", args)
 }
 
-
 // ModSecDisableVendorArgs are the parameters of the WHM API 1 function `modsec_disable_vendor`.
 type ModSecDisableVendorArgs struct {
 	// The vendor's unique short name.
@@ -740,7 +731,6 @@ func (c *Client) ModSecDisableVendor(ctx context.Context, args *ModSecDisableVen
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_disable_vendor", args)
 }
 
-
 // ModSecDisableVendorConfigsArgs are the parameters of the WHM API 1 function `modsec_disable_vendor_configs`.
 type ModSecDisableVendorConfigsArgs struct {
 	// The vendor's unique short name.
@@ -769,7 +759,6 @@ func (c *Client) ModSecDisableVendorConfigs(ctx context.Context, args *ModSecDis
 	return cpanel.WHMCall[ModSecDisableVendorConfigsData](ctx, c.c, http.MethodGet, "modsec_disable_vendor_configs", args)
 }
 
-
 // ModSecDisableVendorConfigsDataOutcomesItem is a generated payload type.
 type ModSecDisableVendorConfigsDataOutcomesItem struct {
 	// Whether the configuration file is active.
@@ -778,10 +767,10 @@ type ModSecDisableVendorConfigsDataOutcomesItem struct {
 	// * `0` — **Not** active.
 	//
 	// Possible values: `1`, `0`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The configuration file path, relative to the `/usr/local/apache/conf/` directory.
-	Config    string `json:"config"`
+	Config string `json:"config"`
 
 	// If the function fails to disable the configuration file, this
 	// return contains the error message.
@@ -797,7 +786,7 @@ type ModSecDisableVendorConfigsDataOutcomesItem struct {
 	// * `0` — Enabled.
 	//
 	// Possible values: `1`, `0`.
-	Ok        int64 `json:"ok"`
+	Ok int64 `json:"ok"`
 }
 
 // ModSecDisableVendorConfigsData is a generated payload type.
@@ -834,7 +823,6 @@ func (c *Client) ModSecDisableVendorUpdates(ctx context.Context, args *ModSecDis
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_disable_vendor_updates", args)
 }
 
-
 // ModSecDiscardAllRuleChanges calls the WHM API 1 function `modsec_discard_all_rule_changes` — Remove all staged ModSecurity rule changes
 //
 // This function discards the staged ModSecurity™ rule changes, if present, for all of
@@ -853,13 +841,12 @@ func (c *Client) ModSecDiscardAllRuleChanges(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[ModSecDiscardAllRuleChangesData](ctx, c.c, http.MethodGet, "modsec_discard_all_rule_changes", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecDiscardAllRuleChangesDataOutcomesItem is a generated payload type.
 type ModSecDiscardAllRuleChangesDataOutcomesItem struct {
 	// The file path to the configuration file.
 	//
 	// * EasyApache 4 — A valid path, relative to the `/etc/apache2/conf.d/modsec/` directory.
-	Config    string `json:"config"`
+	Config string `json:"config"`
 
 	// The error message for a failed discard.
 	//
@@ -874,7 +861,7 @@ type ModSecDiscardAllRuleChangesDataOutcomesItem struct {
 	// * `0` — Failure.
 	//
 	// Possible values: `1`, `0`.
-	Ok        int64 `json:"ok"`
+	Ok int64 `json:"ok"`
 }
 
 // ModSecDiscardAllRuleChangesData is a generated payload type.
@@ -885,7 +872,7 @@ type ModSecDiscardAllRuleChangesData struct {
 	// **Note:**
 	//
 	// The function **only** returns this value if an error occurs.
-	Failed   []string `json:"failed"`
+	Failed []string `json:"failed"`
 
 	// An array of objects containing information about the discarded configuration changes.
 	Outcomes []ModSecDiscardAllRuleChangesDataOutcomesItem `json:"outcomes"`
@@ -926,7 +913,6 @@ type ModSecDiscardRuleChangesArgs struct {
 func (c *Client) ModSecDiscardRuleChanges(ctx context.Context, args *ModSecDiscardRuleChangesArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_discard_rule_changes", args)
 }
-
 
 // ModSecEditRuleArgs are the parameters of the WHM API 1 function `modsec_edit_rule`.
 type ModSecEditRuleArgs struct {
@@ -969,7 +955,6 @@ func (c *Client) ModSecEditRule(ctx context.Context, args *ModSecEditRuleArgs) (
 	return cpanel.WHMCall[ModSecEditRuleData](ctx, c.c, http.MethodGet, "modsec_edit_rule", args)
 }
 
-
 // A list of information about the new ModSecurity rule.
 type ModSecEditRuleDataRule struct {
 	// Whether the ModSecurity rule is disabled.
@@ -981,13 +966,13 @@ type ModSecEditRuleDataRule struct {
 	Disabled int64 `json:"disabled"`
 
 	// The ModSecurity rule's ID.
-	ID       int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The ModSecurity rule's description, if one exists.
-	MetaMsg  string `json:"meta_msg"`
+	MetaMsg string `json:"meta_msg"`
 
 	// The ModSecurity rule's text.
-	Rule     string `json:"rule"`
+	Rule string `json:"rule"`
 }
 
 // ModSecEditRuleData is a generated payload type.
@@ -1029,7 +1014,6 @@ func (c *Client) ModSecEnableVendor(ctx context.Context, args *ModSecEnableVendo
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_enable_vendor", args)
 }
 
-
 // ModSecEnableVendorConfigsArgs are the parameters of the WHM API 1 function `modsec_enable_vendor_configs`.
 type ModSecEnableVendorConfigsArgs struct {
 	// The vendor's unique short name.
@@ -1058,7 +1042,6 @@ func (c *Client) ModSecEnableVendorConfigs(ctx context.Context, args *ModSecEnab
 	return cpanel.WHMCall[ModSecEnableVendorConfigsData](ctx, c.c, http.MethodGet, "modsec_enable_vendor_configs", args)
 }
 
-
 // ModSecEnableVendorConfigsDataOutcomesItem is a generated payload type.
 type ModSecEnableVendorConfigsDataOutcomesItem struct {
 	// Whether the configuration file is active.
@@ -1067,10 +1050,10 @@ type ModSecEnableVendorConfigsDataOutcomesItem struct {
 	// * `0` — **Not** active.
 	//
 	// Possible values: `1`, `0`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The configuration file path, relative to the `/usr/local/apache/conf/` directory.
-	Config    string `json:"config"`
+	Config string `json:"config"`
 
 	// If the function fails to enable the configuration file, this return
 	// contains the error message.
@@ -1086,7 +1069,7 @@ type ModSecEnableVendorConfigsDataOutcomesItem struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	Ok        int64 `json:"ok"`
+	Ok int64 `json:"ok"`
 }
 
 // ModSecEnableVendorConfigsData is a generated payload type.
@@ -1123,7 +1106,6 @@ func (c *Client) ModSecEnableVendorUpdates(ctx context.Context, args *ModSecEnab
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_enable_vendor_updates", args)
 }
 
-
 // ModSecGetConfigTextArgs are the parameters of the WHM API 1 function `modsec_get_config_text`.
 type ModSecGetConfigTextArgs struct {
 	// The ModSecurity configuration file's name.
@@ -1152,7 +1134,6 @@ func (c *Client) ModSecGetConfigText(ctx context.Context, args *ModSecGetConfigT
 	return cpanel.WHMCall[ModSecGetConfigTextData](ctx, c.c, http.MethodGet, "modsec_get_config_text", args)
 }
 
-
 // ModSecGetConfigTextData is a generated payload type.
 type ModSecGetConfigTextData struct {
 	// The ModSecurity configuration file's contents.
@@ -1177,7 +1158,6 @@ func (c *Client) ModSecGetConfigs(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[ModSecGetConfigsData](ctx, c.c, http.MethodGet, "modsec_get_configs", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecGetConfigsDataConfigsItem is a generated payload type.
 type ModSecGetConfigsDataConfigsItem struct {
 	// Whether the configuration file is active.
@@ -1191,10 +1171,10 @@ type ModSecGetConfigsDataConfigsItem struct {
 	// in the `modsec2.cpanel.conf` file.
 	//
 	// Possible values: `1`, `0`.
-	Active   int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The configuration file's location, relative to the `/usr/local/apache/conf` directory.
-	Config   string `json:"config"`
+	Config string `json:"config"`
 
 	// The vendor's unique short name.
 	VendorID string `json:"vendor_id"`
@@ -1223,7 +1203,6 @@ func (c *Client) ModSecGetConfigsWithChangesPending(ctx context.Context, extra .
 	return cpanel.WHMCall[ModSecGetConfigsWithChangesPendingData](ctx, c.c, http.MethodGet, "modsec_get_configs_with_changes_pending", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecGetConfigsWithChangesPendingData is a generated payload type.
 type ModSecGetConfigsWithChangesPendingData struct {
 	// An array of strings containing one or more ModSecurity configuration files.
@@ -1247,11 +1226,10 @@ func (c *Client) ModSecGetLog(ctx context.Context, extra ...cpanel.Args) (*cpane
 	return cpanel.WHMCall[[]ModSecGetLogDataItem](ctx, c.c, http.MethodGet, "modsec_get_log", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecGetLogDataItem is a generated payload type.
 type ModSecGetLogDataItem struct {
 	// The web server's response to the client.
-	ActionDesc    string `json:"action_desc"`
+	ActionDesc string `json:"action_desc"`
 
 	// Whether the file in the `meta_file` return exists.
 	//
@@ -1259,73 +1237,73 @@ type ModSecGetLogDataItem struct {
 	// * `0` — The files does **not** exist.
 	//
 	// Possible values: `1`, `0`.
-	FileExists    int64 `json:"file_exists"`
+	FileExists int64 `json:"file_exists"`
 
 	// This parameter **only** returns the `null` value.
-	Handler       *string `json:"handler"`
+	Handler *string `json:"handler"`
 
 	// The virtual host's (vhost) domain name.
-	Host          string `json:"host"`
+	Host string `json:"host"`
 
 	// The
 	// [HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
 	// that the client used to generate the hit.
-	HTTPMethod    string `json:"http_method"`
+	HTTPMethod string `json:"http_method"`
 
 	// The
 	// [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
 	// that the web server returned.
-	HTTPStatus    int64 `json:"http_status"`
+	HTTPStatus int64 `json:"http_status"`
 
 	// The HTTP version number.
-	HTTPVersion   string `json:"http_version"`
+	HTTPVersion string `json:"http_version"`
 
 	// The line number from the `modsec` database.
-	ID            int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The client's IP address.
-	IP            string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The specific criteria from the ModSecurity rule that generated the hit.
 	JustIfiCATiOn string `json:"justification"`
 
 	// The ModSecurity configuration file with the rule that triggered the log entry.
-	MetaFile      string `json:"meta_file"`
+	MetaFile string `json:"meta_file"`
 
 	// The ID of the ModSecurity rule that triggered the log entry.
-	MetaID        int64 `json:"meta_id"`
+	MetaID int64 `json:"meta_id"`
 
 	// The ModSecurity rule's line number that triggered the log entry.
-	MetaLine      int64 `json:"meta_line"`
+	MetaLine int64 `json:"meta_line"`
 
 	// The transaction data fragment from the ModSecurity rule's logdata action.
-	MetaLogdata   *string `json:"meta_logdata"`
+	MetaLogdata *string `json:"meta_logdata"`
 
 	// The human-readable message from the ModSecurity rule's `msg` action.
-	MetaMsg       string `json:"meta_msg"`
+	MetaMsg string `json:"meta_msg"`
 
 	// The byte offset at which a match occurred within the target data.
 	//
 	// **Note:**
 	//
 	// This data is not always available.
-	MetaOffset    int64 `json:"meta_offset"`
+	MetaOffset int64 `json:"meta_offset"`
 
 	// The revision number from the ModSecurity rule's `rev` action.
-	MetaRev       *int64 `json:"meta_rev"`
+	MetaRev *int64 `json:"meta_rev"`
 
 	// The hit severity level from the ModSecurity rule's `severity` action.
-	MetaSeverity  *string `json:"meta_severity"`
+	MetaSeverity *string `json:"meta_severity"`
 
 	// The client-requested URI.
 	//
 	// **Note:**
 	//
 	// This data is not always available.
-	MetaUri       *string `json:"meta_uri"`
+	MetaUri *string `json:"meta_uri"`
 
 	// The accessed file's absolute path and filename.
-	Path          string `json:"path"`
+	Path string `json:"path"`
 
 	// Whether the system can report the rule to the vendor.
 	//
@@ -1338,17 +1316,17 @@ type ModSecGetLogDataItem struct {
 	// report a rule.
 	//
 	// Possible values: `1`, `0`.
-	ReportAble    int64 `json:"reportable"`
+	ReportAble int64 `json:"reportable"`
 
 	// When the system recorded the log entry, in `YYYY-MM-DD HH:mm:SS` format.
 	//
 	// **Note:**
 	//
 	// This value uses the server's configured time zone.
-	Timestamp     string `json:"timestamp"`
+	Timestamp string `json:"timestamp"`
 
 	// The server's configured timezone, in minutes difference UTC/GMT format.
-	Timezone      int64 `json:"timezone"`
+	Timezone int64 `json:"timezone"`
 }
 
 // ModSecGetRulesArgs are the parameters of the WHM API 1 function `modsec_get_rules`.
@@ -1412,11 +1390,10 @@ func (c *Client) ModSecGetRules(ctx context.Context, args *ModSecGetRulesArgs) (
 	return cpanel.WHMCall[ModSecGetRulesData](ctx, c.c, http.MethodGet, "modsec_get_rules", args)
 }
 
-
 // ModSecGetRulesDataChunksItem is a generated payload type.
 type ModSecGetRulesDataChunksItem struct {
 	// The file path to the configuration file, relative to the `/usr/local/apache/conf/` directory.
-	Config       string `json:"config"`
+	Config string `json:"config"`
 
 	// Whether the configuration file is active.
 	//
@@ -1432,17 +1409,17 @@ type ModSecGetRulesDataChunksItem struct {
 	// * `0` — Active.
 	//
 	// Possible values: `1`, `0`.
-	Disabled     int64 `json:"disabled"`
+	Disabled int64 `json:"disabled"`
 
 	// The ModSecurity rule's ID number.
 	//
 	// **Note:**
 	//
 	// The function does not always return this parameter.
-	ID           int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The description of the rule.
-	MetaMsg      string `json:"meta_msg"`
+	MetaMsg string `json:"meta_msg"`
 
 	// The rule's text.
 	//
@@ -1450,7 +1427,7 @@ type ModSecGetRulesDataChunksItem struct {
 	//
 	// This return may include multiple directives and comments if they
 	// are all part of the same rule.
-	Rule         string `json:"rule"`
+	Rule string `json:"rule"`
 
 	// Whether the system has added the rule to the ModSecurity configuration file.
 	//
@@ -1458,7 +1435,7 @@ type ModSecGetRulesDataChunksItem struct {
 	// * `0` — Rule **not** staged.
 	//
 	// Possible values: `1`, `0`.
-	Staged       int64 `json:"staged"`
+	Staged int64 `json:"staged"`
 
 	// Whether the vendor is active.
 	//
@@ -1469,13 +1446,13 @@ type ModSecGetRulesDataChunksItem struct {
 	VendorActive int64 `json:"vendor_active"`
 
 	// The vendor's unique short name.
-	VendorID     string `json:"vendor_id"`
+	VendorID string `json:"vendor_id"`
 }
 
 // ModSecGetRulesData is a generated payload type.
 type ModSecGetRulesData struct {
 	// An array of objects that contains elements that represent the contents of each configuration file's rules.
-	Chunks        []ModSecGetRulesDataChunksItem `json:"chunks"`
+	Chunks []ModSecGetRulesDataChunksItem `json:"chunks"`
 
 	// Whether the chunks array includes staged changes that the system has not
 	// yet added to the ModSecurity configuration file.
@@ -1504,12 +1481,11 @@ func (c *Client) ModSecGetSettings(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[ModSecGetSettingsData](ctx, c.c, http.MethodGet, "modsec_get_settings", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecGetSettingsDataSettingsItemRadioOptionsItem is a generated payload type.
 type ModSecGetSettingsDataSettingsItemRadioOptionsItem struct {
 	// The setting name to display to the user. The user's
 	// [locale](https://go.cpanel.net/locale) may translate this value.
-	Name   string `json:"name"`
+	Name string `json:"name"`
 
 	// The setting that the system used to select the setting's state.
 	//
@@ -1525,14 +1501,14 @@ type ModSecGetSettingsDataSettingsItemRadioOptionsItem struct {
 // ModSecGetSettingsDataSettingsItem is a generated payload type.
 type ModSecGetSettingsDataSettingsItem struct {
 	// The setting's default value.
-	Default2     any `json:"default"`
+	Default2 any `json:"default"`
 
 	// The setting's description. The user's
 	// [locale](https://go.cpanel.net/locale) may translate this value.
-	Description  string `json:"description"`
+	Description string `json:"description"`
 
 	// The setting's Apache® configuration directive.
-	DirectIve    string `json:"directive"`
+	DirectIve string `json:"directive"`
 
 	// Whether the setting is an engine directive. If the setting is
 	// a normal directive, the function does **not** return this value.
@@ -1540,17 +1516,17 @@ type ModSecGetSettingsDataSettingsItem struct {
 	// * `1` — Engine directive.
 	//
 	// Possible values: `1`.
-	Engine       int64 `json:"engine"`
+	Engine int64 `json:"engine"`
 
 	// Whether the setting is missing.
 	//
 	// * `1` — The value is missing.
 	//
 	// Possible values: `1`.
-	Missing      int64 `json:"missing"`
+	Missing int64 `json:"missing"`
 
 	// The setting's name.
-	Name         string `json:"name"`
+	Name string `json:"name"`
 
 	// An array of objects containing the options that the client should
 	// display, as radio buttons, for this setting in a user interface.
@@ -1562,10 +1538,10 @@ type ModSecGetSettingsDataSettingsItem struct {
 	RadioOptions []ModSecGetSettingsDataSettingsItemRadioOptionsItem `json:"radio_options"`
 
 	// The setting ID.
-	SettingID    int64 `json:"setting_id"`
+	SettingID int64 `json:"setting_id"`
 
 	// The setting's current state, if available.
-	State        string `json:"state"`
+	State string `json:"state"`
 
 	// The form element that the WHM interface uses to display this setting.
 	//
@@ -1575,10 +1551,10 @@ type ModSecGetSettingsDataSettingsItem struct {
 	// only allows numeric values.
 	//
 	// Possible values: `text`, `radio`, `number`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The URL of the setting's entry in the ModSecurity reference manual.
-	URL          string `json:"url"`
+	URL string `json:"url"`
 
 	// A list of validators to apply when updating the state. Use these validators
 	// to perform frontend validation through your preferred implementation
@@ -1588,7 +1564,7 @@ type ModSecGetSettingsDataSettingsItem struct {
 	//
 	// The function may represent each validator as either a string or an
 	// object. …
-	Validation   []json.RawMessage `json:"validation"`
+	Validation []json.RawMessage `json:"validation"`
 }
 
 // ModSecGetSettingsData is a generated payload type.
@@ -1614,7 +1590,6 @@ func (c *Client) ModSecGetVendors(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[ModSecGetVendorsData](ctx, c.c, http.MethodGet, "modsec_get_vendors", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecGetVendorsDataVendorsItemConfigsItem is a generated payload type.
 type ModSecGetVendorsDataVendorsItemConfigsItem struct {
 	// Whether the configuration is active.
@@ -1623,10 +1598,10 @@ type ModSecGetVendorsDataVendorsItemConfigsItem struct {
 	// * `0` — Inactive.
 	//
 	// Possible values: `1`, `0`.
-	Active   int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The configuration file path, relative to the `/usr/local/apache/conf` directory.
-	Config   string `json:"config"`
+	Config string `json:"config"`
 
 	// The vendor's unique short name.
 	VendorID string `json:"vendor_id"`
@@ -1635,10 +1610,10 @@ type ModSecGetVendorsDataVendorsItemConfigsItem struct {
 // ModSecGetVendorsDataVendorsItem is a generated payload type.
 type ModSecGetVendorsDataVendorsItem struct {
 	// The URL to download the vendor rules.
-	ArchiveURL        string `json:"archive_url"`
+	ArchiveURL string `json:"archive_url"`
 
 	// A list of information about the configuration files that the vendor provides.
-	Configs           []ModSecGetVendorsDataVendorsItemConfigsItem `json:"configs"`
+	Configs []ModSecGetVendorsDataVendorsItemConfigsItem `json:"configs"`
 
 	// Whether cPanel & WHM installed the vendor rule set.
 	//
@@ -1646,17 +1621,17 @@ type ModSecGetVendorsDataVendorsItem struct {
 	// * `0` — **Not** installed.
 	//
 	// Possible values: `1`, `0`.
-	CpanelProvided    int64 `json:"cpanel_provided"`
+	CpanelProvided int64 `json:"cpanel_provided"`
 
 	// The ModSecurity vendor's description.
-	Description       string `json:"description"`
+	Description string `json:"description"`
 
 	// The download's [MD5](https://en.wikipedia.org/wiki/MD5)
 	// checksum value.
-	DistMD5           string `json:"dist_md5"`
+	DistMD5 string `json:"dist_md5"`
 
 	// The download's [sha512](https://en.wikipedia.org/wiki/SHA-2) hash.
-	DistSHA512        string `json:"dist_sha512"`
+	DistSHA512 string `json:"dist_sha512"`
 
 	// Whether the vendor is enabled.
 	//
@@ -1664,13 +1639,13 @@ type ModSecGetVendorsDataVendorsItem struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	Enabled           int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The number of configuration files in the vendor rule set.
-	InUse             int64 `json:"in_use"`
+	InUse int64 `json:"in_use"`
 
 	// The rule set version's unique identifier.
-	InstDist          string `json:"inst_dist"`
+	InstDist string `json:"inst_dist"`
 
 	// Whether the vendor is installed.
 	//
@@ -1678,16 +1653,16 @@ type ModSecGetVendorsDataVendorsItem struct {
 	// * `0` — **Not** installed.
 	//
 	// Possible values: `1`, `0`.
-	Installed         int64 `json:"installed"`
+	Installed int64 `json:"installed"`
 
 	// The URL to the vendor's metadata file.
-	InstalledFrom     string `json:"installed_from"`
+	InstalledFrom string `json:"installed_from"`
 
 	// The vendor's name.
-	Name              string `json:"name"`
+	Name string `json:"name"`
 
 	// The full path to the vendor's ModSecurity configuration files.
-	Path              string `json:"path"`
+	Path string `json:"path"`
 
 	// The URL of the vendor's Report Receiver API endpoint that reports
 	// problems with the vendor's rules.
@@ -1695,7 +1670,7 @@ type ModSecGetVendorsDataVendorsItem struct {
 	// **Note:**
 	//
 	// The function may not always return this parameter.
-	ReportURL         string `json:"report_url"`
+	ReportURL string `json:"report_url"`
 
 	// A list of the ModSecurity versions that the vendor supports.
 	SupportedVersions []string `json:"supported_versions"`
@@ -1706,13 +1681,13 @@ type ModSecGetVendorsDataVendorsItem struct {
 	// * `0` — **Cannot** receive automatic updates.
 	//
 	// Possible values: `1`, `0`.
-	Update            int64 `json:"update"`
+	Update int64 `json:"update"`
 
 	// The vendor's unique short name.
-	VendorID          string `json:"vendor_id"`
+	VendorID string `json:"vendor_id"`
 
 	// The URL of the vendor's website.
-	VendorURL         string `json:"vendor_url"`
+	VendorURL string `json:"vendor_url"`
 }
 
 // ModSecGetVendorsData is a generated payload type.
@@ -1735,7 +1710,6 @@ type ModSecGetVendorsData struct {
 func (c *Client) ModSecIsInstalled(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ModSecIsInstalledData], error) {
 	return cpanel.WHMCall[ModSecIsInstalledData](ctx, c.c, http.MethodGet, "modsec_is_installed", cpanel.CombineArgs(extra...))
 }
-
 
 // ModSecIsInstalledDataData is a generated payload type.
 type ModSecIsInstalledDataData struct {
@@ -1782,7 +1756,6 @@ func (c *Client) ModSecMakeConfigActive(ctx context.Context, args *ModSecMakeCon
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_make_config_active", args)
 }
 
-
 // ModSecMakeConfigInactiveArgs are the parameters of the WHM API 1 function `modsec_make_config_inactive`.
 type ModSecMakeConfigInactiveArgs struct {
 	// The ModSecurity configuration file's path and filename, relative to the `/etc/apache2/conf.d/` directory.
@@ -1812,7 +1785,6 @@ type ModSecMakeConfigInactiveArgs struct {
 func (c *Client) ModSecMakeConfigInactive(ctx context.Context, args *ModSecMakeConfigInactiveArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_make_config_inactive", args)
 }
-
 
 // ModSecPreviewVendorArgs are the parameters of the WHM API 1 function `modsec_preview_vendor`.
 type ModSecPreviewVendorArgs struct {
@@ -1849,11 +1821,10 @@ func (c *Client) ModSecPreviewVendor(ctx context.Context, args *ModSecPreviewVen
 	return cpanel.WHMCall[ModSecPreviewVendorData](ctx, c.c, http.MethodGet, "modsec_preview_vendor", args)
 }
 
-
 // ModSecPreviewVendorData is a generated payload type.
 type ModSecPreviewVendorData struct {
 	// The URL to the vendor's rule set archive.
-	ArchiveURL        string `json:"archive_url"`
+	ArchiveURL string `json:"archive_url"`
 
 	// Whether WebPros International, LLC provided the vendor.
 	//
@@ -1861,16 +1832,16 @@ type ModSecPreviewVendorData struct {
 	// * `0` — **Not** cPanel-provided.
 	//
 	// Possible values: `1`, `0`.
-	CpanelProvided    int64 `json:"cpanel_provided"`
+	CpanelProvided int64 `json:"cpanel_provided"`
 
 	// The vendor's description.
-	Description       string `json:"description"`
+	Description string `json:"description"`
 
 	// The download's [MD5](https://en.wikipedia.org/wiki/Md5) checksum value.
-	DistMD5           string `json:"dist_md5"`
+	DistMD5 string `json:"dist_md5"`
 
 	// The download's [sha512](https://en.wikipedia.org/wiki/SHA-2) hash.
-	DistSHA512        string `json:"dist_sha512"`
+	DistSHA512 string `json:"dist_sha512"`
 
 	// Whether the vendor is installed.
 	//
@@ -1878,28 +1849,28 @@ type ModSecPreviewVendorData struct {
 	// * `0` — **Not** installed.
 	//
 	// Possible values: `1`, `0`.
-	Installed         int64 `json:"installed"`
+	Installed int64 `json:"installed"`
 
 	// The vendor's metadata file URL.
-	InstalledFrom     string `json:"installed_from"`
+	InstalledFrom string `json:"installed_from"`
 
 	// The vendor's name.
-	Name              string `json:"name"`
+	Name string `json:"name"`
 
 	// The absolute path to the directory that contains the vendor's configuration files.
-	Path              string `json:"path"`
+	Path string `json:"path"`
 
 	// The URL to which the system will send reports.
-	ReportURL         string `json:"report_url"`
+	ReportURL string `json:"report_url"`
 
 	// A list of the ModSecurity versions that the vendor supports.
 	SupportedVersions []string `json:"supported_versions"`
 
 	// The vendor's unique short name.
-	VendorID          string `json:"vendor_id"`
+	VendorID string `json:"vendor_id"`
 
 	// The vendor's website URL.
-	VendorURL         string `json:"vendor_url"`
+	VendorURL string `json:"vendor_url"`
 }
 
 // ModSecRemoveRuleArgs are the parameters of the WHM API 1 function `modsec_remove_rule`.
@@ -1935,7 +1906,6 @@ func (c *Client) ModSecRemoveRule(ctx context.Context, args *ModSecRemoveRuleArg
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_remove_rule", args)
 }
 
-
 // ModSecRemoveSettingArgs are the parameters of the WHM API 1 function `modsec_remove_setting`.
 type ModSecRemoveSettingArgs struct {
 	// The setting's ID. For a list of available settings and their IDs, call the `modsec_get_settings` function.
@@ -1963,7 +1933,6 @@ type ModSecRemoveSettingArgs struct {
 func (c *Client) ModSecRemoveSetting(ctx context.Context, args *ModSecRemoveSettingArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_remove_setting", args)
 }
-
 
 // ModSecRemoveVendorArgs are the parameters of the WHM API 1 function `modsec_remove_vendor`.
 type ModSecRemoveVendorArgs struct {
@@ -1994,7 +1963,6 @@ type ModSecRemoveVendorArgs struct {
 func (c *Client) ModSecRemoveVendor(ctx context.Context, args *ModSecRemoveVendorArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_remove_vendor", args)
 }
-
 
 // ModSecReportRuleArgs are the parameters of the WHM API 1 function `modsec_report_rule`.
 type ModSecReportRuleArgs struct {
@@ -2062,54 +2030,53 @@ func (c *Client) ModSecReportRule(ctx context.Context, args *ModSecReportRuleArg
 	return cpanel.WHMCall[ModSecReportRuleData](ctx, c.c, http.MethodGet, "modsec_report_rule", args)
 }
 
-
 // ModSecReportRuleDataReportItemHitsItem is a generated payload type.
 type ModSecReportRuleDataReportItemHitsItem struct {
 	// The web server's response to the client.
-	ActionDesc    string `json:"action_desc"`
+	ActionDesc string `json:"action_desc"`
 
 	// This parameter only returns a `null` value.
-	Handler       *string `json:"handler"`
+	Handler *string `json:"handler"`
 
 	// The virtual host's (vhost) domain name.
-	Host          string `json:"host"`
+	Host string `json:"host"`
 
 	// The
 	// [HTTP method](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
 	// that the client used to generate the hit.
-	HTTPMethod    string `json:"http_method"`
+	HTTPMethod string `json:"http_method"`
 
 	// The
 	// [HTTP status code](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)
 	// that the web server returned.
-	HTTPStatus    int64 `json:"http_status"`
+	HTTPStatus int64 `json:"http_status"`
 
 	// The HTTP version number.
-	HTTPVersion   string `json:"http_version"`
+	HTTPVersion string `json:"http_version"`
 
 	// The `modsec` database line number.
-	ID            int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The client's IP address.
-	IP            string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The specific criteria from the ModSecurity rule that generated the hit.
 	JustIfiCATiOn string `json:"justification"`
 
 	// The ModSecurity configuration file that contains the rule that triggered the log entry.
-	MetaFile      string `json:"meta_file"`
+	MetaFile string `json:"meta_file"`
 
 	// The ID of the ModSecurity rule that triggered the log entry.
-	MetaID        int64 `json:"meta_id"`
+	MetaID int64 `json:"meta_id"`
 
 	// The line number of the ModSecurity rule that triggered the log entry.
-	MetaLine      int64 `json:"meta_line"`
+	MetaLine int64 `json:"meta_line"`
 
 	// The transaction data fragment from the ModSecurity rule's `logdata` action.
-	MetaLogdata   *string `json:"meta_logdata"`
+	MetaLogdata *string `json:"meta_logdata"`
 
 	// The human-readable message from the ModSecurity rule's `msg` action.
-	MetaMsg       *string `json:"meta_msg"`
+	MetaMsg *string `json:"meta_msg"`
 
 	// The byte offset at which a match occurred within the target
 	// data.
@@ -2117,10 +2084,10 @@ type ModSecReportRuleDataReportItemHitsItem struct {
 	// **Note:**
 	//
 	// This data is not always available.
-	MetaOffset    int64 `json:"meta_offset"`
+	MetaOffset int64 `json:"meta_offset"`
 
 	// The revision number from the ModSecurity rule's `rev` action.
-	MetaRev       *int64 `json:"meta_rev"`
+	MetaRev *int64 `json:"meta_rev"`
 
 	// The hit severity level from the ModSecurity
 	// rule's `severity` action.
@@ -2135,39 +2102,39 @@ type ModSecReportRuleDataReportItemHitsItem struct {
 	// * `WARNING`
 	//
 	// Possible values: `ALERT`, `CRITICAL`, `DEBUG`, `EMERGENCY`, `ERROR`, `INFO`, `NOTICE`, `WARNING`.
-	MetaSeverity  *string `json:"meta_severity"`
+	MetaSeverity *string `json:"meta_severity"`
 
 	// The client-requested URI.
 	//
 	// **Note:**
 	//
 	// This data is not always available.
-	MetaUri       *string `json:"meta_uri"`
+	MetaUri *string `json:"meta_uri"`
 
 	// The accessed file's path, relative to the document root.
-	Path          string `json:"path"`
+	Path string `json:"path"`
 
 	// The date and time at which the log entry was made.
 	//
 	// **Note:**
 	//
 	// This parameter uses the server's configured time zone.
-	Timestamp     string `json:"timestamp"`
+	Timestamp string `json:"timestamp"`
 
 	// The server's configured timezone, in minutes difference from UTC/GMT.
-	Timezone      string `json:"timezone"`
+	Timezone string `json:"timezone"`
 }
 
 // ModSecReportRuleDataReportItem is a generated payload type.
 type ModSecReportRuleDataReportItem struct {
 	// The contact email address to send with the error report. This allows the rule's vendor to reply to the report directly.
-	Email    string `json:"email"`
+	Email string `json:"email"`
 
 	// An array of objects containing information about the hit.
-	Hits     []ModSecReportRuleDataReportItemHitsItem `json:"hits"`
+	Hits []ModSecReportRuleDataReportItemHitsItem `json:"hits"`
 
 	// A short message that explains the reason for the report.
-	Message  string `json:"message"`
+	Message string `json:"message"`
 
 	// The rule text from the configuration file.
 	RuleText string `json:"rule_text"`
@@ -2178,7 +2145,7 @@ type ModSecReportRuleDataReportItem struct {
 	//
 	// This value does **not** use a specified format. Treat the value as
 	// freeform text.
-	Type2    string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // ModSecReportRuleData is a generated payload type.
@@ -2222,7 +2189,6 @@ func (c *Client) ModSecSetConfigText(ctx context.Context, args *ModSecSetConfigT
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_set_config_text", args)
 }
 
-
 // ModSecSetSettingArgs are the parameters of the WHM API 1 function `modsec_set_setting`.
 type ModSecSetSettingArgs struct {
 	// The setting's ID.
@@ -2263,11 +2229,10 @@ func (c *Client) ModSecSetSetting(ctx context.Context, args *ModSecSetSettingArg
 	return cpanel.WHMCall[ModSecSetSettingData](ctx, c.c, http.MethodGet, "modsec_set_setting", args)
 }
 
-
 // ModSecSetSettingDataRadioOptionsItem is a generated payload type.
 type ModSecSetSettingDataRadioOptionsItem struct {
 	// The setting name to display to the user. The user's [locale](https://go.cpanel.net/localedocs) may translate this value.
-	Name   string `json:"name"`
+	Name string `json:"name"`
 
 	// The setting that the system used to select the setting's state.
 	//
@@ -2280,16 +2245,16 @@ type ModSecSetSettingDataRadioOptionsItem struct {
 // ModSecSetSettingData is a generated payload type.
 type ModSecSetSettingData struct {
 	// The setting's default value.
-	Default2     string `json:"default"`
+	Default2 string `json:"default"`
 
 	// The setting's description.
-	Description  string `json:"description"`
+	Description string `json:"description"`
 
 	// The setting's Apache® directive.
-	DirectIve    string `json:"directive"`
+	DirectIve string `json:"directive"`
 
 	// The setting's name.
-	Name         string `json:"name"`
+	Name string `json:"name"`
 
 	// An array of objects with the options that the client should display, as buttons, for this setting in a user interface.
 	//
@@ -2299,10 +2264,10 @@ type ModSecSetSettingData struct {
 	RadioOptions []ModSecSetSettingDataRadioOptionsItem `json:"radio_options"`
 
 	// The setting's ID.
-	SettingID    int64 `json:"setting_id"`
+	SettingID int64 `json:"setting_id"`
 
 	// The setting's new state.
-	State        int64 `json:"state"`
+	State int64 `json:"state"`
 
 	// The type of UI control that the client should use to represent the setting.
 	//
@@ -2310,10 +2275,10 @@ type ModSecSetSettingData struct {
 	// * `radio` - WHM users modify this setting via a radio button.
 	//   - **Note:** If the `type` parameter's value is `radio`, the function also returns the `radio_options` array of objects.
 	// * `number` - WHM users modify this setting via a text box that only allows numeric …
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The URL for the setting's documentation.
-	URL          string `json:"url"`
+	URL string `json:"url"`
 
 	// A validator or array of validators to apply. Use these validators to perform frontend validation through your preferred implementation methods.
 	//
@@ -2322,7 +2287,7 @@ type ModSecSetSettingData struct {
 	//  The function may represent each validator as either a string or an object.
 	//  * When the function represents the validator as a string, no arguments exist for the validator.
 	//  * When the function returns the validator as a object, the API may als …
-	Validation   []json.RawMessage `json:"validation"`
+	Validation []json.RawMessage `json:"validation"`
 }
 
 // ModSecUndisableRuleArgs are the parameters of the WHM API 1 function `modsec_undisable_rule`.
@@ -2347,7 +2312,7 @@ type ModSecUndisableRuleArgs struct {
 //
 // **Important:**
 //
-//   When you disable the Web Server role, the system disables this function.
+//	When you disable the Web Server role, the system disables this function.
 //
 // Available since cPanel & WHM version 11.46.
 //
@@ -2355,7 +2320,6 @@ type ModSecUndisableRuleArgs struct {
 func (c *Client) ModSecUndisableRule(ctx context.Context, args *ModSecUndisableRuleArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "modsec_undisable_rule", args)
 }
-
 
 // ModSecUpdateVendorArgs are the parameters of the WHM API 1 function `modsec_update_vendor`.
 type ModSecUpdateVendorArgs struct {
@@ -2385,7 +2349,6 @@ func (c *Client) ModSecUpdateVendor(ctx context.Context, args *ModSecUpdateVendo
 	return cpanel.WHMCall[ModSecUpdateVendorData](ctx, c.c, http.MethodGet, "modsec_update_vendor", args)
 }
 
-
 // ModSecUpdateVendorDataDiAGNoSticsNewConfigsItem is a generated payload type.
 type ModSecUpdateVendorDataDiAGNoSticsNewConfigsItem struct {
 	// Whether the configuration file is active.
@@ -2394,10 +2357,10 @@ type ModSecUpdateVendorDataDiAGNoSticsNewConfigsItem struct {
 	// * `0` — **Not** active.
 	//
 	// Possible values: `1`, `0`.
-	Active   int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The file path to the configuration file, relative to the `/usr/local/apache/conf/` Apache configuration directory.
-	Config   string `json:"config"`
+	Config string `json:"config"`
 
 	// The vendor's unique name.
 	VendorID string `json:"vendor_id"`
@@ -2412,22 +2375,22 @@ type ModSecUpdateVendorDataDiAGNoSticsPrevConfigsItem struct {
 // A list of diagnostic information about the update.
 type ModSecUpdateVendorDataDiAGNoStics struct {
 	// A list of the ModSecurity configuration files that the update added.
-	AddedConfigs   []string `json:"added_configs"`
+	AddedConfigs []string `json:"added_configs"`
 
 	// An array of objects containing the ModSecurity configuration files that the update removed.
 	DeletedConfigs []string `json:"deleted_configs"`
 
 	// A complete list of configuration files that the update modified.
-	NewConfigs     []ModSecUpdateVendorDataDiAGNoSticsNewConfigsItem `json:"new_configs"`
+	NewConfigs []ModSecUpdateVendorDataDiAGNoSticsNewConfigsItem `json:"new_configs"`
 
 	// A list of configuration files in the old version.
-	PrevConfigs    []ModSecUpdateVendorDataDiAGNoSticsPrevConfigsItem `json:"prev_configs"`
+	PrevConfigs []ModSecUpdateVendorDataDiAGNoSticsPrevConfigsItem `json:"prev_configs"`
 }
 
 // A list of updated vendor information.
 type ModSecUpdateVendorDataVendor struct {
 	// The URL to download the vendor rules.
-	ArchiveURL     string `json:"archive_url"`
+	ArchiveURL string `json:"archive_url"`
 
 	// Whether WebPros International, LLC provided the rule set.
 	//
@@ -2438,10 +2401,10 @@ type ModSecUpdateVendorDataVendor struct {
 	CpanelProvided int64 `json:"cpanel_provided"`
 
 	// The vendor's description.
-	Description    string `json:"description"`
+	Description string `json:"description"`
 
 	// The download's [MD5](https://en.wikipedia.org/wiki/MD5) checksum value.
-	DistMD5        string `json:"dist_md5"`
+	DistMD5 string `json:"dist_md5"`
 
 	// Whether the vendor is enabled.
 	//
@@ -2449,10 +2412,10 @@ type ModSecUpdateVendorDataVendor struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	Enabled        int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The unique identifier for the rule set version.
-	InstDist       string `json:"inst_dist"`
+	InstDist string `json:"inst_dist"`
 
 	// Whether the vendor is installed.
 	//
@@ -2460,25 +2423,25 @@ type ModSecUpdateVendorDataVendor struct {
 	// * `0` — **Not** installed.
 	//
 	// Possible values: `1`, `0`.
-	Installed      int64 `json:"installed"`
+	Installed int64 `json:"installed"`
 
 	// The URL to the vendor's metadata file.
-	InstalledFrom  string `json:"installed_from"`
+	InstalledFrom string `json:"installed_from"`
 
 	// The vendor's name.
-	Name           string `json:"name"`
+	Name string `json:"name"`
 
 	// The file path to the vendor's ModSecurity configuration files.
-	Path           string `json:"path"`
+	Path string `json:"path"`
 
 	// The URL that the vendor uses to receive problem reports.
-	ReportURL      string `json:"report_url"`
+	ReportURL string `json:"report_url"`
 
 	// The vendor's unique short name.
-	VendorID       string `json:"vendor_id"`
+	VendorID string `json:"vendor_id"`
 
 	// The URL to the vendor's website.
-	VendorURL      string `json:"vendor_url"`
+	VendorURL string `json:"vendor_url"`
 }
 
 // ModSecUpdateVendorData is a generated payload type.
@@ -2487,5 +2450,5 @@ type ModSecUpdateVendorData struct {
 	DiAGNoStics ModSecUpdateVendorDataDiAGNoStics `json:"diagnostics"`
 
 	// A list of updated vendor information.
-	Vendor      ModSecUpdateVendorDataVendor `json:"vendor"`
+	Vendor ModSecUpdateVendorDataVendor `json:"vendor"`
 }

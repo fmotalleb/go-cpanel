@@ -22,7 +22,6 @@ func (c *ExtractInfoClient) Finish(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[ExtractInfoFinishData](ctx, c.c, http.MethodGet, "ExtractInfo", "finish", cpanel.CombineArgs(extra...))
 }
 
-
 // ExtractInfoFinishData is a generated payload type.
 type ExtractInfoFinishData struct {
 	// Always true on success.
@@ -40,28 +39,27 @@ func (c *ExtractInfoClient) Progress(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[ExtractInfoProgressData](ctx, c.c, http.MethodGet, "ExtractInfo", "progress", cpanel.CombineArgs(extra...))
 }
 
-
 // ExtractInfoProgressData is a generated payload type.
 type ExtractInfoProgressData struct {
 	// Bytes the destination directory has grown by since the start baseline. Never negative.
-	CurrentBytes        int64 `json:"currentBytes"`
+	CurrentBytes int64 `json:"currentBytes"`
 
 	// Seconds since the run started. 0 when not running.
-	ElapsedSeconds      int64 `json:"elapsedSeconds"`
+	ElapsedSeconds int64 `json:"elapsedSeconds"`
 
 	// Completion percent (0-99), derived from currentBytes / totalBytes and clamped to 99 until finish is called. Approximate whenever totalBytesEstimated is 1; even when the total is exact the destination-directory delta can carry noise.
-	Percent             float64 `json:"percent"`
+	Percent float64 `json:"percent"`
 
 	// Start epoch recorded by start. Null when not running.
-	StartedAtEpoch      *int64 `json:"startedAtEpoch"`
+	StartedAtEpoch *int64 `json:"startedAtEpoch"`
 
 	// Current run state. 'inprogress' while a run is active and within the timeout, 'timeout' once it has run past the timeout ceiling, or 'none' when nothing is running (including after finish).
 	//
 	// Possible values: `inprogress`, `timeout`, `none`.
-	State               string `json:"state"`
+	State string `json:"state"`
 
 	// The uncompressed archive size recorded at start. Exact for archives under 4 GiB; a best-effort estimate for archives of 4 GiB or more, because the gzip trailer stores the uncompressed size modulo 2**32. See totalBytesEstimated.
-	TotalBytes          int64 `json:"totalBytes"`
+	TotalBytes int64 `json:"totalBytes"`
 
 	// 1 when totalBytes is an estimate (the gzip trailer wrapped because the archive is 4 GiB or larger), 0 when totalBytes is exact.
 	TotalBytesEstimated int64 `json:"totalBytesEstimated"`
@@ -93,7 +91,6 @@ type ExtractInfoStartArgs struct {
 func (c *ExtractInfoClient) Start(ctx context.Context, args *ExtractInfoStartArgs) (*cpanel.UAPIResult[ExtractInfoStartData], error) {
 	return cpanel.UAPICall[ExtractInfoStartData](ctx, c.c, http.MethodGet, "ExtractInfo", "start", args)
 }
-
 
 // ExtractInfoStartData is a generated payload type.
 type ExtractInfoStartData struct {

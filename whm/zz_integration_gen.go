@@ -57,7 +57,6 @@ func (c *Client) CreateIntegrationGroup(ctx context.Context, args *CreateIntegra
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "create_integration_group", args)
 }
 
-
 // CreateIntegrationLinkArgs are the parameters of the WHM API 1 function `create_integration_link`.
 type CreateIntegrationLinkArgs struct {
 	// The application to link.
@@ -174,7 +173,6 @@ func (c *Client) CreateIntegrationLink(ctx context.Context, args *CreateIntegrat
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "create_integration_link", args)
 }
 
-
 // GetIntegrationLinkUserConfigArgs are the parameters of the WHM API 1 function `get_integration_link_user_config`.
 type GetIntegrationLinkUserConfigArgs struct {
 	// The integration link's app name.
@@ -206,31 +204,30 @@ func (c *Client) GetIntegrationLinkUserConfig(ctx context.Context, args *GetInte
 	return cpanel.WHMCall[GetIntegrationLinkUserConfigData](ctx, c.c, http.MethodGet, "get_integration_link_user_config", args)
 }
 
-
 // An object with information about the user's integration link.
 type GetIntegrationLinkUserConfigDataUserConfig struct {
 	// The application to link.
-	App                string `json:"app"`
+	App string `json:"app"`
 
 	// A publicly-available URL to which the server will send the
 	// `app`, `token`, `user`, and `subscriber_unique_id` values through
 	// an HTTP POST request. The destination server will respond
 	// with a JSON-encoded object with either a `redirect_url`
 	// key or the `retry` and `attempt` keys. …
-	AutologinTokenURL  string `json:"autologin_token_url"`
+	AutologinTokenURL string `json:"autologin_token_url"`
 
 	// The image to display for the application on the cPanel *Home* interface.
-	Base64PngImage     string `json:"base64_png_image"`
+	Base64PngImage string `json:"base64_png_image"`
 
 	// The service for which to implement authentication. The `implements` value is a string from the WHM API 1 `get_users_links` function. Typically, this function returns one of the following values:
 	// * `billing` — This link appears in the user menu.
 	// * `customer_service` — This link appears in the user menu.
 	// * `support` — This link appears in the user menu.
 	// * `upgrade` — This link appears in the user me …
-	ImplementS         string `json:"implements"`
+	ImplementS string `json:"implements"`
 
 	// The label to display for the application on the cPanel *Home* interface.
-	Label              string `json:"label"`
+	Label string `json:"label"`
 
 	// The subscriber's unique ID that the system will present to the URL in the `autologin_token_url` endpoint.
 	SubscriberUniqueID string `json:"subscriber_unique_id"`
@@ -238,10 +235,10 @@ type GetIntegrationLinkUserConfigDataUserConfig struct {
 	// A publicly-available URL to which to send the user if the
 	// location in the `autologin_token_url` parameter does not
 	// respond.
-	URL                string `json:"url"`
+	URL string `json:"url"`
 
 	// The cPanel account name.
-	User               string `json:"user"`
+	User string `json:"user"`
 }
 
 // GetIntegrationLinkUserConfigData is a generated payload type.
@@ -271,7 +268,6 @@ type ListIntegrationGroupsArgs struct {
 func (c *Client) ListIntegrationGroups(ctx context.Context, args *ListIntegrationGroupsArgs) (*cpanel.WHMResult[ListIntegrationGroupsData], error) {
 	return cpanel.WHMCall[ListIntegrationGroupsData](ctx, c.c, http.MethodGet, "list_integration_groups", args)
 }
-
 
 // ListIntegrationGroupsDataLinksItem is a generated payload type.
 type ListIntegrationGroupsDataLinksItem struct {
@@ -306,7 +302,6 @@ type ListIntegrationLinksArgs struct {
 func (c *Client) ListIntegrationLinks(ctx context.Context, args *ListIntegrationLinksArgs) (*cpanel.WHMResult[ListIntegrationLinksData], error) {
 	return cpanel.WHMCall[ListIntegrationLinksData](ctx, c.c, http.MethodGet, "list_integration_links", args)
 }
-
 
 // ListIntegrationLinksDataLinksItem is a generated payload type.
 type ListIntegrationLinksDataLinksItem struct {
@@ -347,7 +342,6 @@ func (c *Client) RemoveIntegrationGroup(ctx context.Context, args *RemoveIntegra
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "remove_integration_group", args)
 }
 
-
 // RemoveIntegrationLinkArgs are the parameters of the WHM API 1 function `remove_integration_link`.
 type RemoveIntegrationLinkArgs struct {
 	// The name of the integration link to remove.
@@ -374,7 +368,6 @@ type RemoveIntegrationLinkArgs struct {
 func (c *Client) RemoveIntegrationLink(ctx context.Context, args *RemoveIntegrationLinkArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "remove_integration_link", args)
 }
-
 
 // UpdateIntegrationLinkTokenArgs are the parameters of the WHM API 1 function `update_integration_link_token`.
 type UpdateIntegrationLinkTokenArgs struct {
@@ -411,4 +404,3 @@ type UpdateIntegrationLinkTokenArgs struct {
 func (c *Client) UpdateIntegrationLinkToken(ctx context.Context, args *UpdateIntegrationLinkTokenArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "update_integration_link_token", args)
 }
-

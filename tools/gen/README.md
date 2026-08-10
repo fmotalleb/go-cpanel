@@ -26,7 +26,8 @@ python3 tools/gen/generate.py \
     --cpanel-md tools/gen/cpanel.openapi.md \
     --whm-md tools/gen/whm.openapi.md
 
-# 3. format & verify
+# 3. format & verify (generate.py already gofmts every file it writes;
+#    gofmt -w . catches anything else, e.g. hand-edited files)
 gofmt -w .
 go build ./...
 go vet ./...

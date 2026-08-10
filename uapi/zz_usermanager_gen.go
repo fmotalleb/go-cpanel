@@ -48,7 +48,6 @@ func (c *UserManagerClient) ChangePassword(ctx context.Context, args *UserManage
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "UserManager", "change_password", args)
 }
 
-
 // UserManagerCheckAccountConflictsArgs are the parameters of the UAPI function `UserManager::check_account_conflicts`.
 type UserManagerCheckAccountConflictsArgs struct {
 	// The Subaccount's username and domain name.
@@ -77,14 +76,13 @@ func (c *UserManagerClient) CheckAccountConflicts(ctx context.Context, args *Use
 	return cpanel.UAPICall[UserManagerCheckAccountConflictsData](ctx, c.c, http.MethodGet, "UserManager", "check_account_conflicts", args)
 }
 
-
 // UserManagerCheckAccountConflictsDataAccountsIssuesItem is a generated payload type.
 type UserManagerCheckAccountConflictsDataAccountsIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set megabyte (MB) quota limit for the affected Subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// A description of the issue.
 	Message string `json:"message"`
@@ -105,10 +103,10 @@ type UserManagerCheckAccountConflictsDataAccountsIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // Information that indicates the Subaccount's email status.
@@ -125,7 +123,7 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesEmai
 	// The Subaccount's email disk space quota, in megabytes (MB).
 	//
 	// * `0` — The account has an unlimited email disk space quota.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // Information about the Subaccount's FTP status.
@@ -145,7 +143,7 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesFTP 
 	// megabytes (MB).
 	//
 	// * `0` — The account has an unlimited disk space quota.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // Information about the Subaccount's Web Disk status.
@@ -168,7 +166,7 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesWebd
 	// * `rw` — Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether the Web Disk directory permissions are public
 	// or private.
@@ -183,10 +181,10 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesWebd
 // Information about the Subaccount's access to email, FTP, and Web Disk.
 type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServices struct {
 	// Information that indicates the Subaccount's email status.
-	Email   UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesEmail `json:"email"`
+	Email UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesEmail `json:"email"`
 
 	// Information about the Subaccount's FTP status.
-	FTP     UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesFTP `json:"ftp"`
+	FTP UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesFTP `json:"ftp"`
 
 	// Information about the Subaccount's Web Disk status.
 	Webdisk UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServicesWebdisk `json:"webdisk"`
@@ -202,18 +200,18 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItem struct {
 	// * `null` — **Not** a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType       *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The Subaccount user's phone number, in
 	// [ITU-T-recommended E.164](https://en.wikipedia.org/wiki/E.164)
 	// format.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the Subaccount user, if provided.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// Information about the Subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServices `json:"services"`
+	Services UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItemServices `json:"services"`
 
 	// Whether the account is a system-created special account that
 	// the user **cannot** remove.
@@ -222,7 +220,7 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItem struct {
 	// * `0` — The user **cannot** remove the account.
 	//
 	// Possible values: `1`, `0`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a Subaccount exists with the same username.
 	//
@@ -241,7 +239,7 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItem struct {
 	// * `null` — The account is **not** a Subaccount.
 	//
 	// Possible values: `1`, `0`.
-	SyncedPassword   *int64 `json:"synced_password"`
+	SyncedPassword *int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -252,23 +250,23 @@ type UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItem struct {
 	// * `cpanel` — A cPanel account.
 	//
 	// Possible values: `sub`, `hypothetical`, `service`, `cpanel`.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the Subaccount.
 	//
 	// **Note:**
 	//
 	// This value does **not** include the domain name.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // An object containing the service accounts that match the queried `full_username` parameter.
 type UserManagerCheckAccountConflictsDataAccounts struct {
 	// An alternate email address for the Subaccount's user.
-	AlternateEmail           *string `json:"alternate_email"`
+	AlternateEmail *string `json:"alternate_email"`
 
 	// The URL to the user's Subaccount profile image file.
-	AvatarURL                *string `json:"avatar_url"`
+	AvatarURL *string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the Subaccount.
 	//
@@ -276,7 +274,7 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// * `0` — **Cannot** delete.
 	//
 	// Possible values: `1`, `0`.
-	CanDelete                int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the Subaccount's
 	// password.
@@ -290,7 +288,7 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// from the cPanel account.
 	//
 	// Possible values: `1`, `0`.
-	CanSetPassword           int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the Subaccount's
 	// disk usage quota.
@@ -299,7 +297,7 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// * `0` — **Cannot** change the Subaccount's disk useage quota.
 	//
 	// Possible values: `1`, `0`.
-	CanSetQuota              int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt
 	// for the service account.
@@ -312,7 +310,7 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// **Only** service accounts return this value.
 	//
 	// Possible values: `1`, `0`.
-	Dismissed                int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// A list of the service accounts that the user dismissed the merge
 	// prompt for.
@@ -324,13 +322,13 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	DismissedMergeCandidates []string `json:"dismissed_merge_candidates"`
 
 	// The Subaccount user's associated domain.
-	Domain                   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The Subaccount's username.
-	FullUsername             string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The Subaccount's system-assigned unique identifier.
-	Guid                     string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether the Subaccount owns an expired invitation.
 	//
@@ -338,7 +336,7 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// * `0` — Does **not** own an expired invitation.
 	//
 	// Possible values: `1`, `0`.
-	HasExpiredInvite         int64 `json:"has_expired_invite"`
+	HasExpiredInvite int64 `json:"has_expired_invite"`
 
 	// Whether the Subaccount owns an active invitation.
 	//
@@ -346,7 +344,7 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// * `0` — Does **not** own an active invitation.
 	//
 	// Possible values: `1`, `0`.
-	HasInvite                int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares the queried `full_username` value
 	// with another service account.
@@ -355,18 +353,18 @@ type UserManagerCheckAccountConflictsDataAccounts struct {
 	// * `0` — Does **not** share the service account.
 	//
 	// Possible values: `1`, `0`.
-	HasSiblings              int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// The time at which the new Subaccount invitation will expire.
 	//
 	// * `null` — The account does **not** own an active invitation.
-	InviteExpiration         *int64 `json:"invite_expiration"`
+	InviteExpiration *int64 `json:"invite_expiration"`
 
 	// An array of objects containing information about any issues or problems with the Subaccount.
-	Issues                   []UserManagerCheckAccountConflictsDataAccountsIssuesItem `json:"issues"`
+	Issues []UserManagerCheckAccountConflictsDataAccountsIssuesItem `json:"issues"`
 
 	// An array of objects containing the service accounts that the system could merge for this Subaccount.
-	MergeCandidates          []UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItem `json:"merge_candidates"`
+	MergeCandidates []UserManagerCheckAccountConflictsDataAccountsMergeCandidatesItem `json:"merge_candidates"`
 }
 
 // UserManagerCheckAccountConflictsData is a generated payload type.
@@ -577,7 +575,6 @@ func (c *UserManagerClient) CreateUser(ctx context.Context, args *UserManagerCre
 	return cpanel.UAPICall[CreateUserResponse](ctx, c.c, http.MethodGet, "UserManager", "create_user", args)
 }
 
-
 // CreateUserResponse is a generated payload type.
 // CreateUserResponse is left as raw JSON because its documented schema
 // is a union of shapes; inspect it with encoding/json.
@@ -622,14 +619,13 @@ func (c *UserManagerClient) DeleteUser(ctx context.Context, args *UserManagerDel
 	return cpanel.UAPICall[UserManagerDeleteUserData](ctx, c.c, http.MethodGet, "UserManager", "delete_user", args)
 }
 
-
 // UserManagerDeleteUserDataIssuesItem is a generated payload type.
 type UserManagerDeleteUserDataIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected account.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -648,63 +644,63 @@ type UserManagerDeleteUserDataIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // UserManagerDeleteUserDataMergeCandidatesItem is a generated payload type.
 type UserManagerDeleteUserDataMergeCandidatesItem struct {
-	AlternateEmail           string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
-	AvatarURL                string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
-	CanDelete                int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
-	CanSetPassword           int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
-	CanSetQuota              int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
-	Dismissed                int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	DismissedMergeCandidates []string `json:"dismissed_merge_candidates"`
 
-	Domain                   string `json:"domain"`
+	Domain string `json:"domain"`
 
-	FullUsername             string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
-	Guid                     string `json:"guid"`
+	Guid string `json:"guid"`
 
-	HasExpiredInvite         int64 `json:"has_expired_invite"`
+	HasExpiredInvite int64 `json:"has_expired_invite"`
 
-	HasInvite                int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
-	HasSiblings              int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
-	InviteExpiration         int64 `json:"invite_expiration"`
+	InviteExpiration int64 `json:"invite_expiration"`
 
-	Issues                   []string `json:"issues"`
+	Issues []string `json:"issues"`
 
-	MergeCandidates          []string `json:"merge_candidates"`
+	MergeCandidates []string `json:"merge_candidates"`
 
-	ParentType               string `json:"parent_type"`
+	ParentType string `json:"parent_type"`
 
-	PhoneNumber              string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
-	RealName                 string `json:"real_name"`
+	RealName string `json:"real_name"`
 
-	Services                 json.RawMessage `json:"services"`
+	Services json.RawMessage `json:"services"`
 
-	Special                  int64 `json:"special"`
+	Special int64 `json:"special"`
 
-	SubAccountExists         int64 `json:"sub_account_exists"`
+	SubAccountExists int64 `json:"sub_account_exists"`
 
-	SyncedPassword           int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
-	Type2                    string `json:"type"`
+	Type2 string `json:"type"`
 
-	Username                 string `json:"username"`
+	Username string `json:"username"`
 }
 
 // Information that indicates the account's email status.
@@ -719,7 +715,7 @@ type UserManagerDeleteUserDataServicesEmail struct {
 	// The account's email disk space quota.
 	// * The set quota megabyte (MB) limit for the account's email disk space.
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // Information about the account's FTP status.
@@ -738,7 +734,7 @@ type UserManagerDeleteUserDataServicesFTP struct {
 	// The account's FTP disk space quota.
 	// * An integer that represents the account's maximum FTP disk usage, in megabytes (MB).
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // Information about the account's Web Disk status.
@@ -757,7 +753,7 @@ type UserManagerDeleteUserDataServicesWebdisk struct {
 	// Whether to grant write permissions to the account.
 	// * `ro` - Read-only permissions.
 	// * `rw` - Read and write permissions.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
@@ -770,10 +766,10 @@ type UserManagerDeleteUserDataServicesWebdisk struct {
 // Information about the account's access to email, FTP, and Web Disk.
 type UserManagerDeleteUserDataServices struct {
 	// Information that indicates the account's email status.
-	Email   UserManagerDeleteUserDataServicesEmail `json:"email"`
+	Email UserManagerDeleteUserDataServicesEmail `json:"email"`
 
 	// Information about the account's FTP status.
-	FTP     UserManagerDeleteUserDataServicesFTP `json:"ftp"`
+	FTP UserManagerDeleteUserDataServicesFTP `json:"ftp"`
 
 	// Information about the account's Web Disk status.
 	Webdisk UserManagerDeleteUserDataServicesWebdisk `json:"webdisk"`
@@ -782,17 +778,17 @@ type UserManagerDeleteUserDataServices struct {
 // UserManagerDeleteUserData is a generated payload type.
 type UserManagerDeleteUserData struct {
 	// An alternate email address for the account's user.
-	AlternateEmail           string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's account profile photo.  The URL must point to an image file.
-	AvatarURL                string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the account.
 	// * `1` - Can delete.
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete                int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the account's password.
 	// * `1` - Can change password.
@@ -803,14 +799,14 @@ type UserManagerDeleteUserData struct {
 	// The function returns `0` for accounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword           int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the account's disk usage quota.
 	// * `1` - Can change quota.
 	// * `0` - **Cannot** change quota.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota              int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	// * `1` - Dismissed prompt.
@@ -821,7 +817,7 @@ type UserManagerDeleteUserData struct {
 	// **Only** service accounts return this value.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed                int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// An array of objects that represent the service accounts that the user dismissed the merge prompt for.
 	// This array will always return empty.
@@ -832,49 +828,49 @@ type UserManagerDeleteUserData struct {
 	DismissedMergeCandidates []json.RawMessage `json:"dismissed_merge_candidates"`
 
 	// The account user's associated domain.
-	Domain                   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The account's username and domain name, separated by the `@` character.
-	FullUsername             string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The account unique identifier.
-	Guid                     string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether the Subaccount owns an expired invitation.
 	// * `1` - Owns an expired invitation.
 	// * `0` - Does **not** own an expired invitation.
 	//
 	// Possible values: `0`, `1`.
-	HasExpiredInvite         int64 `json:"has_expired_invite"`
+	HasExpiredInvite int64 `json:"has_expired_invite"`
 
 	// Whether the Subaccount owns an active invitation.
 	// * `1` - Owns an invitation.
 	// * `0` - Does **not** own an invitation.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite                int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does not share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings              int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// The time at which the new Subaccount invitation will expire, given as a valid Unix epoch time or null.
 	//
 	// If the account does not own an active invitation, this value returns `null`.
-	InviteExpiration         *int64 `json:"invite_expiration"`
+	InviteExpiration *int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the account.
-	Issues                   []UserManagerDeleteUserDataIssuesItem `json:"issues"`
+	Issues []UserManagerDeleteUserDataIssuesItem `json:"issues"`
 
 	// The service accounts that the system could merge for this account.
 	//
 	// **Note:**
 	//
 	// You can find descriptions for this array's returns within this table.
-	MergeCandidates          []UserManagerDeleteUserDataMergeCandidatesItem `json:"merge_candidates"`
+	MergeCandidates []UserManagerDeleteUserDataMergeCandidatesItem `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	// * `sub` - An account.
@@ -882,26 +878,26 @@ type UserManagerDeleteUserData struct {
 	// * `null` - **Not** a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType               *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The account user's phone number.
 	// * A valid phone number that conforms to [ITU-T](https://en.wikipedia.org/wiki/ITU-T)'s [E.164-recommended standard](https://en.wikipedia.org/wiki/E.164) for the representation of telephone numbers.
-	PhoneNumber              string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the account's user.
 	// * A first name, a last name, or a first name and last name.
 	// * An empty string.
-	RealName                 string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// Information about the account's access to email, FTP, and Web Disk.
-	Services                 UserManagerDeleteUserDataServices `json:"services"`
+	Services UserManagerDeleteUserDataServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` - A special account.
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `1`, `0`.
-	Special                  int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether an account exists with the same username.
 	// * `1` - Exists.
@@ -909,7 +905,7 @@ type UserManagerDeleteUserData struct {
 	// * `null` - The account is **not** a service account.
 	//
 	// Possible values: `1`, `0`.
-	SubAccountExists         *int64 `json:"sub_account_exists"`
+	SubAccountExists *int64 `json:"sub_account_exists"`
 
 	// Whether the user has synchronized the passwords for each of the account's service accounts.
 	// * `1` - Synchronized.
@@ -917,14 +913,14 @@ type UserManagerDeleteUserData struct {
 	// * `null` - The account is **not** a Subaccount
 	//
 	// Possible values: `1`, `0`.
-	SyncedPassword           *int64 `json:"synced_password"`
+	SyncedPassword *int64 `json:"synced_password"`
 
 	// The type of account.
 	// * `hypothetical` - A hypothetical account that does not exist, but that the user could create as part of a merge.
 	// * `service` - A service account.
 	//
 	// Possible values: `hypothetical`, `service`.
-	Type2                    string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The account username.
 	//
@@ -934,7 +930,7 @@ type UserManagerDeleteUserData struct {
 	// **Note::**
 	//
 	// This value does **not** include the domain name.
-	Username                 string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerDismissMergeArgs are the parameters of the UAPI function `UserManager::dismiss_merge`.
@@ -1006,7 +1002,6 @@ type UserManagerDismissMergeArgs struct {
 func (c *UserManagerClient) DismissMerge(ctx context.Context, args *UserManagerDismissMergeArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "UserManager", "dismiss_merge", args)
 }
-
 
 // UserManagerEditUserArgs are the parameters of the UAPI function `UserManager::edit_user`.
 type UserManagerEditUserArgs struct {
@@ -1206,14 +1201,13 @@ func (c *UserManagerClient) EditUser(ctx context.Context, args *UserManagerEditU
 	return cpanel.UAPICall[UserManagerEditUserData](ctx, c.c, http.MethodGet, "UserManager", "edit_user", args)
 }
 
-
 // UserManagerEditUserDataIssuesItem is a generated payload type.
 type UserManagerEditUserDataIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -1232,19 +1226,19 @@ type UserManagerEditUserDataIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // UserManagerEditUserDataMergeCandidatesItemIssuesItem is a generated payload type.
 type UserManagerEditUserDataMergeCandidatesItemIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -1263,10 +1257,10 @@ type UserManagerEditUserDataMergeCandidatesItemIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -1284,7 +1278,7 @@ type UserManagerEditUserDataMergeCandidatesItemServicesEmail struct {
 	// **Note:**
 	//
 	//   This function will not return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -1304,7 +1298,7 @@ type UserManagerEditUserDataMergeCandidatesItemServicesFTP struct {
 	//
 	// * A positive integer between `1` and `999999`
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -1326,7 +1320,7 @@ type UserManagerEditUserDataMergeCandidatesItemServicesWebdisk struct {
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	//
@@ -1340,10 +1334,10 @@ type UserManagerEditUserDataMergeCandidatesItemServicesWebdisk struct {
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerEditUserDataMergeCandidatesItemServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerEditUserDataMergeCandidatesItemServicesEmail `json:"email"`
+	Email UserManagerEditUserDataMergeCandidatesItemServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerEditUserDataMergeCandidatesItemServicesFTP `json:"ftp"`
+	FTP UserManagerEditUserDataMergeCandidatesItemServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerEditUserDataMergeCandidatesItemServicesWebdisk `json:"webdisk"`
@@ -1352,10 +1346,10 @@ type UserManagerEditUserDataMergeCandidatesItemServices struct {
 // UserManagerEditUserDataMergeCandidatesItem is a generated payload type.
 type UserManagerEditUserDataMergeCandidatesItem struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	//
@@ -1363,7 +1357,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	//
@@ -1375,7 +1369,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	//
@@ -1383,7 +1377,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	//
@@ -1395,18 +1389,18 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `0` - Did **not** dismiss.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed        int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// The Subaccount user's associated domain.
 	//
 	// A domain that the cPanel account owns.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	//
@@ -1422,7 +1416,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `0` - Account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite        int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	//
@@ -1430,37 +1424,37 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
 	InviteExpiration int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []UserManagerEditUserDataMergeCandidatesItemIssuesItem `json:"issues"`
+	Issues []UserManagerEditUserDataMergeCandidatesItemIssuesItem `json:"issues"`
 
 	// An array of objects that represents the service accounts that the system could merge for this subaccount.
-	MergeCandidates  []json.RawMessage `json:"merge_candidates"`
+	MergeCandidates []json.RawMessage `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	//
 	// * `sub` - A subaccount.
 	// * `hypothetical` - A hypothetical subaccount that does **not** yet exist, but the user could create as part of a merge.
 	// * `null`- **Not** a merge candidate.
-	ParentType       string `json:"parent_type"`
+	ParentType string `json:"parent_type"`
 
 	// The subaccount user's phone number.
 	//
 	// The number conforms to the [ITU-T](https://en.wikipedia.org/wiki/ITU-T)'s [E.164](https://en.wikipedia.org/wiki/E.164)-recommended standard for the representation of telephone numbers.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
 	// * A first name, a last name, or a first name and last name.
 	// * An empty string.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerEditUserDataMergeCandidatesItemServices `json:"services"`
+	Services UserManagerEditUserDataMergeCandidatesItemServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	//
@@ -1468,7 +1462,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -1492,7 +1486,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	//   The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -1500,7 +1494,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// * `hypothetical` - A hypothetical subaccount that does **not** exist, but that the user could create as part of a merge.
 	// * `service` - A service account.
 	// * `cpanel` - The cPanel account.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
 	//
@@ -1510,7 +1504,7 @@ type UserManagerEditUserDataMergeCandidatesItem struct {
 	// **Note:**
 	//
 	//   This value does **not** include the domain name.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -1528,7 +1522,7 @@ type UserManagerEditUserDataServicesEmail struct {
 	// **Note:**
 	//
 	//   This function will not return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -1548,7 +1542,7 @@ type UserManagerEditUserDataServicesFTP struct {
 	//
 	// * A positive integer between `1` and `999999`
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -1570,7 +1564,7 @@ type UserManagerEditUserDataServicesWebdisk struct {
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	//
@@ -1584,10 +1578,10 @@ type UserManagerEditUserDataServicesWebdisk struct {
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerEditUserDataServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerEditUserDataServicesEmail `json:"email"`
+	Email UserManagerEditUserDataServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerEditUserDataServicesFTP `json:"ftp"`
+	FTP UserManagerEditUserDataServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerEditUserDataServicesWebdisk `json:"webdisk"`
@@ -1596,10 +1590,10 @@ type UserManagerEditUserDataServices struct {
 // UserManagerEditUserData is a generated payload type.
 type UserManagerEditUserData struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	//
@@ -1607,7 +1601,7 @@ type UserManagerEditUserData struct {
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	//
@@ -1619,7 +1613,7 @@ type UserManagerEditUserData struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	//
@@ -1627,7 +1621,7 @@ type UserManagerEditUserData struct {
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	//
@@ -1639,18 +1633,18 @@ type UserManagerEditUserData struct {
 	// * `0` - Did **not** dismiss.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed        int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// The Subaccount user's associated domain.
 	//
 	// A domain that the cPanel account owns.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	//
@@ -1666,7 +1660,7 @@ type UserManagerEditUserData struct {
 	// * `0` - Account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite        int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	//
@@ -1674,37 +1668,37 @@ type UserManagerEditUserData struct {
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
 	InviteExpiration int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []UserManagerEditUserDataIssuesItem `json:"issues"`
+	Issues []UserManagerEditUserDataIssuesItem `json:"issues"`
 
 	// An array of objects that represents the service accounts that the system could merge for this subaccount.
-	MergeCandidates  []UserManagerEditUserDataMergeCandidatesItem `json:"merge_candidates"`
+	MergeCandidates []UserManagerEditUserDataMergeCandidatesItem `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	//
 	// * `sub` - A subaccount.
 	// * `hypothetical` - A hypothetical subaccount that does **not** yet exist, but the user could create as part of a merge.
 	// * `null`- **Not** a merge candidate.
-	ParentType       string `json:"parent_type"`
+	ParentType string `json:"parent_type"`
 
 	// The subaccount user's phone number.
 	//
 	// The number conforms to the [ITU-T](https://en.wikipedia.org/wiki/ITU-T)'s [E.164](https://en.wikipedia.org/wiki/E.164)-recommended standard for the representation of telephone numbers.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
 	// * A first name, a last name, or a first name and last name.
 	// * An empty string.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerEditUserDataServices `json:"services"`
+	Services UserManagerEditUserDataServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	//
@@ -1712,7 +1706,7 @@ type UserManagerEditUserData struct {
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -1736,7 +1730,7 @@ type UserManagerEditUserData struct {
 	//   The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -1744,7 +1738,7 @@ type UserManagerEditUserData struct {
 	// * `hypothetical` - A hypothetical subaccount that does **not** exist, but that the user could create as part of a merge.
 	// * `service` - A service account.
 	// * `cpanel` - The cPanel account.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
 	//
@@ -1754,7 +1748,7 @@ type UserManagerEditUserData struct {
 	// **Note:**
 	//
 	//   This value does **not** include the domain name.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerListUsersArgs are the parameters of the UAPI function `UserManager::list_users`.
@@ -1783,14 +1777,13 @@ func (c *UserManagerClient) ListUsers(ctx context.Context, args *UserManagerList
 	return cpanel.UAPICall[[]UserManagerListUsersDataItem](ctx, c.c, http.MethodGet, "UserManager", "list_users", args)
 }
 
-
 // UserManagerListUsersDataItemIssuesItem is a generated payload type.
 type UserManagerListUsersDataItemIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -1803,10 +1796,10 @@ type UserManagerListUsersDataItemIssuesItem struct {
 	// The type of issue.
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // An object containing the information that indicates the subaccount's email status.
@@ -1819,7 +1812,7 @@ type UserManagerListUsersDataItemServicesEmail struct {
 	Enabled int64 `json:"enabled"`
 
 	// The maximum amount of disk space allocated to subaccount's email account.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // An object containing the information that indicates the subaccount's FTP status.
@@ -1836,7 +1829,7 @@ type UserManagerListUsersDataItemServicesFTP struct {
 
 	// The subaccount's FTP disk space quota.
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // An object containing information that indicates the subaccount's Web Disk status.
@@ -1856,7 +1849,7 @@ type UserManagerListUsersDataItemServicesWebdisk struct {
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
@@ -1869,10 +1862,10 @@ type UserManagerListUsersDataItemServicesWebdisk struct {
 // An object containing information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerListUsersDataItemServices struct {
 	// An object containing the information that indicates the subaccount's email status.
-	Email   UserManagerListUsersDataItemServicesEmail `json:"email"`
+	Email UserManagerListUsersDataItemServicesEmail `json:"email"`
 
 	// An object containing the information that indicates the subaccount's FTP status.
-	FTP     UserManagerListUsersDataItemServicesFTP `json:"ftp"`
+	FTP UserManagerListUsersDataItemServicesFTP `json:"ftp"`
 
 	// Whether the account is a system-created special account that the user cannot remove.
 	// * `1` - A special account.
@@ -1888,17 +1881,17 @@ type UserManagerListUsersDataItemServices struct {
 // UserManagerListUsersDataItem is a generated payload type.
 type UserManagerListUsersDataItem struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail           string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL                string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	// * `1` - Can delete.
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete                int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	// * `1` - Can change.
@@ -1909,14 +1902,14 @@ type UserManagerListUsersDataItem struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword           int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	// * `1` - Can change.
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota              int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	// * `1` - Dismissed.
@@ -1927,49 +1920,49 @@ type UserManagerListUsersDataItem struct {
 	//  **Only** service accounts return this value.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed                int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// An array of objects containing information about service candidates that the system dismissed from merges.
 	DismissedMergeCandidates []string `json:"dismissed_merge_candidates"`
 
 	// The subaccount user's associated domain.
-	Domain                   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername             string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid                     string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	// * `1` - Expired account invitation exists.
 	// * `0` - Expired account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasExpiredInvite         int64 `json:"has_expired_invite"`
+	HasExpiredInvite int64 `json:"has_expired_invite"`
 
 	// Whether an account login invitation exists.
 	// * `1` - Account invitation exists.
 	// * `0` - Account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite                int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a full_username value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings              int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
-	InviteExpiration         int64 `json:"invite_expiration"`
+	InviteExpiration int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues                   []UserManagerListUsersDataItemIssuesItem `json:"issues"`
+	Issues []UserManagerListUsersDataItemIssuesItem `json:"issues"`
 
 	// An array of objects that represents the service accounts that the system could merge for this subaccount.
-	MergeCandidates          []string `json:"merge_candidates"`
+	MergeCandidates []string `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	// * `sub` - A subaccount.
@@ -1977,23 +1970,23 @@ type UserManagerListUsersDataItem struct {
 	// * `null` - **Not** a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType               *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The subaccount user's phone number. A valid phone number that conforms to [ITU-T](https://en.wikipedia.org/wiki/ITU-T)'s [E.164](https://en.wikipedia.org/wiki/E.164) -recommended standard for the representation of telephone numbers.
-	PhoneNumber              string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
-	RealName                 string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// An object containing information about the subaccount's access to email, FTP, and Web Disk.
-	Services                 UserManagerListUsersDataItemServices `json:"services"`
+	Services UserManagerListUsersDataItemServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` — A special account.
 	// * `0` — **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special                  int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	// * `1` - Exists.
@@ -2004,7 +1997,7 @@ type UserManagerListUsersDataItem struct {
 	// The function returns a `null` value if the account is **not** a service account.
 	//
 	// Possible values: `0`, `1`.
-	SubAccountExists         *int64 `json:"sub_account_exists"`
+	SubAccountExists *int64 `json:"sub_account_exists"`
 
 	// Whether the user has synchronized the passwords for each of the subaccount's service accounts.
 	// * `1` - Synchronized.
@@ -2015,7 +2008,7 @@ type UserManagerListUsersDataItem struct {
 	// The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword           *int64 `json:"synced_password"`
+	SyncedPassword *int64 `json:"synced_password"`
 
 	// The type of account.
 	// * `sub` - A subaccount.
@@ -2024,7 +2017,7 @@ type UserManagerListUsersDataItem struct {
 	// * `cpanel` - The cPanel account.
 	//
 	// Possible values: `sub`, `hypothetical`, `service`, `cpanel`.
-	Type2                    string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount. A username that meets the subaccount name limitations.
 	// - Length  64 characters.
@@ -2033,7 +2026,7 @@ type UserManagerListUsersDataItem struct {
 	// **Note:**
 	//
 	// This value does **not** include the domain name.
-	Username                 string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerLookupServiceAccountArgs are the parameters of the UAPI function `UserManager::lookup_service_account`.
@@ -2068,14 +2061,13 @@ func (c *UserManagerClient) LookupServiceAccount(ctx context.Context, args *User
 	return cpanel.UAPICall[UserManagerLookupServiceAccountData](ctx, c.c, http.MethodGet, "UserManager", "lookup_service_account", args)
 }
 
-
 // UserManagerLookupServiceAccountDataIssuesItem is a generated payload type.
 type UserManagerLookupServiceAccountDataIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -2094,19 +2086,19 @@ type UserManagerLookupServiceAccountDataIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // UserManagerLookupServiceAccountDataMergeCandidatesItemIssuesItem is a generated payload type.
 type UserManagerLookupServiceAccountDataMergeCandidatesItemIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -2125,10 +2117,10 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItemIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -2146,7 +2138,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItemServicesEmail struct 
 	// **Note:**
 	//
 	//   This function will not return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -2166,7 +2158,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItemServicesFTP struct {
 	//
 	// * A positive integer between `1` and `999999`
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -2188,7 +2180,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItemServicesWebdisk struc
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	//
@@ -2202,10 +2194,10 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItemServicesWebdisk struc
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerLookupServiceAccountDataMergeCandidatesItemServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerLookupServiceAccountDataMergeCandidatesItemServicesEmail `json:"email"`
+	Email UserManagerLookupServiceAccountDataMergeCandidatesItemServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerLookupServiceAccountDataMergeCandidatesItemServicesFTP `json:"ftp"`
+	FTP UserManagerLookupServiceAccountDataMergeCandidatesItemServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerLookupServiceAccountDataMergeCandidatesItemServicesWebdisk `json:"webdisk"`
@@ -2214,10 +2206,10 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItemServices struct {
 // UserManagerLookupServiceAccountDataMergeCandidatesItem is a generated payload type.
 type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	//
@@ -2225,7 +2217,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	//
@@ -2237,7 +2229,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	//
@@ -2245,7 +2237,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	//
@@ -2257,18 +2249,18 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `0` - Did **not** dismiss.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed        int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// The Subaccount user's associated domain.
 	//
 	// A domain that the cPanel account owns.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	//
@@ -2284,7 +2276,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `0` - Account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite        int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	//
@@ -2292,37 +2284,37 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
 	InviteExpiration int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []UserManagerLookupServiceAccountDataMergeCandidatesItemIssuesItem `json:"issues"`
+	Issues []UserManagerLookupServiceAccountDataMergeCandidatesItemIssuesItem `json:"issues"`
 
 	// An array of objects that represents the service accounts that the system could merge for this subaccount.
-	MergeCandidates  []json.RawMessage `json:"merge_candidates"`
+	MergeCandidates []json.RawMessage `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	//
 	// * `sub` - A subaccount.
 	// * `hypothetical` - A hypothetical subaccount that does **not** yet exist, but the user could create as part of a merge.
 	// * `null`- **Not** a merge candidate.
-	ParentType       string `json:"parent_type"`
+	ParentType string `json:"parent_type"`
 
 	// The subaccount user's phone number.
 	//
 	// The number conforms to the [ITU-T](https://en.wikipedia.org/wiki/ITU-T)'s [E.164](https://en.wikipedia.org/wiki/E.164)-recommended standard for the representation of telephone numbers.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
 	// * A first name, a last name, or a first name and last name.
 	// * An empty string.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerLookupServiceAccountDataMergeCandidatesItemServices `json:"services"`
+	Services UserManagerLookupServiceAccountDataMergeCandidatesItemServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	//
@@ -2330,7 +2322,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -2354,7 +2346,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	//   The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -2362,7 +2354,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// * `hypothetical` - A hypothetical subaccount that does **not** exist, but that the user could create as part of a merge.
 	// * `service` - A service account.
 	// * `cpanel` - The cPanel account.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
 	//
@@ -2372,7 +2364,7 @@ type UserManagerLookupServiceAccountDataMergeCandidatesItem struct {
 	// **Note:**
 	//
 	//   This value does **not** include the domain name.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -2390,7 +2382,7 @@ type UserManagerLookupServiceAccountDataServicesEmail struct {
 	// **Note:**
 	//
 	//   This function will not return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -2410,7 +2402,7 @@ type UserManagerLookupServiceAccountDataServicesFTP struct {
 	//
 	// * A positive integer between `1` and `999999`
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -2432,7 +2424,7 @@ type UserManagerLookupServiceAccountDataServicesWebdisk struct {
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	//
@@ -2446,10 +2438,10 @@ type UserManagerLookupServiceAccountDataServicesWebdisk struct {
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerLookupServiceAccountDataServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerLookupServiceAccountDataServicesEmail `json:"email"`
+	Email UserManagerLookupServiceAccountDataServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerLookupServiceAccountDataServicesFTP `json:"ftp"`
+	FTP UserManagerLookupServiceAccountDataServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerLookupServiceAccountDataServicesWebdisk `json:"webdisk"`
@@ -2458,10 +2450,10 @@ type UserManagerLookupServiceAccountDataServices struct {
 // UserManagerLookupServiceAccountData is a generated payload type.
 type UserManagerLookupServiceAccountData struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	//
@@ -2469,7 +2461,7 @@ type UserManagerLookupServiceAccountData struct {
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	//
@@ -2481,7 +2473,7 @@ type UserManagerLookupServiceAccountData struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	//
@@ -2489,7 +2481,7 @@ type UserManagerLookupServiceAccountData struct {
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	//
@@ -2501,18 +2493,18 @@ type UserManagerLookupServiceAccountData struct {
 	// * `0` - Did **not** dismiss.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed        int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// The Subaccount user's associated domain.
 	//
 	// A domain that the cPanel account owns.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	//
@@ -2528,7 +2520,7 @@ type UserManagerLookupServiceAccountData struct {
 	// * `0` - Account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite        int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	//
@@ -2536,37 +2528,37 @@ type UserManagerLookupServiceAccountData struct {
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
 	InviteExpiration int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []UserManagerLookupServiceAccountDataIssuesItem `json:"issues"`
+	Issues []UserManagerLookupServiceAccountDataIssuesItem `json:"issues"`
 
 	// An array of objects that represents the service accounts that the system could merge for this subaccount.
-	MergeCandidates  []UserManagerLookupServiceAccountDataMergeCandidatesItem `json:"merge_candidates"`
+	MergeCandidates []UserManagerLookupServiceAccountDataMergeCandidatesItem `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	//
 	// * `sub` - A subaccount.
 	// * `hypothetical` - A hypothetical subaccount that does **not** yet exist, but the user could create as part of a merge.
 	// * `null`- **Not** a merge candidate.
-	ParentType       string `json:"parent_type"`
+	ParentType string `json:"parent_type"`
 
 	// The subaccount user's phone number.
 	//
 	// The number conforms to the [ITU-T](https://en.wikipedia.org/wiki/ITU-T)'s [E.164](https://en.wikipedia.org/wiki/E.164)-recommended standard for the representation of telephone numbers.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
 	// * A first name, a last name, or a first name and last name.
 	// * An empty string.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerLookupServiceAccountDataServices `json:"services"`
+	Services UserManagerLookupServiceAccountDataServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	//
@@ -2574,7 +2566,7 @@ type UserManagerLookupServiceAccountData struct {
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -2598,7 +2590,7 @@ type UserManagerLookupServiceAccountData struct {
 	//   The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -2606,7 +2598,7 @@ type UserManagerLookupServiceAccountData struct {
 	// * `hypothetical` - A hypothetical subaccount that does **not** exist, but that the user could create as part of a merge.
 	// * `service` - A service account.
 	// * `cpanel` - The cPanel account.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
 	//
@@ -2616,7 +2608,7 @@ type UserManagerLookupServiceAccountData struct {
 	// **Note:**
 	//
 	//   This value does **not** include the domain name.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerLookupUserArgs are the parameters of the UAPI function `UserManager::lookup_user`.
@@ -2641,14 +2633,13 @@ func (c *UserManagerClient) LookupUser(ctx context.Context, args *UserManagerLoo
 	return cpanel.UAPICall[UserManagerLookupUserData](ctx, c.c, http.MethodGet, "UserManager", "lookup_user", args)
 }
 
-
 // ServiceAccountIssuesItem is a generated payload type.
 type ServiceAccountIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -2661,10 +2652,10 @@ type ServiceAccountIssuesItem struct {
 	// The type of issue.
 	//
 	// Possible values: `error`, `info`, `warning`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // Information that indicates the subaccount's email status.
@@ -2677,7 +2668,7 @@ type ServiceAccountServicesEmail struct {
 	Enabled int64 `json:"enabled"`
 
 	// The maximum amount of disk space allocated to subaccount's email account, in megabytes (MB).
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -2695,7 +2686,7 @@ type ServiceAccountServicesFTP struct {
 	// The subaccount's FTP disk space quota.
 	// * `1` to `999999` - The maximum disk space that the subaccount may use, in megabytes (MB).
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -2705,7 +2696,7 @@ type ServiceAccountServicesWebdisk struct {
 	// * `0` - Cannot access.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// Whether the subaccount's Web Disk service has enabled Digest Authentication.
 	// * `1` - Digest Authentication is enabled.
@@ -2715,30 +2706,30 @@ type ServiceAccountServicesWebdisk struct {
 	Enabledigest int64 `json:"enabledigest"`
 
 	// The subaccount's Web Disk home directory, relative to the cPanel account's home directory.
-	Homedir      string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// Whether to grant write permissions to the subaccount.
 	// * `ro` - Read-only permissions.
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms        string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
 	// * `0` - Public (0755).
 	//
 	// Possible values: `0`, `1`.
-	Private      int64 `json:"private"`
+	Private int64 `json:"private"`
 }
 
 // Information about the subaccount's access to email, FTP, and Web Disk.
 type ServiceAccountServices struct {
 	// Information that indicates the subaccount's email status.
-	Email   ServiceAccountServicesEmail `json:"email"`
+	Email ServiceAccountServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     ServiceAccountServicesFTP `json:"ftp"`
+	FTP ServiceAccountServicesFTP `json:"ftp"`
 
 	// Whether the account is a system-created special account that the user cannot remove.
 	// * `1` - A special account.
@@ -2754,17 +2745,17 @@ type ServiceAccountServices struct {
 // ServiceAccount is a generated payload type.
 type ServiceAccount struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   *string `json:"alternate_email"`
+	AlternateEmail *string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        *string `json:"avatar_url"`
+	AvatarURL *string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	// * `1` - Can delete.
 	// * `0` - Cannot delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	// * `1` - Can change.
@@ -2775,14 +2766,14 @@ type ServiceAccount struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	// * `1` - Can change.
 	// * `0` - Cannot change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	// * `1` - Dismissed.
@@ -2793,29 +2784,29 @@ type ServiceAccount struct {
 	//   Only service accounts return this value.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed        int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// The subaccount user's associated domain.
-	Domain           *string `json:"domain"`
+	Domain *string `json:"domain"`
 
 	// The subaccount's username and domain name. A valid username, the `@` character, and the associated domain.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does not share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []ServiceAccountIssuesItem `json:"issues"`
+	Issues []ServiceAccountIssuesItem `json:"issues"`
 
 	// An array of service account objects that the system could merge for this subaccount.
-	MergeCandidates  []ServiceAccount `json:"merge_candidates"`
+	MergeCandidates []ServiceAccount `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	// * `sub` - A subaccount.
@@ -2823,25 +2814,25 @@ type ServiceAccount struct {
 	// * `null` - Not a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType       *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The subaccount user's phone number. A valid phone number that conforms to [ITU-T's E.164-recommended standard](https://en.wikipedia.org/wiki/ITU-T) for the representation of telephone numbers.
-	PhoneNumber      *string `json:"phone_number"`
+	PhoneNumber *string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	// * A first name, a last name, or a first name and last name.
 	// * An empty or null string.
-	RealName         *string `json:"real_name"`
+	RealName *string `json:"real_name"`
 
 	// Information about the subaccount's access to email, FTP, and Web Disk.
-	Services         ServiceAccountServices `json:"services"`
+	Services ServiceAccountServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` - A special account.
 	// * `0` - Not a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	// * `1` - Exists.
@@ -2863,7 +2854,7 @@ type ServiceAccount struct {
 	//   The function returns a null value if the account is not a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
 	// The type of account.
 	// * `cpanel` - The cPanel account.
@@ -2872,19 +2863,19 @@ type ServiceAccount struct {
 	// * `sub` - A subaccount.
 	//
 	// Possible values: `cpanel`, `hypothetical`, `service`, `sub`.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerLookupUserDataIssuesItem is a generated payload type.
 type UserManagerLookupUserDataIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -2897,10 +2888,10 @@ type UserManagerLookupUserDataIssuesItem struct {
 	// The type of issue.
 	//
 	// Possible values: `error`, `info`, `warning`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // Information that indicates the subaccount's email status.
@@ -2913,7 +2904,7 @@ type UserManagerLookupUserDataServicesEmail struct {
 	Enabled int64 `json:"enabled"`
 
 	// The maximum amount of disk space allocated to subaccount's email account, in megabytes (MB).
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -2931,7 +2922,7 @@ type UserManagerLookupUserDataServicesFTP struct {
 	// The subaccount's FTP disk space quota.
 	// * `1` to `999999` - The maximum disk space that the subaccount may use, in megabytes (MB).
 	// * `0` - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -2941,7 +2932,7 @@ type UserManagerLookupUserDataServicesWebdisk struct {
 	// * `0` - Cannot access.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// Whether the subaccount's Web Disk service has enabled Digest Authentication.
 	// * `1` - Digest Authentication is enabled.
@@ -2951,30 +2942,30 @@ type UserManagerLookupUserDataServicesWebdisk struct {
 	Enabledigest int64 `json:"enabledigest"`
 
 	// The subaccount's Web Disk home directory, relative to the cPanel account's home directory.
-	Homedir      string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// Whether to grant write permissions to the subaccount.
 	// * `ro` - Read-only permissions.
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms        string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
 	// * `0` - Public (0755).
 	//
 	// Possible values: `0`, `1`.
-	Private      int64 `json:"private"`
+	Private int64 `json:"private"`
 }
 
 // Information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerLookupUserDataServices struct {
 	// Information that indicates the subaccount's email status.
-	Email   UserManagerLookupUserDataServicesEmail `json:"email"`
+	Email UserManagerLookupUserDataServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerLookupUserDataServicesFTP `json:"ftp"`
+	FTP UserManagerLookupUserDataServicesFTP `json:"ftp"`
 
 	// Whether the account is a system-created special account that the user cannot remove.
 	// * `1` - A special account.
@@ -2990,17 +2981,17 @@ type UserManagerLookupUserDataServices struct {
 // UserManagerLookupUserData is a generated payload type.
 type UserManagerLookupUserData struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail           *string `json:"alternate_email"`
+	AlternateEmail *string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL                *string `json:"avatar_url"`
+	AvatarURL *string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	// * `1` - Can delete.
 	// * `0` - Cannot delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete                int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	// * `1` - Can change.
@@ -3011,14 +3002,14 @@ type UserManagerLookupUserData struct {
 	//   The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword           int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	// * `1` - Can change.
 	// * `0` - Cannot change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota              int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	// * `1` - Dismissed.
@@ -3029,49 +3020,49 @@ type UserManagerLookupUserData struct {
 	//   Only service accounts return this value.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed                int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// An array of service account objects that the system dismissed from merges.
 	DismissedMergeCandidates []ServiceAccount `json:"dismissed_merge_candidates"`
 
 	// The subaccount user's associated domain.
-	Domain                   *string `json:"domain"`
+	Domain *string `json:"domain"`
 
 	// The subaccount's username and domain name. A valid username, the `@` character, and the associated domain.
-	FullUsername             string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier.
-	Guid                     string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	// * `1` - Expired account invitation exists.
 	// * `0` - Expired account invitation does not exist.
 	//
 	// Possible values: `0`, `1`.
-	HasExpiredInvite         int64 `json:"has_expired_invite"`
+	HasExpiredInvite int64 `json:"has_expired_invite"`
 
 	// Whether an account login invitation exists.
 	// * `1` -  Account invitation exists.
 	// * `0` -  Account invitation does not exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite                int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does not share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings              int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
-	InviteExpiration         *int64 `json:"invite_expiration"`
+	InviteExpiration *int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues                   []UserManagerLookupUserDataIssuesItem `json:"issues"`
+	Issues []UserManagerLookupUserDataIssuesItem `json:"issues"`
 
 	// An array of service account objects that the system could merge for this subaccount.
-	MergeCandidates          []ServiceAccount `json:"merge_candidates"`
+	MergeCandidates []ServiceAccount `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	// * `sub` - A subaccount.
@@ -3079,25 +3070,25 @@ type UserManagerLookupUserData struct {
 	// * `null` - Not a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType               *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The subaccount user's phone number. A valid phone number that conforms to [ITU-T's E.164-recommended standard](https://en.wikipedia.org/wiki/ITU-T) for the representation of telephone numbers.
-	PhoneNumber              *string `json:"phone_number"`
+	PhoneNumber *string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	// * A first name, a last name, or a first name and last name.
 	// * An empty or null string.
-	RealName                 *string `json:"real_name"`
+	RealName *string `json:"real_name"`
 
 	// Information about the subaccount's access to email, FTP, and Web Disk.
-	Services                 UserManagerLookupUserDataServices `json:"services"`
+	Services UserManagerLookupUserDataServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` - A special account.
 	// * `0` - Not a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special                  int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	// * `1` - Exists.
@@ -3108,7 +3099,7 @@ type UserManagerLookupUserData struct {
 	//   The function returns a null value if the account is not a service account.
 	//
 	// Possible values: `0`, `1`.
-	SubAccountExists         int64 `json:"sub_account_exists"`
+	SubAccountExists int64 `json:"sub_account_exists"`
 
 	// Whether the user has synchronized the passwords for each of the subaccount's service accounts.
 	// * `1` - Synchronized.
@@ -3119,7 +3110,7 @@ type UserManagerLookupUserData struct {
 	//   The function returns a null value if the account is not a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword           int64 `json:"synced_password"`
+	SyncedPassword int64 `json:"synced_password"`
 
 	// The type of account.
 	// * `cpanel` - The cPanel account.
@@ -3128,10 +3119,10 @@ type UserManagerLookupUserData struct {
 	// * `sub` - A subaccount.
 	//
 	// Possible values: `cpanel`, `hypothetical`, `service`, `sub`.
-	Type2                    string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
-	Username                 string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerMergeServiceAccountArgs are the parameters of the UAPI function `UserManager::merge_service_account`.
@@ -3212,14 +3203,13 @@ func (c *UserManagerClient) MergeServiceAccount(ctx context.Context, args *UserM
 	return cpanel.UAPICall[UserManagerMergeServiceAccountData](ctx, c.c, http.MethodGet, "UserManager", "merge_service_account", args)
 }
 
-
 // UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemIssuesItem is a generated payload type.
 type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -3239,10 +3229,10 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemIssuesItem st
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -3260,7 +3250,7 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesEmail
 	// **Note:**
 	//
 	// This function will **not** return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -3278,7 +3268,7 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesFTP s
 	// The subaccount's FTP disk space quota.
 	// * >= `1` - Represents the maximum disk space that the subaccount may use, in megabytes (MB).
 	// * `0`   - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -3298,7 +3288,7 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesWebdi
 	// * `rw` - Read and write permissions.
 	//
 	// Possible values: `ro`, `rw`.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
@@ -3311,10 +3301,10 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesWebdi
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesEmail `json:"email"`
+	Email UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesFTP `json:"ftp"`
+	FTP UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServicesWebdisk `json:"webdisk"`
@@ -3323,17 +3313,17 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServices stru
 // UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem is a generated payload type.
 type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	// * `1` - Can delete.
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	// * `1` - Can change.
@@ -3344,33 +3334,33 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem struct {
 	// The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	// * `1` - Can change.
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// The subaccount user's associated domain that the cPanel account owns.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier. The system assigned unique value.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemIssuesItem `json:"issues"`
+	Issues []UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemIssuesItem `json:"issues"`
 
 	// The type of account that could own the service account.
 	// * `sub`          - A subaccount.
@@ -3378,10 +3368,10 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem struct {
 	// * `null`         - **Not** a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType       *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The subaccount user's phone number.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
@@ -3389,17 +3379,17 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem struct {
 	// * Last name.
 	// * First name and last name.
 	// * An empty string.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServices `json:"services"`
+	Services UserManagerMergeServiceAccountDataDismissedMergeCandidatesItemServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` - A special account.
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -3423,7 +3413,7 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem struct {
 	// The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   *int64 `json:"synced_password"`
+	SyncedPassword *int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -3433,19 +3423,19 @@ type UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem struct {
 	// * `cpanel` - The cPanel account.
 	//
 	// Possible values: `sub`, `hypothetical`, `service`, `cpanel`.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerMergeServiceAccountDataIssuesItem is a generated payload type.
 type UserManagerMergeServiceAccountDataIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -3465,19 +3455,19 @@ type UserManagerMergeServiceAccountDataIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // UserManagerMergeServiceAccountDataMergeCandidatesItemIssuesItem is a generated payload type.
 type UserManagerMergeServiceAccountDataMergeCandidatesItemIssuesItem struct {
 	// The affected section of cPanel & WHM.
-	Area    string `json:"area"`
+	Area string `json:"area"`
 
 	// The set quota megabyte (MB) limit for the affected subaccount.
-	Limit   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The description of the issue.
 	Message string `json:"message"`
@@ -3497,10 +3487,10 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItemIssuesItem struct {
 	// * `info`
 	//
 	// Possible values: `error`, `warning`, `info`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The number of megabytes (MB) that the account currently uses.
-	Used    int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -3518,7 +3508,7 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItemServicesEmail struct {
 	// **Note:**
 	//
 	// This function will **not** return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -3536,7 +3526,7 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItemServicesFTP struct {
 	// The subaccount's FTP disk space quota.
 	// * >= `1` - Represents the maximum disk space that the subaccount may use, in megabytes (MB).
 	// * `0`   - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -3554,7 +3544,7 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItemServicesWebdisk struct
 	// Whether to grant write permissions to the subaccount.
 	// * `ro` - Read-only permissions.
 	// * `rw` - Read and write permissions.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
@@ -3567,10 +3557,10 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItemServicesWebdisk struct
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerMergeServiceAccountDataMergeCandidatesItemServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerMergeServiceAccountDataMergeCandidatesItemServicesEmail `json:"email"`
+	Email UserManagerMergeServiceAccountDataMergeCandidatesItemServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerMergeServiceAccountDataMergeCandidatesItemServicesFTP `json:"ftp"`
+	FTP UserManagerMergeServiceAccountDataMergeCandidatesItemServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerMergeServiceAccountDataMergeCandidatesItemServicesWebdisk `json:"webdisk"`
@@ -3579,17 +3569,17 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItemServices struct {
 // UserManagerMergeServiceAccountDataMergeCandidatesItem is a generated payload type.
 type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail   string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL        string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	// * `1` - Can delete.
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete        int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	// * `1` - Can change.
@@ -3600,33 +3590,33 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword   int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	// * `1` - Can change.
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota      int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// The subaccount user's associated domain. A domain that the cPanel account owns.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername     string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier. The system assigned unique value.
-	Guid             string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings      int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues           []UserManagerMergeServiceAccountDataMergeCandidatesItemIssuesItem `json:"issues"`
+	Issues []UserManagerMergeServiceAccountDataMergeCandidatesItemIssuesItem `json:"issues"`
 
 	// The type of account that could own the service account.
 	// * `sub` - A subaccount.
@@ -3634,10 +3624,10 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// * `null` - Not a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType       *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The subaccount user's phone number.
-	PhoneNumber      string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
@@ -3645,17 +3635,17 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// * Last name.
 	// * First name and last name.
 	// * An empty string.
-	RealName         string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services         UserManagerMergeServiceAccountDataMergeCandidatesItemServices `json:"services"`
+	Services UserManagerMergeServiceAccountDataMergeCandidatesItemServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` - A special account.
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special          int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -3679,7 +3669,7 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword   *int64 `json:"synced_password"`
+	SyncedPassword *int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -3689,7 +3679,7 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// * `cpanel` - The cPanel account.
 	//
 	// Possible values: `sub`, `hypothetical`, `service`, `cpanel`.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the service account that meets the account name limitations.
 	//
@@ -3699,7 +3689,7 @@ type UserManagerMergeServiceAccountDataMergeCandidatesItem struct {
 	// **Note:**
 	//
 	// This value does **not** include the domain name.
-	Username         string `json:"username"`
+	Username string `json:"username"`
 }
 
 // This object contains the information that indicates the subaccount's email status.
@@ -3717,7 +3707,7 @@ type UserManagerMergeServiceAccountDataServicesEmail struct {
 	// **Note:**
 	//
 	// This function will **not** return `0` as a value.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains the information that indicates the subaccount's FTP status.
@@ -3735,7 +3725,7 @@ type UserManagerMergeServiceAccountDataServicesFTP struct {
 	// The subaccount's FTP disk space quota.
 	// * >= `1` - Represents the maximum disk space that the subaccount may use, in megabytes (MB).
 	// * `0`   - Unlimited.
-	Quota   int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 }
 
 // This object contains information that indicates the subaccount's Web Disk status.
@@ -3753,7 +3743,7 @@ type UserManagerMergeServiceAccountDataServicesWebdisk struct {
 	// Whether to grant write permissions to the subaccount.
 	// * `ro` - Read-only permissions.
 	// * `rw` - Read and write permissions.
-	Perms   string `json:"perms"`
+	Perms string `json:"perms"`
 
 	// Whether to set the Web Disk directory's permissions to public or private.
 	// * `1` - Private (0700).
@@ -3766,10 +3756,10 @@ type UserManagerMergeServiceAccountDataServicesWebdisk struct {
 // This object contains information about the subaccount's access to email, FTP, and Web Disk.
 type UserManagerMergeServiceAccountDataServices struct {
 	// This object contains the information that indicates the subaccount's email status.
-	Email   UserManagerMergeServiceAccountDataServicesEmail `json:"email"`
+	Email UserManagerMergeServiceAccountDataServicesEmail `json:"email"`
 
 	// This object contains the information that indicates the subaccount's FTP status.
-	FTP     UserManagerMergeServiceAccountDataServicesFTP `json:"ftp"`
+	FTP UserManagerMergeServiceAccountDataServicesFTP `json:"ftp"`
 
 	// This object contains information that indicates the subaccount's Web Disk status.
 	Webdisk UserManagerMergeServiceAccountDataServicesWebdisk `json:"webdisk"`
@@ -3778,17 +3768,17 @@ type UserManagerMergeServiceAccountDataServices struct {
 // UserManagerMergeServiceAccountData is a generated payload type.
 type UserManagerMergeServiceAccountData struct {
 	// An alternate email address for the subaccount's user.
-	AlternateEmail           string `json:"alternate_email"`
+	AlternateEmail string `json:"alternate_email"`
 
 	// The user's subaccount profile photo.
-	AvatarURL                string `json:"avatar_url"`
+	AvatarURL string `json:"avatar_url"`
 
 	// Whether the cPanel account user can delete the subaccount.
 	// * `1` - Can delete.
 	// * `0` - **Cannot** delete.
 	//
 	// Possible values: `0`, `1`.
-	CanDelete                int64 `json:"can_delete"`
+	CanDelete int64 `json:"can_delete"`
 
 	// Whether the cPanel account user can change the subaccount's password.
 	// * `1` - Can change.
@@ -3799,14 +3789,14 @@ type UserManagerMergeServiceAccountData struct {
 	// The function returns a `0` value for subaccounts that inherit their password from the cPanel account.
 	//
 	// Possible values: `0`, `1`.
-	CanSetPassword           int64 `json:"can_set_password"`
+	CanSetPassword int64 `json:"can_set_password"`
 
 	// Whether the cPanel account user can change the subaccount's disk usage quota.
 	// * `1` - Can change.
 	// * `0` - **Cannot** change.
 	//
 	// Possible values: `0`, `1`.
-	CanSetQuota              int64 `json:"can_set_quota"`
+	CanSetQuota int64 `json:"can_set_quota"`
 
 	// Whether the cPanel account user dismissed the merge prompt for the service account.
 	//
@@ -3817,49 +3807,49 @@ type UserManagerMergeServiceAccountData struct {
 	// * `0` - Did **not** dismiss.
 	//
 	// Possible values: `0`, `1`.
-	Dismissed                int64 `json:"dismissed"`
+	Dismissed int64 `json:"dismissed"`
 
 	// An array of objects of service candidates that the system dismissed from merges.
 	DismissedMergeCandidates []UserManagerMergeServiceAccountDataDismissedMergeCandidatesItem `json:"dismissed_merge_candidates"`
 
 	// The subaccount user's associated domain. A domain that the cPanel account owns.
-	Domain                   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The subaccount's username and domain name.
-	FullUsername             string `json:"full_username"`
+	FullUsername string `json:"full_username"`
 
 	// The subaccount unique identifier. The system assigned unique value.
-	Guid                     string `json:"guid"`
+	Guid string `json:"guid"`
 
 	// Whether an expired account login invitation exists.
 	// * `1` - Expired account invitation exists.
 	// * `0` - Expired account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasExpiredInvite         int64 `json:"has_expired_invite"`
+	HasExpiredInvite int64 `json:"has_expired_invite"`
 
 	// Whether an account login invitation exists.
 	// * `1` - Account invitation exists.
 	// * `0` - Account invitation does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasInvite                int64 `json:"has_invite"`
+	HasInvite int64 `json:"has_invite"`
 
 	// Whether the service account shares a `full_username` value with another service account.
 	// * `1` - Shares.
 	// * `0` - Does **not** share.
 	//
 	// Possible values: `0`, `1`.
-	HasSiblings              int64 `json:"has_siblings"`
+	HasSiblings int64 `json:"has_siblings"`
 
 	// When the invitation expires.
-	InviteExpiration         int64 `json:"invite_expiration"`
+	InviteExpiration int64 `json:"invite_expiration"`
 
 	// Information about any issues or problems with the subaccount.
-	Issues                   []UserManagerMergeServiceAccountDataIssuesItem `json:"issues"`
+	Issues []UserManagerMergeServiceAccountDataIssuesItem `json:"issues"`
 
 	// An array of objects that represents the service accounts that the system could merge for this subaccount.
-	MergeCandidates          []UserManagerMergeServiceAccountDataMergeCandidatesItem `json:"merge_candidates"`
+	MergeCandidates []UserManagerMergeServiceAccountDataMergeCandidatesItem `json:"merge_candidates"`
 
 	// The type of account that could own the service account.
 	// * `sub` - A subaccount.
@@ -3867,10 +3857,10 @@ type UserManagerMergeServiceAccountData struct {
 	// * `null` - Not a merge candidate.
 	//
 	// Possible values: `sub`, `hypothetical`.
-	ParentType               *string `json:"parent_type"`
+	ParentType *string `json:"parent_type"`
 
 	// The subaccount user's phone number.
-	PhoneNumber              string `json:"phone_number"`
+	PhoneNumber string `json:"phone_number"`
 
 	// The name of the subaccount's user.
 	//
@@ -3878,17 +3868,17 @@ type UserManagerMergeServiceAccountData struct {
 	// * Last name.
 	// * First name and last name.
 	// * An empty string.
-	RealName                 string `json:"real_name"`
+	RealName string `json:"real_name"`
 
 	// This object contains information about the subaccount's access to email, FTP, and Web Disk.
-	Services                 UserManagerMergeServiceAccountDataServices `json:"services"`
+	Services UserManagerMergeServiceAccountDataServices `json:"services"`
 
 	// Whether the account is a system-created special account that the user **cannot** remove.
 	// * `1` - A special account.
 	// * `0` - **Not** a special account.
 	//
 	// Possible values: `0`, `1`.
-	Special                  int64 `json:"special"`
+	Special int64 `json:"special"`
 
 	// Whether a subaccount exists with the same username.
 	//
@@ -3900,7 +3890,7 @@ type UserManagerMergeServiceAccountData struct {
 	// The function returns a `null` value if the account is **not** a service account.
 	//
 	// Possible values: `0`, `1`.
-	SubAccountExists         *int64 `json:"sub_account_exists"`
+	SubAccountExists *int64 `json:"sub_account_exists"`
 
 	// Whether the user has synchronized the passwords for each of the subaccount's service accounts.
 	//
@@ -3912,7 +3902,7 @@ type UserManagerMergeServiceAccountData struct {
 	// The function returns a `null` value if the account is **not** a subaccount.
 	//
 	// Possible values: `0`, `1`.
-	SyncedPassword           *int64 `json:"synced_password"`
+	SyncedPassword *int64 `json:"synced_password"`
 
 	// The type of account.
 	//
@@ -3920,7 +3910,7 @@ type UserManagerMergeServiceAccountData struct {
 	// * `hypothetical` - A hypothetical subaccount that does **not** exist, but that the user could create as part of a merge.
 	// * `service` - A service account.
 	// * `cpanel` - The cPanel account.
-	Type2                    string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The username for the subaccount.
 	//
@@ -3932,7 +3922,7 @@ type UserManagerMergeServiceAccountData struct {
 	// **Note:**
 	//
 	// This value does **not** include the domain name.
-	Username                 string `json:"username"`
+	Username string `json:"username"`
 }
 
 // UserManagerUnlinkServiceAccountArgs are the parameters of the UAPI function `UserManager::unlink_service_account`.
@@ -3989,4 +3979,3 @@ type UserManagerUnlinkServiceAccountArgs struct {
 func (c *UserManagerClient) UnlinkServiceAccount(ctx context.Context, args *UserManagerUnlinkServiceAccountArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "UserManager", "unlink_service_account", args)
 }
-

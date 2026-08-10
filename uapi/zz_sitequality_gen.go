@@ -56,11 +56,10 @@ func (c *SiteQualityClient) CreateProject(ctx context.Context, args *SiteQuality
 	return cpanel.UAPICall[SiteQualityCreateProjectData](ctx, c.c, http.MethodPost, "SiteQuality", "create_project", args)
 }
 
-
 // Information about the user that owns the project.
 type SiteQualityCreateProjectDataRole struct {
 	// The user's role ID number.
-	ID   int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The user's role title.
 	Name string `json:"name"`
@@ -80,10 +79,10 @@ type SiteQualityCreateProjectDataSystemsItemSystemType struct {
 	FixedComponents bool `json:"fixedComponents"`
 
 	// The system's type ID number.
-	ID              json.RawMessage `json:"id"`
+	ID json.RawMessage `json:"id"`
 
 	// The name of the system type.
-	Name            string `json:"name"`
+	Name string `json:"name"`
 }
 
 // SiteQualityCreateProjectDataSystemsItem is a generated payload type.
@@ -92,43 +91,43 @@ type SiteQualityCreateProjectDataSystemsItem struct {
 	Description *string `json:"description"`
 
 	// The system's base domain.
-	Domain      string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The system's ID number.
-	ID          int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The time interval for monitoring checks.
-	Interval    string `json:"interval"`
+	Interval string `json:"interval"`
 
 	// Restrictions placed on the monitoring checks.
-	Limits      SiteQualityCreateProjectDataSystemsItemLimits `json:"limits"`
+	Limits SiteQualityCreateProjectDataSystemsItemLimits `json:"limits"`
 
 	// The name of the system.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 
 	// The monitoring template used for the system.
-	SystemType  SiteQualityCreateProjectDataSystemsItemSystemType `json:"system_type"`
+	SystemType SiteQualityCreateProjectDataSystemsItemSystemType `json:"system_type"`
 }
 
 // An object that contains project attributes.
 type SiteQualityCreateProjectData struct {
 	// The project ID number.
-	ID         int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The project identifier.
 	Identifier string `json:"identifier"`
 
 	// The region where monitoring checks originate.
-	Location   string `json:"location"`
+	Location string `json:"location"`
 
 	// The project's name.
-	Name       string `json:"name"`
+	Name string `json:"name"`
 
 	// Information about the user that owns the project.
-	Role       SiteQualityCreateProjectDataRole `json:"role"`
+	Role SiteQualityCreateProjectDataRole `json:"role"`
 
 	// Information about the system that the project monitors.
-	Systems    []SiteQualityCreateProjectDataSystemsItem `json:"systems"`
+	Systems []SiteQualityCreateProjectDataSystemsItem `json:"systems"`
 }
 
 // SiteQualityCreateSiteQualityUserArgs are the parameters of the UAPI function `SiteQuality::create_site_quality_user`.
@@ -164,7 +163,6 @@ func (c *SiteQualityClient) CreateSiteQualityUser(ctx context.Context, args *Sit
 	return cpanel.UAPICall[SiteQualityCreateSiteQualityUserData](ctx, c.c, http.MethodPost, "SiteQuality", "create_site_quality_user", args)
 }
 
-
 // An object that contains user attributes.
 type SiteQualityCreateSiteQualityUserData struct {
 	// The long-lived token for this account. The <a href="https://go.cpanel.net/5k" target="_blank">koality</a> servers require this token to authenticate. If this token is lost, the user must create a new account.
@@ -173,7 +171,7 @@ type SiteQualityCreateSiteQualityUserData struct {
 	// Whether the account is enabled to process user data.
 	//  * `false` - The account is disabled.
 	//  * `true` - The account is enabled.
-	Enabled  *bool `json:"enabled"`
+	Enabled *bool `json:"enabled"`
 
 	// The account's username. This value reflects the `email` parameter.
 	Username string `json:"username"`
@@ -189,7 +187,6 @@ type SiteQualityCreateSiteQualityUserData struct {
 func (c *SiteQualityClient) DeleteSiteQualityUser(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[SiteQualityDeleteSiteQualityUserData], error) {
 	return cpanel.UAPICall[SiteQualityDeleteSiteQualityUserData](ctx, c.c, http.MethodGet, "SiteQuality", "delete_site_quality_user", cpanel.CombineArgs(extra...))
 }
-
 
 // An object that contains whether the user has been deleted.
 type SiteQualityDeleteSiteQualityUserData struct {
@@ -233,7 +230,6 @@ func (c *SiteQualityClient) GetAllScores(ctx context.Context, args *SiteQualityG
 	return cpanel.UAPICall[SiteQualityGetAllScoresData](ctx, c.c, http.MethodPost, "SiteQuality", "get_all_scores", args)
 }
 
-
 // ScoreMasterAttributes is a generated payload type.
 type ScoreMasterAttributes struct {
 	Limit int64 `json:"limit"`
@@ -243,86 +239,86 @@ type ScoreMasterAttributes struct {
 
 // The overall results for the check.
 type ScoreMaster struct {
-	Attributes  ScoreMasterAttributes `json:"attributes"`
+	Attributes ScoreMasterAttributes `json:"attributes"`
 
 	// A description of the check.
 	Description string `json:"description"`
 
 	// An unique identifier for the check.
-	Identifier  string `json:"identifier"`
+	Identifier string `json:"identifier"`
 
-	IncidentS   []json.RawMessage `json:"incidents"`
+	IncidentS []json.RawMessage `json:"incidents"`
 
 	// The check's status message.
-	Message     string `json:"message"`
+	Message string `json:"message"`
 
 	// A numeral score for the check.
 	//
 	// ** Note: **
 	//
 	// A higher score indicates that your website performs well in that check.
-	Score       int64 `json:"score"`
+	Score int64 `json:"score"`
 
 	// The check's summarized status.
 	//   * `good` — The check has returned a positive result.
 	//   * `bad`  — The check has returned a negative result.
 	//
 	// Possible values: `good`, `bad`.
-	Status      string `json:"status"`
+	Status string `json:"status"`
 
 	// The title of the check.
-	Title       string `json:"title"`
+	Title string `json:"title"`
 }
 
 // ScoreSubScoresItemAttributes is a generated payload type.
 type ScoreSubScoresItemAttributes struct {
-	ComponentsFailed    int64 `json:"components_failed"`
+	ComponentsFailed int64 `json:"components_failed"`
 
 	ComponentsProcessed int64 `json:"components_processed"`
 
-	Limit               int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
-	Score               int64 `json:"score"`
+	Score int64 `json:"score"`
 
-	Scoring             string `json:"scoring"`
+	Scoring string `json:"scoring"`
 
-	Tool                string `json:"tool"`
+	Tool string `json:"tool"`
 }
 
 // ScoreSubScoresItem is a generated payload type.
 type ScoreSubScoresItem struct {
-	Attributes    ScoreSubScoresItemAttributes `json:"attributes"`
+	Attributes ScoreSubScoresItemAttributes `json:"attributes"`
 
 	// A description of the check.
-	Description   string `json:"description"`
+	Description string `json:"description"`
 
 	// An unique identifier for the check.
-	Identifier    string `json:"identifier"`
+	Identifier string `json:"identifier"`
 
-	IncidentS     []json.RawMessage `json:"incidents"`
+	IncidentS []json.RawMessage `json:"incidents"`
 
 	// The check subcategory's status message.
-	Message       string `json:"message"`
+	Message string `json:"message"`
 
 	// A numeral score for the check subcategory.
 	//
 	// ** Note: **
 	//
 	// A higher score indicates that your website performs well in that check.
-	Score         int64 `json:"score"`
+	Score int64 `json:"score"`
 
 	// The check subcategory's summarized status.
 	//   * `good` — The check has returned a positive result.
 	//   * `bad`  — The check has returned a negative result.
 	//
 	// Possible values: `good`, `bad`.
-	Status        string `json:"status"`
+	Status string `json:"status"`
 
 	// The title of the check subcategory.
-	Title         string `json:"title"`
+	Title string `json:"title"`
 
 	// The weighted contribution of the subcategory check's `score` result to the `master` object's `score` result.
-	Weight        int64 `json:"weight"`
+	Weight int64 `json:"weight"`
 
 	// The score after weight has been adjusted.
 	WeightedScore int64 `json:"weighted_score"`
@@ -331,7 +327,7 @@ type ScoreSubScoresItem struct {
 // Score is a generated payload type.
 type Score struct {
 	// The overall results for the check.
-	Master    ScoreMaster `json:"master"`
+	Master ScoreMaster `json:"master"`
 
 	// Monitoring checks subcategory results.
 	//
@@ -343,23 +339,23 @@ type Score struct {
 
 // SiteQualityGetAllScoresDataScoresItemScores is a generated payload type.
 type SiteQualityGetAllScoresDataScoresItemScores struct {
-	BasicContent     Score `json:"basic-content"`
+	BasicContent Score `json:"basic-content"`
 
 	BasicPerformance Score `json:"basic-performance"`
 
-	BasicSecurity    Score `json:"basic-security"`
+	BasicSecurity Score `json:"basic-security"`
 
-	BasicSeo         Score `json:"basic-seo"`
+	BasicSeo Score `json:"basic-seo"`
 
-	BasicTech        Score `json:"basic-tech"`
+	BasicTech Score `json:"basic-tech"`
 
-	BasicUptime      Score `json:"basic-uptime"`
+	BasicUptime Score `json:"basic-uptime"`
 }
 
 // SiteQualityGetAllScoresDataScoresItemSystem is a generated payload type.
 type SiteQualityGetAllScoresDataScoresItemSystem struct {
 	// The project's ID number.
-	ID   int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The name of the project.
 	Name string `json:"name"`
@@ -389,7 +385,6 @@ func (c *SiteQualityClient) GetAppToken(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[SiteQualityGetAppTokenData](ctx, c.c, http.MethodGet, "SiteQuality", "get_app_token", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains user authentication attributes.
 type SiteQualityGetAppTokenData struct {
 	// The long-lived token for this account. The <a href="https://go.cpanel.net/5k" target="_blank">koality</a> servers require this token to authenticate. If this token is lost, the user must create a new account.
@@ -407,7 +402,6 @@ func (c *SiteQualityClient) GetMonitoredDomains(ctx context.Context, extra ...cp
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SiteQuality", "get_monitored_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // GetMonitoredSystemScores calls the UAPI function `SiteQuality::get_monitored_system_scores` — Return status for a user's monitored domains.
 //
 // This function returns a monitoring score and system ID for each domain the user monitors with Site Quality Monitoring.
@@ -419,7 +413,6 @@ func (c *SiteQualityClient) GetMonitoredSystemScores(ctx context.Context, extra 
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SiteQuality", "get_monitored_system_scores", cpanel.CombineArgs(extra...))
 }
 
-
 // HasSiteQualityUser calls the UAPI function `SiteQuality::has_site_quality_user` — Validate monitoring account existence
 //
 // This function returns whether the cPanel user has an associated Site Quality Monitoring account.
@@ -430,7 +423,6 @@ func (c *SiteQualityClient) GetMonitoredSystemScores(ctx context.Context, extra 
 func (c *SiteQualityClient) HasSiteQualityUser(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[SiteQualityHasSiteQualityUserData], error) {
 	return cpanel.UAPICall[SiteQualityHasSiteQualityUserData](ctx, c.c, http.MethodGet, "SiteQuality", "has_site_quality_user", cpanel.CombineArgs(extra...))
 }
-
 
 // An object that contains Site Quality Monitoring user attributes.
 type SiteQualityHasSiteQualityUserData struct {
@@ -452,7 +444,6 @@ type SiteQualityHasSiteQualityUserData struct {
 func (c *SiteQualityClient) IsSiteQualityUserEnabled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[SiteQualityIsSiteQualityUserEnabledData], error) {
 	return cpanel.UAPICall[SiteQualityIsSiteQualityUserEnabledData](ctx, c.c, http.MethodGet, "SiteQuality", "is_site_quality_user_enabled", cpanel.CombineArgs(extra...))
 }
-
 
 // An object that contains user attributes.
 type SiteQualityIsSiteQualityUserEnabledData struct {
@@ -479,7 +470,6 @@ func (c *SiteQualityClient) ResetConfig(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[SiteQualityResetConfigData](ctx, c.c, http.MethodGet, "SiteQuality", "reset_config", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains the status of the account data removal from the cPanel user's configuration.
 type SiteQualityResetConfigData struct {
 	// Whether the account data was removed.
@@ -503,7 +493,6 @@ type SiteQualityResetConfigData struct {
 func (c *SiteQualityClient) SendActivationEmail(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[SiteQualitySendActivationEmailData], error) {
 	return cpanel.UAPICall[SiteQualitySendActivationEmailData](ctx, c.c, http.MethodGet, "SiteQuality", "send_activation_email", cpanel.CombineArgs(extra...))
 }
-
 
 // An object that contains the activation email request status.
 type SiteQualitySendActivationEmailData struct {
@@ -544,11 +533,10 @@ func (c *SiteQualityClient) UpdateDomain(ctx context.Context, args *SiteQualityU
 	return cpanel.UAPICall[SiteQualityUpdateDomainData](ctx, c.c, http.MethodPost, "SiteQuality", "update_domain", args)
 }
 
-
 // Information about the system's subscription plan.
 type SiteQualityUpdateDomainDataSystemSystemSize struct {
 	// The system size ID number.
-	ID   int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The name of the system size/subscription plan.
 	Name string `json:"name"`
@@ -557,16 +545,16 @@ type SiteQualityUpdateDomainDataSystemSystemSize struct {
 // Information about the updated monitoring system.
 type SiteQualityUpdateDomainDataSystem struct {
 	// The system's ID number.
-	ID         int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The updated system name (typically the new domain).
-	Name       string `json:"name"`
+	Name string `json:"name"`
 
 	// Information about the system's subscription plan.
 	SystemSize SiteQualityUpdateDomainDataSystemSystemSize `json:"system_size"`
 
 	// The updated system URL with the new domain.
-	URL        string `json:"url"`
+	URL string `json:"url"`
 }
 
 // An object that contains the updated system information from the Site Quality Monitoring API.
@@ -600,7 +588,6 @@ type SiteQualityVerifyCodeArgs struct {
 func (c *SiteQualityClient) VerifyCode(ctx context.Context, args *SiteQualityVerifyCodeArgs) (*cpanel.UAPIResult[SiteQualityVerifyCodeData], error) {
 	return cpanel.UAPICall[SiteQualityVerifyCodeData](ctx, c.c, http.MethodGet, "SiteQuality", "verify_code", args)
 }
-
 
 // An object that contains information about the user's activation code validation.
 type SiteQualityVerifyCodeData struct {

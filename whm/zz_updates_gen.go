@@ -18,7 +18,7 @@ import (
 //
 // **Important:**
 //
-//   Server owners *must* accept these agreements before they use cPanel & WHM.
+//	Server owners *must* accept these agreements before they use cPanel & WHM.
 //
 // Available since cPanel & WHM version 76.
 //
@@ -26,7 +26,6 @@ import (
 func (c *Client) AcceptEula(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "accept_eula", cpanel.CombineArgs(extra...))
 }
-
 
 // GetAvailableTiers calls the WHM API 1 function `get_available_tiers` — Return cPanel & WHM available versions
 //
@@ -42,23 +41,22 @@ func (c *Client) GetAvailableTiers(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[GetAvailableTiersData](ctx, c.c, http.MethodGet, "get_available_tiers", cpanel.CombineArgs(extra...))
 }
 
-
 // A list of the latest available version of cPanel & WHM.
 type GetAvailableTiersData struct {
 	// The version of cPanel & WHM that is currently on the CURRENT tier.
 	Current string `json:"current"`
 
 	// The version of cPanel & WHM that is currently on the EDGE tier.
-	Edge    string `json:"edge"`
+	Edge string `json:"edge"`
 
 	// The version of cPanel & WHM that is currently on the LTS tier.
-	Lts     string `json:"lts"`
+	Lts string `json:"lts"`
 
 	// The version of cPanel & WHM that is currently on the RELEASE tier.
 	Release string `json:"release"`
 
 	// The version of cPanel & WHM that is currently on the STABLE tier.
-	Stable  string `json:"stable"`
+	Stable string `json:"stable"`
 }
 
 // GetCurrentLtsExpirationStatus calls the WHM API 1 function `get_current_lts_expiration_status` — Return Long Term Support expiration status
@@ -72,11 +70,10 @@ func (c *Client) GetCurrentLtsExpirationStatus(ctx context.Context, extra ...cpa
 	return cpanel.WHMCall[GetCurrentLtsExpirationStatusData](ctx, c.c, http.MethodGet, "get_current_lts_expiration_status", cpanel.CombineArgs(extra...))
 }
 
-
 // GetCurrentLtsExpirationStatusData is a generated payload type.
 type GetCurrentLtsExpirationStatusData struct {
 	// When support for the build version expires.
-	Expiration               int64 `json:"expiration"`
+	Expiration int64 `json:"expiration"`
 
 	// Whether the LTS version expires within the next three months.
 	// - `1` — LTS expires within the next three months.
@@ -86,7 +83,7 @@ type GetCurrentLtsExpirationStatusData struct {
 	ExpiresInNextThreeMonths int64 `json:"expires_in_next_three_months"`
 
 	// The full version number.
-	FullVersion              string `json:"full_version"`
+	FullVersion string `json:"full_version"`
 }
 
 // GetLtsWexpire calls the WHM API 1 function `get_lts_wexpire` — Return Long Term Support status for all versions
@@ -100,11 +97,10 @@ func (c *Client) GetLtsWexpire(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[GetLtsWexpireData](ctx, c.c, http.MethodGet, "get_lts_wexpire", cpanel.CombineArgs(extra...))
 }
 
-
 // GetLtsWexpireDataBranchValueItem is a generated payload type.
 type GetLtsWexpireDataBranchValueItem struct {
 	// The build version number.
-	Build  string `json:"build"`
+	Build string `json:"build"`
 
 	// Whether the build represents the main build of the branch.
 	// * `1` - The build is the main build of the branch.
@@ -121,7 +117,7 @@ type GetLtsWexpireDataBranchValueItem struct {
 // GetLtsWexpireDataTiersValueItem is a generated payload type.
 type GetLtsWexpireDataTiersValueItem struct {
 	// The build version number.
-	Build   string `json:"build"`
+	Build string `json:"build"`
 
 	// When WebPros International, LLC support for the build version expires.
 	// Encoded as a Unix Timestamp.
@@ -140,7 +136,7 @@ type GetLtsWexpireDataTiersValueItem struct {
 	// This item is only present when the version is LTS.
 	//
 	// Possible values: `1`.
-	IsLts   int64 `json:"is_lts"`
+	IsLts int64 `json:"is_lts"`
 
 	// Whether the build represents the main build of the tier.
 	// * `1` - The build is the main build of the tier.
@@ -151,14 +147,14 @@ type GetLtsWexpireDataTiersValueItem struct {
 	// This will be `1` for exactly one of the entries in this array.
 	//
 	// Possible values: `0`, `1`.
-	IsMain  int64 `json:"is_main"`
+	IsMain int64 `json:"is_main"`
 
 	// The release tier or tiers which currently offer this branch, if applicable.
 	//
 	// **Note:**
 	//
 	// This item is only present when the version is part of a named tier.
-	Named   []string `json:"named"`
+	Named []string `json:"named"`
 }
 
 // GetLtsWexpireData is a generated payload type.
@@ -167,10 +163,10 @@ type GetLtsWexpireData struct {
 	Branch map[string][]GetLtsWexpireDataBranchValueItem `json:"branch"`
 
 	// An object containing Features or flags supported by this output.
-	Flags  map[string]int64 `json:"flags"`
+	Flags map[string]int64 `json:"flags"`
 
 	// An object that lists information about build versions in release tiers.
-	Tiers  map[string][]GetLtsWexpireDataTiersValueItem `json:"tiers"`
+	Tiers map[string][]GetLtsWexpireDataTiersValueItem `json:"tiers"`
 }
 
 // InstalledVersionsArgs are the parameters of the WHM API 1 function `installed_versions`.
@@ -201,13 +197,12 @@ func (c *Client) InstalledVersions(ctx context.Context, args *InstalledVersionsA
 	return cpanel.WHMCall[InstalledVersionsData](ctx, c.c, http.MethodGet, "installed_versions", args)
 }
 
-
 // InstalledVersionsData is a generated payload type.
 type InstalledVersionsData struct {
 	// The Apache® version.
 	//
 	// * `0` - Apache is **not** installed on the server.
-	Apache                  any `json:"apache"`
+	Apache any `json:"apache"`
 
 	// The default PHP version for Apache.
 	//
@@ -221,165 +216,165 @@ type InstalledVersionsData struct {
 	// **Note:**
 	//
 	// Unlike other keys in this object, this returns a `[0]` value when PHP for Apache is **not** installed.
-	ApachePHPVersions       []any `json:"apache_php_versions"`
+	ApachePHPVersions []any `json:"apache_php_versions"`
 
 	// The BIND version.
 	//
 	// * `0` - BIND is **not** installed on the server.
-	Bind                    any `json:"bind"`
+	Bind any `json:"bind"`
 
 	// The ClamAV version.
 	//
 	// * `0` - ClamAV is **not** installed on the server.
-	Clamav                  any `json:"clamav"`
+	Clamav any `json:"clamav"`
 
 	// The cPanel & WHM version.
-	CpanelAndWHM            string `json:"cpanel_and_whm"`
+	CpanelAndWHM string `json:"cpanel_and_whm"`
 
 	// An array of cPanel-provided RPMs.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this array if you set the `packages` parameter to `1`.
-	CpanelPackages          []string `json:"cpanel_packages"`
+	CpanelPackages []string `json:"cpanel_packages"`
 
 	// The system PHP version.
 	//
 	// * `0` - System PHP is **not** installed on the server.
-	CpanelPHP               any `json:"cpanel_php"`
+	CpanelPHP any `json:"cpanel_php"`
 
 	// The version of the ISC / Vixie cron daemon. This is the default cron service installed on Ubuntu.
 	//
 	// * `0` - ISC / Vixie cron is **not** installed on the server.
-	Cron                    any `json:"cron"`
+	Cron any `json:"cron"`
 
 	// The version of the cronie cron daemon. This is the default cron service installed on CentOS, CloudLinux, AlmaLinux, and other systems running derivatives of Red Hat Enterprise Linux.
 	//
 	// * `0` - cronie is **not** installed on the server.
-	Cronie                  any `json:"cronie"`
+	Cronie any `json:"cronie"`
 
 	// The Dovecot version.
 	//
 	// * `0` - Dovecot is **not** installed on the server.
-	Dovecot                 any `json:"dovecot"`
+	Dovecot any `json:"dovecot"`
 
 	// An array of EasyApache 4 (EA4)-provided RPMs.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this array if you set the `packages` parameter to `1`.
-	EA4Packages             []string `json:"ea_4_packages"`
+	EA4Packages []string `json:"ea_4_packages"`
 
 	// The EasyApache version.
 	//
 	// * `0` - EasyApache is **not** installed on the server.
-	EasyApache              any `json:"easyapache"`
+	EasyApache any `json:"easyapache"`
 
 	// The Exim version.
 	//
 	// * `0` - Exim is **not** installed on the server.
-	Exim                    any `json:"exim"`
+	Exim any `json:"exim"`
 
 	// The Linux® kernel version.
-	LinuxKernel             string `json:"linux_kernel"`
+	LinuxKernel string `json:"linux_kernel"`
 
 	// The Mailman version.
 	//
 	// * `0` - Mailman is **not** installed on the server.
-	Mailman                 any `json:"mailman"`
+	Mailman any `json:"mailman"`
 
 	// The MariaDB® version number.
 	//
 	// * `0` - MariaDB is **not** installed on the server.
-	Mariadb                 any `json:"mariadb"`
+	Mariadb any `json:"mariadb"`
 
 	// The MariaDB RPM's version number.
 	//
 	// * `0` - MariaDB RPM's is **not** installed on the server.
-	MariadbBuild            any `json:"mariadb_build"`
+	MariadbBuild any `json:"mariadb_build"`
 
 	// The Munin version.
 	//
 	// * `0` - Munin is **not** installed on the server.
-	Munin                   any `json:"munin"`
+	Munin any `json:"munin"`
 
 	// The MySQL® version number.
 	//
 	// * `0` - MySQL is **not** installed on the server.
-	Mysql                   any `json:"mysql"`
+	Mysql any `json:"mysql"`
 
 	// The MySQL RPM's version number.
 	//
 	// * `0` - MySQL RPM's is **not** installed on the server.
-	MysqlBuild              any `json:"mysql_build"`
+	MysqlBuild any `json:"mysql_build"`
 
 	// The Name Service Cache Daemon version number.
 	//
 	// * `0` - Name Service Cache Daemon is **not** installed on the server.
-	Nscd                    any `json:"nscd"`
+	Nscd any `json:"nscd"`
 
 	// The OpenSSH version.
 	//
 	// * `0` - OpenSSH is **not** installed on the server.
-	OpenSSHServer           any `json:"openssh-server"`
+	OpenSSHServer any `json:"openssh-server"`
 
 	// The server's operating system (OS).
-	OperatingSystemName     string `json:"operating_system_name"`
+	OperatingSystemName string `json:"operating_system_name"`
 
 	// The version of the server's OS.
-	OperatingSystemVersion  string `json:"operating_system_version"`
+	OperatingSystemVersion string `json:"operating_system_version"`
 
 	// An array of OS-provided RPMs.
 	//
 	// **Note:**
 	//
 	//  The function **only** returns this array if you set the `packages` parameter to `1`.
-	OsPackages              []string `json:"os_packages"`
+	OsPackages []string `json:"os_packages"`
 
 	// The Passive OS Fingerprinting version number.
 	//
 	// * `0` - Passive OS Fingerprinting is **not** installed on the server.
-	P0f                     any `json:"p0f"`
+	P0f any `json:"p0f"`
 
 	// The PostgreSQL® version.
 	//
 	// * `0` - PostgreSQL is **not** installed on the server.
-	Postgresql              any `json:"postgresql"`
+	Postgresql any `json:"postgresql"`
 
 	// The PostgreSQL RPM's version number.
 	//
 	// * `0` - PostgreSQL RPM's is **not** installed on the server.
-	PostgresqlBuild         any `json:"postgresql_build"`
+	PostgresqlBuild any `json:"postgresql_build"`
 
 	// The PowerDNS version.
 	//
 	// * `0` - PowerDNS is **not** installed on the server.
-	Powerdns                any `json:"powerdns"`
+	Powerdns any `json:"powerdns"`
 
 	// The ProFTP version.
 	//
 	// * `0` - ProFTP is **not** installed on the server.
-	Proftpd                 any `json:"proftpd"`
+	Proftpd any `json:"proftpd"`
 
 	// The Pure-FTPd version.
 	//
 	// * `0` - Pure-FTPd is **not** installed on the server.
-	Pureftpd                any `json:"pureftpd"`
+	Pureftpd any `json:"pureftpd"`
 
 	// The Roundcube version.
 	//
 	// * `0` - Roundcube is **not** installed on the server.
-	Roundcube               any `json:"roundcube"`
+	Roundcube any `json:"roundcube"`
 
 	// The Rsyslog version number.
 	//
 	// * `0` - Rsyslog is **not** installed on the server.
-	Rsyslog                 any `json:"rsyslog"`
+	Rsyslog any `json:"rsyslog"`
 
 	// The Apache SpamAssassin™ version number.
 	//
 	// * `0` - Apache SpamAssassin is **not** installed on the server.
-	Spamd                   any `json:"spamd"`
+	Spamd any `json:"spamd"`
 }
 
 // SetCpanelUpdatesArgs are the parameters of the WHM API 1 function `set_cpanel_updates`.
@@ -408,7 +403,6 @@ type SetCpanelUpdatesArgs struct {
 func (c *Client) SetCpanelUpdates(ctx context.Context, args *SetCpanelUpdatesArgs) (*cpanel.WHMResult[SetCpanelUpdatesData], error) {
 	return cpanel.WHMCall[SetCpanelUpdatesData](ctx, c.c, http.MethodGet, "set_cpanel_updates", args)
 }
-
 
 // SetCpanelUpdatesData is a generated payload type.
 type SetCpanelUpdatesData struct {
@@ -444,7 +438,6 @@ type SetTierArgs struct {
 func (c *Client) SetTier(ctx context.Context, args *SetTierArgs) (*cpanel.WHMResult[SetTierData], error) {
 	return cpanel.WHMCall[SetTierData](ctx, c.c, http.MethodGet, "set_tier", args)
 }
-
 
 // SetTierData is a generated payload type.
 type SetTierData struct {
@@ -526,7 +519,6 @@ func (c *Client) UpdateUpdateconf(ctx context.Context, args *UpdateUpdateconfArg
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "update_updateconf", args)
 }
 
-
 // Version calls the WHM API 1 function `version` — Return cPanel & WHM version
 //
 // This function returns [the cPanel & WHM version](https://docs.cpanel.net/knowledge-base/cpanel-product/product-versions-and-the-release-process/) that a server runs.
@@ -537,7 +529,6 @@ func (c *Client) UpdateUpdateconf(ctx context.Context, args *UpdateUpdateconfArg
 func (c *Client) Version(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[VersionData], error) {
 	return cpanel.WHMCall[VersionData](ctx, c.c, http.MethodGet, "version", cpanel.CombineArgs(extra...))
 }
-
 
 // VersionData is a generated payload type.
 type VersionData struct {

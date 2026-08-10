@@ -58,7 +58,6 @@ func (c *Client) AddIPs(ctx context.Context, args *AddIPsArgs) (*cpanel.WHMResul
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "addips", args)
 }
 
-
 // DelIPArgs are the parameters of the WHM API 1 function `delip`.
 type DelIPArgs struct {
 	// The IPv4 address.
@@ -95,7 +94,6 @@ func (c *Client) DelIP(ctx context.Context, args *DelIPArgs) (*cpanel.WHMResult[
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "delip", args)
 }
 
-
 // GetPublicIPArgs are the parameters of the WHM API 1 function `get_public_ip`.
 type GetPublicIPArgs struct {
 	// A valid public or private IP address to query.
@@ -119,7 +117,6 @@ type GetPublicIPArgs struct {
 func (c *Client) GetPublicIP(ctx context.Context, args *GetPublicIPArgs) (*cpanel.WHMResult[GetPublicIPData], error) {
 	return cpanel.WHMCall[GetPublicIPData](ctx, c.c, http.MethodGet, "get_public_ip", args)
 }
-
 
 // GetPublicIPData is a generated payload type.
 type GetPublicIPData struct {
@@ -150,7 +147,6 @@ type GetSharedIPArgs struct {
 func (c *Client) GetSharedIP(ctx context.Context, args *GetSharedIPArgs) (*cpanel.WHMResult[GetSharedIPData], error) {
 	return cpanel.WHMCall[GetSharedIPData](ctx, c.c, http.MethodGet, "get_shared_ip", args)
 }
-
 
 // GetSharedIPData is a generated payload type.
 type GetSharedIPData struct {
@@ -193,11 +189,10 @@ func (c *Client) IPv6DisableAccount(ctx context.Context, args *IPv6DisableAccoun
 	return cpanel.WHMCall[IPv6DisableAccountData](ctx, c.c, http.MethodGet, "ipv6_disable_account", args)
 }
 
-
 // IPv6DisableAccountDataFailuresItem is a generated payload type.
 type IPv6DisableAccountDataFailuresItem struct {
 	// The name of the account where IPv6 disable failed
-	Name   string `json:"name"`
+	Name string `json:"name"`
 
 	// The reason for the IPv6 disable failure
 	Reason json.RawMessage `json:"reason"`
@@ -210,7 +205,7 @@ type IPv6DisableAccountData struct {
 	// **Note**
 	//
 	// The function only returns this value if any failures exist.
-	FailCnt  int64 `json:"fail_cnt"`
+	FailCnt int64 `json:"fail_cnt"`
 
 	// List of accounts where IPv6 disable failed
 	//
@@ -247,9 +242,9 @@ type IPv6EnableAccountArgs struct {
 // **Note:**
 //
 // You **must** perform at least one of the following actions before you call this function:
-//   * Use WHM's [*IPv6 Ranges*](https://go.cpanel.net/whmdocsIPv6Ranges) interface (*WHM >> Home >> IP Functions >> IPv6 Ranges*) or WHM API 1's `ipv6_range_add` function to add one or more IPv6 address ranges for use as dedicated IPv6 addresses.
-//   * Use WHM's [*Basic WebHost Manager Setup*](https://go.cpanel.net/whmdocsBasicasisWebHostManagerSetup) interface (*WHM >> Home >> Server Configuration >> Basic WebHost Manager Setup*) or modify the [`/etc/wwwacct.conf`](https://go.cpanel.net/advancedinstall) file to add a shared IPv6 address to the server.
-//   * For all of cPanel & WHM's features to function properly on IPv6, the `cpsrvd` daemon **must** listen on IPv6 addresses. To enable this functionality, select *On* for the *Listen on IPv6 Addresses* setting in the *System* section of WHM's [*Tweak Settings*](https://go.cpanel.net/whmdocsTweakSettings#system) interface (*WHM >> Home >> Server Configuration >> Tweak Settings*).
+//   - Use WHM's [*IPv6 Ranges*](https://go.cpanel.net/whmdocsIPv6Ranges) interface (*WHM >> Home >> IP Functions >> IPv6 Ranges*) or WHM API 1's `ipv6_range_add` function to add one or more IPv6 address ranges for use as dedicated IPv6 addresses.
+//   - Use WHM's [*Basic WebHost Manager Setup*](https://go.cpanel.net/whmdocsBasicasisWebHostManagerSetup) interface (*WHM >> Home >> Server Configuration >> Basic WebHost Manager Setup*) or modify the [`/etc/wwwacct.conf`](https://go.cpanel.net/advancedinstall) file to add a shared IPv6 address to the server.
+//   - For all of cPanel & WHM's features to function properly on IPv6, the `cpsrvd` daemon **must** listen on IPv6 addresses. To enable this functionality, select *On* for the *Listen on IPv6 Addresses* setting in the *System* section of WHM's [*Tweak Settings*](https://go.cpanel.net/whmdocsTweakSettings#system) interface (*WHM >> Home >> Server Configuration >> Tweak Settings*).
 //
 // **Important:**
 //
@@ -262,17 +257,16 @@ func (c *Client) IPv6EnableAccount(ctx context.Context, args *IPv6EnableAccountA
 	return cpanel.WHMCall[IPv6EnableAccountData](ctx, c.c, http.MethodGet, "ipv6_enable_account", args)
 }
 
-
 // IPv6EnableAccountData is a generated payload type.
 type IPv6EnableAccountData struct {
 	// The number of accounts that failed to enable IPv6.
-	FailCnt  int64 `json:"fail_cnt"`
+	FailCnt int64 `json:"fail_cnt"`
 
 	// List of accounts where IPv6 enable failed.
 	Failures map[string]string `json:"failures"`
 
 	// The IPv6 addresses that the system assigned to each account.
-	IPv6     map[string]string `json:"ipv6"`
+	IPv6 map[string]string `json:"ipv6"`
 }
 
 // IPv6RangeAddArgs are the parameters of the WHM API 1 function `ipv6_range_add`.
@@ -334,7 +328,6 @@ func (c *Client) IPv6RangeAdd(ctx context.Context, args *IPv6RangeAddArgs) (*cpa
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "ipv6_range_add", args)
 }
 
-
 // IPv6RangeEditArgs are the parameters of the WHM API 1 function `ipv6_range_edit`.
 type IPv6RangeEditArgs struct {
 	// The IPv6 address range's current name.
@@ -389,7 +382,6 @@ func (c *Client) IPv6RangeEdit(ctx context.Context, args *IPv6RangeEditArgs) (*c
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "ipv6_range_edit", args)
 }
 
-
 // IPv6RangeList calls the WHM API 1 function `ipv6_range_list` — Return available IPv6 address ranges
 //
 // This function lists available IPv6 address ranges.
@@ -409,24 +401,23 @@ func (c *Client) IPv6RangeList(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[IPv6RangeListData](ctx, c.c, http.MethodGet, "ipv6_range_list", cpanel.CombineArgs(extra...))
 }
 
-
 // IPv6RangeListDataRange2Item is a generated payload type.
 type IPv6RangeListDataRange2Item struct {
 	// The IPv6 address range, in CIDR format.
-	Cidr       string `json:"CIDR"`
+	Cidr string `json:"CIDR"`
 
 	// Whether the IPv6 address range is available.
 	// * `1`  Available.
 	// * `0`  Reserved.
 	//
 	// Possible values: `0`, `1`.
-	Enabled    int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The first IPv6 address in the range.
-	First      string `json:"first"`
+	First string `json:"first"`
 
 	// The last IPv6 address in the range.
-	Last       string `json:"last"`
+	Last string `json:"last"`
 
 	// The most recently assigned address from the IPv6 address range.
 	MostRecent string `json:"mostrecent"`
@@ -436,19 +427,19 @@ type IPv6RangeListDataRange2Item struct {
 	// **Note:**
 	//
 	// `SHARED` represents the server's main IPv6 address.
-	Name       string `json:"name"`
+	Name string `json:"name"`
 
 	// The IPv6 address range's note.
-	Note       string `json:"note"`
+	Note string `json:"note"`
 
 	// The user who owns the IPv6 address range.
-	Owner      string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// The user or users who use addresses in the IPv6 address range.
 	RangeUsers []string `json:"range_users"`
 
 	// IPv6 addresses within the range which have become available.
-	ReClaimEd  []string `json:"reclaimed"`
+	ReClaimEd []string `json:"reclaimed"`
 }
 
 // IPv6RangeListData is a generated payload type.
@@ -488,7 +479,6 @@ func (c *Client) IPv6RangeRemove(ctx context.Context, args *IPv6RangeRemoveArgs)
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "ipv6_range_remove", args)
 }
 
-
 // IPv6RangeUsageArgs are the parameters of the WHM API 1 function `ipv6_range_usage`.
 type IPv6RangeUsageArgs struct {
 	// The IPv6 address range's name.
@@ -519,17 +509,16 @@ func (c *Client) IPv6RangeUsage(ctx context.Context, args *IPv6RangeUsageArgs) (
 	return cpanel.WHMCall[IPv6RangeUsageData](ctx, c.c, http.MethodGet, "ipv6_range_usage", args)
 }
 
-
 // The IPv6 address range's information.
 type IPv6RangeUsageDataUsage struct {
 	// The number of reserved IPv6 addresses.
 	ForBIDDen int64 `json:"forbidden"`
 
 	// The number of available IPv6 addresses.
-	Free      int64 `json:"free"`
+	Free int64 `json:"free"`
 
 	// The number of assigned IPv6 addresses.
-	Used      int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // IPv6RangeUsageData is a generated payload type.
@@ -549,7 +538,6 @@ func (c *Client) ListIPs(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHM
 	return cpanel.WHMCall[ListIPsData](ctx, c.c, http.MethodGet, "listips", cpanel.CombineArgs(extra...))
 }
 
-
 // ListIPsDataIPItem is a generated payload type.
 type ListIPsDataIPItem struct {
 	// Whether the IP address is active.
@@ -557,7 +545,7 @@ type ListIPsDataIPItem struct {
 	// * `0` — Inactive.
 	//
 	// Possible values: `0`, `1`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// Whether the IP address is dedicated.
 	// * `1` — Dedicated.
@@ -567,26 +555,26 @@ type ListIPsDataIPItem struct {
 	Dedicated int64 `json:"dedicated"`
 
 	// The IP address' network interface.
-	If2       string `json:"if"`
+	If2 string `json:"if"`
 
 	// The IP address.
-	IP        string `json:"ip"`
+	IP string `json:"ip"`
 
 	// Whether the IP address is the server's main IP address.
 	// * `1` — Main IP address.
 	// * `0` — **Not** the main IP address.
 	//
 	// Possible values: `0`, `1`.
-	Mainaddr  int64 `json:"mainaddr"`
+	Mainaddr int64 `json:"mainaddr"`
 
 	// The IP address' netmask.
-	Netmask   string `json:"netmask"`
+	Netmask string `json:"netmask"`
 
 	// The IP address' network value.
-	Network   string `json:"network"`
+	Network string `json:"network"`
 
 	// The public IP for the IP address.
-	PublicIP  string `json:"public_ip"`
+	PublicIP string `json:"public_ip"`
 
 	// Whether the IP address can be removed.
 	// * `1` — Removable.
@@ -600,7 +588,7 @@ type ListIPsDataIPItem struct {
 	// * `0` — **Not** in use.
 	//
 	// Possible values: `0`, `1`.
-	Used      int64 `json:"used"`
+	Used int64 `json:"used"`
 }
 
 // ListIPsData is a generated payload type.
@@ -619,7 +607,6 @@ type ListIPsData struct {
 func (c *Client) ListIPv6s(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListIPv6sData], error) {
 	return cpanel.WHMCall[ListIPv6sData](ctx, c.c, http.MethodGet, "listipv6s", cpanel.CombineArgs(extra...))
 }
-
 
 // ListIPv6sDataIPItem is a generated payload type.
 type ListIPv6sDataIPItem struct {
@@ -655,7 +642,6 @@ func (c *Client) NatCheckip(ctx context.Context, args *NatCheckipArgs) (*cpanel.
 	return cpanel.WHMCall[NatCheckipData](ctx, c.c, http.MethodGet, "nat_checkip", args)
 }
 
-
 // NatCheckipData is a generated payload type.
 type NatCheckipData struct {
 	// The local IPv4 address.
@@ -688,7 +674,6 @@ type NatSetPublicIPArgs struct {
 func (c *Client) NatSetPublicIP(ctx context.Context, args *NatSetPublicIPArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "nat_set_public_ip", args)
 }
-
 
 // SetSiteIPArgs are the parameters of the WHM API 1 function `setsiteip`.
 type SetSiteIPArgs struct {
@@ -725,4 +710,3 @@ type SetSiteIPArgs struct {
 func (c *Client) SetSiteIP(ctx context.Context, args *SetSiteIPArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setsiteip", args)
 }
-

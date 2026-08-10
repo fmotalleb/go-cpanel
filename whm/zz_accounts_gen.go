@@ -48,11 +48,10 @@ func (c *Client) AccountSummary(ctx context.Context, args *AccountSummaryArgs) (
 	return cpanel.WHMCall[AccountSummaryData](ctx, c.c, http.MethodGet, "accountsummary", args)
 }
 
-
 // AccountSummaryDataAcctItemChildNodesItem is a generated payload type.
 type AccountSummaryDataAcctItemChildNodesItem struct {
 	// The alias of the child node
-	Alias    string `json:"alias"`
+	Alias string `json:"alias"`
 
 	// The workload delegated to the child node
 	//
@@ -67,45 +66,45 @@ type AccountSummaryDataAcctItem struct {
 	// * `0` Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Backup                          int64 `json:"backup"`
+	Backup int64 `json:"backup"`
 
 	// An array that contains the the workload and alias values for each of the child nodes.
-	ChildNodes                      []AccountSummaryDataAcctItemChildNodesItem `json:"child_nodes"`
+	ChildNodes []AccountSummaryDataAcctItemChildNodesItem `json:"child_nodes"`
 
 	// The account's disk space quota.
 	// * `unlimited`
 	// * A maximum amount of disk space, in mebibyte (MiB).
-	DiskLimit                       any `json:"disklimit"`
+	DiskLimit any `json:"disklimit"`
 
 	// The account's current disk space usage. An integer that represents an amount of disk space, in mebibyte (MiB). For example, 14M represents 14 MiB of disk space.
-	Diskused                        string `json:"diskused"`
+	Diskused string `json:"diskused"`
 
 	// The account's main domain. A valid domain name on the account.
-	Domain                          string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The account's contact email address. A valid email address.
-	Email                           string `json:"email"`
+	Email string `json:"email"`
 
 	// The limit on the number of files that the account owns.
 	// * `unlimited`
 	// * A maximum amount of files as an integer.
-	InodesLimit                     any `json:"inodeslimit"`
+	InodesLimit any `json:"inodeslimit"`
 
 	// The number of files that the account owns.
-	InodesUsed                      int64 `json:"inodesused"`
+	InodesUsed int64 `json:"inodesused"`
 
 	// The account's main domain's IP address.
-	IP                              string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The account's main domain's IPv6 addresses.
-	IPv6                            []string `json:"ipv6"`
+	IPv6 []string `json:"ipv6"`
 
 	// Whether the account is currently locked.
 	// * `1` Locked.
 	// * `0` Not locked.
 	//
 	// Possible values: `0`, `1`.
-	IsLocked                        int64 `json:"is_locked"`
+	IsLocked int64 `json:"is_locked"`
 
 	// Whether the main domain is a temporary domain.
 	// * `1` - The account's main domain is a temporary domain.
@@ -116,75 +115,75 @@ type AccountSummaryDataAcctItem struct {
 	// For more information about temporary domains, read our [Temporary Domains](https://go.cpanel.net/cp-temporary-domain) documentation.
 	//
 	// Possible values: `0`, `1`.
-	IsTemporaryDomain               int64 `json:"is_temporary_domain"`
+	IsTemporaryDomain int64 `json:"is_temporary_domain"`
 
 	// Whether legacy backups are enabled.
 	// * `1` Enabled.
 	// * `0` Disabled.
 	//
 	// Possible values: `0`, `1`.
-	LegacyBackup                    int64 `json:"legacy_backup"`
+	LegacyBackup int64 `json:"legacy_backup"`
 
 	// The storage format that the account's email mailboxes use.
 	// * `maildir` The account's mail is stored in `maildir` format.
 	// * `mbox` The account's mail is stored in `mbox` format.
 	//
 	// Possible values: `maildir`, `mbox`.
-	MailboxFormat                   string `json:"mailbox_format"`
+	MailboxFormat string `json:"mailbox_format"`
 
 	// The percentage of failed or deferred email messages that the account
 	// can send per hour before outgoing mail is rate-limited.
 	// * `unlimited`
 	// * An integer that represents a percentage of messages.
-	MaxDeferFailPercentage          any `json:"max_defer_fail_percentage"`
+	MaxDeferFailPercentage any `json:"max_defer_fail_percentage"`
 
 	// The maximum number of emails that the account can send in one hour.
 	// * `unlimited`
 	// * An integer that represents a number of sent emails.
-	MaxEmailPerHour                 any `json:"max_email_per_hour"`
+	MaxEmailPerHour any `json:"max_email_per_hour"`
 
 	// The maximum size that the cPanel account can define when it creates an email account.
 	// * `unlimited`
 	// * A positive integer that represents the allowable maximum size of an email account, in mebibyte (MiB).
-	MaxEmailacctQuota               any `json:"max_emailacct_quota"`
+	MaxEmailacctQuota any `json:"max_emailacct_quota"`
 
 	// The account's maximum number of addon domains.
 	// * `unlimited`
 	// * `*unknown*`  The account cannot use any addon domains.
 	// * An integer that represents a number of addon domains.
-	MaxAddons                       any `json:"maxaddons"`
+	MaxAddons any `json:"maxaddons"`
 
 	// The account's maximum number of FTP accounts.
 	// * `unlimited`
 	// * An integer that represents a number of FTP accounts.
-	Maxftp                          any `json:"maxftp"`
+	Maxftp any `json:"maxftp"`
 
 	// The account's maximum number of mailing lists.
 	// * `unlimited`
 	// * An integer that represents a number of mailing lists.
-	Maxlst                          any `json:"maxlst"`
+	Maxlst any `json:"maxlst"`
 
 	// The account's maximum number of parked domains (aliases).
 	// * `unlimited`
 	// * `*unknown*` The account cannot use any parked domains.
 	// * An integer that represents a number of parked domains.
-	MaxParked                       any `json:"maxparked"`
+	MaxParked any `json:"maxparked"`
 
 	// The account's maximum number of email addresses.
 	// * `unlimited`
 	// * An integer that represents a number of email accounts.
-	Maxpop                          any `json:"maxpop"`
+	Maxpop any `json:"maxpop"`
 
 	// The account's maximum number of SQL databases.
 	// * `unlimited`
 	// * An integer that represents a number of SQL databases.
-	Maxsql                          any `json:"maxsql"`
+	Maxsql any `json:"maxsql"`
 
 	// The account's maximum number of subdomains.
 	// * `unlimited`
 	// * `*unknown*` The account cannot use any subdomains.
 	// * An integer that represents a number of subdomains.
-	Maxsub                          any `json:"maxsub"`
+	Maxsub any `json:"maxsub"`
 
 	// The minimum number of failed or deferred messages that the account can send before
 	// outgoing mail is subject to rate-limiting.
@@ -197,7 +196,7 @@ type AccountSummaryDataAcctItem struct {
 	// * `0` Unsuspend outgoing email.
 	//
 	// Possible values: `0`, `1`.
-	OutgoingMailHold                int64 `json:"outgoing_mail_hold"`
+	OutgoingMailHold int64 `json:"outgoing_mail_hold"`
 
 	// Whether to suspend outgoing email from the account's users and force failure of any of their mail currently in the mail queue.
 	// * `1` - Suspend and force failure of outgoing email.
@@ -208,66 +207,66 @@ type AccountSummaryDataAcctItem struct {
 	// If mail for a cPanel user's account is suspended, the system will reject their email before the system puts it in the mail server queue.
 	//
 	// Possible values: `0`, `1`.
-	OutgoingMailSuspended           int64 `json:"outgoing_mail_suspended"`
+	OutgoingMailSuspended int64 `json:"outgoing_mail_suspended"`
 
 	// The account's owner.
 	// * root
 	// * A reseller account's username.
-	Owner                           string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// The partition that contains the account's home directory. The name of a partition on the server.
-	Partition                       string `json:"partition"`
+	Partition string `json:"partition"`
 
 	// The account's hosting package. The name of a package on the server.
-	Plan                            string `json:"plan"`
+	Plan string `json:"plan"`
 
 	// The account's shell. A shell location on the server.
-	Shell                           string `json:"shell"`
+	Shell string `json:"shell"`
 
 	// The account creation date. The date in YY-Mon-DD HH-mm human-readable format, where:- YY represents the year.
 	// * `Mon` represents the month.
 	// * `DD` represents the date.
 	// * `HH` represents the hour.
 	// * `mm` represents the minute.
-	Startdate                       string `json:"startdate"`
+	Startdate string `json:"startdate"`
 
 	// Whether the account is currently suspended.
 	// * `1`  Suspended.
 	// * `0`  Not suspended.
 	//
 	// Possible values: `0`, `1`.
-	Suspended                       int64 `json:"suspended"`
+	Suspended int64 `json:"suspended"`
 
 	// The reason for account suspension, if one was provided.
 	// * `null` The account is not currently suspended.
 	// * A blank value, if the suspender did not provide a reason.
 	// * A message that explains the suspension.
-	SuspendReason                   *string `json:"suspendreason"`
+	SuspendReason *string `json:"suspendreason"`
 
 	// The time of suspension.
 	// * `null` The account is not currently suspended.
 	// * The time at which the account became suspended.
-	SuspendTime                     *string `json:"suspendtime"`
+	SuspendTime *string `json:"suspendtime"`
 
 	// Whether the Customer Support Ticket process created this user for temporary access to the system.
 	// * `1` - Temporary user.
 	// * `0` - Regular user.
 	//
 	// Possible values: `0`, `1`.
-	Temporary                       int64 `json:"temporary"`
+	Temporary int64 `json:"temporary"`
 
 	// The account's cPanel interface theme.
 	// * Any valid theme on the server.
-	Theme                           string `json:"theme"`
+	Theme string `json:"theme"`
 
 	// The account's user ID on the system.
-	Uid                             int64 `json:"uid"`
+	Uid int64 `json:"uid"`
 
 	// The account creation date. The account creation date and time, in Unix time format.
-	UnixStartdate                   int64 `json:"unix_startdate"`
+	UnixStartdate int64 `json:"unix_startdate"`
 
 	// The account username. A cPanel account or reseller username on the server.
-	User                            string `json:"user"`
+	User string `json:"user"`
 }
 
 // AccountSummaryData is a generated payload type.
@@ -304,7 +303,6 @@ func (c *Client) GetUpgradeOpportunities(ctx context.Context, args *GetUpgradeOp
 	return cpanel.WHMCall[GetUpgradeOpportunitiesData](ctx, c.c, http.MethodGet, "get_upgrade_opportunities", args)
 }
 
-
 // GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitLastMonth is a generated payload type.
 type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitLastMonth struct {
 	// A fractional number ranging from 0.00 to 1.00 indicating the fraction of the resource limit that was consumed.
@@ -316,7 +314,7 @@ type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitLastMonth struct
 	// * `0` — Not near.
 	//
 	// Possible values: `0`, `1`.
-	Near     int64 `json:"near"`
+	Near int64 `json:"near"`
 
 	// Whether the account has reached this resource limit.
 	//
@@ -324,7 +322,7 @@ type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitLastMonth struct
 	// * `0` — Not reached.
 	//
 	// Possible values: `0`, `1`.
-	Reached  int64 `json:"reached"`
+	Reached int64 `json:"reached"`
 }
 
 // GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitThisMonth is a generated payload type.
@@ -338,7 +336,7 @@ type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitThisMonth struct
 	// * `0` — Not near.
 	//
 	// Possible values: `0`, `1`.
-	Near     int64 `json:"near"`
+	Near int64 `json:"near"`
 
 	// Whether the account has reached this resource limit.
 	//
@@ -346,7 +344,7 @@ type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitThisMonth struct
 	// * `0` — Not reached.
 	//
 	// Possible values: `0`, `1`.
-	Reached  int64 `json:"reached"`
+	Reached int64 `json:"reached"`
 }
 
 // Upgrade opportunities related to bandwidth limits.
@@ -354,7 +352,7 @@ type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimit struct {
 	LastMonth GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitLastMonth `json:"last_month"`
 
 	// An array of human-readable messages representing the facts listed in the other structured data in the `bw_limit` object.
-	Messages  []string `json:"messages"`
+	Messages []string `json:"messages"`
 
 	ThisMonth GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimitThisMonth `json:"this_month"`
 }
@@ -362,23 +360,23 @@ type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimit struct {
 // Upgrade opportunities related to disk usage.
 type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueDiskUsage struct {
 	// An array of human-readable messages representing the facts listed in the other structured data in the `disk_usage` object.
-	Messages              []string `json:"messages"`
+	Messages []string `json:"messages"`
 
 	RelativeToFixedAmount json.RawMessage `json:"relative_to_fixed_amount"`
 
-	RelativeToQuota       json.RawMessage `json:"relative_to_quota"`
+	RelativeToQuota json.RawMessage `json:"relative_to_quota"`
 }
 
 // The property name is the cPanel account.
 type GetUpgradeOpportunitiesDataUpgradeOpportunitiesValue struct {
 	// Upgrade opportunities related to bandwidth limits.
-	BwLimit   GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimit `json:"bw_limit"`
+	BwLimit GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueBwLimit `json:"bw_limit"`
 
 	// Upgrade opportunities related to disk usage.
 	DiskUsage GetUpgradeOpportunitiesDataUpgradeOpportunitiesValueDiskUsage `json:"disk_usage"`
 
 	// An array of human-readable messages representing the facts listed in the other structured data.
-	Messages  []string `json:"messages"`
+	Messages []string `json:"messages"`
 }
 
 // GetUpgradeOpportunitiesData is a generated payload type.
@@ -410,7 +408,6 @@ type HasDigestAuthArgs struct {
 func (c *Client) HasDigestAuth(ctx context.Context, args *HasDigestAuthArgs) (*cpanel.WHMResult[HasDigestAuthData], error) {
 	return cpanel.WHMCall[HasDigestAuthData](ctx, c.c, http.MethodGet, "has_digest_auth", args)
 }
-
 
 // HasDigestAuthData is a generated payload type.
 type HasDigestAuthData struct {
@@ -444,7 +441,6 @@ type HasMycnfForCpuserArgs struct {
 func (c *Client) HasMycnfForCpuser(ctx context.Context, args *HasMycnfForCpuserArgs) (*cpanel.WHMResult[HasMycnfForCpuserData], error) {
 	return cpanel.WHMCall[HasMycnfForCpuserData](ctx, c.c, http.MethodGet, "has_mycnf_for_cpuser", args)
 }
-
 
 // HasMycnfForCpuserData is a generated payload type.
 type HasMycnfForCpuserData struct {
@@ -503,11 +499,10 @@ func (c *Client) ListAccts(ctx context.Context, args *ListAcctsArgs) (*cpanel.WH
 	return cpanel.WHMCall[ListAcctsData](ctx, c.c, http.MethodGet, "listaccts", args)
 }
 
-
 // ListAcctsDataAcctItemChildNodesItem is a generated payload type.
 type ListAcctsDataAcctItemChildNodesItem struct {
 	// The alias of the child node
-	Alias    string `json:"alias"`
+	Alias string `json:"alias"`
 
 	// The workload delegated to the child node
 	//
@@ -522,54 +517,54 @@ type ListAcctsDataAcctItem struct {
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Backup                          int64 `json:"backup"`
+	Backup int64 `json:"backup"`
 
 	// An array that contains the the workload and alias values for each of the child nodes.
-	ChildNodes                      []ListAcctsDataAcctItemChildNodesItem `json:"child_nodes"`
+	ChildNodes []ListAcctsDataAcctItemChildNodesItem `json:"child_nodes"`
 
 	// The account's disk space quota.
 	// * `unlimited` — The account has unlimited disk space quota.
 	// * A maximum amount of disk space, in megabytes (MB).
-	DiskLimit                       any `json:"disklimit"`
+	DiskLimit any `json:"disklimit"`
 
 	// The account's current disk space usage, in megabytes (MB), appended with `M`.
 	//
 	// For example, `14M` represents 14 megabytes of current disk space usage.
-	Diskused                        string `json:"diskused"`
+	Diskused string `json:"diskused"`
 
 	// The account's main domain.
-	Domain                          string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The account's contact email address.
-	Email                           string `json:"email"`
+	Email string `json:"email"`
 
 	// Whether a backup of the account exists.
 	// * `1` - A backup of the account exists.
 	// * `0` - A backup of the account does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	HasBackup                       int64 `json:"has_backup"`
+	HasBackup int64 `json:"has_backup"`
 
 	// The limit on the number of files that the account owns.
 	// * `unlimited` — The account can own an unlimited number files.
 	// * A positive integer.
-	InodesLimit                     any `json:"inodeslimit"`
+	InodesLimit any `json:"inodeslimit"`
 
 	// The number of files that the account owns.
-	InodesUsed                      int64 `json:"inodesused"`
+	InodesUsed int64 `json:"inodesused"`
 
 	// The IPv4 address of the account's main domain.
-	IP                              string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The IPv6 address of the account's main domain.
-	IPv6                            []string `json:"ipv6"`
+	IPv6 []string `json:"ipv6"`
 
 	// Whether the account is currently locked.
 	// * `1` - The account is locked.
 	// * `0` - The account is **not** locked.
 	//
 	// Possible values: `0`, `1`.
-	IsLocked                        int64 `json:"is_locked"`
+	IsLocked int64 `json:"is_locked"`
 
 	// Whether the main domain is a temporary domain.
 	// * `1` - The account's main domain is a temporary domain.
@@ -580,14 +575,14 @@ type ListAcctsDataAcctItem struct {
 	// For more information about temporary domains, read our [Temporary Domains](https://go.cpanel.net/cp-temporary-domain) documentation.
 	//
 	// Possible values: `0`, `1`.
-	IsTemporaryDomain               int64 `json:"is_temporary_domain"`
+	IsTemporaryDomain int64 `json:"is_temporary_domain"`
 
 	// Whether legacy backups are enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	LegacyBackup                    int64 `json:"legacy_backup"`
+	LegacyBackup int64 `json:"legacy_backup"`
 
 	// The type of mailbox the account uses.
 	//
@@ -595,7 +590,7 @@ type ListAcctsDataAcctItem struct {
 	// * `maildir`
 	//
 	// Possible values: `mdbox`, `maildir`.
-	MailboxFormat                   string `json:"mailbox_format"`
+	MailboxFormat string `json:"mailbox_format"`
 
 	// The [percentage of failed or deferred email
 	// messages](https://go.cpanel.net/howtopreventspam)
@@ -603,13 +598,13 @@ type ListAcctsDataAcctItem struct {
 	// mail is rate-limited.
 	// * `unlimited` — The account can send unlimited emails per hour.
 	// * An integer that represents a precentage of messages.
-	MaxDeferFailPercentage          any `json:"max_defer_fail_percentage"`
+	MaxDeferFailPercentage any `json:"max_defer_fail_percentage"`
 
 	// The [maximum number of emails](https://go.cpanel.net/howtopreventspam)
 	// that the account can send in one hour.
 	// * `unlimited` — The account can send unlimited emails per hour.
 	// * An integer that represents a number of sent emails.
-	MaxEmailPerHour                 any `json:"max_email_per_hour"`
+	MaxEmailPerHour any `json:"max_email_per_hour"`
 
 	// The maximum size, in megabytes (MB), that the account
 	// can define when it creates an email account.
@@ -617,34 +612,34 @@ type ListAcctsDataAcctItem struct {
 	// * `unlimited` — The account can set unlimited quotas.
 	// * A positive integer that represents the allowable maximum
 	// size of an email account, in megabytes (MB).
-	MaxEmailacctQuota               any `json:"max_emailacct_quota"`
+	MaxEmailacctQuota any `json:"max_emailacct_quota"`
 
 	// The account's maximum number of addon domains.
 	// * `unlimited` — The account can create unlimited addon domains.
 	// * `*unknown*` — The account cannot create addon domains.
 	// * An integer that represents a number of addon domains.
-	MaxAddons                       any `json:"maxaddons"`
+	MaxAddons any `json:"maxaddons"`
 
 	// The account's maximum number of FTP accounts.
 	// * `unlimited` — The account can create unlimited FTP accounts.
 	// * An integer that represents a number of FTP accounts.
-	Maxftp                          any `json:"maxftp"`
+	Maxftp any `json:"maxftp"`
 
 	// The account's maximum number of mailing lists.
 	// * `unlimited` — The account can create unlimited mailing lists.
 	// * An integer that represents a number of mailing lists.
-	Maxlst                          any `json:"maxlst"`
+	Maxlst any `json:"maxlst"`
 
 	// The account's maximum number of parked domains (aliases).
 	// * `unlimited` — The account can create unlimited parked domains.
 	// * `*unknown*` — The account cannot use parked domains.
 	// * An integer that represents a number of parked domains.
-	MaxParked                       any `json:"maxparked"`
+	MaxParked any `json:"maxparked"`
 
 	// The account's maximum number of email addresses.
 	// * `unlimited` — The account can create unlimited email addresses.
 	// * An integer that represents a number of email accounts.
-	Maxpop                          any `json:"maxpop"`
+	Maxpop any `json:"maxpop"`
 
 	// The account's maximum number of each available type of SQL database.
 	//
@@ -653,13 +648,13 @@ type ListAcctsDataAcctItem struct {
 	//
 	// * `unlimited` — The account can create unlimited SQL databases.
 	// * An integer that represents a number of SQL databases.
-	Maxsql                          any `json:"maxsql"`
+	Maxsql any `json:"maxsql"`
 
 	// The account's maximum number of subdomains.
 	// * `unlimited` — The account can create unlimited subdomains.
 	// * `*unknown*` - The account cannot use subdomains.
 	// * An integer that represents a number of subdomains.
-	Maxsub                          any `json:"maxsub"`
+	Maxsub any `json:"maxsub"`
 
 	// The [minimum number of failed or deferred messages](https://go.cpanel.net/howtopreventspam) that the
 	// account can send before outgoing mail is subject to rate-limiting.
@@ -672,7 +667,7 @@ type ListAcctsDataAcctItem struct {
 	// * `0` - Do **not** hold outgoingemail in the mail queue.
 	//
 	// Possible values: `1`, `0`.
-	OutgoingMailHold                int64 `json:"outgoing_mail_hold"`
+	OutgoingMailHold int64 `json:"outgoing_mail_hold"`
 
 	// Whether to suspend outgoing email from the account's users and force failure of any of their mail currently in the mail queue.
 	// * `1` - Suspend and forcefailure of outgoing email.
@@ -681,65 +676,65 @@ type ListAcctsDataAcctItem struct {
 	// **Note:**
 	//
 	// If mail for a cPanel user's account is suspended, the system will reject their email before the system puts it in the mail server queue. …
-	OutgoingMailSuspended           int64 `json:"outgoing_mail_suspended"`
+	OutgoingMailSuspended int64 `json:"outgoing_mail_suspended"`
 
 	// The reseller account username or `root` user that owns the account.
-	Owner                           string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// The partition that contains the account's home directory.
-	Partition                       string `json:"partition"`
+	Partition string `json:"partition"`
 
 	// The account's hosting package.
-	Plan                            string `json:"plan"`
+	Plan string `json:"plan"`
 
 	// The absolute path of the account's shell location.
-	Shell                           string `json:"shell"`
+	Shell string `json:"shell"`
 
 	// The unique ID of the standalone feature associated with the account's package, if any.
 	// * An empty string if the package has no standalone features.
-	StandaloneFeature               string `json:"standalone_feature"`
+	StandaloneFeature string `json:"standalone_feature"`
 
 	// The name of the standalone feature associated with the account's package, if any.
 	// * An empty string if the package has no standalone features.
 	// * The feature's name if a standalone feature exists.
-	StandaloneFeatureName           string `json:"standalone_feature_name"`
+	StandaloneFeatureName string `json:"standalone_feature_name"`
 
 	// The account creation date, in `YY Mon DD HH:mm` format.
-	Startdate                       string `json:"startdate"`
+	Startdate string `json:"startdate"`
 
 	// Whether the account is currently suspended.
 	// * `1` - Suspended.
 	// * `0` - **Not** suspended.
 	//
 	// Possible values: `0`, `1`.
-	Suspended                       int64 `json:"suspended"`
+	Suspended int64 `json:"suspended"`
 
 	// The reason for account suspension, if one was provided.
-	SuspendReason                   string `json:"suspendreason"`
+	SuspendReason string `json:"suspendreason"`
 
 	// The time of suspension.
 	// * `null` - The account is not currently suspended.
 	// * The time at which the account became suspended.
-	SuspendTime                     *int64 `json:"suspendtime"`
+	SuspendTime *int64 `json:"suspendtime"`
 
 	// Whether the Customer Support Ticket process created this user for temporary access to the system.
 	// * `1` - Temporary user.
 	// * `0` - Regular user.
 	//
 	// Possible values: `0`, `1`.
-	Temporary                       int64 `json:"temporary"`
+	Temporary int64 `json:"temporary"`
 
 	// The account's cPanel interface theme.
-	Theme                           string `json:"theme"`
+	Theme string `json:"theme"`
 
 	// The account's user ID on the system.
-	Uid                             int64 `json:"uid"`
+	Uid int64 `json:"uid"`
 
 	// The account creation date.
-	UnixStartdate                   int64 `json:"unix_startdate"`
+	UnixStartdate int64 `json:"unix_startdate"`
 
 	// The account username.
-	User                            string `json:"user"`
+	User string `json:"user"`
 }
 
 // ListAcctsData is a generated payload type.
@@ -1232,13 +1227,13 @@ type MassModifyAcctArgs struct {
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of
 // SPF resource records on DNS.
-//   * This warning is **not** relevant on CentOS 7 servers, because
-//   [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7
-//   servers use TXT records instead of SPF records.
-//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated
-//   version of BIND that complies with RFC 7208. To resolve this issue, update your
-//   operating system to a version that contains the updated version of BIND. For more
-//   information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   - This warning is **not** relevant on CentOS 7 servers, because
+//     [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7
+//     servers use TXT records instead of SPF records.
+//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated
+//     version of BIND that complies with RFC 7208. To resolve this issue, update your
+//     operating system to a version that contains the updated version of BIND. For more
+//     information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // Available since cPanel & WHM version 88.
 //
@@ -1246,7 +1241,6 @@ type MassModifyAcctArgs struct {
 func (c *Client) MassModifyAcct(ctx context.Context, args *MassModifyAcctArgs) (*cpanel.WHMResult[MassModifyAcctData], error) {
 	return cpanel.WHMCall[MassModifyAcctData](ctx, c.c, http.MethodGet, "massmodifyacct", args)
 }
-
 
 // An object containing the account's modified settings.
 type MassModifyAcctDataPayloadItemExtended struct {
@@ -1259,10 +1253,10 @@ type MassModifyAcctDataPayloadItemExtended struct {
 	// If the account or its hosting plan use
 	// [package extensions](https://go.cpanel.net/GuidetoPackageExtensions),
 	// the `cpuser` object will also include the extension's variables.
-	Cpuser   map[string]json.RawMessage `json:"cpuser"`
+	Cpuser map[string]json.RawMessage `json:"cpuser"`
 
 	// The account's main domain.
-	Domain   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The absolute file path to the account's updated shell location.
 	//
@@ -1275,16 +1269,16 @@ type MassModifyAcctDataPayloadItemExtended struct {
 	//
 	// If you changed the cPanel account's username, the function
 	// returns the new value.
-	User     string `json:"user"`
+	User string `json:"user"`
 }
 
 // MassModifyAcctDataPayloadItem is a generated payload type.
 type MassModifyAcctDataPayloadItem struct {
 	// An object containing the account's modified settings.
-	Extended    MassModifyAcctDataPayloadItemExtended `json:"extended"`
+	Extended MassModifyAcctDataPayloadItemExtended `json:"extended"`
 
 	// A list containing account modification messages.
-	Messages    []string `json:"messages"`
+	Messages []string `json:"messages"`
 
 	// The hostnames of the
 	// [linked cPanel server nodes](https://go.cpanel.net/serverroles)
@@ -1298,20 +1292,20 @@ type MassModifyAcctDataPayloadItem struct {
 	ProxiedFrom []string `json:"proxied_from"`
 
 	// The account's modification status.
-	Reason      string `json:"reason"`
+	Reason string `json:"reason"`
 
 	// Whether the account modification succeeded.
 	// * `1` — Success.
 	// * `0` — Failure.
 	//
 	// Possible values: `1`, `0`.
-	Result      int64 `json:"result"`
+	Result int64 `json:"result"`
 
 	// The modified account's username.
-	User        string `json:"user"`
+	User string `json:"user"`
 
 	// A list of warning messages for the modified account, if any exist.
-	Warnings    []string `json:"warnings"`
+	Warnings []string `json:"warnings"`
 }
 
 // MassModifyAcctData is a generated payload type.
@@ -1859,8 +1853,8 @@ type ModifyAcctArgs struct {
 // **Note:**
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of SPF resource records on DNS.
-//   * This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
-//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   - This warning is **not** relevant on CentOS 7 servers, because [RFC 7208 deprecated SPF records](https://tools.ietf.org/html/rfc7208). CentOS 7 servers use TXT records instead of SPF records.
+//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // Available since cPanel & WHM version 11.
 //
@@ -1868,7 +1862,6 @@ type ModifyAcctArgs struct {
 func (c *Client) ModifyAcct(ctx context.Context, args *ModifyAcctArgs) (*cpanel.WHMResult[ModifyAcctData], error) {
 	return cpanel.WHMCall[ModifyAcctData](ctx, c.c, http.MethodGet, "modifyacct", args)
 }
-
 
 // ModifyAcctData is a generated payload type.
 type ModifyAcctData struct {
@@ -1880,10 +1873,10 @@ type ModifyAcctData struct {
 	// * These properties show up even if the query did **not** modify them.
 	// * Some of these properties **only** appear under certain other conditions.
 	// * If the cPanel account or its hosting plan use …
-	Cpuser   map[string]json.RawMessage `json:"cpuser"`
+	Cpuser map[string]json.RawMessage `json:"cpuser"`
 
 	// The cPanel account's main domain.
-	Domain   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The absolute path to the cPanel account's shell.
 	Setshell string `json:"setshell"`
@@ -1893,7 +1886,7 @@ type ModifyAcctData struct {
 	// **Note:**
 	//
 	// If you changed the cPanel account's username, the function returns the new value.
-	User     string `json:"user"`
+	User string `json:"user"`
 }
 
 // Myprivs calls the WHM API 1 function `myprivs` — Return cPanel account system privileges
@@ -1907,7 +1900,6 @@ func (c *Client) Myprivs(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHM
 	return cpanel.WHMCall[MyprivsData](ctx, c.c, http.MethodGet, "myprivs", cpanel.CombineArgs(extra...))
 }
 
-
 // MyprivsDataPrivilegesItem is a generated payload type.
 type MyprivsDataPrivilegesItem struct {
 	// Allows the user to view an account summary.
@@ -1915,28 +1907,28 @@ type MyprivsDataPrivilegesItem struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AcctSummary            int64 `json:"acct-summary"`
+	AcctSummary int64 `json:"acct-summary"`
 
 	// Allows the user to create packages.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AddPkg                 int64 `json:"add-pkg"`
+	AddPkg int64 `json:"add-pkg"`
 
 	// Allows the user to create packages with dedicated IP addresses.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AddPkgIP               int64 `json:"add-pkg-ip"`
+	AddPkgIP int64 `json:"add-pkg-ip"`
 
 	// Allows the user to create packages with shell access.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AddPkgShell            int64 `json:"add-pkg-shell"`
+	AddPkgShell int64 `json:"add-pkg-shell"`
 
 	// Provides all access privileges to the user.
 	// * `1` — Enabled.
@@ -1947,40 +1939,40 @@ type MyprivsDataPrivilegesItem struct {
 	// If this value is set to `1` , the user has `root` access.
 	//
 	// Possible values: `0`, `1`.
-	All                    int64 `json:"all"`
+	All int64 `json:"all"`
 
 	// Allows the user to create packages with addon domains.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AllowAddoncreate       int64 `json:"allow-addoncreate"`
+	AllowAddoncreate int64 `json:"allow-addoncreate"`
 
 	// Allows the user to create packages with custom email limits.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AllowEmaillimitsPkgs   int64 `json:"allow-emaillimits-pkgs"`
+	AllowEmaillimitsPkgs int64 `json:"allow-emaillimits-pkgs"`
 
 	// Allows the user to create packages with parked domains (aliases).
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AllowParkedcreate      int64 `json:"allow-parkedcreate"`
+	AllowParkedcreate int64 `json:"allow-parkedcreate"`
 
 	// Allows the user to create an account with shell access.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
-	AllowShell             int64 `json:"allow-shell"`
+	AllowShell int64 `json:"allow-shell"`
 
 	// Allows the user to create packages with unlimited bandwidth.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AllowUnlimitedBwPkgs   int64 `json:"allow-unlimited-bw-pkgs"`
+	AllowUnlimitedBwPkgs int64 `json:"allow-unlimited-bw-pkgs"`
 
 	// Allows the user to create packages with unlimited disk space quotas.
 	// * `1` — Enabled.
@@ -1994,63 +1986,63 @@ type MyprivsDataPrivilegesItem struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	AllowUnlimitedPkgs     int64 `json:"allow-unlimited-pkgs"`
+	AllowUnlimitedPkgs int64 `json:"allow-unlimited-pkgs"`
 
 	// Allows the user to retrieve basic system information.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BasicSystemInfo        int64 `json:"basic-system-info"`
+	BasicSystemInfo int64 `json:"basic-system-info"`
 
 	// Whether to give the reseller access to basic cPanel & WHM options.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	BasicWHMFunctions      int64 `json:"basic-whm-functions"`
+	BasicWHMFunctions int64 `json:"basic-whm-functions"`
 
 	// Allows the user to configure DNS clusters.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Clustering             int64 `json:"clustering"`
+	Clustering int64 `json:"clustering"`
 
 	// Allows the user to perform Cross-Origin Resource Sharing (CORS) HTTP requests.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	CorsProxyGet           int64 `json:"cors-proxy-get"`
+	CorsProxyGet int64 `json:"cors-proxy-get"`
 
 	// Allows the reseller to execute cPanel [UAPI](https://go.cpanel.net/uapi) functions via WHM.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	CpanelAPI              int64 `json:"cpanel-api"`
+	CpanelAPI int64 `json:"cpanel-api"`
 
 	// Allows the user to manage how their server and its services connect to other servers and services.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	CpanelIntegration      int64 `json:"cpanel-integration"`
+	CpanelIntegration int64 `json:"cpanel-integration"`
 
 	// Allows the user to create accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	CreateAcct             int64 `json:"create-acct"`
+	CreateAcct int64 `json:"create-acct"`
 
 	// Allows the user to create DNS zones.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	CreateDNS              int64 `json:"create-dns"`
+	CreateDNS int64 `json:"create-dns"`
 
 	// Allows the user to create a new temporary user session for a specified service.
 	// * `1` — Enabled.
@@ -2061,21 +2053,21 @@ type MyprivsDataPrivilegesItem struct {
 	// This privilege allows an API token user to bypass any restrictions that you set on the API token. For more information, read our [Manage API Tokens](https://go.cpanel.net/whmdocsManageasisAPITokens) documentation.
 	//
 	// Possible values: `0`, `1`.
-	CreateUserSession      int64 `json:"create-user-session"`
+	CreateUserSession int64 `json:"create-user-session"`
 
 	// Allows the user to enable demo mode on accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	DemoSetup              int64 `json:"demo-setup"`
+	DemoSetup int64 `json:"demo-setup"`
 
 	// Allows the user to manage Digest Authentication support.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	DigestAuth             int64 `json:"digest-auth"`
+	DigestAuth int64 `json:"digest-auth"`
 
 	// Allows the user to modify accounts.
 	// * `1` — Enabled.
@@ -2086,56 +2078,56 @@ type MyprivsDataPrivilegesItem struct {
 	// This privilege allows circumvention of account creation limits, gives shell access unless explicitly disallowed, and provides access to dedicated IP addresses, among other features.
 	//
 	// Possible values: `0`, `1`.
-	EditAccount            int64 `json:"edit-account"`
+	EditAccount int64 `json:"edit-account"`
 
 	// Allows the user to edit DNS zones.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	EditDNS                int64 `json:"edit-dns"`
+	EditDNS int64 `json:"edit-dns"`
 
 	// Allows the user to edit MX entries.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	EditMX                 int64 `json:"edit-mx"`
+	EditMX int64 `json:"edit-mx"`
 
 	// Allows the user to create and delete packages.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	EditPkg                int64 `json:"edit-pkg"`
+	EditPkg int64 `json:"edit-pkg"`
 
 	// Allows the user to restore specific files and directories from a backup.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	FileRestore            int64 `json:"file-restore"`
+	FileRestore int64 `json:"file-restore"`
 
 	// Allows the user to generate a mobile configuration profile for an email account.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	GenerateEmailConfig    int64 `json:"generate-email-config"`
+	GenerateEmailConfig int64 `json:"generate-email-config"`
 
 	// Allows the user to delete their customers' accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	KillAcct               int64 `json:"kill-acct"`
+	KillAcct int64 `json:"kill-acct"`
 
 	// Allows the user to delete DNS zones.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	KillDNS                int64 `json:"kill-dns"`
+	KillDNS int64 `json:"kill-dns"`
 
 	// Allows the user to modify bandwidth limits on their accounts.
 	// * `1` — Enabled.
@@ -2146,33 +2138,33 @@ type MyprivsDataPrivilegesItem struct {
 	//  This will allow circumvention of account package limits if you do not use resource limits.
 	//
 	// Possible values: `0`, `1`.
-	LimitBandwidth         int64 `json:"limit-bandwidth"`
+	LimitBandwidth int64 `json:"limit-bandwidth"`
 
 	// Allows the user to list owned accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ListAccts              int64 `json:"list-accts"`
+	ListAccts int64 `json:"list-accts"`
 
 	// Allows the user to view existing hosting plans (packages).
 	// * `1` — Enabled.
 	// * `0` — Disabled.
-	ListPkgs               int64 `json:"list-pkgs"`
+	ListPkgs int64 `json:"list-pkgs"`
 
 	// Allows the user to create and modify locales on the server.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	LocaleEdit             int64 `json:"locale-edit"`
+	LocaleEdit int64 `json:"locale-edit"`
 
 	// Allows the user to access WHM's [_Mail Troubleshooter_](https://go.cpanel.net/whmdocsMailTroubleshooter) interface (_WHM >> Home >> Mail >> Mail Troubleshooter_).
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Mailcheck              int64 `json:"mailcheck"`
+	Mailcheck int64 `json:"mailcheck"`
 
 	// Allows the user to manage API tokens.
 	// * `1` — Enabled.
@@ -2183,56 +2175,56 @@ type MyprivsDataPrivilegesItem struct {
 	// This ACL privilege allows an API token user to bypass any restrictions that you set on the API token.
 	//
 	// Possible values: `0`, `1`.
-	ManageAPITokens        int64 `json:"manage-api-tokens"`
+	ManageAPITokens int64 `json:"manage-api-tokens"`
 
 	// Allows the user to manage DNS records.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ManageDNSRecords       int64 `json:"manage-dns-records"`
+	ManageDNSRecords int64 `json:"manage-dns-records"`
 
 	// Allows the user to manage external authentication for their accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ManageOidc             int64 `json:"manage-oidc"`
+	ManageOidc int64 `json:"manage-oidc"`
 
 	// Allows the user to manage their server's cPanel styles.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ManageStyles           int64 `json:"manage-styles"`
+	ManageStyles int64 `json:"manage-styles"`
 
 	// Allows the user to retrieve MySQL® database and user data.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	MysqlInfo              int64 `json:"mysql-info"`
+	MysqlInfo int64 `json:"mysql-info"`
 
 	// Allows the user to send news messages to customers' accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	News                   int64 `json:"news"`
+	News int64 `json:"news"`
 
 	// Allows the user to manage nameservers.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	NSConfig               int64 `json:"ns-config"`
+	NSConfig int64 `json:"ns-config"`
 
 	// Allows the user to park domains within WHM.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ParkDNS                int64 `json:"park-dns"`
+	ParkDNS int64 `json:"park-dns"`
 
 	// Allows the user to modify passwords for customers' accounts.
 	// * `1` — Enabled.
@@ -2243,7 +2235,7 @@ type MyprivsDataPrivilegesItem struct {
 	//  This privilege allows an API token user to change account passwords and log in with a new password. For more information, read our [Manage API Tokens](https://go.cpanel.net/whmdocsManageasisAPITokens) documentation.
 	//
 	// Possible values: `0`, `1`.
-	Passwd                 int64 `json:"passwd"`
+	Passwd int64 `json:"passwd"`
 
 	// Allows the user to modify disk space quotas for accounts.
 	// * `1` — Enabled.
@@ -2254,112 +2246,112 @@ type MyprivsDataPrivilegesItem struct {
 	//  This ACL privilege allows circumvention of account package limits if you do not use resource limits.
 	//
 	// Possible values: `0`, `1`.
-	Quota                  int64 `json:"quota"`
+	Quota int64 `json:"quota"`
 
 	// Allows the user to rearrange the locations of customer accounts in order to free up disk space.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	RearrangeAccts         int64 `json:"rearrange-accts"`
+	RearrangeAccts int64 `json:"rearrange-accts"`
 
 	// Allows the user to re-sync FTP account passwords.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Resftp                 int64 `json:"resftp"`
+	Resftp int64 `json:"resftp"`
 
 	// Allows the user to restart services on the server, such as Apache® or Exim.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Restart                int64 `json:"restart"`
+	Restart int64 `json:"restart"`
 
 	// Allows the user to view the bandwidth usage of accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ShowBandwidth          int64 `json:"show-bandwidth"`
+	ShowBandwidth int64 `json:"show-bandwidth"`
 
 	// Allows the user to manage the SSL certificates installed on domains.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	SSL                    int64 `json:"ssl"`
+	SSL int64 `json:"ssl"`
 
 	// Allows the user to use WHM's [_Purchase and Install an SSL Certificate_](https://go.cpanel.net/whmdocsPurchaseandInstallanSSLCertificate) interface (_WHM >> Home >> SSL/TLS >> Purchase and Install an SSL Certificate_).
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	SSLBuy                 int64 `json:"ssl-buy"`
+	SSLBuy int64 `json:"ssl-buy"`
 
 	// Allows the user to use the SSL CSR/CRT generator.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	SSLGencrt              int64 `json:"ssl-gencrt"`
+	SSLGencrt int64 `json:"ssl-gencrt"`
 
 	// Allows the user to view their server's SSL information.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	SSLInfo                int64 `json:"ssl-info"`
+	SSLInfo int64 `json:"ssl-info"`
 
 	// Allows the user to view WHM's [_Server Information_](https://go.cpanel.net/whmdocsServerInformation) interface (_WHM >> Home >> Server Status >> Server Information_).
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Stats                  int64 `json:"stats"`
+	Stats int64 `json:"stats"`
 
 	// Allows the user to view WHM's [_Service Status_](https://go.cpanel.net/whmdocsServiceStatus) interface (_WHM >> Home >> Server Status >> Service Status_).
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Status                 int64 `json:"status"`
+	Status int64 `json:"status"`
 
 	// Allows the user to suspend customers' accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	SuspendAcct            int64 `json:"suspend-acct"`
+	SuspendAcct int64 `json:"suspend-acct"`
 
 	// Allows the user to manage third-party service offerings.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Thirdparty             int64 `json:"thirdparty"`
+	Thirdparty int64 `json:"thirdparty"`
 
 	// Allows the user to view reports about email message delivery attempts from their account.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	TrackEmail             int64 `json:"track-email"`
+	TrackEmail int64 `json:"track-email"`
 
 	// Allows the user to upgrade and downgrade customers' domain accounts.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UpgradeAccount         int64 `json:"upgrade-account"`
+	UpgradeAccount int64 `json:"upgrade-account"`
 
 	// Whether to allow the reseller to use all global packages. For more information, read our [reseller packages](https://go.cpanel.net/resellerpackages) documentation.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	ViewGlobalPackages     int64 `json:"viewglobalpackages"`
+	ViewGlobalPackages int64 `json:"viewglobalpackages"`
 }
 
 // MyprivsData is a generated payload type.
@@ -2420,7 +2412,6 @@ type SetDigestAuthArgs struct {
 func (c *Client) SetDigestAuth(ctx context.Context, args *SetDigestAuthArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_digest_auth", args)
 }
-
 
 // UntrackAcctIDArgs are the parameters of the WHM API 1 function `untrack_acct_id`.
 type UntrackAcctIDArgs struct {
@@ -2488,4 +2479,3 @@ type UntrackAcctIDArgs struct {
 func (c *Client) UntrackAcctID(ctx context.Context, args *UntrackAcctIDArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "untrack_acct_id", args)
 }
-

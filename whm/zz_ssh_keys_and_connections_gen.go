@@ -51,7 +51,6 @@ func (c *Client) AccessHash(ctx context.Context, args *AccessHashArgs) (*cpanel.
 	return cpanel.WHMCall[AccessHashData](ctx, c.c, http.MethodGet, "accesshash", args)
 }
 
-
 // AccessHashData is a generated payload type.
 type AccessHashData struct {
 	// The user's access hash.
@@ -123,7 +122,6 @@ func (c *Client) AuthorizeSSHKey(ctx context.Context, args *AuthorizeSSHKeyArgs)
 	return cpanel.WHMCall[AuthorizeSSHKeyData](ctx, c.c, http.MethodGet, "authorizesshkey", args)
 }
 
-
 // AuthorizeSSHKeyData is a generated payload type.
 type AuthorizeSSHKeyData struct {
 	// Whether the public SSH key has authorization.
@@ -134,7 +132,7 @@ type AuthorizeSSHKeyData struct {
 	Authorized int64 `json:"authorized"`
 
 	// The public SSH key file's name.
-	File       string `json:"file"`
+	File string `json:"file"`
 }
 
 // CheckRemoteSSHConnectionArgs are the parameters of the WHM API 1 function `check_remote_ssh_connection`.
@@ -164,13 +162,12 @@ func (c *Client) CheckRemoteSSHConnection(ctx context.Context, args *CheckRemote
 	return cpanel.WHMCall[CheckRemoteSSHConnectionData](ctx, c.c, http.MethodGet, "check_remote_ssh_connection", args)
 }
 
-
 // CheckRemoteSSHConnectionData is a generated payload type.
 type CheckRemoteSSHConnectionData struct {
 	// The remote connection's comment section.
 	// * A valid string.
 	// * `undef` - If the local and remote servers connect successfully.
-	Comment          string `json:"comment"`
+	Comment string `json:"comment"`
 
 	// The available SSH protocol versions.
 	// * A valid string.
@@ -178,12 +175,12 @@ type CheckRemoteSSHConnectionData struct {
 	ProtocolVersions []string `json:"protocol_versions"`
 
 	// The raw data from the remote server.
-	Received         string `json:"received"`
+	Received string `json:"received"`
 
 	// The version of the remote server's SSH server software.
 	// * A valid string.
 	// * `undef` - If the local and remote servers connect successfully.
-	ServerSoftware   string `json:"server_software"`
+	ServerSoftware string `json:"server_software"`
 }
 
 // ConvertOpenSSHToPuTTYArgs are the parameters of the WHM API 1 function `convertopensshtoputty`.
@@ -225,7 +222,6 @@ type ConvertOpenSSHToPuTTYArgs struct {
 func (c *Client) ConvertOpenSSHToPuTTY(ctx context.Context, args *ConvertOpenSSHToPuTTYArgs) (*cpanel.WHMResult[ConvertOpenSSHToPuTtyData], error) {
 	return cpanel.WHMCall[ConvertOpenSSHToPuTtyData](ctx, c.c, http.MethodGet, "convertopensshtoputty", args)
 }
-
 
 // ConvertOpenSSHToPuTtyData is a generated payload type.
 type ConvertOpenSSHToPuTtyData struct {
@@ -270,7 +266,6 @@ type DeleteSSHKeyArgs struct {
 func (c *Client) DeleteSSHKey(ctx context.Context, args *DeleteSSHKeyArgs) (*cpanel.WHMResult[DeleteSSHKeyData], error) {
 	return cpanel.WHMCall[DeleteSSHKeyData](ctx, c.c, http.MethodGet, "deletesshkey", args)
 }
-
 
 // DeleteSSHKeyData is a generated payload type.
 type DeleteSSHKeyData struct {
@@ -337,14 +332,13 @@ func (c *Client) GenerateSSHKeypair(ctx context.Context, args *GenerateSSHKeypai
 	return cpanel.WHMCall[GenerateSSHKeypairData](ctx, c.c, http.MethodGet, "generatesshkeypair", args)
 }
 
-
 // GenerateSSHKeypairData is a generated payload type.
 type GenerateSSHKeypairData struct {
 	// The key's [MD5](https://en.wikipedia.org/wiki/MD5) fingerprint.
 	FInGerPrint *string `json:"fingerprint"`
 
 	// The key's filename.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 }
 
 // ImportSSHKeyArgs are the parameters of the WHM API 1 function `importsshkey`.
@@ -408,7 +402,6 @@ type ImportSSHKeyArgs struct {
 func (c *Client) ImportSSHKey(ctx context.Context, args *ImportSSHKeyArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "importsshkey", args)
 }
-
 
 // ListSSHKeysArgs are the parameters of the WHM API 1 function `listsshkeys`.
 type ListSSHKeysArgs struct {
@@ -484,7 +477,6 @@ func (c *Client) ListSSHKeys(ctx context.Context, args *ListSSHKeysArgs) (*cpane
 	return cpanel.WHMCall[ListSSHKeysData](ctx, c.c, http.MethodGet, "listsshkeys", args)
 }
 
-
 // ListSSHKeysDataKeysItem is a generated payload type.
 type ListSSHKeysDataKeysItem struct {
 	// Whether the key is authorized to access the server.
@@ -496,17 +488,17 @@ type ListSSHKeysDataKeysItem struct {
 	Authorized int64 `json:"authorized"`
 
 	// The key's comment.
-	Comment    string `json:"comment"`
+	Comment string `json:"comment"`
 
 	// The date that the key was created, in
 	// [Unix time format](http://en.wikipedia.org/wiki/Unix_time).
-	Ctime      int64 `json:"ctime"`
+	Ctime int64 `json:"ctime"`
 
 	// The key's filename.
-	File       string `json:"file"`
+	File string `json:"file"`
 
 	// The date that the key will expire, in Unix time format.
-	Mtime      int64 `json:"mtime"`
+	Mtime int64 `json:"mtime"`
 
 	// Whether the private key is stored on the server.
 	//
@@ -514,10 +506,10 @@ type ListSSHKeysDataKeysItem struct {
 	// * `0` — The private key is **not** on the server.
 	//
 	// Possible values: `0`, `1`.
-	Private    int64 `json:"private"`
+	Private int64 `json:"private"`
 
 	// The key's text.
-	Text       string `json:"text"`
+	Text string `json:"text"`
 }
 
 // ListSSHKeysData is a generated payload type.

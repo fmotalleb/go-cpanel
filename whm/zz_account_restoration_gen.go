@@ -23,14 +23,13 @@ func (c *Client) RestoreModulesSummary(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[RestoreModulesSummaryData](ctx, c.c, http.MethodGet, "restore_modules_summary", cpanel.CombineArgs(extra...))
 }
 
-
 // RestoreModulesSummaryDataModulesItem is a generated payload type.
 type RestoreModulesSummaryDataModulesItem struct {
 	// The module's name.
-	Module              string `json:"module"`
+	Module string `json:"module"`
 
 	// Notes about the module, if any exist.
-	Notes               []string `json:"notes"`
+	Notes []string `json:"notes"`
 
 	// Whether the module is available under a
 	// [restricted restore](https://go.cpanel.net/whmdocsTransferorRestoreacPanelAccount#restricted-restore).
@@ -42,10 +41,10 @@ type RestoreModulesSummaryDataModulesItem struct {
 	RestrictedAvailable int64 `json:"restricted_available"`
 
 	// A description of the module's behavior when the transfer uses a restricted restore.
-	RestrictedSummary   []string `json:"restricted_summary"`
+	RestrictedSummary []string `json:"restricted_summary"`
 
 	// A description of the module's behavior when the transfer does **not** use a restricted restore.
-	Summary             []string `json:"summary"`
+	Summary []string `json:"summary"`
 }
 
 // RestoreModulesSummaryData is a generated payload type.
@@ -64,7 +63,6 @@ type RestoreModulesSummaryData struct {
 func (c *Client) RestoreQueueActivate(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_activate", cpanel.CombineArgs(extra...))
 }
-
 
 // RestoreQueueAddTaskArgs are the parameters of the WHM API 1 function `restore_queue_add_task`.
 type RestoreQueueAddTaskArgs struct {
@@ -141,7 +139,6 @@ func (c *Client) RestoreQueueAddTask(ctx context.Context, args *RestoreQueueAddT
 	return cpanel.WHMCall[RestoreQueueAddTaskData](ctx, c.c, http.MethodGet, "restore_queue_add_task", args)
 }
 
-
 // RestoreQueueAddTaskData is a generated payload type.
 type RestoreQueueAddTaskData struct {
 	// The process's internal task queue ID.
@@ -159,7 +156,6 @@ func (c *Client) RestoreQueueClearAllCompletedTasks(ctx context.Context, extra .
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_clear_all_completed_tasks", cpanel.CombineArgs(extra...))
 }
 
-
 // RestoreQueueClearAllFailedTasks calls the WHM API 1 function `restore_queue_clear_all_failed_tasks` — Remove all failed restoration tasks
 //
 // This function removes any failed tasks from the restoration queue.
@@ -170,7 +166,6 @@ func (c *Client) RestoreQueueClearAllCompletedTasks(ctx context.Context, extra .
 func (c *Client) RestoreQueueClearAllFailedTasks(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_clear_all_failed_tasks", cpanel.CombineArgs(extra...))
 }
-
 
 // RestoreQueueClearAllPendingTasks calls the WHM API 1 function `restore_queue_clear_all_pending_tasks` — Remove all pending restoration tasks
 //
@@ -183,7 +178,6 @@ func (c *Client) RestoreQueueClearAllPendingTasks(ctx context.Context, extra ...
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_clear_all_pending_tasks", cpanel.CombineArgs(extra...))
 }
 
-
 // RestoreQueueClearAllTasks calls the WHM API 1 function `restore_queue_clear_all_tasks` — Remove all restoration tasks
 //
 // This function removes all tasks from the restoration queue.
@@ -194,7 +188,6 @@ func (c *Client) RestoreQueueClearAllPendingTasks(ctx context.Context, extra ...
 func (c *Client) RestoreQueueClearAllTasks(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_clear_all_tasks", cpanel.CombineArgs(extra...))
 }
-
 
 // RestoreQueueClearCompletedTaskArgs are the parameters of the WHM API 1 function `restore_queue_clear_completed_task`.
 type RestoreQueueClearCompletedTaskArgs struct {
@@ -223,7 +216,6 @@ func (c *Client) RestoreQueueClearCompletedTask(ctx context.Context, args *Resto
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_clear_completed_task", args)
 }
 
-
 // RestoreQueueClearPendingTaskArgs are the parameters of the WHM API 1 function `restore_queue_clear_pending_task`.
 type RestoreQueueClearPendingTaskArgs struct {
 	// The cPanel account's username.
@@ -246,7 +238,6 @@ func (c *Client) RestoreQueueClearPendingTask(ctx context.Context, args *Restore
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restore_queue_clear_pending_task", args)
 }
 
-
 // RestoreQueueIsActive calls the WHM API 1 function `restore_queue_is_active` — Validate restoration queue is active
 //
 // This function checks whether the system's restoration queue is actively processing tasks.
@@ -257,7 +248,6 @@ func (c *Client) RestoreQueueClearPendingTask(ctx context.Context, args *Restore
 func (c *Client) RestoreQueueIsActive(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[RestoreQueueIsActiveData], error) {
 	return cpanel.WHMCall[RestoreQueueIsActiveData](ctx, c.c, http.MethodGet, "restore_queue_is_active", cpanel.CombineArgs(extra...))
 }
-
 
 // RestoreQueueIsActiveData is a generated payload type.
 type RestoreQueueIsActiveData struct {
@@ -281,11 +271,10 @@ func (c *Client) RestoreQueueListActive(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[RestoreQueueListActiveData](ctx, c.c, http.MethodGet, "restore_queue_list_active", cpanel.CombineArgs(extra...))
 }
 
-
 // A list of information about an active task in the restoration queue.
 type RestoreQueueListActiveDataRestoreJobItemOptions struct {
 	// The backup location from which to restore the data.
-	Destid     string `json:"destid"`
+	Destid string `json:"destid"`
 
 	// Whether the task will assign the account a dedicated IP address.
 	//
@@ -293,7 +282,7 @@ type RestoreQueueListActiveDataRestoreJobItemOptions struct {
 	// * `0` — Will **not** assign.
 	//
 	// Possible values: `0`, `1`.
-	GiveIP     int64 `json:"give_ip"`
+	GiveIP int64 `json:"give_ip"`
 
 	// Whether the function will restore the account's email configuration.
 	//
@@ -309,7 +298,7 @@ type RestoreQueueListActiveDataRestoreJobItemOptions struct {
 	// * `0` — Will **not** restore.
 	//
 	// Possible values: `0`, `1`.
-	Mysql      int64 `json:"mysql"`
+	Mysql int64 `json:"mysql"`
 
 	// Whether the function will restore the account's subdomains.
 	//
@@ -323,13 +312,13 @@ type RestoreQueueListActiveDataRestoreJobItemOptions struct {
 // RestoreQueueListActiveDataRestoreJobItem is a generated payload type.
 type RestoreQueueListActiveDataRestoreJobItem struct {
 	// A list of information about an active task in the restoration queue.
-	Options      RestoreQueueListActiveDataRestoreJobItemOptions `json:"options"`
+	Options RestoreQueueListActiveDataRestoreJobItemOptions `json:"options"`
 
 	// The date of the backup that the task will use, in `YYYY-MM-DD` format.
 	RestorePoint string `json:"restore_point"`
 
 	// The cPanel account's username.
-	User         string `json:"user"`
+	User string `json:"user"`
 }
 
 // RestoreQueueListActiveData is a generated payload type.
@@ -349,8 +338,8 @@ type RestoreQueueListActiveData struct {
 // **Note:**
 //
 // On servers that run CentOS 7, you may see a `named` warning about the absence of SPF resource records on DNS.
-//   * This warning is **not** relevant on CentOS 7 servers, because [RFC 7208](https://tools.ietf.org/html/rfc7208) deprecated SPF records. CentOS 7 servers use TXT records instead of SPF records.
-//   * Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
+//   - This warning is **not** relevant on CentOS 7 servers, because [RFC 7208](https://tools.ietf.org/html/rfc7208) deprecated SPF records. CentOS 7 servers use TXT records instead of SPF records.
+//   - Red Hat 7.1 and CentOS 7.1 both contain `bind-9.9.4-23.el7`, which is an updated version of BIND that complies with RFC 7208. To resolve this issue, update your operating system to a version that contains the updated version of BIND. For more information, read the [Red Hat Bugzilla case about SPF record errors](https://bugzilla.redhat.com/show_bug.cgi?id=1215164).
 //
 // Available since cPanel & WHM version 11.38.
 //
@@ -359,20 +348,19 @@ func (c *Client) RestoreQueueListCompleted(ctx context.Context, extra ...cpanel.
 	return cpanel.WHMCall[RestoreQueueListCompletedData](ctx, c.c, http.MethodGet, "restore_queue_list_completed", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains information about the task's options.
 type RestoreQueueListCompletedDataRestoreJobItemRestoreJobOptions struct {
 	// The destination's identification string.
 	// * `local` — The local directory.
 	// * The destination ID string's value.
-	Destid     string `json:"destid"`
+	Destid string `json:"destid"`
 
 	// Whether the task assigned the account a dedicated IP address.
 	// * `1` - Assigned.
 	// * `0` - Did **not** assign.
 	//
 	// Possible values: `0`, `1`.
-	GiveIP     int64 `json:"give_ip"`
+	GiveIP int64 `json:"give_ip"`
 
 	// Whether the function restored the account's email configuration.
 	// * `1` - Restored.
@@ -386,7 +374,7 @@ type RestoreQueueListCompletedDataRestoreJobItemRestoreJobOptions struct {
 	// * `0` - Did **not** restore.
 	//
 	// Possible values: `0`, `1`.
-	Mysql      int64 `json:"mysql"`
+	Mysql int64 `json:"mysql"`
 
 	// Whether the function restored the account's subdomains.
 	// * `1` - Restored.
@@ -399,31 +387,31 @@ type RestoreQueueListCompletedDataRestoreJobItemRestoreJobOptions struct {
 // An object that contains the task's settings.
 type RestoreQueueListCompletedDataRestoreJobItemRestoreJob struct {
 	// An object that contains information about the task's options.
-	Options      RestoreQueueListCompletedDataRestoreJobItemRestoreJobOptions `json:"options"`
+	Options RestoreQueueListCompletedDataRestoreJobItemRestoreJobOptions `json:"options"`
 
 	// The date of the backup that the task used.
 	RestorePoint string `json:"restore_point"`
 
 	// The cPanel account's username.
-	User         string `json:"user"`
+	User string `json:"user"`
 }
 
 // An object that contains information about the task's status.
 type RestoreQueueListCompletedDataRestoreJobItemStatusInfo struct {
 	// The number of items that the restoration process changed.
-	AlteredItems      *int64 `json:"altered_items"`
+	AlteredItems *int64 `json:"altered_items"`
 
 	// The number of items in the restoration process that may cause problems on the account.
-	DangerousItems    *int64 `json:"dangerous_items"`
+	DangerousItems *int64 `json:"dangerous_items"`
 
 	// The time that the restoration process completed this task.
-	Finished          string `json:"finished"`
+	Finished string `json:"finished"`
 
 	// The task's log information.
-	Log               string `json:"log"`
+	Log string `json:"log"`
 
 	// The restoration log file's name.
-	RestoreLogfile    string `json:"restore_logfile"`
+	RestoreLogfile string `json:"restore_logfile"`
 
 	// Whether the task completed successfully.
 	// * `1` - Success.
@@ -431,19 +419,19 @@ type RestoreQueueListCompletedDataRestoreJobItemStatusInfo struct {
 	// * `2` - Warning.
 	//
 	// Possible values: `0`, `1`, `2`.
-	Result            int64 `json:"result"`
+	Result int64 `json:"result"`
 
 	// The number of items that the restoration process skipped.
-	SkippedItems      *int64 `json:"skipped_items"`
+	SkippedItems *int64 `json:"skipped_items"`
 
 	// The restoration process's start time for this task.
-	Started           string `json:"started"`
+	Started string `json:"started"`
 
 	// The restoration transfer session's ID.
 	TransferSessionID string `json:"transfer_session_id"`
 
 	// Any warnings about the restoration process.
-	Warnings          []string `json:"warnings"`
+	Warnings []string `json:"warnings"`
 }
 
 // RestoreQueueListCompletedDataRestoreJobItem is a generated payload type.
@@ -472,14 +460,13 @@ func (c *Client) RestoreQueueListPending(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.WHMCall[RestoreQueueListPendingData](ctx, c.c, http.MethodGet, "restore_queue_list_pending", cpanel.CombineArgs(extra...))
 }
 
-
 // A list of information about the options for a pending task in the restoration queue.
 type RestoreQueueListPendingDataRestoreJobItemOptions struct {
 	// The destination's identification string.
 	//
 	// * `local` — The local directory.
 	// * The destination ID string's value.
-	Destid     string `json:"destid"`
+	Destid string `json:"destid"`
 
 	// Whether the task will assign the account a dedicated IP address.
 	//
@@ -487,7 +474,7 @@ type RestoreQueueListPendingDataRestoreJobItemOptions struct {
 	// * `0` — Will **not** assign.
 	//
 	// Possible values: `0`, `1`.
-	GiveIP     int64 `json:"give_ip"`
+	GiveIP int64 `json:"give_ip"`
 
 	// Whether the function will restore the account's email configuration.
 	//
@@ -503,7 +490,7 @@ type RestoreQueueListPendingDataRestoreJobItemOptions struct {
 	// * `0` — Will **not** restore.
 	//
 	// Possible values: `0`, `1`.
-	Mysql      int64 `json:"mysql"`
+	Mysql int64 `json:"mysql"`
 
 	// Whether the function will restore the account's subdomains.
 	//
@@ -517,13 +504,13 @@ type RestoreQueueListPendingDataRestoreJobItemOptions struct {
 // RestoreQueueListPendingDataRestoreJobItem is a generated payload type.
 type RestoreQueueListPendingDataRestoreJobItem struct {
 	// A list of information about the options for a pending task in the restoration queue.
-	Options      RestoreQueueListPendingDataRestoreJobItemOptions `json:"options"`
+	Options RestoreQueueListPendingDataRestoreJobItemOptions `json:"options"`
 
 	// The date of the backup that the task will use, in `YYYY-MM-DD` format.
 	RestorePoint string `json:"restore_point"`
 
 	// The cPanel account's username.
-	User         string `json:"user"`
+	User string `json:"user"`
 }
 
 // RestoreQueueListPendingData is a generated payload type.
@@ -543,7 +530,6 @@ func (c *Client) RestoreQueueState(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[RestoreQueueStateData](ctx, c.c, http.MethodGet, "restore_queue_state", cpanel.CombineArgs(extra...))
 }
 
-
 // RestorePointOptions is a generated payload type.
 type RestorePointOptions struct {
 	// Whether the restoration process will assign a dedicated IP address
@@ -553,7 +539,7 @@ type RestorePointOptions struct {
 	// * `0` — Will **not** assign.
 	//
 	// Possible values: `1`, `0`.
-	GiveIP     int64 `json:"give_ip"`
+	GiveIP int64 `json:"give_ip"`
 
 	// Whether the restoration process will restore the account's email
 	// configuration.
@@ -571,7 +557,7 @@ type RestorePointOptions struct {
 	// * `0` — Will **not** restore.
 	//
 	// Possible values: `1`, `0`.
-	Mysql      int64 `json:"mysql"`
+	Mysql int64 `json:"mysql"`
 
 	// Whether the restoration process will restore the account's subdomains.
 	//
@@ -584,19 +570,19 @@ type RestorePointOptions struct {
 
 // RestorePoint is a generated payload type.
 type RestorePoint struct {
-	Options      RestorePointOptions `json:"options"`
+	Options RestorePointOptions `json:"options"`
 
 	// The date of the backup file.
 	RestorePoint string `json:"restore_point"`
 
 	// The cPanel account's username.
-	User         string `json:"user"`
+	User string `json:"user"`
 }
 
 // RestoreQueueStateData is a generated payload type.
 type RestoreQueueStateData struct {
 	// An array of objects containing restoration queue items that the system is actively processing.
-	Active    []RestorePoint `json:"active"`
+	Active []RestorePoint `json:"active"`
 
 	// An array of objects containing restoration queue items that the system has already processed.
 	Completed []RestorePoint `json:"completed"`
@@ -607,10 +593,10 @@ type RestoreQueueStateData struct {
 	// * `0` — The restoration queue is **not** processing a task.
 	//
 	// Possible values: `0`, `1`.
-	IsActive  int64 `json:"is_active"`
+	IsActive int64 `json:"is_active"`
 
 	// An array of objects containing restoration queue items that the system will process next.
-	Pending   []RestorePoint `json:"pending"`
+	Pending []RestorePoint `json:"pending"`
 }
 
 // RestoreAccountArgs are the parameters of the WHM API 1 function `restoreaccount`.
@@ -714,7 +700,6 @@ func (c *Client) RestoreAccount(ctx context.Context, args *RestoreAccountArgs) (
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "restoreaccount", args)
 }
 
-
 // VerifyNewUsernameForRestoreArgs are the parameters of the WHM API 1 function `verify_new_username_for_restore`.
 type VerifyNewUsernameForRestoreArgs struct {
 	// The cPanel account that you wish to transfer to the server.
@@ -736,4 +721,3 @@ type VerifyNewUsernameForRestoreArgs struct {
 func (c *Client) VerifyNewUsernameForRestore(ctx context.Context, args *VerifyNewUsernameForRestoreArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "verify_new_username_for_restore", args)
 }
-

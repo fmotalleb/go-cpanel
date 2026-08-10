@@ -23,7 +23,6 @@ func (c *BandwidthClient) GetEnabledProtocols(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Bandwidth", "get_enabled_protocols", cpanel.CombineArgs(extra...))
 }
 
-
 // GetRetentionPeriods calls the UAPI function `Bandwidth::get_retention_periods` — Return bandwidth retention period
 //
 // This function retrieves the retention periods for bandwidth data.
@@ -35,7 +34,6 @@ func (c *BandwidthClient) GetRetentionPeriods(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[[]BandwidthGetRetentionPeriodsDataItem](ctx, c.c, http.MethodGet, "Bandwidth", "get_retention_periods", cpanel.CombineArgs(extra...))
 }
 
-
 // BandwidthGetRetentionPeriodsDataItem is a generated payload type.
 type BandwidthGetRetentionPeriodsDataItem struct {
 	// The interval in which the system reports bandwidth data.
@@ -44,7 +42,7 @@ type BandwidthGetRetentionPeriodsDataItem struct {
 	// - `5min`
 	//
 	// Possible values: `daily`, `hourly`, `5min`.
-	Interval  string `json:"interval"`
+	Interval string `json:"interval"`
 
 	// The retention period for bandwidth data.
 	Retention int64 `json:"retention"`
@@ -130,4 +128,3 @@ type BandwidthQueryArgs struct {
 func (c *BandwidthClient) Query(ctx context.Context, args *BandwidthQueryArgs) (*cpanel.UAPIResult[map[string]map[string]map[string]json.RawMessage], error) {
 	return cpanel.UAPICall[map[string]map[string]map[string]json.RawMessage](ctx, c.c, http.MethodGet, "Bandwidth", "query", args)
 }
-

@@ -44,18 +44,17 @@ func (c *StatsClient) GetBandwidth(ctx context.Context, args *StatsGetBandwidthA
 	return cpanel.UAPICall[[]StatsGetBandwidthDataItem](ctx, c.c, http.MethodGet, "Stats", "get_bandwidth", args)
 }
 
-
 // StatsGetBandwidthDataItem is a generated payload type.
 type StatsGetBandwidthDataItem struct {
 	// The domain's bandwidth usage, in bytes.
-	Bytes      int64 `json:"bytes"`
+	Bytes int64 `json:"bytes"`
 
 	// The domain for which to display bandwidth statistics.
 	//
 	// **Note:**
 	//
 	// The function only returns this value if the `protocol` return's value is `http`.
-	Domain     string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The beginning of the report window.
 	MonthStart int64 `json:"month_start"`
@@ -68,7 +67,7 @@ type StatsGetBandwidthDataItem struct {
 	//   * `ftp`
 	//
 	// Possible values: `http`, `imap`, `smtp`, `pop3`, `ftp`.
-	Protocol   string `json:"protocol"`
+	Protocol string `json:"protocol"`
 }
 
 // StatsGetSiteErrorsArgs are the parameters of the UAPI function `Stats::get_site_errors`.
@@ -107,11 +106,10 @@ func (c *StatsClient) GetSiteErrors(ctx context.Context, args *StatsGetSiteError
 	return cpanel.UAPICall[[]StatsGetSiteErrorsDataItem](ctx, c.c, http.MethodGet, "Stats", "get_site_errors", args)
 }
 
-
 // StatsGetSiteErrorsDataItem is a generated payload type.
 type StatsGetSiteErrorsDataItem struct {
 	// The date that the system recorded the error.
-	Date  int64 `json:"date"`
+	Date int64 `json:"date"`
 
 	// The error log entry.
 	Entry string `json:"entry"`
@@ -139,20 +137,19 @@ func (c *StatsClient) GetStatsDaily(ctx context.Context, args *StatsGetStatsDail
 	return cpanel.UAPICall[StatsGetStatsDailyData](ctx, c.c, http.MethodGet, "Stats", "get_stats_daily", args)
 }
 
-
 // StatsGetStatsDailyDataStatsValue is a generated payload type.
 type StatsGetStatsDailyDataStatsValue struct {
 	// The bandwidth used on this day (in bytes).
 	Bandwidth int64 `json:"bandwidth"`
 
 	// The number of hits recorded on this day.
-	Hits      int64 `json:"hits"`
+	Hits int64 `json:"hits"`
 
 	// The number of pages viewed on this day.
-	Pages     int64 `json:"pages"`
+	Pages int64 `json:"pages"`
 
 	// The number of visits recorded on this day.
-	Visits    int64 `json:"visits"`
+	Visits int64 `json:"visits"`
 }
 
 // StatsGetStatsDailyData is a generated payload type.
@@ -163,7 +160,7 @@ type StatsGetStatsDailyData struct {
 	// A map of date strings (YYYY-MM-DD) to daily statistics.
 	// Up to 45 days of history are returned. Gaps between the
 	// first available stat and yesterday are filled with zeros.
-	Stats  map[string]StatsGetStatsDailyDataStatsValue `json:"stats"`
+	Stats map[string]StatsGetStatsDailyDataStatsValue `json:"stats"`
 }
 
 // StatsListSitesArgs are the parameters of the UAPI function `Stats::list_sites`.
@@ -201,7 +198,6 @@ func (c *StatsClient) ListSites(ctx context.Context, args *StatsListSitesArgs) (
 	return cpanel.UAPICall[[]StatsListSitesDataItem](ctx, c.c, http.MethodGet, "Stats", "list_sites", args)
 }
 
-
 // StatsListSitesDataItem is a generated payload type.
 type StatsListSitesDataItem struct {
 	// Whether the statistics file's filepath is for all the domains on a cPanel account.
@@ -212,17 +208,17 @@ type StatsListSitesDataItem struct {
 	AllDomains int64 `json:"all_domains"`
 
 	// The domain for which to display statistics.
-	Domain     string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The filepath to the statistics file.
-	Path       string `json:"path"`
+	Path string `json:"path"`
 
 	// Whether the function generates statistics from SSL requests.
 	// * `1` - Generates statistics for SSL requests.
 	// * `0` - Generates statistics for non-SSL requests.
 	//
 	// Possible values: `0`, `1`.
-	SSL        int64 `json:"ssl"`
+	SSL int64 `json:"ssl"`
 }
 
 // StatsListStatsByDomainArgs are the parameters of the UAPI function `Stats::list_stats_by_domain`.
@@ -263,12 +259,11 @@ func (c *StatsClient) ListStatsByDomain(ctx context.Context, args *StatsListStat
 	return cpanel.UAPICall[[]StatsListStatsByDomainDataItem](ctx, c.c, http.MethodGet, "Stats", "list_stats_by_domain", args)
 }
 
-
 // StatsListStatsByDomainDataItem is a generated payload type.
 type StatsListStatsByDomainDataItem struct {
 	// The current date and time.
 	Date int64 `json:"date"`
 
 	// The URL of the file from which the system generates statistics reports.
-	URL  string `json:"url"`
+	URL string `json:"url"`
 }

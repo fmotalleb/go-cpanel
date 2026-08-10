@@ -41,7 +41,6 @@ func (c *Client) EditQuota(ctx context.Context, args *EditQuotaArgs) (*cpanel.WH
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "editquota", args)
 }
 
-
 // GetDiskUsageArgs are the parameters of the WHM API 1 function `get_disk_usage`.
 type GetDiskUsageArgs struct {
 	// Each cPanel & WHM server maintains a cache of users’ disk quota
@@ -71,7 +70,6 @@ func (c *Client) GetDiskUsage(ctx context.Context, args *GetDiskUsageArgs) (*cpa
 	return cpanel.WHMCall[GetDiskUsageData](ctx, c.c, http.MethodGet, "get_disk_usage", args)
 }
 
-
 // GetDiskUsageDataAccountsItem is a generated payload type.
 type GetDiskUsageDataAccountsItem struct {
 	// The account's disk space quota, in kibibytes (KiB).
@@ -79,17 +77,17 @@ type GetDiskUsageDataAccountsItem struct {
 	BlocksLimit *int64 `json:"blocks_limit"`
 
 	// The account's current disk space usage, in kibibytes (KiB).
-	BlocksUsed  int64 `json:"blocks_used"`
+	BlocksUsed int64 `json:"blocks_used"`
 
 	// The account's inode quota.
 	// * `null` - The account has an unlimited number of inodes.
 	InodesLimit *int64 `json:"inodes_limit"`
 
 	// The account's current inode usage.
-	InodesUsed  int64 `json:"inodes_used"`
+	InodesUsed int64 `json:"inodes_used"`
 
 	// The cPanel or Reseller account username.
-	User        string `json:"user"`
+	User string `json:"user"`
 }
 
 // GetDiskUsageData is a generated payload type.
@@ -126,12 +124,11 @@ func (c *Client) Limitbw(ctx context.Context, args *LimitbwArgs) (*cpanel.WHMRes
 	return cpanel.WHMCall[LimitbwData](ctx, c.c, http.MethodGet, "limitbw", args)
 }
 
-
 // LimitbwDataBwlimitsItem is a generated payload type.
 type LimitbwDataBwlimitsItem struct {
 	// The account's new bandwidth quota, in megabytes (MB).
 	// * `0` - The user has unlimited bandwidth.
-	Bwlimit       int64 `json:"bwlimit"`
+	Bwlimit int64 `json:"bwlimit"`
 
 	// Whether bandwidth limiting is enabled for the account.
 	// * `1` - Enabled.
@@ -141,24 +138,24 @@ type LimitbwDataBwlimitsItem struct {
 	BwlimitEnable int64 `json:"bwlimitenable"`
 
 	// An array of all of the cPanel account's domains.
-	Domains       []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The account's bandwidth quota, in human-readable format.
 	// * `unlimited` - The user has unlimited bandwidth.
 	// * A positive integer that represents a maximum monthly bandwidth use, a space, and the string MB.
-	HumanBwlimit  string `json:"human_bwlimit"`
+	HumanBwlimit string `json:"human_bwlimit"`
 
 	// The account's current bandwidth usage, in human-readable format.
 	// * `none`
 	// * A positive integer that represents the amount of bandwidth used, a space, and the string MB.
-	HumanBwused   string `json:"human_bwused"`
+	HumanBwused string `json:"human_bwused"`
 
 	// Whether the account's bandwidth quota is unlimited.
 	// * `1` - Unlimited.
 	// * `0` - Not unlimited.
 	//
 	// Possible values: `0`, `1`.
-	Unlimited     int64 `json:"unlimited"`
+	Unlimited int64 `json:"unlimited"`
 }
 
 // LimitbwData is a generated payload type.
@@ -177,7 +174,6 @@ type LimitbwData struct {
 func (c *Client) QuotaEnabled(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[QuotaEnabledData], error) {
 	return cpanel.WHMCall[QuotaEnabledData](ctx, c.c, http.MethodGet, "quota_enabled", cpanel.CombineArgs(extra...))
 }
-
 
 // QuotaEnabledData is a generated payload type.
 type QuotaEnabledData struct {
@@ -240,7 +236,6 @@ func (c *Client) Showbw(ctx context.Context, args *ShowbwArgs) (*cpanel.WHMResul
 	return cpanel.WHMCall[ShowbwData](ctx, c.c, http.MethodGet, "showbw", args)
 }
 
-
 // ShowbwDataAcctItemBwusageItem is a generated payload type.
 type ShowbwDataAcctItemBwusageItem struct {
 	// Whether the account was deleted.
@@ -252,16 +247,16 @@ type ShowbwDataAcctItemBwusageItem struct {
 	Deleted int64 `json:"deleted"`
 
 	// The domain on the account.
-	Domain  string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The domain's bandwidth usage during the queried period, in bytes.
-	Usage   int64 `json:"usage"`
+	Usage int64 `json:"usage"`
 }
 
 // ShowbwDataAcctItem is a generated payload type.
 type ShowbwDataAcctItem struct {
 	// The bandwidth information for domains on the account.
-	Bwusage    []ShowbwDataAcctItemBwusageItem `json:"bwusage"`
+	Bwusage []ShowbwDataAcctItemBwusageItem `json:"bwusage"`
 
 	// Whether the account was deleted.
 	//
@@ -269,16 +264,16 @@ type ShowbwDataAcctItem struct {
 	// * `0` — **Not** deleted.
 	//
 	// Possible values: `1`, `0`.
-	Deleted    int64 `json:"deleted"`
+	Deleted int64 `json:"deleted"`
 
 	// The account's bandwidth limit, in bytes.
-	Limit      int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The account's main domain.
 	MainDomain string `json:"maindomain"`
 
 	// The account's owner.
-	Owner      string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// Whether the user is a reseller.
 	//
@@ -286,29 +281,29 @@ type ShowbwDataAcctItem struct {
 	// * `0` — **Not** a reseller account.
 	//
 	// Possible values: `1`, `0`.
-	Reseller   int64 `json:"reseller"`
+	Reseller int64 `json:"reseller"`
 
 	// The account's total bandwidth usage during the queried period, in bytes.
 	TotalBytes int64 `json:"totalbytes"`
 
 	// The account username.
-	User       string `json:"user"`
+	User string `json:"user"`
 }
 
 // ShowbwData is a generated payload type.
 type ShowbwData struct {
 	// Bandwidth information for the reseller's accounts.
-	Acct      []ShowbwDataAcctItem `json:"acct"`
+	Acct []ShowbwDataAcctItem `json:"acct"`
 
 	// The queried month.
-	Month     int64 `json:"month"`
+	Month int64 `json:"month"`
 
 	// The reseller username or the `root` user.
-	Reseller  string `json:"reseller"`
+	Reseller string `json:"reseller"`
 
 	// The total bandwidth usage of the reseller's accounts during the queried period, in bytes.
 	TotalUsed int64 `json:"totalused"`
 
 	// The queried year.
-	Year      int64 `json:"year"`
+	Year int64 `json:"year"`
 }

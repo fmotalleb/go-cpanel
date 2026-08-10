@@ -24,11 +24,10 @@ func (c *ServerInformationClient) GetInformation(ctx context.Context, extra ...c
 	return cpanel.UAPICall[[]ServerInformationGetInformationDataItem](ctx, c.c, http.MethodGet, "ServerInformation", "get_information", cpanel.CombineArgs(extra...))
 }
 
-
 // ServerInformationGetInformationDataItem is a generated payload type.
 type ServerInformationGetInformationDataItem struct {
 	// An error message about why system couldn't read a resource's status file.
-	Error   string `json:"error"`
+	Error string `json:"error"`
 
 	// The cPanel services, devices, and server health check points on the
 	// server.
@@ -40,14 +39,14 @@ type ServerInformationGetInformationDataItem struct {
 	// * `Server Load` — The server's CPU load.
 	// * `Memory Used` — The server's current memory use.
 	// * …
-	Name    string `json:"name"`
+	Name string `json:"name"`
 
 	// Whether the resource is enabled or disabled.
 	//
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	// * `unknown` — The system couldn't determine the resource's status.
-	Status  any `json:"status"`
+	Status any `json:"status"`
 
 	// The type of resource.
 	//
@@ -56,7 +55,7 @@ type ServerInformationGetInformationDataItem struct {
 	// * `service`
 	//
 	// Possible values: `device`, `metric`, `service`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The resource's status.
 	//
@@ -64,7 +63,7 @@ type ServerInformationGetInformationDataItem struct {
 	// * `down`
 	// * `unknown`
 	// * The current resource usage.
-	Value   string `json:"value"`
+	Value string `json:"value"`
 
 	// The resource's software version.
 	//

@@ -13,7 +13,7 @@ import (
 //
 // Obtain one with New; module accessors return the per-module clients,
 // for example c.Email().AddPop(...). The zero value is not usable.
-type Client struct { c *cpanel.Client }
+type Client struct{ c *cpanel.Client }
 
 // New wraps a core cpanel.Client (pointed at a cPanel server,
 // typically https://host:2083) with typed UAPI access.
@@ -22,585 +22,598 @@ func New(c *cpanel.Client) *Client { return &Client{c: c} }
 // Core returns the underlying core client.
 func (c *Client) Core() *cpanel.Client { return c.c }
 
-
 // AccountEnhancementsClient wraps calls to the UAPI `AccountEnhancements` module.
-type AccountEnhancementsClient struct { c *cpanel.Client }
+type AccountEnhancementsClient struct{ c *cpanel.Client }
 
 // AccountEnhancements returns the client for the UAPI `AccountEnhancements` module.
-func (c *Client) AccountEnhancements() *AccountEnhancementsClient { return &AccountEnhancementsClient{c: c.c} }
+func (c *Client) AccountEnhancements() *AccountEnhancementsClient {
+	return &AccountEnhancementsClient{c: c.c}
+}
 
 // BackupClient wraps calls to the UAPI `Backup` module.
-type BackupClient struct { c *cpanel.Client }
+type BackupClient struct{ c *cpanel.Client }
 
 // Backup returns the client for the UAPI `Backup` module.
 func (c *Client) Backup() *BackupClient { return &BackupClient{c: c.c} }
 
 // BackupInfoClient wraps calls to the UAPI `BackupInfo` module.
-type BackupInfoClient struct { c *cpanel.Client }
+type BackupInfoClient struct{ c *cpanel.Client }
 
 // BackupInfo returns the client for the UAPI `BackupInfo` module.
 func (c *Client) BackupInfo() *BackupInfoClient { return &BackupInfoClient{c: c.c} }
 
 // BandwidthClient wraps calls to the UAPI `Bandwidth` module.
-type BandwidthClient struct { c *cpanel.Client }
+type BandwidthClient struct{ c *cpanel.Client }
 
 // Bandwidth returns the client for the UAPI `Bandwidth` module.
 func (c *Client) Bandwidth() *BandwidthClient { return &BandwidthClient{c: c.c} }
 
 // BatchClient wraps calls to the UAPI `Batch` module.
-type BatchClient struct { c *cpanel.Client }
+type BatchClient struct{ c *cpanel.Client }
 
 // Batch returns the client for the UAPI `Batch` module.
 func (c *Client) Batch() *BatchClient { return &BatchClient{c: c.c} }
 
 // BlockIPClient wraps calls to the UAPI `BlockIP` module.
-type BlockIPClient struct { c *cpanel.Client }
+type BlockIPClient struct{ c *cpanel.Client }
 
 // BlockIP returns the client for the UAPI `BlockIP` module.
 func (c *Client) BlockIP() *BlockIPClient { return &BlockIPClient{c: c.c} }
 
 // BoxTrapperClient wraps calls to the UAPI `BoxTrapper` module.
-type BoxTrapperClient struct { c *cpanel.Client }
+type BoxTrapperClient struct{ c *cpanel.Client }
 
 // BoxTrapper returns the client for the UAPI `BoxTrapper` module.
 func (c *Client) BoxTrapper() *BoxTrapperClient { return &BoxTrapperClient{c: c.c} }
 
 // BrandingClient wraps calls to the UAPI `Branding` module.
-type BrandingClient struct { c *cpanel.Client }
+type BrandingClient struct{ c *cpanel.Client }
 
 // Branding returns the client for the UAPI `Branding` module.
 func (c *Client) Branding() *BrandingClient { return &BrandingClient{c: c.c} }
 
 // CacheBusterClient wraps calls to the UAPI `CacheBuster` module.
-type CacheBusterClient struct { c *cpanel.Client }
+type CacheBusterClient struct{ c *cpanel.Client }
 
 // CacheBuster returns the client for the UAPI `CacheBuster` module.
 func (c *Client) CacheBuster() *CacheBusterClient { return &CacheBusterClient{c: c.c} }
 
 // CcsClient wraps calls to the UAPI `CCS` module.
-type CcsClient struct { c *cpanel.Client }
+type CcsClient struct{ c *cpanel.Client }
 
 // Ccs returns the client for the UAPI `CCS` module.
 func (c *Client) Ccs() *CcsClient { return &CcsClient{c: c.c} }
 
 // ChkservdClient wraps calls to the UAPI `Chkservd` module.
-type ChkservdClient struct { c *cpanel.Client }
+type ChkservdClient struct{ c *cpanel.Client }
 
 // Chkservd returns the client for the UAPI `Chkservd` module.
 func (c *Client) Chkservd() *ChkservdClient { return &ChkservdClient{c: c.c} }
 
 // ChromeClient wraps calls to the UAPI `Chrome` module.
-type ChromeClient struct { c *cpanel.Client }
+type ChromeClient struct{ c *cpanel.Client }
 
 // Chrome returns the client for the UAPI `Chrome` module.
 func (c *Client) Chrome() *ChromeClient { return &ChromeClient{c: c.c} }
 
 // ClamScannerClient wraps calls to the UAPI `ClamScanner` module.
-type ClamScannerClient struct { c *cpanel.Client }
+type ClamScannerClient struct{ c *cpanel.Client }
 
 // ClamScanner returns the client for the UAPI `ClamScanner` module.
 func (c *Client) ClamScanner() *ClamScannerClient { return &ClamScannerClient{c: c.c} }
 
 // ContactInformationClient wraps calls to the UAPI `ContactInformation` module.
-type ContactInformationClient struct { c *cpanel.Client }
+type ContactInformationClient struct{ c *cpanel.Client }
 
 // ContactInformation returns the client for the UAPI `ContactInformation` module.
-func (c *Client) ContactInformation() *ContactInformationClient { return &ContactInformationClient{c: c.c} }
+func (c *Client) ContactInformation() *ContactInformationClient {
+	return &ContactInformationClient{c: c.c}
+}
 
 // ContactusClient wraps calls to the UAPI `Contactus` module.
-type ContactusClient struct { c *cpanel.Client }
+type ContactusClient struct{ c *cpanel.Client }
 
 // Contactus returns the client for the UAPI `Contactus` module.
 func (c *Client) Contactus() *ContactusClient { return &ContactusClient{c: c.c} }
 
 // CPDAVDClient wraps calls to the UAPI `CPDAVD` module.
-type CPDAVDClient struct { c *cpanel.Client }
+type CPDAVDClient struct{ c *cpanel.Client }
 
 // CPDAVD returns the client for the UAPI `CPDAVD` module.
 func (c *Client) CPDAVD() *CPDAVDClient { return &CPDAVDClient{c: c.c} }
 
 // CPGreyListClient wraps calls to the UAPI `cPGreyList` module.
-type CPGreyListClient struct { c *cpanel.Client }
+type CPGreyListClient struct{ c *cpanel.Client }
 
 // CPGreyList returns the client for the UAPI `cPGreyList` module.
 func (c *Client) CPGreyList() *CPGreyListClient { return &CPGreyListClient{c: c.c} }
 
 // CsvimportClient wraps calls to the UAPI `CSVImport` module.
-type CsvimportClient struct { c *cpanel.Client }
+type CsvimportClient struct{ c *cpanel.Client }
 
 // Csvimport returns the client for the UAPI `CSVImport` module.
 func (c *Client) Csvimport() *CsvimportClient { return &CsvimportClient{c: c.c} }
 
 // DAVClient wraps calls to the UAPI `DAV` module.
-type DAVClient struct { c *cpanel.Client }
+type DAVClient struct{ c *cpanel.Client }
 
 // DAV returns the client for the UAPI `DAV` module.
 func (c *Client) DAV() *DAVClient { return &DAVClient{c: c.c} }
 
 // DCVClient wraps calls to the UAPI `DCV` module.
-type DCVClient struct { c *cpanel.Client }
+type DCVClient struct{ c *cpanel.Client }
 
 // DCV returns the client for the UAPI `DCV` module.
 func (c *Client) DCV() *DCVClient { return &DCVClient{c: c.c} }
 
 // DirectoryIndexesClient wraps calls to the UAPI `DirectoryIndexes` module.
-type DirectoryIndexesClient struct { c *cpanel.Client }
+type DirectoryIndexesClient struct{ c *cpanel.Client }
 
 // DirectoryIndexes returns the client for the UAPI `DirectoryIndexes` module.
 func (c *Client) DirectoryIndexes() *DirectoryIndexesClient { return &DirectoryIndexesClient{c: c.c} }
 
 // DirectoryPrivacyClient wraps calls to the UAPI `DirectoryPrivacy` module.
-type DirectoryPrivacyClient struct { c *cpanel.Client }
+type DirectoryPrivacyClient struct{ c *cpanel.Client }
 
 // DirectoryPrivacy returns the client for the UAPI `DirectoryPrivacy` module.
 func (c *Client) DirectoryPrivacy() *DirectoryPrivacyClient { return &DirectoryPrivacyClient{c: c.c} }
 
 // DirectoryProtectionClient wraps calls to the UAPI `DirectoryProtection` module.
-type DirectoryProtectionClient struct { c *cpanel.Client }
+type DirectoryProtectionClient struct{ c *cpanel.Client }
 
 // DirectoryProtection returns the client for the UAPI `DirectoryProtection` module.
-func (c *Client) DirectoryProtection() *DirectoryProtectionClient { return &DirectoryProtectionClient{c: c.c} }
+func (c *Client) DirectoryProtection() *DirectoryProtectionClient {
+	return &DirectoryProtectionClient{c: c.c}
+}
 
 // DNSClient wraps calls to the UAPI `DNS` module.
-type DNSClient struct { c *cpanel.Client }
+type DNSClient struct{ c *cpanel.Client }
 
 // DNS returns the client for the UAPI `DNS` module.
 func (c *Client) DNS() *DNSClient { return &DNSClient{c: c.c} }
 
 // DNSSECClient wraps calls to the UAPI `DNSSEC` module.
-type DNSSECClient struct { c *cpanel.Client }
+type DNSSECClient struct{ c *cpanel.Client }
 
 // DNSSEC returns the client for the UAPI `DNSSEC` module.
 func (c *Client) DNSSEC() *DNSSECClient { return &DNSSECClient{c: c.c} }
 
 // DomainClient wraps calls to the UAPI `Domain` module.
-type DomainClient struct { c *cpanel.Client }
+type DomainClient struct{ c *cpanel.Client }
 
 // Domain returns the client for the UAPI `Domain` module.
 func (c *Client) Domain() *DomainClient { return &DomainClient{c: c.c} }
 
 // DomainInfoClient wraps calls to the UAPI `DomainInfo` module.
-type DomainInfoClient struct { c *cpanel.Client }
+type DomainInfoClient struct{ c *cpanel.Client }
 
 // DomainInfo returns the client for the UAPI `DomainInfo` module.
 func (c *Client) DomainInfo() *DomainInfoClient { return &DomainInfoClient{c: c.c} }
 
 // DomainRecommendationsClient wraps calls to the UAPI `DomainRecommendations` module.
-type DomainRecommendationsClient struct { c *cpanel.Client }
+type DomainRecommendationsClient struct{ c *cpanel.Client }
 
 // DomainRecommendations returns the client for the UAPI `DomainRecommendations` module.
-func (c *Client) DomainRecommendations() *DomainRecommendationsClient { return &DomainRecommendationsClient{c: c.c} }
+func (c *Client) DomainRecommendations() *DomainRecommendationsClient {
+	return &DomainRecommendationsClient{c: c.c}
+}
 
 // DynamicDNSClient wraps calls to the UAPI `DynamicDNS` module.
-type DynamicDNSClient struct { c *cpanel.Client }
+type DynamicDNSClient struct{ c *cpanel.Client }
 
 // DynamicDNS returns the client for the UAPI `DynamicDNS` module.
 func (c *Client) DynamicDNS() *DynamicDNSClient { return &DynamicDNSClient{c: c.c} }
 
 // EA4Client wraps calls to the UAPI `EA4` module.
-type EA4Client struct { c *cpanel.Client }
+type EA4Client struct{ c *cpanel.Client }
 
 // EA4 returns the client for the UAPI `EA4` module.
 func (c *Client) EA4() *EA4Client { return &EA4Client{c: c.c} }
 
 // EmailClient wraps calls to the UAPI `Email` module.
-type EmailClient struct { c *cpanel.Client }
+type EmailClient struct{ c *cpanel.Client }
 
 // Email returns the client for the UAPI `Email` module.
 func (c *Client) Email() *EmailClient { return &EmailClient{c: c.c} }
 
 // EmailAuthClient wraps calls to the UAPI `EmailAuth` module.
-type EmailAuthClient struct { c *cpanel.Client }
+type EmailAuthClient struct{ c *cpanel.Client }
 
 // EmailAuth returns the client for the UAPI `EmailAuth` module.
 func (c *Client) EmailAuth() *EmailAuthClient { return &EmailAuthClient{c: c.c} }
 
 // ExternalAuthenticationClient wraps calls to the UAPI `ExternalAuthentication` module.
-type ExternalAuthenticationClient struct { c *cpanel.Client }
+type ExternalAuthenticationClient struct{ c *cpanel.Client }
 
 // ExternalAuthentication returns the client for the UAPI `ExternalAuthentication` module.
-func (c *Client) ExternalAuthentication() *ExternalAuthenticationClient { return &ExternalAuthenticationClient{c: c.c} }
+func (c *Client) ExternalAuthentication() *ExternalAuthenticationClient {
+	return &ExternalAuthenticationClient{c: c.c}
+}
 
 // ExtractInfoClient wraps calls to the UAPI `ExtractInfo` module.
-type ExtractInfoClient struct { c *cpanel.Client }
+type ExtractInfoClient struct{ c *cpanel.Client }
 
 // ExtractInfo returns the client for the UAPI `ExtractInfo` module.
 func (c *Client) ExtractInfo() *ExtractInfoClient { return &ExtractInfoClient{c: c.c} }
 
 // FeaturesClient wraps calls to the UAPI `Features` module.
-type FeaturesClient struct { c *cpanel.Client }
+type FeaturesClient struct{ c *cpanel.Client }
 
 // Features returns the client for the UAPI `Features` module.
 func (c *Client) Features() *FeaturesClient { return &FeaturesClient{c: c.c} }
 
 // FilemanClient wraps calls to the UAPI `Fileman` module.
-type FilemanClient struct { c *cpanel.Client }
+type FilemanClient struct{ c *cpanel.Client }
 
 // Fileman returns the client for the UAPI `Fileman` module.
 func (c *Client) Fileman() *FilemanClient { return &FilemanClient{c: c.c} }
 
 // FTPClient wraps calls to the UAPI `Ftp` module.
-type FTPClient struct { c *cpanel.Client }
+type FTPClient struct{ c *cpanel.Client }
 
 // FTP returns the client for the UAPI `Ftp` module.
 func (c *Client) FTP() *FTPClient { return &FTPClient{c: c.c} }
 
 // GPGClient wraps calls to the UAPI `GPG` module.
-type GPGClient struct { c *cpanel.Client }
+type GPGClient struct{ c *cpanel.Client }
 
 // GPG returns the client for the UAPI `GPG` module.
 func (c *Client) GPG() *GPGClient { return &GPGClient{c: c.c} }
 
 // ImageManagerClient wraps calls to the UAPI `ImageManager` module.
-type ImageManagerClient struct { c *cpanel.Client }
+type ImageManagerClient struct{ c *cpanel.Client }
 
 // ImageManager returns the client for the UAPI `ImageManager` module.
 func (c *Client) ImageManager() *ImageManagerClient { return &ImageManagerClient{c: c.c} }
 
 // InProductSurveyClient wraps calls to the UAPI `InProductSurvey` module.
-type InProductSurveyClient struct { c *cpanel.Client }
+type InProductSurveyClient struct{ c *cpanel.Client }
 
 // InProductSurvey returns the client for the UAPI `InProductSurvey` module.
 func (c *Client) InProductSurvey() *InProductSurveyClient { return &InProductSurveyClient{c: c.c} }
 
 // IntegrationClient wraps calls to the UAPI `Integration` module.
-type IntegrationClient struct { c *cpanel.Client }
+type IntegrationClient struct{ c *cpanel.Client }
 
 // Integration returns the client for the UAPI `Integration` module.
 func (c *Client) Integration() *IntegrationClient { return &IntegrationClient{c: c.c} }
 
 // KnownHostsClient wraps calls to the UAPI `KnownHosts` module.
-type KnownHostsClient struct { c *cpanel.Client }
+type KnownHostsClient struct{ c *cpanel.Client }
 
 // KnownHosts returns the client for the UAPI `KnownHosts` module.
 func (c *Client) KnownHosts() *KnownHostsClient { return &KnownHostsClient{c: c.c} }
 
 // LangPHPClient wraps calls to the UAPI `LangPHP` module.
-type LangPHPClient struct { c *cpanel.Client }
+type LangPHPClient struct{ c *cpanel.Client }
 
 // LangPHP returns the client for the UAPI `LangPHP` module.
 func (c *Client) LangPHP() *LangPHPClient { return &LangPHPClient{c: c.c} }
 
 // LastLoginClient wraps calls to the UAPI `LastLogin` module.
-type LastLoginClient struct { c *cpanel.Client }
+type LastLoginClient struct{ c *cpanel.Client }
 
 // LastLogin returns the client for the UAPI `LastLogin` module.
 func (c *Client) LastLogin() *LastLoginClient { return &LastLoginClient{c: c.c} }
 
 // LocaleClient wraps calls to the UAPI `Locale` module.
-type LocaleClient struct { c *cpanel.Client }
+type LocaleClient struct{ c *cpanel.Client }
 
 // Locale returns the client for the UAPI `Locale` module.
 func (c *Client) Locale() *LocaleClient { return &LocaleClient{c: c.c} }
 
 // LogManagerClient wraps calls to the UAPI `LogManager` module.
-type LogManagerClient struct { c *cpanel.Client }
+type LogManagerClient struct{ c *cpanel.Client }
 
 // LogManager returns the client for the UAPI `LogManager` module.
 func (c *Client) LogManager() *LogManagerClient { return &LogManagerClient{c: c.c} }
 
 // MailboxesClient wraps calls to the UAPI `Mailboxes` module.
-type MailboxesClient struct { c *cpanel.Client }
+type MailboxesClient struct{ c *cpanel.Client }
 
 // Mailboxes returns the client for the UAPI `Mailboxes` module.
 func (c *Client) Mailboxes() *MailboxesClient { return &MailboxesClient{c: c.c} }
 
 // MarketClient wraps calls to the UAPI `Market` module.
-type MarketClient struct { c *cpanel.Client }
+type MarketClient struct{ c *cpanel.Client }
 
 // Market returns the client for the UAPI `Market` module.
 func (c *Client) Market() *MarketClient { return &MarketClient{c: c.c} }
 
 // MimeClient wraps calls to the UAPI `Mime` module.
-type MimeClient struct { c *cpanel.Client }
+type MimeClient struct{ c *cpanel.Client }
 
 // Mime returns the client for the UAPI `Mime` module.
 func (c *Client) Mime() *MimeClient { return &MimeClient{c: c.c} }
 
 // ModSecurityClient wraps calls to the UAPI `ModSecurity` module.
-type ModSecurityClient struct { c *cpanel.Client }
+type ModSecurityClient struct{ c *cpanel.Client }
 
 // ModSecurity returns the client for the UAPI `ModSecurity` module.
 func (c *Client) ModSecurity() *ModSecurityClient { return &ModSecurityClient{c: c.c} }
 
 // MysqlClient wraps calls to the UAPI `Mysql` module.
-type MysqlClient struct { c *cpanel.Client }
+type MysqlClient struct{ c *cpanel.Client }
 
 // Mysql returns the client for the UAPI `Mysql` module.
 func (c *Client) Mysql() *MysqlClient { return &MysqlClient{c: c.c} }
 
 // NginxCachingClient wraps calls to the UAPI `NginxCaching` module.
-type NginxCachingClient struct { c *cpanel.Client }
+type NginxCachingClient struct{ c *cpanel.Client }
 
 // NginxCaching returns the client for the UAPI `NginxCaching` module.
 func (c *Client) NginxCaching() *NginxCachingClient { return &NginxCachingClient{c: c.c} }
 
 // NotificationsClient wraps calls to the UAPI `Notifications` module.
-type NotificationsClient struct { c *cpanel.Client }
+type NotificationsClient struct{ c *cpanel.Client }
 
 // Notifications returns the client for the UAPI `Notifications` module.
 func (c *Client) Notifications() *NotificationsClient { return &NotificationsClient{c: c.c} }
 
 // ParserClient wraps calls to the UAPI `Parser` module.
-type ParserClient struct { c *cpanel.Client }
+type ParserClient struct{ c *cpanel.Client }
 
 // Parser returns the client for the UAPI `Parser` module.
 func (c *Client) Parser() *ParserClient { return &ParserClient{c: c.c} }
 
 // PassengerAppsClient wraps calls to the UAPI `PassengerApps` module.
-type PassengerAppsClient struct { c *cpanel.Client }
+type PassengerAppsClient struct{ c *cpanel.Client }
 
 // PassengerApps returns the client for the UAPI `PassengerApps` module.
 func (c *Client) PassengerApps() *PassengerAppsClient { return &PassengerAppsClient{c: c.c} }
 
 // PasswdStrengthClient wraps calls to the UAPI `PasswdStrength` module.
-type PasswdStrengthClient struct { c *cpanel.Client }
+type PasswdStrengthClient struct{ c *cpanel.Client }
 
 // PasswdStrength returns the client for the UAPI `PasswdStrength` module.
 func (c *Client) PasswdStrength() *PasswdStrengthClient { return &PasswdStrengthClient{c: c.c} }
 
 // PersonalizationClient wraps calls to the UAPI `Personalization` module.
-type PersonalizationClient struct { c *cpanel.Client }
+type PersonalizationClient struct{ c *cpanel.Client }
 
 // Personalization returns the client for the UAPI `Personalization` module.
 func (c *Client) Personalization() *PersonalizationClient { return &PersonalizationClient{c: c.c} }
 
 // PluginsClient wraps calls to the UAPI `Plugins` module.
-type PluginsClient struct { c *cpanel.Client }
+type PluginsClient struct{ c *cpanel.Client }
 
 // Plugins returns the client for the UAPI `Plugins` module.
 func (c *Client) Plugins() *PluginsClient { return &PluginsClient{c: c.c} }
 
 // PostgresqlClient wraps calls to the UAPI `Postgresql` module.
-type PostgresqlClient struct { c *cpanel.Client }
+type PostgresqlClient struct{ c *cpanel.Client }
 
 // Postgresql returns the client for the UAPI `Postgresql` module.
 func (c *Client) Postgresql() *PostgresqlClient { return &PostgresqlClient{c: c.c} }
 
 // PushbulletClient wraps calls to the UAPI `Pushbullet` module.
-type PushbulletClient struct { c *cpanel.Client }
+type PushbulletClient struct{ c *cpanel.Client }
 
 // Pushbullet returns the client for the UAPI `Pushbullet` module.
 func (c *Client) Pushbullet() *PushbulletClient { return &PushbulletClient{c: c.c} }
 
 // QuotaClient wraps calls to the UAPI `Quota` module.
-type QuotaClient struct { c *cpanel.Client }
+type QuotaClient struct{ c *cpanel.Client }
 
 // Quota returns the client for the UAPI `Quota` module.
 func (c *Client) Quota() *QuotaClient { return &QuotaClient{c: c.c} }
 
 // ResellersClient wraps calls to the UAPI `Resellers` module.
-type ResellersClient struct { c *cpanel.Client }
+type ResellersClient struct{ c *cpanel.Client }
 
 // Resellers returns the client for the UAPI `Resellers` module.
 func (c *Client) Resellers() *ResellersClient { return &ResellersClient{c: c.c} }
 
 // ResourceUsageClient wraps calls to the UAPI `ResourceUsage` module.
-type ResourceUsageClient struct { c *cpanel.Client }
+type ResourceUsageClient struct{ c *cpanel.Client }
 
 // ResourceUsage returns the client for the UAPI `ResourceUsage` module.
 func (c *Client) ResourceUsage() *ResourceUsageClient { return &ResourceUsageClient{c: c.c} }
 
 // RestoreClient wraps calls to the UAPI `Restore` module.
-type RestoreClient struct { c *cpanel.Client }
+type RestoreClient struct{ c *cpanel.Client }
 
 // Restore returns the client for the UAPI `Restore` module.
 func (c *Client) Restore() *RestoreClient { return &RestoreClient{c: c.c} }
 
 // ServerInformationClient wraps calls to the UAPI `ServerInformation` module.
-type ServerInformationClient struct { c *cpanel.Client }
+type ServerInformationClient struct{ c *cpanel.Client }
 
 // ServerInformation returns the client for the UAPI `ServerInformation` module.
-func (c *Client) ServerInformation() *ServerInformationClient { return &ServerInformationClient{c: c.c} }
+func (c *Client) ServerInformation() *ServerInformationClient {
+	return &ServerInformationClient{c: c.c}
+}
 
 // ServiceProxyClient wraps calls to the UAPI `ServiceProxy` module.
-type ServiceProxyClient struct { c *cpanel.Client }
+type ServiceProxyClient struct{ c *cpanel.Client }
 
 // ServiceProxy returns the client for the UAPI `ServiceProxy` module.
 func (c *Client) ServiceProxy() *ServiceProxyClient { return &ServiceProxyClient{c: c.c} }
 
 // SessionClient wraps calls to the UAPI `Session` module.
-type SessionClient struct { c *cpanel.Client }
+type SessionClient struct{ c *cpanel.Client }
 
 // Session returns the client for the UAPI `Session` module.
 func (c *Client) Session() *SessionClient { return &SessionClient{c: c.c} }
 
 // SitejetClient wraps calls to the UAPI `Sitejet` module.
-type SitejetClient struct { c *cpanel.Client }
+type SitejetClient struct{ c *cpanel.Client }
 
 // Sitejet returns the client for the UAPI `Sitejet` module.
 func (c *Client) Sitejet() *SitejetClient { return &SitejetClient{c: c.c} }
 
 // SiteQualityClient wraps calls to the UAPI `SiteQuality` module.
-type SiteQualityClient struct { c *cpanel.Client }
+type SiteQualityClient struct{ c *cpanel.Client }
 
 // SiteQuality returns the client for the UAPI `SiteQuality` module.
 func (c *Client) SiteQuality() *SiteQualityClient { return &SiteQualityClient{c: c.c} }
 
 // SpamAssassinClient wraps calls to the UAPI `SpamAssassin` module.
-type SpamAssassinClient struct { c *cpanel.Client }
+type SpamAssassinClient struct{ c *cpanel.Client }
 
 // SpamAssassin returns the client for the UAPI `SpamAssassin` module.
 func (c *Client) SpamAssassin() *SpamAssassinClient { return &SpamAssassinClient{c: c.c} }
 
 // SSHClient wraps calls to the UAPI `SSH` module.
-type SSHClient struct { c *cpanel.Client }
+type SSHClient struct{ c *cpanel.Client }
 
 // SSH returns the client for the UAPI `SSH` module.
 func (c *Client) SSH() *SSHClient { return &SSHClient{c: c.c} }
 
 // SSLClient wraps calls to the UAPI `SSL` module.
-type SSLClient struct { c *cpanel.Client }
+type SSLClient struct{ c *cpanel.Client }
 
 // SSL returns the client for the UAPI `SSL` module.
 func (c *Client) SSL() *SSLClient { return &SSLClient{c: c.c} }
 
 // StatsClient wraps calls to the UAPI `Stats` module.
-type StatsClient struct { c *cpanel.Client }
+type StatsClient struct{ c *cpanel.Client }
 
 // Stats returns the client for the UAPI `Stats` module.
 func (c *Client) Stats() *StatsClient { return &StatsClient{c: c.c} }
 
 // StatsBarClient wraps calls to the UAPI `StatsBar` module.
-type StatsBarClient struct { c *cpanel.Client }
+type StatsBarClient struct{ c *cpanel.Client }
 
 // StatsBar returns the client for the UAPI `StatsBar` module.
 func (c *Client) StatsBar() *StatsBarClient { return &StatsBarClient{c: c.c} }
 
 // StatsManagerClient wraps calls to the UAPI `StatsManager` module.
-type StatsManagerClient struct { c *cpanel.Client }
+type StatsManagerClient struct{ c *cpanel.Client }
 
 // StatsManager returns the client for the UAPI `StatsManager` module.
 func (c *Client) StatsManager() *StatsManagerClient { return &StatsManagerClient{c: c.c} }
 
 // SubDomainClient wraps calls to the UAPI `SubDomain` module.
-type SubDomainClient struct { c *cpanel.Client }
+type SubDomainClient struct{ c *cpanel.Client }
 
 // SubDomain returns the client for the UAPI `SubDomain` module.
 func (c *Client) SubDomain() *SubDomainClient { return &SubDomainClient{c: c.c} }
 
 // TeamClient wraps calls to the UAPI `Team` module.
-type TeamClient struct { c *cpanel.Client }
+type TeamClient struct{ c *cpanel.Client }
 
 // Team returns the client for the UAPI `Team` module.
 func (c *Client) Team() *TeamClient { return &TeamClient{c: c.c} }
 
 // TeamRolesClient wraps calls to the UAPI `TeamRoles` module.
-type TeamRolesClient struct { c *cpanel.Client }
+type TeamRolesClient struct{ c *cpanel.Client }
 
 // TeamRoles returns the client for the UAPI `TeamRoles` module.
 func (c *Client) TeamRoles() *TeamRolesClient { return &TeamRolesClient{c: c.c} }
 
 // ThemesClient wraps calls to the UAPI `Themes` module.
-type ThemesClient struct { c *cpanel.Client }
+type ThemesClient struct{ c *cpanel.Client }
 
 // Themes returns the client for the UAPI `Themes` module.
 func (c *Client) Themes() *ThemesClient { return &ThemesClient{c: c.c} }
 
 // TokensClient wraps calls to the UAPI `Tokens` module.
-type TokensClient struct { c *cpanel.Client }
+type TokensClient struct{ c *cpanel.Client }
 
 // Tokens returns the client for the UAPI `Tokens` module.
 func (c *Client) Tokens() *TokensClient { return &TokensClient{c: c.c} }
 
 // TrashClient wraps calls to the UAPI `Trash` module.
-type TrashClient struct { c *cpanel.Client }
+type TrashClient struct{ c *cpanel.Client }
 
 // Trash returns the client for the UAPI `Trash` module.
 func (c *Client) Trash() *TrashClient { return &TrashClient{c: c.c} }
 
 // TwoFactorAuthClient wraps calls to the UAPI `TwoFactorAuth` module.
-type TwoFactorAuthClient struct { c *cpanel.Client }
+type TwoFactorAuthClient struct{ c *cpanel.Client }
 
 // TwoFactorAuth returns the client for the UAPI `TwoFactorAuth` module.
 func (c *Client) TwoFactorAuth() *TwoFactorAuthClient { return &TwoFactorAuthClient{c: c.c} }
 
 // UserDataClient wraps calls to the UAPI `UserData` module.
-type UserDataClient struct { c *cpanel.Client }
+type UserDataClient struct{ c *cpanel.Client }
 
 // UserData returns the client for the UAPI `UserData` module.
 func (c *Client) UserData() *UserDataClient { return &UserDataClient{c: c.c} }
 
 // UserManagerClient wraps calls to the UAPI `UserManager` module.
-type UserManagerClient struct { c *cpanel.Client }
+type UserManagerClient struct{ c *cpanel.Client }
 
 // UserManager returns the client for the UAPI `UserManager` module.
 func (c *Client) UserManager() *UserManagerClient { return &UserManagerClient{c: c.c} }
 
 // UsersClient wraps calls to the UAPI `Users` module.
-type UsersClient struct { c *cpanel.Client }
+type UsersClient struct{ c *cpanel.Client }
 
 // Users returns the client for the UAPI `Users` module.
 func (c *Client) Users() *UsersClient { return &UsersClient{c: c.c} }
 
 // UserTasksClient wraps calls to the UAPI `UserTasks` module.
-type UserTasksClient struct { c *cpanel.Client }
+type UserTasksClient struct{ c *cpanel.Client }
 
 // UserTasks returns the client for the UAPI `UserTasks` module.
 func (c *Client) UserTasks() *UserTasksClient { return &UserTasksClient{c: c.c} }
 
 // VariablesClient wraps calls to the UAPI `Variables` module.
-type VariablesClient struct { c *cpanel.Client }
+type VariablesClient struct{ c *cpanel.Client }
 
 // Variables returns the client for the UAPI `Variables` module.
 func (c *Client) Variables() *VariablesClient { return &VariablesClient{c: c.c} }
 
 // VersionControlClient wraps calls to the UAPI `VersionControl` module.
-type VersionControlClient struct { c *cpanel.Client }
+type VersionControlClient struct{ c *cpanel.Client }
 
 // VersionControl returns the client for the UAPI `VersionControl` module.
 func (c *Client) VersionControl() *VersionControlClient { return &VersionControlClient{c: c.c} }
 
 // VersionControlDeploymentClient wraps calls to the UAPI `VersionControlDeployment` module.
-type VersionControlDeploymentClient struct { c *cpanel.Client }
+type VersionControlDeploymentClient struct{ c *cpanel.Client }
 
 // VersionControlDeployment returns the client for the UAPI `VersionControlDeployment` module.
-func (c *Client) VersionControlDeployment() *VersionControlDeploymentClient { return &VersionControlDeploymentClient{c: c.c} }
+func (c *Client) VersionControlDeployment() *VersionControlDeploymentClient {
+	return &VersionControlDeploymentClient{c: c.c}
+}
 
 // WebAppClient wraps calls to the UAPI `WebApp` module.
-type WebAppClient struct { c *cpanel.Client }
+type WebAppClient struct{ c *cpanel.Client }
 
 // WebApp returns the client for the UAPI `WebApp` module.
 func (c *Client) WebApp() *WebAppClient { return &WebAppClient{c: c.c} }
 
 // WebDiskClient wraps calls to the UAPI `WebDisk` module.
-type WebDiskClient struct { c *cpanel.Client }
+type WebDiskClient struct{ c *cpanel.Client }
 
 // WebDisk returns the client for the UAPI `WebDisk` module.
 func (c *Client) WebDisk() *WebDiskClient { return &WebDiskClient{c: c.c} }
 
 // WebmailAppsClient wraps calls to the UAPI `WebmailApps` module.
-type WebmailAppsClient struct { c *cpanel.Client }
+type WebmailAppsClient struct{ c *cpanel.Client }
 
 // WebmailApps returns the client for the UAPI `WebmailApps` module.
 func (c *Client) WebmailApps() *WebmailAppsClient { return &WebmailAppsClient{c: c.c} }
 
 // WebProsMcpClient wraps calls to the UAPI `WebProsMCP` module.
-type WebProsMcpClient struct { c *cpanel.Client }
+type WebProsMcpClient struct{ c *cpanel.Client }
 
 // WebProsMcp returns the client for the UAPI `WebProsMCP` module.
 func (c *Client) WebProsMcp() *WebProsMcpClient { return &WebProsMcpClient{c: c.c} }
 
 // WebVhostsClient wraps calls to the UAPI `WebVhosts` module.
-type WebVhostsClient struct { c *cpanel.Client }
+type WebVhostsClient struct{ c *cpanel.Client }
 
 // WebVhosts returns the client for the UAPI `WebVhosts` module.
 func (c *Client) WebVhosts() *WebVhostsClient { return &WebVhostsClient{c: c.c} }
 
 // WordPressBackupClient wraps calls to the UAPI `WordPressBackup` module.
-type WordPressBackupClient struct { c *cpanel.Client }
+type WordPressBackupClient struct{ c *cpanel.Client }
 
 // WordPressBackup returns the client for the UAPI `WordPressBackup` module.
 func (c *Client) WordPressBackup() *WordPressBackupClient { return &WordPressBackupClient{c: c.c} }
 
 // WordPressRestoreClient wraps calls to the UAPI `WordPressRestore` module.
-type WordPressRestoreClient struct { c *cpanel.Client }
+type WordPressRestoreClient struct{ c *cpanel.Client }
 
 // WordPressRestore returns the client for the UAPI `WordPressRestore` module.
 func (c *Client) WordPressRestore() *WordPressRestoreClient { return &WordPressRestoreClient{c: c.c} }
 
 // WordPressSiteClient wraps calls to the UAPI `WordPressSite` module.
-type WordPressSiteClient struct { c *cpanel.Client }
+type WordPressSiteClient struct{ c *cpanel.Client }
 
 // WordPressSite returns the client for the UAPI `WordPressSite` module.
 func (c *Client) WordPressSite() *WordPressSiteClient { return &WordPressSiteClient{c: c.c} }

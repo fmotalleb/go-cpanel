@@ -32,7 +32,6 @@ func (c *Client) RegisterServerWith360Monitoring(ctx context.Context, extra ...c
 	return cpanel.WHMCall[RegisterServerWith360MonitoringData](ctx, c.c, http.MethodGet, "register_server_with_360_monitoring", cpanel.CombineArgs(extra...))
 }
 
-
 // RegisterServerWith360MonitoringData is a generated payload type.
 type RegisterServerWith360MonitoringData struct {
 	// The unique identifier for the 360 Monitoring user account associated with this server.
@@ -96,7 +95,6 @@ type Set360AgentPollingArgs struct {
 func (c *Client) Set360AgentPolling(ctx context.Context, args *Set360AgentPollingArgs) (*cpanel.WHMResult[Set360AgentPollingData], error) {
 	return cpanel.WHMCall[Set360AgentPollingData](ctx, c.c, http.MethodGet, "set_360_agent_polling", args)
 }
-
 
 // Set360AgentPollingData is a generated payload type.
 type Set360AgentPollingData struct {

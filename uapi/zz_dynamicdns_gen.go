@@ -41,14 +41,13 @@ func (c *DynamicDNSClient) Create(ctx context.Context, args *DynamicDNSCreateArg
 	return cpanel.UAPICall[DynamicDNSCreateData](ctx, c.c, http.MethodGet, "DynamicDNS", "create", args)
 }
 
-
 // Information about the newly-created DDNS domain.
 type DynamicDNSCreateData struct {
 	// The creation time of the Dynamic DNS domain.
 	CreatedTime int64 `json:"created_time"`
 
 	// The DDNS domain’s ID.
-	ID          string `json:"id"`
+	ID string `json:"id"`
 }
 
 // DynamicDNSDeleteArgs are the parameters of the UAPI function `DynamicDNS::delete`.
@@ -77,7 +76,6 @@ func (c *DynamicDNSClient) Delete(ctx context.Context, args *DynamicDNSDeleteArg
 	return cpanel.UAPICall[DynamicDNSDeleteData](ctx, c.c, http.MethodGet, "DynamicDNS", "delete", args)
 }
 
-
 // Information about the deletion.
 type DynamicDNSDeleteData struct {
 	// Whether a DDNS domain with the given ID existed for deletion.
@@ -104,17 +102,16 @@ func (c *DynamicDNSClient) List(ctx context.Context, extra ...cpanel.Args) (*cpa
 	return cpanel.UAPICall[[]DynamicDNSListDataItem](ctx, c.c, http.MethodGet, "DynamicDNS", "list", cpanel.CombineArgs(extra...))
 }
 
-
 // DynamicDNSListDataItem is a generated payload type.
 type DynamicDNSListDataItem struct {
 	// The DDNS domain’s creation time.
-	CreatedTime    int64 `json:"created_time"`
+	CreatedTime int64 `json:"created_time"`
 
 	// A user-editable string that describes the DDNS domain.
-	Description    string `json:"description"`
+	Description string `json:"description"`
 
 	// The domain.
-	Domain         string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The domain’s DDNS ID.
 	//
@@ -123,7 +120,7 @@ type DynamicDNSListDataItem struct {
 	// This ID goes into the URL that the client uses to
 	// [update the domain’s IP address
 	// resolution](https://go.cpanel.net/cpaneldocsdynamicdns).
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The most recent times when the web call ran.
 	//
@@ -132,7 +129,7 @@ type DynamicDNSListDataItem struct {
 	// This list changes every time the web call runs,
 	// even if the domain’s IP address resolution does
 	// **not** change.
-	LastRunTimes   []int64 `json:"last_run_times"`
+	LastRunTimes []int64 `json:"last_run_times"`
 
 	// The most recent update time for the
 	// DDNS domain.
@@ -170,7 +167,6 @@ func (c *DynamicDNSClient) Recreate(ctx context.Context, args *DynamicDNSRecreat
 	return cpanel.UAPICall[DynamicDNSRecreateData](ctx, c.c, http.MethodGet, "DynamicDNS", "recreate", args)
 }
 
-
 // Information about the DDNS domain.
 type DynamicDNSRecreateData struct {
 	// The DDNS domain’s new ID.
@@ -207,4 +203,3 @@ type DynamicDNSSetDescriptionArgs struct {
 func (c *DynamicDNSClient) SetDescription(ctx context.Context, args *DynamicDNSSetDescriptionArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "DynamicDNS", "set_description", args)
 }
-

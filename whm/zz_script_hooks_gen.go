@@ -38,7 +38,6 @@ func (c *Client) DeleteHook(ctx context.Context, args *DeleteHookArgs) (*cpanel.
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "delete_hook", args)
 }
 
-
 // EditHookArgs are the parameters of the WHM API 1 function `edit_hook`.
 type EditHookArgs struct {
 	// The script hook's ID.
@@ -119,7 +118,6 @@ func (c *Client) EditHook(ctx context.Context, args *EditHookArgs) (*cpanel.WHMR
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "edit_hook", args)
 }
 
-
 // ListHooks calls the WHM API 1 function `list_hooks` — Return script hooks list
 //
 // This function lists the server's script hooks.
@@ -131,7 +129,6 @@ func (c *Client) ListHooks(ctx context.Context, extra ...cpanel.Args) (*cpanel.W
 	return cpanel.WHMCall[ListHooksData](ctx, c.c, http.MethodGet, "list_hooks", cpanel.CombineArgs(extra...))
 }
 
-
 // ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem is a generated payload type.
 type ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem struct {
 	// Whether the script hook has a blocking contest.
@@ -140,16 +137,16 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem struct {
 	// * `0` — No blocking contest.
 	//
 	// Possible values: `1`, `0`.
-	Blocking      int64 `json:"blocking"`
+	Blocking int64 `json:"blocking"`
 
 	// The script hook's category.
-	Category      string `json:"category"`
+	Category string `json:"category"`
 
 	// The absolute file path to the script that runs after the hook script to check the results.
-	Check         *string `json:"check"`
+	Check *string `json:"check"`
 
 	// The hook script's description.
-	Description   *string `json:"description"`
+	Description *string `json:"description"`
 
 	// Whether the hook script is enabled.
 	//
@@ -157,7 +154,7 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled       int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// Whether the hook script will run with escalated root privileges.
 	//
@@ -168,7 +165,7 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem struct {
 	EsCALatePrivs int64 `json:"escalateprivs"`
 
 	// The event that triggers the script hook.
-	Event         string `json:"event"`
+	Event string `json:"event"`
 
 	// The type of function that the script hook launches.
 	//
@@ -176,25 +173,25 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem struct {
 	// * `module` — A Perl module function.
 	//
 	// Possible values: `script`, `module`.
-	Exectype      string `json:"exectype"`
+	Exectype string `json:"exectype"`
 
 	// The absolute file path to the hook script.
-	Hook          string `json:"hook"`
+	Hook string `json:"hook"`
 
 	// The script hook's ID.
-	ID            string `json:"id"`
+	ID string `json:"id"`
 
 	// The absolute file path to the script that can roll back the hook script.
-	Rollback      *string `json:"rollback"`
+	Rollback *string `json:"rollback"`
 
 	// When the hook script will execute.
 	//
 	// * `pre` — The script runs before the function.
 	// * `post` — The script runs after the function.
-	Stage         string `json:"stage"`
+	Stage string `json:"stage"`
 
 	// The priority of the script hook, where lower values run before higher values.
-	Weight        int64 `json:"weight"`
+	Weight int64 `json:"weight"`
 }
 
 // A list of hook script attributes.
@@ -205,7 +202,7 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItemAttributes struct {
 	// * `0` — No blocking context.
 	//
 	// Possible values: `1`, `0`.
-	Blocking      int64 `json:"blocking"`
+	Blocking int64 `json:"blocking"`
 
 	// Whether the hook script will run with escalated root
 	// privileges.
@@ -220,10 +217,10 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItemAttributes struct {
 // ListHooksDataCATegOrIesItemEventsItemStagesItem is a generated payload type.
 type ListHooksDataCATegOrIesItemEventsItemStagesItem struct {
 	// An array of objects containing information about hook script actions.
-	Actions     []ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem `json:"actions"`
+	Actions []ListHooksDataCATegOrIesItemEventsItemStagesItemActionsItem `json:"actions"`
 
 	// A list of hook script attributes.
-	Attributes  ListHooksDataCATegOrIesItemEventsItemStagesItemAttributes `json:"attributes"`
+	Attributes ListHooksDataCATegOrIesItemEventsItemStagesItemAttributes `json:"attributes"`
 
 	// The hook script's description.
 	Description string `json:"description"`
@@ -232,13 +229,13 @@ type ListHooksDataCATegOrIesItemEventsItemStagesItem struct {
 	//
 	// * `pre` — The script runs before the function.
 	// * `post` — The script runs after the function.
-	Stage       string `json:"stage"`
+	Stage string `json:"stage"`
 }
 
 // ListHooksDataCATegOrIesItemEventsItem is a generated payload type.
 type ListHooksDataCATegOrIesItemEventsItem struct {
 	// The event that triggers the script hook.
-	Event      string `json:"event"`
+	Event string `json:"event"`
 
 	// When the hook script will execute. It is possible for a hook script
 	// to have both values.
@@ -248,7 +245,7 @@ type ListHooksDataCATegOrIesItemEventsItem struct {
 	StageOrder []string `json:"stage_order"`
 
 	// An array of objects containing stage information.
-	Stages     []ListHooksDataCATegOrIesItemEventsItemStagesItem `json:"stages"`
+	Stages []ListHooksDataCATegOrIesItemEventsItemStagesItem `json:"stages"`
 }
 
 // ListHooksDataCATegOrIesItem is a generated payload type.
@@ -257,7 +254,7 @@ type ListHooksDataCATegOrIesItem struct {
 	Category string `json:"category"`
 
 	// An array of objects containing events.
-	Events   []ListHooksDataCATegOrIesItemEventsItem `json:"events"`
+	Events []ListHooksDataCATegOrIesItemEventsItem `json:"events"`
 }
 
 // ListHooksData is a generated payload type.
@@ -292,11 +289,10 @@ func (c *Client) ReorderHooks(ctx context.Context, args *ReorderHooksArgs) (*cpa
 	return cpanel.WHMCall[ReorderHooksData](ctx, c.c, http.MethodGet, "reorder_hooks", args)
 }
 
-
 // ReorderHooksDataHookOrderItem is a generated payload type.
 type ReorderHooksDataHookOrderItem struct {
 	// The script hook's ID.
-	ID     string `json:"id"`
+	ID string `json:"id"`
 
 	// The script hook's weight. The lower the number, the greater the priority.
 	Weight int64 `json:"weight"`

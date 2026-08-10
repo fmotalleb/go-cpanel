@@ -29,7 +29,7 @@ type PassengerAppsDisableApplicationArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 66.
 //
@@ -37,7 +37,6 @@ type PassengerAppsDisableApplicationArgs struct {
 func (c *PassengerAppsClient) DisableApplication(ctx context.Context, args *PassengerAppsDisableApplicationArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "PassengerApps", "disable_application", args)
 }
-
 
 // PassengerAppsEditApplicationArgs are the parameters of the UAPI function `PassengerApps::edit_application`.
 type PassengerAppsEditApplicationArgs struct {
@@ -108,7 +107,7 @@ type PassengerAppsEditApplicationArgs struct {
 //
 // **Note**:
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 66.
 //
@@ -117,13 +116,12 @@ func (c *PassengerAppsClient) EditApplication(ctx context.Context, args *Passeng
 	return cpanel.UAPICall[map[string]PassengerAppsEditApplicationDataValue](ctx, c.c, http.MethodGet, "PassengerApps", "edit_application", args)
 }
 
-
 // An object describing the newly-edited application.
 //
 // **Note**: `application_name` is the `name` of the application.
 type PassengerAppsEditApplicationDataValue struct {
 	// The URI of the application.
-	BaseUri        string `json:"base_uri"`
+	BaseUri string `json:"base_uri"`
 
 	// The deployment mode of the application.
 	//
@@ -131,7 +129,7 @@ type PassengerAppsEditApplicationDataValue struct {
 	DeploymentMode string `json:"deployment_mode"`
 
 	// The domain of the application.
-	Domain         string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether the application is enabled or not.
 	//
@@ -139,16 +137,16 @@ type PassengerAppsEditApplicationDataValue struct {
 	//   * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	Enabled        int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// An object of the application’s environment variables and their values.
-	Envvars        json.RawMessage `json:"envvars"`
+	Envvars json.RawMessage `json:"envvars"`
 
 	// The name of the application.
-	Name           string `json:"name"`
+	Name string `json:"name"`
 
 	// The path of the application inside the user’s home directory.
-	Path           string `json:"path"`
+	Path string `json:"path"`
 }
 
 // PassengerAppsEnableApplicationArgs are the parameters of the UAPI function `PassengerApps::enable_application`.
@@ -176,7 +174,6 @@ type PassengerAppsEnableApplicationArgs struct {
 func (c *PassengerAppsClient) EnableApplication(ctx context.Context, args *PassengerAppsEnableApplicationArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "PassengerApps", "enable_application", args)
 }
-
 
 // PassengerAppsEnsureDepsArgs are the parameters of the UAPI function `PassengerApps::ensure_deps`.
 type PassengerAppsEnsureDepsArgs struct {
@@ -206,11 +203,11 @@ type PassengerAppsEnsureDepsArgs struct {
 //
 // **Note**:
 //
-//   This function starts the installation process. This may take a long time to complete.
+//	This function starts the installation process. This may take a long time to complete.
 //
 // **Important**:
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 80.
 //
@@ -218,7 +215,6 @@ type PassengerAppsEnsureDepsArgs struct {
 func (c *PassengerAppsClient) EnsureDeps(ctx context.Context, args *PassengerAppsEnsureDepsArgs) (*cpanel.UAPIResult[PassengerAppsEnsureDepsData], error) {
 	return cpanel.UAPICall[PassengerAppsEnsureDepsData](ctx, c.c, http.MethodGet, "PassengerApps", "ensure_deps", args)
 }
-
 
 // PassengerAppsEnsureDepsData is a generated payload type.
 type PassengerAppsEnsureDepsData struct {
@@ -235,7 +231,7 @@ type PassengerAppsEnsureDepsData struct {
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 66.
 //
@@ -243,7 +239,6 @@ type PassengerAppsEnsureDepsData struct {
 func (c *PassengerAppsClient) ListApplications(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[map[string]PassengerAppsListApplicationsDataValue], error) {
 	return cpanel.UAPICall[map[string]PassengerAppsListApplicationsDataValue](ctx, c.c, http.MethodGet, "PassengerApps", "list_applications", cpanel.CombineArgs(extra...))
 }
-
 
 // PassengerAppsListApplicationsDataValueDeps is a generated payload type.
 type PassengerAppsListApplicationsDataValueDeps struct {
@@ -264,7 +259,7 @@ type PassengerAppsListApplicationsDataValueDeps struct {
 // The value is the object defined here.
 type PassengerAppsListApplicationsDataValue struct {
 	// The URI of the application.
-	BaseUri        string `json:"base_uri"`
+	BaseUri string `json:"base_uri"`
 
 	// The deployment mode of the application.
 	//
@@ -274,22 +269,22 @@ type PassengerAppsListApplicationsDataValue struct {
 	// Possible values: `production`, `development`.
 	DeploymentMode string `json:"deployment_mode"`
 
-	Deps           PassengerAppsListApplicationsDataValueDeps `json:"deps"`
+	Deps PassengerAppsListApplicationsDataValueDeps `json:"deps"`
 
 	// The domain of the application
-	Domain         string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The application’s enabled status.
 	//
 	// * `1` — Enabled.
 	// * `0` — Disabled.
-	Enabled        json.RawMessage `json:"enabled"`
+	Enabled json.RawMessage `json:"enabled"`
 
 	// The environment variables set for the application.
-	Envvars        json.RawMessage `json:"envvars"`
+	Envvars json.RawMessage `json:"envvars"`
 
 	// The name of the application
-	Name           string `json:"name"`
+	Name string `json:"name"`
 
 	// The path of the Nodejs executable.
 	// Passenger uses Nodejs to run the application.
@@ -298,10 +293,10 @@ type PassengerAppsListApplicationsDataValue struct {
 	//
 	// The function only returns this value if you configure this application to use
 	// Nodejs.
-	NodeJS         string `json:"nodejs"`
+	NodeJS string `json:"nodejs"`
 
 	// The path of the application
-	Path           string `json:"path"`
+	Path string `json:"path"`
 
 	// The path of the Python executable.
 	// Passenger uses Python to run the application.
@@ -310,7 +305,7 @@ type PassengerAppsListApplicationsDataValue struct {
 	//
 	// The function only returns this value if you configure this application to use
 	// Python.
-	Python         string `json:"python"`
+	Python string `json:"python"`
 
 	// The path of the Ruby executable.
 	// Passenger uses Ruby to run the application.
@@ -319,7 +314,7 @@ type PassengerAppsListApplicationsDataValue struct {
 	//
 	// The function only returns this value if you configure this application to use
 	// Ruby.
-	Ruby           string `json:"ruby"`
+	Ruby string `json:"ruby"`
 }
 
 // PassengerAppsRegisterApplicationArgs are the parameters of the UAPI function `PassengerApps::register_application`.
@@ -392,8 +387,8 @@ type PassengerAppsRegisterApplicationArgs struct {
 //
 // **Important**:
 //
-//   * This function **only** registers an application. It does **not** create the application. You **must** create an application **before** you register the application. For an example of how to do this, read our [How to Create Ruby Web Applications](https://go.cpanel.net/howtocreaterubyapps) documentation.
-//   * When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   - This function **only** registers an application. It does **not** create the application. You **must** create an application **before** you register the application. For an example of how to do this, read our [How to Create Ruby Web Applications](https://go.cpanel.net/howtocreaterubyapps) documentation.
+//   - When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 66.
 //
@@ -402,17 +397,16 @@ func (c *PassengerAppsClient) RegisterApplication(ctx context.Context, args *Pas
 	return cpanel.UAPICall[map[string]PassengerAppsRegisterApplicationDataValue](ctx, c.c, http.MethodGet, "PassengerApps", "register_application", args)
 }
 
-
 // The application’s configuration information.
 //
-//   **Note**:
+//	**Note**:
 //
-//   The top-level key is the name of the application.
+//	The top-level key is the name of the application.
 //
-//   The value is the object defined here.
+//	The value is the object defined here.
 type PassengerAppsRegisterApplicationDataValue struct {
 	// The URI of the application.
-	BaseUri        string `json:"base_uri"`
+	BaseUri string `json:"base_uri"`
 
 	// The deployment mode of the application.
 	//
@@ -423,7 +417,7 @@ type PassengerAppsRegisterApplicationDataValue struct {
 	DeploymentMode string `json:"deployment_mode"`
 
 	// The domain of the application.
-	Domain         string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether the application is enabled or not.
 	//
@@ -431,16 +425,16 @@ type PassengerAppsRegisterApplicationDataValue struct {
 	//   * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	Enabled        int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// An object of the application’s environment variables and their values.
-	Envvars        json.RawMessage `json:"envvars"`
+	Envvars json.RawMessage `json:"envvars"`
 
 	// The name of the application.
-	Name           string `json:"name"`
+	Name string `json:"name"`
 
 	// The path of the application inside the user’s home directory.
-	Path           string `json:"path"`
+	Path string `json:"path"`
 }
 
 // PassengerAppsUnregisterApplicationArgs are the parameters of the UAPI function `PassengerApps::unregister_application`.
@@ -460,8 +454,8 @@ type PassengerAppsUnregisterApplicationArgs struct {
 //
 // **Note:**
 //
-//   * This function **only** unregisters an application. It does **not** delete the application. You **must** manually delete the application from your system.
-//   * When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//   - This function **only** unregisters an application. It does **not** delete the application. You **must** manually delete the application from your system.
+//   - When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 66.
 //
@@ -469,4 +463,3 @@ type PassengerAppsUnregisterApplicationArgs struct {
 func (c *PassengerAppsClient) UnregisterApplication(ctx context.Context, args *PassengerAppsUnregisterApplicationArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "PassengerApps", "unregister_application", args)
 }
-

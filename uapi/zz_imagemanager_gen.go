@@ -42,7 +42,6 @@ func (c *ImageManagerClient) ConvertFile(ctx context.Context, args *ImageManager
 	return cpanel.UAPICall[ImageManagerConvertFileData](ctx, c.c, http.MethodGet, "ImageManager", "convert_file", args)
 }
 
-
 // ImageManagerConvertFileData is a generated payload type.
 type ImageManagerConvertFileData struct {
 	// The new absolute filepath to the image.
@@ -76,7 +75,7 @@ type ImageManagerCreateThumbnailsArgs struct {
 
 // CreateThumbnails calls the UAPI function `ImageManager::create_thumbnails` — Create image thumbnails
 //
-// This function creates thumbnails from images. The function saves the new thumbnail images in a thumbnails subdirectory inside the original directory. The system prepends thumbnail filenames with ``tn_`` (for example, ``tn_picture.jpg``).
+// This function creates thumbnails from images. The function saves the new thumbnail images in a thumbnails subdirectory inside the original directory. The system prepends thumbnail filenames with “tn_“ (for example, “tn_picture.jpg“).
 //
 // **Important:**
 //
@@ -89,7 +88,6 @@ func (c *ImageManagerClient) CreateThumbnails(ctx context.Context, args *ImageMa
 	return cpanel.UAPICall[[]ImageManagerCreateThumbnailsDataItem](ctx, c.c, http.MethodGet, "ImageManager", "create_thumbnails", args)
 }
 
-
 // ImageManagerCreateThumbnailsDataItem is a generated payload type.
 type ImageManagerCreateThumbnailsDataItem struct {
 	// Whether the function failed to create the thumbnail file.
@@ -100,17 +98,17 @@ type ImageManagerCreateThumbnailsDataItem struct {
 	//  * `1` is the **only** possible value.
 	//
 	// Possible values: `1`.
-	Failed        int64 `json:"failed"`
+	Failed int64 `json:"failed"`
 
 	// The file from which the function generated the thumbnail file. An absolute filepath.
-	File          string `json:"file"`
+	File string `json:"file"`
 
 	// The reason that the function didn't create the thumbnail file.
 	//
 	// **Note:**
 	//
 	//  The function only returns this value if it doesn't create the thumbnail.
-	Reason        string `json:"reason"`
+	Reason string `json:"reason"`
 
 	// The thumbnail file that the function generated. An absolute filepath.
 	ThumbnailFile string `json:"thumbnail_file"`
@@ -146,14 +144,13 @@ func (c *ImageManagerClient) GetDimensions(ctx context.Context, args *ImageManag
 	return cpanel.UAPICall[ImageManagerGetDimensionsData](ctx, c.c, http.MethodGet, "ImageManager", "get_dimensions", args)
 }
 
-
 // ImageManagerGetDimensionsData is a generated payload type.
 type ImageManagerGetDimensionsData struct {
 	// The image's height, in pixels.
 	Height int64 `json:"height"`
 
 	// The image's width, in pixels.
-	Width  int64 `json:"width"`
+	Width int64 `json:"width"`
 }
 
 // ImageManagerResizeImageArgs are the parameters of the UAPI function `ImageManager::resize_image`.
@@ -205,4 +202,3 @@ type ImageManagerResizeImageArgs struct {
 func (c *ImageManagerClient) ResizeImage(ctx context.Context, args *ImageManagerResizeImageArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "ImageManager", "resize_image", args)
 }
-

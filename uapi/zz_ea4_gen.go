@@ -22,7 +22,6 @@ func (c *EA4Client) GetPHPRecommendations(ctx context.Context, extra ...cpanel.A
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "EA4", "get_php_recommendations", cpanel.CombineArgs(extra...))
 }
 
-
 // GetRecommendations calls the UAPI function `EA4::get_recommendations` — Get EA4 configuration recommendations
 //
 // This function retrieves a list of EasyApache 4 (EA4) configuration recommendations.
@@ -34,7 +33,6 @@ func (c *EA4Client) GetRecommendations(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[map[string][]EA4GetRecommendationsDataValueItem](ctx, c.c, http.MethodGet, "EA4", "get_recommendations", cpanel.CombineArgs(extra...))
 }
 
-
 // EA4GetRecommendationsDataValueItemOptionsItem is a generated payload type.
 type EA4GetRecommendationsDataValueItemOptionsItem struct {
 	// An array of information that corresponds with a text value.
@@ -42,7 +40,7 @@ type EA4GetRecommendationsDataValueItemOptionsItem struct {
 	// **Note:**
 	//
 	// The function **only** returns this value if one exists.
-	Items       []string `json:"items"`
+	Items []string `json:"items"`
 
 	// The level that triggers a recommendation to appear, based on [Bootstrap 3 alert components](http://getbootstrap.com/components/#alerts).
 	//
@@ -58,7 +56,7 @@ type EA4GetRecommendationsDataValueItemOptionsItem struct {
 	// * This return's value only affects the UI if set to `danger`.
 	//
 	// Possible values: `primary`, `success`, `info`, `warning`, `danger`.
-	Level       string `json:"level"`
+	Level string `json:"level"`
 
 	// The type of recommendation that the interface will return.
 	//
@@ -72,14 +70,14 @@ type EA4GetRecommendationsDataValueItemOptionsItem struct {
 	ReCommEndEd bool `json:"recommended"`
 
 	// The text that the user interface displays.
-	Text        string `json:"text"`
+	Text string `json:"text"`
 
 	// A URL that provides more information.
 	//
 	// **Note:**
 	//
 	// The function **only** returns this value if one exists.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 }
 
 // EA4GetRecommendationsDataValueItem is a generated payload type.
@@ -89,7 +87,7 @@ type EA4GetRecommendationsDataValueItem struct {
 	// **Note:**
 	//
 	// The function **only** returns this value if one exists.
-	Desc    string `json:"desc"`
+	Desc string `json:"desc"`
 
 	// The level that triggers a recommendation to appear, based on [Bootstrap 3 alert components](http://getbootstrap.com/components/#alerts).
 	//
@@ -105,10 +103,10 @@ type EA4GetRecommendationsDataValueItem struct {
 	// * This return's value only affects the UI if set to `danger`.
 	//
 	// Possible values: `primary`, `success`, `info`, `warning`, `danger`.
-	Level   string `json:"level"`
+	Level string `json:"level"`
 
 	// The recommendation's name.
-	Name    string `json:"name"`
+	Name string `json:"name"`
 
 	// The action that triggers a recommendation.
 	//
@@ -116,7 +114,7 @@ type EA4GetRecommendationsDataValueItem struct {
 	// * `remove`
 	//
 	// Possible values: `add`, `remove`.
-	On      string `json:"on"`
+	On string `json:"on"`
 
 	// An object that contains each option for the package's recommendations.
 	Options []EA4GetRecommendationsDataValueItemOptionsItem `json:"options"`
@@ -126,5 +124,5 @@ type EA4GetRecommendationsDataValueItem struct {
 	// **Note:**
 	//
 	// The function **only** returns this value if one exists.
-	URL     string `json:"url"`
+	URL string `json:"url"`
 }

@@ -34,7 +34,6 @@ func (c *Client) DisableMarketProvider(ctx context.Context, args *DisableMarketP
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "disable_market_provider", args)
 }
 
-
 // EnableMarketProviderArgs are the parameters of the WHM API 1 function `enable_market_provider`.
 type EnableMarketProviderArgs struct {
 	// The cPanel Market provider's name.
@@ -57,7 +56,6 @@ func (c *Client) EnableMarketProvider(ctx context.Context, args *EnableMarketPro
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "enable_market_provider", args)
 }
 
-
 // GetAdjustedMarketProvidersProducts calls the WHM API 1 function `get_adjusted_market_providers_products` — Return Market providers' products adjusted prices
 //
 // This function lists all available cPanel Market products from enabled providers,
@@ -70,20 +68,19 @@ func (c *Client) GetAdjustedMarketProvidersProducts(ctx context.Context, extra .
 	return cpanel.WHMCall[GetAdjustedMarketProvidersProductsData](ctx, c.c, http.MethodGet, "get_adjusted_market_providers_products", cpanel.CombineArgs(extra...))
 }
 
-
 // GetAdjustedMarketProvidersProductsDataProductsItem is a generated payload type.
 type GetAdjustedMarketProvidersProductsDataProductsItem struct {
 	// The base name, if one exists.
-	BaseName            string `json:"base_name"`
+	BaseName string `json:"base_name"`
 
 	// The billing type.
-	BillingType         string `json:"billing_type"`
+	BillingType string `json:"billing_type"`
 
 	// The product's description.
-	Description         string `json:"description"`
+	Description string `json:"description"`
 
 	// The product's display name.
-	DisplayName         string `json:"display_name"`
+	DisplayName string `json:"display_name"`
 
 	// Whether the product is enabled.
 	//
@@ -91,69 +88,69 @@ type GetAdjustedMarketProvidersProductsDataProductsItem struct {
 	// * `1` - Enabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled             int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The icon to display in the product list.
-	Icon                string `json:"icon"`
+	Icon string `json:"icon"`
 
 	// The icon's image format.
-	IconMimeType        string `json:"icon_mime_type"`
+	IconMimeType string `json:"icon_mime_type"`
 
 	// The license term.
-	LicenseTerm         int64 `json:"license_term"`
+	LicenseTerm int64 `json:"license_term"`
 
 	// The maximum number of users.
-	MaxUsers            *int64 `json:"max_users"`
+	MaxUsers *int64 `json:"max_users"`
 
 	// The product's maximum price.
 	//
 	// * null - The produce does **not** possess a maximum price.
-	MaximumServerPrice  *float64 `json:"maximum_server_price"`
+	MaximumServerPrice *float64 `json:"maximum_server_price"`
 
 	// The product's minimum price.
 	//
 	// * null - The product does **not** possess a minimum price.
-	MinimumServerPrice  *float64 `json:"minimum_server_price"`
+	MinimumServerPrice *float64 `json:"minimum_server_price"`
 
 	// The product's price.
 	//
 	// * null - The product does **not** possess a static price.
-	Price               *float64 `json:"price"`
+	Price *float64 `json:"price"`
 
 	// The currency code of the product's price, in [ISO-4217 format](https://en.wikipedia.org/wiki/ISO_4217) format.
-	PriceUnit           string `json:"price_unit"`
+	PriceUnit string `json:"price_unit"`
 
 	// The product's display name.
-	Product             string `json:"product"`
+	Product string `json:"product"`
 
 	// The product's category.
-	ProductCategory     *string `json:"product_category"`
+	ProductCategory *string `json:"product_category"`
 
 	// The product's group.
-	ProductGroup        string `json:"product_group"`
+	ProductGroup string `json:"product_group"`
 
 	// The product ID.
-	ProductID           int64 `json:"product_id"`
+	ProductID int64 `json:"product_id"`
 
 	// The cPanel Market provider's display name.
 	ProviderDisplayName string `json:"provider_display_name"`
 
 	// The cPanel Market provider's name.
-	ProviderName        string `json:"provider_name"`
+	ProviderName string `json:"provider_name"`
 
 	// Whether we recommend the product.
 	// * `1` - We recommend the product.
 	// * `0` - We do **not** recommend the product.
 	//
 	// Possible values: `0`, `1`.
-	ReCommEndEd         int64 `json:"recommended"`
+	ReCommEndEd int64 `json:"recommended"`
 
 	// Whether the product requires an IP.
 	// * `1` - Requires an IP address.
 	// * `0` - Does **not** require an IP address.
 	//
 	// Possible values: `0`, `1`.
-	RequiresIP          int64 `json:"requires_ip"`
+	RequiresIP int64 `json:"requires_ip"`
 }
 
 // GetAdjustedMarketProvidersProductsData is a generated payload type.
@@ -173,20 +170,19 @@ func (c *Client) GetMarketProvidersCommissionConfig(ctx context.Context, extra .
 	return cpanel.WHMCall[GetMarketProvidersCommissionConfigData](ctx, c.c, http.MethodGet, "get_market_providers_commission_config", cpanel.CombineArgs(extra...))
 }
 
-
 // GetMarketProvidersCommissionConfigDataPayloadItem is a generated payload type.
 type GetMarketProvidersCommissionConfigDataPayloadItem struct {
 	// The locally-cached commission ID that the server owner uses for the cPanel Market provider.
-	LocalCommissionID   string `json:"local_commission_id"`
+	LocalCommissionID string `json:"local_commission_id"`
 
 	// The cPanel Market provider's display name.
 	ProviderDisplayName string `json:"provider_display_name"`
 
 	// The cPanel Market provider's name.
-	ProviderName        string `json:"provider_name"`
+	ProviderName string `json:"provider_name"`
 
 	// The commission ID that the server owner uses for the cPanel Market provider.
-	RemoteCommissionID  string `json:"remote_commission_id"`
+	RemoteCommissionID string `json:"remote_commission_id"`
 }
 
 // GetMarketProvidersCommissionConfigData is a generated payload type.
@@ -206,18 +202,17 @@ func (c *Client) GetMarketProvidersList(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.WHMCall[GetMarketProvidersListData](ctx, c.c, http.MethodGet, "get_market_providers_list", cpanel.CombineArgs(extra...))
 }
 
-
 // GetMarketProvidersListDataPayloadItem is a generated payload type.
 type GetMarketProvidersListDataPayloadItem struct {
 	// The cPanel Market provider's display name.
-	DisplayName           string `json:"display_name"`
+	DisplayName string `json:"display_name"`
 
 	// Whether the cPanel Market provider is enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled               int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The price of the Market provider's products must be a multiple of this value.
 	//
@@ -227,14 +222,14 @@ type GetMarketProvidersListDataPayloadItem struct {
 	EvenCommissionDivisor int64 `json:"even_commission_divisor"`
 
 	// The cPanel Market provider's name.
-	Name                  string `json:"name"`
+	Name string `json:"name"`
 
 	// Whether the cPanel Market provider supports sales commissions.
 	// * `1` - The provider supports commissions.
 	// * `0` - The provider does **not** support commissions.
 	//
 	// Possible values: `0`, `1`.
-	SupportsCommission    int64 `json:"supports_commission"`
+	SupportsCommission int64 `json:"supports_commission"`
 }
 
 // GetMarketProvidersListData is a generated payload type.
@@ -251,21 +246,23 @@ type GetMarketProvidersListData struct {
 // The return list includes different `attribute` data depending the `product_group` for each product.
 //
 // <table>
-//   <tr>
-//     <th>Product Group</th>
-//     <th>Attributes Returned</th>
-//     <th>Description</th>
-//   </tr>
-//   <tr>
-//     <td>ssl_certificate</td>
-//     <td>SSLMarketProviderMetaData</td>
-//     <td>Contains additional attributes only applicable to SSL Certificates</td>
-//   </tr>
-//   <tr>
-//     <td>*</td>
-//     <td>MarketProviderMetaData</td>
-//     <td>Any products not in a <code>product_group</code> listed above will include only these attributes.</td>
-//   </tr>
+//
+//	<tr>
+//	  <th>Product Group</th>
+//	  <th>Attributes Returned</th>
+//	  <th>Description</th>
+//	</tr>
+//	<tr>
+//	  <td>ssl_certificate</td>
+//	  <td>SSLMarketProviderMetaData</td>
+//	  <td>Contains additional attributes only applicable to SSL Certificates</td>
+//	</tr>
+//	<tr>
+//	  <td>*</td>
+//	  <td>MarketProviderMetaData</td>
+//	  <td>Any products not in a <code>product_group</code> listed above will include only these attributes.</td>
+//	</tr>
+//
 // </table>
 //
 // **Note:**
@@ -281,19 +278,18 @@ func (c *Client) GetMarketProvidersProductMetadata(ctx context.Context, extra ..
 	return cpanel.WHMCall[GetMarketProvidersProductMetadataData](ctx, c.c, http.MethodGet, "get_market_providers_product_metadata", cpanel.CombineArgs(extra...))
 }
 
-
 // GetMarketProvidersProductMetadataDataProductMetadataItem is a generated payload type.
 type GetMarketProvidersProductMetadataDataProductMetadataItem struct {
-	Attributes          json.RawMessage `json:"attributes"`
+	Attributes json.RawMessage `json:"attributes"`
 
 	// The product's ID.
-	ProductID           string `json:"product_id"`
+	ProductID string `json:"product_id"`
 
 	// The cPanel Market provider's display name.
 	ProviderDisplayName string `json:"provider_display_name"`
 
 	// The cPanel Market provider's name.
-	ProviderName        string `json:"provider_name"`
+	ProviderName string `json:"provider_name"`
 }
 
 // GetMarketProvidersProductMetadataData is a generated payload type.
@@ -311,7 +307,6 @@ type GetMarketProvidersProductMetadataData struct {
 func (c *Client) GetMarketProvidersProducts(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[GetMarketProvidersProductsData], error) {
 	return cpanel.WHMCall[GetMarketProvidersProductsData](ctx, c.c, http.MethodGet, "get_market_providers_products", cpanel.CombineArgs(extra...))
 }
-
 
 // MarketItemType is a generated payload type.
 // MarketItemType is left as raw JSON because its documented schema
@@ -369,7 +364,6 @@ func (c *Client) SetMarketProductAttribute(ctx context.Context, args *SetMarketP
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_market_product_attribute", args)
 }
 
-
 // SetMarketProviderCommissionIDArgs are the parameters of the WHM API 1 function `set_market_provider_commission_id`.
 type SetMarketProviderCommissionIDArgs struct {
 	// The cPanel Store ID to which to send cPanel Market commissions.
@@ -396,4 +390,3 @@ type SetMarketProviderCommissionIDArgs struct {
 func (c *Client) SetMarketProviderCommissionID(ctx context.Context, args *SetMarketProviderCommissionIDArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_market_provider_commission_id", args)
 }
-

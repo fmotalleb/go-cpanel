@@ -23,11 +23,10 @@ func (c *FeaturesClient) GetFeatureMetadata(ctx context.Context, extra ...cpanel
 	return cpanel.UAPICall[[]FeaturesGetFeatureMetadataDataItem](ctx, c.c, http.MethodGet, "Features", "get_feature_metadata", cpanel.CombineArgs(extra...))
 }
 
-
 // FeaturesGetFeatureMetadataDataItem is a generated payload type.
 type FeaturesGetFeatureMetadataDataItem struct {
 	// The feature's system ID.
-	ID       string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the feature is a [plugin](https://go.cpanel.net/cpanelplugin).
 	//
@@ -38,7 +37,7 @@ type FeaturesGetFeatureMetadataDataItem struct {
 	IsPlugin int64 `json:"is_plugin"`
 
 	// The feature's name.
-	Name     string `json:"name"`
+	Name string `json:"name"`
 }
 
 // FeaturesHasFeatureArgs are the parameters of the UAPI function `Features::has_feature`.
@@ -63,7 +62,6 @@ type FeaturesHasFeatureArgs struct {
 func (c *FeaturesClient) HasFeature(ctx context.Context, args *FeaturesHasFeatureArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Features", "has_feature", args)
 }
-
 
 // FeaturesHasFeaturesLikeArgs are the parameters of the UAPI function `Features::has_features_like`.
 type FeaturesHasFeaturesLikeArgs struct {
@@ -101,7 +99,6 @@ func (c *FeaturesClient) HasFeaturesLike(ctx context.Context, args *FeaturesHasF
 	return cpanel.UAPICall[FeaturesHasFeaturesLikeData](ctx, c.c, http.MethodGet, "Features", "has_features_like", args)
 }
 
-
 // Object containing the result of the feature search.
 type FeaturesHasFeaturesLikeData struct {
 	// Whether any features match the search pattern and are enabled.
@@ -122,7 +119,6 @@ type FeaturesHasFeaturesLikeData struct {
 func (c *FeaturesClient) ListFeatures(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[map[string]int64], error) {
 	return cpanel.UAPICall[map[string]int64](ctx, c.c, http.MethodGet, "Features", "list_features", cpanel.CombineArgs(extra...))
 }
-
 
 // FeaturesListFeaturesLikeArgs are the parameters of the UAPI function `Features::list_features_like`.
 type FeaturesListFeaturesLikeArgs struct {
@@ -159,4 +155,3 @@ type FeaturesListFeaturesLikeArgs struct {
 func (c *FeaturesClient) ListFeaturesLike(ctx context.Context, args *FeaturesListFeaturesLikeArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Features", "list_features_like", args)
 }
-

@@ -54,7 +54,6 @@ func (c *Client) PHPGetHandlers(ctx context.Context, args *PHPGetHandlersArgs) (
 	return cpanel.WHMCall[PHPGetHandlersData](ctx, c.c, http.MethodGet, "php_get_handlers", args)
 }
 
-
 // PHPGetHandlersDataVersionHandlersItem is a generated payload type.
 type PHPGetHandlersDataVersionHandlersItem struct {
 	// The installed PHP handlers.
@@ -73,7 +72,7 @@ type PHPGetHandlersDataVersionHandlersItem struct {
 	// * `none`
 	//
 	// Possible values: `suphp`, `cgi`, `dso`, `none`.
-	CurrentHandler    string `json:"current_handler"`
+	CurrentHandler string `json:"current_handler"`
 
 	// An installed PHP version.
 	//
@@ -92,7 +91,7 @@ type PHPGetHandlersDataVersionHandlersItem struct {
 	// For more information, read our
 	// [cPanel Deprecation Plan](https://docs.cpanel.net/knowledge-base/cpanel-product/cpanel-deprecation-plan/)
 	// documentation.
-	Version           string `json:"version"`
+	Version string `json:"version"`
 }
 
 // PHPGetHandlersData is a generated payload type.
@@ -151,7 +150,6 @@ func (c *Client) PHPGetImpactedDomains(ctx context.Context, args *PHPGetImpacted
 	return cpanel.WHMCall[PHPGetImpactedDomainsData](ctx, c.c, http.MethodGet, "php_get_impacted_domains", args)
 }
 
-
 // PHPGetImpactedDomainsData is a generated payload type.
 type PHPGetImpactedDomainsData struct {
 	// A list of domains or subdomains that obtain their PHP version from
@@ -169,11 +167,11 @@ type PHPGetImpactedDomainsData struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles) , the system **disables** this function.
+//	When you disable the [Web Server role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles) , the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -181,7 +179,6 @@ type PHPGetImpactedDomainsData struct {
 func (c *Client) PHPGetInstalledVersions(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PHPGetInstalledVersionsData], error) {
 	return cpanel.WHMCall[PHPGetInstalledVersionsData](ctx, c.c, http.MethodGet, "php_get_installed_versions", cpanel.CombineArgs(extra...))
 }
-
 
 // PHPGetInstalledVersionsData is a generated payload type.
 type PHPGetInstalledVersionsData struct {
@@ -214,7 +211,6 @@ func (c *Client) PHPGetSystemDefaultVersion(ctx context.Context, extra ...cpanel
 	return cpanel.WHMCall[PHPGetSystemDefaultVersionData](ctx, c.c, http.MethodGet, "php_get_system_default_version", cpanel.CombineArgs(extra...))
 }
 
-
 // PHPGetSystemDefaultVersionData is a generated payload type.
 type PHPGetSystemDefaultVersionData struct {
 	// The server's default PHP version.
@@ -230,11 +226,11 @@ type PHPGetSystemDefaultVersionData struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 60.
 //
@@ -243,14 +239,13 @@ func (c *Client) PHPGetVhostVersions(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.WHMCall[PHPGetVhostVersionsData](ctx, c.c, http.MethodGet, "php_get_vhost_versions", cpanel.CombineArgs(extra...))
 }
 
-
 // Object containing the domain's PHP-FPM parameters.
 type PHPGetVhostVersionsDataVersionsItemPHPFPMPoolParms struct {
 	// The maximum number of child pages per pool.
-	PmMaxChildren        int64 `json:"pm_max_children"`
+	PmMaxChildren int64 `json:"pm_max_children"`
 
 	// The number of possible requests the system allows.
-	PmMaxRequests        int64 `json:"pm_max_requests"`
+	PmMaxRequests int64 `json:"pm_max_requests"`
 
 	// How long the system remains idle before it kills the FPM child process.
 	PmProcessIdleTimeout int64 `json:"pm_process_idle_timeout"`
@@ -259,7 +254,7 @@ type PHPGetVhostVersionsDataVersionsItemPHPFPMPoolParms struct {
 // PHPGetVhostVersionsDataVersionsItemPhpversionSourceItem is a generated payload type.
 type PHPGetVhostVersionsDataVersionsItemPhpversionSourceItem struct {
 	// The domain the virtual host inherits its PHP version from.
-	Domain        string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether the virtual host uses the system's default PHP version.
 	// * `1` - Uses the system default PHP version.
@@ -275,16 +270,16 @@ type PHPGetVhostVersionsDataVersionsItemPhpversionSourceItem struct {
 // PHPGetVhostVersionsDataVersionsItem is a generated payload type.
 type PHPGetVhostVersionsDataVersionsItem struct {
 	// The account's name.
-	Account          string `json:"account"`
+	Account string `json:"account"`
 
 	// The account owner's name.
-	AccountOwner     string `json:"account_owner"`
+	AccountOwner string `json:"account_owner"`
 
 	// The virtual host's document root.
-	Documentroot     string `json:"documentroot"`
+	Documentroot string `json:"documentroot"`
 
 	// The virtual host's home directory.
-	Homedir          string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// The virtual host's suspension status.
 	//
@@ -294,7 +289,7 @@ type PHPGetVhostVersionsDataVersionsItem struct {
 	// * `0` - **Not** suspended.
 	//
 	// Possible values: `1`, `0`.
-	IsSuspended      int64 `json:"is_suspended"`
+	IsSuspended int64 `json:"is_suspended"`
 
 	// Whether the virtual host is the primary domain.
 	//
@@ -304,7 +299,7 @@ type PHPGetVhostVersionsDataVersionsItem struct {
 	// * `0` - **Not** the primary domain
 	//
 	// Possible values: `1`, `0`.
-	MainDomain       int64 `json:"main_domain"`
+	MainDomain int64 `json:"main_domain"`
 
 	// Whether PHP-FPM is enabled.
 	//
@@ -312,10 +307,10 @@ type PHPGetVhostVersionsDataVersionsItem struct {
 	// * `0` - PHP-FPM **not** enabled.
 	//
 	// Possible values: `1`, `0`.
-	PHPFPM           int64 `json:"php_fpm"`
+	PHPFPM int64 `json:"php_fpm"`
 
 	// Object containing the domain's PHP-FPM parameters.
-	PHPFPMPoolParms  PHPGetVhostVersionsDataVersionsItemPHPFPMPoolParms `json:"php_fpm_pool_parms"`
+	PHPFPMPoolParms PHPGetVhostVersionsDataVersionsItemPHPFPMPoolParms `json:"php_fpm_pool_parms"`
 
 	// How the virtual host determines its PHP version.
 	PhpversionSource []PHPGetVhostVersionsDataVersionsItemPhpversionSourceItem `json:"phpversion_source"`
@@ -327,10 +322,10 @@ type PHPGetVhostVersionsDataVersionsItem struct {
 	// * `ea-php74`
 	// * `inherit`
 	// * Any custom PHP package name.
-	Version          string `json:"version"`
+	Version string `json:"version"`
 
 	// The virtual host's name.
-	Vhost            string `json:"vhost"`
+	Vhost string `json:"vhost"`
 }
 
 // PHPGetVhostVersionsData is a generated payload type.
@@ -372,7 +367,6 @@ func (c *Client) PHPGetVhostsByVersion(ctx context.Context, args *PHPGetVhostsBy
 	return cpanel.WHMCall[PHPGetVhostsByVersionData](ctx, c.c, http.MethodGet, "php_get_vhosts_by_version", args)
 }
 
-
 // PHPGetVhostsByVersionData is a generated payload type.
 type PHPGetVhostsByVersionData struct {
 	// An array of the virtual hosts that use the specified PHP version.
@@ -399,11 +393,11 @@ type PHPINIGetContentArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -411,7 +405,6 @@ type PHPINIGetContentArgs struct {
 func (c *Client) PHPINIGetContent(ctx context.Context, args *PHPINIGetContentArgs) (*cpanel.WHMResult[PHPINIGetContentData], error) {
 	return cpanel.WHMCall[PHPINIGetContentData](ctx, c.c, http.MethodGet, "php_ini_get_content", args)
 }
-
 
 // PHPINIGetContentData is a generated payload type.
 type PHPINIGetContentData struct {
@@ -441,7 +434,7 @@ type PHPINIGetDirectivesArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
+//	When you disable the [Web Server role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -450,17 +443,16 @@ func (c *Client) PHPINIGetDirectives(ctx context.Context, args *PHPINIGetDirecti
 	return cpanel.WHMCall[PHPINIGetDirectivesData](ctx, c.c, http.MethodGet, "php_ini_get_directives", args)
 }
 
-
 // PHPINIGetDirectivesDataDirectivesItem is a generated payload type.
 type PHPINIGetDirectivesDataDirectivesItem struct {
 	// The directive's default value.
 	DefaultValue string `json:"default_value"`
 
 	// The purpose of the directive.
-	Info         string `json:"info"`
+	Info string `json:"info"`
 
 	// The directive's name.
-	Key          string `json:"key"`
+	Key string `json:"key"`
 
 	// The directive's [PHP_INI mode](http://php.net/manual/en/configuration.changes.modes.php).
 	//
@@ -468,7 +460,7 @@ type PHPINIGetDirectivesDataDirectivesItem struct {
 	// * `PHP_INI_PERDIR`
 	// * `PHP_INI_ALL`
 	// * `PHPINI_ONLY`
-	PHPINIMode   string `json:"php_ini_mode"`
+	PHPINIMode string `json:"php_ini_mode"`
 
 	// The type of value that the directive uses.
 	// * `string`
@@ -477,10 +469,10 @@ type PHPINIGetDirectivesDataDirectivesItem struct {
 	// * `float`
 	//
 	// Possible values: `string`, `boolean`, `integer`, `float`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The directive's current value.
-	Value        string `json:"value"`
+	Value string `json:"value"`
 }
 
 // PHPINIGetDirectivesData is a generated payload type.
@@ -516,11 +508,12 @@ type PHPINISetContentArgs struct {
 //
 // **Notes:**
 //
-//  - This document **only** applies to systems that run EasyApache 4.
-//  - Due to the limited field length of HTTP GET method calls, we **strongly** recommend that you use the HTTP POST method.
+//   - This document **only** applies to systems that run EasyApache 4.
+//   - Due to the limited field length of HTTP GET method calls, we **strongly** recommend that you use the HTTP POST method.
 //
 // **Important:**
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // This function requires an HTTP POST request.
 //
@@ -530,7 +523,6 @@ type PHPINISetContentArgs struct {
 func (c *Client) PHPINISetContent(ctx context.Context, args *PHPINISetContentArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "php_ini_set_content", args)
 }
-
 
 // PHPINISetDirectivesArgs are the parameters of the WHM API 1 function `php_ini_set_directives`.
 type PHPINISetDirectivesArgs struct {
@@ -566,11 +558,11 @@ type PHPINISetDirectivesArgs struct {
 //
 // **Note:**
 //
-//   This document only applies to systems that run EasyApache 4.
+//	This document only applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [Web Server](https://go.cpanel.net/serverroles) role , the system **disables** this function.
+//	When you disable the [Web Server](https://go.cpanel.net/serverroles) role , the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -578,7 +570,6 @@ type PHPINISetDirectivesArgs struct {
 func (c *Client) PHPINISetDirectives(ctx context.Context, args *PHPINISetDirectivesArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "php_ini_set_directives", args)
 }
-
 
 // PHPSetHandlerArgs are the parameters of the WHM API 1 function `php_set_handler`.
 type PHPSetHandlerArgs struct {
@@ -625,7 +616,6 @@ func (c *Client) PHPSetHandler(ctx context.Context, args *PHPSetHandlerArgs) (*c
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "php_set_handler", args)
 }
 
-
 // PHPSetSessionSavePathArgs are the parameters of the WHM API 1 function `php_set_session_save_path`.
 type PHPSetSessionSavePathArgs struct {
 	// Whether to overwrite the existing session save path in the `php.ini`
@@ -666,7 +656,6 @@ func (c *Client) PHPSetSessionSavePath(ctx context.Context, args *PHPSetSessionS
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "php_set_session_save_path", args)
 }
 
-
 // PHPSetSystemDefaultVersionArgs are the parameters of the WHM API 1 function `php_set_system_default_version`.
 type PHPSetSystemDefaultVersionArgs struct {
 	// The version of PHP that you wish to set as the system's default.
@@ -696,7 +685,6 @@ type PHPSetSystemDefaultVersionArgs struct {
 func (c *Client) PHPSetSystemDefaultVersion(ctx context.Context, args *PHPSetSystemDefaultVersionArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "php_set_system_default_version", args)
 }
-
 
 // PHPSetVhostVersionsArgs are the parameters of the WHM API 1 function `php_set_vhost_versions`.
 type PHPSetVhostVersionsArgs struct {
@@ -763,4 +751,3 @@ type PHPSetVhostVersionsArgs struct {
 func (c *Client) PHPSetVhostVersions(ctx context.Context, args *PHPSetVhostVersionsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "php_set_vhost_versions", args)
 }
-

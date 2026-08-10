@@ -39,4 +39,3 @@ type ParticipateInAnalyticsArgs struct {
 func (c *Client) ParticipateInAnalytics(ctx context.Context, args *ParticipateInAnalyticsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "participate_in_analytics", args)
 }
-

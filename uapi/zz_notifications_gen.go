@@ -21,4 +21,3 @@ import (
 func (c *NotificationsClient) GetNotificationsCount(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Notifications", "get_notifications_count", cpanel.CombineArgs(extra...))
 }
-

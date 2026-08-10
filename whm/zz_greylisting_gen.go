@@ -23,7 +23,6 @@ func (c *Client) CPGreyListIsServerNetblockTrusted(ctx context.Context, extra ..
 	return cpanel.WHMCall[CPGreyListIsServerNetblockTrustedData](ctx, c.c, http.MethodGet, "cpgreylist_is_server_netblock_trusted", cpanel.CombineArgs(extra...))
 }
 
-
 // CPGreyListIsServerNetblockTrustedData is a generated payload type.
 type CPGreyListIsServerNetblockTrustedData struct {
 	// A list containing the neighboring netblocks.
@@ -57,21 +56,20 @@ func (c *Client) CPGreyListListEntriesForCommonMailProvider(ctx context.Context,
 	return cpanel.WHMCall[CPGreyListListEntriesForCommonMailProviderData](ctx, c.c, http.MethodGet, "cpgreylist_list_entries_for_common_mail_provider", args)
 }
 
-
 // An object containing the mail provider's IP address data.
 type CPGreyListListEntriesForCommonMailProviderDataProvidersValueIPs struct {
 	// The date and time when the function created the record.
 	CreateTime string `json:"create_time"`
 
 	// The mail provider's IP address or range.
-	HostIP     string `json:"host_ip"`
+	HostIP string `json:"host_ip"`
 
 	// Whether Greylisting trusts this mail provider's IP addresses.
 	// - `1` — Trusted.
 	// - `0` — Not trusted.
 	//
 	// Possible values: `0`, `1`.
-	IsTrusted  int64 `json:"is_trusted"`
+	IsTrusted int64 `json:"is_trusted"`
 
 	// The mail provider's identification number.
 	ProviderID int64 `json:"provider_id"`
@@ -90,7 +88,7 @@ type CPGreyListListEntriesForCommonMailProviderDataProvidersValue struct {
 // CPGreyListListEntriesForCommonMailProviderData is a generated payload type.
 type CPGreyListListEntriesForCommonMailProviderData struct {
 	// An object containing mail providers and their IP addresses.
-	Providers       map[string]CPGreyListListEntriesForCommonMailProviderDataProvidersValue `json:"providers"`
+	Providers map[string]CPGreyListListEntriesForCommonMailProviderDataProvidersValue `json:"providers"`
 
 	// An object containing mail providers that the system failed to retrieve data for.
 	ProvidersFailed map[string]string `json:"providers_failed"`
@@ -107,19 +105,18 @@ func (c *Client) CPGreyListLoadCommonMailProvidersConfig(ctx context.Context, ex
 	return cpanel.WHMCall[CPGreyListLoadCommonMailProvidersConfigData](ctx, c.c, http.MethodGet, "cpgreylist_load_common_mail_providers_config", cpanel.CombineArgs(extra...))
 }
 
-
 // An object containing the provider's data.
 //
 // **Note:**
 //
-//   The object's name is the provider's key name.
+//	The object's name is the provider's key name.
 type CPGreyListLoadCommonMailProvidersConfigDataCommonMailProvidersValue struct {
 	// Whether Greylisting automatically trusts new IP addresses that WebPros International, LLC adds for this mail provider.
 	// * `1` - New IP addresses are automatically trusted.
 	// * `0` - New IP addresses are **not** automatically trusted.
 	//
 	// Possible values: `0`, `1`.
-	AutoUpdate  int64 `json:"autoupdate"`
+	AutoUpdate int64 `json:"autoupdate"`
 
 	// The mail provider's name.
 	DisplayName string `json:"display_name"`
@@ -129,7 +126,7 @@ type CPGreyListLoadCommonMailProvidersConfigDataCommonMailProvidersValue struct 
 	// * `0` - The provider is **not** trusted.
 	//
 	// Possible values: `0`, `1`.
-	IsTrusted   int64 `json:"is_trusted"`
+	IsTrusted int64 `json:"is_trusted"`
 }
 
 // CPGreyListLoadCommonMailProvidersConfigData is a generated payload type.
@@ -142,7 +139,7 @@ type CPGreyListLoadCommonMailProvidersConfigData struct {
 	AutotrustNewCommonMailProviders int64 `json:"autotrust_new_common_mail_providers"`
 
 	// An object containing common mail provider settings.
-	CommonMailProviders             map[string]CPGreyListLoadCommonMailProvidersConfigDataCommonMailProvidersValue `json:"common_mail_providers"`
+	CommonMailProviders map[string]CPGreyListLoadCommonMailProvidersConfigDataCommonMailProvidersValue `json:"common_mail_providers"`
 }
 
 // CPGreyListSaveCommonMailProvidersConfigArgs are the parameters of the WHM API 1 function `cpgreylist_save_common_mail_providers_config`.
@@ -186,12 +183,11 @@ func (c *Client) CPGreyListSaveCommonMailProvidersConfig(ctx context.Context, ar
 	return cpanel.WHMCall[CPGreyListSaveCommonMailProvidersConfigData](ctx, c.c, http.MethodGet, "cpgreylist_save_common_mail_providers_config", args)
 }
 
-
 // An object containing the provider's data.
 //
 // **Note:**
 //
-//   The object's name is the provider's key name.
+//	The object's name is the provider's key name.
 type CPGreyListSaveCommonMailProvidersConfigDataCommonMailProvidersValue struct {
 	// Whether Greylisting automatically trusts new IP addresses that WebPros International, LLC adds for this mail provider.
 	//
@@ -199,7 +195,7 @@ type CPGreyListSaveCommonMailProvidersConfigDataCommonMailProvidersValue struct 
 	// * `0` - New IP addresses are **not** automatically trusted.
 	//
 	// Possible values: `0`, `1`.
-	AutoUpdate  int64 `json:"autoupdate"`
+	AutoUpdate int64 `json:"autoupdate"`
 
 	// The mail provider's name.
 	DisplayName string `json:"display_name"`
@@ -210,7 +206,7 @@ type CPGreyListSaveCommonMailProvidersConfigDataCommonMailProvidersValue struct 
 	// * `0` - The provider is **not** trusted.
 	//
 	// Possible values: `0`, `1`.
-	IsTrusted   int64 `json:"is_trusted"`
+	IsTrusted int64 `json:"is_trusted"`
 }
 
 // CPGreyListSaveCommonMailProvidersConfigData is a generated payload type.
@@ -224,7 +220,7 @@ type CPGreyListSaveCommonMailProvidersConfigData struct {
 	AutotrustNewCommonMailProviders int64 `json:"autotrust_new_common_mail_providers"`
 
 	// An object containing common mail provider settings.
-	CommonMailProviders             map[string]CPGreyListSaveCommonMailProvidersConfigDataCommonMailProvidersValue `json:"common_mail_providers"`
+	CommonMailProviders map[string]CPGreyListSaveCommonMailProvidersConfigDataCommonMailProvidersValue `json:"common_mail_providers"`
 }
 
 // CPGreyListStatus calls the WHM API 1 function `cpgreylist_status` — Return Greylisting status
@@ -238,7 +234,6 @@ func (c *Client) CPGreyListStatus(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.WHMCall[CPGreyListStatusData](ctx, c.c, http.MethodGet, "cpgreylist_status", cpanel.CombineArgs(extra...))
 }
 
-
 // CPGreyListStatusData is a generated payload type.
 type CPGreyListStatusData struct {
 	// Whether Greylisting is enabled.
@@ -246,7 +241,7 @@ type CPGreyListStatusData struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEnabled     int64 `json:"is_enabled"`
+	IsEnabled int64 `json:"is_enabled"`
 
 	// Whether Exim is enabled.
 	// * `1` — Enabled.
@@ -256,7 +251,7 @@ type CPGreyListStatusData struct {
 	IsEximEnabled int64 `json:"is_exim_enabled"`
 
 	// The name of the service.
-	Service       string `json:"service"`
+	Service string `json:"service"`
 }
 
 // CPGreyListTrustEntriesForCommonMailProviderArgs are the parameters of the WHM API 1 function `cpgreylist_trust_entries_for_common_mail_provider`.
@@ -288,7 +283,6 @@ func (c *Client) CPGreyListTrustEntriesForCommonMailProvider(ctx context.Context
 	return cpanel.WHMCall[CPGreyListTrustEntriesForCommonMailProviderData](ctx, c.c, http.MethodGet, "cpgreylist_trust_entries_for_common_mail_provider", args)
 }
 
-
 // The providers whose configuration changes succeeded.
 //
 // **Note:**
@@ -302,7 +296,7 @@ type CPGreyListTrustEntriesForCommonMailProviderDataProvidersTrustedValue struct
 // CPGreyListTrustEntriesForCommonMailProviderData is a generated payload type.
 type CPGreyListTrustEntriesForCommonMailProviderData struct {
 	// The providers whose configuration changes failed.
-	ProvidersFailed  map[string]string `json:"providers_failed"`
+	ProvidersFailed map[string]string `json:"providers_failed"`
 
 	// The mail providers that Greylisting trusts.
 	ProvidersTrusted map[string]CPGreyListTrustEntriesForCommonMailProviderDataProvidersTrustedValue `json:"providers_trusted"`
@@ -336,7 +330,6 @@ func (c *Client) CPGreyListUntrustEntriesForCommonMailProvider(ctx context.Conte
 	return cpanel.WHMCall[CPGreyListUntrustEntriesForCommonMailProviderData](ctx, c.c, http.MethodGet, "cpgreylist_untrust_entries_for_common_mail_provider", args)
 }
 
-
 // The mail provider's data.
 type CPGreyListUntrustEntriesForCommonMailProviderDataProvidersFailedValue struct {
 	// The mail providers that failed to update.
@@ -345,7 +338,7 @@ type CPGreyListUntrustEntriesForCommonMailProviderDataProvidersFailedValue struc
 
 // CPGreyListUntrustEntriesForCommonMailProviderData is a generated payload type.
 type CPGreyListUntrustEntriesForCommonMailProviderData struct {
-	ProvidersFailed    map[string]CPGreyListUntrustEntriesForCommonMailProviderDataProvidersFailedValue `json:"providers_failed"`
+	ProvidersFailed map[string]CPGreyListUntrustEntriesForCommonMailProviderDataProvidersFailedValue `json:"providers_failed"`
 
 	// The mail providers that Greylisting does not trust.
 	ProvidersUntrusted map[string]string `json:"providers_untrusted"`
@@ -380,20 +373,19 @@ func (c *Client) CreateCPGreyListTrustedHost(ctx context.Context, args *CreateCP
 	return cpanel.WHMCall[CreateCPGreyListTrustedHostData](ctx, c.c, http.MethodGet, "create_cpgreylist_trusted_host", args)
 }
 
-
 // CreateCPGreyListTrustedHostDataIPsAddedItem is a generated payload type.
 type CreateCPGreyListTrustedHostDataIPsAddedItem struct {
 	// Comment for the individual record.
-	Comment    string `json:"comment"`
+	Comment string `json:"comment"`
 
 	// The date and time at which the function created the record.
 	CreateTime string `json:"create_time"`
 
 	// The trusted host's IP address.
-	HostIP     string `json:"host_ip"`
+	HostIP string `json:"host_ip"`
 
 	// The host's record number.
-	ID         int64 `json:"id"`
+	ID int64 `json:"id"`
 }
 
 // An object that contains the IP addresses that the function failed to add to the Trusted Hosts list.
@@ -405,10 +397,10 @@ type CreateCPGreyListTrustedHostDataIPsFailed struct {
 // CreateCPGreyListTrustedHostData is a generated payload type.
 type CreateCPGreyListTrustedHostData struct {
 	// Comment for the batch.
-	Comment   string `json:"comment"`
+	Comment string `json:"comment"`
 
 	// An array of objects that contains the IP addresses that the function added to the Trusted Hosts list.
-	IPsAdded  []CreateCPGreyListTrustedHostDataIPsAddedItem `json:"ips_added"`
+	IPsAdded []CreateCPGreyListTrustedHostDataIPsAddedItem `json:"ips_added"`
 
 	// An object that contains the IP addresses that the function failed to add to the Trusted Hosts list.
 	IPsFailed CreateCPGreyListTrustedHostDataIPsFailed `json:"ips_failed"`
@@ -440,11 +432,10 @@ func (c *Client) DeleteCPGreyListTrustedHost(ctx context.Context, args *DeleteCP
 	return cpanel.WHMCall[DeleteCPGreyListTrustedHostData](ctx, c.c, http.MethodGet, "delete_cpgreylist_trusted_host", args)
 }
 
-
 // DeleteCPGreyListTrustedHostData is a generated payload type.
 type DeleteCPGreyListTrustedHostData struct {
 	// An object that contains the IP addresses that the function failed to remove from the _Trusted Hosts_ list.
-	IPsFailed  map[string]string `json:"ips_failed"`
+	IPsFailed map[string]string `json:"ips_failed"`
 
 	// An array of IP addresses that the function removed from the _Trusted Hosts_ list.
 	IPsRemoved []string `json:"ips_removed"`
@@ -461,7 +452,6 @@ func (c *Client) DisableCPGreyList(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "disable_cpgreylist", cpanel.CombineArgs(extra...))
 }
 
-
 // EnableCPGreyList calls the WHM API 1 function `enable_cpgreylist` — Enable Greylisting
 //
 // This function enables Greylisting.
@@ -472,7 +462,6 @@ func (c *Client) DisableCPGreyList(ctx context.Context, extra ...cpanel.Args) (*
 func (c *Client) EnableCPGreyList(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "enable_cpgreylist", cpanel.CombineArgs(extra...))
 }
-
 
 // LoadCPGreyListConfig calls the WHM API 1 function `load_cpgreylist_config` — Return Greylisting settings
 //
@@ -485,11 +474,10 @@ func (c *Client) LoadCPGreyListConfig(ctx context.Context, extra ...cpanel.Args)
 	return cpanel.WHMCall[LoadCPGreyListConfigData](ctx, c.c, http.MethodGet, "load_cpgreylist_config", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains Greylisting settings.
 type LoadCPGreyListConfigDataCPGreyListConfig struct {
 	// The maximum amount of seconds that Greylisting waits for a child process to time out.
-	ChildTimeoutSecs     int64 `json:"child_timeout_secs"`
+	ChildTimeoutSecs int64 `json:"child_timeout_secs"`
 
 	// The number of minutes during which Greylisting defers email from an unknown triplet.
 	InitialBlockTimeMins int64 `json:"initial_block_time_mins"`
@@ -499,33 +487,33 @@ type LoadCPGreyListConfigDataCPGreyListConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEnabled            int64 `json:"is_enabled"`
+	IsEnabled int64 `json:"is_enabled"`
 
 	// Whether Exim is enabled.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	IsEximEnabled        int64 `json:"is_exim_enabled"`
+	IsEximEnabled int64 `json:"is_exim_enabled"`
 
 	// The maximum amount of child processes.
-	MaxChildProcs        int64 `json:"max_child_procs"`
+	MaxChildProcs int64 `json:"max_child_procs"`
 
 	// The number of minutes during which Greylisting accepts a re-sent email from an unknown triplet.
-	MustTryTimeMins      int64 `json:"must_try_time_mins"`
+	MustTryTimeMins int64 `json:"must_try_time_mins"`
 
 	// The number of minutes before Greylisting deletes the records in the Greylisting database.
-	PurgeIntervalMins    int64 `json:"purge_interval_mins"`
+	PurgeIntervalMins int64 `json:"purge_interval_mins"`
 
 	// The number of minutes before Greylisting deletes the triplet record and treats a re-sent email as a new, unknown triplet.
-	RecordExpTimeMins    int64 `json:"record_exp_time_mins"`
+	RecordExpTimeMins int64 `json:"record_exp_time_mins"`
 
 	// Whether emails with SPF bypass Greylisting.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	SPFBypass            int64 `json:"spf_bypass"`
+	SPFBypass int64 `json:"spf_bypass"`
 }
 
 // LoadCPGreyListConfigData is a generated payload type.
@@ -551,38 +539,37 @@ func (c *Client) ReadCPGreyListDeferredEntries(ctx context.Context, extra ...cpa
 	return cpanel.WHMCall[ReadCPGreyListDeferredEntriesData](ctx, c.c, http.MethodGet, "read_cpgreylist_deferred_entries", cpanel.CombineArgs(extra...))
 }
 
-
 // ReadCPGreyListDeferredEntriesDataGreylistDeferredEntriesItem is a generated payload type.
 type ReadCPGreyListDeferredEntriesDataGreylistDeferredEntriesItem struct {
 	// The number of times that Greylisting accepted the triplet.
 	AcceptedCount int64 `json:"accepted_count"`
 
 	// The date and time when Greylisting will no longer defer the triplet.
-	BlockExpTime  string `json:"block_exp_time"`
+	BlockExpTime string `json:"block_exp_time"`
 
 	// The date and time when Greylisting created the triplet.
-	CreateTime    string `json:"create_time"`
+	CreateTime string `json:"create_time"`
 
 	// The number of times Greylisting deferred the triplet.
 	DeferredCount int64 `json:"deferred_count"`
 
 	// The email address that the system identified as the triplet's sender.
-	FromAddr      string `json:"from_addr"`
+	FromAddr string `json:"from_addr"`
 
 	// The identification number that the system assigned to the triplet.
-	ID            int64 `json:"id"`
+	ID int64 `json:"id"`
 
 	// The date and time when Greylisting will no longer accept the resent triplet.
-	MustRetryBy   string `json:"must_retry_by"`
+	MustRetryBy string `json:"must_retry_by"`
 
 	// The date and time when Greylisting will purge the triplet from the database.
 	RecordExpTime string `json:"record_exp_time"`
 
 	// The IP address that the system identified as the triplet's sender.
-	SenderIP      string `json:"sender_ip"`
+	SenderIP string `json:"sender_ip"`
 
 	// The email address that the system identified as the triplet's recipient.
-	ToAddr        string `json:"to_addr"`
+	ToAddr string `json:"to_addr"`
 }
 
 // ReadCPGreyListDeferredEntriesData is a generated payload type.
@@ -591,19 +578,19 @@ type ReadCPGreyListDeferredEntriesData struct {
 	GreylistDeferredEntries []ReadCPGreyListDeferredEntriesDataGreylistDeferredEntriesItem `json:"greylist_deferred_entries"`
 
 	// The number of triplets in the interface.
-	Limit                   int64 `json:"limit"`
+	Limit int64 `json:"limit"`
 
 	// The number of triplets to skip from the beginning of the query in the interface.
-	Offset                  int64 `json:"offset"`
+	Offset int64 `json:"offset"`
 
 	// The standard letter code abbreviation for the time zone.
-	ServerTimezone          string `json:"server_timezone"`
+	ServerTimezone string `json:"server_timezone"`
 
 	// The time zone offset in minutes.
-	ServerTzoffset          int64 `json:"server_tzoffset"`
+	ServerTzoffset int64 `json:"server_tzoffset"`
 
 	// The total number of triplets in the database.
-	TotalRows               int64 `json:"total_rows"`
+	TotalRows int64 `json:"total_rows"`
 }
 
 // ReadCPGreyListTrustedHosts calls the WHM API 1 function `read_cpgreylist_trusted_hosts` — Return Greylisting trusted hosts
@@ -617,20 +604,19 @@ func (c *Client) ReadCPGreyListTrustedHosts(ctx context.Context, extra ...cpanel
 	return cpanel.WHMCall[ReadCPGreyListTrustedHostsData](ctx, c.c, http.MethodGet, "read_cpgreylist_trusted_hosts", cpanel.CombineArgs(extra...))
 }
 
-
 // ReadCPGreyListTrustedHostsDataGreylistTrustedHostsItem is a generated payload type.
 type ReadCPGreyListTrustedHostsDataGreylistTrustedHostsItem struct {
 	// The IP address' comment.
-	Comment    string `json:"comment"`
+	Comment string `json:"comment"`
 
 	// The date and time when the system added the IP address to the _Trusted Hosts_ list.
 	CreateTime string `json:"create_time"`
 
 	// The IP address of the host that the system added to the _Trusted Hosts_ list.
-	HostIP     string `json:"host_ip"`
+	HostIP string `json:"host_ip"`
 
 	// The identification number that the system assigned to the IP address.
-	ID         int64 `json:"id"`
+	ID int64 `json:"id"`
 }
 
 // ReadCPGreyListTrustedHostsData is a generated payload type.
@@ -712,11 +698,10 @@ func (c *Client) SaveCPGreyListConfig(ctx context.Context, args *SaveCPGreyListC
 	return cpanel.WHMCall[SaveCPGreyListConfigData](ctx, c.c, http.MethodGet, "save_cpgreylist_config", args)
 }
 
-
 // A list of Greylisting settings.
 type SaveCPGreyListConfigDataCPGreyListConfig struct {
 	// The maximum amount of seconds that Greylisting waits for child process to time out.
-	ChildTimeoutSecs     int64 `json:"child_timeout_secs"`
+	ChildTimeoutSecs int64 `json:"child_timeout_secs"`
 
 	// The number of minutes during which Greylisting defers email from an unknown triplet.
 	InitialBlockTimeMins int64 `json:"initial_block_time_mins"`
@@ -727,7 +712,7 @@ type SaveCPGreyListConfigDataCPGreyListConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	IsEnabled            int64 `json:"is_enabled"`
+	IsEnabled int64 `json:"is_enabled"`
 
 	// Whether Exim is enabled.
 	//
@@ -735,19 +720,19 @@ type SaveCPGreyListConfigDataCPGreyListConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `1`, `0`.
-	IsEximEnabled        int64 `json:"is_exim_enabled"`
+	IsEximEnabled int64 `json:"is_exim_enabled"`
 
 	// The maximum amount of child processes.
-	MaxChildProcs        int64 `json:"max_child_procs"`
+	MaxChildProcs int64 `json:"max_child_procs"`
 
 	// The number of minutes during which Greylisting accepts a re-sent email from an unknown triplet.
-	MustTryTimeMins      int64 `json:"must_try_time_mins"`
+	MustTryTimeMins int64 `json:"must_try_time_mins"`
 
 	// The number of minutes before Greylisting deletes the records in the Greylisting database.
-	PurgeIntervalMins    int64 `json:"purge_interval_mins"`
+	PurgeIntervalMins int64 `json:"purge_interval_mins"`
 
 	// The number of minutes before Greylisting deletes the triplet record and treats a re-sent email as a new, unknown triplet.
-	RecordExpTimeMins    int64 `json:"record_exp_time_mins"`
+	RecordExpTimeMins int64 `json:"record_exp_time_mins"`
 
 	// Whether emails with SPF bypass Greylisting.
 	//
@@ -755,7 +740,7 @@ type SaveCPGreyListConfigDataCPGreyListConfig struct {
 	// * `0` — Do **not** bypass.
 	//
 	// Possible values: `1`, `0`.
-	SPFBypass            int64 `json:"spf_bypass"`
+	SPFBypass int64 `json:"spf_bypass"`
 }
 
 // SaveCPGreyListConfigData is a generated payload type.

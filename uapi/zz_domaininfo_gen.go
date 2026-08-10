@@ -65,7 +65,6 @@ func (c *DomainInfoClient) DomainsData(ctx context.Context, args *DomainInfoDoma
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "DomainInfo", "domains_data", args)
 }
 
-
 // DomainInfoListDomainsArgs are the parameters of the UAPI function `DomainInfo::list_domains`.
 type DomainInfoListDomainsArgs struct {
 	// Whether to hide temporary domains from the response arrays.
@@ -97,23 +96,22 @@ func (c *DomainInfoClient) ListDomains(ctx context.Context, args *DomainInfoList
 	return cpanel.UAPICall[DomainInfoListDomainsData](ctx, c.c, http.MethodGet, "DomainInfo", "list_domains", args)
 }
 
-
 // DomainInfoListDomainsData is a generated payload type.
 type DomainInfoListDomainsData struct {
 	// An array of string values that lists the addon domains on the cPanel account.
-	AddonDomains  []string `json:"addon_domains"`
+	AddonDomains []string `json:"addon_domains"`
 
 	// Whether the domain is a temporary domain.
-	IsTemporary   map[string]int64 `json:"is_temporary"`
+	IsTemporary map[string]int64 `json:"is_temporary"`
 
 	// The cPanel account's main domain.
-	MainDomain    *string `json:"main_domain"`
+	MainDomain *string `json:"main_domain"`
 
 	// An array of string values that lists the parked domains on the cPanel account.
 	ParkedDomains []string `json:"parked_domains"`
 
 	// An array of string values that lists the subdomains on the cPanel account.
-	SubDomains    []string `json:"sub_domains"`
+	SubDomains []string `json:"sub_domains"`
 }
 
 // DomainInfoMainDomainBuiltinSubdomainAliasesArgs are the parameters of the UAPI function `DomainInfo::main_domain_builtin_subdomain_aliases`.
@@ -138,7 +136,7 @@ type DomainInfoMainDomainBuiltinSubdomainAliasesArgs struct {
 //
 // **Note:**
 //
-//   This function retrieves data from the `/var/cpanel/userdata/user/domain` file, where `user` represents the cPanel account username and `domain` represents the domain. For this reason, actual output may not contain all of the returns that this document lists.
+//	This function retrieves data from the `/var/cpanel/userdata/user/domain` file, where `user` represents the cPanel account username and `domain` represents the domain. For this reason, actual output may not contain all of the returns that this document lists.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -146,7 +144,6 @@ type DomainInfoMainDomainBuiltinSubdomainAliasesArgs struct {
 func (c *DomainInfoClient) MainDomainBuiltinSubdomainAliases(ctx context.Context, args *DomainInfoMainDomainBuiltinSubdomainAliasesArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "DomainInfo", "main_domain_builtin_subdomain_aliases", args)
 }
-
 
 // DomainInfoPrimaryDomainArgs are the parameters of the UAPI function `DomainInfo::primary_domain`.
 type DomainInfoPrimaryDomainArgs struct {
@@ -174,7 +171,6 @@ type DomainInfoPrimaryDomainArgs struct {
 func (c *DomainInfoClient) PrimaryDomain(ctx context.Context, args *DomainInfoPrimaryDomainArgs) (*cpanel.UAPIResult[DomainInfoPrimaryDomainData], error) {
 	return cpanel.UAPICall[DomainInfoPrimaryDomainData](ctx, c.c, http.MethodGet, "DomainInfo", "primary_domain", args)
 }
-
 
 // DomainInfoPrimaryDomainData is a generated payload type.
 type DomainInfoPrimaryDomainData struct {
@@ -230,9 +226,9 @@ type DomainInfoSingleDomainDataArgs struct {
 //
 // **Important:**
 //
-//   This function retrieves data from the `/var/cpanel/userdata/user/domain` file, where `user` represents the cPanel account username and `domain` represents the domain.
-//   * Because aliases (parked domains) do **not** use a user data file, this function **cannot** query information for aliases. To retrieve information for an alias, specify the associated main or addon domain.
-//   * Due to differences in user data files, the function's actual output may not contain all of the returns that this document lists.
+//	This function retrieves data from the `/var/cpanel/userdata/user/domain` file, where `user` represents the cPanel account username and `domain` represents the domain.
+//	* Because aliases (parked domains) do **not** use a user data file, this function **cannot** query information for aliases. To retrieve information for an alias, specify the associated main or addon domain.
+//	* Due to differences in user data files, the function's actual output may not contain all of the returns that this document lists.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -240,7 +236,6 @@ type DomainInfoSingleDomainDataArgs struct {
 func (c *DomainInfoClient) SingleDomainData(ctx context.Context, args *DomainInfoSingleDomainDataArgs) (*cpanel.UAPIResult[DomainInfoSingleDomainDataData], error) {
 	return cpanel.UAPICall[DomainInfoSingleDomainDataData](ctx, c.c, http.MethodGet, "DomainInfo", "single_domain_data", args)
 }
-
 
 // An object containing Apache log information.
 type DomainInfoSingleDomainDataDataCustomLog struct {
@@ -263,7 +258,7 @@ type DomainInfoSingleDomainDataDataScriptAlias struct {
 	Path string `json:"path"`
 
 	// The domain's CGI directory.
-	URL  string `json:"url"`
+	URL string `json:"url"`
 }
 
 // DomainInfoSingleDomainDataData is a generated payload type.
@@ -277,7 +272,7 @@ type DomainInfoSingleDomainDataData struct {
 	// This return only appears if you set the `return_https_redirects_status` parameter to `1`.
 	//
 	// Possible values: `0`, `1`.
-	AllAliasesValid       int64 `json:"all_aliases_valid"`
+	AllAliasesValid int64 `json:"all_aliases_valid"`
 
 	// Whether a valid SSL certificate exists or AutoSSL runs on the domain.
 	// * `1` - A valid SSL certificate exists or AutoSSL runs.
@@ -288,35 +283,35 @@ type DomainInfoSingleDomainDataData struct {
 	// This return only appears if you set the `return_https_redirects_status` parameter to `1`.
 	//
 	// Possible values: `0`, `1`.
-	CanHTTPSRedirect      int64 `json:"can_https_redirect"`
+	CanHTTPSRedirect int64 `json:"can_https_redirect"`
 
 	// An object containing Apache log information.
-	CustomLog             DomainInfoSingleDomainDataDataCustomLog `json:"customlog"`
+	CustomLog DomainInfoSingleDomainDataDataCustomLog `json:"customlog"`
 
 	// The absolute path to the domain's document root.
-	Documentroot          string `json:"documentroot"`
+	Documentroot string `json:"documentroot"`
 
 	// The domain name on the cPanel account.
-	Domain                string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The domain's group name.
-	Group                 string `json:"group"`
+	Group string `json:"group"`
 
 	// Whether CGI is enabled for the domain.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Hascgi                int64 `json:"hascgi"`
+	Hascgi int64 `json:"hascgi"`
 
 	// The absolute path to the account's home directory.
-	Homedir               string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// An object containing information about PHP scripts and suPHP.
-	IfModuleModSuPHPC     DomainInfoSingleDomainDataDataIfModuleModSuPHPC `json:"ifmodulemodsuphpc"`
+	IfModuleModSuPHPC DomainInfoSingleDomainDataDataIfModuleModSuPHPC `json:"ifmodulemodsuphpc"`
 
 	// The domain's IP address.
-	IP                    string `json:"ip"`
+	IP string `json:"ip"`
 
 	// Whether the domain redirects to https.
 	// * `1` - Redirects.
@@ -327,20 +322,20 @@ type DomainInfoSingleDomainDataData struct {
 	// This return only appears if you set the `return_https_redirects_status` parameter to `1`.
 	//
 	// Possible values: `0`, `1`.
-	IsHTTPSRedirecting    int64 `json:"is_https_redirecting"`
+	IsHTTPSRedirecting int64 `json:"is_https_redirecting"`
 
 	// Whether the domain is a temporary domain.
 	// * `1` — The domain is temporary.
 	// * `0` — The domain is not temporary.
 	//
 	// Possible values: `0`, `1`.
-	IsTemporary           int64 `json:"is_temporary"`
+	IsTemporary int64 `json:"is_temporary"`
 
 	// The Apache `Options` directive for the domain.
-	Options               string `json:"options"`
+	Options string `json:"options"`
 
 	// The WHM account (root or a reseller) that owns the cPanel account.
-	Owner                 string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// The domain's `open_basedir` setting.
 	// * `1` - Enabled.
@@ -356,19 +351,19 @@ type DomainInfoSingleDomainDataData struct {
 	PHPOpenBasedirProtect int64 `json:"phpopenbasedirprotect"`
 
 	// Apache's port to access the domain.
-	Port                  int64 `json:"port"`
+	Port int64 `json:"port"`
 
 	// An object containing CGI information.
-	ScriptAlias           DomainInfoSingleDomainDataDataScriptAlias `json:"scriptalias"`
+	ScriptAlias DomainInfoSingleDomainDataDataScriptAlias `json:"scriptalias"`
 
 	// The domain's administrator's contact email address.
-	ServerAdmin           string `json:"serveradmin"`
+	ServerAdmin string `json:"serveradmin"`
 
 	// A space-separated list of the domain's aliases.
-	ServerAlias           string `json:"serveralias"`
+	ServerAlias string `json:"serveralias"`
 
 	// The domain's identifier on the server.
-	Servername            string `json:"servername"`
+	Servername string `json:"servername"`
 
 	// The domain type.
 	// * `addon_domain` - The domain is an addon domain.
@@ -377,22 +372,22 @@ type DomainInfoSingleDomainDataData struct {
 	// * `parked_domain` - The domain is a parked domain (domain alias).
 	//
 	// Possible values: `addon_domain`, `sub_domain`, `main_domain`, `parked_domain`.
-	Type2                 string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The domain's Canonical Name (CNAME) setting.
 	// * `On` - Use the CNAME.
 	// * `Off` - Do **not** use the CNAME.
 	//
 	// Possible values: `On`, `Off`.
-	UseCanonicalName      string `json:"usecanonicalname"`
+	UseCanonicalName string `json:"usecanonicalname"`
 
 	// The cPanel account's username.
-	User                  string `json:"user"`
+	User string `json:"user"`
 
 	// The domain's [Apache `mod_userdir` Tweak](https://go.cpanel.net/whmdocsApachemod_userdirTweak) setting.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UserdirProtect        int64 `json:"userdirprotect"`
+	UserdirProtect int64 `json:"userdirprotect"`
 }

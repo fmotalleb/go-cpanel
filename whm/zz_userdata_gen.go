@@ -33,7 +33,6 @@ func (c *Client) GetScopedUserdata(ctx context.Context, args *GetScopedUserdataA
 	return cpanel.WHMCall[map[string]string](ctx, c.c, http.MethodGet, "get_scoped_userdata", args)
 }
 
-
 // SetScopedUserdataArgs are the parameters of the WHM API 1 function `set_scoped_userdata`.
 type SetScopedUserdataArgs struct {
 	// The scope name to modify.
@@ -70,4 +69,3 @@ type SetScopedUserdataArgs struct {
 func (c *Client) SetScopedUserdata(ctx context.Context, args *SetScopedUserdataArgs) (*cpanel.WHMResult[map[string]string], error) {
 	return cpanel.WHMCall[map[string]string](ctx, c.c, http.MethodGet, "set_scoped_userdata", args)
 }
-

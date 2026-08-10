@@ -42,7 +42,6 @@ func (c *PostgresqlClient) CreateDatabase(ctx context.Context, args *PostgresqlC
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "create_database", args)
 }
 
-
 // PostgresqlCreateUserArgs are the parameters of the UAPI function `Postgresql::create_user`.
 type PostgresqlCreateUserArgs struct {
 	// The database user's name.
@@ -78,7 +77,6 @@ func (c *PostgresqlClient) CreateUser(ctx context.Context, args *PostgresqlCreat
 	return cpanel.UAPICall[*int64](ctx, c.c, http.MethodGet, "Postgresql", "create_user", args)
 }
 
-
 // PostgresqlDeleteDatabaseArgs are the parameters of the UAPI function `Postgresql::delete_database`.
 type PostgresqlDeleteDatabaseArgs struct {
 	// The database's name.
@@ -96,7 +94,7 @@ type PostgresqlDeleteDatabaseArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [Postgres role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Postgres role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 54.
 //
@@ -104,7 +102,6 @@ type PostgresqlDeleteDatabaseArgs struct {
 func (c *PostgresqlClient) DeleteDatabase(ctx context.Context, args *PostgresqlDeleteDatabaseArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "delete_database", args)
 }
-
 
 // PostgresqlDeleteUserArgs are the parameters of the UAPI function `Postgresql::delete_user`.
 type PostgresqlDeleteUserArgs struct {
@@ -123,7 +120,7 @@ type PostgresqlDeleteUserArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [PostgreSQL role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [PostgreSQL role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 84.
 //
@@ -131,7 +128,6 @@ type PostgresqlDeleteUserArgs struct {
 func (c *PostgresqlClient) DeleteUser(ctx context.Context, args *PostgresqlDeleteUserArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "delete_user", args)
 }
-
 
 // GetRestrictions calls the UAPI function `Postgresql::get_restrictions` — Return PostgreSQL name length restrictions
 //
@@ -148,17 +144,16 @@ func (c *PostgresqlClient) GetRestrictions(ctx context.Context, extra ...cpanel.
 	return cpanel.UAPICall[PostgresqlGetRestrictionsData](ctx, c.c, http.MethodGet, "Postgresql", "get_restrictions", cpanel.CombineArgs(extra...))
 }
 
-
 // PostgresqlGetRestrictionsData is a generated payload type.
 type PostgresqlGetRestrictionsData struct {
 	// The maximum length of a database name.
 	MaxDatabaseNameLength int64 `json:"max_database_name_length"`
 
 	// The maximum length of a database username.
-	MaxUsernameLength     int64 `json:"max_username_length"`
+	MaxUsernameLength int64 `json:"max_username_length"`
 
 	// If database prefixing is enabled, this return outputs the database prefix. A valid string up to eight characters and an underscore (`_`).
-	Prefix                string `json:"prefix"`
+	Prefix string `json:"prefix"`
 }
 
 // PostgresqlGrantAllPrivilegesArgs are the parameters of the UAPI function `Postgresql::grant_all_privileges`.
@@ -200,14 +195,13 @@ func (c *PostgresqlClient) GrantAllPrivileges(ctx context.Context, args *Postgre
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "grant_all_privileges", args)
 }
 
-
 // ListDatabases calls the UAPI function `Postgresql::list_databases` — Return PostgreSQL databases
 //
 // This function lists an account's PostgreSQL® databases.
 //
 // **Important:**
 //
-//   When you disable the [*Postgres* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [*Postgres* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 84.
 //
@@ -216,11 +210,10 @@ func (c *PostgresqlClient) ListDatabases(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.UAPICall[[]PostgresqlListDatabasesDataItem](ctx, c.c, http.MethodGet, "Postgresql", "list_databases", cpanel.CombineArgs(extra...))
 }
 
-
 // PostgresqlListDatabasesDataItem is a generated payload type.
 type PostgresqlListDatabasesDataItem struct {
 	// The database name.
-	Database  string `json:"database"`
+	Database string `json:"database"`
 
 	// The disk space that the database uses, in bytes.
 	DiskUsage int64 `json:"disk_usage"`
@@ -230,7 +223,7 @@ type PostgresqlListDatabasesDataItem struct {
 	// **Note:**
 	//
 	//   If no users exist on a database, the function returns an empty array
-	Users     []string `json:"users"`
+	Users []string `json:"users"`
 }
 
 // ListUsers calls the UAPI function `Postgresql::list_users` — Return PostgreSQL users
@@ -247,7 +240,6 @@ type PostgresqlListDatabasesDataItem struct {
 func (c *PostgresqlClient) ListUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "Postgresql", "list_users", cpanel.CombineArgs(extra...))
 }
-
 
 // PostgresqlRenameDatabaseArgs are the parameters of the UAPI function `Postgresql::rename_database`.
 type PostgresqlRenameDatabaseArgs struct {
@@ -287,7 +279,6 @@ type PostgresqlRenameDatabaseArgs struct {
 func (c *PostgresqlClient) RenameDatabase(ctx context.Context, args *PostgresqlRenameDatabaseArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "rename_database", args)
 }
-
 
 // PostgresqlRenameUserArgs are the parameters of the UAPI function `Postgresql::rename_user`.
 type PostgresqlRenameUserArgs struct {
@@ -333,7 +324,6 @@ func (c *PostgresqlClient) RenameUser(ctx context.Context, args *PostgresqlRenam
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "rename_user", args)
 }
 
-
 // PostgresqlRenameUserNoPasswordArgs are the parameters of the UAPI function `Postgresql::rename_user_no_password`.
 type PostgresqlRenameUserNoPasswordArgs struct {
 	// The database user's new name.
@@ -378,7 +368,6 @@ func (c *PostgresqlClient) RenameUserNoPassword(ctx context.Context, args *Postg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "rename_user_no_password", args)
 }
 
-
 // PostgresqlRevokeAllPrivilegesArgs are the parameters of the UAPI function `Postgresql::revoke_all_privileges`.
 type PostgresqlRevokeAllPrivilegesArgs struct {
 	// The database's name.
@@ -418,7 +407,6 @@ func (c *PostgresqlClient) RevokeAllPrivileges(ctx context.Context, args *Postgr
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "revoke_all_privileges", args)
 }
 
-
 // PostgresqlSetPasswordArgs are the parameters of the UAPI function `Postgresql::set_password`.
 type PostgresqlSetPasswordArgs struct {
 	// The user's new password.
@@ -445,7 +433,7 @@ type PostgresqlSetPasswordArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [Postgres role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Postgres role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -453,7 +441,6 @@ type PostgresqlSetPasswordArgs struct {
 func (c *PostgresqlClient) SetPassword(ctx context.Context, args *PostgresqlSetPasswordArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "set_password", args)
 }
-
 
 // UpdatePrivileges calls the UAPI function `Postgresql::update_privileges` — Update PostgreSQL® privileges
 //
@@ -475,4 +462,3 @@ func (c *PostgresqlClient) SetPassword(ctx context.Context, args *PostgresqlSetP
 func (c *PostgresqlClient) UpdatePrivileges(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Postgresql", "update_privileges", cpanel.CombineArgs(extra...))
 }
-

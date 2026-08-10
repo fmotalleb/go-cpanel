@@ -33,12 +33,11 @@ func (c *IntegrationClient) FetchURL(ctx context.Context, args *IntegrationFetch
 	return cpanel.UAPICall[IntegrationFetchURLData](ctx, c.c, http.MethodGet, "Integration", "fetch_url", args)
 }
 
-
 // IntegrationFetchURLData is a generated payload type.
 type IntegrationFetchURLData struct {
 	// The publicly-available URL to which the application will redirect visitors.
 	RedirectURL string `json:"redirect_url"`
 
 	// The publicly-available URL to which the application redirects visitors if the `redirect_url` location is unavailable.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 }

@@ -34,7 +34,6 @@ func (c *Client) AbortTransferSession(ctx context.Context, args *AbortTransferSe
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "abort_transfer_session", args)
 }
 
-
 // AnalyzeTransferSessionRemoteArgs are the parameters of the WHM API 1 function `analyze_transfer_session_remote`.
 type AnalyzeTransferSessionRemoteArgs struct {
 	// The transfer session's ID.
@@ -57,16 +56,15 @@ func (c *Client) AnalyzeTransferSessionRemote(ctx context.Context, args *Analyze
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "analyze_transfer_session_remote", args)
 }
 
-
 // AvailableTransferModules calls the WHM API 1 function `available_transfer_modules` — Return available transfer modules
 //
 // This function lists all available transfer modules.
 //
 // **Note:**
 //
-//   For more information about how this function works with other functions in the transfer and restore process, read our
-//   [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide)
-//   documentation.
+//	For more information about how this function works with other functions in the transfer and restore process, read our
+//	[Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide)
+//	documentation.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -74,7 +72,6 @@ func (c *Client) AnalyzeTransferSessionRemote(ctx context.Context, args *Analyze
 func (c *Client) AvailableTransferModules(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[AvailableTransferModulesData], error) {
 	return cpanel.WHMCall[AvailableTransferModulesData](ctx, c.c, http.MethodGet, "available_transfer_modules", cpanel.CombineArgs(extra...))
 }
-
 
 // AvailableTransferModulesData is a generated payload type.
 type AvailableTransferModulesData struct {
@@ -238,11 +235,11 @@ type CreateRemoteRootTransferSessionArgs struct {
 //
 // **Important:**
 //
-//   For information about the ports that cPanel & WHM uses, read our [How to Configure Your Firewall for cPanel Services](https://go.cpanel.net/firewall) documentation.
+//	For information about the ports that cPanel & WHM uses, read our [How to Configure Your Firewall for cPanel Services](https://go.cpanel.net/firewall) documentation.
 //
 // **Note:**
 //
-//   For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
+//	For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
 //
 // ### Authentication
 // There are several methods that you can use to authenticate a transfer session with the remote server:
@@ -268,14 +265,13 @@ func (c *Client) CreateRemoteRootTransferSession(ctx context.Context, args *Crea
 	return cpanel.WHMCall[CreateRemoteRootTransferSessionData](ctx, c.c, http.MethodGet, "create_remote_root_transfer_session", args)
 }
 
-
 // CreateRemoteRootTransferSessionData is a generated payload type.
 type CreateRemoteRootTransferSessionData struct {
 	// The HTML output from the analysis of the remote server connection.
-	AnalyzeRawout     string `json:"analyze_rawout"`
+	AnalyzeRawout string `json:"analyze_rawout"`
 
 	// The HTML output from the creation of the remote server connection.
-	CreateRawout      string `json:"create_rawout"`
+	CreateRawout string `json:"create_rawout"`
 
 	// The transfer session's ID.
 	TransferSessionID string `json:"transfer_session_id"`
@@ -331,7 +327,6 @@ func (c *Client) CreateRemoteUserTransferSession(ctx context.Context, args *Crea
 	return cpanel.WHMCall[CreateRemoteUserTransferSessionData](ctx, c.c, http.MethodGet, "create_remote_user_transfer_session", args)
 }
 
-
 // CreateRemoteUserTransferSessionData is a generated payload type.
 type CreateRemoteUserTransferSessionData struct {
 	// The transfer session's ID.
@@ -365,7 +360,6 @@ func (c *Client) DeleteAccountArchives(ctx context.Context, args *DeleteAccountA
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "delete_account_archives", args)
 }
 
-
 // EnqueueTransferItem calls the WHM API 1 function `enqueue_transfer_item` — Add module to transfer session
 //
 // This function adds a transfer session to a queue. For more information about how this function works with other
@@ -382,7 +376,6 @@ func (c *Client) DeleteAccountArchives(ctx context.Context, args *DeleteAccountA
 func (c *Client) EnqueueTransferItem(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "enqueue_transfer_item", cpanel.CombineArgs(extra...))
 }
-
 
 // FetchTransferSessionLogArgs are the parameters of the WHM API 1 function `fetch_transfer_session_log`.
 type FetchTransferSessionLogArgs struct {
@@ -406,7 +399,7 @@ type FetchTransferSessionLogArgs struct {
 //
 // **Note:**
 //
-//  For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
+//	For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -414,7 +407,6 @@ type FetchTransferSessionLogArgs struct {
 func (c *Client) FetchTransferSessionLog(ctx context.Context, args *FetchTransferSessionLogArgs) (*cpanel.WHMResult[FetchTransferSessionLogData], error) {
 	return cpanel.WHMCall[FetchTransferSessionLogData](ctx, c.c, http.MethodGet, "fetch_transfer_session_log", args)
 }
-
 
 // FetchTransferSessionLogData is a generated payload type.
 type FetchTransferSessionLogData struct {
@@ -447,7 +439,6 @@ type GetTransferSessionStateArgs struct {
 func (c *Client) GetTransferSessionState(ctx context.Context, args *GetTransferSessionStateArgs) (*cpanel.WHMResult[GetTransferSessionStateData], error) {
 	return cpanel.WHMCall[GetTransferSessionStateData](ctx, c.c, http.MethodGet, "get_transfer_session_state", args)
 }
-
 
 // GetTransferSessionStateData is a generated payload type.
 type GetTransferSessionStateData struct {
@@ -492,7 +483,6 @@ type PauseTransferSessionArgs struct {
 func (c *Client) PauseTransferSession(ctx context.Context, args *PauseTransferSessionArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "pause_transfer_session", args)
 }
-
 
 // RemoteBasicCredentialCheckArgs are the parameters of the WHM API 1 function `remote_basic_credential_check`.
 type RemoteBasicCredentialCheckArgs struct {
@@ -584,11 +574,10 @@ func (c *Client) RemoteBasicCredentialCheck(ctx context.Context, args *RemoteBas
 	return cpanel.WHMCall[RemoteBasicCredentialCheckData](ctx, c.c, http.MethodGet, "remote_basic_credential_check", args)
 }
 
-
 // RemoteBasicCredentialCheckData is a generated payload type.
 type RemoteBasicCredentialCheckData struct {
 	// The function call's raw HTML output.
-	Output   string `json:"output"`
+	Output string `json:"output"`
 
 	// The function call's response.
 	Response string `json:"response"`
@@ -611,7 +600,7 @@ type RetrieveTransferSessionRemoteAnalysisArgs struct {
 //
 // **Note:**
 //
-//   For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
+//	For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -619,7 +608,6 @@ type RetrieveTransferSessionRemoteAnalysisArgs struct {
 func (c *Client) RetrieveTransferSessionRemoteAnalysis(ctx context.Context, args *RetrieveTransferSessionRemoteAnalysisArgs) (*cpanel.WHMResult[RetrieveTransferSessionRemoteAnalysisData], error) {
 	return cpanel.WHMCall[RetrieveTransferSessionRemoteAnalysisData](ctx, c.c, http.MethodGet, "retrieve_transfer_session_remote_analysis", args)
 }
-
 
 // An object containing the transfer configuration options.
 type RetrieveTransferSessionRemoteAnalysisDataConfig struct {
@@ -644,7 +632,7 @@ type RetrieveTransferSessionRemoteAnalysisDataItems struct {
 //
 // **Note:**
 //
-//   The database's name is the key's name.
+//	The database's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataLocalDbsDbsMysqlValue struct {
 	// Owner of the database.
 	Owner string `json:"owner"`
@@ -654,7 +642,7 @@ type RetrieveTransferSessionRemoteAnalysisDataLocalDbsDbsMysqlValue struct {
 //
 // **Note:**
 //
-//   The database's name is the key's name.
+//	The database's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataLocalDbsDbsPgsqlValue struct {
 	// Owner of the database.
 	Owner string `json:"owner"`
@@ -673,7 +661,7 @@ type RetrieveTransferSessionRemoteAnalysisDataLocalDbsDbs struct {
 //
 // **Note:**
 //
-//   The database user's name is the key's name.
+//	The database user's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataLocalDbsUsersMysqlValue struct {
 	// Owner of the database user.
 	Owner string `json:"owner"`
@@ -683,7 +671,7 @@ type RetrieveTransferSessionRemoteAnalysisDataLocalDbsUsersMysqlValue struct {
 //
 // **Note:**
 //
-//   The database user's name is the key's name.
+//	The database user's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataLocalDbsUsersPgsqlValue struct {
 	// Owner of the user.
 	Owner string `json:"owner"`
@@ -701,7 +689,7 @@ type RetrieveTransferSessionRemoteAnalysisDataLocalDbsUsers struct {
 // An object containing the local server's databases and users.
 type RetrieveTransferSessionRemoteAnalysisDataLocalDbs struct {
 	// An object containing the local server's databases.
-	Dbs   RetrieveTransferSessionRemoteAnalysisDataLocalDbsDbs `json:"dbs"`
+	Dbs RetrieveTransferSessionRemoteAnalysisDataLocalDbsDbs `json:"dbs"`
 
 	// An object containing the local server's database users.
 	Users RetrieveTransferSessionRemoteAnalysisDataLocalDbsUsers `json:"users"`
@@ -710,25 +698,25 @@ type RetrieveTransferSessionRemoteAnalysisDataLocalDbs struct {
 // An object containing the local server's information.
 type RetrieveTransferSessionRemoteAnalysisDataLocal struct {
 	// A list of the local server's available IP addresses.
-	AvailableIPs    []string `json:"available_ips"`
+	AvailableIPs []string `json:"available_ips"`
 
 	// An object containing the local server's databases and users.
-	Dbs             RetrieveTransferSessionRemoteAnalysisDataLocalDbs `json:"dbs"`
+	Dbs RetrieveTransferSessionRemoteAnalysisDataLocalDbs `json:"dbs"`
 
 	// A list of the local server's dedicated IP addresses.
-	DedicatedIPs    map[string]string `json:"dedicated_ips"`
+	DedicatedIPs map[string]string `json:"dedicated_ips"`
 
 	// A list of the local server's domains and owners.
-	Domains         json.RawMessage `json:"domains"`
+	Domains json.RawMessage `json:"domains"`
 
 	// An object containing the local server's account groups.
-	Groups          map[string]int64 `json:"groups"`
+	Groups map[string]int64 `json:"groups"`
 
 	// The local server's hostname.
-	Host            string `json:"host"`
+	Host string `json:"host"`
 
 	// The local server's major version.
-	MajorVersion    string `json:"major_version"`
+	MajorVersion string `json:"major_version"`
 
 	// The database type Roundcube uses on the local server.
 	//
@@ -736,23 +724,23 @@ type RetrieveTransferSessionRemoteAnalysisDataLocal struct {
 	RoundcubeDbtype string `json:"roundcube_dbtype"`
 
 	// An object containing the local server's account users.
-	Users           map[string]int64 `json:"users"`
+	Users map[string]int64 `json:"users"`
 
 	// The local server's version of cPanel.
-	Version         string `json:"version"`
+	Version string `json:"version"`
 }
 
 // An object containing the module.
 //
 // **Note:**
 //
-//   The module name is the key's name.
+//	The module name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataModulesValue struct {
 	// Module information from both servers.
 	Analysis map[string]string `json:"analysis"`
 
 	// The name of the module.
-	Name     string `json:"name"`
+	Name string `json:"name"`
 }
 
 // An object containing transfer session options.
@@ -769,14 +757,14 @@ type RetrieveTransferSessionRemoteAnalysisDataOptions struct {
 	// * `1` _ Transfer session will **not** use Restirced Restore.
 	//
 	// Possible values: `0`, `1`.
-	Unrestricted      int64 `json:"unrestricted"`
+	Unrestricted int64 `json:"unrestricted"`
 }
 
 // An object containing the database owner.
 //
 // **Note:**
 //
-//   The database's name is the key's name.
+//	The database's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsDbsMysqlValue struct {
 	// Owner of the database.
 	Owner string `json:"owner"`
@@ -786,7 +774,7 @@ type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsDbsMysqlValue struct {
 //
 // **Note:**
 //
-//   The database's name is the key's name.
+//	The database's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsDbsPgsqlValue struct {
 	// Owner of the database.
 	Owner string `json:"owner"`
@@ -805,7 +793,7 @@ type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsDbs struct {
 //
 // **Note:**
 //
-//   The database user's name is the key's name.
+//	The database user's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsUsersMysqlValue struct {
 	// Owner of the database user.
 	Owner string `json:"owner"`
@@ -815,7 +803,7 @@ type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsUsersMysqlValue struct {
 //
 // **Note:**
 //
-//   The database user's name is the key's name.
+//	The database user's name is the key's name.
 type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsUsersPgsqlValue struct {
 	// Owner of the user.
 	Owner string `json:"owner"`
@@ -833,7 +821,7 @@ type RetrieveTransferSessionRemoteAnalysisDataRemoteDbsUsers struct {
 // An object containing the remote server's databases and users.
 type RetrieveTransferSessionRemoteAnalysisDataRemoteDbs struct {
 	// An object containing the remote server's databases.
-	Dbs   RetrieveTransferSessionRemoteAnalysisDataRemoteDbsDbs `json:"dbs"`
+	Dbs RetrieveTransferSessionRemoteAnalysisDataRemoteDbsDbs `json:"dbs"`
 
 	// An object containing the remote server's database users.
 	Users RetrieveTransferSessionRemoteAnalysisDataRemoteDbsUsers `json:"users"`
@@ -842,32 +830,32 @@ type RetrieveTransferSessionRemoteAnalysisDataRemoteDbs struct {
 // RetrieveTransferSessionRemoteAnalysisDataRemoteLinkedNodesItem is a generated payload type.
 type RetrieveTransferSessionRemoteAnalysisDataRemoteLinkedNodesItem struct {
 	// The remote server's linked cPanel server node alias.
-	Alias              string `json:"alias"`
+	Alias string `json:"alias"`
 
 	// Enabled services on the linked node.
-	EnabledServices    []string `json:"enabled_services"`
+	EnabledServices []string `json:"enabled_services"`
 
 	// The remote server's linked cPanel server node hostname.
-	Hostname           string `json:"hostname"`
+	Hostname string `json:"hostname"`
 
 	// Last time linked node was checked.
-	LastCheck          int64 `json:"last_check"`
+	LastCheck int64 `json:"last_check"`
 
 	// An object containing server role system settings.
-	SystemSettings     map[string]map[string]int64 `json:"system_settings"`
+	SystemSettings map[string]map[string]int64 `json:"system_settings"`
 
 	// Whether the connection to the server node is using TLS verification.
 	// * `0` - Server node connection is **note** using TLS verification.
 	// * `1` - Server node connection is using TLS verification.
 	//
 	// Possible values: `0`, `1`.
-	TLSVerified        int64 `json:"tls_verified"`
+	TLSVerified int64 `json:"tls_verified"`
 
 	// The username the server node link uses.
-	Username           string `json:"username"`
+	Username string `json:"username"`
 
 	// The server node's software version number.
-	Version            string `json:"version"`
+	Version string `json:"version"`
 
 	// An object containing a group of services required for the remote server's linked cPanel server node to perform a specific task.
 	WorkerCapabilities map[string]json.RawMessage `json:"worker_capabilities"`
@@ -876,13 +864,13 @@ type RetrieveTransferSessionRemoteAnalysisDataRemoteLinkedNodesItem struct {
 // An object containing the remote server's information.
 type RetrieveTransferSessionRemoteAnalysisDataRemote struct {
 	// Remote server data load error message.
-	Conflicts             json.RawMessage `json:"conflicts"`
+	Conflicts json.RawMessage `json:"conflicts"`
 
 	// Remote server internal version.
-	CpVersion             string `json:"cpversion"`
+	CpVersion string `json:"cpversion"`
 
 	// An object containing the remote server's databases and users.
-	Dbs                   RetrieveTransferSessionRemoteAnalysisDataRemoteDbs `json:"dbs"`
+	Dbs RetrieveTransferSessionRemoteAnalysisDataRemoteDbs `json:"dbs"`
 
 	// Whether the remote server can transmit disk usage information to the target server.
 	// * `1` - Remote server can transmit disk usage information.
@@ -893,7 +881,7 @@ type RetrieveTransferSessionRemoteAnalysisDataRemote struct {
 	//   cPanel & WHM servers have this ability by default.
 	//
 	// Possible values: `0`, `1`.
-	HasDiskUsed           int64 `json:"has_disk_used"`
+	HasDiskUsed int64 `json:"has_disk_used"`
 
 	// Whether the remote server can transmit file usage information to the target server.
 	// * `1` - Remote server can transmit file usage information.
@@ -904,58 +892,58 @@ type RetrieveTransferSessionRemoteAnalysisDataRemote struct {
 	//   cPanel & WHM servers have this ability by default.
 	//
 	// Possible values: `0`, `1`.
-	HasFilesUsed          int64 `json:"has_files_used"`
+	HasFilesUsed int64 `json:"has_files_used"`
 
 	// Whether the remote server can transmit owner information to the target server.
 	// * `1` — Remote server can transmit owner information.
 	// * `0` — Remote server **cannot** transfer owner information, and the transfer tool will assume that root owns all accounts.
 	//
 	// Possible values: `0`, `1`.
-	HasOwners             int64 `json:"has_owners"`
+	HasOwners int64 `json:"has_owners"`
 
 	// Whether the remote server has package extensions.
 	// * `1` - Remote server has package extensions.
 	// * `0` - Remote server does **not** have package extensions.
 	//
 	// Possible values: `0`, `1`.
-	HasPackageExtensions  int64 `json:"has_package_extensions"`
+	HasPackageExtensions int64 `json:"has_package_extensions"`
 
 	// Whether the remote server has the transfer tool.
 	// * `1` - Remote server has the transfer tool.
 	// * `0` - Remote server does **not** have the transfer tool.
 	//
 	// Possible values: `0`, `1`.
-	HasXfertool           int64 `json:"has_xfertool"`
+	HasXfertool int64 `json:"has_xfertool"`
 
 	// The remote server's IP address.
-	Host                  string `json:"host"`
+	Host string `json:"host"`
 
 	// The local server's hostname.
-	Hostname              string `json:"hostname"`
+	Hostname string `json:"hostname"`
 
 	// An array containing the remote server's linked cPanel server nodes, if any exist.
-	LinkedNodes           []RetrieveTransferSessionRemoteAnalysisDataRemoteLinkedNodesItem `json:"linked_nodes"`
+	LinkedNodes []RetrieveTransferSessionRemoteAnalysisDataRemoteLinkedNodesItem `json:"linked_nodes"`
 
 	// The remote server's major version.
-	MajorVersion          string `json:"major_version"`
+	MajorVersion string `json:"major_version"`
 
 	// The remote servers reseller accounts that own one or more accounts.
 	//
 	// **Note:**
 	//
 	//   This won't return a value if the `root` user is the only user that owns accounts.
-	Resellers             map[string]int64 `json:"resellers"`
+	Resellers map[string]int64 `json:"resellers"`
 
 	// The database type Roundcube uses on the remote server.
 	//
 	// Possible values: `sqlite`, `mysql`.
-	RoundcubeDbtype       string `json:"roundcube_dbtype"`
+	RoundcubeDbtype string `json:"roundcube_dbtype"`
 
 	// The remote server's type.
 	// * An internal cPanel type ID dependent on cPanel version.
 	// * `Plesk`
 	// * `Ensim`
-	ServerType            string `json:"server_type"`
+	ServerType string `json:"server_type"`
 
 	// Whether the remote server supports the Live Transfers feature in WHM's Transfer Tool  interface (WHM >> Home >> Transfers >> Transfer Tool).
 	// * `1` — Supported.
@@ -965,28 +953,28 @@ type RetrieveTransferSessionRemoteAnalysisDataRemote struct {
 	SupportsLiveTransfers int64 `json:"supports_live_transfers"`
 
 	// The remote server's software version number.
-	Version               string `json:"version"`
+	Version string `json:"version"`
 }
 
 // RetrieveTransferSessionRemoteAnalysisData is a generated payload type.
 type RetrieveTransferSessionRemoteAnalysisData struct {
 	// An object containing the transfer configuration options.
-	Config            RetrieveTransferSessionRemoteAnalysisDataConfig `json:"config"`
+	Config RetrieveTransferSessionRemoteAnalysisDataConfig `json:"config"`
 
 	// An object containing items to transfer.
-	Items             RetrieveTransferSessionRemoteAnalysisDataItems `json:"items"`
+	Items RetrieveTransferSessionRemoteAnalysisDataItems `json:"items"`
 
 	// An object containing the local server's information.
-	Local             RetrieveTransferSessionRemoteAnalysisDataLocal `json:"local"`
+	Local RetrieveTransferSessionRemoteAnalysisDataLocal `json:"local"`
 
 	// An list of objects containing the module infromation of both servers.
-	Modules           map[string]RetrieveTransferSessionRemoteAnalysisDataModulesValue `json:"modules"`
+	Modules map[string]RetrieveTransferSessionRemoteAnalysisDataModulesValue `json:"modules"`
 
 	// An object containing transfer session options.
-	Options           RetrieveTransferSessionRemoteAnalysisDataOptions `json:"options"`
+	Options RetrieveTransferSessionRemoteAnalysisDataOptions `json:"options"`
 
 	// An object containing the remote server's information.
-	Remote            RetrieveTransferSessionRemoteAnalysisDataRemote `json:"remote"`
+	Remote RetrieveTransferSessionRemoteAnalysisDataRemote `json:"remote"`
 
 	// The transfer session's ID.
 	TransferSessionID string `json:"transfer_session_id"`
@@ -1009,7 +997,7 @@ type StartTransferSessionArgs struct {
 //
 // **Note:**
 //
-//   For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
+//	For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -1017,7 +1005,6 @@ type StartTransferSessionArgs struct {
 func (c *Client) StartTransferSession(ctx context.Context, args *StartTransferSessionArgs) (*cpanel.WHMResult[StartTransferSessionData], error) {
 	return cpanel.WHMCall[StartTransferSessionData](ctx, c.c, http.MethodGet, "start_transfer_session", args)
 }
-
 
 // StartTransferSessionData is a generated payload type.
 type StartTransferSessionData struct {
@@ -1060,7 +1047,6 @@ func (c *Client) TransferModuleSchema(ctx context.Context, args *TransferModuleS
 	return cpanel.WHMCall[TransferModuleSchemaData](ctx, c.c, http.MethodGet, "transfer_module_schema", args)
 }
 
-
 // An object containing the key's information.
 //
 // **Note:**
@@ -1081,10 +1067,10 @@ type TransferModuleSchemaDataSchemaKeysValue struct {
 // An object containing information about the schema's keys.
 type TransferModuleSchemaDataSchema struct {
 	// An object containing the schema's keys.
-	Keys     map[string]TransferModuleSchemaDataSchemaKeysValue `json:"keys"`
+	Keys map[string]TransferModuleSchemaDataSchemaKeysValue `json:"keys"`
 
 	// The schema's primary key.
-	Primary  []string `json:"primary"`
+	Primary []string `json:"primary"`
 
 	// A list of schema's required keys.
 	Required []string `json:"required"`
@@ -1113,7 +1099,7 @@ type ValidateSystemUserArgs struct {
 //
 // **Note:**
 //
-//   For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
+//	For more information about how this function works with other functions in the transfer and restore process, read our [Guide to Transfer and Restore API Functions](https://go.cpanel.net/transferrestoreAPIguide) documentation.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -1122,7 +1108,6 @@ func (c *Client) ValidateSystemUser(ctx context.Context, args *ValidateSystemUse
 	return cpanel.WHMCall[ValidateSystemUserData](ctx, c.c, http.MethodGet, "validate_system_user", args)
 }
 
-
 // ValidateSystemUserData is a generated payload type.
 type ValidateSystemUserData struct {
 	// Whether the username exists on the server.
@@ -1130,21 +1115,21 @@ type ValidateSystemUserData struct {
 	// * `0` — Does **not** exist.
 	//
 	// Possible values: `0`, `1`.
-	Exists           int64 `json:"exists"`
+	Exists int64 `json:"exists"`
 
 	// Whether the username is reserved.
 	// * `1` — Reserved.
 	// * `0` — **Not** reserved.
 	//
 	// Possible values: `0`, `1`.
-	Reserved         int64 `json:"reserved"`
+	Reserved int64 `json:"reserved"`
 
 	// Whether the system can use the username to create a new account.
 	// * `1` — Usable.
 	// * `0` — Unusable.
 	//
 	// Possible values: `0`, `1`.
-	ValidForNew      int64 `json:"valid_for_new"`
+	ValidForNew int64 `json:"valid_for_new"`
 
 	// Whether the username is valid for a transferred account, but not a new account.
 	// * `1` — Valid for transfer, but **not** a new account.

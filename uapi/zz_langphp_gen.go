@@ -46,11 +46,11 @@ type LangPHPPHPGetDomainHandlerArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system disables this function. For more information, read our How to Use Server Profiles documentation.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system disables this function. For more information, read our How to Use Server Profiles documentation.
 //
 // Available since cPanel & WHM version cPanel 68.
 //
@@ -58,7 +58,6 @@ type LangPHPPHPGetDomainHandlerArgs struct {
 func (c *LangPHPClient) PHPGetDomainHandler(ctx context.Context, args *LangPHPPHPGetDomainHandlerArgs) (*cpanel.UAPIResult[LangPHPPHPGetDomainHandlerData], error) {
 	return cpanel.UAPICall[LangPHPPHPGetDomainHandlerData](ctx, c.c, http.MethodGet, "LangPHP", "php_get_domain_handler", args)
 }
-
 
 // LangPHPPHPGetDomainHandlerData is a generated payload type.
 type LangPHPPHPGetDomainHandlerData struct {
@@ -99,11 +98,11 @@ type LangPHPPHPGetImpactedDomainsArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 62.
 //
@@ -111,7 +110,6 @@ type LangPHPPHPGetImpactedDomainsArgs struct {
 func (c *LangPHPClient) PHPGetImpactedDomains(ctx context.Context, args *LangPHPPHPGetImpactedDomainsArgs) (*cpanel.UAPIResult[LangPHPPHPGetImpactedDomainsData], error) {
 	return cpanel.UAPICall[LangPHPPHPGetImpactedDomainsData](ctx, c.c, http.MethodGet, "LangPHP", "php_get_impacted_domains", args)
 }
-
 
 // LangPHPPHPGetImpactedDomainsData is a generated payload type.
 type LangPHPPHPGetImpactedDomainsData struct {
@@ -129,11 +127,11 @@ type LangPHPPHPGetImpactedDomainsData struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -141,7 +139,6 @@ type LangPHPPHPGetImpactedDomainsData struct {
 func (c *LangPHPClient) PHPGetInstalledVersions(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[LangPHPPHPGetInstalledVersionsData], error) {
 	return cpanel.UAPICall[LangPHPPHPGetInstalledVersionsData](ctx, c.c, http.MethodGet, "LangPHP", "php_get_installed_versions", cpanel.CombineArgs(extra...))
 }
-
 
 // LangPHPPHPGetInstalledVersionsData is a generated payload type.
 type LangPHPPHPGetInstalledVersionsData struct {
@@ -160,7 +157,7 @@ type LangPHPPHPGetInstalledVersionsData struct {
 //
 // **Important**:
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -168,7 +165,6 @@ type LangPHPPHPGetInstalledVersionsData struct {
 func (c *LangPHPClient) PHPGetSystemDefaultVersion(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[LangPHPPHPGetSystemDefaultVersionData], error) {
 	return cpanel.UAPICall[LangPHPPHPGetSystemDefaultVersionData](ctx, c.c, http.MethodGet, "LangPHP", "php_get_system_default_version", cpanel.CombineArgs(extra...))
 }
-
 
 // LangPHPPHPGetSystemDefaultVersionData is a generated payload type.
 type LangPHPPHPGetSystemDefaultVersionData struct {
@@ -200,11 +196,11 @@ type LangPHPPHPGetVhostVersionsArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -213,14 +209,13 @@ func (c *LangPHPClient) PHPGetVhostVersions(ctx context.Context, args *LangPHPPH
 	return cpanel.UAPICall[[]LangPHPPHPGetVhostVersionsDataItem](ctx, c.c, http.MethodGet, "LangPHP", "php_get_vhost_versions", args)
 }
 
-
 // An object containing the domain's PHP-FPM parameters.
 type LangPHPPHPGetVhostVersionsDataItemPHPFPMPoolParms struct {
 	// The maximum number of child pages per pool.
-	PmMaxChildren        int64 `json:"pm_max_children"`
+	PmMaxChildren int64 `json:"pm_max_children"`
 
 	// The maximum number of requests per pool.
-	PmMaxRequests        int64 `json:"pm_max_requests"`
+	PmMaxRequests int64 `json:"pm_max_requests"`
 
 	// A specified time of idleness before the system kills an FPM child process.
 	PmProcessIdleTimeout int64 `json:"pm_process_idle_timeout"`
@@ -229,7 +224,7 @@ type LangPHPPHPGetVhostVersionsDataItemPHPFPMPoolParms struct {
 // LangPHPPHPGetVhostVersionsDataItemPhpversionSourceItem is a generated payload type.
 type LangPHPPHPGetVhostVersionsDataItemPhpversionSourceItem struct {
 	// The domain the virtual host inherits its PHP version from.
-	Domain        string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether the virtual host uses the system's default PHP version.
 	// * `1` - Uses the system default PHP version.
@@ -245,16 +240,16 @@ type LangPHPPHPGetVhostVersionsDataItemPhpversionSourceItem struct {
 // LangPHPPHPGetVhostVersionsDataItem is a generated payload type.
 type LangPHPPHPGetVhostVersionsDataItem struct {
 	// The account's name.
-	Account          string `json:"account"`
+	Account string `json:"account"`
 
 	// The account's owner.
-	AccountOwner     string `json:"account_owner"`
+	AccountOwner string `json:"account_owner"`
 
 	// The virtual host's document root.
-	Documentroot     string `json:"documentroot"`
+	Documentroot string `json:"documentroot"`
 
 	// The virtual host's home directory.
-	Homedir          string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// Whether the virtual host is the primary domain.
 	//
@@ -264,7 +259,7 @@ type LangPHPPHPGetVhostVersionsDataItem struct {
 	// * `0` - **Not** the primary domain
 	//
 	// Possible values: `1`, `0`.
-	MainDomain       int64 `json:"main_domain"`
+	MainDomain int64 `json:"main_domain"`
 
 	// Whether FPM is enabled on the virtual host.
 	//
@@ -272,10 +267,10 @@ type LangPHPPHPGetVhostVersionsDataItem struct {
 	// * `0` - PHP-FPM **not** enabled.
 	//
 	// Possible values: `0`, `1`.
-	PHPFPM           int64 `json:"php_fpm"`
+	PHPFPM int64 `json:"php_fpm"`
 
 	// An object containing the domain's PHP-FPM parameters.
-	PHPFPMPoolParms  LangPHPPHPGetVhostVersionsDataItemPHPFPMPoolParms `json:"php_fpm_pool_parms"`
+	PHPFPMPoolParms LangPHPPHPGetVhostVersionsDataItemPHPFPMPoolParms `json:"php_fpm_pool_parms"`
 
 	// How the virtual host determines its PHP version.
 	PhpversionSource []LangPHPPHPGetVhostVersionsDataItemPhpversionSourceItem `json:"phpversion_source"`
@@ -285,10 +280,10 @@ type LangPHPPHPGetVhostVersionsDataItem struct {
 	// * `ea-php73`
 	// * `ea-php74`
 	// * Any custom PHP package name.
-	Version          string `json:"version"`
+	Version string `json:"version"`
 
 	// The virtual host's name.
-	Vhost            string `json:"vhost"`
+	Vhost string `json:"vhost"`
 }
 
 // LangPHPPHPINIGetUserBasicDirectivesArgs are the parameters of the UAPI function `LangPHP::php_ini_get_user_basic_directives`.
@@ -324,11 +319,11 @@ type LangPHPPHPINIGetUserBasicDirectivesArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
+//	This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -337,17 +332,16 @@ func (c *LangPHPClient) PHPINIGetUserBasicDirectives(ctx context.Context, args *
 	return cpanel.UAPICall[LangPHPPHPINIGetUserBasicDirectivesData](ctx, c.c, http.MethodGet, "LangPHP", "php_ini_get_user_basic_directives", args)
 }
 
-
 // LangPHPPHPINIGetUserBasicDirectivesDataDirectivesItem is a generated payload type.
 type LangPHPPHPINIGetUserBasicDirectivesDataDirectivesItem struct {
 	// The directive's default value.
 	DefaultValue any `json:"default_value"`
 
 	// The purpose of the directive.
-	Info         string `json:"info"`
+	Info string `json:"info"`
 
 	// The directive's name.
-	Key          string `json:"key"`
+	Key string `json:"key"`
 
 	// The directive's [PHP_INI mode](http://php.net/manual/en/configuration.changes.modes.php).
 	//
@@ -357,7 +351,7 @@ type LangPHPPHPINIGetUserBasicDirectivesDataDirectivesItem struct {
 	// * `PHPINI_ONLY`
 	//
 	// Possible values: `PHP_INI_SYSTEM`, `PHP_INI_PERDIR`, `PHP_INI_ALL`, `PHPINI_ONLY`.
-	PHPINIMode   string `json:"php_ini_mode"`
+	PHPINIMode string `json:"php_ini_mode"`
 
 	// The type of value that the directive uses.
 	//
@@ -367,10 +361,10 @@ type LangPHPPHPINIGetUserBasicDirectivesDataDirectivesItem struct {
 	// * `float`
 	//
 	// Possible values: `string`, `boolean`, `integer`, `float`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The directive's current value.
-	Value        string `json:"value"`
+	Value string `json:"value"`
 }
 
 // LangPHPPHPINIGetUserBasicDirectivesData is a generated payload type.
@@ -410,11 +404,11 @@ type LangPHPPHPINIGetUserContentArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
+//	This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -422,7 +416,6 @@ type LangPHPPHPINIGetUserContentArgs struct {
 func (c *LangPHPClient) PHPINIGetUserContent(ctx context.Context, args *LangPHPPHPINIGetUserContentArgs) (*cpanel.UAPIResult[LangPHPPHPINIGetUserContentData], error) {
 	return cpanel.UAPICall[LangPHPPHPINIGetUserContentData](ctx, c.c, http.MethodGet, "LangPHP", "php_ini_get_user_content", args)
 }
-
 
 // LangPHPPHPINIGetUserContentData is a generated payload type.
 type LangPHPPHPINIGetUserContentData struct {
@@ -436,11 +429,11 @@ type LangPHPPHPINIGetUserContentData struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
+//	This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -449,42 +442,41 @@ func (c *LangPHPClient) PHPINIGetUserPaths(ctx context.Context, extra ...cpanel.
 	return cpanel.UAPICall[LangPHPPHPINIGetUserPathsData](ctx, c.c, http.MethodGet, "LangPHP", "php_ini_get_user_paths", cpanel.CombineArgs(extra...))
 }
 
-
 // LangPHPPHPINIGetUserPathsDataPathsItem is a generated payload type.
 type LangPHPPHPINIGetUserPathsDataPathsItem struct {
 	// The account's name.
-	Account      string `json:"account"`
+	Account string `json:"account"`
 
 	// The virtual host's document root.
 	Documentroot string `json:"documentroot"`
 
 	// The home directory.
-	Homedir      string `json:"homedir"`
+	Homedir string `json:"homedir"`
 
 	// Whether the virtual host is the account's primary domain.
 	// * `1` - Primary domain.
 	// * `0` - **Not** the primary domain.
 	//
 	// Possible values: `1`, `0`.
-	MainDomain   int64 `json:"main_domain"`
+	MainDomain int64 `json:"main_domain"`
 
 	// The name of the virtual host's `php.ini` file.
-	Path         string `json:"path"`
+	Path string `json:"path"`
 
 	// The record's type.
 	// * `home`
 	// * `vhost`
 	//
 	// Possible values: `home`, `vhost`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The default PHP version.
 	// - `ea-php##`, where `##` represents the major and minor versions of PHP (for example, `ea-php72` represents PHP 7.2).
 	// - Any custom PHP package name.
-	Version      string `json:"version"`
+	Version string `json:"version"`
 
 	// The name of the virtual host.
-	Vhost        string `json:"vhost"`
+	Vhost string `json:"vhost"`
 }
 
 // LangPHPPHPINIGetUserPathsData is a generated payload type.
@@ -537,11 +529,11 @@ type LangPHPPHPINISetUserBasicDirectivesArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
+//	This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -549,7 +541,6 @@ type LangPHPPHPINISetUserBasicDirectivesArgs struct {
 func (c *LangPHPClient) PHPINISetUserBasicDirectives(ctx context.Context, args *LangPHPPHPINISetUserBasicDirectivesArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "LangPHP", "php_ini_set_user_basic_directives", args)
 }
-
 
 // LangPHPPHPINISetUserContentArgs are the parameters of the UAPI function `LangPHP::php_ini_set_user_content`.
 type LangPHPPHPINISetUserContentArgs struct {
@@ -589,11 +580,11 @@ type LangPHPPHPINISetUserContentArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
+//	This document **only** applies to systems that run EasyApache 4 with MultiPHP enabled.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -601,7 +592,6 @@ type LangPHPPHPINISetUserContentArgs struct {
 func (c *LangPHPClient) PHPINISetUserContent(ctx context.Context, args *LangPHPPHPINISetUserContentArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "LangPHP", "php_ini_set_user_content", args)
 }
-
 
 // LangPHPPHPSetVhostVersionsArgs are the parameters of the UAPI function `LangPHP::php_set_vhost_versions`.
 type LangPHPPHPSetVhostVersionsArgs struct {
@@ -629,11 +619,11 @@ type LangPHPPHPSetVhostVersionsArgs struct {
 //
 // **Note:**
 //
-//   This document **only** applies to systems that run EasyApache 4.
+//	This document **only** applies to systems that run EasyApache 4.
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.52.
 //
@@ -641,7 +631,6 @@ type LangPHPPHPSetVhostVersionsArgs struct {
 func (c *LangPHPClient) PHPSetVhostVersions(ctx context.Context, args *LangPHPPHPSetVhostVersionsArgs) (*cpanel.UAPIResult[LangPHPPHPSetVhostVersionsData], error) {
 	return cpanel.UAPICall[LangPHPPHPSetVhostVersionsData](ctx, c.c, http.MethodGet, "LangPHP", "php_set_vhost_versions", args)
 }
-
 
 // LangPHPPHPSetVhostVersionsData is a generated payload type.
 type LangPHPPHPSetVhostVersionsData struct {

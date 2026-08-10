@@ -22,24 +22,23 @@ func (c *CPGreyListClient) DisableAllDomains(ctx context.Context, extra ...cpane
 	return cpanel.UAPICall[[]CPGreyListDisableAllDomainsDataItem](ctx, c.c, http.MethodGet, "cPGreyList", "disable_all_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // CPGreyListDisableAllDomainsDataItem is a generated payload type.
 type CPGreyListDisableAllDomainsDataItem struct {
 	// The domains that your changes will affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether Greylisting is enabled.
 	// - `1` — Enabled.
 	// - `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// - `main` — A main domain.
@@ -47,7 +46,7 @@ type CPGreyListDisableAllDomainsDataItem struct {
 	// - `parked` — A parked domain.
 	//
 	// Possible values: `main`, `addon`, `parked`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // CPGreyListDisableDomainsArgs are the parameters of the UAPI function `cPGreyList::disable_domains`.
@@ -76,31 +75,30 @@ func (c *CPGreyListClient) DisableDomains(ctx context.Context, args *CPGreyListD
 	return cpanel.UAPICall[[]CPGreyListDisableDomainsDataItem](ctx, c.c, http.MethodGet, "cPGreyList", "disable_domains", args)
 }
 
-
 // CPGreyListDisableDomainsDataItem is a generated payload type.
 type CPGreyListDisableDomainsDataItem struct {
 	// An array of domains that your changes will affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether Greylisting is disabled.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` — A main domain.
 	// * `sub` — A subdomain.
 	//
 	// Possible values: `main`, `sub`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // EnableAllDomains calls the UAPI function `cPGreyList::enable_all_domains` — Enable Greylisting for all domains
@@ -114,29 +112,28 @@ func (c *CPGreyListClient) EnableAllDomains(ctx context.Context, extra ...cpanel
 	return cpanel.UAPICall[[]CPGreyListEnableAllDomainsDataItem](ctx, c.c, http.MethodGet, "cPGreyList", "enable_all_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // CPGreyListEnableAllDomainsDataItem is a generated payload type.
 type CPGreyListEnableAllDomainsDataItem struct {
 	// An array of domains that your changes will affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether Greylisting is enabled.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` — A main domain.
 	// * `sub` — A subdomain.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // CPGreyListEnableDomainsArgs are the parameters of the UAPI function `cPGreyList::enable_domains`.
@@ -165,31 +162,30 @@ func (c *CPGreyListClient) EnableDomains(ctx context.Context, args *CPGreyListEn
 	return cpanel.UAPICall[[]CPGreyListEnableDomainsDataItem](ctx, c.c, http.MethodGet, "cPGreyList", "enable_domains", args)
 }
 
-
 // CPGreyListEnableDomainsDataItem is a generated payload type.
 type CPGreyListEnableDomainsDataItem struct {
 	// An array of domains that your changes will affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether Greylisting is disabled.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` — A main domain.
 	// * `sub` — A subdomain.
 	//
 	// Possible values: `main`, `sub`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // HasGreylistingEnabled calls the UAPI function `cPGreyList::has_greylisting_enabled` — Return whether Greylisting is enabled
@@ -202,7 +198,6 @@ type CPGreyListEnableDomainsDataItem struct {
 func (c *CPGreyListClient) HasGreylistingEnabled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[CPGreyListHasGreylistingEnabledData], error) {
 	return cpanel.UAPICall[CPGreyListHasGreylistingEnabledData](ctx, c.c, http.MethodGet, "cPGreyList", "has_greylisting_enabled", cpanel.CombineArgs(extra...))
 }
-
 
 // CPGreyListHasGreylistingEnabledData is a generated payload type.
 type CPGreyListHasGreylistingEnabledData struct {
@@ -225,41 +220,40 @@ func (c *CPGreyListClient) ListDomains(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[[]CPGreyListListDomainsDataItem](ctx, c.c, http.MethodGet, "cPGreyList", "list_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains the number of domains with Greylisting enabled or disabled.
 type CPGreyListListDomainsDataItemCPGreyList struct {
 	// The number of domains with Greylisting disabled.
 	TotalDisabled int64 `json:"total_disabled"`
 
 	// The number of domains with Greylisting enabled.
-	TotalEnabled  int64 `json:"total_enabled"`
+	TotalEnabled int64 `json:"total_enabled"`
 }
 
 // CPGreyListListDomainsDataItem is a generated payload type.
 type CPGreyListListDomainsDataItem struct {
 	// An object that contains the number of domains with Greylisting enabled or disabled.
-	CPGreyList   CPGreyListListDomainsDataItemCPGreyList `json:"cPGreyList"`
+	CPGreyList CPGreyListListDomainsDataItemCPGreyList `json:"cPGreyList"`
 
 	// An array of domains that your changes to a selected domain will affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether Greylisting is enabled.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` — A main domain.
 	// * `sub` — A subdomain.
 	//
 	// Possible values: `main`, `sub`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }

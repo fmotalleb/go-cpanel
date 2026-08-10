@@ -23,7 +23,6 @@ func (c *Client) GetCommerce(ctx context.Context, extra ...cpanel.Args) (*cpanel
 	return cpanel.WHMCall[GetCommerceData](ctx, c.c, http.MethodGet, "get_commerce", cpanel.CombineArgs(extra...))
 }
 
-
 // GetCommerceData is a generated payload type.
 type GetCommerceData struct {
 	// * `1` - Sitejet Commerce is enabled.
@@ -33,7 +32,7 @@ type GetCommerceData struct {
 	IsEnabled int64 `json:"is_enabled"`
 
 	// The current URL of the storefront for purchasing the Sitejet Commerce upgrade.
-	Storeurl  string `json:"storeurl"`
+	Storeurl string `json:"storeurl"`
 }
 
 // GetEcommerce calls the WHM API 1 function `get_ecommerce` — Get Ecommerce Data
@@ -51,7 +50,6 @@ func (c *Client) GetEcommerce(ctx context.Context, extra ...cpanel.Args) (*cpane
 	return cpanel.WHMCall[GetEcommerceData](ctx, c.c, http.MethodGet, "get_ecommerce", cpanel.CombineArgs(extra...))
 }
 
-
 // GetEcommerceData is a generated payload type.
 type GetEcommerceData struct {
 	// * `1` - Sitejet Commerce is enabled.
@@ -61,7 +59,7 @@ type GetEcommerceData struct {
 	IsEnabled int64 `json:"is_enabled"`
 
 	// The current URL of the storefront for purchasing the Sitejet Commerce upgrade.
-	Storeurl  string `json:"storeurl"`
+	Storeurl string `json:"storeurl"`
 }
 
 // SetCommerceArgs are the parameters of the WHM API 1 function `set_commerce`.
@@ -91,7 +89,6 @@ type SetCommerceArgs struct {
 func (c *Client) SetCommerce(ctx context.Context, args *SetCommerceArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_commerce", args)
 }
-
 
 // SetEcommerceArgs are the parameters of the WHM API 1 function `set_ecommerce`.
 type SetEcommerceArgs struct {
@@ -124,4 +121,3 @@ type SetEcommerceArgs struct {
 func (c *Client) SetEcommerce(ctx context.Context, args *SetEcommerceArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_ecommerce", args)
 }
-

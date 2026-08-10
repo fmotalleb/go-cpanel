@@ -26,7 +26,6 @@ func (c *WordPressBackupClient) AnyRunning(ctx context.Context, extra ...cpanel.
 	return cpanel.UAPICall[WordPressBackupAnyRunningData](ctx, c.c, http.MethodGet, "WordPressBackup", "any_running", cpanel.CombineArgs(extra...))
 }
 
-
 // WordPressBackupAnyRunningDataSitesItem is a generated payload type.
 type WordPressBackupAnyRunningDataSitesItem struct {
 	// The WordPress site's unique ID.
@@ -34,10 +33,10 @@ type WordPressBackupAnyRunningDataSitesItem struct {
 	// **Note:**
 	//
 	// `null` is the only possible value. We have not implemented this return.
-	ID    *string `json:"id"`
+	ID *string `json:"id"`
 
 	// The WordPress site's URL. The URL does not contain a protocol prefix.
-	Site  string `json:"site"`
+	Site string `json:"site"`
 
 	// The type of process that is active.
 	//
@@ -57,10 +56,10 @@ type WordPressBackupAnyRunningData struct {
 	AnyRunning int64 `json:"any_running"`
 
 	// An array that contains each site with a backup in progress. The function only populates this array if it is actively processing a backup.
-	Sites      []WordPressBackupAnyRunningDataSitesItem `json:"sites"`
+	Sites []WordPressBackupAnyRunningDataSitesItem `json:"sites"`
 
 	// The SSE service URL that the system uses to monitor the backup progress. The SSE service URL does not contain a protocol, hostname, or port.
-	SseURL     string `json:"sse_url"`
+	SseURL string `json:"sse_url"`
 }
 
 // WordPressBackupCancelArgs are the parameters of the UAPI function `WordPressBackup::cancel`.
@@ -80,7 +79,7 @@ type WordPressBackupCancelArgs struct {
 //
 // **Note:**
 //
-//   You **must** install the [WordPress Manager](https://go.cpanel.net/wordpressmanager) cPanel plugin to access this API function.
+//	You **must** install the [WordPress Manager](https://go.cpanel.net/wordpressmanager) cPanel plugin to access this API function.
 //
 // Available since cPanel & WHM version WordPress Manager 3.0.
 //
@@ -89,7 +88,6 @@ func (c *WordPressBackupClient) Cancel(ctx context.Context, args *WordPressBacku
 	return cpanel.UAPICall[WordPressBackupCancelData](ctx, c.c, http.MethodGet, "WordPressBackup", "cancel", args)
 }
 
-
 // WordPressBackupCancelData is a generated payload type.
 type WordPressBackupCancelData struct {
 	// Whether the system cancelled an active backup.
@@ -97,7 +95,7 @@ type WordPressBackupCancelData struct {
 	// * `0` — Could not cancel the backup or no active backup in progress.
 	//
 	// Possible values: `0`, `1`.
-	Ok   int64 `json:"ok"`
+	Ok int64 `json:"ok"`
 
 	// The site's URL without the protocol prefix.
 	Site string `json:"site"`
@@ -129,7 +127,6 @@ func (c *WordPressBackupClient) Cleanup(ctx context.Context, args *WordPressBack
 	return cpanel.UAPICall[WordPressBackupCleanupData](ctx, c.c, http.MethodGet, "WordPressBackup", "cleanup", args)
 }
 
-
 // WordPressBackupCleanupData is a generated payload type.
 type WordPressBackupCleanupData struct {
 	// Whether the system released the system resources.
@@ -137,7 +134,7 @@ type WordPressBackupCleanupData struct {
 	// * `0` - Backup in progress.
 	//
 	// Possible values: `0`, `1`.
-	Ok   int64 `json:"ok"`
+	Ok int64 `json:"ok"`
 
 	// The site's URL **without** the protocol prefix.
 	Site string `json:"site"`
@@ -169,7 +166,6 @@ func (c *WordPressBackupClient) GetAvailableBackups(ctx context.Context, args *W
 	return cpanel.UAPICall[WordPressBackupGetAvailableBackupsData](ctx, c.c, http.MethodGet, "WordPressBackup", "get_available_backups", args)
 }
 
-
 // WordPressBackupGetAvailableBackupsDataAvailableItem is a generated payload type.
 type WordPressBackupGetAvailableBackupsDataAvailableItem struct {
 	// The date and time the system created the backup.
@@ -191,7 +187,7 @@ type WordPressBackupGetAvailableBackupsData struct {
 	Available []WordPressBackupGetAvailableBackupsDataAvailableItem `json:"available"`
 
 	// The absolute path to the backup directory.
-	Dir       string `json:"dir"`
+	Dir string `json:"dir"`
 }
 
 // WordPressBackupIsRunningArgs are the parameters of the UAPI function `WordPressBackup::is_running`.
@@ -220,11 +216,10 @@ func (c *WordPressBackupClient) IsRunning(ctx context.Context, args *WordPressBa
 	return cpanel.UAPICall[WordPressBackupIsRunningData](ctx, c.c, http.MethodGet, "WordPressBackup", "is_running", args)
 }
 
-
 // WordPressBackupIsRunningData is a generated payload type.
 type WordPressBackupIsRunningData struct {
 	// The unique ID of the backup process.
-	ActionID  *string `json:"action_id"`
+	ActionID *string `json:"action_id"`
 
 	// Whether a backup is active.
 	// * `1` - Backup in progress.
@@ -260,15 +255,14 @@ func (c *WordPressBackupClient) Start(ctx context.Context, args *WordPressBackup
 	return cpanel.UAPICall[WordPressBackupStartData](ctx, c.c, http.MethodGet, "WordPressBackup", "start", args)
 }
 
-
 // WordPressBackupStartData is a generated payload type.
 type WordPressBackupStartData struct {
 	// The unique ID of the backup process.
 	BackupID string `json:"backup_id"`
 
 	// The WordPress site's URL without the protocol prefix.
-	Site     string `json:"site"`
+	Site string `json:"site"`
 
 	// The SSE path **without** the protocol, hostname, or port that the system uses to monitor the backup progress.
-	SseURL   string `json:"sse_url"`
+	SseURL string `json:"sse_url"`
 }

@@ -34,7 +34,7 @@ type TeamAddRolesArgs struct {
 //
 // **Note:**
 //
-//   This action may result in team users gaining access to team owner level privileges.
+//	This action may result in team users gaining access to team owner level privileges.
 //
 // Available since cPanel & WHM version 108.
 //
@@ -42,7 +42,6 @@ type TeamAddRolesArgs struct {
 func (c *TeamClient) AddRoles(ctx context.Context, args *TeamAddRolesArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "add_roles", args)
 }
-
 
 // TeamAddTeamUserArgs are the parameters of the UAPI function `Team::add_team_user`.
 type TeamAddTeamUserArgs struct {
@@ -191,7 +190,7 @@ type TeamAddTeamUserArgs struct {
 //
 // **Note:**
 //
-//   This action may result in team users gaining access to team owner level privileges.
+//	This action may result in team users gaining access to team owner level privileges.
 //
 // Available since cPanel & WHM version 104.
 //
@@ -199,7 +198,6 @@ type TeamAddTeamUserArgs struct {
 func (c *TeamClient) AddTeamUser(ctx context.Context, args *TeamAddTeamUserArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Team", "add_team_user", args)
 }
-
 
 // TeamCancelExpireArgs are the parameters of the UAPI function `Team::cancel_expire`.
 type TeamCancelExpireArgs struct {
@@ -222,7 +220,6 @@ type TeamCancelExpireArgs struct {
 func (c *TeamClient) CancelExpire(ctx context.Context, args *TeamCancelExpireArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "cancel_expire", args)
 }
-
 
 // TeamEditTeamUserArgs are the parameters of the UAPI function `Team::edit_team_user`.
 type TeamEditTeamUserArgs struct {
@@ -368,7 +365,6 @@ func (c *TeamClient) EditTeamUser(ctx context.Context, args *TeamEditTeamUserArg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "edit_team_user", args)
 }
 
-
 // GetTeamUsersWithRolesCount calls the UAPI function `Team::get_team_users_with_roles_count` — Get number of team users with roles
 //
 // This function returns the current and maximum number of team users with roles.
@@ -380,7 +376,6 @@ func (c *TeamClient) GetTeamUsersWithRolesCount(ctx context.Context, extra ...cp
 	return cpanel.UAPICall[TeamGetTeamUsersWithRolesCountData](ctx, c.c, http.MethodGet, "Team", "get_team_users_with_roles_count", cpanel.CombineArgs(extra...))
 }
 
-
 // TeamGetTeamUsersWithRolesCountData is a generated payload type.
 type TeamGetTeamUsersWithRolesCountData struct {
 	// Maximum number of team users with roles.
@@ -388,7 +383,7 @@ type TeamGetTeamUsersWithRolesCountData struct {
 	// **Note:**
 	//
 	// This value is stored in the package.
-	Max  int64 `json:"max"`
+	Max int64 `json:"max"`
 
 	// The current number of team users with roles.
 	Used int64 `json:"used"`
@@ -415,7 +410,6 @@ func (c *TeamClient) ListTeam(ctx context.Context, args *TeamListTeamArgs) (*cpa
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "list_team", args)
 }
 
-
 // TeamPasswordResetRequestArgs are the parameters of the UAPI function `Team::password_reset_request`.
 type TeamPasswordResetRequestArgs struct {
 	// The username of the team user.
@@ -438,7 +432,6 @@ func (c *TeamClient) PasswordResetRequest(ctx context.Context, args *TeamPasswor
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "password_reset_request", args)
 }
 
-
 // TeamReinstateTeamUserArgs are the parameters of the UAPI function `Team::reinstate_team_user`.
 type TeamReinstateTeamUserArgs struct {
 	// The username of the team user.
@@ -460,7 +453,6 @@ type TeamReinstateTeamUserArgs struct {
 func (c *TeamClient) ReinstateTeamUser(ctx context.Context, args *TeamReinstateTeamUserArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "reinstate_team_user", args)
 }
-
 
 // TeamRemoveRolesArgs are the parameters of the UAPI function `Team::remove_roles`.
 type TeamRemoveRolesArgs struct {
@@ -489,7 +481,6 @@ func (c *TeamClient) RemoveRoles(ctx context.Context, args *TeamRemoveRolesArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "remove_roles", args)
 }
 
-
 // TeamRemoveTeamUserArgs are the parameters of the UAPI function `Team::remove_team_user`.
 type TeamRemoveTeamUserArgs struct {
 	// The username of the team user.
@@ -511,7 +502,6 @@ type TeamRemoveTeamUserArgs struct {
 func (c *TeamClient) RemoveTeamUser(ctx context.Context, args *TeamRemoveTeamUserArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "remove_team_user", args)
 }
-
 
 // TeamSetContactEmailArgs are the parameters of the UAPI function `Team::set_contact_email`.
 type TeamSetContactEmailArgs struct {
@@ -540,7 +530,6 @@ type TeamSetContactEmailArgs struct {
 func (c *TeamClient) SetContactEmail(ctx context.Context, args *TeamSetContactEmailArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "set_contact_email", args)
 }
-
 
 // TeamSetExpireArgs are the parameters of the UAPI function `Team::set_expire`.
 type TeamSetExpireArgs struct {
@@ -574,7 +563,6 @@ func (c *TeamClient) SetExpire(ctx context.Context, args *TeamSetExpireArgs) (*c
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Team", "set_expire", args)
 }
 
-
 // TeamSetLocaleArgs are the parameters of the UAPI function `Team::set_locale`.
 type TeamSetLocaleArgs struct {
 	// The new locale for the team user.
@@ -601,7 +589,6 @@ type TeamSetLocaleArgs struct {
 func (c *TeamClient) SetLocale(ctx context.Context, args *TeamSetLocaleArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "set_locale", args)
 }
-
 
 // TeamSetNotesArgs are the parameters of the UAPI function `Team::set_notes`.
 type TeamSetNotesArgs struct {
@@ -630,7 +617,6 @@ func (c *TeamClient) SetNotes(ctx context.Context, args *TeamSetNotesArgs) (*cpa
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "set_notes", args)
 }
 
-
 // TeamSetPasswordArgs are the parameters of the UAPI function `Team::set_password`.
 type TeamSetPasswordArgs struct {
 	// The password to set for the team user.
@@ -658,7 +644,6 @@ func (c *TeamClient) SetPassword(ctx context.Context, args *TeamSetPasswordArgs)
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "set_password", args)
 }
 
-
 // TeamSetRolesArgs are the parameters of the UAPI function `Team::set_roles`.
 type TeamSetRolesArgs struct {
 	// The username of the team user.
@@ -679,7 +664,7 @@ type TeamSetRolesArgs struct {
 //
 // **Note:**
 //
-//   This action may result in team users gaining access to team owner level privileges.
+//	This action may result in team users gaining access to team owner level privileges.
 //
 // Available since cPanel & WHM version 108.
 //
@@ -687,7 +672,6 @@ type TeamSetRolesArgs struct {
 func (c *TeamClient) SetRoles(ctx context.Context, args *TeamSetRolesArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "set_roles", args)
 }
-
 
 // TeamSuspendTeamUserArgs are the parameters of the UAPI function `Team::suspend_team_user`.
 type TeamSuspendTeamUserArgs struct {
@@ -713,4 +697,3 @@ type TeamSuspendTeamUserArgs struct {
 func (c *TeamClient) SuspendTeamUser(ctx context.Context, args *TeamSuspendTeamUserArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Team", "suspend_team_user", args)
 }
-

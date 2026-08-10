@@ -35,12 +35,11 @@ func (c *TrashClient) Remove(ctx context.Context, args *TrashRemoveArgs) (*cpane
 	return cpanel.UAPICall[TrashRemoveData](ctx, c.c, http.MethodPost, "Trash", "remove", args)
 }
 
-
 // TrashRemoveData is a generated payload type.
 type TrashRemoveData struct {
 	// True when the target was already absent (idempotent success); omitted otherwise.
 	AlreadyGone bool `json:"alreadyGone"`
 
 	// Always true on success.
-	Removed     bool `json:"removed"`
+	Removed bool `json:"removed"`
 }

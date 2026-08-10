@@ -27,7 +27,6 @@ func (c *SpamAssassinClient) ClearSpamBox(ctx context.Context, extra ...cpanel.A
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SpamAssassin", "clear_spam_box", cpanel.CombineArgs(extra...))
 }
 
-
 // GetSymbolicTestNames calls the UAPI function `SpamAssassin::get_symbolic_test_names` — Return SpamAssassin™ symbolic test scores
 //
 // This function lists the Apache SpamAssassin™ scores for each symbolic test.
@@ -39,11 +38,10 @@ func (c *SpamAssassinClient) GetSymbolicTestNames(ctx context.Context, extra ...
 	return cpanel.UAPICall[[]SpamAssassinGetSymbolicTestNamesDataItem](ctx, c.c, http.MethodGet, "SpamAssassin", "get_symbolic_test_names", cpanel.CombineArgs(extra...))
 }
 
-
 // SpamAssassinGetSymbolicTestNamesDataItem is a generated payload type.
 type SpamAssassinGetSymbolicTestNamesDataItem struct {
 	// The name of the test.
-	Key      string `json:"key"`
+	Key string `json:"key"`
 
 	// The type and section of the email that the SpamAssassin analyses.
 	// * `body_tests`
@@ -59,7 +57,7 @@ type SpamAssassinGetSymbolicTestNamesDataItem struct {
 	RuleType string `json:"rule_type"`
 
 	// The score to assign to the email if the result of the test is true.
-	Score    any `json:"score"`
+	Score any `json:"score"`
 }
 
 // GetUserPreferences calls the UAPI function `SpamAssassin::get_user_preferences` — Return SpamAssassin™ settings
@@ -77,7 +75,6 @@ func (c *SpamAssassinClient) GetUserPreferences(ctx context.Context, extra ...cp
 	return cpanel.UAPICall[SpamAssassinGetUserPreferencesData](ctx, c.c, http.MethodGet, "SpamAssassin", "get_user_preferences", cpanel.CombineArgs(extra...))
 }
 
-
 // SpamAssassinGetUserPreferencesData is a generated payload type.
 type SpamAssassinGetUserPreferencesData struct {
 	// The email addresses on the blacklist.
@@ -87,7 +84,7 @@ type SpamAssassinGetUserPreferencesData struct {
 	RequiredScore []float64 `json:"required_score"`
 
 	// The symbolic test name and score.
-	Score         []string `json:"score"`
+	Score []string `json:"score"`
 
 	// The email addresses on the whitelist.
 	WhitelistFrom []string `json:"whitelist_from"`
@@ -139,7 +136,6 @@ func (c *SpamAssassinClient) UpdateUserPreference(ctx context.Context, args *Spa
 	return cpanel.UAPICall[SpamAssassinUpdateUserPreferenceData](ctx, c.c, http.MethodGet, "SpamAssassin", "update_user_preference", args)
 }
 
-
 // SpamAssassinUpdateUserPreferenceData is a generated payload type.
 type SpamAssassinUpdateUserPreferenceData struct {
 	// An array containing custom SpamAssassin variable values.
@@ -150,14 +146,14 @@ type SpamAssassinUpdateUserPreferenceData struct {
 	AdditionalProperties []string `json:"additionalProperties"`
 
 	// An array of email addresses on the blacklist.
-	BlacklistFrom        []string `json:"blacklist_from"`
+	BlacklistFrom []string `json:"blacklist_from"`
 
 	// An array containing the score at which the system will mark a message as spam. The system considers mail that matches this score to be spam.
-	RequiredScore        []float64 `json:"required_score"`
+	RequiredScore []float64 `json:"required_score"`
 
 	// An array of the symbolic test names and their scores.
-	Score                []string `json:"score"`
+	Score []string `json:"score"`
 
 	// An array of the email addresses on the whitelist.
-	WhitelistFrom        []string `json:"whitelist_from"`
+	WhitelistFrom []string `json:"whitelist_from"`
 }

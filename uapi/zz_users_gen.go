@@ -59,4 +59,3 @@ type UsersChangePasswordArgs struct {
 func (c *UsersClient) ChangePassword(ctx context.Context, args *UsersChangePasswordArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Users", "change_password", args)
 }
-

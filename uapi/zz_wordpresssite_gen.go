@@ -23,7 +23,6 @@ func (c *WordPressSiteClient) Create(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "WordPressSite", "create", cpanel.CombineArgs(extra...))
 }
 
-
 // Retrieve calls the UAPI function `WordPressSite::retrieve` — Return WordPress site information
 //
 // This function retrieves the installation status and detailed information of the WordPress site for cPanel user's primary domain.
@@ -35,11 +34,10 @@ func (c *WordPressSiteClient) Retrieve(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[[]WordPressSiteRetrieveDataItem](ctx, c.c, http.MethodGet, "WordPressSite", "retrieve", cpanel.CombineArgs(extra...))
 }
 
-
 // WordPressSiteRetrieveDataItem is a generated payload type.
 type WordPressSiteRetrieveDataItem struct {
 	// Detailed information of the WordPress site.
-	Details       json.RawMessage `json:"details"`
+	Details json.RawMessage `json:"details"`
 
 	// Installation status of the WordPress site.
 	InstallStatus string `json:"install_status"`

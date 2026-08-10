@@ -23,3 +23,7 @@ coverage.*
 # Generator downloads
 tools/gen/*.openapi.yaml
 tools/gen/*.openapi.md
+
+# Python
+__pycache__/
+*.pyc

@@ -48,14 +48,13 @@ func (c *CsvimportClient) Doimport(ctx context.Context, args *CsvimportDoimportA
 	return cpanel.UAPICall[CsvimportDoimportData](ctx, c.c, http.MethodGet, "CSVImport", "doimport", args)
 }
 
-
 // CsvimportDoimportDataResultsItem is a generated payload type.
 type CsvimportDoimportDataResultsItem struct {
 	// The email address or forwarder.
-	Email  string `json:"email"`
+	Email string `json:"email"`
 
 	// The destination of the forwarder (if applicable).
-	Fwd    *string `json:"fwd"`
+	Fwd *string `json:"fwd"`
 
 	// The explanation of the outcome for each operation.
 	Reason string `json:"reason"`
@@ -74,7 +73,7 @@ type CsvimportDoimportDataResultsItem struct {
 	// * `fwd` — A forwarder.
 	//
 	// Possible values: `email`, `fwd`.
-	Type2  string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // CsvimportDoimportData is a generated payload type.

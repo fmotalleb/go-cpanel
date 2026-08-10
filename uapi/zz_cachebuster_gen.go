@@ -17,13 +17,13 @@ import (
 //
 // `https://example.com/styled/basic/sprites/icon_spritemap.css`
 //
-//  To force the browser to fetch the updated version, you would append the following:
+//	To force the browser to fetch the updated version, you would append the following:
 //
-//  `https://example.com/styled/basic/sprites/icon_spritemap.css?<CacheBusterID>`
+//	`https://example.com/styled/basic/sprites/icon_spritemap.css?<CacheBusterID>`
 //
-//  **Note**
+//	**Note**
 //
-//  The application that updates the resource at this url on the server **must** call the `CacheBuster::update` function when it updates the resource to signify that update.
+//	The application that updates the resource at this url on the server **must** call the `CacheBuster::update` function when it updates the resource to signify that update.
 //
 // Available since cPanel & WHM version cPanel 11.46.
 //
@@ -31,7 +31,6 @@ import (
 func (c *CacheBusterClient) Read(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[CacheBusterReadData], error) {
 	return cpanel.UAPICall[CacheBusterReadData](ctx, c.c, http.MethodGet, "CacheBuster", "read", cpanel.CombineArgs(extra...))
 }
-
 
 // CacheBusterReadData is a generated payload type.
 type CacheBusterReadData struct {
@@ -49,7 +48,6 @@ type CacheBusterReadData struct {
 func (c *CacheBusterClient) Update(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[CacheBusterUpdateData], error) {
 	return cpanel.UAPICall[CacheBusterUpdateData](ctx, c.c, http.MethodGet, "CacheBuster", "update", cpanel.CombineArgs(extra...))
 }
-
 
 // CacheBusterUpdateData is a generated payload type.
 type CacheBusterUpdateData struct {

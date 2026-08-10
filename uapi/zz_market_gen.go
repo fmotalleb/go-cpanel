@@ -39,31 +39,30 @@ func (c *MarketClient) CancelPendingSSLCertificate(ctx context.Context, args *Ma
 	return cpanel.UAPICall[[]MarketCancelPendingSslcertificateDataItem](ctx, c.c, http.MethodGet, "Market", "cancel_pending_ssl_certificate", args)
 }
 
-
 // MarketCancelPendingSslcertificateDataItem is a generated payload type.
 type MarketCancelPendingSslcertificateDataItem struct {
 	// When the system created the order.
-	CreatedTime    int64 `json:"created_time"`
+	CreatedTime int64 `json:"created_time"`
 
 	// The text of the Certificate Request (CSR).
-	Csr            string `json:"csr"`
+	Csr string `json:"csr"`
 
 	// A list of domains on the certificate.
-	Domains        []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// Whether the system has deleted the item from the pending queue.
 	// * `1` - Deleted.
 	// * `0` - **Not** deleted.
 	//
 	// Possible values: `0`, `1`.
-	Expired        int64 `json:"expired"`
+	Expired int64 `json:"expired"`
 
 	// The first time that the system polled the provider for the certificate.
-	FirstPollTime  int64 `json:"first_poll_time"`
+	FirstPollTime int64 `json:"first_poll_time"`
 
 	// The last time that the system polled the
 	// provider for the certificate.
-	LastPollTime   int64 `json:"last_poll_time"`
+	LastPollTime int64 `json:"last_poll_time"`
 
 	// The last status code of the order.
 	// * `CertificateNotFound` - The system cannot locate the specified certificate.
@@ -73,29 +72,29 @@ type MarketCancelPendingSslcertificateDataItem struct {
 	LastStatusCode string `json:"last_status_code"`
 
 	// The ID of the order.
-	OrderID        string `json:"order_id"`
+	OrderID string `json:"order_id"`
 
 	// The ID of the ordered item.
-	OrderItemID    string `json:"order_item_id"`
+	OrderItemID string `json:"order_item_id"`
 
 	// The product's ID.
-	ProductID      string `json:"product_id"`
+	ProductID string `json:"product_id"`
 
 	// The cPanel Market provider's name.
-	Provider       string `json:"provider"`
+	Provider string `json:"provider"`
 
 	// The status of the order.
 	// * `confirmed` - Payment confirmed.
 	// * `unconfirmed` - Payment **not** confirmed.
 	//
 	// Possible values: `confirmed`, `unconfirmed`.
-	Status         string `json:"status"`
+	Status string `json:"status"`
 
 	// The URI of the cPanel Market Provider's support site.
-	SupportUri     string `json:"support_uri"`
+	SupportUri string `json:"support_uri"`
 
 	// A list of virtual host names.
-	VhostNames     []string `json:"vhost_names"`
+	VhostNames []string `json:"vhost_names"`
 }
 
 // MarketCreateShoppingCartArgs are the parameters of the UAPI function `Market::create_shopping_cart`.
@@ -143,17 +142,16 @@ func (c *MarketClient) CreateShoppingCart(ctx context.Context, args *MarketCreat
 	return cpanel.UAPICall[MarketCreateShoppingCartData](ctx, c.c, http.MethodGet, "Market", "create_shopping_cart", args)
 }
 
-
 // MarketCreateShoppingCartData is a generated payload type.
 type MarketCreateShoppingCartData struct {
 	// The location of the provider’s check out page.
 	CheckoutURL string `json:"checkout_url"`
 
 	// The order’s ID.
-	OrderID     string `json:"order_id"`
+	OrderID string `json:"order_id"`
 
 	// An array of objects that contain information about Items in the shopping cart. The function returns these values in the order in which you called them. This array of objects returns values that vary between providers.
-	OrderItems  []json.RawMessage `json:"order_items"`
+	OrderItems []json.RawMessage `json:"order_items"`
 }
 
 // MarketCreateShoppingCartNonSSLArgs are the parameters of the UAPI function `Market::create_shopping_cart_non_ssl`.
@@ -191,14 +189,13 @@ func (c *MarketClient) CreateShoppingCartNonSSL(ctx context.Context, args *Marke
 	return cpanel.UAPICall[MarketCreateShoppingCartNonSSLData](ctx, c.c, http.MethodGet, "Market", "create_shopping_cart_non_ssl", args)
 }
 
-
 // MarketCreateShoppingCartNonSSLData is a generated payload type.
 type MarketCreateShoppingCartNonSSLData struct {
 	// The URL of the provider's checkout page.
-	CheckoutURL   string `json:"checkout_url"`
+	CheckoutURL string `json:"checkout_url"`
 
 	// The order ID assigned by the provider.
-	OrderID       string `json:"order_id"`
+	OrderID string `json:"order_id"`
 
 	// An array of objects that contain information about the items in the shopping cart. The values returned vary between providers.
 	OrderItemsRef []json.RawMessage `json:"order_items_ref"`
@@ -214,7 +211,6 @@ type MarketCreateShoppingCartNonSSLData struct {
 func (c *MarketClient) GetAllProducts(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]MarketProviderProductMetaDataType], error) {
 	return cpanel.UAPICall[[]MarketProviderProductMetaDataType](ctx, c.c, http.MethodGet, "Market", "get_all_products", cpanel.CombineArgs(extra...))
 }
-
 
 // MarketProviderProductMetaDataType is a generated payload type.
 // MarketProviderProductMetaDataType is left as raw JSON because its documented schema
@@ -245,7 +241,6 @@ type MarketGetBuildCartURLArgs struct {
 func (c *MarketClient) GetBuildCartURL(ctx context.Context, args *MarketGetBuildCartURLArgs) (*cpanel.UAPIResult[MarketGetBuildCartURLData], error) {
 	return cpanel.UAPICall[MarketGetBuildCartURLData](ctx, c.c, http.MethodGet, "Market", "get_build_cart_url", args)
 }
-
 
 // MarketGetBuildCartURLData is a generated payload type.
 type MarketGetBuildCartURLData struct {
@@ -286,14 +281,13 @@ func (c *MarketClient) GetCertificateStatusDetails(ctx context.Context, args *Ma
 	return cpanel.UAPICall[MarketGetCertificateStatusDetailsData](ctx, c.c, http.MethodGet, "Market", "get_certificate_status_details", args)
 }
 
-
 // An object that contains actionable URLs.
 type MarketGetCertificateStatusDetailsDataActionUrls struct {
 	// A URL that a user can use to expedite the validation process for Extended Validation (EV) certificates.
 	EvClickThroughStatus string `json:"evClickThroughStatus"`
 
 	// A URL that a user can use to expedite the validation process for Organization Validated (OV) certificates.
-	OvCallbackStatus     string `json:"ovCallbackStatus"`
+	OvCallbackStatus string `json:"ovCallbackStatus"`
 }
 
 // An object that contains information about the domain.
@@ -319,7 +313,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `not-completed` - The certificate's brand validation is **not** complete.
 	// * `completed` - The certificate's brand validation is complete.
 	// * `in-progress` - The certificate's brand validation is in progress. …
-	BrandValStatus               string `json:"brandValStatus"`
+	BrandValStatus string `json:"brandValStatus"`
 
 	// Whether the provider has issued the SSL certificate.
 	//
@@ -329,7 +323,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `in-progress` - The certificate's issue is in progress.
 	//
 	// Possible values: `not applicable`, `not-completed`, `completed`, `in-progress`.
-	CertificateStatus            string `json:"certificateStatus"`
+	CertificateStatus string `json:"certificateStatus"`
 
 	// Whether the certificate signing request (CSR) has completed.
 	//
@@ -339,7 +333,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `in-progress` - The CSR for the certificate is in progress.
 	//
 	// Possible values: `not applicable`, `not-completed`, `completed`, `in-progress`.
-	CsrStatus                    string `json:"csrStatus"`
+	CsrStatus string `json:"csrStatus"`
 
 	// Whether Domain Control Validation (DCV) has completed.
 	//
@@ -349,7 +343,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `in-progress` - The DCV for the certificate is in progress.
 	//
 	// Possible values: `not applicable`, `not-completed`, `completed`, `in-progress`.
-	DCVStatus                    string `json:"dcvStatus"`
+	DCVStatus string `json:"dcvStatus"`
 
 	// Whether every requirement for the EV certificate has completed.
 	//
@@ -357,7 +351,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `not-completed` - The EV certificate's requirements check is **not** complete.
 	// * `completed` - The EV certificate's requirements check is complete.
 	// * `in-progress` - The EV certificate's requirements check is in progress. …
-	EvClickThroughStatus         string `json:"evClickThroughStatus"`
+	EvClickThroughStatus string `json:"evClickThroughStatus"`
 
 	// Whether every requirement for the Domain Validated (DV) certificate has completed.
 	//
@@ -365,7 +359,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `not-completed` - The DV certificate's requirements check is **not** complete.
 	// * `completed` - The DV certificate's requirements check is complete.
 	// * `in-progress` - The DV certificate's requirements check is in progress. …
-	FreeDvupstatus               string `json:"freeDVUPStatus"`
+	FreeDvupstatus string `json:"freeDVUPStatus"`
 
 	// Whether every requirement for the OV certificate has completed.
 	//
@@ -381,7 +375,7 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `not-completed` - The CA has **not** verified the organization's validity via phone.
 	// * `completed` - The CA has verified the organization's validity via phone.
 	// * `in-progress` - The CA's verification of the organization's validity …
-	OvCallbackStatus             string `json:"ovCallbackStatus"`
+	OvCallbackStatus string `json:"ovCallbackStatus"`
 
 	// Whether the validation process has completed.
 	//
@@ -391,13 +385,13 @@ type MarketGetCertificateStatusDetailsDataStatusDetails struct {
 	// * `in-progress` - The certificate's validation is in progress.
 	//
 	// Possible values: `not applicable`, `not-completed`, `completed`, `in-progress`.
-	ValidationStatus             string `json:"validationStatus"`
+	ValidationStatus string `json:"validationStatus"`
 }
 
 // MarketGetCertificateStatusDetailsData is a generated payload type.
 type MarketGetCertificateStatusDetailsData struct {
 	// An object that contains actionable URLs.
-	ActionUrls    MarketGetCertificateStatusDetailsDataActionUrls `json:"actionUrls"`
+	ActionUrls MarketGetCertificateStatusDetailsDataActionUrls `json:"actionUrls"`
 
 	// An object that contains information about the domain.
 	DomainDetails MarketGetCertificateStatusDetailsDataDomainDetails `json:"domain_details"`
@@ -428,7 +422,6 @@ func (c *MarketClient) GetCompletionURL(ctx context.Context, args *MarketGetComp
 	return cpanel.UAPICall[MarketGetCompletionURLData](ctx, c.c, http.MethodGet, "Market", "get_completion_url", args)
 }
 
-
 // MarketGetCompletionURLData is a generated payload type.
 type MarketGetCompletionURLData struct {
 	// The full cPanel URL for the product purchase completion page, including the security token.
@@ -454,7 +447,6 @@ type MarketGetLicenseInfoArgs struct {
 func (c *MarketClient) GetLicenseInfo(ctx context.Context, args *MarketGetLicenseInfoArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Market", "get_license_info", args)
 }
-
 
 // MarketGetLoginURLArgs are the parameters of the UAPI function `Market::get_login_url`.
 type MarketGetLoginURLArgs struct {
@@ -483,7 +475,6 @@ func (c *MarketClient) GetLoginURL(ctx context.Context, args *MarketGetLoginURLA
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Market", "get_login_url", args)
 }
 
-
 // MarketGetPendingSSLCertificatesArgs are the parameters of the UAPI function `Market::get_pending_ssl_certificates`.
 type MarketGetPendingSSLCertificatesArgs struct {
 	// The cPanel Market provider's name.
@@ -506,76 +497,75 @@ func (c *MarketClient) GetPendingSSLCertificates(ctx context.Context, args *Mark
 	return cpanel.UAPICall[[]MarketGetPendingSSLCertificatesDataItem](ctx, c.c, http.MethodGet, "Market", "get_pending_ssl_certificates", args)
 }
 
-
 // MarketGetPendingSSLCertificatesDataItem is a generated payload type.
 type MarketGetPendingSSLCertificatesDataItem struct {
 	// The certificate ID. The system sets this for re-issued short-lived certificates, which it polls by certificate ID rather than by order item ID.
-	CertificateID            string `json:"certificate_id"`
+	CertificateID string `json:"certificate_id"`
 
 	// When the system placed the order.
-	CreatedTime              int64 `json:"created_time"`
+	CreatedTime int64 `json:"created_time"`
 
 	// The certificate signing request's (CSR) text. A CSR file in Base64 PEM format.
-	Csr                      string `json:"csr"`
+	Csr string `json:"csr"`
 
 	// The domains on the certificate.
-	Domains                  []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// Whether the pending queue item has been deleted.
 	// * `1` - Deleted.
 	// * `0` - **Not** deleted.
 	//
 	// Possible values: `0`, `1`.
-	Expired                  int64 `json:"expired"`
+	Expired int64 `json:"expired"`
 
 	// The first time that the system polled the provider for the certificate.
-	FirstPollTime            int64 `json:"first_poll_time"`
+	FirstPollTime int64 `json:"first_poll_time"`
 
 	// hash that contains information to verify an OV or EV certificate request.
 	//
 	// **Notes:**
 	//
 	//  The function returns this hash for OV or EV certificate requests. This hash includes returns that vary between certificate providers. The output example demonstrates what the cPStore returns for an OV certificate.
-	IdentityVerification     json.RawMessage `json:"identity_verification"`
+	IdentityVerification json.RawMessage `json:"identity_verification"`
 
 	// The last time that the system polled the provider for the certificate.
-	LastPollTime             int64 `json:"last_poll_time"`
+	LastPollTime int64 `json:"last_poll_time"`
 
 	// The last status code of the order. The function returns the value in the unnamed hash.
 	// * `CertificateNotFound` - The system cannot locate the specified certificate.
 	// * `RequiresApproval` - The specified certificate requires approval.
 	// * `OrderCanceled` - The system canceled the order of the specified certificate.
 	// * `OrderItemCanceled` - The system canceled the order item of the specified certificate …
-	LastStatusCode           string `json:"last_status_code"`
+	LastStatusCode string `json:"last_status_code"`
 
 	// The ID of the order.
-	OrderID                  string `json:"order_id"`
+	OrderID string `json:"order_id"`
 
 	// The ID of the ordered item.
-	OrderItemID              string `json:"order_item_id"`
+	OrderItemID string `json:"order_item_id"`
 
 	// For a re-issued certificate, the ID of the certificate that it descends from.
 	OriginatingCertificateID string `json:"originating_certificate_id"`
 
 	// The expiration of the parent subscription certificate, as a Unix timestamp.
-	ParentCertExpiry         int64 `json:"parent_cert_expiry"`
+	ParentCertExpiry int64 `json:"parent_cert_expiry"`
 
 	// The product's ID.
-	ProductID                string `json:"product_id"`
+	ProductID string `json:"product_id"`
 
 	// The cPanel Market provider's name.
-	Provider                 string `json:"provider"`
+	Provider string `json:"provider"`
 
 	// The status of the order.
 	// * `confirmed` - Payment confirmed.
 	// * `unconfirmed` - Payment not confirmed.
-	Status                   string `json:"status"`
+	Status string `json:"status"`
 
 	// The URI of the cPanel Market Provider's support site.
-	SupportUri               string `json:"support_uri"`
+	SupportUri string `json:"support_uri"`
 
 	// The virtual host domains on the certificate.
-	VhostNames               []string `json:"vhost_names"`
+	VhostNames []string `json:"vhost_names"`
 }
 
 // MarketGetProductInfoArgs are the parameters of the UAPI function `Market::get_product_info`.
@@ -600,14 +590,13 @@ func (c *MarketClient) GetProductInfo(ctx context.Context, args *MarketGetProduc
 	return cpanel.UAPICall[MarketGetProductInfoData](ctx, c.c, http.MethodGet, "Market", "get_product_info", args)
 }
 
-
 // MarketGetProductInfoData is a generated payload type.
 type MarketGetProductInfoData struct {
 	// The product's identifier in the cPanel Store.
-	ProductID          string `json:"product_id"`
+	ProductID string `json:"product_id"`
 
 	// The cPanel path to redirect to after a purchase attempt.
-	RedirectPath       string `json:"redirect_path"`
+	RedirectPath string `json:"redirect_path"`
 
 	// The full cPanel URL to redirect to after a failed purchase, including the security token and relevant query string parameters.
 	RedirectURLFailure string `json:"redirect_url_failure"`
@@ -638,26 +627,25 @@ func (c *MarketClient) GetProviderSpecificDCVConstraints(ctx context.Context, ar
 	return cpanel.UAPICall[MarketGetProviderSpecificDCVConstraintsData](ctx, c.c, http.MethodGet, "Market", "get_provider_specific_dcv_constraints", args)
 }
 
-
 // MarketGetProviderSpecificDCVConstraintsData is a generated payload type.
 type MarketGetProviderSpecificDCVConstraintsData struct {
 	// An array that lists the characters which the provider allows in the DCV check file's filename.
-	DCVFileAllowedCharacters    []string `json:"dcv_file_allowed_characters"`
+	DCVFileAllowedCharacters []string `json:"dcv_file_allowed_characters"`
 
 	// The DCV check file extension that the provider requires.
-	DCVFileExtension            string `json:"dcv_file_extension"`
+	DCVFileExtension string `json:"dcv_file_extension"`
 
 	// The number of characters that the provider allows in the DCV check file's filename.
 	DCVFileRandomCharacterCount int64 `json:"dcv_file_random_character_count"`
 
 	// The path to the DCV check file, relative to the domain's document root directory.
-	DCVFileRelativePath         string `json:"dcv_file_relative_path"`
+	DCVFileRelativePath string `json:"dcv_file_relative_path"`
 
 	// The maximum number of HTTP redirects the provider allows.
-	DCVMaxRedirects             int64 `json:"dcv_max_redirects"`
+	DCVMaxRedirects int64 `json:"dcv_max_redirects"`
 
 	// The user agent string that the system will use for the imitated local DCV check.
-	DCVUserAgentString          string `json:"dcv_user_agent_string"`
+	DCVUserAgentString string `json:"dcv_user_agent_string"`
 }
 
 // GetProvidersList calls the UAPI function `Market::get_providers_list` — Return enabled providers
@@ -671,14 +659,13 @@ func (c *MarketClient) GetProvidersList(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[[]MarketGetProvidersListDataItem](ctx, c.c, http.MethodGet, "Market", "get_providers_list", cpanel.CombineArgs(extra...))
 }
 
-
 // MarketGetProvidersListDataItem is a generated payload type.
 type MarketGetProvidersListDataItem struct {
 	// The cPanel Market provider's display name.
 	DisplayName string `json:"display_name"`
 
 	// The cPanel Market provider's name.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 }
 
 // MarketGetSSLCertificateIfAvailableArgs are the parameters of the UAPI function `Market::get_ssl_certificate_if_available`.
@@ -708,7 +695,6 @@ func (c *MarketClient) GetSSLCertificateIfAvailable(ctx context.Context, args *M
 	return cpanel.UAPICall[MarketGetSslcertificateIfAvailableData](ctx, c.c, http.MethodGet, "Market", "get_ssl_certificate_if_available", args)
 }
 
-
 // An object that contains encrypted URLs a user must click to complete their SSL certificate order.
 //
 // **Note:**
@@ -723,7 +709,7 @@ type MarketGetSslcertificateIfAvailableDataEncryptedActionUrls struct {
 	// URL the user must click to verify their identity by phone to complete their Organization Validation (OV) certificate order.
 	// * An encrypted URL.
 	// * `null` - No action required.
-	OvCallbackStatus     *string `json:"ovCallbackStatus"`
+	OvCallbackStatus *string `json:"ovCallbackStatus"`
 }
 
 // MarketGetSslcertificateIfAvailableData is a generated payload type.
@@ -731,7 +717,7 @@ type MarketGetSslcertificateIfAvailableData struct {
 	// The certificate's text.
 	// * `null` - The certificate is not available.
 	// * A certificate file in [Base64 PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) format.
-	CertificatePem      *string `json:"certificate_pem"`
+	CertificatePem *string `json:"certificate_pem"`
 
 	// An object that contains encrypted URLs a user must click to complete their SSL certificate order.
 	//
@@ -741,14 +727,14 @@ type MarketGetSslcertificateIfAvailableData struct {
 	EncryptedActionUrls MarketGetSslcertificateIfAvailableDataEncryptedActionUrls `json:"encrypted_action_urls"`
 
 	// The status code of the certificate.
-	StatusCode          string `json:"status_code"`
+	StatusCode string `json:"status_code"`
 
 	// An error message from the certificate provider. For example, why a certificate authority rejected an SSL certificate.
 	//
 	// **Note:**
 	//
 	// If no error message exists, this will return an empty string.
-	StatusMessage       string `json:"status_message"`
+	StatusMessage string `json:"status_message"`
 }
 
 // ProcessSSLPendingQueue calls the UAPI function `Market::process_ssl_pending_queue` — Start processing pending queue's SSL certificates
@@ -762,58 +748,57 @@ func (c *MarketClient) ProcessSSLPendingQueue(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[[]MarketProcessSSLPendingQueueDataItem](ctx, c.c, http.MethodGet, "Market", "process_ssl_pending_queue", cpanel.CombineArgs(extra...))
 }
 
-
 // MarketProcessSSLPendingQueueDataItem is a generated payload type.
 type MarketProcessSSLPendingQueueDataItem struct {
 	// The certificate ID. The system sets this for re-issued short-lived certificates, which it polls by certificate ID rather than by order item ID.
-	CertificateID            string `json:"certificate_id"`
+	CertificateID string `json:"certificate_id"`
 
 	// The text of the certificate, if available.
 	// * `null` - The certificate is not available.
-	CertificatePem           *string `json:"certificate_pem"`
+	CertificatePem *string `json:"certificate_pem"`
 
 	// When the system placed the order.
-	CreatedTime              int64 `json:"created_time"`
+	CreatedTime int64 `json:"created_time"`
 
 	// The Certificate Signing Request's (CSR's) text.
-	Csr                      string `json:"csr"`
+	Csr string `json:"csr"`
 
 	// Whether the system has deleted the item from the pending queue.
 	// * `0` - Deleted.
 	// * `1` - **Not** deleted.
 	//
 	// Possible values: `0`, `1`.
-	Deleted                  int64 `json:"deleted"`
+	Deleted int64 `json:"deleted"`
 
 	// A list of domains that the certificate request covers.
-	Domains                  []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// Whether the system has deleted the item from the pending queue.
 	// * `1` - Deleted.
 	// * `0` - **Not** deleted.
 	//
 	// Possible values: `0`, `1`.
-	Expired                  int64 `json:"expired"`
+	Expired int64 `json:"expired"`
 
 	// The first time that the system polled the provider for the certificate.
-	FirstPollTime            int64 `json:"first_poll_time"`
+	FirstPollTime int64 `json:"first_poll_time"`
 
 	// Whether the system installed the certificate.
 	// * `1` - Installed.
 	// * `0` - **Not** installed.
 	//
 	// Possible values: `0`, `1`.
-	Installed                int64 `json:"installed"`
+	Installed int64 `json:"installed"`
 
 	// The last time that the system polled the provider for the certificate.
-	LastPollTime             int64 `json:"last_poll_time"`
+	LastPollTime int64 `json:"last_poll_time"`
 
 	// The last status code of the order.
 	// * `CertificateNotFound` - The system cannot locate the specified certificate.
 	// * `RequiresApproval` - The specified certificate requires approval.
 	// * `OrderCanceled` - The system canceled the order of the specified certificate.
 	// * `OrderItemCanceled` - The system canceled the order item of the specified certificate. …
-	LastStatusCode           string `json:"last_status_code"`
+	LastStatusCode string `json:"last_status_code"`
 
 	// An error message from the certificate provider.
 	// For example, why a certificate authority rejected an SSL certificate.
@@ -821,35 +806,35 @@ type MarketProcessSSLPendingQueueDataItem struct {
 	// **Note:**
 	//
 	// If no error message exists, this will return an empty string.
-	LastStatusMessage        string `json:"last_status_message"`
+	LastStatusMessage string `json:"last_status_message"`
 
 	// A unique identifier for the order.
-	OrderID                  string `json:"order_id"`
+	OrderID string `json:"order_id"`
 
 	// A unique identifier of each item in the order.
-	OrderItemID              string `json:"order_item_id"`
+	OrderItemID string `json:"order_item_id"`
 
 	// For a re-issued certificate, the ID of the certificate that it descends from.
 	OriginatingCertificateID string `json:"originating_certificate_id"`
 
 	// The expiration of the parent subscription certificate, as a Unix timestamp.
-	ParentCertExpiry         int64 `json:"parent_cert_expiry"`
+	ParentCertExpiry int64 `json:"parent_cert_expiry"`
 
 	// An identifier for a given product.
-	ProductID                string `json:"product_id"`
+	ProductID string `json:"product_id"`
 
 	// The cPanel Market provider's name.
-	Provider                 string `json:"provider"`
+	Provider string `json:"provider"`
 
 	// The status of the order.
 	// * `confirmed` - Payment confirmed.
 	// * `unconfirmed` - Payment **not** confirmed.
 	//
 	// Possible values: `confirmed`, `unconfirmed`.
-	Status                   string `json:"status"`
+	Status string `json:"status"`
 
 	// A list of virtual host names.
-	VhostNames               []string `json:"vhost_names"`
+	VhostNames []string `json:"vhost_names"`
 }
 
 // MarketRequestSSLCertificatesArgs are the parameters of the UAPI function `Market::request_ssl_certificates`.
@@ -904,11 +889,10 @@ func (c *MarketClient) RequestSSLCertificates(ctx context.Context, args *MarketR
 	return cpanel.UAPICall[MarketRequestSSLCertificatesData](ctx, c.c, http.MethodGet, "Market", "request_ssl_certificates", args)
 }
 
-
 // Information about each certificate in the order.
 type MarketRequestSSLCertificatesDataCertificates struct {
 	// The private key's ID.
-	KeyID       string `json:"key_id"`
+	KeyID string `json:"key_id"`
 
 	// The ID of the ordered item.
 	OrderItemID int64 `json:"order_item_id"`
@@ -920,10 +904,10 @@ type MarketRequestSSLCertificatesData struct {
 	Certificates MarketRequestSSLCertificatesDataCertificates `json:"certificates"`
 
 	// The URL that the cPanel Market provider uses to process payment.
-	CheckoutURL  string `json:"checkout_url"`
+	CheckoutURL string `json:"checkout_url"`
 
 	// The order ID that the cPanel Market provider assigned.
-	OrderID      int64 `json:"order_id"`
+	OrderID int64 `json:"order_id"`
 }
 
 // MarketSetStatusOfPendingQueueItemsArgs are the parameters of the UAPI function `Market::set_status_of_pending_queue_items`.
@@ -966,7 +950,6 @@ func (c *MarketClient) SetStatusOfPendingQueueItems(ctx context.Context, args *M
 	return cpanel.UAPICall[MarketSetStatusOfPendingQueueItemsData](ctx, c.c, http.MethodGet, "Market", "set_status_of_pending_queue_items", args)
 }
 
-
 // The function only returns these values if the user or users do **not** have the `order_item_id` item in the cPanel Market pending queue.
 type MarketSetStatusOfPendingQueueItemsData struct {
 	// The type of error that the function encountered.
@@ -974,7 +957,7 @@ type MarketSetStatusOfPendingQueueItemsData struct {
 	// * `EntryDoesNotExist` — The returned `order_item_ids` do not exist in the cPanel Market pending queue for the user.
 	//
 	// Possible values: `EntryDoesNotExist`.
-	ErrorType    string `json:"error_type"`
+	ErrorType string `json:"error_type"`
 
 	// An array that lists order item IDs which do not exist in the cPanel Market pending queue for the user.
 	OrderItemIds []int64 `json:"order_item_ids"`
@@ -1017,7 +1000,6 @@ func (c *MarketClient) SetURLAfterCheckout(ctx context.Context, args *MarketSetU
 	return cpanel.UAPICall[MarketSetURLAfterCheckoutData](ctx, c.c, http.MethodGet, "Market", "set_url_after_checkout", args)
 }
 
-
 // MarketSetURLAfterCheckoutData is a generated payload type.
 type MarketSetURLAfterCheckoutData struct {
 	// Any errors that the function encounters.
@@ -1055,7 +1037,6 @@ type MarketValidateLoginTokenArgs struct {
 func (c *MarketClient) ValidateLoginToken(ctx context.Context, args *MarketValidateLoginTokenArgs) (*cpanel.UAPIResult[MarketValidateLoginTokenData], error) {
 	return cpanel.UAPICall[MarketValidateLoginTokenData](ctx, c.c, http.MethodGet, "Market", "validate_login_token", args)
 }
-
 
 // MarketValidateLoginTokenData is a generated payload type.
 type MarketValidateLoginTokenData struct {

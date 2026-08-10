@@ -23,7 +23,6 @@ func (c *Client) AllowAllWHMRootAccess(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "allow_all_whm_root_access", cpanel.CombineArgs(extra...))
 }
 
-
 // RestrictWHMRootAccessArgs are the parameters of the WHM API 1 function `restrict_whm_root_access`.
 type RestrictWHMRootAccessArgs struct {
 	// The IPs you wish to restrict in CIDR format.
@@ -63,7 +62,6 @@ type RestrictWHMRootAccessArgs struct {
 func (c *Client) RestrictWHMRootAccess(ctx context.Context, args *RestrictWHMRootAccessArgs) (*cpanel.WHMResult[RestrictWHMRootAccessData], error) {
 	return cpanel.WHMCall[RestrictWHMRootAccessData](ctx, c.c, http.MethodGet, "restrict_whm_root_access", args)
 }
-
 
 // RestrictWHMRootAccessData is a generated payload type.
 type RestrictWHMRootAccessData struct {

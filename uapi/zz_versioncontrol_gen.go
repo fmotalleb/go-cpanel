@@ -80,7 +80,6 @@ func (c *VersionControlClient) Create(ctx context.Context, args *VersionControlC
 	return cpanel.UAPICall[VersionControlCreateData](ctx, c.c, http.MethodGet, "VersionControl", "create", args)
 }
 
-
 // An object containing URLs to use to clone the repository.
 type VersionControlCreateDataCloneUrls struct {
 	// A list of clone URLs with read-only permissions. The function
@@ -91,7 +90,7 @@ type VersionControlCreateDataCloneUrls struct {
 	//
 	// If the server uses a [nonstandard SSH port](https://go.cpanel.net/firewall),
 	// the system returns a clone URL that includes the port number.
-	ReadOnly  []string `json:"read_only"`
+	ReadOnly []string `json:"read_only"`
 
 	// A list of of clone URLs with read-write permissions. The function
 	// returns a blank array if the account does **not** include the
@@ -116,7 +115,7 @@ type VersionControlCreateDataSourceRepository struct {
 	RemoteName string `json:"remote_name"`
 
 	// The source repository's clone URL.
-	URL        string `json:"url"`
+	URL string `json:"url"`
 }
 
 // A list of arguments for the
@@ -129,7 +128,7 @@ type VersionControlCreateDataTasksItemArgs struct {
 	//
 	// The function **only** returns this value if the process
 	// generated a log file.
-	LogFile        string `json:"log_file"`
+	LogFile string `json:"log_file"`
 
 	// The absolute path to the repository's directory within the user's `home` directory.
 	RepositoryRoot string `json:"repository_root"`
@@ -146,19 +145,19 @@ type VersionControlCreateDataTasksItem struct {
 	// `create` is the only possible value.
 	//
 	// Possible values: `create`.
-	Action    string `json:"action"`
+	Action string `json:"action"`
 
 	// A list of arguments for the
 	// [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor)
 	// system's process.
-	Args      VersionControlCreateDataTasksItemArgs `json:"args"`
+	Args VersionControlCreateDataTasksItemArgs `json:"args"`
 
 	// The [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor)
 	// system's task ID number.
-	ID        string `json:"id"`
+	ID string `json:"id"`
 
 	// The SSE interface to track the progress of the process.
-	SseURL    string `json:"sse_url"`
+	SseURL string `json:"sse_url"`
 
 	// The [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor)
 	// subsystem that will handle the task.
@@ -182,10 +181,10 @@ type VersionControlCreateData struct {
 	//
 	// * `null` — The system has **not** finished the clone process for
 	// the repository, or no local branches exist.
-	Branch            *string `json:"branch"`
+	Branch *string `json:"branch"`
 
 	// An object containing URLs to use to clone the repository.
-	CloneUrls         VersionControlCreateDataCloneUrls `json:"clone_urls"`
+	CloneUrls VersionControlCreateDataCloneUrls `json:"clone_urls"`
 
 	// Information about the most-recent (HEAD) commit for the current branch.
 	//
@@ -196,13 +195,13 @@ type VersionControlCreateData struct {
 	// * `null` is the only possible value.
 	//
 	// Possible values: `None`.
-	LastUpdate        json.RawMessage `json:"last_update"`
+	LastUpdate json.RawMessage `json:"last_update"`
 
 	// The repository's display name.
-	Name              string `json:"name"`
+	Name string `json:"name"`
 
 	// The absolute path of the directory that contains the repository in the user's `home` directory.
-	RepositoryRoot    string `json:"repository_root"`
+	RepositoryRoot string `json:"repository_root"`
 
 	// A object containing information about a cloned repository's source
 	// repository.
@@ -211,7 +210,7 @@ type VersionControlCreateData struct {
 	//
 	// The function **only** returns this object if it will clone a
 	// repository.
-	SourceRepository  VersionControlCreateDataSourceRepository `json:"source_repository"`
+	SourceRepository VersionControlCreateDataSourceRepository `json:"source_repository"`
 
 	// An array of objects containing information about the
 	// [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor)
@@ -221,7 +220,7 @@ type VersionControlCreateData struct {
 	//
 	// The function **only** returns this value if it will clone a
 	// repository.
-	Tasks             []VersionControlCreateDataTasksItem `json:"tasks"`
+	Tasks []VersionControlCreateDataTasksItem `json:"tasks"`
 
 	// The repository type.
 	//
@@ -230,7 +229,7 @@ type VersionControlCreateData struct {
 	// **Note:**
 	//
 	// `git` is the only possible value.
-	Type2             string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // VersionControlDeleteArgs are the parameters of the UAPI function `VersionControl::delete`.
@@ -266,7 +265,6 @@ func (c *VersionControlClient) Delete(ctx context.Context, args *VersionControlD
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "VersionControl", "delete", args)
 }
 
-
 // VersionControlRetrieveArgs are the parameters of the UAPI function `VersionControl::retrieve`.
 type VersionControlRetrieveArgs struct {
 	// A comma-separated list of desired return values.
@@ -291,25 +289,26 @@ type VersionControlRetrieveArgs struct {
 //
 // **Important:**
 //
-// * This feature does **not** allow the following characters in repository paths:
-//   ``\ * | " ' < > & @ ` $ { } [ ] ( ) ; ? : = % #``
-// * This function does **not** allow repositories that exist in the following
+//   - This feature does **not** allow the following characters in repository paths:
+//     “\ * | " ' < > & @ ` $ { } [ ] ( ) ; ? : = % #“
+//   - This function does **not** allow repositories that exist in the following
+//
 // cPanel-controlled directories:
 //
-//   * `.cpanel`
-//   * `.htpasswds`
-//   * `.ssh`
-//   * `.trash`
-//   * `access-logs`
-//   * `cgi-bin`
-//   * `etc`
-//   * `logs`
-//   * `perl5`
-//   * `mail`
-//   * `spamassassin`
-//   * `ssl`
-//   * `tmp`
-//   * `var`
+//   - `.cpanel`
+//   - `.htpasswds`
+//   - `.ssh`
+//   - `.trash`
+//   - `access-logs`
+//   - `cgi-bin`
+//   - `etc`
+//   - `logs`
+//   - `perl5`
+//   - `mail`
+//   - `spamassassin`
+//   - `ssl`
+//   - `tmp`
+//   - `var`
 //
 // Users can create repositories in some of these directories on the command line.
 // They may appear in the list of repositories in Gitweb, but users may see an error
@@ -322,7 +321,6 @@ func (c *VersionControlClient) Retrieve(ctx context.Context, args *VersionContro
 	return cpanel.UAPICall[[]VersionControlRetrieveDataItem](ctx, c.c, http.MethodGet, "VersionControl", "retrieve", args)
 }
 
-
 // An array of objects containing URLS to use to clone the repository.
 type VersionControlRetrieveDataItemCloneUrls struct {
 	// A list of clone URLs with read-only permissions.
@@ -334,7 +332,7 @@ type VersionControlRetrieveDataItemCloneUrls struct {
 	//
 	// If the server uses a nonstandard SSH port, the system returns a
 	// clone URL that includes the port number.
-	ReadOnly  []string `json:"read_only"`
+	ReadOnly []string `json:"read_only"`
 
 	// A list of clone URLs with read-write permissions.
 	//
@@ -351,16 +349,16 @@ type VersionControlRetrieveDataItemCloneUrls struct {
 // A object containing information about the state of the repository at the time of the most recent deployment.
 type VersionControlRetrieveDataItemLastDeploymentRepositoryState struct {
 	// The author's name and email address for the commit that the system most recently deployed.
-	Author     string `json:"author"`
+	Author string `json:"author"`
 
 	// The timestamp for the commit that the system most recently deployed.
-	Date       int64 `json:"date"`
+	Date int64 `json:"date"`
 
 	// The identifier (SHA-1 value) for the commit that the system most recently deployed.
 	Identifier string `json:"identifier"`
 
 	// The commit message for the commit that the system most recently deployed.
-	Message    string `json:"message"`
+	Message string `json:"message"`
 }
 
 // An object containing information about the commit that the system
@@ -372,7 +370,7 @@ type VersionControlRetrieveDataItemLastDeploymentRepositoryState struct {
 // exists.
 type VersionControlRetrieveDataItemLastDeployment struct {
 	// The timestamp for the most-recent deployment.
-	DeploymentDate  int64 `json:"deployment_date"`
+	DeploymentDate int64 `json:"deployment_date"`
 
 	// A object containing information about the state of the repository at the time of the most recent deployment.
 	RepositoryState VersionControlRetrieveDataItemLastDeploymentRepositoryState `json:"repository_state"`
@@ -395,16 +393,16 @@ type VersionControlRetrieveDataItemLastDeployment struct {
 // unavailable.
 type VersionControlRetrieveDataItemLastUpdate struct {
 	// The most-recent commit's author's name and email address.
-	Author     string `json:"author"`
+	Author string `json:"author"`
 
 	// The timestamp for the most-recent commit.
-	Date       int64 `json:"date"`
+	Date int64 `json:"date"`
 
 	// The identifier (SHA-1 value) for the most-recent commit.
 	Identifier string `json:"identifier"`
 
 	// The commit message.
-	Message    string `json:"message"`
+	Message string `json:"message"`
 }
 
 // An object containing information about the source repository.
@@ -418,7 +416,7 @@ type VersionControlRetrieveDataItemSourceRepository struct {
 	RemoteName string `json:"remote_name"`
 
 	// The source repository's clone URL.
-	URL        string `json:"url"`
+	URL string `json:"url"`
 }
 
 // A list of arguments for the Task Queue system's process.
@@ -429,7 +427,7 @@ type VersionControlRetrieveDataItemTasksItemArgs struct {
 	//
 	// The function only returns this value if the process generated
 	// a log file.
-	LogFile        string `json:"log_file"`
+	LogFile string `json:"log_file"`
 
 	// The absolute path to the repository's directory in the user's `home` directory.
 	RepositoryRoot string `json:"repository_root"`
@@ -443,16 +441,16 @@ type VersionControlRetrieveDataItemTasksItem struct {
 	// * `deploy` — Deploy the repository.
 	//
 	// Possible values: `create`, `deploy`.
-	Action    string `json:"action"`
+	Action string `json:"action"`
 
 	// A list of arguments for the Task Queue system's process.
-	Args      VersionControlRetrieveDataItemTasksItemArgs `json:"args"`
+	Args VersionControlRetrieveDataItemTasksItemArgs `json:"args"`
 
 	// The Task Queue system's task ID number.
-	ID        string `json:"id"`
+	ID string `json:"id"`
 
 	// The Secure Server Events (SSE) interface URL to track the progress of the process.
-	SseURL    string `json:"sse_url"`
+	SseURL string `json:"sse_url"`
 
 	// The Task Queue subsystem that will handle the task.
 	//
@@ -476,10 +474,10 @@ type VersionControlRetrieveDataItem struct {
 	// * `null` — The system has not finished the clone process for the
 	// repository, no local branches exist, or the repository is a bare
 	// repository.
-	Branch            *string `json:"branch"`
+	Branch *string `json:"branch"`
 
 	// An array of objects containing URLS to use to clone the repository.
-	CloneUrls         VersionControlRetrieveDataItemCloneUrls `json:"clone_urls"`
+	CloneUrls VersionControlRetrieveDataItemCloneUrls `json:"clone_urls"`
 
 	// Whether the system could deploy the repository.
 	//
@@ -487,7 +485,7 @@ type VersionControlRetrieveDataItem struct {
 	// * `0` — Cannot deploy.
 	//
 	// Possible values: `1`, `0`.
-	DeployAble        int64 `json:"deployable"`
+	DeployAble int64 `json:"deployable"`
 
 	// An object containing information about the commit that the system
 	// most recently deployed.
@@ -496,7 +494,7 @@ type VersionControlRetrieveDataItem struct {
 	//
 	// The system **only** returns this object if deployment information
 	// exists.
-	LastDeployment    VersionControlRetrieveDataItemLastDeployment `json:"last_deployment"`
+	LastDeployment VersionControlRetrieveDataItemLastDeployment `json:"last_deployment"`
 
 	// An object containing information about the most-recent (HEAD) commit
 	// for the current branch.
@@ -512,13 +510,13 @@ type VersionControlRetrieveDataItem struct {
 	// a `null` value instead of an object.
 	// * The system may require a large amount of time to clone larger
 	// repositories. Until this proc …
-	LastUpdate        VersionControlRetrieveDataItemLastUpdate `json:"last_update"`
+	LastUpdate VersionControlRetrieveDataItemLastUpdate `json:"last_update"`
 
 	// The repository's display name.
-	Name              string `json:"name"`
+	Name string `json:"name"`
 
 	// The absolute directory path in the user's `home` directory containing the repository.
-	RepositoryRoot    string `json:"repository_root"`
+	RepositoryRoot string `json:"repository_root"`
 
 	// An object containing information about the source repository.
 	//
@@ -526,7 +524,7 @@ type VersionControlRetrieveDataItem struct {
 	//
 	// The function **only** returns this object if you cloned a source
 	// repository.
-	SourceRepository  VersionControlRetrieveDataItemSourceRepository `json:"source_repository"`
+	SourceRepository VersionControlRetrieveDataItemSourceRepository `json:"source_repository"`
 
 	// An array of objects containing information about the
 	// [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor)
@@ -536,14 +534,14 @@ type VersionControlRetrieveDataItem struct {
 	//
 	// The function only returns this value if the clone process is
 	// **not** finished.
-	Tasks             []VersionControlRetrieveDataItemTasksItem `json:"tasks"`
+	Tasks []VersionControlRetrieveDataItemTasksItem `json:"tasks"`
 
 	// The repository type.
 	//
 	// * `git` is the only possible value.
 	//
 	// Possible values: `git`.
-	Type2             string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // VersionControlUpdateArgs are the parameters of the UAPI function `VersionControl::update`.
@@ -605,7 +603,6 @@ func (c *VersionControlClient) Update(ctx context.Context, args *VersionControlU
 	return cpanel.UAPICall[VersionControlUpdateData](ctx, c.c, http.MethodGet, "VersionControl", "update", args)
 }
 
-
 // An object containing the URLs to use to clone the repository.
 //
 // The function returns an empty object if the account does **not**
@@ -625,7 +622,7 @@ type VersionControlUpdateDataCloneUrls struct {
 	//
 	// If the server uses a nonstandard SSH port, the system returns a
 	// clone URL that includes the port number.
-	ReadOnly  []string `json:"read_only"`
+	ReadOnly []string `json:"read_only"`
 
 	// A list of clone URLs with read-write permissions.
 	//
@@ -642,16 +639,16 @@ type VersionControlUpdateDataCloneUrls struct {
 // A object containing information about the state of the repository at the time of the most recent deployment.
 type VersionControlUpdateDataLastDeploymentRepositoryState struct {
 	// The author's name and email address for the commit that the system most recently deployed.
-	Author     string `json:"author"`
+	Author string `json:"author"`
 
 	// The timestamp for the commit that the system most recently deployed.
-	Date       int64 `json:"date"`
+	Date int64 `json:"date"`
 
 	// The identifier (SHA-1 value) for the commit that the system most recently deployed.
 	Identifier string `json:"identifier"`
 
 	// The commit message for the commit that the system most recently deployed.
-	Message    string `json:"message"`
+	Message string `json:"message"`
 }
 
 // An object containing information about the commit that the system
@@ -662,7 +659,7 @@ type VersionControlUpdateDataLastDeploymentRepositoryState struct {
 // If no deployment information exists, the function returns a `null` value.
 type VersionControlUpdateDataLastDeployment struct {
 	// The timestamp for the most recent deployment.
-	DeploymentDate  int64 `json:"deployment_date"`
+	DeploymentDate int64 `json:"deployment_date"`
 
 	// A object containing information about the state of the repository at the time of the most recent deployment.
 	RepositoryState VersionControlUpdateDataLastDeploymentRepositoryState `json:"repository_state"`
@@ -684,16 +681,16 @@ type VersionControlUpdateDataLastDeployment struct {
 // Until this process finishes, HEAD information is unavailable.
 type VersionControlUpdateDataLastUpdate struct {
 	// The most recent commit's author name and email address.
-	Author     string `json:"author"`
+	Author string `json:"author"`
 
 	// The timestamp for the most recent commit.
-	Date       int64 `json:"date"`
+	Date int64 `json:"date"`
 
 	// The identifier (SHA-1 value) for the most recent commit.
 	Identifier string `json:"identifier"`
 
 	// The commit message.
-	Message    string `json:"message"`
+	Message string `json:"message"`
 }
 
 // An object containing information about the source repository.
@@ -707,7 +704,7 @@ type VersionControlUpdateDataSourceRepository struct {
 	RemoteName string `json:"remote_name"`
 
 	// The source repository's clone URL.
-	URL        string `json:"url"`
+	URL string `json:"url"`
 }
 
 // An object containing arguments for the Task Queue system's process.
@@ -719,7 +716,7 @@ type VersionControlUpdateDataTasksItemArgs struct {
 	//
 	// The function **only** returns this value if the process
 	// generated a log file.
-	LogFile        string `json:"log_file"`
+	LogFile string `json:"log_file"`
 
 	// The repository's absolute directory path in the user's `home` directory.
 	RepositoryRoot string `json:"repository_root"`
@@ -733,13 +730,13 @@ type VersionControlUpdateDataTasksItem struct {
 	// * `deploy` — Deploy the repository.
 	//
 	// Possible values: `create`, `deploy`.
-	Action    string `json:"action"`
+	Action string `json:"action"`
 
 	// An object containing arguments for the Task Queue system's process.
-	Args      VersionControlUpdateDataTasksItemArgs `json:"args"`
+	Args VersionControlUpdateDataTasksItemArgs `json:"args"`
 
 	// The Task Queue system's task ID number.
-	ID        string `json:"id"`
+	ID string `json:"id"`
 
 	// The Task Queue subsystem that will handle the task.
 	//
@@ -767,7 +764,7 @@ type VersionControlUpdateData struct {
 	// * `null` — The system has not finished the clone process for the
 	// repository, no local branches exist, or the repository is a bare
 	// repository.
-	Branch            *string `json:"branch"`
+	Branch *string `json:"branch"`
 
 	// An object containing the URLs to use to clone the repository.
 	//
@@ -778,7 +775,7 @@ type VersionControlUpdateData struct {
 	//
 	// If the server uses a nonstandard SSH port, the system returns a
 	// clone URL that includes the port number.
-	CloneUrls         VersionControlUpdateDataCloneUrls `json:"clone_urls"`
+	CloneUrls VersionControlUpdateDataCloneUrls `json:"clone_urls"`
 
 	// Whether the system could deploy the repository.
 	//
@@ -786,7 +783,7 @@ type VersionControlUpdateData struct {
 	// * `0` — Cannot deploy.
 	//
 	// Possible values: `1`, `0`.
-	DeployAble        int64 `json:"deployable"`
+	DeployAble int64 `json:"deployable"`
 
 	// An object containing information about the commit that the system
 	// most recently deployed.
@@ -794,7 +791,7 @@ type VersionControlUpdateData struct {
 	// **Note:**
 	//
 	// If no deployment information exists, the function returns a `null` value.
-	LastDeployment    VersionControlUpdateDataLastDeployment `json:"last_deployment"`
+	LastDeployment VersionControlUpdateDataLastDeployment `json:"last_deployment"`
 
 	// An object containing information about the most recent (HEAD) commit for
 	// the current branch.
@@ -810,13 +807,13 @@ type VersionControlUpdateData struct {
 	// returns a `null` value instead of an object.
 	// * The system may require a large amount of time to clone larger repositories.
 	// Until this p …
-	LastUpdate        VersionControlUpdateDataLastUpdate `json:"last_update"`
+	LastUpdate VersionControlUpdateDataLastUpdate `json:"last_update"`
 
 	// The repository's display name.
-	Name              string `json:"name"`
+	Name string `json:"name"`
 
 	// The directory path that exists in the user's `home` directory containing the repository.
-	RepositoryRoot    string `json:"repository_root"`
+	RepositoryRoot string `json:"repository_root"`
 
 	// An object containing information about the source repository.
 	//
@@ -824,7 +821,7 @@ type VersionControlUpdateData struct {
 	//
 	// The function **only** returns this object if you cloned a source
 	// repository.
-	SourceRepository  VersionControlUpdateDataSourceRepository `json:"source_repository"`
+	SourceRepository VersionControlUpdateDataSourceRepository `json:"source_repository"`
 
 	// An array of objects containing information about the
 	// [Task Queue](https://go.cpanel.net/whmdocsTaskQueueMonitor)
@@ -834,7 +831,7 @@ type VersionControlUpdateData struct {
 	//
 	// The function **only** returns this value if the clone process is
 	// not finished.
-	Tasks             []VersionControlUpdateDataTasksItem `json:"tasks"`
+	Tasks []VersionControlUpdateDataTasksItem `json:"tasks"`
 
 	// The repository type.
 	//
@@ -845,5 +842,5 @@ type VersionControlUpdateData struct {
 	// * `git` is the only possible value.
 	//
 	// Possible values: `git`.
-	Type2             string `json:"type"`
+	Type2 string `json:"type"`
 }

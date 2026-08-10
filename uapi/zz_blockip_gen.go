@@ -37,7 +37,6 @@ func (c *BlockIPClient) AddIP(ctx context.Context, args *BlockIPAddIPArgs) (*cpa
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BlockIP", "add_ip", args)
 }
 
-
 // BlockIPRemoveIPArgs are the parameters of the UAPI function `BlockIP::remove_ip`.
 type BlockIPRemoveIPArgs struct {
 	// The IP address or IP address range that you wish to unblock.
@@ -63,4 +62,3 @@ type BlockIPRemoveIPArgs struct {
 func (c *BlockIPClient) RemoveIP(ctx context.Context, args *BlockIPRemoveIPArgs) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "BlockIP", "remove_ip", args)
 }
-

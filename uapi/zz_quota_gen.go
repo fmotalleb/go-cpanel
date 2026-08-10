@@ -17,7 +17,7 @@ import (
 //
 // **Note:**
 //
-//   This function runs on **only** the local server. To retrieve the cPanel account's total quota, use the UAPI `Quota::get_quota` function instead.
+//	This function runs on **only** the local server. To retrieve the cPanel account's total quota, use the UAPI `Quota::get_quota` function instead.
 //
 // Available since cPanel & WHM version cPanel 88.
 //
@@ -25,7 +25,6 @@ import (
 func (c *QuotaClient) GetLocalQuotaInfo(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[QuotaGetLocalQuotaInfoData], error) {
 	return cpanel.UAPICall[QuotaGetLocalQuotaInfoData](ctx, c.c, http.MethodGet, "Quota", "get_local_quota_info", cpanel.CombineArgs(extra...))
 }
-
 
 // QuotaGetLocalQuotaInfoData is a generated payload type.
 type QuotaGetLocalQuotaInfoData struct {
@@ -36,12 +35,12 @@ type QuotaGetLocalQuotaInfoData struct {
 	// **Note:**
 	//
 	//  This value does **not** update immediately.
-	ByteLimit  int64 `json:"byte_limit"`
+	ByteLimit int64 `json:"byte_limit"`
 
 	// The amount of disk space the cPanel account uses on this server, in bytes.
 	// * A positive integer.
 	// * `0` - No usage or disabled server quotas.
-	BytesUsed  int64 `json:"bytes_used"`
+	BytesUsed int64 `json:"bytes_used"`
 
 	// The limit for inodes that the cPanel account may use on this server.
 	// * A positive integer.
@@ -65,38 +64,37 @@ func (c *QuotaClient) GetQuotaInfo(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[QuotaGetQuotaInfoData](ctx, c.c, http.MethodGet, "Quota", "get_quota_info", cpanel.CombineArgs(extra...))
 }
 
-
 // An object containing the cPanel account's quota.
 type QuotaGetQuotaInfoData struct {
 	// The account's inode quota limit.
 	//
 	// * `0` — Unlimited or disabled server quotas.
-	InodeLimit         int64 `json:"inode_limit"`
+	InodeLimit int64 `json:"inode_limit"`
 
 	// The account's available inode quota.
 	//
 	// * `0` — Unlimited or disabled server quotas.
-	InodesRemain       int64 `json:"inodes_remain"`
+	InodesRemain int64 `json:"inodes_remain"`
 
 	// The account's number of used inodes.
 	//
 	// * `0` — No usage or disabled server quotas.
-	InodesUsed         int64 `json:"inodes_used"`
+	InodesUsed int64 `json:"inodes_used"`
 
 	// The account's disk space limit, in megabytes (MB).
 	//
 	// * `0.00` — Unlimited or disabled server quotas.
-	MegabyteLimit      float64 `json:"megabyte_limit"`
+	MegabyteLimit float64 `json:"megabyte_limit"`
 
 	// The account's available disk space in, megabytes (MB).
 	//
 	// * `0.00` — Unlimited or disabled server quotas.
-	MegabytesRemain    float64 `json:"megabytes_remain"`
+	MegabytesRemain float64 `json:"megabytes_remain"`
 
 	// The account's used disk space, in megabytes (MB).
 	//
 	// * `0.00` — No usage or disabled server quotas.
-	MegabytesUsed      float64 `json:"megabytes_used"`
+	MegabytesUsed float64 `json:"megabytes_used"`
 
 	// Whether the account is under its inode limit.
 	//
@@ -104,7 +102,7 @@ type QuotaGetQuotaInfoData struct {
 	// * `0` — Over limit.
 	//
 	// Possible values: `1`, `0`.
-	UnderInodeLimit    int64 `json:"under_inode_limit"`
+	UnderInodeLimit int64 `json:"under_inode_limit"`
 
 	// Whether the account is under its disk space limit, in megabytes (MB).
 	//
@@ -120,5 +118,5 @@ type QuotaGetQuotaInfoData struct {
 	// * `0` — Over limit.
 	//
 	// Possible values: `1`, `0`.
-	UnderQuotaOverall  int64 `json:"under_quota_overall"`
+	UnderQuotaOverall int64 `json:"under_quota_overall"`
 }

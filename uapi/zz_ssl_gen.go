@@ -42,7 +42,6 @@ func (c *SSLClient) AddAutoSSLExcludedDomains(ctx context.Context, args *SSLAddA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "add_autossl_excluded_domains", args)
 }
 
-
 // CanSSLRedirect calls the UAPI function `SSL::can_ssl_redirect` — Return whether domains can redirect to secure URL
 //
 // This function determines whether the system can automatically redirect domains on a cPanel account to use SSL.
@@ -53,7 +52,6 @@ func (c *SSLClient) AddAutoSSLExcludedDomains(ctx context.Context, args *SSLAddA
 func (c *SSLClient) CanSSLRedirect(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "SSL", "can_ssl_redirect", cpanel.CombineArgs(extra...))
 }
-
 
 // CheckSharedCert calls the UAPI function `SSL::check_shared_cert` — Return whether shared SSL certificate exists
 //
@@ -69,7 +67,6 @@ func (c *SSLClient) CanSSLRedirect(ctx context.Context, extra ...cpanel.Args) (*
 func (c *SSLClient) CheckSharedCert(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "SSL", "check_shared_cert", cpanel.CombineArgs(extra...))
 }
-
 
 // SSLDeleteCertArgs are the parameters of the UAPI function `SSL::delete_cert`.
 type SSLDeleteCertArgs struct {
@@ -107,14 +104,13 @@ func (c *SSLClient) DeleteCert(ctx context.Context, args *SSLDeleteCertArgs) (*c
 	return cpanel.UAPICall[[]SSLDeleteCertDataItem](ctx, c.c, http.MethodGet, "SSL", "delete_cert", args)
 }
 
-
 // SSLDeleteCertDataItem is a generated payload type.
 type SSLDeleteCertDataItem struct {
 	// The date the certificate was created.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the domains that the certificate covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -123,18 +119,18 @@ type SSLDeleteCertDataItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -142,16 +138,16 @@ type SSLDeleteCertDataItem struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The certificate's Common Name.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The certificate's issuer information.
-	IssuerText             string `json:"issuer_text"`
+	IssuerText string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -159,35 +155,35 @@ type SSLDeleteCertDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The date the certificate expired.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The date the certificate started.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificate's serial number.
-	Serial                 string `json:"serial"`
+	Serial string `json:"serial"`
 
 	// The certificate's OID signature hash algorithm.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The certificate's Common Name.
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The certificate's subject text information.
-	SubjectText            string `json:"subject_text"`
+	SubjectText string `json:"subject_text"`
 
 	// The certificate's validation type.
 	//
@@ -198,7 +194,7 @@ type SSLDeleteCertDataItem struct {
 	// certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType         *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // SSLDeleteCsrArgs are the parameters of the UAPI function `SSL::delete_csr`.
@@ -236,17 +232,16 @@ func (c *SSLClient) DeleteCsr(ctx context.Context, args *SSLDeleteCsrArgs) (*cpa
 	return cpanel.UAPICall[[]SSLDeleteCsrDataItem](ctx, c.c, http.MethodGet, "SSL", "delete_csr", args)
 }
 
-
 // SSLDeleteCsrDataItem is a generated payload type.
 type SSLDeleteCsrDataItem struct {
 	// The CSR's Common Name.
-	CommonName     string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The CSR's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the domains that the CSR covers.
-	Domains        []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the CSR's key uses.
 	//
@@ -260,13 +255,13 @@ type SSLDeleteCsrDataItem struct {
 	// The CSR's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The CSR's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The CSR's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The CSR's key's algorithm.
 	//
@@ -274,12 +269,12 @@ type SSLDeleteCsrDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The CSR's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 }
 
 // SSLDeleteKeyArgs are the parameters of the UAPI function `SSL::delete_key`.
@@ -318,11 +313,10 @@ func (c *SSLClient) DeleteKey(ctx context.Context, args *SSLDeleteKeyArgs) (*cpa
 	return cpanel.UAPICall[[]SSLDeleteKeyDataItem](ctx, c.c, http.MethodGet, "SSL", "delete_key", args)
 }
 
-
 // SSLDeleteKeyDataItem is a generated payload type.
 type SSLDeleteKeyDataItem struct {
 	// The private key's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The ECDSA curve that the key uses.
 	//
@@ -336,10 +330,10 @@ type SSLDeleteKeyDataItem struct {
 	// The key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The private key's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The key's algorithm.
 	//
@@ -347,17 +341,17 @@ type SSLDeleteKeyDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The key's modulus, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the key's modulus.
 	//
 	// * `null` — The key is **not** an RSA key.
-	ModulusLength  *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 }
 
 // SSLDeleteSSLArgs are the parameters of the UAPI function `SSL::delete_ssl`.
@@ -393,7 +387,6 @@ func (c *SSLClient) DeleteSSL(ctx context.Context, args *SSLDeleteSSLArgs) (*cpa
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "delete_ssl", args)
 }
 
-
 // SSLDisableMailSniArgs are the parameters of the UAPI function `SSL::disable_mail_sni`.
 type SSLDisableMailSniArgs struct {
 	// A pipe-delimited list of the account's domains.
@@ -411,11 +404,11 @@ type SSLDisableMailSniArgs struct {
 //
 // **Note:**
 //
-//   Mail SNI is **always** enabled.
+//	Mail SNI is **always** enabled.
 //
-//   * After you change the SNI status, you **must** run UAPI's `rebuild_mail_sni_config` function.
-//   * Functions that enable Mail SNI succeed with a warning that Mail SNI is always enabled.
-//   * Functions that disable Mail SNI fail and make no changes.
+//	* After you change the SNI status, you **must** run UAPI's `rebuild_mail_sni_config` function.
+//	* Functions that enable Mail SNI succeed with a warning that Mail SNI is always enabled.
+//	* Functions that disable Mail SNI fail and make no changes.
 //
 // Available since cPanel & WHM version cPanel 11.48.
 //
@@ -424,12 +417,11 @@ func (c *SSLClient) DisableMailSni(ctx context.Context, args *SSLDisableMailSniA
 	return cpanel.UAPICall[SSLDisableMailSniData](ctx, c.c, http.MethodGet, "SSL", "disable_mail_sni", args)
 }
 
-
 // SSLDisableMailSniData is a generated payload type.
 type SSLDisableMailSniData struct {
 	// An object containing the domains that failed to disable
 	//  mail SNI.
-	FailedDomains  map[string]string `json:"failed_domains"`
+	FailedDomains map[string]string `json:"failed_domains"`
 
 	// AN object containing the domains with disabled mail SNI.
 	UpdatedDomains map[string]int64 `json:"updated_domains"`
@@ -459,7 +451,7 @@ type SSLEnableMailSniArgs struct {
 //
 // **Important:**
 //
-//   When you disable the *Calendars and Contacts*, *Mail Receive*, *Web Disk*, *Webmail*, **and** *Web Server* [roles](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the *Calendars and Contacts*, *Mail Receive*, *Web Disk*, *Webmail*, **and** *Web Server* [roles](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.48.
 //
@@ -468,11 +460,10 @@ func (c *SSLClient) EnableMailSni(ctx context.Context, args *SSLEnableMailSniArg
 	return cpanel.UAPICall[SSLEnableMailSniData](ctx, c.c, http.MethodGet, "SSL", "enable_mail_sni", args)
 }
 
-
 // SSLEnableMailSniData is a generated payload type.
 type SSLEnableMailSniData struct {
 	// An object that contains the domains that did not enable mail SNI.
-	FailedDomains  map[string]string `json:"failed_domains"`
+	FailedDomains map[string]string `json:"failed_domains"`
 
 	// An object that contains the domains with disabled mail SNI.
 	UpdatedDomains map[string]int64 `json:"updated_domains"`
@@ -505,29 +496,28 @@ func (c *SSLClient) FetchBestForDomain(ctx context.Context, args *SSLFetchBestFo
 	return cpanel.UAPICall[SSLFetchBestForDomainData](ctx, c.c, http.MethodGet, "SSL", "fetch_best_for_domain", args)
 }
 
-
 // SSLFetchBestForDomainData is a generated payload type.
 type SSLFetchBestForDomainData struct {
 	// The CA bundle's contents (if applicable).
-	Cab           string `json:"cab"`
+	Cab string `json:"cab"`
 
 	// The certificate's contents.
-	Crt           string `json:"crt"`
+	Crt string `json:"crt"`
 
 	// The username that generated the certificate.
-	CrtOrigin     string `json:"crt_origin"`
+	CrtOrigin string `json:"crt_origin"`
 
 	// The domain that generated the private key.
-	Domain        string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The IP address.
-	IP            string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The private key.
-	Key           string `json:"key"`
+	Key string `json:"key"`
 
 	// The username that generated the private key.
-	KeyOrigin     string `json:"key_origin"`
+	KeyOrigin string `json:"key_origin"`
 
 	// The cPanel accounts that the system searched for domain information.
 	SearchedUsers []string `json:"searched_users"`
@@ -537,13 +527,13 @@ type SSLFetchBestForDomainData struct {
 	// * `0` - Inactive.
 	//
 	// Possible values: `0`, `1`.
-	Status        int64 `json:"status"`
+	Status int64 `json:"status"`
 
 	// The certificate's status.
-	StatusMsg     string `json:"statusmsg"`
+	StatusMsg string `json:"statusmsg"`
 
 	// The username that stores the private key.
-	User          string `json:"user"`
+	User string `json:"user"`
 }
 
 // SSLFetchCertInfoArgs are the parameters of the UAPI function `SSL::fetch_cert_info`.
@@ -578,24 +568,23 @@ func (c *SSLClient) FetchCertInfo(ctx context.Context, args *SSLFetchCertInfoArg
 	return cpanel.UAPICall[SSLFetchCertInfoData](ctx, c.c, http.MethodGet, "SSL", "fetch_cert_info", args)
 }
 
-
 // SSLFetchCertInfoData is a generated payload type.
 type SSLFetchCertInfoData struct {
 	// The CA bundle's contents (if applicable).
-	Cabundle            *string `json:"cabundle"`
+	Cabundle *string `json:"cabundle"`
 
 	// The certificate's contents.
-	Certificate         string `json:"certificate"`
+	Certificate string `json:"certificate"`
 
 	// Whether the certificate is self-signed.
 	// * `1` - Self-signed.
 	// * `0` - **Not** self-signed.
 	//
 	// Possible values: `0`, `1`.
-	IsSelfSigned        int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The private key.
-	Key                 string `json:"key"`
+	Key string `json:"key"`
 
 	// The IP address.
 	SubjectCommonNameIP string `json:"subject.commonName_ip"`
@@ -623,27 +612,26 @@ func (c *SSLClient) FetchCertificatesForFqdns(ctx context.Context, args *SSLFetc
 	return cpanel.UAPICall[[]SSLFetchCertificatesForFqdnsDataItem](ctx, c.c, http.MethodGet, "SSL", "fetch_certificates_for_fqdns", args)
 }
 
-
 // SSLFetchCertificatesForFqdnsDataItem is a generated payload type.
 type SSLFetchCertificatesForFqdnsDataItem struct {
 	// The CA bundle's contents.
-	Cab                    string `json:"cab"`
+	Cab string `json:"cab"`
 
 	// When the certificate was created.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The certificate's contents in Base64 PEM format.
-	Crt                    string `json:"crt"`
+	Crt string `json:"crt"`
 
 	// Whether the certificate is installed on the account.
 	// * `1` — Installed.
 	// * `0` — Not installed.
 	//
 	// Possible values: `0`, `1`.
-	DomainIsConfigured     int64 `json:"domain_is_configured"`
+	DomainIsConfigured int64 `json:"domain_is_configured"`
 
 	// The domains that the CSR covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -652,37 +640,37 @@ type SSLFetchCertificatesForFqdnsDataItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's identification.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	// - `1` — Self-signed.
 	// - `0` — Not self-signed.
 	//
 	// Possible values: `0`, `1`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The name that issued the certificate.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's organization.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The certificate's issuer information.
-	IssuerText             string `json:"issuer_text"`
+	IssuerText string `json:"issuer_text"`
 
 	// The private key in Base64 PEM format.
-	Key                    string `json:"key"`
+	Key string `json:"key"`
 
 	// The certificate's key's algorithm.
 	//
@@ -690,45 +678,45 @@ type SSLFetchCertificatesForFqdnsDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// When the certificate expired.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// When the certificate started.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificate's serial number.
-	Serial                 string `json:"serial"`
+	Serial string `json:"serial"`
 
 	// The OID of the hash algorithm used to sign the certificate request.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The certificate's common name.
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The certificate's subject text information.
-	SubjectText            string `json:"subject_text"`
+	SubjectText string `json:"subject_text"`
 
 	// The certificate's validation type.
 	// * `ev` — Extended Validation.
 	// * `ov` — Organization Validated.
 	// * `dv` — Domain Validated.
 	// * `null` —  The system could not parse and determine the certificate's validation type.
-	ValidationType         string `json:"validation_type"`
+	ValidationType string `json:"validation_type"`
 
 	// A message that explains the reason for a verification error.
-	VerifyError            string `json:"verify_error"`
+	VerifyError string `json:"verify_error"`
 }
 
 // SSLFetchKeyAndCabundleForCertificateArgs are the parameters of the UAPI function `SSL::fetch_key_and_cabundle_for_certificate`.
@@ -759,29 +747,28 @@ func (c *SSLClient) FetchKeyAndCabundleForCertificate(ctx context.Context, args 
 	return cpanel.UAPICall[SSLFetchKeyAndCabundleForCertificateData](ctx, c.c, http.MethodPost, "SSL", "fetch_key_and_cabundle_for_certificate", args)
 }
 
-
 // SSLFetchKeyAndCabundleForCertificateData is a generated payload type.
 type SSLFetchKeyAndCabundleForCertificateData struct {
 	// The CA bundle's contents (if applicable).
-	Cab           string `json:"cab"`
+	Cab string `json:"cab"`
 
 	// The certificate's contents.
-	Crt           string `json:"crt"`
+	Crt string `json:"crt"`
 
 	// The username that generated the certificate.
-	CrtOrigin     string `json:"crt_origin"`
+	CrtOrigin string `json:"crt_origin"`
 
 	// The domain that generated the private key.
-	Domain        string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The IP address.
-	IP            string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The private key.
-	Key           string `json:"key"`
+	Key string `json:"key"`
 
 	// The username that generated the private key.
-	KeyOrigin     string `json:"key_origin"`
+	KeyOrigin string `json:"key_origin"`
 
 	// The users that the system searched for certificate information.
 	SearchedUsers []string `json:"searched_users"`
@@ -791,13 +778,13 @@ type SSLFetchKeyAndCabundleForCertificateData struct {
 	// * `0` - Inactive.
 	//
 	// Possible values: `0`, `1`.
-	Status        int64 `json:"status"`
+	Status int64 `json:"status"`
 
 	// The certificate's status.
-	StatusMsg     string `json:"statusmsg"`
+	StatusMsg string `json:"statusmsg"`
 
 	// The username that stores the private key.
-	User          string `json:"user"`
+	User string `json:"user"`
 }
 
 // SSLFindCertificatesForKeyArgs are the parameters of the UAPI function `SSL::find_certificates_for_key`.
@@ -828,14 +815,13 @@ func (c *SSLClient) FindCertificatesForKey(ctx context.Context, args *SSLFindCer
 	return cpanel.UAPICall[[]SSLFindCertificatesForKeyDataItem](ctx, c.c, http.MethodGet, "SSL", "find_certificates_for_key", args)
 }
 
-
 // SSLFindCertificatesForKeyDataItem is a generated payload type.
 type SSLFindCertificatesForKeyDataItem struct {
 	// The date the certificate was created.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the domains that the certificate covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -844,18 +830,18 @@ type SSLFindCertificatesForKeyDataItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -863,16 +849,16 @@ type SSLFindCertificatesForKeyDataItem struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The name that issued the certificate.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's organization name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The certificate's issuer information.
-	IssuerText             string `json:"issuer_text"`
+	IssuerText string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -880,32 +866,32 @@ type SSLFindCertificatesForKeyDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The date the certificate expired.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The date the certificate started.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificate's signature OID hash algorithm.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The certificate's Common Name.
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The certificate's subject text information.
-	SubjectText            string `json:"subject_text"`
+	SubjectText string `json:"subject_text"`
 
 	// The certificate's validation type.
 	//
@@ -916,7 +902,7 @@ type SSLFindCertificatesForKeyDataItem struct {
 	// certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType         *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // SSLFindCsrsForKeyArgs are the parameters of the UAPI function `SSL::find_csrs_for_key`.
@@ -948,17 +934,16 @@ func (c *SSLClient) FindCsrsForKey(ctx context.Context, args *SSLFindCsrsForKeyA
 	return cpanel.UAPICall[[]SSLFindCsrsForKeyDataItem](ctx, c.c, http.MethodGet, "SSL", "find_csrs_for_key", args)
 }
 
-
 // SSLFindCsrsForKeyDataItem is a generated payload type.
 type SSLFindCsrsForKeyDataItem struct {
 	// The CSR's common name.
-	CommonName     string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The date the CSR was created.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the domains that the CSR covers.
-	Domains        []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the CSR's key uses.
 	//
@@ -972,13 +957,13 @@ type SSLFindCsrsForKeyDataItem struct {
 	// The CSR's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The CSR's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The CSR's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The CSR's key's algorithm.
 	//
@@ -986,12 +971,12 @@ type SSLFindCsrsForKeyDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The CSR's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 }
 
 // SSLGenerateCertArgs are the parameters of the UAPI function `SSL::generate_cert`.
@@ -1061,14 +1046,13 @@ func (c *SSLClient) GenerateCert(ctx context.Context, args *SSLGenerateCertArgs)
 	return cpanel.UAPICall[SSLGenerateCertData](ctx, c.c, http.MethodGet, "SSL", "generate_cert", args)
 }
 
-
 // SSLGenerateCertData is a generated payload type.
 type SSLGenerateCertData struct {
 	// The certificate's creation date.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of domains that the certificate covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -1077,18 +1061,18 @@ type SSLGenerateCertData struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * null — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -1096,10 +1080,10 @@ type SSLGenerateCertData struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The certificate's Common Name.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
@@ -1110,38 +1094,38 @@ type SSLGenerateCertData struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The date that the certificate expires.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The certificate's start date.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificate's serial number.
-	Serial                 string `json:"serial"`
+	Serial string `json:"serial"`
 
 	// The certificate's OID hash algorithm signature.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The domain that issued the certificate.
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The certificate's text.
-	Text                   string `json:"text"`
+	Text string `json:"text"`
 
 	// The certificate's validation type, if one exists.
-	ValidationType         *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // SSLGenerateCsrArgs are the parameters of the UAPI function `SSL::generate_csr`.
@@ -1216,17 +1200,16 @@ func (c *SSLClient) GenerateCsr(ctx context.Context, args *SSLGenerateCsrArgs) (
 	return cpanel.UAPICall[SSLGenerateCsrData](ctx, c.c, http.MethodGet, "SSL", "generate_csr", args)
 }
 
-
 // SSLGenerateCsrData is a generated payload type.
 type SSLGenerateCsrData struct {
 	// The name that issued the CSR.
-	CommonName     string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The date the CSR was created.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The domains that the CSR covers.
-	Domains        []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the CSR's key uses.
 	//
@@ -1240,13 +1223,13 @@ type SSLGenerateCsrData struct {
 	// The CSR's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The CSR's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The CSR's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The CSR's key's algorithm.
 	//
@@ -1254,15 +1237,15 @@ type SSLGenerateCsrData struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The CSR's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The CSR's text.
-	Text           string `json:"text"`
+	Text string `json:"text"`
 }
 
 // SSLGenerateKeyArgs are the parameters of the UAPI function `SSL::generate_key`.
@@ -1319,11 +1302,10 @@ func (c *SSLClient) GenerateKey(ctx context.Context, args *SSLGenerateKeyArgs) (
 	return cpanel.UAPICall[SSLGenerateKeyData](ctx, c.c, http.MethodGet, "SSL", "generate_key", args)
 }
 
-
 // SSLGenerateKeyData is a generated payload type.
 type SSLGenerateKeyData struct {
 	// The key's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The ECDSA curve that the key uses.
 	//
@@ -1337,13 +1319,13 @@ type SSLGenerateKeyData struct {
 	// The key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The key's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The key's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The key's algorithm.
 	//
@@ -1351,20 +1333,20 @@ type SSLGenerateKeyData struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The key's modulus, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the key's modulus.
 	//
 	// * `null` — The key is **not** an RSA key.
-	ModulusLength  *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The key's contents.
-	Text           string `json:"text"`
+	Text string `json:"text"`
 }
 
 // GetAutoSSLExcludedDomains calls the UAPI function `SSL::get_autossl_excluded_domains` — Return AutoSSL disabled domains
@@ -1377,7 +1359,6 @@ type SSLGenerateKeyData struct {
 func (c *SSLClient) GetAutoSSLExcludedDomains(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]SSLGetAutoSSLExcludedDomainsDataItem], error) {
 	return cpanel.UAPICall[[]SSLGetAutoSSLExcludedDomainsDataItem](ctx, c.c, http.MethodGet, "SSL", "get_autossl_excluded_domains", cpanel.CombineArgs(extra...))
 }
-
 
 // SSLGetAutoSSLExcludedDomainsDataItem is a generated payload type.
 type SSLGetAutoSSLExcludedDomainsDataItem struct {
@@ -1400,17 +1381,16 @@ func (c *SSLClient) GetAutoSSLProblems(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[[]SSLGetAutoSSLProblemsDataItem](ctx, c.c, http.MethodGet, "SSL", "get_autossl_problems", cpanel.CombineArgs(extra...))
 }
 
-
 // SSLGetAutoSSLProblemsDataItem is a generated payload type.
 type SSLGetAutoSSLProblemsDataItem struct {
 	// The certificate's hostname.
-	Domain  string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// text description of the problem.
 	Problem string `json:"problem"`
 
 	// When the problem occurred.
-	Time    string `json:"time"`
+	Time string `json:"time"`
 }
 
 // SSLGetAutoSSLRenewalStatusArgs are the parameters of the UAPI function `SSL::get_autossl_renewal_status`.
@@ -1435,7 +1415,6 @@ func (c *SSLClient) GetAutoSSLRenewalStatus(ctx context.Context, args *SSLGetAut
 	return cpanel.UAPICall[SSLGetAutoSSLRenewalStatusData](ctx, c.c, http.MethodGet, "SSL", "get_autossl_renewal_status", args)
 }
 
-
 // An object that contains the AutoSSL renewal status for the domain.
 type SSLGetAutoSSLRenewalStatusData struct {
 	// Whether AutoSSL has DCV failures recorded for this domain. Defaults to 1 if the problems database is unreachable.
@@ -1446,17 +1425,17 @@ type SSLGetAutoSSLRenewalStatusData struct {
 	// Whether an AutoSSL provider is configured on the server.
 	//
 	// Possible values: `0`, `1`.
-	IsActive    int64 `json:"is_active"`
+	IsActive int64 `json:"is_active"`
 
 	// Whether the domain is on the user's AutoSSL exclusion list.
 	//
 	// Possible values: `0`, `1`.
-	IsExcluded  int64 `json:"is_excluded"`
+	IsExcluded int64 `json:"is_excluded"`
 
 	// Whether AutoSSL will auto-renew the certificate for this domain. Only true when the server has an active AutoSSL provider, the current certificate was issued by that provider, the domain is not excluded, and there are no recorded DCV problems.
 	//
 	// Possible values: `0`, `1`.
-	WillRenew   int64 `json:"will_renew"`
+	WillRenew int64 `json:"will_renew"`
 }
 
 // SSLGetCabundleArgs are the parameters of the UAPI function `SSL::get_cabundle`.
@@ -1485,14 +1464,13 @@ func (c *SSLClient) GetCabundle(ctx context.Context, args *SSLGetCabundleArgs) (
 	return cpanel.UAPICall[SSLGetCabundleData](ctx, c.c, http.MethodGet, "SSL", "get_cabundle", args)
 }
 
-
 // SSLGetCabundleData is a generated payload type.
 type SSLGetCabundleData struct {
 	// The CA bundle's tag.
 	Bundle string `json:"bundle"`
 
 	// The CA bundle's contents.
-	Cab    string `json:"cab"`
+	Cab string `json:"cab"`
 
 	// The certificate's hostname.
 	Domain string `json:"domain"`
@@ -1545,7 +1523,6 @@ func (c *SSLClient) GetCnName(ctx context.Context, args *SSLGetCnNameArgs) (*cpa
 	return cpanel.UAPICall[SSLGetCnNameData](ctx, c.c, http.MethodGet, "SSL", "get_cn_name", args)
 }
 
-
 // SSLGetCnNameData is a generated payload type.
 type SSLGetCnNameData struct {
 	// The method that the system used to match the certificate with the mail
@@ -1556,10 +1533,10 @@ type SSLGetCnNameData struct {
 	// * `exact-wildcard` — The domain exactly matches the certificate.
 	// * `mail-wildcard` — The `mail` subdomain of the domain matches the domain of the wildcard certificate.
 	// * `www-wildcard` — The `www` subdomain of the dom …
-	CertMatchMethod      string `json:"cert_match_method"`
+	CertMatchMethod string `json:"cert_match_method"`
 
 	// The certificate's expiration date.
-	CertValidNotAfter    int64 `json:"cert_valid_not_after"`
+	CertValidNotAfter int64 `json:"cert_valid_not_after"`
 
 	// Whether the certificate is currently valid.
 	//
@@ -1572,7 +1549,7 @@ type SSLGetCnNameData struct {
 	//   * The certificate is **not** self-signed (the `ssldomain_matches_cert` value is `1`).
 	//   * The certificate matches the SSL domain (the `ssldomain_matches_cert` value is `1`).
 	//   * The certificate is within its validity period (the `cert_valid_not_ …
-	IsCurrentlyValid     int64 `json:"is_currently_valid"`
+	IsCurrentlyValid int64 `json:"is_currently_valid"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -1584,7 +1561,7 @@ type SSLGetCnNameData struct {
 	// If the `cert_match_method` value is `none`, you should ignore this return's value.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned         int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// Whether the certificate is a wildcard certificate.
 	//
@@ -1592,10 +1569,10 @@ type SSLGetCnNameData struct {
 	// * `0` — Not a wildcard.
 	//
 	// Possible values: `1`, `0`.
-	IsWildCard           int64 `json:"is_wild_card"`
+	IsWildCard int64 `json:"is_wild_card"`
 
 	// The best domain to use to access the service.
-	Ssldomain            string `json:"ssldomain"`
+	Ssldomain string `json:"ssldomain"`
 
 	// Whether an SSL-protected domain matches the certificate.
 	//
@@ -1691,44 +1668,43 @@ func (c *SSLClient) InstallSSL(ctx context.Context, args *SSLInstallSSLArgs) (*c
 	return cpanel.UAPICall[SSLInstallSSLData](ctx, c.c, http.MethodGet, "SSL", "install_ssl", args)
 }
 
-
 // SSLInstallSSLData is a generated payload type.
 type SSLInstallSSLData struct {
 	// The action that the function used to install the certificate.
-	Action                  string `json:"action"`
+	Action string `json:"action"`
 
 	// The certificate ID.
-	CertID                  string `json:"cert_id"`
+	CertID string `json:"cert_id"`
 
 	// The domain that the certificate covers.
-	Domain                  string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The domains that require extra certificates for mail and other services.
 	ExtraCertificateDomains []string `json:"extra_certificate_domains"`
 
 	// The results, in HTML format.
-	HTML                    string `json:"html"`
+	HTML string `json:"html"`
 
 	// The domain's IP address.
-	IP                      string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The key ID.
-	KeyID                   string `json:"key_id"`
+	KeyID string `json:"key_id"`
 
 	// The results, in text format.
-	Message                 string `json:"message"`
+	Message string `json:"message"`
 
 	// The results.
-	StatusMsg               string `json:"statusmsg"`
+	StatusMsg string `json:"statusmsg"`
 
 	// The domain's owner.
-	User                    string `json:"user"`
+	User string `json:"user"`
 
 	// The domains that the certificate does not cover.
-	WarningDomains          []string `json:"warning_domains"`
+	WarningDomains []string `json:"warning_domains"`
 
 	// The domains that the certificate covers.
-	WorkingDomains          []string `json:"working_domains"`
+	WorkingDomains []string `json:"working_domains"`
 }
 
 // SSLInstalledHostArgs are the parameters of the UAPI function `SSL::installed_host`.
@@ -1759,8 +1735,8 @@ type SSLInstalledHostArgs struct {
 //
 // **Important:**
 //
-//   * If you do **not** possess a dedicated IP address, this function will **fail**. For non-dedicated IP addresses, use the `SSL::installed_hosts` function.
-//   * When you disable the _Calendars and Contacts_, _Receive Mail_, _Web Disk_ , _Webmail_ , **and**  _Web Server_ [roles](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//   - If you do **not** possess a dedicated IP address, this function will **fail**. For non-dedicated IP addresses, use the `SSL::installed_hosts` function.
+//   - When you disable the _Calendars and Contacts_, _Receive Mail_, _Web Disk_ , _Webmail_ , **and**  _Web Server_ [roles](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1769,11 +1745,10 @@ func (c *SSLClient) InstalledHost(ctx context.Context, args *SSLInstalledHostArg
 	return cpanel.UAPICall[SSLInstalledHostData](ctx, c.c, http.MethodGet, "SSL", "installed_host", args)
 }
 
-
 // An object containing the certificate information.
 type SSLInstalledHostDataCertificate struct {
 	// The domains that the certificate covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -1782,31 +1757,31 @@ type SSLInstalledHostDataCertificate struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	// * `1` — Self-signed.
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `0`, `1`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The issuer's Common Name, typically a domain name.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's organization.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The X.509 information about the issuer that contains CSR information.
-	IssuerText             string `json:"issuer_text"`
+	IssuerText string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -1814,32 +1789,32 @@ type SSLInstalledHostDataCertificate struct {
 	//   * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The certificate's expiration time.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The certificate's start time.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The signature algorithm of the certificate.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The certificate's Common Name.
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The X.509 information about the certificate's subject that contains CSR information.
-	SubjectText            string `json:"subject_text"`
+	SubjectText string `json:"subject_text"`
 
 	// The certificate's validation type.
 	// * `ev` — Extended Validation.
@@ -1848,14 +1823,14 @@ type SSLInstalledHostDataCertificate struct {
 	// * `null` — The system could not parse and determine the certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType         *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 
 	// Any errors that exist during the certificate verification process. If there are no errors, this will return an empty string.
 	//
 	// **Note:**
 	//
 	// You **must** set the `verify_certificate` parameter to `1` for this return to appear.
-	VerifyError            string `json:"verify_error"`
+	VerifyError string `json:"verify_error"`
 }
 
 // SSLInstalledHostData is a generated payload type.
@@ -1864,7 +1839,7 @@ type SSLInstalledHostData struct {
 	Certificate SSLInstalledHostDataCertificate `json:"certificate"`
 
 	// The issuer's hostname.
-	Host        string `json:"host"`
+	Host string `json:"host"`
 }
 
 // InstalledHosts calls the UAPI function `SSL::installed_hosts` — Return domains with SSL certificate information
@@ -1873,11 +1848,11 @@ type SSLInstalledHostData struct {
 //
 // **Important:**
 //
-//   For a dedicated IP address, use the UAPI `SSL::installed_host` function.
+//	For a dedicated IP address, use the UAPI `SSL::installed_host` function.
 //
 // **Important:**
 //
-//  When you disable the *CalendarContact* , *MailReceive* , *WebDisk* , *Webmail* , and  *WebServer* [roles](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the *CalendarContact* , *MailReceive* , *WebDisk* , *Webmail* , and  *WebServer* [roles](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -1886,17 +1861,16 @@ func (c *SSLClient) InstalledHosts(ctx context.Context, extra ...cpanel.Args) (*
 	return cpanel.UAPICall[[]SSLInstalledHostsDataItem](ctx, c.c, http.MethodGet, "SSL", "installed_hosts", cpanel.CombineArgs(extra...))
 }
 
-
 // An object that contains information about each certificate.
 type SSLInstalledHostsDataItemCertificate struct {
 	// The AutoSSL provider's name.
-	AutoSSLProvider            string `json:"auto_ssl_provider"`
+	AutoSSLProvider string `json:"auto_ssl_provider"`
 
 	// The AutoSSL provider's display name.
 	AutoSSLProviderDisplayName string `json:"auto_ssl_provider_display_name"`
 
 	// The domains that the certificate covers.
-	Domains                    []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -1905,38 +1879,38 @@ type SSLInstalledHostsDataItemCertificate struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName             *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic                *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's ID.
-	ID                         string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the AutoSSL service provided the certificate.
 	// * `1` - Provided by the AutoSSL service.
 	// * `0` - Not provided by the AutoSSL service.
 	//
 	// Possible values: `0`, `1`.
-	IsAutoSSL                  int64 `json:"is_autossl"`
+	IsAutoSSL int64 `json:"is_autossl"`
 
 	// Whether the certificate is self-signed.
 	// * `1` - Self-signed.
 	// * `0` - Not self-signed.
 	//
 	// Possible values: `0`, `1`.
-	IsSelfSigned               int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The name that issued the certificate.
-	IssuerCommonName           string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's organization name.
-	IssuerOrganizationName     string `json:"issuer.organizationName"`
+	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The issuer's X.509 information.
-	IssuerText                 string `json:"issuer_text"`
+	IssuerText string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -1944,32 +1918,32 @@ type SSLInstalledHostsDataItemCertificate struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm               string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                    *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength              *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// When the certificate expired.
-	NotAfter                   int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// When the certificate started.
-	NotBefore                  int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The signature algorithm of the certificate.
-	SignatureAlgorithm         string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The certificate's common name.
-	SubjectCommonName          string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The subject's X.509 information.
-	SubjectText                string `json:"subject_text"`
+	SubjectText string `json:"subject_text"`
 
 	// The certificate's validation type.
 	//
@@ -1980,54 +1954,54 @@ type SSLInstalledHostsDataItemCertificate struct {
 	// * null - The system could not parse and determine the certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType             *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // SSLInstalledHostsDataItem is a generated payload type.
 type SSLInstalledHostsDataItem struct {
 	// An object that contains information about each certificate.
-	Certificate     SSLInstalledHostsDataItemCertificate `json:"certificate"`
+	Certificate SSLInstalledHostsDataItemCertificate `json:"certificate"`
 
 	// The certificate's text.
 	CertificateText string `json:"certificate_text"`
 
 	// The document root of the domain that the certificate covers.
-	DocRoot         string `json:"docroot"`
+	DocRoot string `json:"docroot"`
 
 	// The domains that the certificate covers.
-	Domains         []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// An array of every valid fully qualified domain
 	// name (FQDN) on the virtual host, which includes service
 	// subdomains (proxy subdomains).
-	Fqdns           []string `json:"fqdns"`
+	Fqdns []string `json:"fqdns"`
 
 	// The host's IP address.
-	IP              string `json:"ip"`
+	IP string `json:"ip"`
 
 	// Whether the website is primary on the IP address.
 	// * `1` - Primary.
 	// * `0` - Not primary.
 	//
 	// Possible values: `0`, `1`.
-	IsPrimaryOnIP   int64 `json:"is_primary_on_ip"`
+	IsPrimaryOnIP int64 `json:"is_primary_on_ip"`
 
 	// Whether SNI is active on the domain.
 	// * `1` - Active.
 	// * `0` - Inactive.
 	//
 	// Possible values: `0`, `1`.
-	MailSniStatus   int64 `json:"mail_sni_status"`
+	MailSniStatus int64 `json:"mail_sni_status"`
 
 	// Whether the website requires SNI to function.
 	// * `1` - Requires SNI.
 	// * `0` - Does not require SNI.
 	//
 	// Possible values: `0`, `1`.
-	NeedsSni        int64 `json:"needs_sni"`
+	NeedsSni int64 `json:"needs_sni"`
 
 	// The server's hostname.
-	Servername      string `json:"servername"`
+	Servername string `json:"servername"`
 }
 
 // IsAutoSSLCheckInProgress calls the UAPI function `SSL::is_autossl_check_in_progress` — Return whether AutoSSL check in progress
@@ -2044,7 +2018,6 @@ type SSLInstalledHostsDataItem struct {
 func (c *SSLClient) IsAutoSSLCheckInProgress(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "SSL", "is_autossl_check_in_progress", cpanel.CombineArgs(extra...))
 }
-
 
 // IsMailSniSupported calls the UAPI function `SSL::is_mail_sni_supported` — Return whether mail SNI is enabled
 //
@@ -2068,7 +2041,6 @@ func (c *SSLClient) IsMailSniSupported(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "SSL", "is_mail_sni_supported", cpanel.CombineArgs(extra...))
 }
 
-
 // IsSniSupported calls the UAPI function `SSL::is_sni_supported` — Return whether Apache web server supports mail SNI
 //
 // This function checks whether the Apache web server supports SNI.
@@ -2083,7 +2055,6 @@ func (c *SSLClient) IsMailSniSupported(ctx context.Context, extra ...cpanel.Args
 func (c *SSLClient) IsSniSupported(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "SSL", "is_sni_supported", cpanel.CombineArgs(extra...))
 }
-
 
 // ListCerts calls the UAPI function `SSL::list_certs` — Return all SSL certificates
 //
@@ -2102,11 +2073,10 @@ func (c *SSLClient) ListCerts(ctx context.Context, extra ...cpanel.Args) (*cpane
 	return cpanel.UAPICall[[]SSLListCertsDataItem](ctx, c.c, http.MethodGet, "SSL", "list_certs", cpanel.CombineArgs(extra...))
 }
 
-
 // SSLListCertsDataItem is a generated payload type.
 type SSLListCertsDataItem struct {
 	// The date the certificate was created.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// Whether the certificate is installed on the account.
 	//
@@ -2114,10 +2084,10 @@ type SSLListCertsDataItem struct {
 	// * `0` — Not installed.
 	//
 	// Possible values: `1`, `0`.
-	DomainIsConfigured     int64 `json:"domain_is_configured"`
+	DomainIsConfigured int64 `json:"domain_is_configured"`
 
 	// A list of domains that the certificate covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -2126,18 +2096,18 @@ type SSLListCertsDataItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -2145,16 +2115,16 @@ type SSLListCertsDataItem struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The issuer's name.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The certificate's organization.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
 
 	// The certificate's issuer information.
-	IssuerText             string `json:"issuer_text"`
+	IssuerText string `json:"issuer_text"`
 
 	// The certificate's key's algorithm.
 	//
@@ -2162,35 +2132,35 @@ type SSLListCertsDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The certificate's expiration date.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The certificate's start date.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificate's serial number.
-	Serial                 string `json:"serial"`
+	Serial string `json:"serial"`
 
 	// The OID hash algorithm signature of the certificate.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The certificate's Common Name (CN).
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The certificate's subject text information.
-	SubjectText            string `json:"subject_text"`
+	SubjectText string `json:"subject_text"`
 
 	// The certificate's validation type.
 	//
@@ -2201,7 +2171,7 @@ type SSLListCertsDataItem struct {
 	// certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType         *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // ListCsrs calls the UAPI function `SSL::list_csrs` — Return all certificate signing requests
@@ -2222,17 +2192,16 @@ func (c *SSLClient) ListCsrs(ctx context.Context, extra ...cpanel.Args) (*cpanel
 	return cpanel.UAPICall[[]SSLListCsrsDataItem](ctx, c.c, http.MethodGet, "SSL", "list_csrs", cpanel.CombineArgs(extra...))
 }
 
-
 // SSLListCsrsDataItem is a generated payload type.
 type SSLListCsrsDataItem struct {
 	// The CSR's Common Name or Distinguished Name.
-	CommonName     string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The CSR's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the domains that the CSR covers.
-	Domains        []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the CSR's key uses.
 	//
@@ -2246,13 +2215,13 @@ type SSLListCsrsDataItem struct {
 	// The CSR's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The CSR's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The CSR's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The CSR's key's algorithm.
 	//
@@ -2260,12 +2229,12 @@ type SSLListCsrsDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The CSR's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The CSR's key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 }
 
 // ListKeys calls the UAPI function `SSL::list_keys` — Return all private keys
@@ -2285,11 +2254,10 @@ func (c *SSLClient) ListKeys(ctx context.Context, extra ...cpanel.Args) (*cpanel
 	return cpanel.UAPICall[[]SSLListKeysDataItem](ctx, c.c, http.MethodGet, "SSL", "list_keys", cpanel.CombineArgs(extra...))
 }
 
-
 // SSLListKeysDataItem is a generated payload type.
 type SSLListKeysDataItem struct {
 	// The key's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The ECDSA curve that the key uses.
 	//
@@ -2303,13 +2271,13 @@ type SSLListKeysDataItem struct {
 	// The key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The key's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The key ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The key's algorithm.
 	//
@@ -2317,17 +2285,17 @@ type SSLListKeysDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The key's modulus, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the key's modulus.
 	//
 	// * `null` — The key is **not** an RSA key.
-	ModulusLength  *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 }
 
 // SSLListSSLItemsArgs are the parameters of the UAPI function `SSL::list_ssl_items`.
@@ -2362,14 +2330,13 @@ func (c *SSLClient) ListSSLItems(ctx context.Context, args *SSLListSSLItemsArgs)
 	return cpanel.UAPICall[[]SSLListSSLItemsDataItem](ctx, c.c, http.MethodGet, "SSL", "list_ssl_items", args)
 }
 
-
 // SSLListSSLItemsDataItem is a generated payload type.
 type SSLListSSLItemsDataItem struct {
 	// The hostname.
-	Host  string `json:"host"`
+	Host string `json:"host"`
 
 	// The certificate's ID.
-	ID    string `json:"id"`
+	ID string `json:"id"`
 
 	// The type of SSL item.
 	// * `key`
@@ -2412,7 +2379,6 @@ func (c *SSLClient) MailSniStatus(ctx context.Context, args *SSLMailSniStatusArg
 	return cpanel.UAPICall[SSLMailSniStatusData](ctx, c.c, http.MethodGet, "SSL", "mail_sni_status", args)
 }
 
-
 // SSLMailSniStatusData is a generated payload type.
 type SSLMailSniStatusData struct {
 	// Whether SNI for mail is enabled.
@@ -2447,12 +2413,12 @@ type SSLRebuildMailSniConfigArgs struct {
 //
 // * You **must** run this function after you change the SNI status through the UAPI's `enable_mail_sni` or `disable_mail_sni` functions.
 // * Mail SNI is **always** enabled.
-//   * Functions that enable Mail SNI succeed with a warning that Mail SNI is always enabled. Functions that disable Mail SNI fail and make no changes.
-//   * Functions that disable Mail SNI will fail and make no changes.
+//   - Functions that enable Mail SNI succeed with a warning that Mail SNI is always enabled. Functions that disable Mail SNI fail and make no changes.
+//   - Functions that disable Mail SNI will fail and make no changes.
 //
 // **Important:**
 //
-//  When you disable the _Calendars and Contacts_, _Receive Mail_, _Web Disk_, _Webmail_, **and**  _Web Server_ [roles](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the _Calendars and Contacts_, _Receive Mail_, _Web Disk_, _Webmail_, **and**  _Web Server_ [roles](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.48.
 //
@@ -2460,7 +2426,6 @@ type SSLRebuildMailSniConfigArgs struct {
 func (c *SSLClient) RebuildMailSniConfig(ctx context.Context, args *SSLRebuildMailSniConfigArgs) (*cpanel.UAPIResult[SSLRebuildMailSniConfigData], error) {
 	return cpanel.UAPICall[SSLRebuildMailSniConfigData](ctx, c.c, http.MethodGet, "SSL", "rebuild_mail_sni_config", args)
 }
-
 
 // SSLRebuildMailSniConfigData is a generated payload type.
 type SSLRebuildMailSniConfigData struct {
@@ -2482,7 +2447,6 @@ type SSLRebuildMailSniConfigData struct {
 func (c *SSLClient) Rebuildssldb(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "rebuildssldb", cpanel.CombineArgs(extra...))
 }
-
 
 // SSLRemoveAutoSSLExcludedDomainsArgs are the parameters of the UAPI function `SSL::remove_autossl_excluded_domains`.
 type SSLRemoveAutoSSLExcludedDomainsArgs struct {
@@ -2509,7 +2473,6 @@ type SSLRemoveAutoSSLExcludedDomainsArgs struct {
 func (c *SSLClient) RemoveAutoSSLExcludedDomains(ctx context.Context, args *SSLRemoveAutoSSLExcludedDomainsArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "remove_autossl_excluded_domains", args)
 }
-
 
 // SSLSetAutoSSLExcludedDomainsArgs are the parameters of the UAPI function `SSL::set_autossl_excluded_domains`.
 type SSLSetAutoSSLExcludedDomainsArgs struct {
@@ -2543,7 +2506,6 @@ func (c *SSLClient) SetAutoSSLExcludedDomains(ctx context.Context, args *SSLSetA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "set_autossl_excluded_domains", args)
 }
 
-
 // SSLSetCertFriendlyNameArgs are the parameters of the UAPI function `SSL::set_cert_friendly_name`.
 type SSLSetCertFriendlyNameArgs struct {
 	// The certificate's friendly name.
@@ -2574,7 +2536,6 @@ type SSLSetCertFriendlyNameArgs struct {
 func (c *SSLClient) SetCertFriendlyName(ctx context.Context, args *SSLSetCertFriendlyNameArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "set_cert_friendly_name", args)
 }
-
 
 // SSLSetCsrFriendlyNameArgs are the parameters of the UAPI function `SSL::set_csr_friendly_name`.
 type SSLSetCsrFriendlyNameArgs struct {
@@ -2617,7 +2578,6 @@ func (c *SSLClient) SetCsrFriendlyName(ctx context.Context, args *SSLSetCsrFrien
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "set_csr_friendly_name", args)
 }
 
-
 // SSLSetDefaultKeyTypeArgs are the parameters of the UAPI function `SSL::set_default_key_type`.
 type SSLSetDefaultKeyTypeArgs struct {
 	// The key type to set.
@@ -2647,7 +2607,6 @@ type SSLSetDefaultKeyTypeArgs struct {
 func (c *SSLClient) SetDefaultKeyType(ctx context.Context, args *SSLSetDefaultKeyTypeArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "set_default_key_type", args)
 }
-
 
 // SSLSetKeyFriendlyNameArgs are the parameters of the UAPI function `SSL::set_key_friendly_name`.
 type SSLSetKeyFriendlyNameArgs struct {
@@ -2686,7 +2645,6 @@ func (c *SSLClient) SetKeyFriendlyName(ctx context.Context, args *SSLSetKeyFrien
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "set_key_friendly_name", args)
 }
 
-
 // SSLSetPrimarySSLArgs are the parameters of the UAPI function `SSL::set_primary_ssl`.
 type SSLSetPrimarySSLArgs struct {
 	// The primary SSL website's servername.
@@ -2712,7 +2670,6 @@ type SSLSetPrimarySSLArgs struct {
 func (c *SSLClient) SetPrimarySSL(ctx context.Context, args *SSLSetPrimarySSLArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "set_primary_ssl", args)
 }
-
 
 // SSLShowCertArgs are the parameters of the UAPI function `SSL::show_cert`.
 type SSLShowCertArgs struct {
@@ -2748,23 +2705,22 @@ func (c *SSLClient) ShowCert(ctx context.Context, args *SSLShowCertArgs) (*cpane
 	return cpanel.UAPICall[SSLShowCertData](ctx, c.c, http.MethodGet, "SSL", "show_cert", args)
 }
 
-
 // A object that contains the issuer's details.
 type SSLShowCertDataDetailsIssuer struct {
 	// The issuer's Common Name or Distinguished Name.
-	CommonName          string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The certificate's two-letter country code.
-	CountryName         string `json:"countryName"`
+	CountryName string `json:"countryName"`
 
 	// The issuer's email address.
-	EmailAddress        string `json:"emailAddress"`
+	EmailAddress string `json:"emailAddress"`
 
 	// The issuer's locality or city.
-	LocalityName        string `json:"localityName"`
+	LocalityName string `json:"localityName"`
 
 	// The issuer's organization name.
-	OrganizationName    string `json:"organizationName"`
+	OrganizationName string `json:"organizationName"`
 
 	// The issuer's state or province name.
 	StateOrProvinceName string `json:"stateOrProvinceName"`
@@ -2773,19 +2729,19 @@ type SSLShowCertDataDetailsIssuer struct {
 // An object containing the certificate's ownership details.
 type SSLShowCertDataDetailsSubject struct {
 	// The certificate's Common Name or Distinguished Name.
-	CommonName          string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The certificate's two-letter country code.
-	CountryName         string `json:"countryName"`
+	CountryName string `json:"countryName"`
 
 	// The certificate's email address.
-	EmailAddress        string `json:"emailAddress"`
+	EmailAddress string `json:"emailAddress"`
 
 	// The certificate's locality or city.
-	LocalityName        string `json:"localityName"`
+	LocalityName string `json:"localityName"`
 
 	// The certificate's organization name.
-	OrganizationName    string `json:"organizationName"`
+	OrganizationName string `json:"organizationName"`
 
 	// The certificate's state or province name.
 	StateOrProvinceName string `json:"stateOrProvinceName"`
@@ -2794,7 +2750,7 @@ type SSLShowCertDataDetailsSubject struct {
 // An object containing the certificate's details.
 type SSLShowCertDataDetails struct {
 	// A list of the certificate's domains.
-	Domains            []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -2803,18 +2759,18 @@ type SSLShowCertDataDetails struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName     *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic        *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName       string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID                 string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -2822,10 +2778,10 @@ type SSLShowCertDataDetails struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned       int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// A object that contains the issuer's details.
-	Issuer             SSLShowCertDataDetailsIssuer `json:"issuer"`
+	Issuer SSLShowCertDataDetailsIssuer `json:"issuer"`
 
 	// The certificate's key's algorithm.
 	//
@@ -2833,24 +2789,24 @@ type SSLShowCertDataDetails struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm       string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus            *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The certificate's expiration date.
-	NotAfter           int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The certificate's start time.
-	NotBefore          int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificate's OID hash algorithm signature.
 	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// An object containing the certificate's ownership details.
-	Subject            SSLShowCertDataDetailsSubject `json:"subject"`
+	Subject SSLShowCertDataDetailsSubject `json:"subject"`
 
 	// The certificate's validation type.
 	//
@@ -2861,19 +2817,19 @@ type SSLShowCertDataDetails struct {
 	// certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType     *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // SSLShowCertData is a generated payload type.
 type SSLShowCertData struct {
 	// The contents of the certificate.
-	Cert    string `json:"cert"`
+	Cert string `json:"cert"`
 
 	// An object containing the certificate's details.
 	Details SSLShowCertDataDetails `json:"details"`
 
 	// The parsed information from the OpenSSL command-line tool.
-	Text    string `json:"text"`
+	Text string `json:"text"`
 }
 
 // SSLShowCsrArgs are the parameters of the UAPI function `SSL::show_csr`.
@@ -2910,60 +2866,59 @@ func (c *SSLClient) ShowCsr(ctx context.Context, args *SSLShowCsrArgs) (*cpanel.
 	return cpanel.UAPICall[SSLShowCsrData](ctx, c.c, http.MethodGet, "SSL", "show_csr", args)
 }
 
-
 // An object contaning the CSR's contents.
 type SSLShowCsrDataDetails struct {
 	// The CSR's Common Name or Distinguished Name.
-	CommonName             string `json:"commonName"`
+	CommonName string `json:"commonName"`
 
 	// The CSR's [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166)
 	// country code.
-	CountryName            string `json:"countryName"`
+	CountryName string `json:"countryName"`
 
 	// The CSR's creation date.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the domains that the CSR covers.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The CSR's email address.
-	EmailAddress           string `json:"emailAddress"`
+	EmailAddress string `json:"emailAddress"`
 
 	// The CSR's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The CSR's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// The key algorithm that encrypts the CSR.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's locality or city.
-	LocalityName           string `json:"localityName"`
+	LocalityName string `json:"localityName"`
 
 	// The CSR's modulus.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The CSR's organization name.
-	OrganizationName       string `json:"organizationName"`
+	OrganizationName string `json:"organizationName"`
 
 	// The CSR's organizational unit name.
 	OrganizationalUnitName string `json:"organizationalUnitName"`
 
 	// The CSR's state or province name.
-	StateOrProvinceName    string `json:"stateOrProvinceName"`
+	StateOrProvinceName string `json:"stateOrProvinceName"`
 }
 
 // SSLShowCsrData is a generated payload type.
 type SSLShowCsrData struct {
 	// The CSR's text.
-	Csr     string `json:"csr"`
+	Csr string `json:"csr"`
 
 	// An object contaning the CSR's contents.
 	Details SSLShowCsrDataDetails `json:"details"`
 
 	// The parsed information from the OpenSSL command-line tool.
-	Text    string `json:"text"`
+	Text string `json:"text"`
 }
 
 // SSLShowKeyArgs are the parameters of the UAPI function `SSL::show_key`.
@@ -3001,11 +2956,10 @@ func (c *SSLClient) ShowKey(ctx context.Context, args *SSLShowKeyArgs) (*cpanel.
 	return cpanel.UAPICall[SSLShowKeyData](ctx, c.c, http.MethodGet, "SSL", "show_key", args)
 }
 
-
 // An object of the key's details.
 type SSLShowKeyDataDetails struct {
 	// The key's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The ECDSA curve that the key uses.
 	//
@@ -3019,16 +2973,16 @@ type SSLShowKeyDataDetails struct {
 	// The key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The key's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The key's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The key's contents.
-	Key            string `json:"key"`
+	Key string `json:"key"`
 
 	// The key's algorithm.
 	//
@@ -3036,17 +2990,17 @@ type SSLShowKeyDataDetails struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The key's modulus, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the key's modulus.
 	//
 	// * `null` — The key is **not** an RSA key.
-	ModulusLength  *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 }
 
 // SSLShowKeyData is a generated payload type.
@@ -3055,7 +3009,7 @@ type SSLShowKeyData struct {
 	Details SSLShowKeyDataDetails `json:"details"`
 
 	// The raw information from the [OpenSSL](https://www.openssl.org/) command-line tool.
-	Text    string `json:"text"`
+	Text string `json:"text"`
 }
 
 // StartAutoSSLCheck calls the UAPI function `SSL::start_autossl_check` — Start AutoSSL for current user
@@ -3072,7 +3026,6 @@ type SSLShowKeyData struct {
 func (c *SSLClient) StartAutoSSLCheck(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SSL", "start_autossl_check", cpanel.CombineArgs(extra...))
 }
-
 
 // SSLToggleSSLRedirectForDomainsArgs are the parameters of the UAPI function `SSL::toggle_ssl_redirect_for_domains`.
 type SSLToggleSSLRedirectForDomainsArgs struct {
@@ -3118,7 +3071,6 @@ func (c *SSLClient) ToggleSSLRedirectForDomains(ctx context.Context, args *SSLTo
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "SSL", "toggle_ssl_redirect_for_domains", args)
 }
 
-
 // SSLUploadCertArgs are the parameters of the UAPI function `SSL::upload_cert`.
 type SSLUploadCertArgs struct {
 	// The certificate's contents.
@@ -3155,14 +3107,13 @@ func (c *SSLClient) UploadCert(ctx context.Context, args *SSLUploadCertArgs) (*c
 	return cpanel.UAPICall[[]SSLUploadCertDataItem](ctx, c.c, http.MethodPost, "SSL", "upload_cert", args)
 }
 
-
 // SSLUploadCertDataItem is a generated payload type.
 type SSLUploadCertDataItem struct {
 	// The certificate's creation date.
-	Created                int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// A list of the certificate's domains.
-	Domains                []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The ECDSA curve that the certificate's key uses.
 	//
@@ -3171,18 +3122,18 @@ type SSLUploadCertDataItem struct {
 	// * `null` — The certificate's key is **not** an ECDSA key.
 	//
 	// Possible values: `prime256v1`, `secp384r1`.
-	EcdsaCurveName         *string `json:"ecdsa_curve_name"`
+	EcdsaCurveName *string `json:"ecdsa_curve_name"`
 
 	// The certificate's key's ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an ECDSA key.
-	EcdsaPublic            *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The certificate's friendly name.
-	FriendlyName           string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The certificate's ID.
-	ID                     string `json:"id"`
+	ID string `json:"id"`
 
 	// Whether the certificate is self-signed.
 	//
@@ -3190,10 +3141,10 @@ type SSLUploadCertDataItem struct {
 	// * `0` — Not self-signed.
 	//
 	// Possible values: `1`, `0`.
-	IsSelfSigned           int64 `json:"is_self_signed"`
+	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The issuer's Common Name or Distinguished Name.
-	IssuerCommonName       string `json:"issuer.commonName"`
+	IssuerCommonName string `json:"issuer.commonName"`
 
 	// The issuer's Organization Name.
 	IssuerOrganizationName string `json:"issuer.organizationName"`
@@ -3204,29 +3155,29 @@ type SSLUploadCertDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm           string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The certificate's key's modulus, in hexadecimal format.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	Modulus                *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the certificate's key's modulus.
 	//
 	// * `null` — The certificate's key is **not** an RSA key.
-	ModulusLength          *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 
 	// The certificate's expiration date.
-	NotAfter               int64 `json:"not_after"`
+	NotAfter int64 `json:"not_after"`
 
 	// The certificate's start date.
-	NotBefore              int64 `json:"not_before"`
+	NotBefore int64 `json:"not_before"`
 
 	// The certificiate's OID hash algorithm signature.
-	SignatureAlgorithm     string `json:"signature_algorithm"`
+	SignatureAlgorithm string `json:"signature_algorithm"`
 
 	// The issuer's Common Name or Distinguished Name.
-	SubjectCommonName      string `json:"subject.commonName"`
+	SubjectCommonName string `json:"subject.commonName"`
 
 	// The certificate's validation type.
 	//
@@ -3237,7 +3188,7 @@ type SSLUploadCertDataItem struct {
 	// the certificate's validation type.
 	//
 	// Possible values: `ev`, `ov`, `dv`.
-	ValidationType         *string `json:"validation_type"`
+	ValidationType *string `json:"validation_type"`
 }
 
 // SSLUploadKeyArgs are the parameters of the UAPI function `SSL::upload_key`.
@@ -3279,11 +3230,10 @@ func (c *SSLClient) UploadKey(ctx context.Context, args *SSLUploadKeyArgs) (*cpa
 	return cpanel.UAPICall[[]SSLUploadKeyDataItem](ctx, c.c, http.MethodPost, "SSL", "upload_key", args)
 }
 
-
 // SSLUploadKeyDataItem is a generated payload type.
 type SSLUploadKeyDataItem struct {
 	// The key's creation date.
-	Created        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The ECDSA curve that the key uses.
 	//
@@ -3297,13 +3247,13 @@ type SSLUploadKeyDataItem struct {
 	// The key’s ECDSA compressed public point, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an ECDSA key.
-	EcdsaPublic    *string `json:"ecdsa_public"`
+	EcdsaPublic *string `json:"ecdsa_public"`
 
 	// The key's friendly name.
-	FriendlyName   string `json:"friendly_name"`
+	FriendlyName string `json:"friendly_name"`
 
 	// The key's ID.
-	ID             string `json:"id"`
+	ID string `json:"id"`
 
 	// The key’s algorithm.
 	//
@@ -3311,15 +3261,15 @@ type SSLUploadKeyDataItem struct {
 	// * `id-ecPublicKey` — ECDSA.
 	//
 	// Possible values: `rsaEncryption`, `id-ecPublicKey`.
-	KeyAlgorithm   string `json:"key_algorithm"`
+	KeyAlgorithm string `json:"key_algorithm"`
 
 	// The key's modulus, in hexadecimal format.
 	//
 	// * `null` — The key is **not** an RSA key.
-	Modulus        *string `json:"modulus"`
+	Modulus *string `json:"modulus"`
 
 	// The length, in bits, of the key's modulus.
 	//
 	// * `null` — The key is **not** an RSA key.
-	ModulusLength  *int64 `json:"modulus_length"`
+	ModulusLength *int64 `json:"modulus_length"`
 }

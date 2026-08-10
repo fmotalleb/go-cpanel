@@ -47,11 +47,10 @@ func (c *Client) GetTweaksetting(ctx context.Context, args *GetTweaksettingArgs)
 	return cpanel.WHMCall[GetTweaksettingData](ctx, c.c, http.MethodGet, "get_tweaksetting", args)
 }
 
-
 // A list of the *Tweak Settings* option's information.
 type GetTweaksettingDataTweaksetting struct {
 	// A key name in the `cpanel.config` file.
-	Key   string `json:"key"`
+	Key string `json:"key"`
 
 	// The value. This value depends on the `key` value's requirements.
 	Value string `json:"value"`
@@ -121,4 +120,3 @@ type SetTweaksettingArgs struct {
 func (c *Client) SetTweaksetting(ctx context.Context, args *SetTweaksettingArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_tweaksetting", args)
 }
-

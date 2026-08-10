@@ -41,7 +41,6 @@ func (c *PushbulletClient) SendTestMessage(ctx context.Context, args *Pushbullet
 	return cpanel.UAPICall[PushbulletSendTestMessageData](ctx, c.c, http.MethodGet, "Pushbullet", "send_test_message", args)
 }
 
-
 // PushbulletSendTestMessageData is a generated payload type.
 type PushbulletSendTestMessageData struct {
 	// The test message's ID.
@@ -54,5 +53,5 @@ type PushbulletSendTestMessageData struct {
 	//
 	// This return may contain values that are Boolean primitives. JSON
 	// properly represents these, but XML represents them as `0` or `1`.
-	Payload   json.RawMessage `json:"payload"`
+	Payload json.RawMessage `json:"payload"`
 }

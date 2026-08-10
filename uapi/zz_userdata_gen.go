@@ -33,7 +33,6 @@ func (c *UserDataClient) GetScopedUserdata(ctx context.Context, args *UserDataGe
 	return cpanel.UAPICall[map[string]string](ctx, c.c, http.MethodGet, "UserData", "get_scoped_userdata", args)
 }
 
-
 // UserDataSetScopedUserdataArgs are the parameters of the UAPI function `UserData::set_scoped_userdata`.
 type UserDataSetScopedUserdataArgs struct {
 	// The scope name to modify.
@@ -70,4 +69,3 @@ type UserDataSetScopedUserdataArgs struct {
 func (c *UserDataClient) SetScopedUserdata(ctx context.Context, args *UserDataSetScopedUserdataArgs) (*cpanel.UAPIResult[map[string]string], error) {
 	return cpanel.UAPICall[map[string]string](ctx, c.c, http.MethodGet, "UserData", "set_scoped_userdata", args)
 }
-

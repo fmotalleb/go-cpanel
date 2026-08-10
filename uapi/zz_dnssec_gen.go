@@ -42,21 +42,20 @@ func (c *DNSSECClient) ActivateZoneKey(ctx context.Context, args *DNSSECActivate
 	return cpanel.UAPICall[DNSSECActivateZoneKeyData](ctx, c.c, http.MethodGet, "DNSSEC", "activate_zone_key", args)
 }
 
-
 // DNSSECActivateZoneKeyData is a generated payload type.
 type DNSSECActivateZoneKeyData struct {
 	// The domain for which the system activated a security key.
-	Domain  string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// An error message that describes why the system could not activate the security key.
 	//
 	// **Note:**
 	//
 	// The function **only** displays this return when the `success` return is a `0` value.
-	Error   string `json:"error"`
+	Error string `json:"error"`
 
 	// The security key's ID.
-	KeyID   string `json:"key_id"`
+	KeyID string `json:"key_id"`
 
 	// Whether the system activated the security key.
 	// * `1` - Activated.
@@ -150,18 +149,17 @@ func (c *DNSSECClient) AddZoneKey(ctx context.Context, args *DNSSECAddZoneKeyArg
 	return cpanel.UAPICall[DNSSECAddZoneKeyData](ctx, c.c, http.MethodGet, "DNSSEC", "add_zone_key", args)
 }
 
-
 // DNSSECAddZoneKeyData is a generated payload type.
 type DNSSECAddZoneKeyData struct {
 	// The domain for which the system added a security key.
-	Domain   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// An error message that describes why the system could not add the security key.
 	//
 	// **Note:**
 	//
 	// The function **only** displays this return when the `success` return is a `0` value.
-	Error    string `json:"error"`
+	Error string `json:"error"`
 
 	// The security key's ID.
 	NewKeyID string `json:"new_key_id"`
@@ -172,7 +170,7 @@ type DNSSECAddZoneKeyData struct {
 	// * `0` — The system failed to add the security key.
 	//
 	// Possible values: `1`, `0`.
-	Success  int64 `json:"success"`
+	Success int64 `json:"success"`
 }
 
 // DNSSECDeactivateZoneKeyArgs are the parameters of the UAPI function `DNSSEC::deactivate_zone_key`.
@@ -206,11 +204,10 @@ func (c *DNSSECClient) DeactivateZoneKey(ctx context.Context, args *DNSSECDeacti
 	return cpanel.UAPICall[DNSSECDeactivateZoneKeyData](ctx, c.c, http.MethodGet, "DNSSEC", "deactivate_zone_key", args)
 }
 
-
 // DNSSECDeactivateZoneKeyData is a generated payload type.
 type DNSSECDeactivateZoneKeyData struct {
 	// The domain for which the system deactivated a security key.
-	Domain  string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// An error message that describes why the system could not
 	// deactivate the security key.
@@ -218,10 +215,10 @@ type DNSSECDeactivateZoneKeyData struct {
 	// **Note**
 	//
 	// The function **only** displays this return when the `success` return is a `0` value.
-	Error   string `json:"error"`
+	Error string `json:"error"`
 
 	// The security key's ID.
-	KeyID   string `json:"key_id"`
+	KeyID string `json:"key_id"`
 
 	// Whether the system deactivated the security key.
 	//
@@ -253,12 +250,12 @@ type DNSSECDisableDNSSECArgs struct {
 //
 // **Warning:**
 //
-//  * This action is **irreversible**. If you disable DNSSEC on the domain, you will lose the associated keys. You can only retrieve the previous state with a full backup.
-//  * If you disable DNSSEC, you **must** remove the DNS records at the registrar.
+//   - This action is **irreversible**. If you disable DNSSEC on the domain, you will lose the associated keys. You can only retrieve the previous state with a full backup.
+//   - If you disable DNSSEC, you **must** remove the DNS records at the registrar.
 //
 // **Important:**
 //
-//   When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 60.
 //
@@ -266,7 +263,6 @@ type DNSSECDisableDNSSECArgs struct {
 func (c *DNSSECClient) DisableDNSSEC(ctx context.Context, args *DNSSECDisableDNSSECArgs) (*cpanel.UAPIResult[DNSSECDisableDNSSECData], error) {
 	return cpanel.UAPICall[DNSSECDisableDNSSECData](ctx, c.c, http.MethodGet, "DNSSEC", "disable_dnssec", args)
 }
-
 
 // An array of objects that contain the domains for which the system disabled DNSSEC.
 type DNSSECDisableDNSSECDataDisabled struct {
@@ -404,12 +400,12 @@ type DNSSECEnableDNSSECArgs struct {
 //
 // **Note:**
 //
-//  * After you enable DNSSEC on the domain, you **must** add the DNS records to your registrar.
-//  * You **cannot** modify the DNSSEC security key. To make any changes, you **must** disable (and delete) and re-create the DNSSEC security key.
+//   - After you enable DNSSEC on the domain, you **must** add the DNS records to your registrar.
+//   - You **cannot** modify the DNSSEC security key. To make any changes, you **must** disable (and delete) and re-create the DNSSEC security key.
 //
 // **Important:**
 //
-//   When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 60.
 //
@@ -417,7 +413,6 @@ type DNSSECEnableDNSSECArgs struct {
 func (c *DNSSECClient) EnableDNSSEC(ctx context.Context, args *DNSSECEnableDNSSECArgs) (*cpanel.UAPIResult[DNSSECEnableDNSSECData], error) {
 	return cpanel.UAPICall[DNSSECEnableDNSSECData](ctx, c.c, http.MethodGet, "DNSSEC", "enable_dnssec", args)
 }
-
 
 // Information about the domain for which the system
 // enabled DNSSEC.
@@ -432,10 +427,10 @@ type DNSSECEnableDNSSECDataEnabledAdditionalProperties struct {
 	// * `0` — The system failed to enable DNSSEC.
 	//
 	// Possible values: `1`, `0`.
-	Enabled     int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// The assigned security key ID.
-	NewKeyID    int64 `json:"new_key_id"`
+	NewKeyID int64 `json:"new_key_id"`
 
 	// The version of DNSSEC the system used.
 	//
@@ -494,14 +489,13 @@ func (c *DNSSECClient) ExportZoneDnskey(ctx context.Context, args *DNSSECExportZ
 	return cpanel.UAPICall[DNSSECExportZoneDnskeyData](ctx, c.c, http.MethodGet, "DNSSEC", "export_zone_dnskey", args)
 }
 
-
 // DNSSECExportZoneDnskeyData is a generated payload type.
 type DNSSECExportZoneDnskeyData struct {
 	// The DNSKEY record value.
-	Dnskey  string `json:"dnskey"`
+	Dnskey string `json:"dnskey"`
 
 	// The DNSSEC record's ID.
-	KeyID   int64 `json:"key_id"`
+	KeyID int64 `json:"key_id"`
 
 	// Whether the DNSKEY record exported successfully.
 	//
@@ -543,20 +537,19 @@ func (c *DNSSECClient) ExportZoneKey(ctx context.Context, args *DNSSECExportZone
 	return cpanel.UAPICall[DNSSECExportZoneKeyData](ctx, c.c, http.MethodGet, "DNSSEC", "export_zone_key", args)
 }
 
-
 // DNSSECExportZoneKeyData is a generated payload type.
 type DNSSECExportZoneKeyData struct {
 	// The security key's domain.
-	Domain     string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The content of the key, which includes the algorithm.
 	KeyContent string `json:"key_content"`
 
 	// The security key's ID.
-	KeyID      int64 `json:"key_id"`
+	KeyID int64 `json:"key_id"`
 
 	// The security key's internal identifier.
-	KeyTag     int64 `json:"key_tag"`
+	KeyTag int64 `json:"key_tag"`
 
 	// The security key's signing type.
 	//
@@ -565,7 +558,7 @@ type DNSSECExportZoneKeyData struct {
 	// * `ZSK` - Zone Signing Key.
 	//
 	// Possible values: `CSK`, `KSK`, `ZSK`.
-	KeyType    string `json:"key_type"`
+	KeyType string `json:"key_type"`
 
 	// Whether the function succeeded.
 	//
@@ -573,7 +566,7 @@ type DNSSECExportZoneKeyData struct {
 	// * `0` - The function failed.
 	//
 	// Possible values: `0`, `1`.
-	Success    int64 `json:"success"`
+	Success int64 `json:"success"`
 }
 
 // DNSSECFetchDsRecordsArgs are the parameters of the UAPI function `DNSSEC::fetch_ds_records`.
@@ -606,7 +599,6 @@ func (c *DNSSECClient) FetchDsRecords(ctx context.Context, args *DNSSECFetchDsRe
 	return cpanel.UAPICall[DNSSECFetchDsRecordsData](ctx, c.c, http.MethodGet, "DNSSEC", "fetch_ds_records", args)
 }
 
-
 // DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalPropertiesDigestsItem is a generated payload type.
 type DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalPropertiesDigestsItem struct {
 	// A description of the algorithm
@@ -614,10 +606,10 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalPropertiesDigests
 	AlgoDesc string `json:"algo_desc"`
 
 	// A IETF-recognized DNSSEC Algorithm Number.
-	AlgoNum  int64 `json:"algo_num"`
+	AlgoNum int64 `json:"algo_num"`
 
 	// The actual digest in the DS record.
-	Digest   string `json:"digest"`
+	Digest string `json:"digest"`
 }
 
 // The information related to the domain's DNSSEC record.
@@ -632,11 +624,11 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalProperties struct
 	// * `0` - Inactive.
 	//
 	// Possible values: `0`, `1`.
-	Active     int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// A description of the algorithm
 	// that the DS key uses.
-	AlgoDesc   string `json:"algo_desc"`
+	AlgoDesc string `json:"algo_desc"`
 
 	// The algorithm the system generated for the security key.
 	//
@@ -649,20 +641,20 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalProperties struct
 	// * `14` - ECDSA Curve P-384 with SHA-384
 	//
 	// Possible values: `5`, `6`, `7`, `8`, `10`, `13`, `14`.
-	AlgoNum    int64 `json:"algo_num"`
+	AlgoNum int64 `json:"algo_num"`
 
 	// The short-form reference to the algorithm.
-	AlgoTag    string `json:"algo_tag"`
+	AlgoTag string `json:"algo_tag"`
 
 	// The DS key's size, in bits.
-	Bits       int64 `json:"bits"`
+	Bits int64 `json:"bits"`
 
 	// The key's creation time.
-	Created    int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The information that
 	//  the registrar uses to populate the DS records.
-	Digests    []DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalPropertiesDigestsItem `json:"digests"`
+	Digests []DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalPropertiesDigestsItem `json:"digests"`
 
 	// An integer that determines the `key_type` value.
 	//
@@ -670,13 +662,13 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalProperties struct
 	// * `257` - A Combined Signing Key (CSK) or Key Signing Key (KSK).
 	//
 	// Possible values: `256`, `257`.
-	Flags      int64 `json:"flags"`
+	Flags int64 `json:"flags"`
 
 	// PowerDNS's internal identifier.
-	KeyID      int64 `json:"key_id"`
+	KeyID int64 `json:"key_id"`
 
 	// The DS key's identification number.
-	KeyTag     int64 `json:"key_tag"`
+	KeyTag int64 `json:"key_tag"`
 
 	// The DS key's signing type.
 	// * `CSK` - Combined Signing Key.
@@ -684,7 +676,7 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesKeysAdditionalProperties struct
 	// * `ZSK` - Zone Signing Key.
 	//
 	// Possible values: `CSK`, `KSK`, `ZSK`.
-	KeyType    string `json:"key_type"`
+	KeyType string `json:"key_type"`
 
 	// The DS key's private key, in ISC format.
 	PrivateKey string `json:"privatekey"`
@@ -704,16 +696,16 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesKeys struct {
 //
 // **Note:**
 //
-//  If the domain uses NSEC semantics, only the `nsec_version` return appears in the object.
+//	If the domain uses NSEC semantics, only the `nsec_version` return appears in the object.
 type DNSSECFetchDsRecordsDataAdditionalPropertiesNsecDetails struct {
 	// A description of the NSEC3 key's algorithm.
 	Nsec3HashAlgoDesc string `json:"nsec3_hash_algo_desc"`
 
 	// The DNSSEC Digest Algorithm Number.
-	Nsec3HashAlgoNum  int64 `json:"nsec3_hash_algo_num"`
+	Nsec3HashAlgoNum int64 `json:"nsec3_hash_algo_num"`
 
 	// The number of times that the system rehashes the first hash operation.
-	Nsec3Iterations   int64 `json:"nsec3_iterations"`
+	Nsec3Iterations int64 `json:"nsec3_iterations"`
 
 	// Whether NSEC3 will operate in Narrow or Inclusive mode.
 	//
@@ -725,7 +717,7 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesNsecDetails struct {
 	//  For more information about these modes, read [PowerDNS's DNSSEC documentation](https://doc.powerdns.com/authoritative/dnssec/intro.html).
 	//
 	// Possible values: `0`, `1`.
-	Nsec3Narrow       int64 `json:"nsec3_narrow"`
+	Nsec3Narrow int64 `json:"nsec3_narrow"`
 
 	// Whether NSEC3 will create records for all delegations or only for secure delegations.
 	//
@@ -733,14 +725,14 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesNsecDetails struct {
 	// * `0` - Create records only for secure delegations.
 	//
 	// Possible values: `0`, `1`.
-	Nsec3OptOut       int64 `json:"nsec3_opt_out"`
+	Nsec3OptOut int64 `json:"nsec3_opt_out"`
 
 	// The salt value that PowerDNS uses in the hashes.
 	//
 	// **Note:**
 	//
 	//  For more information about the salt value, read [RFC 5155](https://tools.ietf.org/html/rfc5155#section-3.1.5).
-	Nsec3Salt         string `json:"nsec3_salt"`
+	Nsec3Salt string `json:"nsec3_salt"`
 
 	// Whether the domain uses NSEC or [Next Secure Record version 3](https://tools.ietf.org/html/rfc5155) (NSEC3) [Domain Name Security Extensions](https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions) (DNSSEC) semantics.
 	//
@@ -748,7 +740,7 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesNsecDetails struct {
 	// * `NSEC3`
 	//
 	// Possible values: `NSEC`, `NSEC3`.
-	NsecVersion       string `json:"nsec_version"`
+	NsecVersion string `json:"nsec_version"`
 }
 
 // An object containing the domain's DS record information.
@@ -758,7 +750,7 @@ type DNSSECFetchDsRecordsDataAdditionalPropertiesNsecDetails struct {
 // The return's name is the domain's name.
 type DNSSECFetchDsRecordsDataAdditionalProperties struct {
 	// The DS keys on the requested domain.
-	Keys        DNSSECFetchDsRecordsDataAdditionalPropertiesKeys `json:"keys"`
+	Keys DNSSECFetchDsRecordsDataAdditionalPropertiesKeys `json:"keys"`
 
 	// An object containing the [Next Secure Record](https://tools.ietf.org/html/rfc4470) (NSEC) information for the selected domain.
 	//
@@ -820,18 +812,17 @@ func (c *DNSSECClient) ImportZoneKey(ctx context.Context, args *DNSSECImportZone
 	return cpanel.UAPICall[DNSSECImportZoneKeyData](ctx, c.c, http.MethodGet, "DNSSEC", "import_zone_key", args)
 }
 
-
 // DNSSECImportZoneKeyData is a generated payload type.
 type DNSSECImportZoneKeyData struct {
 	// The domain for which the system imported the zone key.
-	Domain   string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// An error message that describes why the system could not import the security key.
 	//
 	// **Note:**
 	//
 	// The function **only** displays this return when the `success` return is a `0` value.
-	Error    string `json:"error"`
+	Error string `json:"error"`
 
 	// The security key's ID.
 	NewKeyID string `json:"new_key_id"`
@@ -842,7 +833,7 @@ type DNSSECImportZoneKeyData struct {
 	// * `0` - The system **failed** to import the security key.
 	//
 	// Possible values: `0`, `1`.
-	Success  int64 `json:"success"`
+	Success int64 `json:"success"`
 }
 
 // DNSSECRemoveZoneKeyArgs are the parameters of the UAPI function `DNSSEC::remove_zone_key`.
@@ -876,21 +867,20 @@ func (c *DNSSECClient) RemoveZoneKey(ctx context.Context, args *DNSSECRemoveZone
 	return cpanel.UAPICall[DNSSECRemoveZoneKeyData](ctx, c.c, http.MethodGet, "DNSSEC", "remove_zone_key", args)
 }
 
-
 // DNSSECRemoveZoneKeyData is a generated payload type.
 type DNSSECRemoveZoneKeyData struct {
 	// The domain for which the system removed a security key.
-	Domain  string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// An error message that describes why the system could not remove the security key.
 	//
 	// **Note:**
 	//
 	// The function **only** displays this return when the `success` return is a `0` value.
-	Error   string `json:"error"`
+	Error string `json:"error"`
 
 	// The security key's ID.
-	KeyID   string `json:"key_id"`
+	KeyID string `json:"key_id"`
 
 	// Whether the system removed the security key.
 	//
@@ -954,7 +944,7 @@ type DNSSECSetNsec3Args struct {
 //
 // **Important:**
 //
-//   When you disable the [DNS role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [DNS role](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 60.
 //
@@ -962,7 +952,6 @@ type DNSSECSetNsec3Args struct {
 func (c *DNSSECClient) SetNsec3(ctx context.Context, args *DNSSECSetNsec3Args) (*cpanel.UAPIResult[DNSSECSetNsec3Data], error) {
 	return cpanel.UAPICall[DNSSECSetNsec3Data](ctx, c.c, http.MethodGet, "DNSSEC", "set_nsec3", args)
 }
-
 
 // DNSSECSetNsec3Data is a generated payload type.
 type DNSSECSetNsec3Data struct {
@@ -991,7 +980,7 @@ type DNSSECUnsetNsec3Args struct {
 //
 // **Important:**
 //
-//   When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [DNS role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 60.
 //
@@ -999,7 +988,6 @@ type DNSSECUnsetNsec3Args struct {
 func (c *DNSSECClient) UnsetNsec3(ctx context.Context, args *DNSSECUnsetNsec3Args) (*cpanel.UAPIResult[DNSSECUnsetNsec3Data], error) {
 	return cpanel.UAPICall[DNSSECUnsetNsec3Data](ctx, c.c, http.MethodGet, "DNSSEC", "unset_nsec3", args)
 }
-
 
 // A list of the domains for which the system disabled NSEC3.
 type DNSSECUnsetNsec3DataDisabled struct {

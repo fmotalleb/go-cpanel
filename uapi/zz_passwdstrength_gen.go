@@ -35,7 +35,6 @@ func (c *PasswdStrengthClient) GetRequiredStrength(ctx context.Context, args *Pa
 	return cpanel.UAPICall[PasswdStrengthGetRequiredStrengthData](ctx, c.c, http.MethodGet, "PasswdStrength", "get_required_strength", args)
 }
 
-
 // PasswdStrengthGetRequiredStrengthData is a generated payload type.
 type PasswdStrengthGetRequiredStrengthData struct {
 	// The application's minimum password strength.

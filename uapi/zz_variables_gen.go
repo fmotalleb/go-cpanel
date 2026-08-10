@@ -40,7 +40,6 @@ func (c *VariablesClient) GetServerInformation(ctx context.Context, args *Variab
 	return cpanel.UAPICall[VariablesGetServerInformationData](ctx, c.c, http.MethodGet, "Variables", "get_server_information", args)
 }
 
-
 // VariablesGetServerInformationData is a generated payload type.
 type VariablesGetServerInformationData struct {
 	// Whether the system allows users to park subdomains of the server's hostname.
@@ -49,7 +48,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowParkSubdomainOnHostname      *int64 `json:"allow_park_subdomain_on_hostname"`
+	AllowParkSubdomainOnHostname *int64 `json:"allow_park_subdomain_on_hostname"`
 
 	// Whether the system allows users to create addon domains or aliases that resolve to other servers.
 	//
@@ -57,7 +56,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowRemoteDomains                *int64 `json:"allow_remote_domains"`
+	AllowRemoteDomains *int64 `json:"allow_remote_domains"`
 
 	// Whether cPanel's [*Reset Password*](https://go.cpanel.net/resetsubaccountpass) feature is enabled for the account.
 	//
@@ -65,7 +64,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - *Reset Password* feature not enabled.
 	//
 	// Possible values: `1`, `0`.
-	AllowResetPassword                *int64 `json:"allow_reset_password"`
+	AllowResetPassword *int64 `json:"allow_reset_password"`
 
 	// Whether cPanel's [*Reset Password*](https://go.cpanel.net/resetsubaccountpass) feature is enabled for subaccounts on the account.
 	//
@@ -73,7 +72,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - *Reset Password* feature not enabled.
 	//
 	// Possible values: `1`, `0`.
-	AllowResetPasswordForSubaccounts  *int64 `json:"allow_reset_password_for_subaccounts"`
+	AllowResetPasswordForSubaccounts *int64 `json:"allow_reset_password_for_subaccounts"`
 
 	// Whether the system allows users to add domains they didn't register with a domain name registrar.
 	//
@@ -81,13 +80,13 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't allow.
 	//
 	// Possible values: `1`, `0`.
-	AllowUnregisteredDomains          *int64 `json:"allow_unregistered_domains"`
+	AllowUnregisteredDomains *int64 `json:"allow_unregistered_domains"`
 
 	// The IP address or IP address with a firewall port number that Apache uses to listen for requests and serve web pages over an unsecured connection.
-	ApachePort                        *string `json:"apache_port"`
+	ApachePort *string `json:"apache_port"`
 
 	// The IP address or IP address with a firewall port number that Apache uses to listen for requests and serve web pages over a secure connection.
-	ApacheSSLPort                     *string `json:"apache_ssl_port"`
+	ApacheSSLPort *string `json:"apache_ssl_port"`
 
 	// Whether the user can access cPanel's [*API Shell*](https://go.cpanel.net/cpaneldocsAPIShell) interface (*cPanel >> Home >> Advanced >> API Shell*).
 	//
@@ -95,7 +94,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Can't access.
 	//
 	// Possible values: `1`, `0`.
-	APIShell                          *int64 `json:"api_shell"`
+	APIShell *int64 `json:"api_shell"`
 
 	// Whether the user can update their [AWStats](http://awstats.sourceforge.net/) software.
 	//
@@ -103,7 +102,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Can't update.
 	//
 	// Possible values: `1`, `0`.
-	AwstatsBrowserUpdate              *int64 `json:"awstats_browser_update"`
+	AwstatsBrowserUpdate *int64 `json:"awstats_browser_update"`
 
 	// Whether the AWStats statistical analysis software interprets visitors' domain names as IP addresses.
 	//
@@ -111,10 +110,10 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't interpret visitors' domain names as IP addresses.
 	//
 	// Possible values: `1`, `0`.
-	AwstatsReverseDNS                 *int64 `json:"awstats_reverse_dns"`
+	AwstatsReverseDNS *int64 `json:"awstats_reverse_dns"`
 
 	// The cPanel `root` directory.
-	CpanelRootDirectory               *string `json:"cpanel_root_directory"`
+	CpanelRootDirectory *string `json:"cpanel_root_directory"`
 
 	// Whether the account requires database prefixing.
 	//
@@ -122,10 +121,10 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't require database prefixing.
 	//
 	// Possible values: `1`, `0`.
-	DatabasePrefixRequired            *int64 `json:"database_prefix_required"`
+	DatabasePrefixRequired *int64 `json:"database_prefix_required"`
 
 	// The cPanel interface's default theme.
-	DefaultTheme                      *string `json:"default_theme"`
+	DefaultTheme *string `json:"default_theme"`
 
 	// Whether users can access the [*Analog Stats*](https://go.cpanel.net/cpaneldocsAnalogStats) interface (*cPanel >> Home >> Metrics >> Analog Stats*).
 	//
@@ -133,7 +132,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableAnalog                     *int64 `json:"disable_analog"`
+	DisableAnalog *int64 `json:"disable_analog"`
 
 	// Whether the [AWStats](http://awstats.sourceforge.net/) software is enabled.
 	//
@@ -141,7 +140,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableAwstats                    *int64 `json:"disable_awstats"`
+	DisableAwstats *int64 `json:"disable_awstats"`
 
 	// Whether [*BoxTrapper*](https://go.cpanel.net/cpaneldocsBoxTrapper) is enabled.
 	//
@@ -149,7 +148,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableBoxtrapper                 *int64 `json:"disable_boxtrapper"`
+	DisableBoxtrapper *int64 `json:"disable_boxtrapper"`
 
 	// Whether Mailman mailing lists are enabled.
 	//
@@ -157,7 +156,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableMailman                    *int64 `json:"disable_mailman"`
+	DisableMailman *int64 `json:"disable_mailman"`
 
 	// Whether [Roundcube webmail](https://roundcube.net/) is enabled.
 	//
@@ -165,7 +164,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableRoundcube                  *int64 `json:"disable_roundcube"`
+	DisableRoundcube *int64 `json:"disable_roundcube"`
 
 	// Whether the Apache SpamAssassin spam filter is enabled.
 	//
@@ -173,7 +172,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableSpamassassin               *int64 `json:"disable_spamassassin"`
+	DisableSpamassassin *int64 `json:"disable_spamassassin"`
 
 	// Whether Apache SpamAssassin's spam box feature is enabled.
 	//
@@ -181,7 +180,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableSpambox                    *int64 `json:"disable_spambox"`
+	DisableSpambox *int64 `json:"disable_spambox"`
 
 	// Whether the [Webalizer](http://www.webalizer.org/) statistics program is enabled.
 	//
@@ -189,7 +188,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	DisableWebalizer                  *int64 `json:"disable_webalizer"`
+	DisableWebalizer *int64 `json:"disable_webalizer"`
 
 	// Whether the system displays links to cPanel feature documentation in the cPanel interface.
 	//
@@ -197,14 +196,14 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't display documentation links.
 	//
 	// Possible values: `1`, `0`.
-	DisplayCpanelDoclinks             *int64 `json:"display_cpanel_doclinks"`
+	DisplayCpanelDoclinks *int64 `json:"display_cpanel_doclinks"`
 
 	// The application that processes DNS management requests.
 	//
 	// * The value is an application's file path, relative to the user's home directory.
 	// * `dnsadmin`
 	// * `auto-detect SSL`
-	DnsadminApp                       *string `json:"dnsadmin_app"`
+	DnsadminApp *string `json:"dnsadmin_app"`
 
 	// Whether the system restricts users from creating addon domains and subdomains outside of their `public_html` directory.
 	//
@@ -212,13 +211,13 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Allows users to creating addon domains and subdomains outside of their `public_html` directory.
 	//
 	// Possible values: `1`, `0`.
-	DocrootsInPublicHTMLOnly          *int64 `json:"docroots_in_public_html_only"`
+	DocrootsInPublicHTMLOnly *int64 `json:"docroots_in_public_html_only"`
 
 	// The location of the Exim email filter storage directory.
-	EmailFilterStorageDirectory       *string `json:"email_filter_storage_directory"`
+	EmailFilterStorageDirectory *string `json:"email_filter_storage_directory"`
 
 	// The minimum age of files that the system will automatically purge from `.trash` folders in user home directories.
-	EmptyTrashDays                    *string `json:"empty_trash_days"`
+	EmptyTrashDays *string `json:"empty_trash_days"`
 
 	// Whether [EasyApache 4's *FileProtect* option](https://go.cpanel.net/EasyApache4FileprotectOption) is enabled.
 	//
@@ -226,13 +225,13 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	EnableFileProtect                 *int64 `json:"enable_file_protect"`
+	EnableFileProtect *int64 `json:"enable_file_protect"`
 
 	// The maximum file size, in megabytes (MB), that a user can upload to a server.
-	FileUploadMaximumBytes            *int64 `json:"file_upload_maximum_bytes"`
+	FileUploadMaximumBytes *int64 `json:"file_upload_maximum_bytes"`
 
 	// The minimum filesystem quota that the system requires after a file uploads to a server.
-	FileUploadMustLeaveBytes          *int64 `json:"file_upload_must_leave_bytes"`
+	FileUploadMustLeaveBytes *int64 `json:"file_upload_must_leave_bytes"`
 
 	// Whether file usage information displays in the cPanel *Home* interface's statistics bar.
 	//
@@ -240,7 +239,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't display file usage information.
 	//
 	// Possible values: `1`, `0`.
-	FileUsage                         *int64 `json:"file_usage"`
+	FileUsage *int64 `json:"file_usage"`
 
 	// The FTP server.
 	//
@@ -249,10 +248,10 @@ type VariablesGetServerInformationData struct {
 	// * `disabled` - FTP has been disabled on this server.
 	//
 	// Possible values: `pure-ftpd`, `proftpd`, `disabled`.
-	FTPServer                         *string `json:"ftp_server"`
+	FTPServer *string `json:"ftp_server"`
 
 	// The maximum number of directories deep to look for `.htaccess` files when you change the PHP handler.
-	HtaccessCheckRecurse              *int64 `json:"htaccess_check_recurse"`
+	HtaccessCheckRecurse *int64 `json:"htaccess_check_recurse"`
 
 	// Whether cPanel account users can send invitations to new Subaccount users via cPanel's [*User Manager*](https://go.cpanel.net/cpaneldocsUserManager) interface (*cPanel >> Home >> Preferences >> User Manager*).
 	//
@@ -260,7 +259,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Can't send invitations.
 	//
 	// Possible values: `1`, `0`.
-	InviteSub                         *int64 `json:"invite_sub"`
+	InviteSub *int64 `json:"invite_sub"`
 
 	// Whether the `cpsrvd` daemon and other cPanel & WHM services listen on IPv6.
 	//
@@ -268,7 +267,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Don't listen on IPv6.
 	//
 	// Possible values: `1`, `0`.
-	IPv6Listen                        *int64 `json:"ipv6_listen"`
+	IPv6Listen *int64 `json:"ipv6_listen"`
 
 	// Whether the [Apache `mod_userdir` Tweak](https://go.cpanel.net/whmdocsApachemod_userdirTweak) is enabled.
 	//
@@ -276,7 +275,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	IsModUserdirEnabled               *int64 `json:"is_mod_userdir_enabled"`
+	IsModUserdirEnabled *int64 `json:"is_mod_userdir_enabled"`
 
 	// The DNS nameserver's type.
 	//
@@ -285,10 +284,10 @@ type VariablesGetServerInformationData struct {
 	// * `disabled` - Nameserver's have been disabled on this server.
 	//
 	// Possible values: `powerdns`, `bind`, `disabled`.
-	LocalNameserverType               *string `json:"local_nameserver_type"`
+	LocalNameserverType *string `json:"local_nameserver_type"`
 
 	// The logout redirection URL.
-	LogoutRedirectURL                 *string `json:"logout_redirect_url"`
+	LogoutRedirectURL *string `json:"logout_redirect_url"`
 
 	// The mailserver type.
 	//
@@ -296,7 +295,7 @@ type VariablesGetServerInformationData struct {
 	// * `disabled` - The mailserver is disabled on this system.
 	//
 	// Possible values: `dovecot`, `disabled`.
-	MailServer                        *string `json:"mail_server"`
+	MailServer *string `json:"mail_server"`
 
 	// The mailbox storage format for new accounts.
 	//
@@ -304,19 +303,19 @@ type VariablesGetServerInformationData struct {
 	// * `maildir` - The maildir storage format.
 	//
 	// Possible values: `mdbox`, `maildir`.
-	MailboxStorageFormat              *string `json:"mailbox_storage_format"`
+	MailboxStorageFormat *string `json:"mailbox_storage_format"`
 
 	// The minimum strength for cPanel account passwords.
-	MinimumPasswordStrength           *int64 `json:"minimum_password_strength"`
+	MinimumPasswordStrength *int64 `json:"minimum_password_strength"`
 
 	// The minimum strength for MySQL or MariaDB passwords.
-	MinimumPasswordStrengthMysql      *int64 `json:"minimum_password_strength_mysql"`
+	MinimumPasswordStrengthMysql *int64 `json:"minimum_password_strength_mysql"`
 
 	// The MySQL or MariaDB hostname or IP address.
-	MysqlHost                         *string `json:"mysql_host"`
+	MysqlHost *string `json:"mysql_host"`
 
 	// The MySQL or MariaDB version.
-	MysqlVersion                      *string `json:"mysql_version"`
+	MysqlVersion *string `json:"mysql_version"`
 
 	// The PHP loaders through which the system executes internal PHP scripts.
 	//
@@ -326,10 +325,10 @@ type VariablesGetServerInformationData struct {
 	// * An emtpy string - PHP loader is not in use.
 	//
 	// Possible values: ``, `ioncube`, `sourceguardian`, `ioncube,sourceguardian`.
-	PHPLoader                         *string `json:"php_loader"`
+	PHPLoader *string `json:"php_loader"`
 
 	// The number of seconds that a PHP script can run before the system terminates it.
-	PHPMaximumExecutionTime           *int64 `json:"php_maximum_execution_time"`
+	PHPMaximumExecutionTime *int64 `json:"php_maximum_execution_time"`
 
 	// Whether PHP `open_basedir` protection is enabled on the server.
 	//
@@ -341,16 +340,16 @@ type VariablesGetServerInformationData struct {
 	// We removed WHM's *PHP open_basedir Tweak* interface (*WHM >> Home >> Security Center >> PHP open_basedir Tweak*)
 	//
 	// Possible values: `1`, `0`.
-	PHPOpenBasedirHome                *int64 `json:"php_open_basedir_home"`
+	PHPOpenBasedirHome *int64 `json:"php_open_basedir_home"`
 
 	// The maximum size, in megabytes (MB), of a POST request.
-	PHPPostMaximumSize                *int64 `json:"php_post_maximum_size"`
+	PHPPostMaximumSize *int64 `json:"php_post_maximum_size"`
 
 	// The system's default version of PHP.
-	PHPSystemDefaultVersion           *string `json:"php_system_default_version"`
+	PHPSystemDefaultVersion *string `json:"php_system_default_version"`
 
 	// The maximum file size, in megabytes (MB), that a PHP script may upload.
-	PHPUploadMaximumFilesize          *int64 `json:"php_upload_maximum_filesize"`
+	PHPUploadMaximumFilesize *int64 `json:"php_upload_maximum_filesize"`
 
 	// Whether the user can search for the phpMyAdmin information schema.
 	//
@@ -366,7 +365,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't require SSL.
 	//
 	// Possible values: `1`, `0`.
-	RequireSSL                        *int64 `json:"require_ssl"`
+	RequireSSL *int64 `json:"require_ssl"`
 
 	// Whether the Apache Client Optimizer is enabled.
 	//
@@ -374,7 +373,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	SkipApacheClientsOptimizer        *int64 `json:"skip_apache_clients_optimizer"`
+	SkipApacheClientsOptimizer *int64 `json:"skip_apache_clients_optimizer"`
 
 	// Whether the system automatically suspends HTTP service for accounts that exceed their bandwidth limit.
 	//
@@ -382,7 +381,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't suspend HTTP service.
 	//
 	// Possible values: `1`, `0`.
-	SkipBandwidthLimitCheck           *int64 `json:"skip_bandwidth_limit_check"`
+	SkipBandwidthLimitCheck *int64 `json:"skip_bandwidth_limit_check"`
 
 	// Whether mailbox usage warnings are enabled.
 	//
@@ -390,7 +389,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Not enabled.
 	//
 	// Possible values: `1`, `0`.
-	SkipMailboxWarningsCheck          *int64 `json:"skip_mailbox_warnings_check"`
+	SkipMailboxWarningsCheck *int64 `json:"skip_mailbox_warnings_check"`
 
 	// The default SSL/TLS encryption algorithm used by the system.
 	//
@@ -400,7 +399,7 @@ type VariablesGetServerInformationData struct {
 	// * `rsa-4096` - The rsa-4096 encryption algorithm.
 	//
 	// Possible values: `rsa-2048`, `ecdsa-secp384r1`, `ecdsa-prime256v1`, `rsa-4096`.
-	SSLDefaultKeyType                 *string `json:"ssl_default_key_type"`
+	SSLDefaultKeyType *string `json:"ssl_default_key_type"`
 
 	// Whether the system uses the MySQL `INFORMATION_SCHEMA` view. This view includes disk usage by all MySQL tables in the disk usage totals.
 	//
@@ -408,7 +407,7 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't use MySQL's `INFORMATION_SCHEMA` view.
 	//
 	// Possible values: `1`, `0`.
-	UseInformationSchema              *int64 `json:"use_information_schema"`
+	UseInformationSchema *int64 `json:"use_information_schema"`
 
 	// Whether the system prefixes Mailman URLs with mail. For example, `http://mail.domain.com/mailman`.
 	//
@@ -416,10 +415,10 @@ type VariablesGetServerInformationData struct {
 	// * `0` - Doesn't prefix Mailman URLs with the `mail.` prefix.
 	//
 	// Possible values: `1`, `0`.
-	UseMailForMailmanURL              *int64 `json:"use_mail_for_mailman_url"`
+	UseMailForMailmanURL *int64 `json:"use_mail_for_mailman_url"`
 
 	// The system's Linux Kernel version.
-	Version                           *string `json:"version"`
+	Version *string `json:"version"`
 }
 
 // VariablesGetSessionInformationArgs are the parameters of the UAPI function `Variables::get_session_information`.
@@ -448,7 +447,6 @@ type VariablesGetSessionInformationArgs struct {
 func (c *VariablesClient) GetSessionInformation(ctx context.Context, args *VariablesGetSessionInformationArgs) (*cpanel.UAPIResult[VariablesGetSessionInformationData], error) {
 	return cpanel.UAPICall[VariablesGetSessionInformationData](ctx, c.c, http.MethodGet, "Variables", "get_session_information", args)
 }
-
 
 // VariablesGetSessionInformationData is a generated payload type.
 type VariablesGetSessionInformationData struct {
@@ -479,7 +477,6 @@ type VariablesGetUserInformationArgs struct {
 func (c *VariablesClient) GetUserInformation(ctx context.Context, args *VariablesGetUserInformationArgs) (*cpanel.UAPIResult[VariablesGetUserInformationData], error) {
 	return cpanel.UAPICall[VariablesGetUserInformationData](ctx, c.c, http.MethodGet, "Variables", "get_user_information", args)
 }
-
 
 // The available features on the account that exist in the `/var/cpanel/users/user` file`, where user represents the cPanel user.
 //
@@ -522,259 +519,259 @@ type VariablesGetUserInformationData struct {
 	// * `0` - Backups not enabled.
 	//
 	// Possible values: `0`, `1`.
-	BackupEnabled                                  int64 `json:"backup_enabled"`
+	BackupEnabled int64 `json:"backup_enabled"`
 
 	// The account's bandwidth limit.
 	// * `0` - unlimited
 	// * A maximum amount of bandwidth, in bytes.
-	BandwidthLimit                                 int64 `json:"bandwidth_limit"`
+	BandwidthLimit int64 `json:"bandwidth_limit"`
 
 	// Whether CGI is enabled.
 	// * `1` - Enabled.
 	// * `0` - Not enabled.
 	//
 	// Possible values: `0`, `1`.
-	CGIEnabled                                     int64 `json:"cgi_enabled"`
+	CGIEnabled int64 `json:"cgi_enabled"`
 
 	// The account's contact email address.
-	ContactEmail                                   string `json:"contact_email"`
+	ContactEmail string `json:"contact_email"`
 
 	// The account's alternate contact email address, if one exists.
-	ContactEmail2                                  string `json:"contact_email_2"`
+	ContactEmail2 string `json:"contact_email_2"`
 
 	// The `root` directory.
-	CpanelRootDirectory                            string `json:"cpanel_root_directory"`
+	CpanelRootDirectory string `json:"cpanel_root_directory"`
 
 	// The account's creation date in [Unix time](http://en.wikipedia.org/wiki/Unix_time) format.
-	Created                                        int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The version of cPanel used during account creation.
-	CreatedInVersion                               string `json:"created_in_version"`
+	CreatedInVersion string `json:"created_in_version"`
 
 	// The owner of the account's databases.
 	// * `root`
 	// * A reseller account's username.
 	// * The account's username.
-	DatabaseOwner                                  string `json:"database_owner"`
+	DatabaseOwner string `json:"database_owner"`
 
 	// The account's inactive domains.
-	DeadDomains                                    []string `json:"dead_domains"`
+	DeadDomains []string `json:"dead_domains"`
 
 	// Whether demo mode is enabled.
 	// * `1` - Enabled.
 	// * `0` - Not enabled.
 	//
 	// Possible values: `0`, `1`.
-	DemoMode                                       int64 `json:"demo_mode"`
+	DemoMode int64 `json:"demo_mode"`
 
 	// The number of disk blocks for the account.
 	// * `0` - unlimited
 	// * A maximum amount of disk blocks, in kilobytes.
-	DiskBlockLimit                                 int64 `json:"disk_block_limit"`
+	DiskBlockLimit int64 `json:"disk_block_limit"`
 
 	// Whether DomainKeys Identified Mail (DKIM) is enabled.
 	// * `1` - Enabled.
 	// * `0` - Not enabled.
 	//
 	// Possible values: `0`, `1`.
-	DKIMEnabled                                    int64 `json:"dkim_enabled"`
+	DKIMEnabled int64 `json:"dkim_enabled"`
 
 	// The account's main domain.
-	Domain                                         string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// list of the account's domains and subdomains.
-	Domains                                        []string `json:"domains"`
+	Domains []string `json:"domains"`
 
 	// The available features on the account that exist in the `/var/cpanel/users/user` file`, where user represents the cPanel user.
 	//
 	// **Note:**
 	//
 	// This object returns any custom features that the hosting provider adds to the `/var/cpanel/users/user` file.
-	Feature                                        VariablesGetUserInformationDataFeature `json:"feature"`
+	Feature VariablesGetUserInformationDataFeature `json:"feature"`
 
 	// The account's [feature list](https://go.cpanel.net/whmdocs84FeatureManager) name.
-	FeatureList                                    string `json:"feature_list"`
+	FeatureList string `json:"feature_list"`
 
 	// The account's group ID.
-	Gid                                            int64 `json:"gid"`
+	Gid int64 `json:"gid"`
 
 	// The user's home directory.
-	Home                                           string `json:"home"`
+	Home string `json:"home"`
 
 	// Any symlinks to the cPanel account's home directory. An array of one or more home directory symlinks.
-	HomeDirectoryLinks                             []json.RawMessage `json:"home_directory_links"`
+	HomeDirectoryLinks []json.RawMessage `json:"home_directory_links"`
 
 	// The account's IPv4 address.
-	IP                                             string `json:"ip"`
+	IP string `json:"ip"`
 
 	// The account's language.
-	Lang                                           string `json:"lang"`
+	Lang string `json:"lang"`
 
 	// The most recent modification time of the `/var/cpanel/users/user` file in [Unix time format](https://en.wikipedia.org/wiki/Unix_time).
 	//
 	// **Note:**
 	//
 	// `user` represents the cPanel user.
-	LastModified                                   int64 `json:"last_modified"`
+	LastModified int64 `json:"last_modified"`
 
 	// Whether legacy backups are enabled.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	LegacyBackupEnabled                            int64 `json:"legacy_backup_enabled"`
+	LegacyBackupEnabled int64 `json:"legacy_backup_enabled"`
 
 	// The account's default locale, a two-letter [ISO-3166 code](http://www.iso.org/iso/country_codes.htm).
-	Locale                                         string `json:"locale"`
+	Locale string `json:"locale"`
 
 	// The storage format that the account's mailboxes use.
 	// * `maildir`
 	// * `mbox`
 	//
 	// Possible values: `maildir`, `mbox`.
-	MailboxFormat                                  string `json:"mailbox_format"`
+	MailboxFormat string `json:"mailbox_format"`
 
 	// The account's maximum number of addon domains.
 	// * `unlimited`
 	// * An integer that represents a number of addon domains.
-	MaximumAddonDomains                            any `json:"maximum_addon_domains"`
+	MaximumAddonDomains any `json:"maximum_addon_domains"`
 
 	// The account's maximum number of SQL databases.
 	// * `unlimited`
 	// * An integer that represents a number of SQL databases.
-	MaximumDatabases                               any `json:"maximum_databases"`
+	MaximumDatabases any `json:"maximum_databases"`
 
 	// The [percentage of failed or deferred email messages](https://go.cpanel.net/howtopreventspam) that the account can send per hour before outgoing mail is rate-limited.
 	// * `unlimited`
 	// * An integer value.
-	MaximumDeferFailPercentage                     any `json:"maximum_defer_fail_percentage"`
+	MaximumDeferFailPercentage any `json:"maximum_defer_fail_percentage"`
 
 	// The maximum size, that the account can define when it creates an email account.
 	// * `unlimited`
 	// * An integer value, in Megabytes (MB).
-	MaximumEmailAccountDiskQuota                   any `json:"maximum_email_account_disk_quota"`
+	MaximumEmailAccountDiskQuota any `json:"maximum_email_account_disk_quota"`
 
 	// The maximum number of emails that the account can send in one hour.
 	// * A positive integer.
 	// * `0` or `unlimited` - The account can send an unlimited number of emails.
-	MaximumEmailsPerHour                           any `json:"maximum_emails_per_hour"`
+	MaximumEmailsPerHour any `json:"maximum_emails_per_hour"`
 
 	// The account's maximum number of FTP accounts.
 	// * `unlimited`
 	// * An integer that represents a number of FTP accounts.
-	MaximumFTPAccounts                             any `json:"maximum_ftp_accounts"`
+	MaximumFTPAccounts any `json:"maximum_ftp_accounts"`
 
 	// The maximum number of email accounts for the account.
 	// * `unlimited`
 	// * An integer that represents a number of email accounts.
-	MaximumMailAccounts                            any `json:"maximum_mail_accounts"`
+	MaximumMailAccounts any `json:"maximum_mail_accounts"`
 
 	// The account's maximum number of mailing lists.
 	// * `unlimited`
 	// * An integer that represents a number of mailing lists.
-	MaximumMailingLists                            any `json:"maximum_mailing_lists"`
+	MaximumMailingLists any `json:"maximum_mailing_lists"`
 
 	// The account's maximum number of aliases.
 	// * `unlimited`
 	// * An integer that represents a number of aliases.
-	MaximumParkedDomains                           any `json:"maximum_parked_domains"`
+	MaximumParkedDomains any `json:"maximum_parked_domains"`
 
 	// The account's maximum number of Ruby applications.
 	//   * `unlimited`
 	//   * An integer that represents a number of applications.
-	MaximumPassengerApps                           any `json:"maximum_passenger_apps"`
+	MaximumPassengerApps any `json:"maximum_passenger_apps"`
 
 	// The account's maximum number of subdomains.
 	// * `unlimited`
 	// * An integer that represents a number of subdomains.
-	MaximumSubdomains                              any `json:"maximum_subdomains"`
+	MaximumSubdomains any `json:"maximum_subdomains"`
 
 	// Domains and their mail exchanger (MX) type.
-	Mxcheck                                        VariablesGetUserInformationDataMxcheck `json:"mxcheck"`
+	Mxcheck VariablesGetUserInformationDataMxcheck `json:"mxcheck"`
 
 	// Whether the systems sends a notification when someone links the account to an external authentication account.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAccountAuthnLink                         int64 `json:"notify_account_authn_link"`
+	NotifyAccountAuthnLink int64 `json:"notify_account_authn_link"`
 
 	// Whether the systems sends a notification when someone disables notifications for external authentication account links.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAccountAuthnLinkNotificationDisabled     int64 `json:"notify_account_authn_link_notification_disabled"`
+	NotifyAccountAuthnLinkNotificationDisabled int64 `json:"notify_account_authn_link_notification_disabled"`
 
 	// Whether the system sends a notification when someone logs in to the account.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAccountLogin                             int64 `json:"notify_account_login"`
+	NotifyAccountLogin int64 `json:"notify_account_login"`
 
 	// Whether the system sends a notification when a user on a known netblock logs in to the account.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAccountLoginForKnownNetblock             int64 `json:"notify_account_login_for_known_netblock"`
+	NotifyAccountLoginForKnownNetblock int64 `json:"notify_account_login_for_known_netblock"`
 
 	// Whether the system sends a notification when someone disables notifications for account logins.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAccountLoginNotificationDisabled         int64 `json:"notify_account_login_notification_disabled"`
+	NotifyAccountLoginNotificationDisabled int64 `json:"notify_account_login_notification_disabled"`
 
 	// Whether the system sends a notification when an AutoSSL certificate expires.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLExpiry                            int64 `json:"notify_autossl_expiry"`
+	NotifyAutoSSLExpiry int64 `json:"notify_autossl_expiry"`
 
 	// Whether the system sends a notification when AutoSSL cannot renew a certificate because domains that fail Domain Control Validation (DCV) exist on the current certificate.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLExpiryCoverage                    int64 `json:"notify_autossl_expiry_coverage"`
+	NotifyAutoSSLExpiryCoverage int64 `json:"notify_autossl_expiry_coverage"`
 
 	// Whether the system sends a notification when AutoSSL renews a certificate.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalCoverage                   int64 `json:"notify_autossl_renewal_coverage"`
+	NotifyAutoSSLRenewalCoverage int64 `json:"notify_autossl_renewal_coverage"`
 
 	// Whether the system sends a notification when AutoSSL renews a certificate, but the new certificate lacks at least one domain that the previous certificate secured.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalCoverageReduced            int64 `json:"notify_autossl_renewal_coverage_reduced"`
+	NotifyAutoSSLRenewalCoverageReduced int64 `json:"notify_autossl_renewal_coverage_reduced"`
 
 	// Whether the system sends a notification when AutoSSL renews a certificate, but the new certificate lacks at least one domain that the previous certificate secured.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyAutoSSLRenewalUncoveredDomains           int64 `json:"notify_autossl_renewal_uncovered_domains"`
+	NotifyAutoSSLRenewalUncoveredDomains int64 `json:"notify_autossl_renewal_uncovered_domains"`
 
 	// Whether the systems sends a notification when the account reaches its bandwidth quota.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyBandwidthLimit                           int64 `json:"notify_bandwidth_limit"`
+	NotifyBandwidthLimit int64 `json:"notify_bandwidth_limit"`
 
 	// Whether the systems sends a notification when someone changes the contact address for the account.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyContactAddressChange                     int64 `json:"notify_contact_address_change"`
+	NotifyContactAddressChange int64 `json:"notify_contact_address_change"`
 
 	// Whether the systems sends a notification when someone disables the notification for contact address changes.
 	// * `1` - Notifies.
@@ -788,67 +785,67 @@ type VariablesGetUserInformationData struct {
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyDiskLimit                                int64 `json:"notify_disk_limit"`
+	NotifyDiskLimit int64 `json:"notify_disk_limit"`
 
 	// Whether the systems sends a notification when someone changes the account's password.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyPasswordChange                           int64 `json:"notify_password_change"`
+	NotifyPasswordChange int64 `json:"notify_password_change"`
 
 	// Whether the systems sends a notification when someone disables notifications for password changes.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyPasswordChangeNotificationDisabled       int64 `json:"notify_password_change_notification_disabled"`
+	NotifyPasswordChangeNotificationDisabled int64 `json:"notify_password_change_notification_disabled"`
 
 	// Whether the systems sends a notification when an SSL certificate on the account expires.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifySSLExpiry                                int64 `json:"notify_ssl_expiry"`
+	NotifySSLExpiry int64 `json:"notify_ssl_expiry"`
 
 	// Whether the systems sends a notification when the account's Two-Factor Authentication (2FA) credentials change.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyTwofactorauthChange                      int64 `json:"notify_twofactorauth_change"`
+	NotifyTwofactorauthChange int64 `json:"notify_twofactorauth_change"`
 
 	// Whether the systems sends a notification when someone disables notifications for 2FA.
 	// * `1` - Notifies.
 	// * `0` - Doesn't notify.
 	//
 	// Possible values: `0`, `1`.
-	NotifyTwofactorauthChangeNotificationDisabled  int64 `json:"notify_twofactorauth_change_notification_disabled"`
+	NotifyTwofactorauthChangeNotificationDisabled int64 `json:"notify_twofactorauth_change_notification_disabled"`
 
 	// The account's owner.
 	// * `root`
 	// * A reseller account's username.
 	// * The account's username.
-	Owner                                          string `json:"owner"`
+	Owner string `json:"owner"`
 
 	// The account's package extensions.
-	PackageExtensions                              []string `json:"package_extensions"`
+	PackageExtensions []string `json:"package_extensions"`
 
 	// The account's hosting package.
-	Plan                                           string `json:"plan"`
+	Plan string `json:"plan"`
 
 	// The account's Pushbullet access token.
-	PushbulletAccessToken                          string `json:"pushbullet_access_token"`
+	PushbulletAccessToken string `json:"pushbullet_access_token"`
 
 	// The account's shell.
-	Shell                                          string `json:"shell"`
+	Shell string `json:"shell"`
 
 	// Whether Sender Policy Framework (SPF) is enabled.
 	// * `1` - Enabled.
 	// * `0` - Not enabled.
 	//
 	// Possible values: `0`, `1`.
-	SPFEnabled                                     int64 `json:"spf_enabled"`
+	SPFEnabled int64 `json:"spf_enabled"`
 
 	// The type of key to generate for the user’s TLS certificates and CSRs.
 	//
@@ -857,21 +854,21 @@ type VariablesGetUserInformationData struct {
 	// * `rsa-4096` — 4,096-bit RSA.
 	// * `ecdsa-prime256v1` — ECDSA prime256v1 (“P-256”).
 	// * `ecdsa-secp384r1` — ECDSA secp384r1 (“P-384”). …
-	SSLDefaultKeyType                              string `json:"ssl_default_key_type"`
+	SSLDefaultKeyType string `json:"ssl_default_key_type"`
 
 	// The account's current theme.
-	Theme                                          string `json:"theme"`
+	Theme string `json:"theme"`
 
 	// The account's user ID on the system.
-	Uid                                            int64 `json:"uid"`
+	Uid int64 `json:"uid"`
 
 	// An existing account's username.
-	User                                           string `json:"user"`
+	User string `json:"user"`
 
 	// Whether UTF-8-encoded mailbox names are enabled for the cPanel account.
 	// * `1` - Enabled.
 	// * `0` - Not enabled.
 	//
 	// Possible values: `0`, `1`.
-	UTF8Mailbox                                    int64 `json:"utf8_mailbox"`
+	UTF8Mailbox int64 `json:"utf8_mailbox"`
 }

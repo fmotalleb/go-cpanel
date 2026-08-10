@@ -33,7 +33,6 @@ func (c *ChromeClient) GetDom(ctx context.Context, args *ChromeGetDomArgs) (*cpa
 	return cpanel.UAPICall[ChromeGetDomData](ctx, c.c, http.MethodGet, "Chrome", "get_dom", args)
 }
 
-
 // ChromeGetDomData is a generated payload type.
 type ChromeGetDomData struct {
 	// The pages' footer.

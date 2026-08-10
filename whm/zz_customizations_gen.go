@@ -56,7 +56,6 @@ func (c *Client) DeleteCustomizations(ctx context.Context, args *DeleteCustomiza
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "delete_customizations", args)
 }
 
-
 // RetrieveCustomizationsArgs are the parameters of the WHM API 1 function `retrieve_customizations`.
 type RetrieveCustomizationsArgs struct {
 	// The application name for the customization.
@@ -89,7 +88,6 @@ type RetrieveCustomizationsArgs struct {
 func (c *Client) RetrieveCustomizations(ctx context.Context, args *RetrieveCustomizationsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "retrieve_customizations", args)
 }
-
 
 // UpdateCustomizationsArgs are the parameters of the WHM API 1 function `update_customizations`.
 type UpdateCustomizationsArgs struct {
@@ -132,4 +130,3 @@ type UpdateCustomizationsArgs struct {
 func (c *Client) UpdateCustomizations(ctx context.Context, args *UpdateCustomizationsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "update_customizations", args)
 }
-

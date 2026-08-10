@@ -43,7 +43,6 @@ func (c *MimeClient) AddHandler(ctx context.Context, args *MimeAddHandlerArgs) (
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "add_handler", args)
 }
 
-
 // MimeAddHotlinkArgs are the parameters of the UAPI function `Mime::add_hotlink`.
 type MimeAddHotlinkArgs struct {
 	// File types to hotlink protect.
@@ -86,7 +85,7 @@ type MimeAddHotlinkArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -94,7 +93,6 @@ type MimeAddHotlinkArgs struct {
 func (c *MimeClient) AddHotlink(ctx context.Context, args *MimeAddHotlinkArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "add_hotlink", args)
 }
-
 
 // MimeAddMimeArgs are the parameters of the UAPI function `Mime::add_mime`.
 type MimeAddMimeArgs struct {
@@ -126,7 +124,6 @@ type MimeAddMimeArgs struct {
 func (c *MimeClient) AddMime(ctx context.Context, args *MimeAddMimeArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "add_mime", args)
 }
-
 
 // MimeAddRedirectArgs are the parameters of the UAPI function `Mime::add_redirect`.
 type MimeAddRedirectArgs struct {
@@ -182,7 +179,7 @@ type MimeAddRedirectArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [*Web Server* role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [*Web Server* role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -190,7 +187,6 @@ type MimeAddRedirectArgs struct {
 func (c *MimeClient) AddRedirect(ctx context.Context, args *MimeAddRedirectArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "add_redirect", args)
 }
-
 
 // MimeDeleteHandlerArgs are the parameters of the UAPI function `Mime::delete_handler`.
 type MimeDeleteHandlerArgs struct {
@@ -209,7 +205,7 @@ type MimeDeleteHandlerArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -218,14 +214,13 @@ func (c *MimeClient) DeleteHandler(ctx context.Context, args *MimeDeleteHandlerA
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "delete_handler", args)
 }
 
-
 // DeleteHotlink calls the UAPI function `Mime::delete_hotlink` — Disable hotlink protection
 //
 // This function removes hotlink protection.
 //
 // **Important:**
 //
-//   When you disable the [Web Server](https://go.cpanel.net/serverroles) role, the system **disables** this function.
+//	When you disable the [Web Server](https://go.cpanel.net/serverroles) role, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -233,7 +228,6 @@ func (c *MimeClient) DeleteHandler(ctx context.Context, args *MimeDeleteHandlerA
 func (c *MimeClient) DeleteHotlink(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "delete_hotlink", cpanel.CombineArgs(extra...))
 }
-
 
 // MimeDeleteMimeArgs are the parameters of the UAPI function `Mime::delete_mime`.
 type MimeDeleteMimeArgs struct {
@@ -252,7 +246,7 @@ type MimeDeleteMimeArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -260,7 +254,6 @@ type MimeDeleteMimeArgs struct {
 func (c *MimeClient) DeleteMime(ctx context.Context, args *MimeDeleteMimeArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "delete_mime", args)
 }
-
 
 // MimeDeleteRedirectArgs are the parameters of the UAPI function `Mime::delete_redirect`.
 type MimeDeleteRedirectArgs struct {
@@ -303,7 +296,6 @@ func (c *MimeClient) DeleteRedirect(ctx context.Context, args *MimeDeleteRedirec
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Mime", "delete_redirect", args)
 }
 
-
 // MimeGetRedirectArgs are the parameters of the UAPI function `Mime::get_redirect`.
 type MimeGetRedirectArgs struct {
 	// The domain's name.
@@ -326,7 +318,6 @@ func (c *MimeClient) GetRedirect(ctx context.Context, args *MimeGetRedirectArgs)
 	return cpanel.UAPICall[MimeGetRedirectData](ctx, c.c, http.MethodGet, "Mime", "get_redirect", args)
 }
 
-
 // MimeGetRedirectData is a generated payload type.
 type MimeGetRedirectData struct {
 	// Whether the domain redirects to another URL.
@@ -337,7 +328,7 @@ type MimeGetRedirectData struct {
 	RedirectionEnabled int64 `json:"redirection_enabled"`
 
 	// The URL to which to the domain redirects.
-	URL                string `json:"url"`
+	URL string `json:"url"`
 }
 
 // MimeListHandlersArgs are the parameters of the UAPI function `Mime::list_handlers`.
@@ -359,8 +350,8 @@ type MimeListHandlersArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [WebServer role](https://go.cpanel.net/serverroles),
-//   the system **disables** this function.
+//	When you disable the [WebServer role](https://go.cpanel.net/serverroles),
+//	the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -369,19 +360,18 @@ func (c *MimeClient) ListHandlers(ctx context.Context, args *MimeListHandlersArg
 	return cpanel.UAPICall[[]MimeListHandlersDataItem](ctx, c.c, http.MethodGet, "Mime", "list_handlers", args)
 }
 
-
 // MimeListHandlersDataItem is a generated payload type.
 type MimeListHandlersDataItem struct {
 	// The handler's extension. A valid file extension.
 	Extension string `json:"extension"`
 
 	// The handler's name. A valid string.
-	Handler   string `json:"handler"`
+	Handler string `json:"handler"`
 
 	// The handler's owner.
 	// - system
 	// - user
-	Origin    string `json:"origin"`
+	Origin string `json:"origin"`
 }
 
 // ListHotlinks calls the UAPI function `Mime::list_hotlinks` — Return domains with hotlink protection
@@ -399,7 +389,6 @@ func (c *MimeClient) ListHotlinks(ctx context.Context, extra ...cpanel.Args) (*c
 	return cpanel.UAPICall[MimeListHotlinksData](ctx, c.c, http.MethodGet, "Mime", "list_hotlinks", cpanel.CombineArgs(extra...))
 }
 
-
 // MimeListHotlinksData is a generated payload type.
 type MimeListHotlinksData struct {
 	// Whether the domain allows hotlinks from an empty or null referral URL.
@@ -407,10 +396,10 @@ type MimeListHotlinksData struct {
 	// * `0` - Does not allow hotlinks.
 	//
 	// Possible values: `0`, `1`.
-	AllowNull   int64 `json:"allow_null"`
+	AllowNull int64 `json:"allow_null"`
 
 	// A comma-separated list of file types to hotlink protect.
-	Extensions  string `json:"extensions"`
+	Extensions string `json:"extensions"`
 
 	// The URL to which to send hotlinkers.
 	RedirectURL string `json:"redirect_url"`
@@ -421,10 +410,10 @@ type MimeListHotlinksData struct {
 	// * `disabled`
 	//
 	// Possible values: `enabled`, `disabled`.
-	State       string `json:"state"`
+	State string `json:"state"`
 
 	// An array of the domains with hotlink protection.
-	Urls        []string `json:"urls"`
+	Urls []string `json:"urls"`
 }
 
 // MimeListMimeArgs are the parameters of the UAPI function `Mime::list_mime`.
@@ -448,11 +437,11 @@ type MimeListMimeArgs struct {
 //
 // **Note:**
 //
-//   This function does **not** list PHP versions with MIME types when the user or domain enables PHP-FPM. The system displays **only** custom MIME types.
+//	This function does **not** list PHP versions with MIME types when the user or domain enables PHP-FPM. The system displays **only** custom MIME types.
 //
 // **Important:**
 //
-//   When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
+//	When you disable the [Web Server role](https://go.cpanel.net/serverroles), the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.42.
 //
@@ -460,7 +449,6 @@ type MimeListMimeArgs struct {
 func (c *MimeClient) ListMime(ctx context.Context, args *MimeListMimeArgs) (*cpanel.UAPIResult[[]MimeListMimeDataItem], error) {
 	return cpanel.UAPICall[[]MimeListMimeDataItem](ctx, c.c, http.MethodGet, "Mime", "list_mime", args)
 }
-
 
 // MimeListMimeDataItem is a generated payload type.
 type MimeListMimeDataItem struct {
@@ -472,10 +460,10 @@ type MimeListMimeDataItem struct {
 	// *  `user`
 	//
 	// Possible values: `system`, `user`.
-	Origin    string `json:"origin"`
+	Origin string `json:"origin"`
 
 	// The MIME type.
-	Type2     string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // MimeListRedirectsArgs are the parameters of the UAPI function `Mime::list_redirects`.
@@ -509,27 +497,26 @@ func (c *MimeClient) ListRedirects(ctx context.Context, args *MimeListRedirectsA
 	return cpanel.UAPICall[[]MimeListRedirectsDataItem](ctx, c.c, http.MethodGet, "Mime", "list_redirects", args)
 }
 
-
 // MimeListRedirectsDataItem is a generated payload type.
 type MimeListRedirectsDataItem struct {
 	// The redirect's destination URL.
-	Destination      string `json:"destination"`
+	Destination string `json:"destination"`
 
 	// The domain to redirect.
 	//
 	// * `ALL` is the only possible value.
 	//
 	// Possible values: `ALL`.
-	DisplayDomain    string `json:"displaydomain"`
+	DisplayDomain string `json:"displaydomain"`
 
 	// The path to the file within the domain to test, relative to the home directory.
 	DisplaySourceURL string `json:"displaysourceurl"`
 
 	// The absolute file path to the source domain's document root.
-	DocRoot          string `json:"docroot"`
+	DocRoot string `json:"docroot"`
 
 	// The domain to redirect.
-	Domain           string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The kind of redirect.
 	//
@@ -539,37 +526,37 @@ type MimeListRedirectsDataItem struct {
 	// expression match of the URL.
 	//
 	// Possible values: `rewrite`, `redirect`, `redirectmatch`.
-	Kind             string `json:"kind"`
+	Kind string `json:"kind"`
 
 	// Whether the redirect matches `www.` subdomains.
 	// * `1` — Matches.
 	// * `0` — Does not match.
 	//
 	// Possible values: `1`, `0`.
-	Matchwww         int64 `json:"matchwww"`
+	Matchwww int64 `json:"matchwww"`
 
 	// Whether the [*Redirect with or without www.* option](https://go.cpanel.net/Redirects) is active.
 	//
 	// * `checked` — The *Redirect with or without www.* option is active.
 	//
 	// Possible values: `checked`.
-	MatchwwwText     string `json:"matchwww_text"`
+	MatchwwwText string `json:"matchwww_text"`
 
 	// The options that the function passes to Apache as part of
 	// the [Rewrite rule](https://httpd.apache.org/docs/2.4/rewrite/flags.html#flag_l).
-	Opts             string `json:"opts"`
+	Opts string `json:"opts"`
 
 	// The path to the file within the domain to test, relative to the home directory.
-	Source           string `json:"source"`
+	Source string `json:"source"`
 
 	// The path to the file within the domain to test, relative to the home directory.
-	SourceURL        string `json:"sourceurl"`
+	SourceURL string `json:"sourceurl"`
 
 	// The [HTTP Status Code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) of the request
-	StatusCode       string `json:"statuscode"`
+	StatusCode string `json:"statuscode"`
 
 	// The redirect's destination URL.
-	TargetURL        string `json:"targeturl"`
+	TargetURL string `json:"targeturl"`
 
 	// Whether the redirect is permanent or temporary.
 	//
@@ -577,10 +564,10 @@ type MimeListRedirectsDataItem struct {
 	// * `temporary` — The redirect is temporary.
 	//
 	// Possible values: `permanent`, `temporary`.
-	Type2            string `json:"type"`
+	Type2 string `json:"type"`
 
 	// The domain to redirect.
-	URLDomain        string `json:"urldomain"`
+	URLDomain string `json:"urldomain"`
 
 	// Whether the wildcard subdomains match.
 	//
@@ -588,14 +575,14 @@ type MimeListRedirectsDataItem struct {
 	// * `0` — Does **not** match.
 	//
 	// Possible values: `1`, `0`.
-	Wildcard         int64 `json:"wildcard"`
+	Wildcard int64 `json:"wildcard"`
 
 	// Whether the [*Wild Card Redirect*](https://go.cpanel.net/Redirects) option is active.
 	//
 	// * `checked` — The *Wild Card Redirect* option is active.
 	//
 	// Possible values: `checked`.
-	WildcardText     string `json:"wildcard_text"`
+	WildcardText string `json:"wildcard_text"`
 }
 
 // MimeRedirectInfoArgs are the parameters of the UAPI function `Mime::redirect_info`.
@@ -629,7 +616,6 @@ func (c *MimeClient) RedirectInfo(ctx context.Context, args *MimeRedirectInfoArg
 	return cpanel.UAPICall[MimeRedirectInfoData](ctx, c.c, http.MethodGet, "Mime", "redirect_info", args)
 }
 
-
 // MimeRedirectInfoData is a generated payload type.
 type MimeRedirectInfoData struct {
 	// The redirect's domain, or `** All Public Domains **`.
@@ -639,5 +625,5 @@ type MimeRedirectInfoData struct {
 	Domain string `json:"domain"`
 
 	// The redirect's URL.
-	URL    string `json:"url"`
+	URL string `json:"url"`
 }

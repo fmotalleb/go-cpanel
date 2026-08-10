@@ -55,7 +55,6 @@ func (c *Client) DeleteRPMVersion(ctx context.Context, args *DeleteRPMVersionArg
 	return cpanel.WHMCall[DeleteRPMVersionData](ctx, c.c, http.MethodGet, "delete_rpm_version", args)
 }
 
-
 // DeleteRPMVersionData is a generated payload type.
 type DeleteRPMVersionData struct {
 	// Whether the function was successful.
@@ -111,7 +110,6 @@ func (c *Client) EditRPMVersion(ctx context.Context, args *EditRPMVersionArgs) (
 	return cpanel.WHMCall[EditRPMVersionData](ctx, c.c, http.MethodGet, "edit_rpm_version", args)
 }
 
-
 // EditRPMVersionData is a generated payload type.
 type EditRPMVersionData struct {
 	// Whether the function succeeded.
@@ -150,7 +148,6 @@ func (c *Client) GetRPMVersionData(ctx context.Context, args *GetRPMVersionDataA
 	return cpanel.WHMCall[string](ctx, c.c, http.MethodGet, "get_rpm_version_data", args)
 }
 
-
 // InstallRPMPluginArgs are the parameters of the WHM API 1 function `install_rpm_plugin`.
 type InstallRPMPluginArgs struct {
 	// The name of a plugin RPM to install.
@@ -173,14 +170,13 @@ func (c *Client) InstallRPMPlugin(ctx context.Context, args *InstallRPMPluginArg
 	return cpanel.WHMCall[InstallRPMPluginData](ctx, c.c, http.MethodGet, "install_rpm_plugin", args)
 }
 
-
 // InstallRPMPluginData is a generated payload type.
 type InstallRPMPluginData struct {
 	// The name of the RPM plugin log entry for this installation, which includes a timestamp.
 	LogEntry string `json:"log_entry"`
 
 	// The PID of the process that will install the RPM.
-	Pid      int64 `json:"pid"`
+	Pid int64 `json:"pid"`
 }
 
 // ListRpmsArgs are the parameters of the WHM API 1 function `list_rpms`.
@@ -210,7 +206,6 @@ func (c *Client) ListRpms(ctx context.Context, args *ListRpmsArgs) (*cpanel.WHMR
 	return cpanel.WHMCall[ListRpmsData](ctx, c.c, http.MethodGet, "list_rpms", args)
 }
 
-
 // ListRpmsData is a generated payload type.
 type ListRpmsData struct {
 	// A list of all RPM dependencies that the server owner has not yet installed.
@@ -227,7 +222,6 @@ type ListRpmsData struct {
 func (c *Client) PackageManagerFixcache(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PackageManagerFixcacheData], error) {
 	return cpanel.WHMCall[PackageManagerFixcacheData](ctx, c.c, http.MethodGet, "package_manager_fixcache", cpanel.CombineArgs(extra...))
 }
-
 
 // PackageManagerFixcacheData is a generated payload type.
 type PackageManagerFixcacheData struct {
@@ -271,14 +265,13 @@ func (c *Client) PackageManagerGetBuildLog(ctx context.Context, args *PackageMan
 	return cpanel.WHMCall[PackageManagerGetBuildLogData](ctx, c.c, http.MethodGet, "package_manager_get_build_log", args)
 }
 
-
 // PackageManagerGetBuildLogData is a generated payload type.
 type PackageManagerGetBuildLogData struct {
 	// The most recent build log entries.
-	Content      []string `json:"content"`
+	Content []string `json:"content"`
 
 	// The last position that the system read in the build log.
-	Offset       int64 `json:"offset"`
+	Offset int64 `json:"offset"`
 
 	// Whether the build process is in progress.
 	//
@@ -347,50 +340,49 @@ func (c *Client) PackageManagerGetPackageInfo(ctx context.Context, args *Package
 	return cpanel.WHMCall[PackageManagerGetPackageInfoData](ctx, c.c, http.MethodGet, "package_manager_get_package_info", args)
 }
 
-
 // The RPM package's dependencies and conflicts.
 type PackageManagerGetPackageInfoDataPackagesItemPkgDep struct {
 	// A list of the RPM package's conflicts, if any exist.
 	Conflicts []string `json:"conflicts"`
 
 	// A list of the RPM package's requirements, if any exist.
-	Requires  []string `json:"requires"`
+	Requires []string `json:"requires"`
 }
 
 // PackageManagerGetPackageInfoDataPackagesItem is a generated payload type.
 type PackageManagerGetPackageInfoDataPackagesItem struct {
 	// The required system architecture.
-	ArchItEcture     string `json:"architecture"`
+	ArchItEcture string `json:"architecture"`
 
 	// The RPM package's distribution license.
-	License          string `json:"license"`
+	License string `json:"license"`
 
 	// A detailed description of the RPM package.
-	LongDescription  string `json:"long_description"`
+	LongDescription string `json:"long_description"`
 
 	// The RPM package developer's URL, if available.
-	MoreInfoURL      *string `json:"more_info_url"`
+	MoreInfoURL *string `json:"more_info_url"`
 
 	// The RPM package name.
-	Package2         string `json:"package"`
+	Package2 string `json:"package"`
 
 	// The RPM package's dependencies and conflicts.
-	PkgDep           PackageManagerGetPackageInfoDataPackagesItemPkgDep `json:"pkg_dep"`
+	PkgDep PackageManagerGetPackageInfoDataPackagesItemPkgDep `json:"pkg_dep"`
 
 	// The RPM package's group.
-	PkgGroup         string `json:"pkg_group"`
+	PkgGroup string `json:"pkg_group"`
 
 	// The RPM package's cPanel release number.
-	Release          string `json:"release"`
+	Release string `json:"release"`
 
 	// The repository where the RPM package resides.
-	RepoName         string `json:"repo_name"`
+	RepoName string `json:"repo_name"`
 
 	// A short description of the RPM package.
 	ShortDescription string `json:"short_description"`
 
 	// The RPM package's size.
-	Size             int64 `json:"size"`
+	Size int64 `json:"size"`
 
 	// The install state of the RPM package.
 	//
@@ -399,16 +391,16 @@ type PackageManagerGetPackageInfoDataPackagesItem struct {
 	// * `updatable`
 	//
 	// Possible values: `installed`, `not_installed`, `updatable`.
-	State            string `json:"state"`
+	State string `json:"state"`
 
 	// The version of the RPM package's software.
-	Version          string `json:"version"`
+	Version string `json:"version"`
 
 	// The currently installed version of an RPM package.
 	VersionInstalled string `json:"version_installed"`
 
 	// The latest available version of an RPM package.
-	VersionLatest    string `json:"version_latest"`
+	VersionLatest string `json:"version_latest"`
 }
 
 // PackageManagerGetPackageInfoData is a generated payload type.
@@ -438,7 +430,6 @@ type PackageManagerIsPerformingActionsArgs struct {
 func (c *Client) PackageManagerIsPerformingActions(ctx context.Context, args *PackageManagerIsPerformingActionsArgs) (*cpanel.WHMResult[PackageManagerIsPerformingActionsData], error) {
 	return cpanel.WHMCall[PackageManagerIsPerformingActionsData](ctx, c.c, http.MethodGet, "package_manager_is_performing_actions", args)
 }
-
 
 // PackageManagerIsPerformingActionsData is a generated payload type.
 type PackageManagerIsPerformingActionsData struct {
@@ -479,7 +470,6 @@ type PackageManagerListPackagesArgs struct {
 func (c *Client) PackageManagerListPackages(ctx context.Context, args *PackageManagerListPackagesArgs) (*cpanel.WHMResult[PackageManagerListPackagesData], error) {
 	return cpanel.WHMCall[PackageManagerListPackagesData](ctx, c.c, http.MethodGet, "package_manager_list_packages", args)
 }
-
 
 // PackageManagerListPackagesDataPackagesItem is a generated payload type.
 type PackageManagerListPackagesDataPackagesItem struct {
@@ -527,20 +517,19 @@ func (c *Client) PackageManagerResolveActions(ctx context.Context, args *Package
 	return cpanel.WHMCall[PackageManagerResolveActionsData](ctx, c.c, http.MethodGet, "package_manager_resolve_actions", args)
 }
 
-
 // PackageManagerResolveActionsData is a generated payload type.
 type PackageManagerResolveActionsData struct {
 	// A list of RPM packages that the system would install if you provisioned them as currently selected.
-	Install    []string `json:"install"`
+	Install []string `json:"install"`
 
 	// A list of unaffected RPM packages.
 	UnAFfected []string `json:"unaffected"`
 
 	// A list of RPM packages that the system would uninstall if you provisioned them as currently selected.
-	Uninstall  []string `json:"uninstall"`
+	Uninstall []string `json:"uninstall"`
 
 	// A list of RPM packages that the system would upgrade if you provisioned them as currently selected.
-	Upgrade    []string `json:"upgrade"`
+	Upgrade []string `json:"upgrade"`
 }
 
 // PackageManagerSubmitActionsArgs are the parameters of the WHM API 1 function `package_manager_submit_actions`.
@@ -589,7 +578,6 @@ func (c *Client) PackageManagerSubmitActions(ctx context.Context, args *PackageM
 	return cpanel.WHMCall[PackageManagerSubmitActionsData](ctx, c.c, http.MethodGet, "package_manager_submit_actions", args)
 }
 
-
 // PackageManagerSubmitActionsData is a generated payload type.
 type PackageManagerSubmitActionsData struct {
 	// A valid Process ID (PID).
@@ -606,7 +594,6 @@ type PackageManagerSubmitActionsData struct {
 func (c *Client) PackageManagerUpgrade(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[PackageManagerUpgradeData], error) {
 	return cpanel.WHMCall[PackageManagerUpgradeData](ctx, c.c, http.MethodGet, "package_manager_upgrade", cpanel.CombineArgs(extra...))
 }
-
 
 // PackageManagerUpgradeData is a generated payload type.
 type PackageManagerUpgradeData struct {
@@ -636,12 +623,11 @@ func (c *Client) UninstallRPMPlugin(ctx context.Context, args *UninstallRPMPlugi
 	return cpanel.WHMCall[UninstallRPMPluginData](ctx, c.c, http.MethodGet, "uninstall_rpm_plugin", args)
 }
 
-
 // UninstallRPMPluginData is a generated payload type.
 type UninstallRPMPluginData struct {
 	// The name of the RPM plugin log entry for this uninstall process, including a timestamp.
 	LogEntry string `json:"log_entry"`
 
 	// The PID of the process that is doing the removal.
-	Pid      int64 `json:"pid"`
+	Pid int64 `json:"pid"`
 }

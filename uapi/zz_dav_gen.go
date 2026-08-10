@@ -31,7 +31,6 @@ func (c *DAVClient) DisableSharedGlobalAddressbook(ctx context.Context, args *DA
 	return cpanel.UAPICall[DAVDisableSharedGlobalAddressbookData](ctx, c.c, http.MethodGet, "DAV", "disable_shared_global_addressbook", args)
 }
 
-
 // DAVDisableSharedGlobalAddressbookData is a generated payload type.
 type DAVDisableSharedGlobalAddressbookData struct {
 	// Whether the global address book is shared.
@@ -61,7 +60,6 @@ type DAVEnableSharedGlobalAddressbookArgs struct {
 func (c *DAVClient) EnableSharedGlobalAddressbook(ctx context.Context, args *DAVEnableSharedGlobalAddressbookArgs) (*cpanel.UAPIResult[DAVEnableSharedGlobalAddressbookData], error) {
 	return cpanel.UAPICall[DAVEnableSharedGlobalAddressbookData](ctx, c.c, http.MethodGet, "DAV", "enable_shared_global_addressbook", args)
 }
-
 
 // DAVEnableSharedGlobalAddressbookData is a generated payload type.
 type DAVEnableSharedGlobalAddressbookData struct {
@@ -96,7 +94,6 @@ func (c *DAVClient) GetCalendarContactsConfig(ctx context.Context, args *DAVGetC
 	return cpanel.UAPICall[DAVGetCalendarContactsConfigData](ctx, c.c, http.MethodGet, "DAV", "get_calendar_contacts_config", args)
 }
 
-
 // Configuration details for ActiveSync.
 type DAVGetCalendarContactsConfigDataActivesync struct {
 	// Whether the server has ActiveSync enabled.
@@ -107,17 +104,17 @@ type DAVGetCalendarContactsConfigDataActivesync struct {
 	Enabled int64 `json:"enabled"`
 
 	// The port number the system uses for secure ActiveSync connections.
-	Port    int64 `json:"port"`
+	Port int64 `json:"port"`
 
 	// The fully qualified domain name to connect to.
-	Server  string `json:"server"`
+	Server string `json:"server"`
 
 	// The cPanel user or email account user to
 	// whom the returned connection information pertains.
 	//
 	// If you do **not** specify the `user` parameter,
 	// this function returns the authenticated cPanel user.
-	User    string `json:"user"`
+	User string `json:"user"`
 }
 
 // DAVGetCalendarContactsConfigDataNoSSLCalendarsItem is a generated payload type.
@@ -126,13 +123,13 @@ type DAVGetCalendarContactsConfigDataNoSSLCalendarsItem struct {
 	Description string `json:"description"`
 
 	// The name of the calendar.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 
 	// The relative URL path to the calendar.
-	Path        string `json:"path"`
+	Path string `json:"path"`
 
 	// The absolute URL to the calendar.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 }
 
 // DAVGetCalendarContactsConfigDataNoSSLContactsItem is a generated payload type.
@@ -141,22 +138,22 @@ type DAVGetCalendarContactsConfigDataNoSSLContactsItem struct {
 	Description string `json:"description"`
 
 	// The name of the address book.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 
 	// The relative URL to the address book.
-	Path        string `json:"path"`
+	Path string `json:"path"`
 
 	// The absolute URL to the address book.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 }
 
 // A list of non-SSL connection configurations.
 type DAVGetCalendarContactsConfigDataNoSSL struct {
 	// An array of objects containing the user's calendars.
-	Calendars  []DAVGetCalendarContactsConfigDataNoSSLCalendarsItem `json:"calendars"`
+	Calendars []DAVGetCalendarContactsConfigDataNoSSLCalendarsItem `json:"calendars"`
 
 	// An array of objects containing the user's address books.
-	Contacts   []DAVGetCalendarContactsConfigDataNoSSLContactsItem `json:"contacts"`
+	Contacts []DAVGetCalendarContactsConfigDataNoSSLContactsItem `json:"contacts"`
 
 	// The absolute URL path and HTTP port to the user's
 	// CalDAV `free-busy-query` connection.
@@ -164,7 +161,7 @@ type DAVGetCalendarContactsConfigDataNoSSL struct {
 	// **Note:**
 	//
 	// This information is useful for clients that support Autodiscovery.
-	FreeBusy   string `json:"free_busy"`
+	FreeBusy string `json:"free_busy"`
 
 	// The absolute URL path and HTTP port to the user's CalDAV
 	// and CardDAV connection information.
@@ -175,10 +172,10 @@ type DAVGetCalendarContactsConfigDataNoSSL struct {
 	FullServer string `json:"full_server"`
 
 	// The port number that the system uses for non-SSL connections.
-	Port       int64 `json:"port"`
+	Port int64 `json:"port"`
 
 	// The short server connection string that includes a domain name and a port that uses the HTTP protocol.
-	Server     string `json:"server"`
+	Server string `json:"server"`
 }
 
 // DAVGetCalendarContactsConfigDataSSLCalendarsItem is a generated payload type.
@@ -187,13 +184,13 @@ type DAVGetCalendarContactsConfigDataSSLCalendarsItem struct {
 	Description string `json:"description"`
 
 	// The name of the calendar.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 
 	// The relative URL path to the calendar.
-	Path        string `json:"path"`
+	Path string `json:"path"`
 
 	// The absolute URL to the calendar.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 }
 
 // DAVGetCalendarContactsConfigDataSSLContactsItem is a generated payload type.
@@ -202,22 +199,22 @@ type DAVGetCalendarContactsConfigDataSSLContactsItem struct {
 	Description string `json:"description"`
 
 	// The name of the address book.
-	Name        string `json:"name"`
+	Name string `json:"name"`
 
 	// The relative URL to the address book.
-	Path        string `json:"path"`
+	Path string `json:"path"`
 
 	// The absolute URL to the address book.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 }
 
 // A list of SSL connection configurations.
 type DAVGetCalendarContactsConfigDataSSL struct {
 	// An array of objects containing the user's calendars.
-	Calendars    []DAVGetCalendarContactsConfigDataSSLCalendarsItem `json:"calendars"`
+	Calendars []DAVGetCalendarContactsConfigDataSSLCalendarsItem `json:"calendars"`
 
 	// An array of objects containing the user's address books.
-	Contacts     []DAVGetCalendarContactsConfigDataSSLContactsItem `json:"contacts"`
+	Contacts []DAVGetCalendarContactsConfigDataSSLContactsItem `json:"contacts"`
 
 	// The absolute URL path and HTTPS port to the user's CalDAV
 	// `free-busy-query` connection.
@@ -225,7 +222,7 @@ type DAVGetCalendarContactsConfigDataSSL struct {
 	// **Note:**
 	//
 	// This information is useful for clients that support Autodiscovery.
-	FreeBusy     string `json:"free_busy"`
+	FreeBusy string `json:"free_busy"`
 
 	// The absolute URL path and HTTPS port to the user's CalDAV and
 	// CardDAV connection information.
@@ -234,7 +231,7 @@ type DAVGetCalendarContactsConfigDataSSL struct {
 	//
 	// This information is useful for clients that do **not** support
 	// Autodiscovery.
-	FullServer   string `json:"full_server"`
+	FullServer string `json:"full_server"`
 
 	// Whether the server uses a self-signed certificate.
 	//
@@ -245,7 +242,7 @@ type DAVGetCalendarContactsConfigDataSSL struct {
 	IsSelfSigned int64 `json:"is_self_signed"`
 
 	// The port number that the system uses for SSL connections.
-	Port         int64 `json:"port"`
+	Port int64 `json:"port"`
 
 	// The short server connection string that includes a
 	// domain name and a port that uses the HTTPS protocol.
@@ -253,7 +250,7 @@ type DAVGetCalendarContactsConfigDataSSL struct {
 	// **Note:**
 	//
 	// This value is useful for clients that support Autodiscovery.
-	Server       string `json:"server"`
+	Server string `json:"server"`
 }
 
 // DAVGetCalendarContactsConfigData is a generated payload type.
@@ -262,17 +259,17 @@ type DAVGetCalendarContactsConfigData struct {
 	Activesync DAVGetCalendarContactsConfigDataActivesync `json:"activesync"`
 
 	// A list of non-SSL connection configurations.
-	NoSSL      DAVGetCalendarContactsConfigDataNoSSL `json:"no_ssl"`
+	NoSSL DAVGetCalendarContactsConfigDataNoSSL `json:"no_ssl"`
 
 	// A list of SSL connection configurations.
-	SSL        DAVGetCalendarContactsConfigDataSSL `json:"ssl"`
+	SSL DAVGetCalendarContactsConfigDataSSL `json:"ssl"`
 
 	// The cPanel user or email account user to
 	// whom the returned connection information pertains.
 	//
 	// If you do **not** specify the `user` parameter,
 	// this function returns the authenticated cPanel user.
-	User       string `json:"user"`
+	User string `json:"user"`
 }
 
 // DAVHasSharedGlobalAddressbookArgs are the parameters of the UAPI function `DAV::has_shared_global_addressbook`.
@@ -295,7 +292,6 @@ func (c *DAVClient) HasSharedGlobalAddressbook(ctx context.Context, args *DAVHas
 	return cpanel.UAPICall[DAVHasSharedGlobalAddressbookData](ctx, c.c, http.MethodGet, "DAV", "has_shared_global_addressbook", args)
 }
 
-
 // DAVHasSharedGlobalAddressbookData is a generated payload type.
 type DAVHasSharedGlobalAddressbookData struct {
 	// Whether the global address book is enabled.
@@ -317,7 +313,6 @@ func (c *DAVClient) IsDAVServiceEnabled(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[DAVIsDAVServiceEnabledData](ctx, c.c, http.MethodGet, "DAV", "is_dav_service_enabled", cpanel.CombineArgs(extra...))
 }
 
-
 // DAVIsDAVServiceEnabledData is a generated payload type.
 type DAVIsDAVServiceEnabledData struct {
 	// Whether the DAV service is enabled.
@@ -338,7 +333,6 @@ type DAVIsDAVServiceEnabledData struct {
 func (c *DAVClient) IsHordeEnabled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[DAVIsHordeEnabledData], error) {
 	return cpanel.UAPICall[DAVIsHordeEnabledData](ctx, c.c, http.MethodGet, "DAV", "is_horde_enabled", cpanel.CombineArgs(extra...))
 }
-
 
 // DAVIsHordeEnabledData is a generated payload type.
 type DAVIsHordeEnabledData struct {

@@ -9,6 +9,9 @@ Usage:
 
 import argparse
 import re
+import shutil
+import subprocess
+import sys
 from pathlib import Path
 
 import yaml
@@ -685,11 +688,14 @@ def generate_package(kind, spec, ops, outdir, pkg_doc, spec_root):
         files[fname] = lines
 
     # any late-created payload types (shouldn't happen, but be safe)
+    written = []
     for fname, lines in files.items():
         code = assemble_file(gen, kind, fname, lines)
-        (outdir / fname).write_text(code, encoding="utf-8")
+        p = outdir / fname
+        p.write_text(code, encoding="utf-8")
+        written.append(p)
 
-    return gen, groups
+    return gen, groups, written
 
 
 def pkg_name(kind):
@@ -901,18 +907,20 @@ def main():
     uapi_ops = parse_ops(cpanel_spec, "uapi", cpanel_urls)
     whm_ops = parse_ops(whm_spec, "whm", whm_urls)
 
-    ug, ugroups = generate_package("uapi", cpanel_spec, uapi_ops, outdir / "uapi",
-                                   "", "https://api.docs.cpanel.net/specifications/cpanel.openapi")
-    wg, wgroups = generate_package("whm", whm_spec, whm_ops, outdir / "whm",
-                                   "", "https://api.docs.cpanel.net/specifications/whm.openapi")
+    ug, ugroups, uwritten = generate_package("uapi", cpanel_spec, uapi_ops, outdir / "uapi",
+                                             "", "https://api.docs.cpanel.net/specifications/cpanel.openapi")
+    wg, wgroups, wwritten = generate_package("whm", whm_spec, whm_ops, outdir / "whm",
+                                             "", "https://api.docs.cpanel.net/specifications/whm.openapi")
 
     # client scaffolding
-    write_uapi_client(outdir / "uapi", sorted(ugroups.keys(), key=str.lower))
-    write_whm_client(outdir / "whm")
-    write_doc(outdir / "uapi", "uapi", "Package uapi provides fully-typed access to every cPanel UAPI\nfunction documented in cPanel's official OpenAPI document (version 138):",
-              ugroups, "https://api.docs.cpanel.net/specifications/cpanel.openapi")
-    write_doc(outdir / "whm", "whm", "Package whm provides fully-typed access to every WHM API 1\nfunction documented in cPanel's official OpenAPI document (version 138):",
-              wgroups, "https://api.docs.cpanel.net/specifications/whm.openapi")
+    written = uwritten + wwritten
+    written.append(write_uapi_client(outdir / "uapi", sorted(ugroups.keys(), key=str.lower)))
+    written.append(write_whm_client(outdir / "whm"))
+    written.append(write_doc(outdir / "uapi", "uapi", "Package uapi provides fully-typed access to every cPanel UAPI\nfunction documented in cPanel's official OpenAPI document (version 138):",
+                             ugroups, "https://api.docs.cpanel.net/specifications/cpanel.openapi"))
+    written.append(write_doc(outdir / "whm", "whm", "Package whm provides fully-typed access to every WHM API 1\nfunction documented in cPanel's official OpenAPI document (version 138):",
+                             wgroups, "https://api.docs.cpanel.net/specifications/whm.openapi"))
+    run_gofmt(written)
 
     total = len(uapi_ops) + len(whm_ops)
     print(f"uapi: {len(uapi_ops)} functions in {len(ugroups)} modules")
@@ -950,7 +958,9 @@ def write_uapi_client(outdir, modules):
         lines.append("")
         lines.append(f"// {pascal(m)} returns the client for the UAPI `{m}` module.")
         lines.append(f"func (c *Client) {pascal(m)}() *{t} {{ return &{t}{{c: c.c}} }}")
-    (outdir / "client.go").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    p = outdir / "client.go"
+    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return p
 
 
 def write_whm_client(outdir):
@@ -973,7 +983,9 @@ def write_whm_client(outdir):
              "// Core returns the underlying core client.",
              "func (c *Client) Core() *cpanel.Client { return c.c }",
              ""]
-    (outdir / "client.go").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    p = outdir / "client.go"
+    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return p
 
 
 def write_doc(outdir, pkg, head, groups, url):
@@ -992,7 +1004,19 @@ def write_doc(outdir, pkg, head, groups, url):
     for dl in doc_lines(counts, limit=6000):
         lines.append(dl)
     lines.append(f"package {pkg}")
-    (outdir / "doc.go").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    p = outdir / "doc.go"
+    p.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return p
+
+
+def run_gofmt(paths):
+    exe = shutil.which("gofmt")
+    if exe is None:
+        print("warning: gofmt not found on PATH; generated files were left "
+              "unformatted (run `gofmt -w .` afterwards)", file=sys.stderr)
+        return
+    subprocess.run([exe, "-w", *(str(p) for p in paths)], check=True)
+    print(f"gofmt: formatted {len(paths)} generated files")
 
 
 if __name__ == "__main__":

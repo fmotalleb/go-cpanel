@@ -30,7 +30,6 @@ func (c *StatsManagerClient) GetConfiguration(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[[]StatsManagerGetConfigurationDataItem](ctx, c.c, http.MethodGet, "StatsManager", "get_configuration", cpanel.CombineArgs(extra...))
 }
 
-
 // StatsManagerGetConfigurationDataItemAnalyzeRsItem is a generated payload type.
 type StatsManagerGetConfigurationDataItemAnalyzeRsItem struct {
 	// Whether the analyzer is turned on or off for the domain.
@@ -41,7 +40,7 @@ type StatsManagerGetConfigurationDataItemAnalyzeRsItem struct {
 	// **Note:** This is the cumulative effect of the choices the server admin and user make.
 	//
 	// Possible values: `1`, `0`.
-	Enabled       int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// Whether the analyzer is turned on or off for the domain specifically by this user.
 	//
@@ -60,7 +59,7 @@ type StatsManagerGetConfigurationDataItemAnalyzeRsItem struct {
 	// - `webalizer` - The Webalizer weblog analyzer.
 	//
 	// Possible values: `analog`, `awstats`, `webalizer`.
-	Name          string `json:"name"`
+	Name string `json:"name"`
 }
 
 // StatsManagerGetConfigurationDataItem is a generated payload type.
@@ -69,7 +68,7 @@ type StatsManagerGetConfigurationDataItem struct {
 	AnalyzeRs []StatsManagerGetConfigurationDataItemAnalyzeRsItem `json:"analyzers"`
 
 	// The domain.
-	Domain    string `json:"domain"`
+	Domain string `json:"domain"`
 }
 
 // SaveConfiguration calls the UAPI function `StatsManager::save_configuration` — Save current user's weblog analyzers configuration
@@ -90,7 +89,6 @@ func (c *StatsManagerClient) SaveConfiguration(ctx context.Context, extra ...cpa
 	return cpanel.UAPICall[[]StatsManagerSaveConfigurationDataItem](ctx, c.c, http.MethodPost, "StatsManager", "save_configuration", cpanel.CombineArgs(extra...))
 }
 
-
 // StatsManagerSaveConfigurationDataItemAnalyzeRsItem is a generated payload type.
 type StatsManagerSaveConfigurationDataItemAnalyzeRsItem struct {
 	// Whether the analyzer is turned on or off for the whole server.
@@ -107,7 +105,7 @@ type StatsManagerSaveConfigurationDataItemAnalyzeRsItem struct {
 	// - `0` - the analyzer is disabled.
 	//
 	// Possible values: `1`, `0`.
-	Enabled   int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// Whether the analyzer can be turned on or off for the domain by the cPanel user.
 	//
@@ -115,7 +113,7 @@ type StatsManagerSaveConfigurationDataItemAnalyzeRsItem struct {
 	// - `0` - the analyzer cannot be managed by the cPanel user. The reseller or `root` controls the configuration.
 	//
 	// Possible values: `1`, `0`.
-	Locked    int64 `json:"locked"`
+	Locked int64 `json:"locked"`
 
 	// Name of the analyzer.
 	//
@@ -126,7 +124,7 @@ type StatsManagerSaveConfigurationDataItemAnalyzeRsItem struct {
 	// - `webalizer` - The Webalizer weblog analyzer.
 	//
 	// Possible values: `analog`, `awstats`, `webalizer`.
-	Name      string `json:"name"`
+	Name string `json:"name"`
 }
 
 // StatsManagerSaveConfigurationDataItem is a generated payload type.
@@ -135,5 +133,5 @@ type StatsManagerSaveConfigurationDataItem struct {
 	AnalyzeRs []StatsManagerSaveConfigurationDataItemAnalyzeRsItem `json:"analyzers"`
 
 	// The domain.
-	Domain    string `json:"domain"`
+	Domain string `json:"domain"`
 }

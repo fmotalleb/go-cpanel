@@ -39,7 +39,6 @@ func (c *Client) AssignAccountEnhancement(ctx context.Context, args *AssignAccou
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "assign_account_enhancement", args)
 }
 
-
 // CreateAccountEnhancementArgs are the parameters of the WHM API 1 function `create_account_enhancement`.
 type CreateAccountEnhancementArgs struct {
 	// The identifier of the item you are targeting.
@@ -71,7 +70,6 @@ func (c *Client) CreateAccountEnhancement(ctx context.Context, args *CreateAccou
 	return cpanel.WHMCall[CreateAccountEnhancementData](ctx, c.c, http.MethodGet, "create_account_enhancement", args)
 }
 
-
 // CreateAccountEnhancementData is a generated payload type.
 type CreateAccountEnhancementData struct {
 	// The name of the newly-created account enhancement.
@@ -100,7 +98,6 @@ func (c *Client) DeleteAccountEnhancement(ctx context.Context, args *DeleteAccou
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "delete_account_enhancement", args)
 }
 
-
 // ListAccountEnhancements calls the WHM API 1 function `list_account_enhancements` — Return Account Enhancements
 //
 // This function retrieves all existing account enhancements on the system.
@@ -112,11 +109,10 @@ func (c *Client) ListAccountEnhancements(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.WHMCall[ListAccountEnhancementsData](ctx, c.c, http.MethodGet, "list_account_enhancements", cpanel.CombineArgs(extra...))
 }
 
-
 // ListAccountEnhancementsDataEnhancements is a generated payload type.
 type ListAccountEnhancementsDataEnhancements struct {
 	// The id the account enhancement is for.
-	ID   string `json:"id"`
+	ID string `json:"id"`
 
 	// The name of the account enhancement.
 	Name string `json:"name"`
@@ -162,11 +158,10 @@ func (c *Client) ModifyAccountEnhancement(ctx context.Context, args *ModifyAccou
 	return cpanel.WHMCall[ModifyAccountEnhancementData](ctx, c.c, http.MethodGet, "modify_account_enhancement", args)
 }
 
-
 // ModifyAccountEnhancementData is a generated payload type.
 type ModifyAccountEnhancementData struct {
 	// The updated enhancement id.
-	ID   string `json:"id"`
+	ID string `json:"id"`
 
 	// The enhancement name.
 	Name string `json:"name"`
@@ -198,4 +193,3 @@ type UnassignAccountEnhancementArgs struct {
 func (c *Client) UnassignAccountEnhancement(ctx context.Context, args *UnassignAccountEnhancementArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "unassign_account_enhancement", args)
 }
-

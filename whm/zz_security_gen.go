@@ -18,7 +18,7 @@ import (
 //
 // **Note:**
 //
-//   For more information, read the [cPanel Security Advisor](https://go.cpanel.net/githubsecurityadvisor) documentation at the WebPros International, LLC GitHub® repository.
+//	For more information, read the [cPanel Security Advisor](https://go.cpanel.net/githubsecurityadvisor) documentation at the WebPros International, LLC GitHub® repository.
 //
 // Available since cPanel & WHM version 80.
 //
@@ -27,19 +27,18 @@ func (c *Client) FetchSecurityAdvice(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.WHMCall[FetchSecurityAdviceData](ctx, c.c, http.MethodGet, "fetch_security_advice", cpanel.CombineArgs(extra...))
 }
 
-
 // **Note:**
 //
-//   This function only returns this object when the `type` return is the `mod_advice` value.
+//	This function only returns this object when the `type` return is the `mod_advice` value.
 type FetchSecurityAdviceDataPayloadItemAdvice struct {
 	// A unique check identifier in the module that returns a status message.
-	Key        string `json:"key"`
+	Key string `json:"key"`
 
 	// A message that suggests how to resolve the security issue.
 	SuggestIOn *string `json:"suggestion"`
 
 	// A summary about the module's current security status.
-	Summary    string `json:"summary"`
+	Summary string `json:"summary"`
 
 	// The level at which the module returns a specific security message.
 	// * `ADVISE_BAD` - The object contains a security issue.
@@ -48,7 +47,7 @@ type FetchSecurityAdviceDataPayloadItemAdvice struct {
 	// * `ADVISE_WARN` - The object contains a warning.
 	//
 	// Possible values: `ADVISE_BAD`, `ADVISE_GOOD`, `ADVISE_INFO`, `ADVISE_WARN`.
-	Type2      string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // FetchSecurityAdviceDataPayloadItem is a generated payload type.
@@ -56,7 +55,7 @@ type FetchSecurityAdviceDataPayloadItem struct {
 	// **Note:**
 	//
 	//   This function only returns this object when the `type` return is the `mod_advice` value.
-	Advice  FetchSecurityAdviceDataPayloadItemAdvice `json:"advice"`
+	Advice FetchSecurityAdviceDataPayloadItemAdvice `json:"advice"`
 
 	// A message that describes an error.
 	//
@@ -66,7 +65,7 @@ type FetchSecurityAdviceDataPayloadItem struct {
 	Message string `json:"message"`
 
 	// The name of a module that the Security Advisor checked.
-	Module  string `json:"module"`
+	Module string `json:"module"`
 
 	// The type of security message.
 	//
@@ -75,7 +74,7 @@ type FetchSecurityAdviceDataPayloadItem struct {
 	// * `mod_run` - There was an error preventing the system from completing one of the module's checks.
 	//
 	// Possible values: `mod_advice`, `mod_load`, `mod_run`.
-	Type2   string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // FetchSecurityAdviceData is a generated payload type.
@@ -117,35 +116,34 @@ func (c *Client) GetMinimumPasswordStrengths(ctx context.Context, args *GetMinim
 	return cpanel.WHMCall[GetMinimumPasswordStrengthsData](ctx, c.c, http.MethodGet, "getminimumpasswordstrengths", args)
 }
 
-
 // GetMinimumPasswordStrengthsData is a generated payload type.
 type GetMinimumPasswordStrengthsData struct {
 	// The minimum password strength for new cPanel accounts.
 	CreateAcct int64 `json:"createacct"`
 
 	// The minimum password strength for **all** services.
-	Default2   int64 `json:"default"`
+	Default2 int64 `json:"default"`
 
 	// The minimum password strength for FTP accounts.
-	FTP        int64 `json:"ftp"`
+	FTP int64 `json:"ftp"`
 
 	// The minimum password strength for mailing lists.
-	List       int64 `json:"list"`
+	List int64 `json:"list"`
 
 	// The minimum password strength for MySQL® database users.
-	Mysql      int64 `json:"mysql"`
+	Mysql int64 `json:"mysql"`
 
 	// The minimum password strength for WHM user or system accounts.
-	Passwd     int64 `json:"passwd"`
+	Passwd int64 `json:"passwd"`
 
 	// The minimum password strength for PostgreSQL database users.
-	Postgres   int64 `json:"postgres"`
+	Postgres int64 `json:"postgres"`
 
 	// The minimum password strength for SSH keys.
-	SSHKey     int64 `json:"sshkey"`
+	SSHKey int64 `json:"sshkey"`
 
 	// The minimum password strength for mail, FTP, Web Disk, and WebDAV accounts.
-	Virtual    int64 `json:"virtual"`
+	Virtual int64 `json:"virtual"`
 }
 
 // SetMinimumPasswordStrengthsArgs are the parameters of the WHM API 1 function `setminimumpasswordstrengths`.
@@ -196,4 +194,3 @@ type SetMinimumPasswordStrengthsArgs struct {
 func (c *Client) SetMinimumPasswordStrengths(ctx context.Context, args *SetMinimumPasswordStrengthsArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "setminimumpasswordstrengths", args)
 }
-

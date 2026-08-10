@@ -22,29 +22,28 @@ func (c *Client) ListAccountsRetention(ctx context.Context, extra ...cpanel.Args
 	return cpanel.WHMCall[ListAccountsRetentionData](ctx, c.c, http.MethodGet, "list_accounts_retention", cpanel.CombineArgs(extra...))
 }
 
-
 // ListAccountsRetentionDataAccountsItem is a generated payload type.
 type ListAccountsRetentionDataAccountsItem struct {
 	// The account's primary domain.
-	Domain        string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// The account's custom web log retention period, in days.
 	// Null when the account uses the server default.
 	RetentionDays *int64 `json:"retention_days"`
 
 	// The cPanel account username.
-	User          string `json:"user"`
+	User string `json:"user"`
 
 	// Whether the account uses the server-wide default retention setting.
 	// * `true` — Uses the server default.
 	// * `false` — Uses a custom retention value.
-	UsingDefault  bool `json:"using_default"`
+	UsingDefault bool `json:"using_default"`
 }
 
 // ListAccountsRetentionData is a generated payload type.
 type ListAccountsRetentionData struct {
 	// A list of cPanel accounts and their web log retention preferences.
-	Accounts         []ListAccountsRetentionDataAccountsItem `json:"accounts"`
+	Accounts []ListAccountsRetentionDataAccountsItem `json:"accounts"`
 
 	// The server-wide default web log retention period, in days, from Tweak Settings.
 	// A value of 0 means logs are retained indefinitely.

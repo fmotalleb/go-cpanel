@@ -22,14 +22,13 @@ func (c *ResourceUsageClient) GetUsages(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[[]ResourceUsageGetUsagesDataItem](ctx, c.c, http.MethodGet, "ResourceUsage", "get_usages", cpanel.CombineArgs(extra...))
 }
 
-
 // ResourceUsageGetUsagesDataItem is a generated payload type.
 type ResourceUsageGetUsagesDataItem struct {
 	// The resource's UI display name.
 	Description string `json:"description"`
 
 	// An error message, if applicable.
-	Error       *string `json:"error"`
+	Error *string `json:"error"`
 
 	// The resource's defined output format.
 	//
@@ -41,25 +40,25 @@ type ResourceUsageGetUsagesDataItem struct {
 	// **Note:**
 	//
 	// Third-party modules will return their defined formatter value.
-	FormatTer   string `json:"formatter"`
+	FormatTer string `json:"formatter"`
 
 	// The resource's reference name.
 	// * `disk_usage`
 	// * `filesusage` - This function **only** returns this value if the *Display File Usage information in the cPanel stats bar* setting is enabled in the *Display* section of WHM's [*Tweak Settings*](https://go.cpanel.net/whmdocsTweakSettings#display) interface (*WHM >> Home >> Server Configuration >> Tweak Settings*).
 	// * `cachedmysqldiskusage`
 	// * `cachedpost …
-	ID          string `json:"id"`
+	ID string `json:"id"`
 
 	// The resources's maximum usage value.
 	//
 	// **Note:**
 	//
 	//  This function returns an null value for an (unlimited) quota.
-	Maximum     *int64 `json:"maximum"`
+	Maximum *int64 `json:"maximum"`
 
 	// The resource's defined URL link to its corresponding interface, in applicable.
-	URL         string `json:"url"`
+	URL string `json:"url"`
 
 	// The resource's current usage value.
-	Usage       int64 `json:"usage"`
+	Usage int64 `json:"usage"`
 }

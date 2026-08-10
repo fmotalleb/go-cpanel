@@ -29,7 +29,6 @@ func (c *Client) BackgroundMysqlUpgradeCheckerRun(ctx context.Context, extra ...
 	return cpanel.WHMCall[BackgroundMysqlUpgradeCheckerRunData](ctx, c.c, http.MethodGet, "background_mysql_upgrade_checker_run", cpanel.CombineArgs(extra...))
 }
 
-
 // BackgroundMysqlUpgradeCheckerRunData is a generated payload type.
 type BackgroundMysqlUpgradeCheckerRunData struct {
 	// The upgrade log's location, relative to the
@@ -38,7 +37,7 @@ type BackgroundMysqlUpgradeCheckerRunData struct {
 	LogEntry string `json:"log_entry"`
 
 	// The upgrade check's process ID.
-	Pid      int64 `json:"pid"`
+	Pid int64 `json:"pid"`
 }
 
 // BackgroundMysqlUpgradeStatusArgs are the parameters of the WHM API 1 function `background_mysql_upgrade_status`.
@@ -62,7 +61,7 @@ type BackgroundMysqlUpgradeStatusArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [MySQL/MariaDB](https://go.cpanel.net/serverroles) role and remote MySQL is **not** already configured, the system **disables** this function.
+//	When you disable the [MySQL/MariaDB](https://go.cpanel.net/serverroles) role and remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.48.
 //
@@ -71,14 +70,13 @@ func (c *Client) BackgroundMysqlUpgradeStatus(ctx context.Context, args *Backgro
 	return cpanel.WHMCall[BackgroundMysqlUpgradeStatusData](ctx, c.c, http.MethodGet, "background_mysql_upgrade_status", args)
 }
 
-
 // BackgroundMysqlUpgradeStatusData is a generated payload type.
 type BackgroundMysqlUpgradeStatusData struct {
 	// An error code.
 	// * `0` — Successful upgrade.
 	// * `-1` — Child process died from a signal.
 	// * `4` — MySQL upgrade failed error code.
-	Error    int64 `json:"error"`
+	Error int64 `json:"error"`
 
 	// The upgrade's error log file.
 	//
@@ -88,7 +86,7 @@ type BackgroundMysqlUpgradeStatusData struct {
 	ErrorLog string `json:"error_log"`
 
 	// The upgrade's log file.
-	Log      string `json:"log"`
+	Log string `json:"log"`
 
 	// The upgrade's state.
 	// * success
@@ -96,7 +94,7 @@ type BackgroundMysqlUpgradeStatusData struct {
 	// * in progress
 	//
 	// Possible values: `success`, `failed`, `in progress`.
-	State    string `json:"state"`
+	State string `json:"state"`
 }
 
 // CurrentMysqlVersion calls the WHM API 1 function `current_mysql_version` — Return MySQL version
@@ -105,7 +103,7 @@ type BackgroundMysqlUpgradeStatusData struct {
 //
 // **Important:**
 //
-//   When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//	When you disable the [MySQL/MariaDB role](https://go.cpanel.net/serverroles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version cPanel 11.48.
 //
@@ -114,7 +112,6 @@ func (c *Client) CurrentMysqlVersion(ctx context.Context, extra ...cpanel.Args) 
 	return cpanel.WHMCall[CurrentMysqlVersionData](ctx, c.c, http.MethodGet, "current_mysql_version", cpanel.CombineArgs(extra...))
 }
 
-
 // CurrentMysqlVersionData is a generated payload type.
 type CurrentMysqlVersionData struct {
 	// The server's database engine.
@@ -122,7 +119,7 @@ type CurrentMysqlVersionData struct {
 	// * `mariadb`
 	//
 	// Possible values: `mysql`, `mariadb`.
-	Server  string `json:"server"`
+	Server string `json:"server"`
 
 	// The version number, in `major`.`minor` format.
 	Version string `json:"version"`
@@ -147,17 +144,16 @@ func (c *Client) GetDatabaseOptimizations(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[GetDatabaseOptimizationsData](ctx, c.c, http.MethodGet, "get_database_optimizations", cpanel.CombineArgs(extra...))
 }
 
-
 // GetDatabaseOptimizationsDataPayloadItem is a generated payload type.
 type GetDatabaseOptimizationsDataPayloadItem struct {
 	// The name of the option.
-	Name   string `json:"name"`
+	Name string `json:"name"`
 
 	// A justification for why the option should be adjusted.
 	Reason string `json:"reason"`
 
 	// The recommended option value.
-	Value  string `json:"value"`
+	Value string `json:"value"`
 }
 
 // GetDatabaseOptimizationsData is a generated payload type.
@@ -181,7 +177,6 @@ func (c *Client) InstallableMysqlVersions(ctx context.Context, extra ...cpanel.A
 	return cpanel.WHMCall[InstallableMysqlVersionsData](ctx, c.c, http.MethodGet, "installable_mysql_versions", cpanel.CombineArgs(extra...))
 }
 
-
 // InstallableMysqlVersionsDataVersionsItem is a generated payload type.
 type InstallableMysqlVersionsDataVersionsItem struct {
 	// The server's database engine.
@@ -189,7 +184,7 @@ type InstallableMysqlVersionsDataVersionsItem struct {
 	// * `mariadb`
 	//
 	// Possible values: `mysql`, `mariadb`.
-	Server  string `json:"server"`
+	Server string `json:"server"`
 
 	// The version number in `major.minor` format.
 	Version string `json:"version"`
@@ -216,7 +211,6 @@ func (c *Client) LatestAvailableMysqlVersion(ctx context.Context, extra ...cpane
 	return cpanel.WHMCall[LatestAvailableMysqlVersionData](ctx, c.c, http.MethodGet, "latest_available_mysql_version", cpanel.CombineArgs(extra...))
 }
 
-
 // LatestAvailableMysqlVersionData is a generated payload type.
 type LatestAvailableMysqlVersionData struct {
 	// The server's database engine.
@@ -224,7 +218,7 @@ type LatestAvailableMysqlVersionData struct {
 	// * `mariadb`
 	//
 	// Possible values: `mysql`, `mariadb`.
-	Server  string `json:"server"`
+	Server string `json:"server"`
 
 	// The version number in `major.minor` format.
 	Version string `json:"version"`
@@ -240,7 +234,7 @@ type LatestAvailableMysqlVersionData struct {
 //
 // **Important:**
 //
-//   When you disable the [MySQL/MariaDB and PostgreSQL roles](https://go.cpanel.net/serverroles) and remote MySQL is not already configured, the system **disables** this function.
+//	When you disable the [MySQL/MariaDB and PostgreSQL roles](https://go.cpanel.net/serverroles) and remote MySQL is not already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -248,7 +242,6 @@ type LatestAvailableMysqlVersionData struct {
 func (c *Client) ListDatabaseUsers(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[ListDatabaseUsersData], error) {
 	return cpanel.WHMCall[ListDatabaseUsersData](ctx, c.c, http.MethodGet, "list_database_users", cpanel.CombineArgs(extra...))
 }
-
 
 // ListDatabaseUsersDataPayloadItem is a generated payload type.
 type ListDatabaseUsersDataPayloadItem struct {
@@ -263,7 +256,7 @@ type ListDatabaseUsersDataPayloadItem struct {
 	Engine string `json:"engine"`
 
 	// The database user's name.
-	Name   string `json:"name"`
+	Name string `json:"name"`
 }
 
 // ListDatabaseUsersData is a generated payload type.
@@ -291,7 +284,6 @@ func (c *Client) ListDatabases(ctx context.Context, extra ...cpanel.Args) (*cpan
 	return cpanel.WHMCall[ListDatabasesData](ctx, c.c, http.MethodGet, "list_databases", cpanel.CombineArgs(extra...))
 }
 
-
 // ListDatabasesDataPayloadItem is a generated payload type.
 type ListDatabasesDataPayloadItem struct {
 	// The database's owner.
@@ -305,7 +297,7 @@ type ListDatabasesDataPayloadItem struct {
 	Engine string `json:"engine"`
 
 	// The database's name.
-	Name   string `json:"name"`
+	Name string `json:"name"`
 }
 
 // ListDatabasesData is a generated payload type.
@@ -340,7 +332,6 @@ func (c *Client) ListMysqlDatabasesAndUsers(ctx context.Context, args *ListMysql
 	return cpanel.WHMCall[ListMysqlDatabasesAndUsersData](ctx, c.c, http.MethodGet, "list_mysql_databases_and_users", args)
 }
 
-
 // An object that contains the user's MySQL database configuration settings.
 type ListMysqlDatabasesAndUsersDataMysqlConfig struct {
 	// The MySQL version installed on the server.
@@ -356,13 +347,13 @@ type ListMysqlDatabasesAndUsersDataMysqlConfig struct {
 	// * `0` — Disabled.
 	//
 	// Possible values: `0`, `1`.
-	UseDBPrefix  int64 `json:"use_db_prefix"`
+	UseDBPrefix int64 `json:"use_db_prefix"`
 }
 
 // ListMysqlDatabasesAndUsersData is a generated payload type.
 type ListMysqlDatabasesAndUsersData struct {
 	// An object that contains the user's MySQL database configuration settings.
-	MysqlConfig    ListMysqlDatabasesAndUsersDataMysqlConfig `json:"mysql_config"`
+	MysqlConfig ListMysqlDatabasesAndUsersDataMysqlConfig `json:"mysql_config"`
 
 	// An object that contains database names and users.
 	MysqlDatabases map[string][]string `json:"mysql_databases"`
@@ -426,7 +417,6 @@ func (c *Client) RemoteMysqlCreateProfile(ctx context.Context, args *RemoteMysql
 	return cpanel.WHMCall[RemoteMysqlCreateProfileData](ctx, c.c, http.MethodGet, "remote_mysql_create_profile", args)
 }
 
-
 // An object containing the new profile's data.
 type RemoteMysqlCreateProfileDataProfileDetails struct {
 	// Whether the system uses this profile to access the MySQL server.
@@ -434,7 +424,7 @@ type RemoteMysqlCreateProfileDataProfileDetails struct {
 	// * `0` — **Not** active.
 	//
 	// Possible values: `0`, `1`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// Whether the remote database profile is a cPanel Cloud deployment.
 	//
@@ -442,7 +432,7 @@ type RemoteMysqlCreateProfileDataProfileDetails struct {
 	// * `0` — **Not** cPanel Cloud.
 	//
 	// Possible values: `0`, `1`.
-	Cpcloud   int64 `json:"cpcloud"`
+	Cpcloud int64 `json:"cpcloud"`
 
 	// The MySQL server's IP address or hostname.
 	MysqlHost string `json:"mysql_host"`
@@ -457,7 +447,7 @@ type RemoteMysqlCreateProfileDataProfileDetails struct {
 	MysqlUser string `json:"mysql_user"`
 
 	// A description of the profile data.
-	SetupVia  string `json:"setup_via"`
+	SetupVia string `json:"setup_via"`
 }
 
 // RemoteMysqlCreateProfileData is a generated payload type.
@@ -466,7 +456,7 @@ type RemoteMysqlCreateProfileData struct {
 	ProfileDetails RemoteMysqlCreateProfileDataProfileDetails `json:"profile_details"`
 
 	// The new profile's name.
-	ProfileSaved   string `json:"profile_saved"`
+	ProfileSaved string `json:"profile_saved"`
 }
 
 // RemoteMysqlCreateProfileViaSSHArgs are the parameters of the WHM API 1 function `remote_mysql_create_profile_via_ssh`.
@@ -551,7 +541,6 @@ func (c *Client) RemoteMysqlCreateProfileViaSSH(ctx context.Context, args *Remot
 	return cpanel.WHMCall[RemoteMysqlCreateProfileViaSSHData](ctx, c.c, http.MethodGet, "remote_mysql_create_profile_via_ssh", args)
 }
 
-
 // An object containing the new profile's data.
 type RemoteMysqlCreateProfileViaSSHDataProfileDetails struct {
 	// Whether the remote database profile is a cPanel Cloud deployment.
@@ -560,7 +549,7 @@ type RemoteMysqlCreateProfileViaSSHDataProfileDetails struct {
 	// * `0` — **Not** cPanel Cloud.
 	//
 	// Possible values: `0`, `1`.
-	Cpcloud   int64 `json:"cpcloud"`
+	Cpcloud int64 `json:"cpcloud"`
 
 	// The MySQL server's IP address or hostname.
 	MysqlHost string `json:"mysql_host"`
@@ -575,7 +564,7 @@ type RemoteMysqlCreateProfileViaSSHDataProfileDetails struct {
 	MysqlUser string `json:"mysql_user"`
 
 	// description of the profile data.
-	SetupVia  string `json:"setup_via"`
+	SetupVia string `json:"setup_via"`
 }
 
 // RemoteMysqlCreateProfileViaSSHData is a generated payload type.
@@ -584,7 +573,7 @@ type RemoteMysqlCreateProfileViaSSHData struct {
 	ProfileDetails RemoteMysqlCreateProfileViaSSHDataProfileDetails `json:"profile_details"`
 
 	// The new profile's name.
-	ProfileSaved   string `json:"profile_saved"`
+	ProfileSaved string `json:"profile_saved"`
 }
 
 // RemoteMysqlDeleteProfileArgs are the parameters of the WHM API 1 function `remote_mysql_delete_profile`.
@@ -609,7 +598,6 @@ func (c *Client) RemoteMysqlDeleteProfile(ctx context.Context, args *RemoteMysql
 	return cpanel.WHMCall[RemoteMysqlDeleteProfileData](ctx, c.c, http.MethodGet, "remote_mysql_delete_profile", args)
 }
 
-
 // hash of the deleted profile's data. This hash includes the name , mysql_host , mysql_user , mysql_pass , mysql_port , setup_via , and active returns.
 type RemoteMysqlDeleteProfileDataProfileDetails struct {
 	// Whether the system uses this profile to access the MySQL server.
@@ -617,7 +605,7 @@ type RemoteMysqlDeleteProfileDataProfileDetails struct {
 	// - 0  Not active.
 	//
 	// Possible values: `0`, `1`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The MySQL server's IP address or hostname. A valid IP address or hostname.
 	MysqlHost string `json:"mysql_host"`
@@ -632,7 +620,7 @@ type RemoteMysqlDeleteProfileDataProfileDetails struct {
 	MysqlUser string `json:"mysql_user"`
 
 	// description of the profile data. A valid string with a maximum length of 255 characters.
-	SetupVia  string `json:"setup_via"`
+	SetupVia string `json:"setup_via"`
 }
 
 // RemoteMysqlDeleteProfileData is a generated payload type.
@@ -666,7 +654,6 @@ func (c *Client) RemoteMysqlInitiateProfileActivation(ctx context.Context, args 
 	return cpanel.WHMCall[RemoteMysqlInitiateProfileActivationData](ctx, c.c, http.MethodGet, "remote_mysql_initiate_profile_activation", args)
 }
 
-
 // RemoteMysqlInitiateProfileActivationData is a generated payload type.
 type RemoteMysqlInitiateProfileActivationData struct {
 	// The profile activation's process ID.
@@ -684,14 +671,13 @@ func (c *Client) RemoteMysqlMonitorProfileActivation(ctx context.Context, extra 
 	return cpanel.WHMCall[RemoteMysqlMonitorProfileActivationData](ctx, c.c, http.MethodGet, "remote_mysql_monitor_profile_activation", cpanel.CombineArgs(extra...))
 }
 
-
 // RemoteMysqlMonitorProfileActivationDataJobInProgressStepsItem is a generated payload type.
 type RemoteMysqlMonitorProfileActivationDataJobInProgressStepsItem struct {
 	// The time when the process finished.
-	EndTime   int64 `json:"end_time"`
+	EndTime int64 `json:"end_time"`
 
 	// The name of the process.
-	Name      string `json:"name"`
+	Name string `json:"name"`
 
 	// The time when the process began.
 	StartTime int64 `json:"start_time"`
@@ -702,7 +688,7 @@ type RemoteMysqlMonitorProfileActivationDataJobInProgressStepsItem struct {
 	// * `FAILED` — The process failed to complete successfully.
 	//
 	// Possible values: `DONE`, `INPROGRESS`, `FAILED`.
-	Status    string `json:"status"`
+	Status string `json:"status"`
 }
 
 // An object containing the profile activation that is currently in progress.
@@ -711,7 +697,7 @@ type RemoteMysqlMonitorProfileActivationDataJobInProgress struct {
 	ProfileName string `json:"profile_name"`
 
 	// The time when the job started.
-	StartTime   int64 `json:"start_time"`
+	StartTime int64 `json:"start_time"`
 
 	// The job's current status.
 	// * `DONE` — The process completed successfully.
@@ -719,19 +705,19 @@ type RemoteMysqlMonitorProfileActivationDataJobInProgress struct {
 	// * `FAILED` — The process failed to complete successfully.
 	//
 	// Possible values: `DONE`, `INPROGRESS`, `FAILED`.
-	Status      string `json:"status"`
+	Status string `json:"status"`
 
 	// An array of objects containing the completed or active processes for the current profile activation.
-	Steps       []RemoteMysqlMonitorProfileActivationDataJobInProgressStepsItem `json:"steps"`
+	Steps []RemoteMysqlMonitorProfileActivationDataJobInProgressStepsItem `json:"steps"`
 }
 
 // RemoteMysqlMonitorProfileActivationDataLastJobDetailsStepsItem is a generated payload type.
 type RemoteMysqlMonitorProfileActivationDataLastJobDetailsStepsItem struct {
 	// The time when the process finished.
-	EndTime   int64 `json:"end_time"`
+	EndTime int64 `json:"end_time"`
 
 	// The name of the process.
-	Name      string `json:"name"`
+	Name string `json:"name"`
 
 	// The time when the process began.
 	StartTime int64 `json:"start_time"`
@@ -740,19 +726,19 @@ type RemoteMysqlMonitorProfileActivationDataLastJobDetailsStepsItem struct {
 	// * `DONE` — The process completed successfully.
 	// * `INPROGRESS` - The process is currently active.
 	// * `FAILED` - The process failed to complete successfully.
-	Status    string `json:"status"`
+	Status string `json:"status"`
 }
 
 // An object containing the most recently completed profile activation's data.
 type RemoteMysqlMonitorProfileActivationDataLastJobDetails struct {
 	// The time when the job finished.
-	EndTime     int64 `json:"end_time"`
+	EndTime int64 `json:"end_time"`
 
 	// The the name of the activated profile.
 	ProfileName string `json:"profile_name"`
 
 	// The time when the job started.
-	StartTime   int64 `json:"start_time"`
+	StartTime int64 `json:"start_time"`
 
 	// The job's current status.
 	// * `DONE` — The process completed successfully.
@@ -760,16 +746,16 @@ type RemoteMysqlMonitorProfileActivationDataLastJobDetails struct {
 	// * `FAILED` - The process failed to complete successfully.
 	//
 	// Possible values: `DONE`, `INPROGRESS`, `FAILED`.
-	Status      string `json:"status"`
+	Status string `json:"status"`
 
 	// An array of objects containing the completed processes for the most recent profile activation.
-	Steps       []RemoteMysqlMonitorProfileActivationDataLastJobDetailsStepsItem `json:"steps"`
+	Steps []RemoteMysqlMonitorProfileActivationDataLastJobDetailsStepsItem `json:"steps"`
 }
 
 // RemoteMysqlMonitorProfileActivationData is a generated payload type.
 type RemoteMysqlMonitorProfileActivationData struct {
 	// An object containing the profile activation that is currently in progress.
-	JobInProgress  RemoteMysqlMonitorProfileActivationDataJobInProgress `json:"job_in_progress"`
+	JobInProgress RemoteMysqlMonitorProfileActivationDataJobInProgress `json:"job_in_progress"`
 
 	// An object containing the most recently completed profile activation's data.
 	LastJobDetails RemoteMysqlMonitorProfileActivationDataLastJobDetails `json:"last_job_details"`
@@ -797,7 +783,6 @@ func (c *Client) RemoteMysqlReadProfile(ctx context.Context, args *RemoteMysqlRe
 	return cpanel.WHMCall[RemoteMysqlReadProfileData](ctx, c.c, http.MethodGet, "remote_mysql_read_profile", args)
 }
 
-
 // An object containing the profile's data.
 type RemoteMysqlReadProfileDataProfileDetails struct {
 	// Whether the system uses this profile to access the MySQL server.
@@ -806,7 +791,7 @@ type RemoteMysqlReadProfileDataProfileDetails struct {
 	// * `0` — The system does **not** use the profile.
 	//
 	// Possible values: `1`, `0`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The MySQL server's IP address or hostname.
 	MysqlHost string `json:"mysql_host"`
@@ -821,7 +806,7 @@ type RemoteMysqlReadProfileDataProfileDetails struct {
 	MysqlUser string `json:"mysql_user"`
 
 	// A description of the MySQL profile data.
-	SetupVia  string `json:"setup_via"`
+	SetupVia string `json:"setup_via"`
 }
 
 // RemoteMysqlReadProfileData is a generated payload type.
@@ -830,7 +815,7 @@ type RemoteMysqlReadProfileData struct {
 	ProfileDetails RemoteMysqlReadProfileDataProfileDetails `json:"profile_details"`
 
 	// The MySQL profile's name.
-	ProfileName    string `json:"profile_name"`
+	ProfileName string `json:"profile_name"`
 }
 
 // RemoteMysqlReadProfiles calls the WHM API 1 function `remote_mysql_read_profiles` — Return remote MySQL profiles
@@ -844,7 +829,6 @@ func (c *Client) RemoteMysqlReadProfiles(ctx context.Context, extra ...cpanel.Ar
 	return cpanel.WHMCall[RemoteMysqlReadProfilesData](ctx, c.c, http.MethodGet, "remote_mysql_read_profiles", cpanel.CombineArgs(extra...))
 }
 
-
 // An object containing the MySQL profile's data.
 //
 // **Note:**
@@ -857,7 +841,7 @@ type RemoteMysqlReadProfilesDataAdditionalProperties struct {
 	// * `0` — Does **not** access the MySQL server.
 	//
 	// Possible values: `1`, `0`.
-	Active                  int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// Whether the system's MySQL profile functions with the server's
 	// local MySQL instance.
@@ -868,19 +852,19 @@ type RemoteMysqlReadProfilesDataAdditionalProperties struct {
 	// * `0` — Does **not** function with the local MySQL instance.
 	//
 	// Possible values: `1`, `0`.
-	IsLocalhostProfile      int64 `json:"is_localhost_profile"`
+	IsLocalhostProfile int64 `json:"is_localhost_profile"`
 
 	// The MySQL server's IP address or hostname.
-	MysqlHost               string `json:"mysql_host"`
+	MysqlHost string `json:"mysql_host"`
 
 	// The MySQL server's password.
-	MysqlPass               string `json:"mysql_pass"`
+	MysqlPass string `json:"mysql_pass"`
 
 	// The MySQL server's port.
-	MysqlPort               int64 `json:"mysql_port"`
+	MysqlPort int64 `json:"mysql_port"`
 
 	// The MySQL server's username.
-	MysqlUser               string `json:"mysql_user"`
+	MysqlUser string `json:"mysql_user"`
 
 	// Whether the system supports the server's MySQL version.
 	//
@@ -891,7 +875,7 @@ type RemoteMysqlReadProfilesDataAdditionalProperties struct {
 	MysqlVersionIsSupported int64 `json:"mysql_version_is_supported"`
 
 	// A description of the MySQL profile data.
-	SetupVia                string `json:"setup_via"`
+	SetupVia string `json:"setup_via"`
 }
 
 // RemoteMysqlReadProfilesData is a generated payload type.
@@ -945,7 +929,6 @@ func (c *Client) RemoteMysqlUpdateProfile(ctx context.Context, args *RemoteMysql
 	return cpanel.WHMCall[RemoteMysqlUpdateProfileData](ctx, c.c, http.MethodGet, "remote_mysql_update_profile", args)
 }
 
-
 // An object containing the updated profile's data.
 type RemoteMysqlUpdateProfileDataProfileDetails struct {
 	// Whether the system uses this profile to access the MySQL server.
@@ -953,7 +936,7 @@ type RemoteMysqlUpdateProfileDataProfileDetails struct {
 	// * `0` — Not active.
 	//
 	// Possible values: `0`, `1`.
-	Active    int64 `json:"active"`
+	Active int64 `json:"active"`
 
 	// The MySQL server's IP address or hostname.
 	MysqlHost string `json:"mysql_host"`
@@ -968,7 +951,7 @@ type RemoteMysqlUpdateProfileDataProfileDetails struct {
 	MysqlUser string `json:"mysql_user"`
 
 	// A description of the profile data.
-	SetupVia  string `json:"setup_via"`
+	SetupVia string `json:"setup_via"`
 }
 
 // RemoteMysqlUpdateProfileData is a generated payload type.
@@ -977,7 +960,7 @@ type RemoteMysqlUpdateProfileData struct {
 	ProfileDetails RemoteMysqlUpdateProfileDataProfileDetails `json:"profile_details"`
 
 	// The updated profile's name.
-	ProfileSaved   string `json:"profile_saved"`
+	ProfileSaved string `json:"profile_saved"`
 }
 
 // RemoteMysqlValidateProfileArgs are the parameters of the WHM API 1 function `remote_mysql_validate_profile`.
@@ -1001,7 +984,6 @@ type RemoteMysqlValidateProfileArgs struct {
 func (c *Client) RemoteMysqlValidateProfile(ctx context.Context, args *RemoteMysqlValidateProfileArgs) (*cpanel.WHMResult[RemoteMysqlValidateProfileData], error) {
 	return cpanel.WHMCall[RemoteMysqlValidateProfileData](ctx, c.c, http.MethodGet, "remote_mysql_validate_profile", args)
 }
-
 
 // RemoteMysqlValidateProfileData is a generated payload type.
 type RemoteMysqlValidateProfileData struct {
@@ -1048,7 +1030,7 @@ type RenameMysqlDatabaseArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [*MySQL/MariaDB role*](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//	When you disable the [*MySQL/MariaDB role*](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -1056,7 +1038,6 @@ type RenameMysqlDatabaseArgs struct {
 func (c *Client) RenameMysqlDatabase(ctx context.Context, args *RenameMysqlDatabaseArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "rename_mysql_database", args)
 }
-
 
 // RenameMysqlUserArgs are the parameters of the WHM API 1 function `rename_mysql_user`.
 type RenameMysqlUserArgs struct {
@@ -1087,7 +1068,7 @@ type RenameMysqlUserArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [*MySQL/MariaDB role*](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//	When you disable the [*MySQL/MariaDB role*](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -1095,7 +1076,6 @@ type RenameMysqlUserArgs struct {
 func (c *Client) RenameMysqlUser(ctx context.Context, args *RenameMysqlUserArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "rename_mysql_user", args)
 }
-
 
 // RenamePostgresqlDatabaseArgs are the parameters of the WHM API 1 function `rename_postgresql_database`.
 type RenamePostgresqlDatabaseArgs struct {
@@ -1125,11 +1105,11 @@ type RenamePostgresqlDatabaseArgs struct {
 //
 // **Warning:**
 //
-//   The system requires more time to rename larger and more complex databases.
+//	The system requires more time to rename larger and more complex databases.
 //
 // **Important:**
 //
-//   When you disable the [*PostgreSQL role*](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [*PostgreSQL role*](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -1137,7 +1117,6 @@ type RenamePostgresqlDatabaseArgs struct {
 func (c *Client) RenamePostgresqlDatabase(ctx context.Context, args *RenamePostgresqlDatabaseArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "rename_postgresql_database", args)
 }
-
 
 // RenamePostgresqlUserArgs are the parameters of the WHM API 1 function `rename_postgresql_user`.
 type RenamePostgresqlUserArgs struct {
@@ -1172,7 +1151,7 @@ type RenamePostgresqlUserArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [*PostgreSQL role*](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
+//	When you disable the [*PostgreSQL role*](https://go.cpanel.net/howtouseserverprofiles#roles), the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.44.
 //
@@ -1180,7 +1159,6 @@ type RenamePostgresqlUserArgs struct {
 func (c *Client) RenamePostgresqlUser(ctx context.Context, args *RenamePostgresqlUserArgs) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "rename_postgresql_user", args)
 }
-
 
 // SetLocalMysqlRootPasswordArgs are the parameters of the WHM API 1 function `set_local_mysql_root_password`.
 type SetLocalMysqlRootPasswordArgs struct {
@@ -1213,7 +1191,7 @@ type SetLocalMysqlRootPasswordArgs struct {
 //
 // **Important:**
 //
-//   When you disable the [*MySQL/MariaDB role*](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
+//	When you disable the [*MySQL/MariaDB role*](https://go.cpanel.net/howtouseserverprofiles#roles) **and** remote MySQL is **not** already configured, the system **disables** this function.
 //
 // Available since cPanel & WHM version 11.52.
 //
@@ -1221,7 +1199,6 @@ type SetLocalMysqlRootPasswordArgs struct {
 func (c *Client) SetLocalMysqlRootPassword(ctx context.Context, args *SetLocalMysqlRootPasswordArgs) (*cpanel.WHMResult[SetLocalMysqlRootPasswordData], error) {
 	return cpanel.WHMCall[SetLocalMysqlRootPasswordData](ctx, c.c, http.MethodGet, "set_local_mysql_root_password", args)
 }
-
 
 // SetLocalMysqlRootPasswordData is a generated payload type.
 type SetLocalMysqlRootPasswordData struct {
@@ -1241,7 +1218,7 @@ type SetLocalMysqlRootPasswordData struct {
 	// * `0` — **Not** reset.
 	//
 	// Possible values: `0`, `1`.
-	PasswordReset  int64 `json:"password_reset"`
+	PasswordReset int64 `json:"password_reset"`
 
 	// Whether the system updated the profile.
 	//
@@ -1294,7 +1271,6 @@ func (c *Client) SetMysqlPassword(ctx context.Context, args *SetMysqlPasswordArg
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_mysql_password", args)
 }
 
-
 // SetPostgresqlPasswordArgs are the parameters of the WHM API 1 function `set_postgresql_password`.
 type SetPostgresqlPasswordArgs struct {
 	// The database user's new password.
@@ -1329,7 +1305,6 @@ func (c *Client) SetPostgresqlPassword(ctx context.Context, args *SetPostgresqlP
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodGet, "set_postgresql_password", args)
 }
 
-
 // StartBackgroundMysqlUpgradeArgs are the parameters of the WHM API 1 function `start_background_mysql_upgrade`.
 type StartBackgroundMysqlUpgradeArgs struct {
 	// The desired MySQL® or MariaDB® version. Must contain one decimal.
@@ -1356,7 +1331,6 @@ func (c *Client) StartBackgroundMysqlUpgrade(ctx context.Context, args *StartBac
 	return cpanel.WHMCall[StartBackgroundMysqlUpgradeData](ctx, c.c, http.MethodGet, "start_background_mysql_upgrade", args)
 }
 
-
 // StartBackgroundMysqlUpgradeData is a generated payload type.
 type StartBackgroundMysqlUpgradeData struct {
 	// The upgrade log's location, relative to the `/var/cpanel/logs/` directory.
@@ -1379,4 +1353,3 @@ type StartBackgroundMysqlUpgradeData struct {
 func (c *Client) UpdateSqlConfig(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[json.RawMessage], error) {
 	return cpanel.WHMCall[json.RawMessage](ctx, c.c, http.MethodPost, "update_sql_config", cpanel.CombineArgs(extra...))
 }
-

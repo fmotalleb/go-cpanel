@@ -28,7 +28,6 @@ func (c *SessionClient) CreateTempUser(ctx context.Context, extra ...cpanel.Args
 	return cpanel.UAPICall[SessionCreateTempUserData](ctx, c.c, http.MethodGet, "Session", "create_temp_user", cpanel.CombineArgs(extra...))
 }
 
-
 // SessionCreateTempUserData is a generated payload type.
 type SessionCreateTempUserData struct {
 	// Whether the function successfully created the temporary user session.
@@ -36,7 +35,7 @@ type SessionCreateTempUserData struct {
 	// * `0` - Failure.
 	//
 	// Possible values: `0`, `1`.
-	Created         int64 `json:"created"`
+	Created int64 `json:"created"`
 
 	// The temporary user's session ID.
 	SessionTempUser string `json:"session_temp_user"`
@@ -88,8 +87,9 @@ type SessionCreateWebmailSessionForMailUserArgs struct {
 // To do this, send an HTTP POST to `https://$URL_AUTHTY:2096$token/login` with a message body of `session=$session` where:
 //
 // * `$URL_AUTHTY` represents the value from the `hostname` return.
-//   * If the `hostname` return value is `null`, enter the hostname of the server that answered the API function.
-//   * `$token` represents the value from the token return.
+//   - If the `hostname` return value is `null`, enter the hostname of the server that answered the API function.
+//   - `$token` represents the value from the token return.
+//
 // * `$session` represents the value of the session return.
 //
 // For example, an HTTP POST may resemble the following:
@@ -107,7 +107,6 @@ func (c *SessionClient) CreateWebmailSessionForMailUser(ctx context.Context, arg
 	return cpanel.UAPICall[SessionCreateWebmailSessionForMailUserData](ctx, c.c, http.MethodGet, "Session", "create_webmail_session_for_mail_user", args)
 }
 
-
 // SessionCreateWebmailSessionForMailUserData is a generated payload type.
 type SessionCreateWebmailSessionForMailUserData struct {
 	// The Webmail server's hostname.
@@ -118,10 +117,10 @@ type SessionCreateWebmailSessionForMailUserData struct {
 	Hostname *string `json:"hostname"`
 
 	// The session ID to submit via POST to begin using the new session.
-	Session  string `json:"session"`
+	Session string `json:"session"`
 
 	// A new security token.
-	Token    string `json:"token"`
+	Token string `json:"token"`
 }
 
 // SessionCreateWebmailSessionForMailUserCheckPasswordArgs are the parameters of the UAPI function `Session::create_webmail_session_for_mail_user_check_password`.
@@ -176,8 +175,9 @@ type SessionCreateWebmailSessionForMailUserCheckPasswordArgs struct {
 // To do this, send an HTTP POST to `https://$URL_AUTHTY:2096$token/login` with a message body of `session=$session` where:
 //
 // * `$URL_AUTHTY` represents the value from the `hostname` return.
-//   * If the `hostname` return value is `null`, enter the hostname of the server that answered the API function.
-//   * `$token` represents the value from the token return.
+//   - If the `hostname` return value is `null`, enter the hostname of the server that answered the API function.
+//   - `$token` represents the value from the token return.
+//
 // * `$session` represents the value of the session return.
 //
 // For example, an HTTP POST may resemble the following:
@@ -195,7 +195,6 @@ func (c *SessionClient) CreateWebmailSessionForMailUserCheckPassword(ctx context
 	return cpanel.UAPICall[SessionCreateWebmailSessionForMailUserCheckPasswordData](ctx, c.c, http.MethodGet, "Session", "create_webmail_session_for_mail_user_check_password", args)
 }
 
-
 // SessionCreateWebmailSessionForMailUserCheckPasswordData is a generated payload type.
 type SessionCreateWebmailSessionForMailUserCheckPasswordData struct {
 	// The Webmail server's hostname.
@@ -206,10 +205,10 @@ type SessionCreateWebmailSessionForMailUserCheckPasswordData struct {
 	Hostname *string `json:"hostname"`
 
 	// The session value to submit via POST to begin using the new session.
-	Session  string `json:"session"`
+	Session string `json:"session"`
 
 	// A new security token.
-	Token    string `json:"token"`
+	Token string `json:"token"`
 }
 
 // SessionCreateWebmailSessionForSelfArgs are the parameters of the UAPI function `Session::create_webmail_session_for_self`.
@@ -246,8 +245,9 @@ type SessionCreateWebmailSessionForSelfArgs struct {
 // To do this, send an HTTP POST to `https://$URL_AUTHTY:2096$token/login` with a message body of `session=$session` where:
 //
 // * `$URL_AUTHTY` represents the value from the `hostname` return.
-//   * If the `hostname` return value is `null`, enter the hostname of the server that answered the API function.
-//   * `$token` represents the value from the token return.
+//   - If the `hostname` return value is `null`, enter the hostname of the server that answered the API function.
+//   - `$token` represents the value from the token return.
+//
 // * `$session` represents the value of the session return.
 //
 // For example, an HTTP POST may resemble the following:
@@ -265,7 +265,6 @@ func (c *SessionClient) CreateWebmailSessionForSelf(ctx context.Context, args *S
 	return cpanel.UAPICall[SessionCreateWebmailSessionForSelfData](ctx, c.c, http.MethodGet, "Session", "create_webmail_session_for_self", args)
 }
 
-
 // SessionCreateWebmailSessionForSelfData is a generated payload type.
 type SessionCreateWebmailSessionForSelfData struct {
 	// The Webmail server's hostname.
@@ -276,8 +275,8 @@ type SessionCreateWebmailSessionForSelfData struct {
 	Hostname *string `json:"hostname"`
 
 	// The session value to submit via POST to begin using the new session.
-	Session  string `json:"session"`
+	Session string `json:"session"`
 
 	// A new security token.
-	Token    string `json:"token"`
+	Token string `json:"token"`
 }

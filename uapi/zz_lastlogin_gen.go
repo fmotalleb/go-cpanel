@@ -21,4 +21,3 @@ import (
 func (c *LastLoginClient) GetLastOrCurrentLoggedInIP(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "LastLogin", "get_last_or_current_logged_in_ip", cpanel.CombineArgs(extra...))
 }
-

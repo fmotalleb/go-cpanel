@@ -39,24 +39,23 @@ func (c *KnownHostsClient) Create(ctx context.Context, args *KnownHostsCreateArg
 	return cpanel.UAPICall[KnownHostsCreateData](ctx, c.c, http.MethodGet, "KnownHosts", "create", args)
 }
 
-
 // An object containing metadata about the host's public key.
 type KnownHostsCreateDataHostItemMeta struct {
 	// The key's algorithm.
-	Algorithm       string `json:"algorithm"`
+	Algorithm string `json:"algorithm"`
 
 	// The host's public key.
-	Body            string `json:"body"`
+	Body string `json:"body"`
 
 	// The key's [MD5](https://en.wikipedia.org/wiki/MD5) fingerprint.
-	MD5             string `json:"md5"`
+	MD5 string `json:"md5"`
 
 	// A human-readable version of the key's MD5 fingerprint.
-	MD5Printable    string `json:"md5-printable"`
+	MD5Printable string `json:"md5-printable"`
 
 	// The key's [SHA-256](https://en.wikipedia.org/wiki/SHA-2)
 	// fingerprint.
-	SHA256          string `json:"sha256"`
+	SHA256 string `json:"sha256"`
 
 	// A human-readable version of the key's SHA-256 fingerprint.
 	SHA256Printable string `json:"sha256-printable"`
@@ -68,7 +67,7 @@ type KnownHostsCreateDataHostItem struct {
 	Host string `json:"host"`
 
 	// The host's key.
-	Key  string `json:"key"`
+	Key string `json:"key"`
 
 	// The host's entry in the `/home/user/.ssh/known_hosts` file, where `user` is the cPanel account username.
 	Line string `json:"line"`
@@ -110,7 +109,6 @@ func (c *KnownHostsClient) Delete(ctx context.Context, args *KnownHostsDeleteArg
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "KnownHosts", "delete", args)
 }
 
-
 // KnownHostsUpdateArgs are the parameters of the UAPI function `KnownHosts::update`.
 type KnownHostsUpdateArgs struct {
 	// The host to update.
@@ -138,23 +136,22 @@ func (c *KnownHostsClient) Update(ctx context.Context, args *KnownHostsUpdateArg
 	return cpanel.UAPICall[KnownHostsUpdateData](ctx, c.c, http.MethodGet, "KnownHosts", "update", args)
 }
 
-
 // An object containing metadata about the host's public key.
 type KnownHostsUpdateDataHostItemMeta struct {
 	// The key's algorithm.
-	Algorithm       string `json:"algorithm"`
+	Algorithm string `json:"algorithm"`
 
 	// The host's public key.
-	Body            string `json:"body"`
+	Body string `json:"body"`
 
 	// The key's MD5 fingerprint.
-	MD5             string `json:"md5"`
+	MD5 string `json:"md5"`
 
 	// A human-readable version of the key's MD5 fingerprint.
-	MD5Printable    string `json:"md5-printable"`
+	MD5Printable string `json:"md5-printable"`
 
 	// The key's SHA-256 fingerprint.
-	SHA256          string `json:"sha256"`
+	SHA256 string `json:"sha256"`
 
 	// human-readable version of the key's SHA-256 fingerprint.
 	SHA256Printable string `json:"sha256-printable"`
@@ -166,7 +163,7 @@ type KnownHostsUpdateDataHostItem struct {
 	Host string `json:"host"`
 
 	// The host's key.
-	Key  string `json:"key"`
+	Key string `json:"key"`
 
 	// The host's entry in the `/home/user/.ssh/known_hosts` file, where user is the cPanel account username. A valid entry that includes the hostname or IP address, the key's algorithm, and the public key.
 	Line string `json:"line"`
@@ -208,23 +205,22 @@ func (c *KnownHostsClient) Verify(ctx context.Context, args *KnownHostsVerifyArg
 	return cpanel.UAPICall[KnownHostsVerifyData](ctx, c.c, http.MethodGet, "KnownHosts", "verify", args)
 }
 
-
 // An object that contains information about the host's public key.
 type KnownHostsVerifyDataHostItemMeta struct {
 	// The key's algorithm.
-	Algorithm       string `json:"algorithm"`
+	Algorithm string `json:"algorithm"`
 
 	// The host's public key. public key.
-	Body            string `json:"body"`
+	Body string `json:"body"`
 
 	// The key's [MD5](https://en.wikipedia.org/wiki/MD5) fingerprint.
-	MD5             string `json:"md5"`
+	MD5 string `json:"md5"`
 
 	// A human-readable version of the key's MD5 fingerprint.
-	MD5Printable    string `json:"md5-printable"`
+	MD5Printable string `json:"md5-printable"`
 
 	// The key's [SHA-256](https://en.wikipedia.org/wiki/SHA-2) fingerprint.
-	SHA256          string `json:"sha256"`
+	SHA256 string `json:"sha256"`
 
 	// A human-readable version of the key's SHA-256 fingerprint.
 	SHA256Printable string `json:"sha256-printable"`
@@ -236,7 +232,7 @@ type KnownHostsVerifyDataHostItem struct {
 	Host string `json:"host"`
 
 	// The host's key.
-	Key  string `json:"key"`
+	Key string `json:"key"`
 
 	// The host's entry in the `/home/user/.ssh/known_hosts` file, where `user` is the cPanel account username.
 	Line string `json:"line"`
@@ -248,7 +244,7 @@ type KnownHostsVerifyDataHostItem struct {
 // KnownHostsVerifyData is a generated payload type.
 type KnownHostsVerifyData struct {
 	// An array of errors that the system generated.
-	Errors      []string `json:"errors"`
+	Errors []string `json:"errors"`
 
 	// The reason why the system will register the hostname.
 	// * `new` — The host does **not** already exist.
@@ -258,12 +254,12 @@ type KnownHostsVerifyData struct {
 	FailureType string `json:"failure_type"`
 
 	// An array of objects that contain information about the host.
-	Host        []KnownHostsVerifyDataHostItem `json:"host"`
+	Host []KnownHostsVerifyDataHostItem `json:"host"`
 
 	// Whether the host already exists in the `/home/user/.ssh/known_hosts` file, where `user` is the cPanel account username.
 	// * `1` — Exists.
 	// * `0` — The host does **not** already exist, or the system must re-register the hostname.
 	//
 	// Possible values: `0`, `1`.
-	Status      int64 `json:"status"`
+	Status int64 `json:"status"`
 }

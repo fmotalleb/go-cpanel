@@ -27,34 +27,33 @@ func (c *ModSecurityClient) DisableAllDomains(ctx context.Context, extra ...cpan
 	return cpanel.UAPICall[[]ModSecurityDisableAllDomainsDataItem](ctx, c.c, http.MethodGet, "ModSecurity", "disable_all_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecurityDisableAllDomainsDataItem is a generated payload type.
 type ModSecurityDisableAllDomainsDataItem struct {
 	// An array of domains that your changes to a selected domain affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The cPanel account's domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether ModSecurity is enabled on the account.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// An exception error message. The function only returns this value if an error occurs.
-	ExceptIOn    string `json:"exception"`
+	ExceptIOn string `json:"exception"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` - A main domain.
 	// * `sub` - A subdomain.
 	//
 	// Possible values: `main`, `sub`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // ModSecurityDisableDomainsArgs are the parameters of the UAPI function `ModSecurity::disable_domains`.
@@ -87,7 +86,6 @@ func (c *ModSecurityClient) DisableDomains(ctx context.Context, args *ModSecurit
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ModSecurity", "disable_domains", args)
 }
 
-
 // EnableAllDomains calls the UAPI function `ModSecurity::enable_all_domains` — Enable ModSecurity for all domains
 //
 // This function enables ModSecurity™ on a cPanel account's domains.
@@ -103,34 +101,33 @@ func (c *ModSecurityClient) EnableAllDomains(ctx context.Context, extra ...cpane
 	return cpanel.UAPICall[[]ModSecurityEnableAllDomainsDataItem](ctx, c.c, http.MethodGet, "ModSecurity", "enable_all_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecurityEnableAllDomainsDataItem is a generated payload type.
 type ModSecurityEnableAllDomainsDataItem struct {
 	// An array of domains that your changes to a selected domain affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The cPanel account's domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether ModSecurity is enabled on the account.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// An exception error message. The function only returns this value if an error occurs.
-	ExceptIOn    string `json:"exception"`
+	ExceptIOn string `json:"exception"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` - A main domain.
 	// * `sub` - A subdomain.
 	//
 	// Possible values: `main`, `sub`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }
 
 // ModSecurityEnableDomainsArgs are the parameters of the UAPI function `ModSecurity::enable_domains`.
@@ -163,7 +160,6 @@ func (c *ModSecurityClient) EnableDomains(ctx context.Context, args *ModSecurity
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ModSecurity", "enable_domains", args)
 }
 
-
 // HasModsecurityInstalled calls the UAPI function `ModSecurity::has_modsecurity_installed` — Return ModSecurity installation status
 //
 // This function checks whether ModSecurity™ is installed on a server.
@@ -178,7 +174,6 @@ func (c *ModSecurityClient) EnableDomains(ctx context.Context, args *ModSecurity
 func (c *ModSecurityClient) HasModsecurityInstalled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[ModSecurityHasModsecurityInstalledData], error) {
 	return cpanel.UAPICall[ModSecurityHasModsecurityInstalledData](ctx, c.c, http.MethodGet, "ModSecurity", "has_modsecurity_installed", cpanel.CombineArgs(extra...))
 }
-
 
 // ModSecurityHasModsecurityInstalledData is a generated payload type.
 type ModSecurityHasModsecurityInstalledData struct {
@@ -205,29 +200,28 @@ func (c *ModSecurityClient) ListDomains(ctx context.Context, extra ...cpanel.Arg
 	return cpanel.UAPICall[[]ModSecurityListDomainsDataItem](ctx, c.c, http.MethodGet, "ModSecurity", "list_domains", cpanel.CombineArgs(extra...))
 }
 
-
 // ModSecurityListDomainsDataItem is a generated payload type.
 type ModSecurityListDomainsDataItem struct {
 	// An array of domains that your changes to a selected domain affect.
 	DependEncies []string `json:"dependencies"`
 
 	// The cPanel account's domain.
-	Domain       string `json:"domain"`
+	Domain string `json:"domain"`
 
 	// Whether ModSecurity is enabled for the account.
 	// * `1` - Enabled.
 	// * `0` - Disabled.
 	//
 	// Possible values: `0`, `1`.
-	Enabled      int64 `json:"enabled"`
+	Enabled int64 `json:"enabled"`
 
 	// A comma-separated list of domain-related search terms.
-	SearchHint   string `json:"searchhint"`
+	SearchHint string `json:"searchhint"`
 
 	// The domain type.
 	// * `main` - A main domain.
 	// * `sub` - A subdomain.
 	//
 	// Possible values: `main`, `sub`.
-	Type2        string `json:"type"`
+	Type2 string `json:"type"`
 }

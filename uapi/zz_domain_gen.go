@@ -56,7 +56,6 @@ func (c *DomainClient) ConvertTemporaryToRegistered(ctx context.Context, args *D
 	return cpanel.UAPICall[DomainConvertTemporaryToRegisteredData](ctx, c.c, http.MethodPost, "Domain", "convert_temporary_to_registered", args)
 }
 
-
 // DomainConvertTemporaryToRegisteredData is a generated payload type.
 type DomainConvertTemporaryToRegisteredData struct {
 	// A message describing the result of the conversion.
@@ -88,7 +87,6 @@ type DomainIsTemporaryDomainArgs struct {
 func (c *DomainClient) IsTemporaryDomain(ctx context.Context, args *DomainIsTemporaryDomainArgs) (*cpanel.UAPIResult[int64], error) {
 	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Domain", "is_temporary_domain", args)
 }
-
 
 // DomainRenameDomainArgs are the parameters of the UAPI function `Domain::rename_domain`.
 type DomainRenameDomainArgs struct {
@@ -131,7 +129,6 @@ func (c *DomainClient) RenameDomain(ctx context.Context, args *DomainRenameDomai
 	return cpanel.UAPICall[DomainRenameDomainData](ctx, c.c, http.MethodPost, "Domain", "rename_domain", args)
 }
 
-
 // DomainRenameDomainData is a generated payload type.
 type DomainRenameDomainData struct {
 	// A message describing the result of the rename.
@@ -153,7 +150,6 @@ type DomainRenameDomainData struct {
 func (c *DomainClient) TemporaryDomainIsDisabled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[DomainTemporaryDomainIsDisabledData], error) {
 	return cpanel.UAPICall[DomainTemporaryDomainIsDisabledData](ctx, c.c, http.MethodGet, "Domain", "temporary_domain_is_disabled", cpanel.CombineArgs(extra...))
 }
-
 
 // An object containing the disabled state of the
 // temporary domains feature.
