@@ -105,6 +105,7 @@ jobs:
           TAG: ${{ steps.versions.outputs.tag }}
           CPANEL_VER: ${{ steps.versions.outputs.cpanel }}
           WHM_VER: ${{ steps.versions.outputs.whm }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$TAG" \
             --repo "$GITHUB_REPOSITORY" \
