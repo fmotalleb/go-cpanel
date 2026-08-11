@@ -41,11 +41,19 @@ jobs:
       - name: Read spec versions
         id: versions
         run: |
+          # Convert the spec info.version into a Go-valid module tag.
+          # cPanel reports 4-part versions ("11.137.9999.96") which are not
+          # valid Go module tags; trailing parts become a semver prerelease
+          # ("v11.137.9999-96") so `go get module@<tag>` works and versions
+          # stay unique and monotonically ordered.
+          to_tag() {
+            python3 -c 'import sys; p=sys.argv[1].lstrip("v").split("."); c=(p+["0","0","0"])[:3]; pre="-".join(p[3:]); print("v"+".".join(c)+("-"+pre if pre else ""))' "$1"
+          }
           CPANEL_VER=$(python3 -c 'import yaml;print(yaml.safe_load(open("tools/gen/cpanel.openapi.yaml"))["info"]["version"])')
           WHM_VER=$(python3 -c 'import yaml;print(yaml.safe_load(open("tools/gen/whm.openapi.yaml"))["info"]["version"])')
           echo "cpanel=$CPANEL_VER" >> "$GITHUB_OUTPUT"
           echo "whm=$WHM_VER" >> "$GITHUB_OUTPUT"
-          echo "tag=v$CPANEL_VER" >> "$GITHUB_OUTPUT"
+          echo "tag=$(to_tag "$CPANEL_VER")" >> "$GITHUB_OUTPUT"
 
       - name: Regenerate
         run: |

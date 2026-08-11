@@ -39,9 +39,11 @@ counts/dates, so re-check the README numbers if you do.
 
 `.github/workflows/update.yml` runs every Monday (and on `workflow_dispatch`):
 fetches the specs, regenerates, verifies, and if anything changed commits to
-`main`, pushes tag `v<spec info.version>` (e.g. `v11.137.9999.96`), and
-publishes a GitHub release. It never commits when output is unchanged. This is
-the only place that pushes generated code to `main` — leave it to the bot.
+`main`, pushes a Go-valid tag, and publishes a GitHub release. cPanel's 4-part
+spec `info.version` (e.g. `11.137.9999.96`) is not a valid Go module tag, so
+the workflow rewrites trailing parts as a semver prerelease → `v11.137.9999-96`.
+It never commits when output is unchanged. This is the only place that pushes
+generated code to `main` — leave it to the bot.
 
 ## Verify (matches CI)
 

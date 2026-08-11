@@ -10,6 +10,11 @@ developer portal:
 The generated code currently targets **cPanel & WHM version 138**
 (spec info version `11.137.9999.96`).
 
+cPanel's `info.version` is a 4-part string (`11.137.9999.96`) that is **not a
+valid Go module tag**. The weekly auto-update converts it to a semver tag by
+moving the trailing parts into a prerelease: `11.137.9999.96` → `v11.137.9999-96`,
+so `go get github.com/fmotalleb/go-cpanel@v11.137.9999-96` resolves.
+
 ## Regenerating
 
 Requirements: Python 3.9+ with PyYAML, Go 1.22+.
