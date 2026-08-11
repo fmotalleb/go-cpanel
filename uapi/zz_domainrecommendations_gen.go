@@ -180,14 +180,14 @@ type DomainRecommendationsDomainAvailabilityData struct {
 
 // DomainRecommendationsDomainSuggestionsArgs are the parameters of the UAPI function `DomainRecommendations::domain_suggestions`.
 type DomainRecommendationsDomainSuggestionsArgs struct {
-	// The domain name or search term for suggestions.
+	// The search term used to generate domain suggestions. This is a free-text query, not necessarily a fully-qualified domain name.
 	//
 	// **Note:**
 	//
 	// Use the base domain name without the TLD (for example, `mybusiness` instead of `mybusiness.com`).
 	//
 	// This parameter is required.
-	Domain string `cpanel:"domain"`
+	SearchField string `cpanel:"search_field"`
 
 	// The page number to retrieve (1-indexed).
 	//
@@ -217,7 +217,7 @@ type DomainRecommendationsDomainSuggestionsArgs struct {
 //
 // This function returns available domain name suggestions and their registration pricing for a given search term.
 //
-// The system retrieves the results from the configured domain store and caches them for up to two minutes per unique combination of `domain`, `page`, and `page_size`. Use the `use_cache=0` option to bypass the cache and force a live request.
+// The system retrieves the results from the configured domain store and caches them for up to two minutes per unique combination of `search_field`, `page`, `page_size`, and the requested `tld` list. Use the `use_cache=0` option to bypass the cache and force a live request.
 //
 // **Note:**
 //

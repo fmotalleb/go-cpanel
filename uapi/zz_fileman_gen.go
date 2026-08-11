@@ -1063,33 +1063,187 @@ type FilemanTrashFileData struct {
 	TrashLeaf string `json:"trash_leaf"`
 }
 
+// FilemanUploadFilesArgs are the parameters of the UAPI function `Fileman::upload_files`.
+type FilemanUploadFilesArgs struct {
+	// The directory in which to store the uploaded files.
+	//
+	// **Note:**
+	//
+	// * A relative path resolves against the account's home directory.
+	// * This parameter defaults to the account's home directory.
+	// * The system creates the directory if it does not exist.
+	Dir *string `cpanel:"dir,omitempty"`
+
+	// Whether to include the account's disk usage in the response.
+	//
+	// * `1` - Return the `diskinfo` object.
+	// * `0` - Do not return the `diskinfo` object.
+	//
+	// Possible values: `0`, `1`.
+	//
+	// Defaults to `0`.
+	GetDiskInfo *int64 `cpanel:"get_disk_info,omitempty"`
+
+	// Whether to replace a file that already exists in the target directory.
+	//
+	// * `1` - Overwrite the existing file.
+	// * `0` - Fail that file with an "already exists" reason.
+	//
+	// Possible values: `0`, `1`.
+	//
+	// Defaults to `0`.
+	Overwrite *int64 `cpanel:"overwrite,omitempty"`
+
+	// The permissions to apply to every file in the request, in octal
+	// notation.
+	//
+	// **Note:**
+	//
+	// * The system reads both `0644` and `644` as octal.
+	// * This parameter defaults to `0644`.
+	// * If the system cannot apply the permissions, the upload still succeeds
+	//   and the function returns a warning for that file.
+	//
+	// Defaults to `0644`.
+	Permissions *string `cpanel:"permissions,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
 // UploadFiles calls the UAPI function `Fileman::upload_files` — Upload files
 //
-// This function uploads files.
-//
-// **Note:**
-//
-//	For more information about how to use this function in your custom code,
-//	read our [Use UAPI's `Fileman::upload_files`
-//	Function in Custom Code tutorial](https://go.cpanel.net/tutorial-use-uapis-fileman-upload-files-function-in-custom-code).
+// This function uploads one or more files to a directory.
 //
 // **Important:**
 //
-//	When you disable the [File Storage](https://go.cpanel.net/serverroles) role, the system **disables** this function.
+//   - You **must** send the files as parts of a `multipart/form-data` request
+//     body. Query parameters cannot carry a file. For security reasons, the
+//     system discards any query parameter whose name begins with `file-`.
+//   - You can't pass the file parts on the command line, and LiveAPI can't
+//     call this function at all, because neither can send a
+//     `multipart/form-data` body.
+//   - When you disable the [File Storage](https://go.cpanel.net/serverroles)
+//     role, the system **disables** this function.
+//   - You cannot call this function through WHM API 1's
+//     [uapi_cpanel](https://go.cpanel.net/UseWHMAPItoCallcPanelAPIandUAPI)
+//     function.
 //
-// You cannot call this function through WHM API 1's [uapi_cpanel](https://go.cpanel.net/UseWHMAPItoCallcPanelAPIandUAPI) function.
+// **Note:**
+//
+//   - The system names each stored file after that part's `filename`
+//     attribute, **not** after the form field's name. By convention, name the
+//     fields `file-0`, `file-1`, and so on, as the cPanel interface does.
+//   - The system scans every uploaded file for viruses and rejects an
+//     infected file.
+//   - The system rejects a filename of `.` or `..`, or a filename that
+//     contains control characters or any of the `<`, `>`, `;`, and `/`
+//     characters.
+//   - If one request contains two files with the same name, the system
+//     renames the second file. For example, `example-2.png`.
+//   - For more information about how to use this function in your custom
+//     code, read our [Use UAPI's `Fileman::upload_files` Function in Custom
+//     Code tutorial](https://go.cpanel.net/tutorial-use-uapis-fileman-upload-files-fun …
+//
+// This function requires an HTTP POST request.
 //
 // Available since cPanel & WHM version cPanel 11.44.
 //
 // Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/manage-files/fileman-upload_files.md
-func (c *FilemanClient) UploadFiles(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[FilemanUploadFilesData], error) {
-	return cpanel.UAPICall[FilemanUploadFilesData](ctx, c.c, http.MethodGet, "Fileman", "upload_files", cpanel.CombineArgs(extra...))
+func (c *FilemanClient) UploadFiles(ctx context.Context, args *FilemanUploadFilesArgs) (*cpanel.UAPIResult[FilemanUploadFilesData], error) {
+	return cpanel.UAPICall[FilemanUploadFilesData](ctx, c.c, http.MethodPost, "Fileman", "upload_files", args)
+}
+
+// The account's disk usage and upload limits. The
+// system **only** returns this object when you pass
+// the `get_disk_info` parameter.
+//
+// **Note:**
+//
+//   - The object also contains a `_humansize` variant
+//     of every value below, formatted for display. For
+//     example, `spaceused_humansize`.
+//   - The system returns each byte count as a decimal
+//     string with two decimal places, and each inode
+//     count as a number.
+//   - A value that the account's quota does not limit
+//     appears as an infinity symbol (∞).
+type FilemanUploadFilesDataDiskinfo struct {
+	// The largest size, in bytes, that a single uploaded file may reach.
+	FileUploadMaxBytes string `json:"file_upload_max_bytes"`
+
+	// The amount of free space, in bytes, that must remain after an upload.
+	FileUploadMustLeaveBytes string `json:"file_upload_must_leave_bytes"`
+
+	// The total size, in bytes, that the account may upload now.
+	FileUploadRemain string `json:"file_upload_remain"`
+
+	// The number of inodes that the account may use.
+	FilesLimit any `json:"fileslimit"`
+
+	// The number of inodes that the account may still use.
+	FilesRemain any `json:"filesremain"`
+
+	// The number of inodes that the account uses.
+	FilesUsed any `json:"filesused"`
+
+	// The disk space, in bytes, that the account may use.
+	SpaceLimit string `json:"spacelimit"`
+
+	// The disk space, in bytes, that the account may still use.
+	SpaceRemain string `json:"spaceremain"`
+
+	// The disk space, in bytes, that the account uses.
+	SpaceUsed string `json:"spaceused"`
+}
+
+// FilemanUploadFilesDataUploadsItem is a generated payload type.
+type FilemanUploadFilesDataUploadsItem struct {
+	// The file's name.
+	File string `json:"file"`
+
+	// A description of the outcome for this file.
+	Reason string `json:"reason"`
+
+	// The stored file's size, in bytes. The system returns `null` when the upload failed.
+	Size *int64 `json:"size"`
+
+	// * `1` - The system stored the file.
+	// * `0` - The upload failed. Check the `reason` value.
+	//
+	// Possible values: `0`, `1`.
+	Status int64 `json:"status"`
+
+	// Non-critical problems, such as a failure to apply the file's ownership or permissions.
+	Warnings []string `json:"warnings"`
 }
 
 // FilemanUploadFilesData is a generated payload type.
 type FilemanUploadFilesData struct {
-	Content string `json:"content"`
+	// The account's disk usage and upload limits. The
+	// system **only** returns this object when you pass
+	// the `get_disk_info` parameter.
+	//
+	// **Note:**
+	//
+	// * The object also contains a `_humansize` variant
+	//   of every value below, formatted for display. For
+	//   example, `spaceused_humansize`.
+	// * The system returns each byte count as a decimal
+	//   string with two decimal places, and each inode
+	//   count as a number.
+	// * A …
+	Diskinfo FilemanUploadFilesDataDiskinfo `json:"diskinfo"`
 
-	// The file's name.
-	Filename string `json:"filename"`
+	// The number of files that the system did not store.
+	Failed int64 `json:"failed"`
+
+	// The number of files that the system stored.
+	Succeeded int64 `json:"succeeded"`
+
+	// One entry for each file in the request.
+	Uploads []FilemanUploadFilesDataUploadsItem `json:"uploads"`
+
+	// The number of files that produced warnings.
+	Warned int64 `json:"warned"`
 }

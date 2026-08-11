@@ -83,6 +83,11 @@ type TeamAddTeamUserArgs struct {
 	Password *string `cpanel:"password,omitempty"`
 
 	// A comma-separated list of roles assigned to the new team user. Current roles include admin, database, email, web.
+	//
+	// **Note:**
+	//
+	//  * This parameter is named `roles`, not `role`. This function rejects the `role` parameter with an error.
+	//  * A team user with no roles **cannot** use any features. To assign roles after you create the team user, use the `set_roles` or `add_roles` functions.
 	Roles *string `cpanel:"roles,omitempty"`
 
 	// Whether to create an email subaccount for the team user. A subaccount is always created for a team user, but it does not have any associated service subaccounts by default.
@@ -652,6 +657,10 @@ type TeamSetRolesArgs struct {
 	User string `cpanel:"user"`
 
 	// The role or roles to set for the team user. Current roles include admin, database, email, web.
+	//
+	// **Note:**
+	//
+	//  * This function replaces the team user's current roles. If you omit this parameter, the team user loses every role and **cannot** use any features.
 	Role *string `cpanel:"role,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).

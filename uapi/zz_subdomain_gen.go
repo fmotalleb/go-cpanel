@@ -125,3 +125,155 @@ type SubDomainChangedocrootData struct {
 	// The absolute path of the new document root.
 	Documentroot string `json:"documentroot"`
 }
+
+// SubDomainDelsubdomainArgs are the parameters of the UAPI function `SubDomain::delsubdomain`.
+type SubDomainDelsubdomainArgs struct {
+	// The subdomain to remove. Give this value either as the underscore-separated `subdomain_rootdomain` form that the `SubDomain::listsubdomains` function returns in its `domainkey` field, or as a fully qualified domain name.
+	//
+	// This parameter is required.
+	Domain string `cpanel:"domain"`
+
+	// Whether to remove the dot (`.`) characters from the subdomain label in the `domain` value.
+	// * `1` - Remove dots from the subdomain label.
+	// * `0` - Do **not** remove dots from the subdomain label.
+	//
+	// Possible values: `0`, `1`.
+	//
+	// Defaults to `0`.
+	DisallowDoT *int64 `cpanel:"disallowdot,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// Delsubdomain calls the UAPI function `SubDomain::delsubdomain` — Remove a subdomain
+//
+// This function removes a subdomain from the cPanel account.
+//
+// **Important:**
+//
+//   - If any addon domain is parked on the subdomain, the system refuses to
+//     remove it and names the addon domains in the `errors` field. Remove
+//     those addon domains first with the
+//     `AddonDomain::deladdondomain` function.
+//   - This function does **not** remove the subdomain's document root or the
+//     files in it.
+//
+// When you disable the [Web Server role](https://go.cpanel.net/serverroles#roles),
+// the system **disables** this function.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/subdomain/subdomain-delsubdomain.md
+func (c *SubDomainClient) Delsubdomain(ctx context.Context, args *SubDomainDelsubdomainArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
+	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "SubDomain", "delsubdomain", args)
+}
+
+// GetReservedSubdomains calls the UAPI function `SubDomain::getreservedsubdomains` — List the reserved subdomain names
+//
+// This function lists the subdomain labels that the system reserves, and
+// that an account therefore cannot use to create a subdomain.
+//
+// **Note:**
+//
+// The returned labels are **not** sorted.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/subdomain/subdomain-getreservedsubdomains.md
+func (c *SubDomainClient) GetReservedSubdomains(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
+	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "SubDomain", "getreservedsubdomains", cpanel.CombineArgs(extra...))
+}
+
+// SubDomainListsubdomainsArgs are the parameters of the UAPI function `SubDomain::listsubdomains`.
+type SubDomainListsubdomainsArgs struct {
+	// A Perl regular expression. The system returns only the subdomains whose fully qualified name matches this pattern, case-insensitively.
+	//
+	// If this value is not a valid Perl regular expression, the function fails and reports the error in the `errors` field.
+	Regex *string `cpanel:"regex,omitempty"`
+
+	// Whether to include the `can_https_redirect` and `is_https_redirecting` fields in each entry.
+	// * `1` - Include the HTTPS redirect status.
+	// * `0` - Omit the HTTPS redirect status.
+	//
+	// Possible values: `0`, `1`.
+	//
+	// Defaults to `0`.
+	ReturnHTTPSRedirectStatus *int64 `cpanel:"return_https_redirect_status,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// Listsubdomains calls the UAPI function `SubDomain::listsubdomains` — List the subdomains
+//
+// This function lists the subdomains on the cPanel account, including the subdomains that the account's addon domains are parked on.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/subdomain/subdomain-listsubdomains.md
+func (c *SubDomainClient) Listsubdomains(ctx context.Context, args *SubDomainListsubdomainsArgs) (*cpanel.UAPIResult[[]SubDomainListsubdomainsDataItem], error) {
+	return cpanel.UAPICall[[]SubDomainListsubdomainsDataItem](ctx, c.c, http.MethodGet, "SubDomain", "listsubdomains", args)
+}
+
+// SubDomainListsubdomainsDataItem is a generated payload type.
+type SubDomainListsubdomainsDataItem struct {
+	// The subdomain's document root, relative to the account's home directory.
+	Basedir string `json:"basedir"`
+
+	// Whether the system can redirect the subdomain to `HTTPS`. The system only returns this field when you pass the `return_https_redirect_status` parameter.
+	// * `1` - The system can redirect the subdomain.
+	// * `0` - The system cannot redirect the subdomain.
+	//
+	// Possible values: `0`, `1`.
+	CanHTTPSRedirect int64 `json:"can_https_redirect"`
+
+	// The absolute path to the subdomain's document root.
+	Dir string `json:"dir"`
+
+	// The subdomain's fully qualified domain name.
+	Domain string `json:"domain"`
+
+	// The subdomain in the underscore-separated `subdomain_rootdomain` form. Pass this value to the `SubDomain::delsubdomain` function to remove the subdomain.
+	DomainKey string `json:"domainkey"`
+
+	// Whether the system currently redirects the subdomain to `HTTPS`. The system only returns this field when you pass the `return_https_redirect_status` parameter.
+	// * `1` - The system redirects the subdomain.
+	// * `0` - The system does **not** redirect the subdomain.
+	//
+	// Possible values: `0`, `1`.
+	IsHTTPSRedirecting int64 `json:"is_https_redirecting"`
+
+	// The subdomain's document root, relative to the account's home directory and prefixed with `home:`.
+	Reldir string `json:"reldir"`
+
+	// The domain that the subdomain belongs to.
+	RootDomain string `json:"rootdomain"`
+
+	// The subdomain's rewrite status, or the URL that it redirects to.
+	Status string `json:"status"`
+
+	// The subdomain's label, without the root domain.
+	Subdomain string `json:"subdomain"`
+
+	// The built-in service subdomain aliases, for example `www`, that the system serves for the subdomain.
+	WebSubdomainAliases []string `json:"web_subdomain_aliases"`
+}
+
+// Validregex calls the UAPI function `SubDomain::validregex` — Return the subdomain validation pattern
+//
+// This function retrieves the regular expression that the system uses to
+// validate a subdomain label.
+//
+// **Note:**
+//
+// Use this value to validate a subdomain label in an interface before you
+// call the `SubDomain::addsubdomain` function. It does **not** replace the
+// server-side validation that `SubDomain::addsubdomain` performs.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/subdomain/subdomain-validregex.md
+func (c *SubDomainClient) Validregex(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]string], error) {
+	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "SubDomain", "validregex", cpanel.CombineArgs(extra...))
+}

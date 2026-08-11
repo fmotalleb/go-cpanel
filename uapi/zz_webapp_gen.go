@@ -51,15 +51,12 @@ type WebAppConfigureArgs struct {
 	// deployment is named after the application.
 	DeployName *string `cpanel:"deployname,omitempty"`
 
-	// The domain to bind the application to: a new subdomain of a domain
-	// the account owns (or the application's own already-materialized
-	// domain). An existing domain — the main domain, an addon domain, a
-	// manually created subdomain, or one already claimed by another
-	// application — is rejected; see the `domain_in_use` and
-	// `domain_unavailable` `error_category` values.
-	//
-	// Pass an empty value to generate and bind a temporary domain
-	// automatically.
+	// The domain to bind the application to. Any domain the account owns is
+	// accepted — the main domain, an addon domain, a parked domain, or a
+	// manually created subdomain — and the application is served AT it. A
+	// domain that does not exist yet is created as a subdomain, provided the
+	// account owns its root. A domain another application is already serving
+	// is rejected; see the `domain_in_use` `error_category` value. …
 	Domain *string `cpanel:"domain,omitempty"`
 
 	// A JSON-encoded object of the application's environment variables.

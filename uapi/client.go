@@ -30,6 +30,12 @@ func (c *Client) AccountEnhancements() *AccountEnhancementsClient {
 	return &AccountEnhancementsClient{c: c.c}
 }
 
+// AddonDomainClient wraps calls to the UAPI `AddonDomain` module.
+type AddonDomainClient struct{ c *cpanel.Client }
+
+// AddonDomain returns the client for the UAPI `AddonDomain` module.
+func (c *Client) AddonDomain() *AddonDomainClient { return &AddonDomainClient{c: c.c} }
+
 // BackupClient wraps calls to the UAPI `Backup` module.
 type BackupClient struct{ c *cpanel.Client }
 
@@ -190,6 +196,12 @@ type DomainInfoClient struct{ c *cpanel.Client }
 // DomainInfo returns the client for the UAPI `DomainInfo` module.
 func (c *Client) DomainInfo() *DomainInfoClient { return &DomainInfoClient{c: c.c} }
 
+// DomainLookupClient wraps calls to the UAPI `DomainLookup` module.
+type DomainLookupClient struct{ c *cpanel.Client }
+
+// DomainLookup returns the client for the UAPI `DomainLookup` module.
+func (c *Client) DomainLookup() *DomainLookupClient { return &DomainLookupClient{c: c.c} }
+
 // DomainRecommendationsClient wraps calls to the UAPI `DomainRecommendations` module.
 type DomainRecommendationsClient struct{ c *cpanel.Client }
 
@@ -349,6 +361,12 @@ type NotificationsClient struct{ c *cpanel.Client }
 
 // Notifications returns the client for the UAPI `Notifications` module.
 func (c *Client) Notifications() *NotificationsClient { return &NotificationsClient{c: c.c} }
+
+// ParkClient wraps calls to the UAPI `Park` module.
+type ParkClient struct{ c *cpanel.Client }
+
+// Park returns the client for the UAPI `Park` module.
+func (c *Client) Park() *ParkClient { return &ParkClient{c: c.c} }
 
 // ParserClient wraps calls to the UAPI `Parser` module.
 type ParserClient struct{ c *cpanel.Client }
@@ -617,3 +635,9 @@ type WordPressSiteClient struct{ c *cpanel.Client }
 
 // WordPressSite returns the client for the UAPI `WordPressSite` module.
 func (c *Client) WordPressSite() *WordPressSiteClient { return &WordPressSiteClient{c: c.c} }
+
+// ZoneEditClient wraps calls to the UAPI `ZoneEdit` module.
+type ZoneEditClient struct{ c *cpanel.Client }
+
+// ZoneEdit returns the client for the UAPI `ZoneEdit` module.
+func (c *Client) ZoneEdit() *ZoneEditClient { return &ZoneEditClient{c: c.c} }
