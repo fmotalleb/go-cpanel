@@ -25,6 +25,13 @@ type PassengerAppsDisableApplicationArgs struct {
 
 // DisableApplication calls the UAPI function `PassengerApps::disable_application` — Disable Passenger application
 //
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for
+// deploying web applications; it deploys container-based applications
+// and supersedes Application Manager. Use `WebApp::stop` instead of this
+// function for applications deployed with Web Apps. Use
+// `PassengerApps` only to manage applications already registered with
+// Application Manager.
+//
 // This function disables a Passenger application on an account.
 //
 // **Important:**
@@ -103,6 +110,13 @@ type PassengerAppsEditApplicationArgs struct {
 
 // EditApplication calls the UAPI function `PassengerApps::edit_application` — Update Passenger application settings
 //
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for
+// deploying web applications; it deploys container-based applications
+// and supersedes Application Manager. Use `WebApp::configure` instead of
+// this function for applications deployed with Web Apps. Use
+// `PassengerApps` only to manage applications already registered with
+// Application Manager.
+//
 // This function edits a Passenger application for an account.
 //
 // **Note**:
@@ -162,6 +176,8 @@ type PassengerAppsEnableApplicationArgs struct {
 
 // EnableApplication calls the UAPI function `PassengerApps::enable_application` — Enable Passenger application
 //
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for deploying web applications; it deploys container-based applications and supersedes Application Manager. Use `WebApp::start` instead of this function for applications deployed with Web Apps. Use `PassengerApps` only to manage applications already registered with Application Manager.
+//
 // This function enables a Passenger application and generates the Apache configuration on an account.
 //
 // **Important:**
@@ -199,6 +215,14 @@ type PassengerAppsEnsureDepsArgs struct {
 
 // EnsureDeps calls the UAPI function `PassengerApps::ensure_deps` — Install Passenger application dependencies
 //
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for
+// deploying web applications; it deploys container-based applications
+// and supersedes Application Manager. `WebApp::deploy` installs an
+// application's dependencies automatically as part of the deploy, so
+// there is no separate dependency-install call for Web Apps. Use
+// `PassengerApps` only to manage applications already registered with
+// Application Manager.
+//
 // This function installs the dependencies for a Passenger application.
 //
 // **Note**:
@@ -226,6 +250,13 @@ type PassengerAppsEnsureDepsData struct {
 }
 
 // ListApplications calls the UAPI function `PassengerApps::list_applications` — Return Passenger applications
+//
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for
+// deploying web applications; it deploys container-based applications
+// and supersedes Application Manager. Use `WebApp::list` instead of this
+// function for applications deployed with Web Apps. Use
+// `PassengerApps` only to manage applications already registered with
+// Application Manager.
 //
 // This function lists an account’s Passenger applications.
 //
@@ -383,6 +414,13 @@ type PassengerAppsRegisterApplicationArgs struct {
 
 // RegisterApplication calls the UAPI function `PassengerApps::register_application` — Register Passenger application
 //
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for
+// deploying web applications; it deploys container-based applications
+// and supersedes Application Manager. For a new application, use
+// `WebApp::stage` and `WebApp::deploy` instead of this function. Use
+// `PassengerApps` only to manage applications already registered with
+// Application Manager.
+//
 // This function registers a Passenger application for an account.
 //
 // **Important**:
@@ -449,6 +487,13 @@ type PassengerAppsUnregisterApplicationArgs struct {
 }
 
 // UnregisterApplication calls the UAPI function `PassengerApps::unregister_application` — Unregister Passenger application
+//
+// **Note**: Web Apps (`WebApp`) is the newer, recommended feature for
+// deploying web applications; it deploys container-based applications
+// and supersedes Application Manager. Use `WebApp::delete` instead of
+// this function for applications deployed with Web Apps. Use
+// `PassengerApps` only to manage applications already registered with
+// Application Manager.
 //
 // This function unregisters a [Passenger application](https://go.cpanel.net/cpaneldocsApplicationManager) on an account.
 //

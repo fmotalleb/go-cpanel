@@ -11,89 +11,167 @@ import (
 	cpanel "github.com/fmotalleb/go-cpanel"
 )
 
-// List calls the UAPI function `BackupInfo::list` — List the current user's full-account backups
+// List calls the UAPI function `BackupInfo::list` — Return cPanel account backups
 //
-// Scans the current cPanel user's home directory for full-account backup archives and returns one entry per archive, deriving real status from the on-disk marker file cPanel writes during a run. Single source of truth for the available-backups table. Read-only.
+// This function returns one entry for each cPanel account backup archive
+// in the current cPanel account's home directory.
+//
+// **Note:**
+// The function derives each archive's status from the on-disk marker file
+// that cPanel writes while a backup runs. It is the single source of truth
+// for the list of available backups.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/backupinfo/list.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/backupinfo/backupinfo-list.md
 func (c *BackupInfoClient) List(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]BackupInfoListDataItem], error) {
 	return cpanel.UAPICall[[]BackupInfoListDataItem](ctx, c.c, http.MethodGet, "BackupInfo", "list", cpanel.CombineArgs(extra...))
 }
 
 // BackupInfoListDataItem is a generated payload type.
 type BackupInfoListDataItem struct {
-	// The home-relative file name (basename; safe to echo). Never an absolute path.
+	// The archive file name.
+	//
+	// **Note:**
+	// This duplicates the `name` return value.
 	Fullpath string `json:"fullpath"`
 
 	// Archive modification time, epoch seconds.
 	Mtime int64 `json:"mtime"`
 
-	// The archive file name (basename only; never an absolute path).
+	// The archive file name.
 	Name string `json:"name"`
 
-	// Size of the .tar.gz archive in bytes.
+	// Size of the `.tar.gz` archive in bytes.
 	SizeBytes int64 `json:"sizeBytes"`
 
-	// Start epoch read from the marker file while a run is active. Null when not running.
+	// Start epoch read from the marker file while a
+	// run is active. Null when not running.
 	StartedAtEpoch *int64 `json:"startedAtEpoch"`
 
-	// Archive status derived from the marker file. 'ready' (marker absent), 'inprogress' (marker present, within timeout), or 'timeout' (marker present, stalled past the timeout threshold).
+	// Archive status derived from the marker file.
+	//
+	// * `ready` - No marker file is present.
+	// * `inprogress` - A marker file is present and
+	//   the run is within the timeout.
+	// * `timeout` - A marker file is present and the
+	//   run stalled past the timeout threshold.
 	//
 	// Possible values: `ready`, `inprogress`, `timeout`.
 	Status string `json:"status"`
 }
 
-// Progress calls the UAPI function `BackupInfo::progress` — Get progress for the current user's running full-account backup
+// Progress calls the UAPI function `BackupInfo::progress` — Return account backup progress
 //
-// Returns telemetry for a full-account backup. When the PkgAcct::Create hook is installed it anchors the run's start and finish; 'complete' is reported only once the published archive is confirmed in the homedir (returning its exact final size), so a run that never publishes an archive is never reported complete. Otherwise it falls back to the on-disk marker. While running, estimatedPercent is an ESTIMATE (the final archive is gzipped, so the byte total is multiplied by a heuristic compression factor) clamped to 99. Degrades to zeros when nothing is running or when quota data is unavailable. Read-only and safe to poll.
+// This function returns progress information for a cPanel account backup.
+//
+// **Note:**
+// When the `PkgAcct::Create` hook is installed, that hook anchors the
+// run's start and finish, and the function reports `complete` only after
+// it confirms the published archive in the home directory, along with the
+// archive's exact final size. A run that never publishes an archive is
+// therefore never reported as complete. Without the hook, the function
+// falls back to the on-disk marker file. When no run is active, the
+// `state` return value is `none` and the other return values are `0` or
+// null. When the function cannot determine the account's disk usage, the
+// `estimatedTotalBytes` and `estimatedPercent` return values are `0` even
+// while a run is active.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/backupinfo/progress.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/backupinfo/backupinfo-progress.md
 func (c *BackupInfoClient) Progress(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[BackupInfoProgressData], error) {
 	return cpanel.UAPICall[BackupInfoProgressData](ctx, c.c, http.MethodGet, "BackupInfo", "progress", cpanel.CombineArgs(extra...))
 }
 
 // BackupInfoProgressData is a generated payload type.
 type BackupInfoProgressData struct {
-	// Current size in bytes of the growing .tar.gz archive.
+	// Current size in bytes of the growing `.tar.gz` archive.
 	CurrentBytes int64 `json:"currentBytes"`
 
-	// Seconds since the run started. 0 when not running.
+	// Seconds since the run started. `0` when not
+	// running.
 	ElapsedSeconds int64 `json:"elapsedSeconds"`
 
-	// Completion percent (0-100). An ESTIMATE while running (clamped to 99; the UI must label it "estimated"); an exact 100 only on a confirmed 'complete' (published archive present).
+	// Completion percent, from 0 to 100.
+	//
+	// **Note:**
+	// While a run is active this return value is an
+	// estimate and the function clamps it to 99, because
+	// the final archive is gzipped and the function
+	// multiplies the byte total by a heuristic
+	// compression factor. The interface must label it as
+	// estimated. The value is exactly 100 only when the
+	// `state` return value is `complete` and the
+	// published archive is prese …
 	EstimatedPercent float64 `json:"estimatedPercent"`
 
-	// Estimated final archive size in bytes, (homedir + DB + mailman bytes) multiplied by the gzip compression factor. 0 when quota data is unavailable.
+	// Estimated final archive size in bytes. The
+	// function multiplies the home directory, database
+	// and mailing list byte totals by the gzip
+	// compression factor to produce this value.
+	//
+	// **Note:**
+	// The returned value is `0` when quota data is
+	// unavailable.
 	EstimatedTotalBytes int64 `json:"estimatedTotalBytes"`
 
-	// Finish epoch. Set only on a confirmed hook 'complete' (published archive present); null otherwise.
+	// The finish time, in epoch seconds.
+	//
+	// **Note:**
+	// The function sets this only when the hook confirms
+	// the `complete` state and the published archive is
+	// present. It is null otherwise.
 	FinishedAtEpoch *int64 `json:"finishedAtEpoch"`
 
-	// Start epoch (hook record when available, otherwise the marker file). Null when not running.
+	// The start time, in epoch seconds. Null when not
+	// running.
+	//
+	// **Note:**
+	// This comes from the hook record when that is
+	// available, and otherwise from the marker file.
 	StartedAtEpoch *int64 `json:"startedAtEpoch"`
 
-	// Current run state. 'inprogress' or 'timeout' while a run is active or finalizing, 'complete' once the published archive is confirmed in the homedir, or 'none' when nothing is running. A confirmed hook 'complete' is sticky - it persists across polls until a new run starts or the reset endpoint is called.
+	// The current run state.
 	//
-	// Possible values: `inprogress`, `timeout`, `complete`, `none`.
+	// * `inprogress` - A run is active or finalizing.
+	// * `timeout` - A run is active but has passed the
+	//   timeout ceiling.
+	// * `complete` - The published archive is confirmed
+	//   in the home directory. This state persists
+	//   across polls until a new run starts or the
+	//   `BackupInfo::reset` function is called.
+	// * `none` - Nothing is running. …
 	State string `json:"state"`
 
-	// Origin of 'state'. 'hook' is the authoritative PkgAcct::Create record (definitive start/finish); 'marker' is the estimated, marker-derived fallback; 'none' when nothing is running.
+	// Origin of the `state` value.
+	//
+	// * `hook` - The authoritative `PkgAcct::Create`
+	//   record, which gives a definitive start and
+	//   finish.
+	// * `marker` - The estimated fallback derived from
+	//   the on-disk marker file.
+	// * `none` - Nothing is running.
 	//
 	// Possible values: `hook`, `marker`, `none`.
 	StateSource string `json:"stateSource"`
 }
 
-// Reset calls the UAPI function `BackupInfo::reset` — Clear the current user's backup run-state record
+// Reset calls the UAPI function `BackupInfo::reset` — Remove backup progress record
 //
-// Clears the authoritative run-state record so a sticky 'complete' stops being reported by progress. After reset, progress reflects only live state ('inprogress' while a run is genuinely active, otherwise 'none'). Idempotent - succeeds whether or not a record exists.
+// This function clears the authoritative run-state record, so that the
+// `BackupInfo::progress` function stops reporting a `complete` state that
+// persists across polls.
+//
+// **Note:**
+// After a reset, the `BackupInfo::progress` function reflects only live
+// state. It reports `inprogress` while a run is genuinely active and
+// `none` otherwise. This function is idempotent and succeeds whether or
+// not a record exists.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/backupinfo/reset.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/backupinfo/backupinfo-reset.md
 func (c *BackupInfoClient) Reset(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[BackupInfoResetData], error) {
 	return cpanel.UAPICall[BackupInfoResetData](ctx, c.c, http.MethodGet, "BackupInfo", "reset", cpanel.CombineArgs(extra...))
 }

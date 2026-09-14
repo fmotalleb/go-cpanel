@@ -12,43 +12,6 @@ import (
 	cpanel "github.com/fmotalleb/go-cpanel"
 )
 
-// ExternalAuthenticationAddAuthnLinkArgs are the parameters of the UAPI function `ExternalAuthentication::add_authn_link`.
-type ExternalAuthenticationAddAuthnLinkArgs struct {
-	// The preferred username of the account on the identity provider.
-	//
-	// This parameter is required.
-	PreferredUsername string `cpanel:"preferred_username"`
-
-	// The name of the identity provider.
-	//
-	// This parameter is required.
-	ProviderID string `cpanel:"provider_id"`
-
-	// The unique identifier for the user at the identity provider.
-	//
-	// This parameter is required.
-	SubjectUniqueIdentifier string `cpanel:"subject_unique_identifier"`
-
-	// The username.
-	//
-	// This parameter is required.
-	Username string `cpanel:"username"`
-
-	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
-	Extra cpanel.Args `cpanel:"-"`
-}
-
-// AddAuthnLink calls the UAPI function `ExternalAuthentication::add_authn_link` — Add external authentication link
-//
-// This function adds an External Authentication authorization link to an account.
-//
-// Available since cPanel & WHM version cPanel 56.
-//
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/external-authentication/externalauthentication-add_authn_link.md
-func (c *ExternalAuthenticationClient) AddAuthnLink(ctx context.Context, args *ExternalAuthenticationAddAuthnLinkArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
-	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "ExternalAuthentication", "add_authn_link", args)
-}
-
 // ConfiguredModules calls the UAPI function `ExternalAuthentication::configured_modules` — Return server's external authentication providers
 //
 // This function lists the display information for your server's available and configured external authentication identity provider modules.

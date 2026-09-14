@@ -32,31 +32,23 @@ type WebAppConfigureArgs struct {
 	Appdir *string `cpanel:"appdir,omitempty"`
 
 	// The command that builds the application.
+	//
+	// Pass an empty value to clear it, so the deploy falls back to the
+	// detected default.
 	BuildCommand *string `cpanel:"build_command,omitempty"`
-
-	// The database action to perform.
-	//
-	// * `create` — Provision a new database and database user, and inject the credentials into the application's environment.
-	// * `link` — Link the existing database that the `db_name` parameter specifies.
-	//
-	// Possible values: `create`, `link`.
-	DB *string `cpanel:"db,omitempty"`
-
-	// The name of the existing database to link.
-	//
-	// **Required** when `db` is `link`.
-	DBName *string `cpanel:"db_name,omitempty"`
 
 	// The name (slug) used to name the deployment. When omitted, the
 	// deployment is named after the application.
 	DeployName *string `cpanel:"deployname,omitempty"`
 
-	// The domain to bind the application to. Any domain the account owns is
-	// accepted — the main domain, an addon domain, a parked domain, or a
-	// manually created subdomain — and the application is served AT it. A
-	// domain that does not exist yet is created as a subdomain, provided the
-	// account owns its root. A domain another application is already serving
-	// is rejected; see the `domain_in_use` `error_category` value. …
+	// The domain to bind the application to: a new subdomain of a domain
+	// the account owns, or the application's own already-materialized
+	// domain. A domain already claimed by another application is always
+	// rejected. A domain the account already uses for something else — the
+	// main domain, an addon domain, a manually created subdomain — is
+	// rejected unless `use_existing_domain` confirms it. See the
+	// `domain_in_use`, `domain_unavailable`, and `domain_temporary`
+	// `error_category` values. …
 	Domain *string `cpanel:"domain,omitempty"`
 
 	// A JSON-encoded object of the application's environment variables.
@@ -64,10 +56,26 @@ type WebAppConfigureArgs struct {
 	// **Warning:** This **replaces all** existing environment variables
 	// with the set you provide.
 	//
-	// **Security note:** These values are stored in plaintext. Do not
-	// use this parameter for sensitive secrets (API keys, database
-	// passwords, tokens, etc.).
+	// The values are written to the application's own `.env` file, which
+	// the container reads at startup. That file lives in the application's
+	// source tree, so setting values is refused unless the repository
+	// keeps it out of version control — see the `env_not_editable`
+	// `error_category` and the `env_editable` field on the application. An
+	// empty obje …
 	Env *string `cpanel:"env,omitempty"`
+
+	// The raw contents of a `.env` file, for a caller pasting a whole file
+	// rather than assembling an object. Mutually exclusive with `env`;
+	// passing both is an error.
+	//
+	// **Warning:** This **replaces all** existing environment variables,
+	// exactly as `env` does.
+	//
+	// The text is read the way podman's `--env-file` reads it, so what is
+	// accepted here is what the container would have loaded from the same
+	// bytes: leading whitespace is trimmed, blank lines and lines
+	// beginning with `#` are ignored, the first `=` separa …
+	EnvText *string `cpanel:"env_text,omitempty"`
 
 	// The run mode for `server` category applications.
 	//
@@ -80,8 +88,25 @@ type WebAppConfigureArgs struct {
 	// The runtime version tag to run the application under. Use `WebApp::get_available` to list the valid tags.
 	RuntimeTag *string `cpanel:"runtime_tag,omitempty"`
 
-	// The command that starts the application's server process. Only meaningful for the `server` category.
+	// The command that starts the application's server process. Only
+	// meaningful for the `server` category.
+	//
+	// Pass an empty value to clear it, so the deploy falls back to the
+	// adapter default. Clearing both this and `build_command` on a
+	// non-static application leaves it undeployable: the deploy then fails
+	// with a `requires_build` `error_category`.
 	StartupCommand *string `cpanel:"startup_command,omitempty"`
+
+	// Confirms that the application may be served at a domain the account
+	// already uses. The application is proxied over that domain, so
+	// whatever its document root serves — an existing website, and any
+	// files added to it later — stops being reachable until the
+	// application is deleted. Other configuration on a domain already in
+	// use (rewrites, handlers) may also take precedence and keep the
+	// application from being served, which is why a fresh, unused
+	// `<name>.<domain>` is the ideal target. See
+	// https://go.cpa …
+	UseExistingDomain *int64 `cpanel:"use_existing_domain,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
 	Extra cpanel.Args `cpanel:"-"`
@@ -98,28 +123,16 @@ type WebAppConfigureArgs struct {
 //	The `env` parameter uses **replace-all** semantics — the value you
 //	pass becomes the application's complete set of environment
 //	variables. To change one variable, read the current set first and
-//	resubmit it with your change applied.
+//	resubmit it with your change applied. `env_text` is the same
+//	operation with the same semantics, for a caller pasting a whole
+//	`.env` file instead of assembling an object; pass one or the other,
+//	never both.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_configure.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-configure.md
 func (c *WebAppClient) Configure(ctx context.Context, args *WebAppConfigureArgs) (*cpanel.UAPIResult[WebAppConfigureData], error) {
 	return cpanel.UAPICall[WebAppConfigureData](ctx, c.c, http.MethodGet, "WebApp", "configure", args)
-}
-
-// The application's linked database information, or `null` if no database is linked.
-type WebAppConfigureDataDB struct {
-	// The environment variable names that carry the database credentials.
-	EnvKeys []string `json:"env_keys"`
-
-	// The database server hostname.
-	Host string `json:"host"`
-
-	// The database name.
-	Name string `json:"name"`
-
-	// The database server port.
-	Port int64 `json:"port"`
 }
 
 // Suggested configuration values for the detected framework. Present only when this call changed `appdir` and re-ran the preflight.
@@ -170,6 +183,9 @@ type WebAppConfigureDataSource struct {
 
 // The application with its updated configuration.
 type WebAppConfigureData struct {
+	// The application's configured build command, or `null` if it has no build step. Set from the preflight-suggested default at `stage`, and overridable via `configure`.
+	BuildCommand *string `json:"build_command"`
+
 	// The application's category. This determines which
 	// lifecycle actions apply.
 	//
@@ -199,9 +215,6 @@ type WebAppConfigureData struct {
 	// name.
 	ContainerName *string `json:"container_name"`
 
-	// The application's linked database information, or `null` if no database is linked.
-	DB WebAppConfigureDataDB `json:"db"`
-
 	// Suggested configuration values for the detected framework. Present only when this call changed `appdir` and re-ran the preflight.
 	Defaults WebAppConfigureDataDefaults `json:"defaults"`
 
@@ -216,6 +229,26 @@ type WebAppConfigureData struct {
 
 	// The application's environment variables.
 	Env map[string]string `json:"env"`
+
+	// Whether the environment may be set for this
+	// application. The values are written to the
+	// application's own `.env`, which lives in its
+	// source tree, so a repository that would publish
+	// that file withholds the feature: a `configure`
+	// that sets `env` or `env_text` fails with an
+	// `error_category` of `env_not_editable`. Derived from the source
+	// tree on every call, so it changes as soon as the
+	// repository does.
+	EnvEditable bool `json:"env_editable"`
+
+	// Why the environment is not editable, or `ok` when
+	// it is. `tracked` means the repository tracks
+	// `.env`; `not_ignored` means no committed
+	// `.gitignore` rule covers it. Both are fixed by the
+	// user in the repository, not through this API.
+	//
+	// Possible values: `ok`, `tracked`, `not_ignored`.
+	EnvStatus string `json:"env_status"`
 
 	// The application's detected or user-selected framework, or `null` if unknown.
 	Framework *string `json:"framework"`
@@ -258,6 +291,9 @@ type WebAppConfigureData struct {
 	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
 	Staged bool `json:"staged"`
 
+	// The application's configured startup command, or `null` for a `static` application (which has no running process to start). Set from the preflight-suggested default at `stage`, and overridable via `configure`.
+	StartupCommand *string `json:"startup_command"`
+
 	// The application's current status.
 	//
 	// * `created` — Registered but never deployed.
@@ -271,6 +307,9 @@ type WebAppConfigureData struct {
 
 	// The application's live HTTPS URL.
 	URL string `json:"url"`
+
+	// Whether the application was confirmed onto a domain the account already used, replacing what that domain served. `0` for an application serving a domain it created itself. See https://go.cpanel.net/docroot2proxy.
+	UseExistingDomain int64 `json:"use_existing_domain"`
 }
 
 // WebAppDeleteArgs are the parameters of the UAPI function `WebApp::delete`.
@@ -324,7 +363,7 @@ type WebAppDeleteArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_delete.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-delete.md
 func (c *WebAppClient) Delete(ctx context.Context, args *WebAppDeleteArgs) (*cpanel.UAPIResult[WebAppDeleteData], error) {
 	return cpanel.UAPICall[WebAppDeleteData](ctx, c.c, http.MethodGet, "WebApp", "delete", args)
 }
@@ -380,7 +419,7 @@ type WebAppDeployArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_deploy.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-deploy.md
 func (c *WebAppClient) Deploy(ctx context.Context, args *WebAppDeployArgs) (*cpanel.UAPIResult[WebAppDeployData], error) {
 	return cpanel.UAPICall[WebAppDeployData](ctx, c.c, http.MethodGet, "WebApp", "deploy", args)
 }
@@ -437,7 +476,7 @@ type WebAppFetchLogsArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_fetch_logs.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-fetch_logs.md
 func (c *WebAppClient) FetchLogs(ctx context.Context, args *WebAppFetchLogsArgs) (*cpanel.UAPIResult[WebAppFetchLogsData], error) {
 	return cpanel.UAPICall[WebAppFetchLogsData](ctx, c.c, http.MethodGet, "WebApp", "fetch_logs", args)
 }
@@ -460,7 +499,7 @@ type WebAppFetchLogsData struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_get_available.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-get_available.md
 func (c *WebAppClient) GetAvailable(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[WebAppGetAvailableData], error) {
 	return cpanel.UAPICall[WebAppGetAvailableData](ctx, c.c, http.MethodGet, "WebApp", "get_available", cpanel.CombineArgs(extra...))
 }
@@ -525,7 +564,7 @@ type WebAppGetAvailableData struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_has_feature.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-has_feature.md
 func (c *WebAppClient) HasFeature(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[WebAppHasFeatureData], error) {
 	return cpanel.UAPICall[WebAppHasFeatureData](ctx, c.c, http.MethodGet, "WebApp", "has_feature", cpanel.CombineArgs(extra...))
 }
@@ -549,24 +588,9 @@ type WebAppHasFeatureData struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_list.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-list.md
 func (c *WebAppClient) List(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]WebAppListDataItem], error) {
 	return cpanel.UAPICall[[]WebAppListDataItem](ctx, c.c, http.MethodGet, "WebApp", "list", cpanel.CombineArgs(extra...))
-}
-
-// The application's linked database information, or `null` if no database is linked.
-type WebAppListDataItemDB struct {
-	// The environment variable names that carry the database credentials.
-	EnvKeys []string `json:"env_keys"`
-
-	// The database server hostname.
-	Host string `json:"host"`
-
-	// The database name.
-	Name string `json:"name"`
-
-	// The database server port.
-	Port int64 `json:"port"`
 }
 
 // Information about the most recent deploy, or `null` if the application has never deployed.
@@ -602,6 +626,9 @@ type WebAppListDataItemSource struct {
 
 // WebAppListDataItem is a generated payload type.
 type WebAppListDataItem struct {
+	// The application's configured build command, or `null` if it has no build step. Set from the preflight-suggested default at `stage`, and overridable via `configure`.
+	BuildCommand *string `json:"build_command"`
+
 	// The application's category. This determines which
 	// lifecycle actions apply.
 	//
@@ -620,9 +647,6 @@ type WebAppListDataItem struct {
 	// base name.
 	ContainerName *string `json:"container_name"`
 
-	// The application's linked database information, or `null` if no database is linked.
-	DB WebAppListDataItemDB `json:"db"`
-
 	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
 	Deployed bool `json:"deployed"`
 
@@ -634,6 +658,27 @@ type WebAppListDataItem struct {
 
 	// The application's environment variables.
 	Env map[string]string `json:"env"`
+
+	// Whether the environment may be set for this
+	// application. The values are written to the
+	// application's own `.env`, which lives in its
+	// source tree, so a repository that would publish
+	// that file withholds the feature: a `configure`
+	// that sets `env` or `env_text` fails with an `error_category`
+	// of `env_not_editable`. Derived from the source
+	// tree on every call, so it changes as soon as the
+	// repository does.
+	EnvEditable bool `json:"env_editable"`
+
+	// Why the environment is not editable, or `ok`
+	// when it is. `tracked` means the repository tracks
+	// `.env`; `not_ignored` means no committed
+	// `.gitignore` rule covers it. Both are fixed by
+	// the user in the repository, not through this
+	// API.
+	//
+	// Possible values: `ok`, `tracked`, `not_ignored`.
+	EnvStatus string `json:"env_status"`
 
 	// The application's detected or user-selected framework, or `null` if unknown.
 	Framework *string `json:"framework"`
@@ -676,6 +721,9 @@ type WebAppListDataItem struct {
 	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
 	Staged bool `json:"staged"`
 
+	// The application's configured startup command, or `null` for a `static` application (which has no running process to start). Set from the preflight-suggested default at `stage`, and overridable via `configure`.
+	StartupCommand *string `json:"startup_command"`
+
 	// The application's current status.
 	//
 	// * `created` — Registered but never deployed.
@@ -689,6 +737,9 @@ type WebAppListDataItem struct {
 
 	// The application's live HTTPS URL.
 	URL string `json:"url"`
+
+	// Whether the application was confirmed onto a domain the account already used, replacing what that domain served. `0` for an application serving a domain it created itself. See https://go.cpanel.net/docroot2proxy.
+	UseExistingDomain int64 `json:"use_existing_domain"`
 }
 
 // WebAppRedeployArgs are the parameters of the UAPI function `WebApp::redeploy`.
@@ -728,17 +779,77 @@ type WebAppRedeployArgs struct {
 // the application does not exist), `metadata.error_category` carries a
 // machine-readable failure category. Build and runtime failures occur
 // inside the background task and are recorded asynchronously in
-// `last_deploy.error_category`, which is accessible via `WebApp::list`.
+// `last_deploy.error_category`, which is accessible via `WebApp::list`. …
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_redeploy.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-redeploy.md
 func (c *WebAppClient) Redeploy(ctx context.Context, args *WebAppRedeployArgs) (*cpanel.UAPIResult[WebAppRedeployData], error) {
 	return cpanel.UAPICall[WebAppRedeployData](ctx, c.c, http.MethodGet, "WebApp", "redeploy", args)
 }
 
 // WebAppRedeployData is a generated payload type.
 type WebAppRedeployData struct {
+	// The unique identifier of this deploy.
+	DeployID string `json:"deploy_id"`
+
+	// The SSE URL to stream the deploy's progress.
+	SseURL string `json:"sse_url"`
+
+	// The task id of the SSE process.
+	TaskID string `json:"task_id"`
+}
+
+// WebAppRedeploy2Args are the parameters of the UAPI function `WebApp::redeploy`.
+type WebAppRedeploy2Args struct {
+	// The application's unique name (slug).
+	//
+	// This parameter is required.
+	Name string `cpanel:"name"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// Redeploy2 calls the UAPI function `WebApp::redeploy` — Redeploy an application, pulling source updates first.
+//
+// This function redeploys an already-deployed application. For
+// Git-sourced applications, it pulls the latest changes from the
+// configured branch before deploying. Otherwise it behaves exactly
+// like `WebApp::deploy`.
+//
+// **Note**:
+//
+//	This function starts an asynchronous task and returns immediately.
+//	Stream the returned `sse_url` for live progress, or poll the task.
+//	While the task runs, the application's status is `deploying`. When
+//	the task finishes the status transitions to `running` on success or
+//	`errored` on failure. Use `WebApp::list` to read the current status
+//	and inspect `last_deploy` for the outcome and any failure category.
+//
+// **Important**:
+//
+//	This function is idempotent. If you call it while a deploy for the
+//	same application is already running, it returns the in-flight
+//	task's identifiers instead of starting a new deploy.
+//
+// If this call fails before the task is dispatched (for example, when
+// the application does not exist), `metadata.error_category` carries a
+// machine-readable failure category. Build and runtime failures occur
+// inside the background task and are recorded asynchronously in
+// `last_deploy.error_category`, which is accessible via `WebApp::list`. …
+//
+// This function requires an HTTP POST request.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-redeploy-post.md
+func (c *WebAppClient) Redeploy2(ctx context.Context, args *WebAppRedeploy2Args) (*cpanel.UAPIResult[WebAppRedeploy2Data], error) {
+	return cpanel.UAPICall[WebAppRedeploy2Data](ctx, c.c, http.MethodPost, "WebApp", "redeploy", args)
+}
+
+// WebAppRedeploy2Data is a generated payload type.
+type WebAppRedeploy2Data struct {
 	// The unique identifier of this deploy.
 	DeployID string `json:"deploy_id"`
 
@@ -772,7 +883,7 @@ type WebAppRestartArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_restart.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-restart.md
 func (c *WebAppClient) Restart(ctx context.Context, args *WebAppRestartArgs) (*cpanel.UAPIResult[WebAppRestartData], error) {
 	return cpanel.UAPICall[WebAppRestartData](ctx, c.c, http.MethodGet, "WebApp", "restart", args)
 }
@@ -816,7 +927,7 @@ type WebAppSetModeArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_set_mode.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-set_mode.md
 func (c *WebAppClient) SetMode(ctx context.Context, args *WebAppSetModeArgs) (*cpanel.UAPIResult[WebAppSetModeData], error) {
 	return cpanel.UAPICall[WebAppSetModeData](ctx, c.c, http.MethodGet, "WebApp", "set_mode", args)
 }
@@ -851,20 +962,20 @@ type WebAppStageArgs struct {
 	// source type:
 	//
 	// * When `source_type` is `zip` — the path, relative to the user's
-	//   home directory, of a previously uploaded source archive
-	//   (for example, `uploads/my-app.zip`).
+	//   home directory, of a previously uploaded source archive: a ZIP
+	//   or tar file (for example, `uploads/my-app.zip` or
+	//   `uploads/my-app.tar.gz`).
 	// * When `source_type` is `git` — the Git repository URL to clone
-	//   (for example, `https://github.com/example/my-app.git`).
-	//
-	// **Security note:** This source is built and run on the server.
-	// Only use ZIP archives or Git repositories from a trusted origin. …
+	//   (for example, `https://github.com/example/my-app.git`). …
 	//
 	// This parameter is required.
 	Source string `cpanel:"source"`
 
 	// The application's source type.
 	//
-	// * `zip` — An archive previously uploaded with `Fileman::upload_files`.
+	// * `zip` — An archive (ZIP or tar — `.tar`, `.tar.gz`/`.tgz`,
+	//   `.tar.bz2`, `.tar.xz`) previously uploaded with
+	//   `Fileman::upload_files`.
 	// * `git` — A Git repository.
 	//
 	// Possible values: `zip`, `git`.
@@ -891,6 +1002,16 @@ type WebAppStageArgs struct {
 	// Possible values: `production`, `development`.
 	Mode *string `cpanel:"mode,omitempty"`
 
+	// The parent domain to serve the application under. The application's
+	// domain becomes `<assigned name>.<parent>` — read it back from the
+	// response `data.domain` rather than composing it, since the assigned
+	// name may differ from the requested `name`.
+	//
+	// This is the parent domain only, not the whole served domain. The
+	// account must own the parent itself; owning only the domain above it is
+	// not sufficient. …
+	Parent *string `cpanel:"parent,omitempty"`
+
 	// The runtime that backs the application.
 	//
 	// This parameter defaults to the system default runtime
@@ -898,6 +1019,17 @@ type WebAppStageArgs struct {
 	//
 	// Possible values: `nodejs`.
 	Runtime *string `cpanel:"runtime,omitempty"`
+
+	// The name of one of the account's existing SSH keys (Security's
+	// "Manage SSH Keys") to use for the clone. Only meaningful for a
+	// `git@...` SSH source URL; invalid with `source_type` `zip`, or
+	// with an `https://` source.
+	//
+	// This lets the clone use a key that has real access to the
+	// repository even when it is not stored under one of ssh's default
+	// identity filenames. When this key is currently passphrase-protected,
+	// also provide `sshkeypass`.
+	SSHKeyName *string `cpanel:"ssh_key_name,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
 	Extra cpanel.Args `cpanel:"-"`
@@ -927,24 +1059,9 @@ type WebAppStageArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_stage.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-stage.md
 func (c *WebAppClient) Stage(ctx context.Context, args *WebAppStageArgs) (*cpanel.UAPIResult[WebAppStageData], error) {
 	return cpanel.UAPICall[WebAppStageData](ctx, c.c, http.MethodGet, "WebApp", "stage", args)
-}
-
-// The application's linked database information, or `null` if no database is linked.
-type WebAppStageDataDB struct {
-	// The environment variable names that carry the database credentials.
-	EnvKeys []string `json:"env_keys"`
-
-	// The database server hostname.
-	Host string `json:"host"`
-
-	// The database name.
-	Name string `json:"name"`
-
-	// The database server port.
-	Port int64 `json:"port"`
 }
 
 // Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
@@ -981,6 +1098,9 @@ type WebAppStageDataSource struct {
 	// The Git branch, or `null` for ZIP sources.
 	Branch *string `json:"branch"`
 
+	// The name of the SSH key used for the clone, or `null` when none was selected or the source is not Git.
+	SSHKeyName *string `json:"ssh_key_name"`
+
 	// The source type.
 	//
 	// * `zip` — An uploaded archive.
@@ -995,6 +1115,9 @@ type WebAppStageDataSource struct {
 
 // The newly registered application.
 type WebAppStageData struct {
+	// The application's configured build command, or `null` if it has no build step. Set from the preflight-suggested default detected by this call, and overridable via `configure`.
+	BuildCommand *string `json:"build_command"`
+
 	// The application's category. This determines which
 	// lifecycle actions apply.
 	//
@@ -1022,20 +1145,37 @@ type WebAppStageData struct {
 	// name.
 	ContainerName *string `json:"container_name"`
 
-	// The application's linked database information, or `null` if no database is linked.
-	DB WebAppStageDataDB `json:"db"`
-
 	// Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
 	Defaults WebAppStageDataDefaults `json:"defaults"`
 
 	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
 	Deployed bool `json:"deployed"`
 
-	// The domain the application is bound to. This is an existing domain on the account or an automatically generated temporary domain.
+	// The domain the application is bound to, composed as the assigned name under the requested `parent` — or under the account's main domain when `parent` was omitted. The domain is not created until the application is deployed.
 	Domain string `json:"domain"`
 
 	// The application's environment variables.
 	Env map[string]string `json:"env"`
+
+	// Whether the environment may be set for this
+	// application. The values are written to the
+	// application's own `.env`, which lives in its
+	// source tree, so a repository that would publish
+	// that file withholds the feature: a `configure`
+	// that sets `env` or `env_text` fails with an `error_category`
+	// of `env_not_editable`. Derived from the source
+	// tree on every call, so it changes as soon as the
+	// repository does.
+	EnvEditable bool `json:"env_editable"`
+
+	// Why the environment is not editable, or `ok` when
+	// it is. `tracked` means the repository tracks
+	// `.env`; `not_ignored` means no committed
+	// `.gitignore` rule covers it. Both are fixed by the
+	// user in the repository, not through this API.
+	//
+	// Possible values: `ok`, `tracked`, `not_ignored`.
+	EnvStatus string `json:"env_status"`
 
 	// The application's detected or user-selected framework, or `null` if unknown.
 	Framework *string `json:"framework"`
@@ -1076,6 +1216,9 @@ type WebAppStageData struct {
 	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
 	Staged bool `json:"staged"`
 
+	// The application's configured startup command, or `null` for a `static` application (which has no running process to start). Set from the preflight-suggested default detected by this call, and overridable via `configure`.
+	StartupCommand *string `json:"startup_command"`
+
 	// The application's current status.
 	//
 	// * `created` — Registered but never deployed.
@@ -1089,6 +1232,300 @@ type WebAppStageData struct {
 
 	// The application's live HTTPS URL.
 	URL string `json:"url"`
+
+	// Whether the application was confirmed onto a domain the account already used, replacing what that domain served. `0` for an application serving a domain it created itself. See https://go.cpanel.net/docroot2proxy.
+	UseExistingDomain int64 `json:"use_existing_domain"`
+}
+
+// WebAppStage2Args are the parameters of the UAPI function `WebApp::stage`.
+type WebAppStage2Args struct {
+	// The requested application name (slug). If a deployed application
+	// already uses it, the application is registered under the next free
+	// `<name>-N` instead; read the assigned name from the response
+	// `data.name` and use it for `WebApp::configure` and `WebApp::deploy`.
+	//
+	// This parameter is required.
+	Name string `cpanel:"name"`
+
+	// The application's source location. This is **required** for every
+	// source type:
+	//
+	// * When `source_type` is `zip` — the path, relative to the user's
+	//   home directory, of a previously uploaded source archive: a ZIP
+	//   or tar file (for example, `uploads/my-app.zip` or
+	//   `uploads/my-app.tar.gz`).
+	// * When `source_type` is `git` — the Git repository URL to clone
+	//   (for example, `https://github.com/example/my-app.git`). …
+	//
+	// This parameter is required.
+	Source string `cpanel:"source"`
+
+	// The application's source type.
+	//
+	// * `zip` — An archive (ZIP or tar — `.tar`, `.tar.gz`/`.tgz`,
+	//   `.tar.bz2`, `.tar.xz`) previously uploaded with
+	//   `Fileman::upload_files`.
+	// * `git` — A Git repository.
+	//
+	// Possible values: `zip`, `git`.
+	//
+	// This parameter is required.
+	SourceType string `cpanel:"source_type"`
+
+	// The application root, relative to the top of the cloned repository
+	// or extracted archive, for a source whose application does not live
+	// at the top level (for example, `packages/web` in a monorepo). The
+	// preflight inspects this directory to detect the framework. …
+	Appdir *string `cpanel:"appdir,omitempty"`
+
+	// The Git branch to clone. Only meaningful when `source_type` is
+	// `git`.
+	//
+	// This parameter defaults to the repository's default branch.
+	Branch *string `cpanel:"branch,omitempty"`
+
+	// The run mode for `server` category applications.
+	//
+	// This parameter defaults to `production`.
+	//
+	// Possible values: `production`, `development`.
+	Mode *string `cpanel:"mode,omitempty"`
+
+	// The parent domain to serve the application under. The application's
+	// domain becomes `<assigned name>.<parent>` — read it back from the
+	// response `data.domain` rather than composing it, since the assigned
+	// name may differ from the requested `name`.
+	//
+	// This is the parent domain only, not the whole served domain. The
+	// account must own the parent itself; owning only the domain above it is
+	// not sufficient. …
+	Parent *string `cpanel:"parent,omitempty"`
+
+	// The runtime that backs the application.
+	//
+	// This parameter defaults to the system default runtime
+	// (`nodejs`).
+	//
+	// Possible values: `nodejs`.
+	Runtime *string `cpanel:"runtime,omitempty"`
+
+	// The name of one of the account's existing SSH keys (Security's
+	// "Manage SSH Keys") to use for the clone. Only meaningful for a
+	// `git@...` SSH source URL; invalid with `source_type` `zip`, or
+	// with an `https://` source.
+	//
+	// This lets the clone use a key that has real access to the
+	// repository even when it is not stored under one of ssh's default
+	// identity filenames. When this key is currently passphrase-protected,
+	// also provide `sshkeypass`.
+	SSHKeyName *string `cpanel:"ssh_key_name,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// Stage2 calls the UAPI function `WebApp::stage` — Register a new web application.
+//
+// Web Apps is the recommended feature for deploying new web applications, and this function is the entry point. Prefer it over the older Application Manager (`PassengerApps`) feature for new deployments.
+//
+// This function registers a new web application from an uploaded
+// archive or a Git repository. Once the source is placed on disk, it
+// runs a preflight that inspects the source and detects the
+// application's framework and category, records them on the
+// application, and derives suggested configuration defaults. The
+// detection `confidence` and the suggested `defaults` are returned so
+// you can pass them to `WebApp::configure`. The application is
+// registered but **not** deployed — call `WebApp::configure` (optional)
+// and then `WebApp::deploy` to bring it live.
+//
+// The preflight never fails the stage: a source with no recognizable
+// markers is registered with a `none` confidence and generic defaults.
+//
+// Registering a name that is still **staged** (not yet deployed)
+// overwrites it: the previously staged application and its source are
+// replaced, and the response `warnings` array reports that the old
+// files were overwritten. …
+//
+// This function requires an HTTP POST request.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-stage-post.md
+func (c *WebAppClient) Stage2(ctx context.Context, args *WebAppStage2Args) (*cpanel.UAPIResult[WebAppStage2Data], error) {
+	return cpanel.UAPICall[WebAppStage2Data](ctx, c.c, http.MethodPost, "WebApp", "stage", args)
+}
+
+// Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
+type WebAppStage2DataDefaults struct {
+	// The suggested build command, or `null` if no build step is needed.
+	BuildCommand *string `json:"build_command"`
+
+	// The suggested build output directory, or `null` if not applicable.
+	OutputDir *string `json:"output_dir"`
+
+	// The suggested runtime version tag.
+	RuntimeTag string `json:"runtime_tag"`
+
+	// The suggested startup command, or `null` for `static` applications.
+	StartupCommand *string `json:"startup_command"`
+}
+
+// Information about the most recent deploy, or `null` if the application has never deployed.
+type WebAppStage2DataLastDeploy struct {
+	// The unique identifier of the deploy.
+	DeployID string `json:"deploy_id"`
+
+	// The result of the deploy.
+	//
+	// Possible values: `success`, `failed`.
+	Result string `json:"result"`
+
+	// When the deploy finished, in ISO 8601 format.
+	Timestamp string `json:"timestamp"`
+}
+
+// The application's source information.
+type WebAppStage2DataSource struct {
+	// The Git branch, or `null` for ZIP sources.
+	Branch *string `json:"branch"`
+
+	// The name of the SSH key used for the clone, or `null` when none was selected or the source is not Git.
+	SSHKeyName *string `json:"ssh_key_name"`
+
+	// The source type.
+	//
+	// * `zip` — An uploaded archive.
+	// * `git` — A Git repository.
+	//
+	// Possible values: `zip`, `git`.
+	Type2 string `json:"type"`
+
+	// The Git repository URL, or `null` for ZIP sources.
+	URL *string `json:"url"`
+}
+
+// The newly registered application.
+type WebAppStage2Data struct {
+	// The application's configured build command, or `null` if it has no build step. Set from the preflight-suggested default detected by this call, and overridable via `configure`.
+	BuildCommand *string `json:"build_command"`
+
+	// The application's category. This determines which
+	// lifecycle actions apply.
+	//
+	// * `static` — The application builds to static files that the web server serves directly.
+	// * `server` — The application runs a long-lived server process.
+	// * `other` — Any other kind of application.
+	//
+	// Possible values: `static`, `server`, `other`.
+	Category string `json:"category"`
+
+	// How confident the preflight detection is.
+	//
+	// * `high` — Strong framework markers found.
+	// * `low` — Partial markers found; verify the defaults before deploying.
+	// * `none` — No recognizable markers; the defaults are generic.
+	//
+	// Possible values: `high`, `low`, `none`.
+	COnFIDEnce string `json:"confidence"`
+
+	// The name of the deployed container backing this
+	// application, or `null` while it is only staged.
+	// Assigned by the deploy and unique per application
+	// instance, so it identifies the exact deployed
+	// record even when several applications share a base
+	// name.
+	ContainerName *string `json:"container_name"`
+
+	// Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
+	Defaults WebAppStage2DataDefaults `json:"defaults"`
+
+	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
+	Deployed bool `json:"deployed"`
+
+	// The domain the application is bound to, composed as the assigned name under the requested `parent` — or under the account's main domain when `parent` was omitted. The domain is not created until the application is deployed.
+	Domain string `json:"domain"`
+
+	// The application's environment variables.
+	Env map[string]string `json:"env"`
+
+	// Whether the environment may be set for this
+	// application. The values are written to the
+	// application's own `.env`, which lives in its
+	// source tree, so a repository that would publish
+	// that file withholds the feature: a `configure`
+	// that sets `env` or `env_text` fails with an `error_category`
+	// of `env_not_editable`. Derived from the source
+	// tree on every call, so it changes as soon as the
+	// repository does.
+	EnvEditable bool `json:"env_editable"`
+
+	// Why the environment is not editable, or `ok` when
+	// it is. `tracked` means the repository tracks
+	// `.env`; `not_ignored` means no committed
+	// `.gitignore` rule covers it. Both are fixed by the
+	// user in the repository, not through this API.
+	//
+	// Possible values: `ok`, `tracked`, `not_ignored`.
+	EnvStatus string `json:"env_status"`
+
+	// The application's detected or user-selected framework, or `null` if unknown.
+	Framework *string `json:"framework"`
+
+	// Information about the most recent deploy, or `null` if the application has never deployed.
+	LastDeploy WebAppStage2DataLastDeploy `json:"last_deploy"`
+
+	// The application's run mode. Only meaningful for the `server` category; `null` otherwise.
+	//
+	// Possible values: `production`, `development`.
+	Mode *string `json:"mode"`
+
+	// The application's assigned name (slug), unique
+	// across the account. This may differ from the name
+	// you requested: if a deployed application already
+	// used that name, the application was registered
+	// under the next free `<name>-N`. Use this value for
+	// `WebApp::configure` and `WebApp::deploy`.
+	Name string `json:"name"`
+
+	// The package manager the deploy uses to install
+	// dependencies and run scripts. It is detected from
+	// the source's `packageManager` field, a lockfile, or
+	// the default (`npm`).
+	//
+	// Possible values: `npm`, `yarn`, `pnpm`, `bun`.
+	PackageManager string `json:"package_manager"`
+
+	// The application's runtime identifier.
+	Runtime string `json:"runtime"`
+
+	// The runtime version tag.
+	RuntimeTag string `json:"runtime_tag"`
+
+	// The application's source information.
+	Source WebAppStage2DataSource `json:"source"`
+
+	// Whether the application's source is present in the staging area. This is `true` after the source is uploaded or cloned and until the application is deleted.
+	Staged bool `json:"staged"`
+
+	// The application's configured startup command, or `null` for a `static` application (which has no running process to start). Set from the preflight-suggested default detected by this call, and overridable via `configure`.
+	StartupCommand *string `json:"startup_command"`
+
+	// The application's current status.
+	//
+	// * `created` — Registered but never deployed.
+	// * `deploying` — A deploy is in progress.
+	// * `running` — The application is live.
+	// * `stopped` — The application is stopped.
+	// * `errored` — The last action failed.
+	//
+	// Possible values: `created`, `deploying`, `running`, `stopped`, `errored`.
+	Status string `json:"status"`
+
+	// The application's live HTTPS URL.
+	URL string `json:"url"`
+
+	// Whether the application was confirmed onto a domain the account already used, replacing what that domain served. `0` for an application serving a domain it created itself. See https://go.cpanel.net/docroot2proxy.
+	UseExistingDomain int64 `json:"use_existing_domain"`
 }
 
 // WebAppStartArgs are the parameters of the UAPI function `WebApp::start`.
@@ -1114,7 +1551,7 @@ type WebAppStartArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_start.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-start.md
 func (c *WebAppClient) Start(ctx context.Context, args *WebAppStartArgs) (*cpanel.UAPIResult[WebAppStartData], error) {
 	return cpanel.UAPICall[WebAppStartData](ctx, c.c, http.MethodGet, "WebApp", "start", args)
 }
@@ -1150,7 +1587,7 @@ type WebAppStopArgs struct {
 //
 // Available since cPanel & WHM version cPanel 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp_stop.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-stop.md
 func (c *WebAppClient) Stop(ctx context.Context, args *WebAppStopArgs) (*cpanel.UAPIResult[WebAppStopData], error) {
 	return cpanel.UAPICall[WebAppStopData](ctx, c.c, http.MethodGet, "WebApp", "stop", args)
 }

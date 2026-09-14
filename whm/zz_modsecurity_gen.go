@@ -1211,12 +1211,12 @@ type ModSecGetConfigsWithChangesPendingData struct {
 
 // ModSecGetLog calls the WHM API 1 function `modsec_get_log` — Return ModSecurity logs
 //
-// This function retrieves ModSecurity™ log entries from the modsec MySQL® database.
+// This function retrieves ModSecurity™ log entries from the modsec SQLite database.
 //
 // **Important:**
 //
 // When you disable the
-// [Web Server role](https://docs.cpanel.net/knowledge-base/general-systems-administration/how-to-use-server-profiles/#roles),
+// [Web Server role](https://go.cpanel.net/serverroles),
 // the system disables this function.
 //
 // Available since cPanel & WHM version 11.46.

@@ -41,6 +41,11 @@ type ServiceProxySetServiceProxyBackendsArgs struct {
 	// The hostname or IP address to assign as the server that handles
 	// the account's service proxy requests.
 	//
+	// The proxy backend must be routable. The server rejects non-routable
+	// IP literals (loopback, RFC 1918, CGNAT, and cloud-metadata addresses)
+	// and obfuscated encodings of those addresses; use a routable hostname
+	// or IP address instead.
+	//
 	// This parameter defaults to the existing service proxy configuration,
 	// if one exists.
 	General *string `cpanel:"general,omitempty"`

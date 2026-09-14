@@ -62,8 +62,12 @@ type SetServiceProxyBackendsArgs struct {
 	// The hostname or IP address to assign as the server that handles
 	// the account's service proxy requests.
 	//
-	// This parameter defaults to the existing service proxy configuration,
-	// if one exists.
+	// The proxy backend must be routable. As a security measure, the server
+	// rejects non-routable IP literals (loopback, RFC 1918, CGNAT, and
+	// cloud-metadata addresses), and obfuscated encodings of those addresses.
+	// To use a private-network IPv4 or IPv6 (ULA) backend, this WHM API 1
+	// function permits them, but the account's proxy will not function unless
+	// the server can route to that backend. …
 	General *string `cpanel:"general,omitempty"`
 
 	// The name of a service group for which to assign a proxy backend. The

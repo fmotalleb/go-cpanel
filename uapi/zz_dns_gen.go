@@ -39,6 +39,45 @@ func (c *DNSClient) EnsureDomainsResideOnlyLocally(ctx context.Context, args *DN
 	return cpanel.UAPICall[[]string](ctx, c.c, http.MethodGet, "DNS", "ensure_domains_reside_only_locally", args)
 }
 
+// DNSEnsureDomainsUseRecognizedNameserversArgs are the parameters of the UAPI function `DNS::ensure_domains_use_recognized_nameservers`.
+type DNSEnsureDomainsUseRecognizedNameserversArgs struct {
+	// The domain to check.
+	//
+	// **Note:**
+	//
+	// To check multiple domains, duplicate or increment the parameter name. For example, to check three domains, you could:
+	// * Use the `domain` parameter multiple times.
+	// * Use the `domain`, `domain-1`, and `domain-2` parameters.
+	//
+	// This parameter is required.
+	Domain string `cpanel:"domain"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// EnsureDomainsUseRecognizedNameservers calls the UAPI function `DNS::ensure_domains_use_recognized_nameservers` — Return whether domains use recognized nameservers
+//
+// This function indicates whether the account's domains' nameservers resolve to an IP address that this server recognizes as its own. It predicts the outcome of the create-time nameserver validation that runs when a domain is added to the account, without performing any privileged action.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/dns-information/dns-ensure_domains_use_recognized_nameservers.md
+func (c *DNSClient) EnsureDomainsUseRecognizedNameservers(ctx context.Context, args *DNSEnsureDomainsUseRecognizedNameserversArgs) (*cpanel.UAPIResult[[]DNSEnsureDomainsUseRecognizedNameserversDataItem], error) {
+	return cpanel.UAPICall[[]DNSEnsureDomainsUseRecognizedNameserversDataItem](ctx, c.c, http.MethodGet, "DNS", "ensure_domains_use_recognized_nameservers", args)
+}
+
+// DNSEnsureDomainsUseRecognizedNameserversDataItem is a generated payload type.
+type DNSEnsureDomainsUseRecognizedNameserversDataItem struct {
+	// The validator's own localized message.
+	Message string `json:"message"`
+
+	// A short machine-readable reason code.
+	//
+	// Possible values: `domain_not_registered`, `unrecognized_nameservers`.
+	Type2 string `json:"type"`
+}
+
 // DNSFetchCpanelGeneratedDomainsArgs are the parameters of the UAPI function `DNS::fetch_cpanel_generated_domains`.
 type DNSFetchCpanelGeneratedDomainsArgs struct {
 	// The domain for which to retrieve cPanel-generated subdomains.

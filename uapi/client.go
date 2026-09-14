@@ -30,6 +30,12 @@ func (c *Client) AccountEnhancements() *AccountEnhancementsClient {
 	return &AccountEnhancementsClient{c: c.c}
 }
 
+// ActiveSessionsClient wraps calls to the UAPI `ActiveSessions` module.
+type ActiveSessionsClient struct{ c *cpanel.Client }
+
+// ActiveSessions returns the client for the UAPI `ActiveSessions` module.
+func (c *Client) ActiveSessions() *ActiveSessionsClient { return &ActiveSessionsClient{c: c.c} }
+
 // AddonDomainClient wraps calls to the UAPI `AddonDomain` module.
 type AddonDomainClient struct{ c *cpanel.Client }
 
@@ -611,6 +617,12 @@ type WebProsMcpClient struct{ c *cpanel.Client }
 
 // WebProsMcp returns the client for the UAPI `WebProsMCP` module.
 func (c *Client) WebProsMcp() *WebProsMcpClient { return &WebProsMcpClient{c: c.c} }
+
+// WebsiteBackupClient wraps calls to the UAPI `WebsiteBackup` module.
+type WebsiteBackupClient struct{ c *cpanel.Client }
+
+// WebsiteBackup returns the client for the UAPI `WebsiteBackup` module.
+func (c *Client) WebsiteBackup() *WebsiteBackupClient { return &WebsiteBackupClient{c: c.c} }
 
 // WebVhostsClient wraps calls to the UAPI `WebVhosts` module.
 type WebVhostsClient struct{ c *cpanel.Client }

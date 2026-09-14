@@ -11,13 +11,20 @@ import (
 	cpanel "github.com/fmotalleb/go-cpanel"
 )
 
-// Finish calls the UAPI function `ExtractInfo::finish` — Clear the current user's extract run-state marker
+// Finish calls the UAPI function `ExtractInfo::finish` — Remove extract progress record
 //
-// Clears the run-state marker written by ExtractInfo.start. After finish, progress reports state 'none'. Idempotent - succeeds whether or not a marker exists. Call after Fileman.fileop op=extract completes (success or failure).
+// This function clears the run-state marker that the `ExtractInfo::start`
+// function wrote.
+//
+// **Note:**
+// After it runs, the `ExtractInfo::progress` function reports the state
+// `none`. This function is idempotent and succeeds whether or not a marker
+// exists. Call it after the `Fileman::fileop` function with `op=extract`
+// finishes, whether that operation succeeded or failed.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/extractinfo/finish.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/extractinfo/extractinfo-finish.md
 func (c *ExtractInfoClient) Finish(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[ExtractInfoFinishData], error) {
 	return cpanel.UAPICall[ExtractInfoFinishData](ctx, c.c, http.MethodGet, "ExtractInfo", "finish", cpanel.CombineArgs(extra...))
 }
@@ -28,51 +35,93 @@ type ExtractInfoFinishData struct {
 	Cleared bool `json:"cleared"`
 }
 
-// Progress calls the UAPI function `ExtractInfo::progress` — Get progress for the current user's running archive extraction
+// Progress calls the UAPI function `ExtractInfo::progress` — Return archive extraction progress
 //
-// Returns telemetry for an in-progress archive extraction started via ExtractInfo.start. currentBytes is how much the destination directory has grown since the start baseline; totalBytes is the uncompressed archive size recorded at start, exact for archives under 4 GiB and a best-effort estimate for larger ones (the gzip trailer stores the uncompressed size modulo 2**32, so it wraps at 4 GiB). totalBytesEstimated reports which of those two cases applies. percent is derived from currentBytes and totalBytes and clamped to 99; it is approximate whenever totalBytesEstimated is true. Degrades to zeros when no run is active. Read-only and safe to poll.
+// This function returns progress information for an archive extraction
+// that the `ExtractInfo::start` function began.
+//
+// **Note:**
+// When no run is active, the `state` return value is `none` and the other
+// return values are `0` or null.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/extractinfo/progress.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/extractinfo/extractinfo-progress.md
 func (c *ExtractInfoClient) Progress(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[ExtractInfoProgressData], error) {
 	return cpanel.UAPICall[ExtractInfoProgressData](ctx, c.c, http.MethodGet, "ExtractInfo", "progress", cpanel.CombineArgs(extra...))
 }
 
 // ExtractInfoProgressData is a generated payload type.
 type ExtractInfoProgressData struct {
-	// Bytes the destination directory has grown by since the start baseline. Never negative.
+	// Bytes the destination directory has grown by since
+	// the baseline that the `ExtractInfo::start`
+	// function recorded. Never negative.
 	CurrentBytes int64 `json:"currentBytes"`
 
-	// Seconds since the run started. 0 when not running.
+	// Seconds since the run started. `0` when not
+	// running.
 	ElapsedSeconds int64 `json:"elapsedSeconds"`
 
-	// Completion percent (0-99), derived from currentBytes / totalBytes and clamped to 99 until finish is called. Approximate whenever totalBytesEstimated is 1; even when the total is exact the destination-directory delta can carry noise.
+	// Completion percent, from 0 to 99.
+	//
+	// **Note:**
+	// The function derives this from `currentBytes` and
+	// `totalBytes` and clamps it to 99 until the
+	// `ExtractInfo::finish` function is called. The
+	// value is approximate whenever
+	// `totalBytesEstimated` is `1`. Even when the total
+	// is exact, the destination directory delta can
+	// carry noise.
 	Percent float64 `json:"percent"`
 
-	// Start epoch recorded by start. Null when not running.
+	// Start epoch recorded by the `ExtractInfo::start`
+	// function. Null when not running.
 	StartedAtEpoch *int64 `json:"startedAtEpoch"`
 
-	// Current run state. 'inprogress' while a run is active and within the timeout, 'timeout' once it has run past the timeout ceiling, or 'none' when nothing is running (including after finish).
+	// Current run state.
+	//
+	// * `inprogress` - A run is active and within the
+	//   timeout.
+	// * `timeout` - A run has passed the timeout
+	//   ceiling.
+	// * `none` - Nothing is running. This includes the
+	//   period after the `ExtractInfo::finish` function
+	//   is called.
 	//
 	// Possible values: `inprogress`, `timeout`, `none`.
 	State string `json:"state"`
 
-	// The uncompressed archive size recorded at start. Exact for archives under 4 GiB; a best-effort estimate for archives of 4 GiB or more, because the gzip trailer stores the uncompressed size modulo 2**32. See totalBytesEstimated.
+	// The uncompressed archive size recorded at start.
+	//
+	// **Note:**
+	// That size is exact for archives under 4 GiB. It is
+	// a best-effort estimate for archives of 4 GiB or
+	// more, because the gzip trailer stores the
+	// uncompressed size modulo 4,294,967,296 bytes. See
+	// the `totalBytesEstimated` return value.
 	TotalBytes int64 `json:"totalBytes"`
 
-	// 1 when totalBytes is an estimate (the gzip trailer wrapped because the archive is 4 GiB or larger), 0 when totalBytes is exact.
+	// Whether the `totalBytes` return value is an
+	// estimate rather than an exact size.
+	//
+	// * `1` - The value is an estimate. The gzip trailer
+	//   stores the uncompressed size modulo
+	//   4,294,967,296 bytes, so it wrapped for an
+	//   archive of 4 GiB or larger.
+	// * `0` - The value is exact.
 	TotalBytesEstimated int64 `json:"totalBytesEstimated"`
 }
 
 // ExtractInfoStartArgs are the parameters of the UAPI function `ExtractInfo::start`.
 type ExtractInfoStartArgs struct {
-	// Path to the backup archive being extracted. Must resolve within the current user's home directory.
+	// The file path to the backup archive. It must resolve within the
+	// cPanel account's home directory.
 	//
 	// This parameter is required.
 	Archive string `cpanel:"archive"`
 
-	// Destination directory the archive is being extracted into. Must resolve within the current user's home directory.
+	// The destination directory where you want to extract the archive. It
+	// must resolve within the cPanel account's home directory.
 	//
 	// This parameter is required.
 	Directory string `cpanel:"directory"`
@@ -81,13 +130,29 @@ type ExtractInfoStartArgs struct {
 	Extra cpanel.Args `cpanel:"-"`
 }
 
-// Start calls the UAPI function `ExtractInfo::start` — Begin tracking progress for an extract run
+// Start calls the UAPI function `ExtractInfo::start` — Start extract progress tracking
 //
-// Begins tracking an extract run for the given archive and destination directory (both must resolve within the current user's home directory). Computes the exact uncompressed byte size of the archive and snapshots the destination directory's current disk usage as a baseline, then writes a run-state marker. Returns immediately; no extraction happens in this function. Call before Fileman.fileop op=extract.
+// This function starts progress tracking for a File Manager extract
+// operation.
+//
+// **Note:**
+//
+//   - The `Fileman::fileop` function with `op=extract` is a single
+//     synchronous call to `tar` that reports no progress of its own. This
+//     function brackets that call from the outside so that a caller can show
+//     real progress.
+//   - Call this function first, then call the `Fileman::fileop` function to
+//     perform the extract, poll the `ExtractInfo::progress` function while
+//     it runs, and call the `ExtractInfo::finish` function when it
+//     completes.
+//   - The function records the archive's total uncompressed byte size and a
+//     baseline snapshot of the destination directory's disk usage, then
+//     writes a run-state marker.
+//   - This function returns immediately and extracts nothing itself.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/extractinfo/start.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/extractinfo/extractinfo-start.md
 func (c *ExtractInfoClient) Start(ctx context.Context, args *ExtractInfoStartArgs) (*cpanel.UAPIResult[ExtractInfoStartData], error) {
 	return cpanel.UAPICall[ExtractInfoStartData](ctx, c.c, http.MethodGet, "ExtractInfo", "start", args)
 }

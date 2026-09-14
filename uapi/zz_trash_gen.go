@@ -13,7 +13,16 @@ import (
 
 // TrashRemoveArgs are the parameters of the UAPI function `Trash::remove`.
 type TrashRemoveArgs struct {
-	// Home-relative path of the item to permanently delete. Must resolve strictly within ~/.trash.
+	// The path of the item to permanently delete.
+	//
+	// **Note:**
+	// This parameter
+	// must resolve strictly within the `.trash` directory in the account's
+	// home directory. A leading slash is read relative to the home
+	// directory, so `/.trash/backup-7.14.2026_16-35-25` is the expected
+	// form. The function resolves symlinks and `..` traversal before it
+	// runs that confinement check, and the trash directory itself can
+	// never be the target.
 	//
 	// This parameter is required.
 	Path string `cpanel:"path"`
@@ -22,24 +31,61 @@ type TrashRemoveArgs struct {
 	Extra cpanel.Args `cpanel:"-"`
 }
 
-// Remove calls the UAPI function `Trash::remove` — Permanently delete a single item from the trash
+// Remove calls the UAPI function `Trash::remove` — Delete item from Trash
 //
-// Force-deletes a single item from the current user's ~/.trash directory. Unlike Fileman.fileop op=unlink, this uses a non-safe recursive delete, so permission-locked entries (e.g. a 0444 file or a 0555 subdirectory preserved from a backup) are actually removed instead of being silently skipped and falsely reported as deleted. The path parameter must resolve strictly within ~/.trash (symlinks and `..` traversal are resolved before the confinement check runs); the trash root itself can never be the target. If the target is already absent, this is an idempotent success rather than an error. On success, the stale line (if any) for the removed item is pruned from the trash's restore map.
+// This function permanently deletes a single item from the `.trash`
+// directory in the current cPanel account's home directory.
+//
+// **Note:**
+// Unlike the `Fileman::fileop` function with `op=unlink`, this function
+// uses a non-safe recursive delete, so it removes permission-locked
+// entries instead of skipping them silently and reporting them as deleted.
+// Such an entry might be a `0444` file or a `0555` subdirectory preserved
+// from a backup.
+//
+// If the target is already absent, the function reports an idempotent
+// success rather than an error. On success, it also prunes the stale line
+// for the removed item, if there is one, from the trash's restore map.
 //
 // This function requires an HTTP POST request.
 //
 // Available since cPanel & WHM version 136.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/trash/remove.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/trash/trash-remove.md
 func (c *TrashClient) Remove(ctx context.Context, args *TrashRemoveArgs) (*cpanel.UAPIResult[TrashRemoveData], error) {
 	return cpanel.UAPICall[TrashRemoveData](ctx, c.c, http.MethodPost, "Trash", "remove", args)
 }
 
 // TrashRemoveData is a generated payload type.
 type TrashRemoveData struct {
-	// True when the target was already absent (idempotent success); omitted otherwise.
+	// True when the target was already absent, which the
+	// function reports as an idempotent success. Omitted
+	// otherwise.
 	AlreadyGone bool `json:"alreadyGone"`
 
 	// Always true on success.
 	Removed bool `json:"removed"`
+}
+
+// Usage calls the UAPI function `Trash::usage` — Report the disk space used by the trash directory
+//
+// Report the current apparent size of the trash directory's contents. Returns whether the trash exists, the total apparent bytes calculated by summing each entry's lstat size, and the number of items in the trash. Excludes the root-level .trash_restore bookkeeping file. Does not walk the account's home directory or follow symbolic links outside the trash. even on large accounts.
+//
+// Available since cPanel & WHM version 136.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/trash/trash-usage.md
+func (c *TrashClient) Usage(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[TrashUsageData], error) {
+	return cpanel.UAPICall[TrashUsageData](ctx, c.c, http.MethodGet, "Trash", "usage", cpanel.CombineArgs(extra...))
+}
+
+// TrashUsageData is a generated payload type.
+type TrashUsageData struct {
+	// Total apparent size of the trash contents, calculated by summing each entry's lstat size in bytes. Excludes the root-level .trash_restore bookkeeping file. This value does not represent allocated disk blocks or quota impact.
+	Bytes int64 `json:"bytes"`
+
+	// Whether the trash directory exists. A brand-new account that has never trashed anything returns 0; otherwise 1.
+	Exists int64 `json:"exists"`
+
+	// Number of items in the trash, excluding the .trash_restore bookkeeping file.
+	Items int64 `json:"items"`
 }

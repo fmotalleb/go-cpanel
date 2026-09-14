@@ -33,7 +33,7 @@ type SitejetAddAPITokenArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/add_sitejet_api_token.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-add_api_token.md
 func (c *SitejetClient) AddAPIToken(ctx context.Context, args *SitejetAddAPITokenArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "add_api_token", args)
 }
@@ -48,7 +48,7 @@ func (c *SitejetClient) AddAPIToken(ctx context.Context, args *SitejetAddAPIToke
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/can_create_domains.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-can_create_domains.md
 func (c *SitejetClient) CanCreateDomains(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "can_create_domains", cpanel.CombineArgs(extra...))
 }
@@ -59,7 +59,7 @@ func (c *SitejetClient) CanCreateDomains(ctx context.Context, extra ...cpanel.Ar
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/create_sitejet_account.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-create_account.md
 func (c *SitejetClient) CreateAccount(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[SitejetCreateAccountData], error) {
 	return cpanel.UAPICall[SitejetCreateAccountData](ctx, c.c, http.MethodGet, "Sitejet", "create_account", cpanel.CombineArgs(extra...))
 }
@@ -87,7 +87,7 @@ type SitejetCreateRestorePointArgs struct {
 //
 // Available since cPanel & WHM version 120.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/create_restore_point.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-create_restore_point.md
 func (c *SitejetClient) CreateRestorePoint(ctx context.Context, args *SitejetCreateRestorePointArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "create_restore_point", args)
 }
@@ -157,7 +157,7 @@ type SitejetCreateWebsiteArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/create_sitejet_website.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-create_website.md
 func (c *SitejetClient) CreateWebsite(ctx context.Context, args *SitejetCreateWebsiteArgs) (*cpanel.UAPIResult[SitejetCreateWebsiteData], error) {
 	return cpanel.UAPICall[SitejetCreateWebsiteData](ctx, c.c, http.MethodGet, "Sitejet", "create_website", args)
 }
@@ -183,7 +183,7 @@ type SitejetGetAllUserSitejetInfoArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/get_all_user_sitejet_info.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-get_all_user_sitejet_info.md
 func (c *SitejetClient) GetAllUserSitejetInfo(ctx context.Context, args *SitejetGetAllUserSitejetInfoArgs) (*cpanel.UAPIResult[[]SitejetGetAllUserSitejetInfoDataItem], error) {
 	return cpanel.UAPICall[[]SitejetGetAllUserSitejetInfoDataItem](ctx, c.c, http.MethodGet, "Sitejet", "get_all_user_sitejet_info", args)
 }
@@ -320,7 +320,7 @@ type SitejetGetAllUserSitejetInfoDataItem struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/get_sitejet_api_token.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-get_api_token.md
 func (c *SitejetClient) GetAPIToken(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Sitejet", "get_api_token", cpanel.CombineArgs(extra...))
 }
@@ -342,7 +342,7 @@ type SitejetGetPreviewURLArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/get_sitejet_preview_url.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-get_preview_url.md
 func (c *SitejetClient) GetPreviewURL(ctx context.Context, args *SitejetGetPreviewURLArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Sitejet", "get_preview_url", args)
 }
@@ -374,7 +374,7 @@ type SitejetGetSSOLinkArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/get_sitejet_sso_link.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-get_sso_link.md
 func (c *SitejetClient) GetSSOLink(ctx context.Context, args *SitejetGetSSOLinkArgs) (*cpanel.UAPIResult[string], error) {
 	return cpanel.UAPICall[string](ctx, c.c, http.MethodGet, "Sitejet", "get_sso_link", args)
 }
@@ -387,7 +387,7 @@ func (c *SitejetClient) GetSSOLink(ctx context.Context, args *SitejetGetSSOLinkA
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/get_sitejet_templates.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-get_templates.md
 //
 // Deprecated: cPanel & WHM mark this function as deprecated.
 func (c *SitejetClient) GetTemplates(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]SitejetGetTemplatesDataItem], error) {
@@ -418,6 +418,46 @@ type SitejetGetTemplatesDataItem struct {
 	Tags []string `json:"tags"`
 }
 
+// SitejetIsPublishInProgressArgs are the parameters of the UAPI function `Sitejet::is_publish_in_progress`.
+type SitejetIsPublishInProgressArgs struct {
+	// The domain for the Sitejet website.
+	//
+	// This parameter is required.
+	Domain string `cpanel:"domain"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// IsPublishInProgress calls the UAPI function `Sitejet::is_publish_in_progress` — Check whether a Sitejet publish is running
+//
+// This function reports whether a Sitejet publish is currently running for a domain, and under which process ID.
+//
+// Available since cPanel & WHM version 110.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-is_publish_in_progress.md
+func (c *SitejetClient) IsPublishInProgress(ctx context.Context, args *SitejetIsPublishInProgressArgs) (*cpanel.UAPIResult[SitejetIsPublishInProgressData], error) {
+	return cpanel.UAPICall[SitejetIsPublishInProgressData](ctx, c.c, http.MethodGet, "Sitejet", "is_publish_in_progress", args)
+}
+
+// SitejetIsPublishInProgressData is a generated payload type.
+type SitejetIsPublishInProgressData struct {
+	// - `1` - A publish is currently running for the domain.
+	// - `0` - No publish is running for the domain.
+	//
+	// `0` does not mean a publish can be started. A website
+	// migration holds the same lock without recording a
+	// publish and also reports `0`, and `start_publish` then
+	// fails with a migration error. Read `0` as "no publish
+	// to follow", not as "safe to publish".
+	//
+	// Possible values: `1`, `0`.
+	InProgress int64 `json:"in_progress"`
+
+	// The running publish process's ID. The system only returns this field when `in_progress` is `1` and the publish daemon has started; while a publish is still starting up, `in_progress` is `1` without a `pid` - poll again. Pass it to the `poll_publish` function to follow the publish's progress.
+	Pid int64 `json:"pid"`
+}
+
 // SitejetRestoreDocumentRootArgs are the parameters of the UAPI function `Sitejet::restore_document_root`.
 type SitejetRestoreDocumentRootArgs struct {
 	// A cPanel account's domain.
@@ -435,7 +475,7 @@ type SitejetRestoreDocumentRootArgs struct {
 //
 // Available since cPanel & WHM version 120.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/restore_document_root.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-restore_document_root.md
 func (c *SitejetClient) RestoreDocumentRoot(ctx context.Context, args *SitejetRestoreDocumentRootArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
 	return cpanel.UAPICall[json.RawMessage](ctx, c.c, http.MethodGet, "Sitejet", "restore_document_root", args)
 }
@@ -469,7 +509,7 @@ type SitejetSetTemplateArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/set_sitejet_template.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-set_template.md
 //
 // Deprecated: cPanel & WHM mark this function as deprecated.
 func (c *SitejetClient) SetTemplate(ctx context.Context, args *SitejetSetTemplateArgs) (*cpanel.UAPIResult[json.RawMessage], error) {
@@ -498,7 +538,7 @@ type SitejetStartPublishArgs struct {
 //
 // Available since cPanel & WHM version 110.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/start_publish_sitejet.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/sitejet/sitejet-start_publish.md
 func (c *SitejetClient) StartPublish(ctx context.Context, args *SitejetStartPublishArgs) (*cpanel.UAPIResult[SitejetStartPublishData], error) {
 	return cpanel.UAPICall[SitejetStartPublishData](ctx, c.c, http.MethodGet, "Sitejet", "start_publish", args)
 }

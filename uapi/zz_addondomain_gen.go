@@ -38,11 +38,11 @@ type AddonDomainAddaddondomainArgs struct {
 	// Defaults to `0`.
 	DisallowDoT *int64 `cpanel:"disallowdot,omitempty"`
 
-	// Whether to create the addon domain even when the domain fails the system's name, [DNS](https://go.cpanel.net/dnsrecords) and registration checks. When you pass this parameter, the system overwrites an existing DNS zone for the domain.
+	// Accepted for compatibility, but ignored for account-level callers. It can no longer cause the system to skip the domain name, [DNS](https://go.cpanel.net/dnsrecords), and registration checks, or to overwrite an existing DNS zone.
 	//
 	// The system still refuses to create a domain that another account owns.
-	// * `1` - Skip the checks and overwrite an existing zone.
 	// * `0` - Enforce the checks.
+	// * `1` - Accepted, but has no effect for account-level callers.
 	//
 	// Possible values: `0`, `1`.
 	//

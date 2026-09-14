@@ -17,7 +17,7 @@ import (
 //
 // Available since cPanel & WHM version 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/webprosmcp/get_connection_config.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/webprosmcp/webprosmcp-get_connection_config.md
 func (c *WebProsMcpClient) GetConnectionConfig(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[WebProsMcpGetConnectionConfigData], error) {
 	return cpanel.UAPICall[WebProsMcpGetConnectionConfigData](ctx, c.c, http.MethodGet, "WebProsMCP", "get_connection_config", cpanel.CombineArgs(extra...))
 }
@@ -61,7 +61,7 @@ type WebProsMcpGetConnectionConfigData struct {
 //
 // Available since cPanel & WHM version 138.
 //
-// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/webprosmcp/unlink_webpros_account.md
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/webprosmcp/webprosmcp-unlink_webpros_account.md
 func (c *WebProsMcpClient) UnlinkWebProsAccount(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[WebProsMcpUnlinkWebProsAccountData], error) {
 	return cpanel.UAPICall[WebProsMcpUnlinkWebProsAccountData](ctx, c.c, http.MethodGet, "WebProsMCP", "unlink_webpros_account", cpanel.CombineArgs(extra...))
 }

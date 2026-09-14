@@ -62,6 +62,15 @@ type CreateAcctArgs struct {
 	// If you do not specify this parameter, the system will determine the account's IP address.
 	Customip *string `cpanel:"customip,omitempty"`
 
+	// Whether to enable Digest Authentication for the account. This is
+	// an alias for the `enabledigest` parameter.
+	//
+	// * `1` — Enable.
+	// * `0` — Disable.
+	//
+	// Possible values: `0`, `1`.
+	DigestAuth *int64 `cpanel:"digestauth,omitempty"`
+
 	// Whether [DomainKeys Identified Mail (DKIM)](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail) is enabled for the account.
 	// * `1` — Enabled.
 	// * `0` — Disabled.
@@ -89,6 +98,23 @@ type CreateAcctArgs struct {
 	// * If you do not provide a domain, the system will automatically create a temporary domain for the account.
 	// * For more information about temporary domains, read our [Temporary Domains](https://go.cpanel.net/cp-temporary-domain) documentation.
 	Domain *string `cpanel:"domain,omitempty"`
+
+	// Whether to enable Digest Authentication for the account.
+	//
+	// * `1` — Enable.
+	// * `0` — Disable.
+	//
+	// **Note:**
+	//
+	// This parameter defaults to `0` (disabled) unless the selected
+	// package enables Digest Authentication. To set this parameter,
+	// the function's caller **must** have the `digest-auth` ACL.
+	// Otherwise, the system creates the account with Digest
+	// Authentication disabled, regardless of this parameter's value
+	// or the selected package's default.
+	//
+	// Possible values: `0`, `1`.
+	Enabledigest *int64 `cpanel:"enabledigest,omitempty"`
 
 	// The account's assigned feature list.
 	//
