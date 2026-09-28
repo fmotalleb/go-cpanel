@@ -44,8 +44,6 @@ type CreateAcctArgs struct {
 	CGI *int64 `cpanel:"cgi,omitempty"`
 
 	// The account's contact email address.
-	//
-	// Defaults to ``.
 	ContactEmail *string `cpanel:"contactemail,omitempty"`
 
 	// The account's cPanel theme.

@@ -879,7 +879,9 @@ type WebAppRestartArgs struct {
 //
 //	This function only applies to applications in the `server`
 //	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//	`invalid_category` error category. It also requires the
+//	application to have finished at least one deploy; calling it
+//	before then fails with the `not_deployed` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -916,14 +918,18 @@ type WebAppSetModeArgs struct {
 
 // SetMode calls the UAPI function `WebApp::set_mode` — Set an application's run mode.
 //
-// This function sets an application's run mode and restarts the
-// application so the new mode takes effect.
+// This function sets an application's run mode, applies it to the
+// container's environment (for example, `NODE_ENV` for a Node.js
+// application), and recreates the container so the change takes
+// effect immediately.
 //
 // **Important**:
 //
 //	This function only applies to applications in the `server`
 //	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//	`invalid_category` error category. It also requires the
+//	application to have finished at least one deploy; calling it
+//	before then fails with the `not_deployed` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -939,12 +945,16 @@ type WebAppSetModeData struct {
 	// Possible values: `production`, `development`.
 	Mode string `json:"mode"`
 
-	// Whether the application restarted to apply the new
-	// mode.
+	// Whether the application's container was actually
+	// recreated with the new mode in effect.
 	//
-	// * `1` — Restarted.
+	// * `1` — Restarted; the new mode is live.
+	// * `0` — The restart could not be completed. The
+	//   mode is still recorded and takes effect on the
+	//   next successful deploy, configure, or
+	//   set_mode.
 	//
-	// Possible values: `1`.
+	// Possible values: `0`, `1`.
 	ReStarted int64 `json:"restarted"`
 }
 
@@ -1547,7 +1557,9 @@ type WebAppStartArgs struct {
 //
 //	This function only applies to applications in the `server`
 //	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//	`invalid_category` error category. It also requires the
+//	application to have finished at least one deploy; calling it
+//	before then fails with the `not_deployed` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //
@@ -1583,7 +1595,9 @@ type WebAppStopArgs struct {
 //
 //	This function only applies to applications in the `server`
 //	category. Calling it on a `static` application fails with the
-//	`invalid_category` error category.
+//	`invalid_category` error category. It also requires the
+//	application to have finished at least one deploy; calling it
+//	before then fails with the `not_deployed` error category.
 //
 // Available since cPanel & WHM version cPanel 138.
 //

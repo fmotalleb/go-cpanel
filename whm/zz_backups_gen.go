@@ -1771,7 +1771,7 @@ type StartBackgroundPkgacctArgs struct {
 	// * `compress` - Compress the data.
 	// * `null` - Do **not** compress the data.
 	//
-	// Possible values: `compress`.
+	// Possible values: `compress`, `None`.
 	//
 	// Defaults to `None`.
 	CompressionSetting *string `cpanel:"compressionsetting,omitempty"`

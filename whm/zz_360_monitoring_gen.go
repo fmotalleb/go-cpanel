@@ -103,3 +103,321 @@ type Set360AgentPollingData struct {
 	// Possible values: `1`.
 	Status int64 `json:"status"`
 }
+
+// WebProsAuthCallback calls the WHM API 1 function `webpros_auth_callback` — Complete the WebPros authentication flow
+//
+// This function completes the WebPros single sign-on flow for
+// 360 Monitoring.
+//
+// Call this function after the WebPros authorization server redirects the
+// user back to the server. The function exchanges the authorization code
+// for a token bundle and stores that bundle on the server. It does not
+// return the access token or the refresh token. Use the
+// `360Monitoring/webpros_auth_token` function to retrieve the access
+// token.
+//
+// This function accepts its arguments as a single JSON-encoded `json`
+// parameter, and it requires that parameter in the request body. The
+// authorization code is a secret, and the server records the URL query
+// string in its access log. The function therefore rejects a request that
+// is not an HTTP `POST`, and also rejects a `json` parameter that appears
+// in the query string of a `POST`.
+//
+// The function returns `data.success` with a value of `1` when it stores
+// a token. If the function fails, it returns `data.success` with a value
+// of `0`, a human-readable `data.error` message, and, for the failures
+// that it detects before it contacts the authorization server, a
+// machine-readable `data.reason` value.
+//
+// This function requires an HTTP POST request.
+//
+// Available since cPanel & WHM version 11.132.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/whm.openapi/360-monitoring/360monitoring-webpros_auth_callback.md
+func (c *Client) WebProsAuthCallback(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[WebProsAuthCallbackData], error) {
+	return cpanel.WHMCall[WebProsAuthCallbackData](ctx, c.c, http.MethodPost, "webpros_auth_callback", cpanel.CombineArgs(extra...))
+}
+
+// A summary of the stored token. The function only
+// returns this field when the authentication succeeds.
+// It never contains the access token or the refresh
+// token.
+type WebProsAuthCallbackDataTokenData struct {
+	// The email address from the `email` claim of the
+	// identity token. The system omits this field when
+	// the identity token does not contain an `email`
+	// claim.
+	Email string `json:"email"`
+
+	// The number of seconds until the stored token expires.
+	ExpiresIn int64 `json:"expires_in"`
+}
+
+// WebProsAuthCallbackData is a generated payload type.
+type WebProsAuthCallbackData struct {
+	// The error message. The function only returns this
+	// field if the authentication fails.
+	Error string `json:"error"`
+
+	// The machine-readable reason that the authentication
+	// failed. The function returns this field for the
+	// failures that it detects before it contacts the
+	// WebPros authorization server, and for a stored token
+	// that the system cannot use. It omits the field when
+	// the exchange with the authorization server itself
+	// failed. …
+	Reason string `json:"reason"`
+
+	// * `1` - The system stored a WebPros authentication token.
+	// * `0` - The authentication failed. Check the `data.reason` and `data.error` fields for more details.
+	//
+	// Possible values: `0`, `1`.
+	Success int64 `json:"success"`
+
+	// A summary of the stored token. The function only
+	// returns this field when the authentication succeeds.
+	// It never contains the access token or the refresh
+	// token.
+	TokenData WebProsAuthCallbackDataTokenData `json:"token_data"`
+}
+
+// WebProsAuthClear calls the WHM API 1 function `webpros_auth_clear` — Clear the WebPros authentication token
+//
+// This function removes the stored WebPros authentication token for
+// 360 Monitoring.
+//
+// This function does not accept any parameters. It deletes the token
+// bundle that the server stored during the WebPros single sign-on flow,
+// which signs the server out of 360 Monitoring.
+//
+// The function is idempotent. If the server does not store a token, the
+// function reports success and makes no changes.
+//
+// Available since cPanel & WHM version 11.132.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/whm.openapi/360-monitoring/360monitoring-webpros_auth_clear.md
+func (c *Client) WebProsAuthClear(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[WebProsAuthClearData], error) {
+	return cpanel.WHMCall[WebProsAuthClearData](ctx, c.c, http.MethodGet, "webpros_auth_clear", cpanel.CombineArgs(extra...))
+}
+
+// WebProsAuthClearData is a generated payload type.
+type WebProsAuthClearData struct {
+	// The error message. The function only returns this
+	// field when the system failed to remove the stored
+	// token.
+	Error string `json:"error"`
+
+	// The machine-readable failure code. The function only
+	// returns this field when it failed. It is
+	// `removal_failed` when the token file exists and the
+	// system could not remove it, which leaves the stored
+	// token in place.
+	Reason string `json:"reason"`
+
+	// * `1` - The server does not store a WebPros authentication token any longer.
+	// * `0` - The system failed to remove the stored token. Check the `data.error` field and the `metadata.reason` field for more details.
+	//
+	// Possible values: `0`, `1`.
+	Success int64 `json:"success"`
+}
+
+// WebProsAuthStartArgs are the parameters of the WHM API 1 function `webpros_auth_start`.
+type WebProsAuthStartArgs struct {
+	// The WHM session identifier from which to build the redirect URI. The system
+	// reads the identifier from the request path when it is absent, so callers in a
+	// browser session do not need to send it. Callers outside of a browser
+	// session, such as those using `whmapi1` functions from a shell, must send the identifier, and it must consist
+	// only of digits.
+	SessionID *string `cpanel:"session_id,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// WebProsAuthStart calls the WHM API 1 function `webpros_auth_start` — Start the WebPros authentication flow
+//
+// This function starts the WebPros single sign-on flow for 360 Monitoring.
+//
+// The system records the user agent and the remote IP address in the
+// server's log only. It builds the redirect URI from the WHM session
+// identifier, which it reads from the request when the `session_id`
+// parameter is absent. The function fails when it cannot determine a
+// session identifier, because a redirect URI without one produces an
+// authentication flow that cannot complete.
+//
+// The function returns an authorization URL and the state token for this
+// flow. Redirect the user to the authorization URL and store the state
+// token for the duration of the flow. When the user returns to the
+// server, pass the authorization code and the state that the identity
+// provider returned to the `360Monitoring/webpros_auth_callback`
+// function.
+//
+// The system keeps the Proof Key for Code Exchange (PKCE) verifier on the
+// server, stored with the state for this flow. The verifier never reaches
+// the caller, and the `360Monitoring/webpros_auth_callback` function does
+// not accept one.
+//
+// The state token is a single-use secret. Do not log it, and do not use
+// it outside of the WHM session that started the flow. The system binds
+// the flow to that session and rejects a callback that arrives under any
+// other session.
+//
+// Available since cPanel & WHM version 11.132.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/whm.openapi/360-monitoring/360monitoring-webpros_auth_start.md
+func (c *Client) WebProsAuthStart(ctx context.Context, args *WebProsAuthStartArgs) (*cpanel.WHMResult[WebProsAuthStartData], error) {
+	return cpanel.WHMCall[WebProsAuthStartData](ctx, c.c, http.MethodGet, "webpros_auth_start", args)
+}
+
+// WebProsAuthStartData is a generated payload type.
+type WebProsAuthStartData struct {
+	// The WebPros authorization URL. Redirect the user to
+	// this URL to complete the sign-in. The function only
+	// returns this field when it starts the flow
+	// successfully.
+	AuthURL string `json:"auth_url"`
+
+	// The error message. The function only returns this
+	// field when the system failed to start the
+	// authentication flow.
+	Error string `json:"error"`
+
+	// The machine-readable failure code. The function
+	// returns this field for the failures that it detects
+	// before it starts the flow. The value is one of the following:
+	//
+	// * `missing_parameter` - The system could not
+	// determine the WHM session identifier.
+	// * `invalid_parameter` - The `session_id` parameter is
+	// not a number. …
+	Reason string `json:"reason"`
+
+	// The state token for this flow. The system generates
+	// this value, stores it, and requires the
+	// `360Monitoring/webpros_auth_callback` function to
+	// return it unchanged. The token is single-use and
+	// expires ten minutes after the system issues it. The
+	// function only returns this field when it starts the
+	// flow successfully.
+	State string `json:"state"`
+}
+
+// WebProsAuthStatus calls the WHM API 1 function `webpros_auth_status` — Check the WebPros authentication status
+//
+// This function reports whether the server holds a valid WebPros
+// authentication token for 360 Monitoring.
+//
+// This function does not accept any parameters. It reads the token that
+// the server stored during the WebPros single sign-on flow, checks that
+// the token contains an identity token, and checks whether the token has
+// expired.
+//
+// The function returns `data.valid` with a value of `1` when a usable
+// token exists. When the token is not usable, the function returns
+// `data.valid` with a value of `0` and a machine-readable
+// `data.reason` value.
+//
+// The function does not return the access token or the refresh token.
+// Use the `360Monitoring/webpros_auth_token` function to retrieve the
+// access token.
+//
+// Available since cPanel & WHM version 11.132.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/whm.openapi/360-monitoring/360monitoring-webpros_auth_status.md
+func (c *Client) WebProsAuthStatus(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[WebProsAuthStatusData], error) {
+	return cpanel.WHMCall[WebProsAuthStatusData](ctx, c.c, http.MethodGet, "webpros_auth_status", cpanel.CombineArgs(extra...))
+}
+
+// WebProsAuthStatusData is a generated payload type.
+type WebProsAuthStatusData struct {
+	// The email address from the `email` claim of the stored
+	// identity token. The function only returns this field
+	// when the token is valid. The function omits this field
+	// when the identity token does not contain an `email`
+	// claim.
+	Email string `json:"email"`
+
+	// The error message. The function only returns this
+	// field when the status check failed and the
+	// `data.reason` field is `error`.
+	Error string `json:"error"`
+
+	// The Unix timestamp at which the stored token expired.
+	// The function only returns this field when the
+	// `data.reason` field is `expired`.
+	ExpiredAt int64 `json:"expired_at"`
+
+	// The number of seconds until the stored token expires.
+	// The function only returns this field when the token is
+	// valid.
+	ExpiresIn int64 `json:"expires_in"`
+
+	// The machine-readable reason that the token is not
+	// usable. The function only returns this field when the
+	// `data.valid` field is `0`.
+	//
+	// It is one of the following values:
+	// * `no_token` - The server does not store a token.
+	// * `parse_error` - The system could not read or decode the stored token.
+	// * `missing_id_token` - The stored token does not contain an identity token.
+	// * `missing_access_token` - The stor …
+	Reason string `json:"reason"`
+
+	// * `1` - The server holds a valid WebPros authentication token.
+	// * `0` - The server does not hold a valid WebPros authentication token. Check the `data.reason` field for more details.
+	//
+	// Possible values: `0`, `1`.
+	Valid int64 `json:"valid"`
+}
+
+// WebProsAuthToken calls the WHM API 1 function `webpros_auth_token` — Retrieve the WebPros access token
+//
+// This function returns the stored WebPros access token for
+// 360 Monitoring.
+//
+// This function does not accept any parameters. It returns the
+// `access_token` value from the token bundle that the server stored during
+// the WebPros single sign-on flow, and the number of seconds that remain
+// before that token expires. The function never returns the refresh token
+// or the rest of the token bundle.
+//
+// The function fails with a `data.reason` value of `no_valid_token` when
+// the server does not store a token or when the stored token is no longer
+// valid. Use the `360Monitoring/webpros_auth_status` function to find out
+// why the stored token is not valid, and the
+// `360Monitoring/webpros_auth_start` function to start a new
+// authentication flow.
+//
+// The access token is a bearer credential. Transmit it only over HTTPS and
+// do not write it to logs.
+//
+// Available since cPanel & WHM version 11.132.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/whm.openapi/360-monitoring/360monitoring-webpros_auth_token.md
+func (c *Client) WebProsAuthToken(ctx context.Context, extra ...cpanel.Args) (*cpanel.WHMResult[WebProsAuthTokenData], error) {
+	return cpanel.WHMCall[WebProsAuthTokenData](ctx, c.c, http.MethodGet, "webpros_auth_token", cpanel.CombineArgs(extra...))
+}
+
+// WebProsAuthTokenData is a generated payload type.
+type WebProsAuthTokenData struct {
+	// The WebPros access token. The function only returns
+	// this field when a valid token exists.
+	AccessToken string `json:"access_token"`
+
+	// The error message. The function only returns this
+	// field when it could not return an access token.
+	Error string `json:"error"`
+
+	// The number of seconds until the access token expires.
+	// The function only returns this field when a valid
+	// token exists. The value is `0` when the system could
+	// not determine the remaining lifetime.
+	ExpiresIn int64 `json:"expires_in"`
+
+	// The machine-readable reason that the function could
+	// not return an access token.
+	//
+	// It is the following value:
+	// * `no_valid_token` - The server does not store a valid token. Call the `360Monitoring/webpros_auth_status` function for the details.
+	Reason string `json:"reason"`
+}

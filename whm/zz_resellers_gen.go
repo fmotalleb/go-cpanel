@@ -1858,9 +1858,9 @@ type SetResellerIPsArgs struct {
 	// * `1` — Restrict the reseller's account to its dedicated IP address.
 	// * `0` — Allow the user to dedicate any available IP address to an owned account.
 	//
-	// Possible values: `1`.
+	// Possible values: `1`, `0`.
 	//
-	// Defaults to `0`.
+	// Defaults to `1`.
 	Delegate *int64 `cpanel:"delegate,omitempty"`
 
 	// The IP addresses to allocate to the reseller's account.

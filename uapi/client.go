@@ -368,6 +368,12 @@ type NotificationsClient struct{ c *cpanel.Client }
 // Notifications returns the client for the UAPI `Notifications` module.
 func (c *Client) Notifications() *NotificationsClient { return &NotificationsClient{c: c.c} }
 
+// NovaClient wraps calls to the UAPI `Nova` module.
+type NovaClient struct{ c *cpanel.Client }
+
+// Nova returns the client for the UAPI `Nova` module.
+func (c *Client) Nova() *NovaClient { return &NovaClient{c: c.c} }
+
 // ParkClient wraps calls to the UAPI `Park` module.
 type ParkClient struct{ c *cpanel.Client }
 
@@ -647,6 +653,12 @@ type WordPressSiteClient struct{ c *cpanel.Client }
 
 // WordPressSite returns the client for the UAPI `WordPressSite` module.
 func (c *Client) WordPressSite() *WordPressSiteClient { return &WordPressSiteClient{c: c.c} }
+
+// WpxClient wraps calls to the UAPI `WPX` module.
+type WpxClient struct{ c *cpanel.Client }
+
+// Wpx returns the client for the UAPI `WPX` module.
+func (c *Client) Wpx() *WpxClient { return &WpxClient{c: c.c} }
 
 // ZoneEditClient wraps calls to the UAPI `ZoneEdit` module.
 type ZoneEditClient struct{ c *cpanel.Client }

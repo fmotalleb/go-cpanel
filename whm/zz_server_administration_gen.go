@@ -2628,7 +2628,7 @@ type StartCpanelUpdateArgs struct {
 	// * `sync`    — Update the currently-installed version of cPanel & WHM instead of downloading
 	// a newer version. This ensures the current version installed has the correct files.
 	//
-	// Possible values: `force`, `sync`.
+	// Possible values: `force`, `sync`, `None`.
 	//
 	// Defaults to `None`.
 	Mode *string `cpanel:"mode,omitempty"`

@@ -21,6 +21,9 @@ type APITokenCreateArgs struct {
 	// * An API token name's maximum length is 50 characters, and the name may **only**
 	// contain alphanumeric characters, dashes (`-`), and underscores (`_`).
 	// * You **must** assign a name that does **not** already exist to the API token.
+	// * The `root` user **cannot** create an API token named `WebPros_Dashboard` or
+	// `WP-Dashboard`. The system reserves these names for the WebPros Dashboard's own
+	// credential and rejects the request.
 	//
 	// This parameter is required.
 	TokenName string `cpanel:"token_name"`
@@ -239,7 +242,7 @@ type APITokenUpdateArgs struct {
 	// * An API token name's maximum length is 50 characters, and the name may **only**
 	// contain alphanumeric characters, dashes (`-`), and underscores (`_`).
 	//
-	// * You **must** assign a name that does **not** already exist to the API token.
+	// * You **must** assign a name that does **not** already exist to the API token. …
 	NewName *string `cpanel:"new_name,omitempty"`
 
 	// The new remote IP or CIDR IP ranges to assign to this token. If you do not use this parameter, the system
@@ -1244,8 +1247,11 @@ type WpDashboardCreateAPITokenArgs struct {
 	//
 	// **Note:**
 	//
-	// This parameter's value cannot exceed 50 characters and may **only**
+	// * This parameter's value cannot exceed 50 characters and may **only**
 	// contain alphanumeric characters, dashes (`-`), and underscores (`_`).
+	// * The `root` user **cannot** create an API token named `WebPros_Dashboard` or
+	// `WP-Dashboard`. The system reserves these names for the WebPros Dashboard's
+	// own credential and rejects the request.
 	//
 	// This parameter is required.
 	TokenName string `cpanel:"token_name"`

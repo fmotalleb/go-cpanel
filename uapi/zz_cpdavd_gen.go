@@ -143,11 +143,6 @@ type CPDAVDManageCollectionArgs struct {
 	// This parameter is required.
 	CollectionType string `cpanel:"collection_type"`
 
-	// The path to the collection.
-	//
-	// This parameter is required.
-	Path string `cpanel:"path"`
-
 	// The color of the calendar, if applicable.
 	CalendarColor *string `cpanel:"calendar-color,omitempty"`
 
@@ -156,6 +151,9 @@ type CPDAVDManageCollectionArgs struct {
 
 	// The name of the collection. Required when creating a collection.
 	Name *string `cpanel:"name,omitempty"`
+
+	// The path to the collection. Required for the `update` and `delete` actions, which use it to identify an existing collection. Optional for `create`, where omitting it autogenerates a path of the form `<collection_type>-<uuid>`.
+	Path *string `cpanel:"path,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
 	Extra cpanel.Args `cpanel:"-"`

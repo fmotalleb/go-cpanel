@@ -12,7 +12,7 @@ import (
 	cpanel "github.com/fmotalleb/go-cpanel"
 )
 
-// AllowAllWHMRootAccess calls the WHM API 1 function `allow_all_whm_root_access` — Clear all CIDR restrictions to login to cPanel & WHM with the root password.
+// AllowAllWHMRootAccess calls the WHM API 1 function `allow_all_whm_root_access` — Clear all CIDR restrictions on root login
 //
 // This function removes all restrictions to root login to cPanel & WHM login based on IP.
 //

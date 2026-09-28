@@ -994,7 +994,7 @@ type GenerateMobileconfigArgs struct {
 	//  * You can request one, two, or all possible values.
 	//  * The function ignores unsupported values.
 	//
-	// Possible values: `caldav`, `carddav`, `email`. …
+	// Defaults to `email,caldav,carddav`.
 	SelectedAccountServices *string `cpanel:"selected_account_services,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
