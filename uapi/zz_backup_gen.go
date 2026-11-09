@@ -290,6 +290,8 @@ type BackupRestoreDatabasesArgs struct {
 	//
 	// **Only** pass this parameter to restore files already on the server.
 	//
+	// The file **must** be inside the account's home directory. The system rejects paths that resolve outside it, including symlinks that point outside the home directory.
+	//
 	// **Note:**
 	//
 	// To restore multiple database backup files, increment the parameter name. For example: `backup-1`, `backup-2`, and `backup-3`.

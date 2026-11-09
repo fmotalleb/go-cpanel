@@ -208,6 +208,20 @@ type CreateUserSessionArgs struct {
 	// the login interface.
 	Locale *string `cpanel:"locale,omitempty"`
 
+	// The post-login destination to hand the user off to, for example a
+	// website builder such as `nova`, `nova-wordpress`, or `sitejet`.
+	//
+	// **Note:**
+	//
+	// * This parameter's value may contain only lowercase letters and numbers, in
+	//   hyphen-separated segments. It may not begin or end with a hyphen,
+	//   or contain two consecutive hyphens, and it may not exceed 64
+	//   characters.
+	// * This parameter requires the `service` parameter's value to be
+	//   `cpaneld`.
+	// * This function accepts any well-formed value for this param …
+	PostLoginLanding *string `cpanel:"post_login_landing,omitempty"`
+
 	// The hostname or IP address for the function to use in the `url`
 	// return. This parameter's value defaults to the server's hostname.
 	PreferredDomain *string `cpanel:"preferred_domain,omitempty"`
@@ -220,6 +234,21 @@ type CreateUserSessionArgs struct {
 	// * This value must be base64-encoded.
 	// * Maximum decoded length is 5000 characters.
 	PromptToken *string `cpanel:"promptToken,omitempty"`
+
+	// A domain the cPanel account owns.
+	//
+	// **Note:**
+	//
+	// * A leading `http://` or `https://` is stripped, and the value is
+	//   lowercased, before validation. An IP address is rejected.
+	// * This parameter requires the `service` parameter's value to be
+	//   `cpaneld`.
+	// * When omitted, this parameter defaults to the account's main
+	//   domain, but only when that domain is itself a syntactically valid
+	//   domain name.
+	// * Supplying this parameter's value without also supplying the
+	//   `post_login_landing` parameter's value is …
+	Website *string `cpanel:"website,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
 	Extra cpanel.Args `cpanel:"-"`
@@ -235,8 +264,12 @@ type CreateUserSessionArgs struct {
 //
 // * The system destroys the temporary session after 15 minutes of inactivity.
 // * For more information about the Single Sign On feature, read our
-// [Guide to API Authentication](/whm/tokens/)
+// [Guide to API Authentication](https://go.cpanel.net/AuthAPI)
 // documentation.
+//
+//   - On accounts that use the Meridian theme, this function can stage a
+//     handoff request for a separate website-builder shell to read once
+//     the session's interface loads.
 //
 // Available since cPanel & WHM version 11.40.
 //
@@ -250,18 +283,13 @@ type CreateUserSessionData struct {
 	// The session's security token.
 	CpSecurityToken string `json:"cp_security_token"`
 
-	// When the security token expires, in Unix time format.
+	// The session's expiration time, in [Unix Epoch format](https://go.cpanel.net/unix_time).
 	Expires int64 `json:"expires"`
 
 	// The security token's service.
 	Service string `json:"service"`
 
 	// The session ID.
-	//
-	// **Note:**
-	//
-	// If the `app` parameter contains a valid application, the URL **also**
-	// contains the application information.
 	Session string `json:"session"`
 
 	// The security token's URL. The URL contains the values of

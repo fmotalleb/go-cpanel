@@ -143,7 +143,7 @@ type GetAdjustedMarketProvidersProductsDataProductsItem struct {
 	// * `0` - We do **not** recommend the product.
 	//
 	// Possible values: `0`, `1`.
-	ReCommEndEd int64 `json:"recommended"`
+	Recommended int64 `json:"recommended"`
 
 	// Whether the product requires an IP.
 	// * `1` - Requires an IP address.

@@ -105,7 +105,7 @@ type NovaCreateAccountData struct {
 
 // NovaDiskQuotaCheckArgs are the parameters of the UAPI function `Nova::disk_quota_check`.
 type NovaDiskQuotaCheckArgs struct {
-	// The domain to use for the AI App Builder website.
+	// The domain to check for available disk space.
 	Domain *string `cpanel:"domain,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
@@ -114,7 +114,7 @@ type NovaDiskQuotaCheckArgs struct {
 
 // DiskQuotaCheck calls the UAPI function `Nova::disk_quota_check` — Return disk quota information
 //
-// This function checks whether a user has sufficient free space to back up the domain's document root.
+// This function checks whether a user has enough free space to back up the domain's document root.
 //
 // **Note:**
 //
@@ -150,13 +150,13 @@ type NovaDiskQuotaCheckData struct {
 	// Possible values: `1`, `0`.
 	IsDocRootEmpty int64 `json:"is_docroot_empty"`
 
-	// The amount of space required in megabytes (MB) for a document root backup.
+	// The required amount of space, in megabytes (MB).
 	RequiredSpace int64 `json:"required_space"`
 }
 
 // NovaEnsureAccountArgs are the parameters of the UAPI function `Nova::ensure_account`.
 type NovaEnsureAccountArgs struct {
-	// The color scheme Meridian is using, so Nova can match it.
+	// The color scheme of the Meridian cPanel theme, so Nova can match it.
 	//
 	// Possible values: `light`, `dark`, `auto`.
 	ColorScheme *string `cpanel:"colorScheme,omitempty"`
@@ -178,11 +178,12 @@ type NovaEnsureAccountArgs struct {
 	// **Example use case:** …
 	PromptToken *string `cpanel:"promptToken,omitempty"`
 
-	// Where Nova's "Back to cPanel" control returns the user. Required for a
-	// regular account and rejected for a standalone one. Must be an https URL
-	// of at most 2048 characters, on the host the request was made to, with
-	// the path "/frontend/meridian/index.html" (optionally prefixed by a
-	// cPanel session token) and the in-product route in the fragment.
+	// The URL where Nova's "Back to cPanel" control returns the user.
+	// Required for regular accounts, not allowed for standalone accounts.
+	// The URL must use HTTPS, use the same host as the request, and have
+	// 2048 characters or less. Its path must be
+	// `/frontend/meridian/index.html` (optionally prefixed by a cPanel
+	// session token) with the in-product route in the fragment.
 	ReturnURL *string `cpanel:"return_url,omitempty"`
 
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
@@ -191,12 +192,12 @@ type NovaEnsureAccountArgs struct {
 
 // EnsureAccount calls the UAPI function `Nova::ensure_account` — Return Nova account SSO URL
 //
-// This function ensures that an AI App Builder account exists for the
+// This function ensures an AI App Builder account exists for the
 // caller, then returns an SSO URL. The system reuses existing accounts.
 // For entitled accounts of any tier, the system usually provisions the
-// account eagerly, asynchronously, during account creation or package
-// upgrades. This function is a fail-safe: it provisions the account on
-// the spot for any entitled caller the eager provisioning hasn't
+// account eagerly and asynchronously during account creation or package
+// upgrades. This function acts as a fail-safe: it immediately provisions
+// the account for any entitled caller that eager provisioning hasn't
 // already covered.
 //
 // **Note:**
@@ -463,6 +464,21 @@ type NovaGetTierData struct {
 
 	// The user's effective AI App Builder tier (the AI_APP_BUILDER_TIER value from the cpuser file), or an empty string if none.
 	Tier string `json:"tier"`
+}
+
+// IsWordPressEntitled calls the UAPI function `Nova::is_wordpress_entitled` — Return Nova for WordPress access
+//
+// This function returns whether the cPanel account can access the Nova for WordPress feature.
+//
+// **Note:**
+//
+// For more information about the Nova for WordPress feature requirements, read our <a href="https://go.cpanel.net/whmdocsFeatureManager" target="_blank">_Feature Manager_</a> interface (_WHM >> Home >> Packages >> Feature Manager_) documentation.
+//
+// Available since cPanel & WHM version 110.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/nova/nova-is_wordpress_entitled.md
+func (c *NovaClient) IsWordPressEntitled(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[int64], error) {
+	return cpanel.UAPICall[int64](ctx, c.c, http.MethodGet, "Nova", "is_wordpress_entitled", cpanel.CombineArgs(extra...))
 }
 
 // NovaPollPublishArgs are the parameters of the UAPI function `Nova::poll_publish`.

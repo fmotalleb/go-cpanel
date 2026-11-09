@@ -74,16 +74,16 @@ type WpxChangeAdminPasswordData struct {
 //	  or any install task is queued.
 //	- This function requires the `apitokens` feature, because the
 //	  walkthrough creates a cPanel API token.
-//	- If the domain already has one or more WordPress installations, the
-//	  function returns a `collision` response listing the existing
-//	  installations so the caller can prompt the user to remove them and
-//	  retry.
-//	- The function refuses the call when the account has too little free
-//	  disk space for a WordPress installation. That check runs before the
-//	  token creation, so a refusal never leaves a live token behind.
-//	- Unlike `create_website`, this function does **not** enforce the
-//	  account's maximum WordPress website count. That limit is a WordPress
-//	  Toolkit plan constraint, and the Nova …
+//	- Your account is handed off to Nova for WordPress. Nova's callback
+//	  into UAPI's `WPX::import_website` function queues a WP Toolkit
+//	  Site Import. So this function requires the
+//	  `wp-toolkit-site-import` feature.
+//	  An account without it receives a synchronous error before any
+//	  token is created or any install task is queued. If an
+//	  administrator has disabled `wp-toolkit-site-import` server-wide
+//	  (the `disabled` feature list), the `nova-wordpress` feature itself
+//	  becomes unavailable, and this function instead fails with the
+//	  not-entitled error from the Nova for WordPress entitleme …
 //
 // This function requires an HTTP POST request.
 //
@@ -107,22 +107,68 @@ type WpxCreateNovaForWordPressWebsiteDataExistingInstallationsItem struct {
 // `magic_link` return value. When the domain already has
 // a WordPress installation, the object instead contains
 // the `status` value set to `collision` and the
-// `existing_installations` value. The `domain` value is
-// always present.
+// `existing_installations` value. When the PHP version
+// is below the WordPress minimum, it contains `status`
+// set to `unsupported_php` and the `get_php_compatibility`
+// fields. The `domain` value is always present.
 type WpxCreateNovaForWordPressWebsiteData struct {
+	// Which PHP versions fall below the minimum. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	BlockedBy []string `json:"blocked_by"`
+
+	// Whether WordPress can install. Always `0`. Present only when the `status` field is `unsupported_php`.
+	//
+	// Possible values: `1`, `0`.
+	Compatible int64 `json:"compatible"`
+
 	// The domain, normalized to lowercase.
 	Domain string `json:"domain"`
+
+	// The PHP package the domain runs. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainPackage *string `json:"domain_package"`
+
+	// The domain's PHP version as `major.minor`. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainVersion *string `json:"domain_version"`
+
+	// Where the domain's PHP version comes from. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	//
+	// Possible values: `domain`, `system_default`.
+	DomainVersionSource *string `json:"domain_version_source"`
+
+	// The virtual host whose PHP setting to change in MultiPHP Manager. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainVersionVhost *string `json:"domain_version_vhost"`
+
+	// The PHP version that decided the refusal, as `major.minor`. Present only when the `status` field is `unsupported_php`.
+	EffectiveVersion *string `json:"effective_version"`
 
 	// The WordPress installations that already exist on the domain. Present only when the `status` field is `collision`, and never empty in that case.
 	ExistingInstallations []WpxCreateNovaForWordPressWebsiteDataExistingInstallationsItem `json:"existing_installations"`
 
+	// Whether a PHP version lookup failed. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	//
+	// Possible values: `1`, `0`.
+	IsFallback int64 `json:"is_fallback"`
+
 	// The Nova magic link the user follows to continue the walkthrough. Present on the normal start path.
 	MagicLink string `json:"magic_link"`
 
-	// This value only returns when the function detects an existing installation on the domain.
+	// The minimum PHP version WordPress requires. Present only when the `status` field is `unsupported_php`.
+	RequiredVersion string `json:"required_version"`
+
+	// Present only when the function refuses to start.
+	// - `collision` - The domain already has a WordPress
+	//   installation. `existing_installations` is present.
+	// - `unsupported_php` - The PHP version is below the
+	//   WordPress minimum. The `get_php_compatibility` function's
+	//   return fields are present.
 	//
-	// Possible values: `collision`.
+	// Possible values: `collision`, `unsupported_php`.
 	Status string `json:"status"`
+
+	// The server's default PHP package. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	SystemDefaultPackage *string `json:"system_default_package"`
+
+	// The server's default PHP version as `major.minor`. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	SystemDefaultVersion *string `json:"system_default_version"`
 }
 
 // CreateWebsite calls the UAPI function `WPX::create_website` — Start a new WordPress installation on a domain
@@ -177,14 +223,47 @@ type WpxCreateWebsiteDataExistingInstallationsItem struct {
 // field set to `collision`, plus the `domain` and
 // `existing_installations` fields.
 type WpxCreateWebsiteData struct {
+	// Which PHP versions fall below the minimum. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	BlockedBy []string `json:"blocked_by"`
+
+	// Whether WordPress can install. Always `0`. Present only when the `status` field is `unsupported_php`.
+	//
+	// Possible values: `1`, `0`.
+	Compatible int64 `json:"compatible"`
+
 	// The domain, normalized to lowercase.
 	Domain string `json:"domain"`
+
+	// The PHP package the domain runs. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainPackage *string `json:"domain_package"`
+
+	// The domain's PHP version as `major.minor`. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainVersion *string `json:"domain_version"`
+
+	// Where the domain's PHP version comes from. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	//
+	// Possible values: `domain`, `system_default`.
+	DomainVersionSource *string `json:"domain_version_source"`
+
+	// The virtual host whose PHP setting to change in MultiPHP Manager. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainVersionVhost *string `json:"domain_version_vhost"`
+
+	// The PHP version that decided the refusal, as `major.minor`. Present only when the `status` field is `unsupported_php`.
+	EffectiveVersion *string `json:"effective_version"`
 
 	// The WordPress installations that already exist on the domain. Present only when the `status` field is `collision`, and never empty in that case.
 	ExistingInstallations []WpxCreateWebsiteDataExistingInstallationsItem `json:"existing_installations"`
 
 	// The unique correlator for the installation run. Pass it to `get_task_progress` to poll progress with a cPanel API token. Present only when the `status` field is `running`.
 	InstallID string `json:"install_id"`
+
+	// Whether a PHP version lookup failed. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	//
+	// Possible values: `1`, `0`.
+	IsFallback int64 `json:"is_fallback"`
+
+	// The minimum PHP version WordPress requires. Present only when the `status` field is `unsupported_php`.
+	RequiredVersion string `json:"required_version"`
 
 	// The path to the Server-Sent Events stream that reports installation progress. This is a path, not a full URL. Resolve it against the cPanel host that served the request. An interactive cPanel session can read this stream, but a cPanel API token cannot. Present only when the `status` field is `running`.
 	SseURL string `json:"sse_url"`
@@ -196,9 +275,15 @@ type WpxCreateWebsiteData struct {
 	// - `collision` - The domain already has a WordPress
 	//   installation. The `existing_installations` field is
 	//   present, and the system queued nothing.
-	//
-	// Possible values: `running`, `collision`.
+	// - `unsupported_php` - The PHP version is below the
+	//   WordPress minimum. The `get_php_compatibility` funct …
 	Status string `json:"status"`
+
+	// The server's default PHP package. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	SystemDefaultPackage *string `json:"system_default_package"`
+
+	// The server's default PHP version as `major.minor`. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	SystemDefaultVersion *string `json:"system_default_version"`
 
 	// The queued installation task id. Pass it to `get_task_status` to check whether the task is still queued. Present only when the `status` field is `running`.
 	TaskID string `json:"task_id"`
@@ -319,6 +404,110 @@ type WpxGetCredentialsData struct {
 
 	// Always an empty string. This function never returns a WordPress password.
 	Password string `json:"password"`
+}
+
+// WpxGetPHPCompatibilityArgs are the parameters of the UAPI function `WPX::get_php_compatibility`.
+type WpxGetPHPCompatibilityArgs struct {
+	// The domain to evaluate. The system normalizes the value to lowercase.
+	//
+	// * When present, the system checks the domain's own PHP version in
+	//   addition to the system default. The domain must belong to the
+	//   account, or the function returns an error.
+	// * When absent or empty, or when the account has no virtual host for
+	//   the domain yet, the system only evaluates the system default.
+	Domain *string `cpanel:"domain,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// GetPHPCompatibility calls the UAPI function `WPX::get_php_compatibility` — Return PHP compatibility
+//
+// This function reports whether the PHP version a WordPress installation
+// would run under meets the minimum that WordPress requires.
+//
+//	**Note:**
+//
+//	* Two PHP versions must pass: the server's system default PHP, which
+//	  WordPress Toolkit uses while it stages the installation outside the
+//	  document root, and the domain's own PHP, which serves the site
+//	  afterwards.
+//	* A cPanel user can change a domain's PHP version in MultiPHP Manager,
+//	  but only the hosting provider can change the system default.
+//	* The `create_website`, `create_nova_for_wordpress_website`, and
+//	  `import_website` functions run the same check. When it fails, they
+//	  return the `status` field set to `unsupported_php` with this
+//	  function's data.
+//
+// Available since cPanel & WHM version 137.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/wpx/wpx-get_php_compatibility.md
+func (c *WpxClient) GetPHPCompatibility(ctx context.Context, args *WpxGetPHPCompatibilityArgs) (*cpanel.UAPIResult[WpxGetPHPCompatibilityData], error) {
+	return cpanel.UAPICall[WpxGetPHPCompatibilityData](ctx, c.c, http.MethodGet, "WPX", "get_php_compatibility", args)
+}
+
+// The PHP compatibility verdict.
+type WpxGetPHPCompatibilityData struct {
+	// Which PHP versions fall below the minimum. Empty when
+	// `compatible` is `1`.
+	// - `system_default` - The server default PHP is too old.
+	//   Only the hosting provider can change it.
+	// - `domain` - The domain's PHP is too old. Change it in
+	//   MultiPHP Manager, on the row that the
+	//   `domain_version_vhost` return field names.
+	BlockedBy []string `json:"blocked_by"`
+
+	// Whether WordPress can install.
+	// - `1` - Every known PHP version meets the minimum.
+	// - `0` - At least one version in `blocked_by` is too old.
+	//
+	// Possible values: `1`, `0`.
+	Compatible int64 `json:"compatible"`
+
+	// The evaluated domain, normalized to lowercase. `null` when no domain was given.
+	Domain *string `json:"domain"`
+
+	// The PHP package the domain runs. `null` when no domain was given or the account has no virtual host for it.
+	DomainPackage *string `json:"domain_package"`
+
+	// The domain's PHP version as `major.minor`. `null` when unknown.
+	DomainVersion *string `json:"domain_version"`
+
+	// Where the domain's version comes from.
+	// - `domain` - Set on the domain or an ancestor document root.
+	// - `system_default` - Inherited from the server default.
+	//
+	// Possible values: `domain`, `system_default`.
+	DomainVersionSource *string `json:"domain_version_source"`
+
+	// The virtual host whose PHP setting `domain_version`
+	// comes from. This is the row to change in MultiPHP
+	// Manager. For a parked (alias) domain, the subdomain
+	// behind an addon domain, or a domain that inherits an
+	// ancestor document root's setting, this differs from
+	// `domain`. `null` when the version is inherited from
+	// the system default or is unknown.
+	DomainVersionVhost *string `json:"domain_version_vhost"`
+
+	// The lowest known version of the two, which is the version that decides the verdict. `null` when neither is known.
+	EffectiveVersion *string `json:"effective_version"`
+
+	// - `1` - A version lookup failed. The unknown version did
+	//   not block, so the verdict may be optimistic. The
+	//   installation itself reports any problem.
+	// - `0` - Every lookup succeeded.
+	//
+	// Possible values: `1`, `0`.
+	IsFallback int64 `json:"is_fallback"`
+
+	// The minimum PHP version WordPress requires, as `major.minor`.
+	RequiredVersion string `json:"required_version"`
+
+	// The server's default PHP package. `null` when unknown.
+	SystemDefaultPackage *string `json:"system_default_package"`
+
+	// The server's default PHP version as `major.minor`. `null` when unknown.
+	SystemDefaultVersion *string `json:"system_default_version"`
 }
 
 // WpxGetSiteActivityArgs are the parameters of the UAPI function `WPX::get_site_activity`.
@@ -661,7 +850,8 @@ type WpxHasReachedQuotaData struct {
 //
 //	- This function has the following prerequisites:
 //	    - The `nova-wordpress` entitlement.
-//	    - The `redirects`, `wp-toolkit`, and `mysql` features.
+//	    - The `redirects`, `wp-toolkit`, `wp-toolkit-site-import`, and
+//	      `mysql` features.
 //	- Because the request carries the source WordPress credentials, use the
 //	  `POST` method and do not place the `source_password` or `source_user`
 //	  keys in the URL query string. The system rejects a request that uses
@@ -696,16 +886,52 @@ type WpxImportWebsiteDataExistingInstallationsItem struct {
 // WordPress installation and the `overwrite` parameter is
 // not set, the object instead contains the `status` field
 // set to `collision`, plus the `domain` and
-// `existing_installations` fields.
+// `existing_installations` fields. When the PHP
+// version is below the WordPress minimum, it contains
+// the `status` field set to `unsupported_php`, plus the
+// `domain` field and the `get_p …
 type WpxImportWebsiteData struct {
+	// Which PHP versions fall below the minimum. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	BlockedBy []string `json:"blocked_by"`
+
+	// Whether WordPress can install. Always `0`. Present only when the `status` field is `unsupported_php`.
+	//
+	// Possible values: `1`, `0`.
+	Compatible int64 `json:"compatible"`
+
 	// The destination domain, normalized to lowercase.
 	Domain string `json:"domain"`
+
+	// The PHP package the domain runs. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainPackage *string `json:"domain_package"`
+
+	// The domain's PHP version as `major.minor`. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainVersion *string `json:"domain_version"`
+
+	// Where the domain's PHP version comes from. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	//
+	// Possible values: `domain`, `system_default`.
+	DomainVersionSource *string `json:"domain_version_source"`
+
+	// The virtual host whose PHP setting to change in MultiPHP Manager. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	DomainVersionVhost *string `json:"domain_version_vhost"`
+
+	// The PHP version that decided the refusal, as `major.minor`. Present only when the `status` field is `unsupported_php`.
+	EffectiveVersion *string `json:"effective_version"`
 
 	// The WordPress installations that already exist on the domain. Present only when the `status` field is `collision`, and never empty in that case.
 	ExistingInstallations []WpxImportWebsiteDataExistingInstallationsItem `json:"existing_installations"`
 
 	// The unique correlator for the import run. Pass it to `get_task_progress` to poll progress with a cPanel API token. Present only when the `status` field is `running`.
 	InstallID string `json:"install_id"`
+
+	// Whether a PHP version lookup failed. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	//
+	// Possible values: `1`, `0`.
+	IsFallback int64 `json:"is_fallback"`
+
+	// The minimum PHP version WordPress requires. Present only when the `status` field is `unsupported_php`.
+	RequiredVersion string `json:"required_version"`
 
 	// The path to the Server-Sent Events stream that reports import progress. This is a path, not a full URL. Resolve it against the cPanel host that served the request. An interactive cPanel session can read this stream, but a cPanel API token cannot. Present only when the `status` field is `running`.
 	SseURL string `json:"sse_url"`
@@ -717,11 +943,88 @@ type WpxImportWebsiteData struct {
 	// - `collision` - The destination domain already has
 	//   a WordPress installation. The `existing_installations`
 	//   field is present, and the system queued nothing.
-	//
-	// Possible values: `running`, `collision`.
+	// - `unsupported_php` - The PHP version is below the
+	//   WordPress minimum. The `get_php_compatibility` …
 	Status string `json:"status"`
 
+	// The server's default PHP package. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	SystemDefaultPackage *string `json:"system_default_package"`
+
+	// The server's default PHP version as `major.minor`. Present only when the `status` field is `unsupported_php`. See the `get_php_compatibility` function.
+	SystemDefaultVersion *string `json:"system_default_version"`
+
 	// The queued import task id. Pass it to `get_task_status` to check whether the task is still queued. Present only when the `status` field is `running`.
+	TaskID string `json:"task_id"`
+}
+
+// WpxListActiveInstallsArgs are the parameters of the UAPI function `WPX::list_active_installs`.
+type WpxListActiveInstallsArgs struct {
+	// Return only the installs for this domain. Omit it to return every active install for the account. The domain must belong to the account; if it doesn't, the function returns an error instead of an empty list.
+	Domain *string `cpanel:"domain,omitempty"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// ListActiveInstalls calls the UAPI function `WPX::list_active_installs` — Return active WordPress installs
+//
+// This function lists the WordPress installs that are still queued or
+// running for the account. It joins each queued install task to the run's
+// progress log, so `status` is the value `get_task_progress` reports.
+//
+//	**Note:**
+//
+//	* This function reads the task queue without taking element locks, so
+//	  it never fails or blocks when another reader or the task runner
+//	  briefly holds an element.
+//	* A task that is queued but has not written a log line yet reports
+//	  `unknown` with a `percentage` of `0`.
+//	* An element in the queue is not proof that an install is in flight. If
+//	  the task runner dies mid-install (reboot, OOM kill) the element stays
+//	  in the queue until the account queues another task. The function
+//	  reports such a row as `stale` when its log says `running` but the
+//	  runner's pid file names a process that is gone or is not a task
+//	  runner.
+//	* A finished install leaves the queue when the runner completes it. It
+//	  can appear once with `complete` or `failed` in the short window
+//	  before that removal.
+//	* The rows need no ownership check: the queue and the logs live in
+//	  the caller's own home directory, so the caller can only ever see
+//	  its own installs.
+//
+// Available since cPanel & WHM version 137.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/wpx/wpx-list_active_installs.md
+func (c *WpxClient) ListActiveInstalls(ctx context.Context, args *WpxListActiveInstallsArgs) (*cpanel.UAPIResult[[]WpxListActiveInstallsDataItem], error) {
+	return cpanel.UAPICall[[]WpxListActiveInstallsDataItem](ctx, c.c, http.MethodGet, "WPX", "list_active_installs", args)
+}
+
+// WpxListActiveInstallsDataItem is a generated payload type.
+type WpxListActiveInstallsDataItem struct {
+	// The domain the install targets, lower-cased.
+	Domain string `json:"domain"`
+
+	// The run's correlator. Poll `get_task_progress` with it.
+	InstallID string `json:"install_id"`
+
+	// The last progress message from the run's log. Empty when the run has not written a log line yet.
+	Message string `json:"message"`
+
+	// The monotonic progress percentage from the run's log. `0` when the run has not written a log line yet.
+	Percentage int64 `json:"percentage"`
+
+	// The `/sse/UserTasks/` stream for the run.
+	SseURL string `json:"sse_url"`
+
+	// The run's state, as `get_task_progress` reports it.
+	// * `unknown` - The task is queued but has not written a log line yet.
+	// * `running` - The install is in progress.
+	// * `stale` - The log says the install is running but its task runner is no longer alive. The install will not finish; treat it like `failed` and offer a retry.
+	// * `complete` - The install finished. The task is about to leave the queue.
+	// * ` …
+	Status string `json:"status"`
+
+	// The queue element id, as `create_website` returned it.
 	TaskID string `json:"task_id"`
 }
 

@@ -247,7 +247,7 @@ type ScoreMaster struct {
 	// An unique identifier for the check.
 	Identifier string `json:"identifier"`
 
-	IncidentS []json.RawMessage `json:"incidents"`
+	Incidents []json.RawMessage `json:"incidents"`
 
 	// The check's status message.
 	Message string `json:"message"`
@@ -295,7 +295,7 @@ type ScoreSubScoresItem struct {
 	// An unique identifier for the check.
 	Identifier string `json:"identifier"`
 
-	IncidentS []json.RawMessage `json:"incidents"`
+	Incidents []json.RawMessage `json:"incidents"`
 
 	// The check subcategory's status message.
 	Message string `json:"message"`

@@ -204,7 +204,7 @@ type EA4RecommendationsDataValueItemOptionsItem struct {
 	// * If the function does **not** return this value, then the text displayed in the interface is informational.
 	//
 	// Possible values: `True`, `False`.
-	ReCommEndEd bool `json:"recommended"`
+	Recommended bool `json:"recommended"`
 
 	// The text returned in the user interface.
 	Text string `json:"text"`

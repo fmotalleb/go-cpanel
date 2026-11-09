@@ -1860,9 +1860,13 @@ func (c *Client) Savemxs(ctx context.Context, args *SavemxsArgs) (*cpanel.WHMRes
 // SetNameserverArgs are the parameters of the WHM API 1 function `set_nameserver`.
 type SetNameserverArgs struct {
 	// The nameserver software.
-	// * `BIND`
-	// * `PowerDNS`
-	// * `Disabled`
+	// * `BIND` — The calling user requires `root`-level access.
+	// * `PowerDNS` — The calling user requires the _DNS Clustering_ ACL.
+	// * `Disabled` — The calling user requires `root`-level access.
+	//
+	// **Note:**
+	//
+	// For more information, read our [Edit Reseller Nameservers and Privileges](https://go.cpanel.net/whmdocsEditResellerNameserversandPrivileges) documentation.
 	//
 	// Possible values: `BIND`, `PowerDNS`, `Disabled`.
 	//
@@ -1873,9 +1877,9 @@ type SetNameserverArgs struct {
 	Extra cpanel.Args `cpanel:"-"`
 }
 
-// SetNameserver calls the WHM API 1 function `set_nameserver` — Update remote DNS server's nameserver software
+// SetNameserver calls the WHM API 1 function `set_nameserver` — Update the local server's nameserver software
 //
-// This function sets the nameserver software that the remote servers in a DNS cluster run. The system queues the nameserver software that you select until the HTTP request finishes. Then, it sets the remote servers' nameserver software.
+// This function sets the nameserver software that the local server runs. The system queues the nameserver software that you select until the HTTP request finishes. Then, it sets the local server's nameserver software.
 //
 // Available since cPanel & WHM version 84.
 //

@@ -1910,7 +1910,7 @@ type ManageFeaturesDataFeatureItem struct {
 	// value to the `action` parameter.
 	//
 	// Possible values: `1`, `0`.
-	ReCommEndEd int64 `json:"recommended"`
+	Recommended int64 `json:"recommended"`
 
 	// The feature's vendor.
 	//

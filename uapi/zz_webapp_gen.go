@@ -6,6 +6,7 @@ package uapi
 
 import (
 	"context"
+	"encoding/json"
 	"net/http"
 
 	cpanel "github.com/fmotalleb/go-cpanel"
@@ -31,11 +32,38 @@ type WebAppConfigureArgs struct {
 	// also ca …
 	Appdir *string `cpanel:"appdir,omitempty"`
 
+	// Whether the scheduled health check may act on this application.
+	//
+	// * `1` — The health check may restart or otherwise repair it.
+	// * `0` — Leave the application alone entirely. It is not checked, so its `health` block stops being updated.
+	//
+	// Pass an empty value to follow the server-wide setting, which is the
+	// default.
+	//
+	// Possible values: `0`, `1`, ``.
+	AutoRecovery *string `cpanel:"auto_recovery,omitempty"`
+
 	// The command that builds the application.
 	//
 	// Pass an empty value to clear it, so the deploy falls back to the
 	// detected default.
 	BuildCommand *string `cpanel:"build_command,omitempty"`
+
+	// The application's database action.
+	//
+	// * `create` — Provisions a new MySQL database and user, named from
+	//   the application's slug.
+	// * `link` — Attaches an existing, account-owned database (see
+	//   `db_name`) by creating a new, dedicated MySQL user for it,
+	//   granted `ALL PRIVILEGES` on the database — never by reusing an
+	//   existing user, since MySQL keeps no retrievable password for one.
+	// * `remove` — Clears the application's `db` record, and deletes the
+	//   **database** and its user if it was `create`d, o …
+	DB *string `cpanel:"db,omitempty"`
+
+	// The existing, account-owned database to attach. Required when `db`
+	// is `link`; ignored (and omittable) otherwise.
+	DBName *string `cpanel:"db_name,omitempty"`
 
 	// The name (slug) used to name the deployment. When omitted, the
 	// deployment is named after the application.
@@ -135,6 +163,36 @@ func (c *WebAppClient) Configure(ctx context.Context, args *WebAppConfigureArgs)
 	return cpanel.UAPICall[WebAppConfigureData](ctx, c.c, http.MethodGet, "WebApp", "configure", args)
 }
 
+// The application's linked database, or `null` if none is configured.
+type WebAppConfigureDataDB struct {
+	// The environment variable names the database's
+	// connection details are injected under, directly
+	// into the deployed container's environment. These
+	// are not part of this application's own `env`
+	// field, and are never echoed back by any call.
+	EnvKeys []string `json:"env_keys"`
+
+	// The database server hostname.
+	Host string `json:"host"`
+
+	// The database name.
+	Name string `json:"name"`
+
+	// How the application got this database.
+	//
+	// * `create` — Provisioned by this application; `remove`
+	//   deletes the database itself.
+	// * `link` — An existing database this account owns
+	//   independently; `remove` only detaches the
+	//   dedicated dbuser created for it.
+	//
+	// Possible values: `create`, `link`.
+	Origin string `json:"origin"`
+
+	// The database server port.
+	Port int64 `json:"port"`
+}
+
 // Suggested configuration values for the detected framework. Present only when this call changed `appdir` and re-ran the preflight.
 type WebAppConfigureDataDefaults struct {
 	// The suggested build command, or `null` if no build step is needed.
@@ -148,6 +206,77 @@ type WebAppConfigureDataDefaults struct {
 
 	// The suggested startup command, or `null` for `static` applications.
 	StartupCommand *string `json:"startup_command"`
+}
+
+// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+type WebAppConfigureDataHealthMemory struct {
+	// The memory limit, or `null` if it is not capped.
+	LimitBytes *int64 `json:"limit_bytes"`
+
+	// How many times a process was killed for exceeding the limit during this run.
+	OomKills int64 `json:"oom_kills"`
+
+	// The highest memory use recorded during this run, or `null` once the run is over or if this server does not keep that figure.
+	PeakBytes *int64 `json:"peak_bytes"`
+}
+
+// What the most recent health check found, or `null`
+// if the application has not been checked yet. This
+// is read from the last check rather than measured
+// when you call this function, so it is at most one
+// check interval old.
+type WebAppConfigureDataHealth struct {
+	// What would repair the cause, which is not
+	// always a restart.
+	//
+	// * `none` — Nothing should be done to the application.
+	// * `restart` — Restarting it is a reasonable repair.
+	// * `rewire_proxy` — Its reverse-proxy configuration needs rewriting.
+	// * `notify` — Only a person can resolve this.
+	//
+	// Possible values: `none`, `restart`, `rewire_proxy`, `notify`.
+	Action string `json:"action"`
+
+	// What is wrong with the application.
+	//
+	// * `healthy` — Nothing.
+	// * `stopped_by_user` — You stopped it.
+	// * `deploying` — A deploy is in progress.
+	// * `never_deployed` — No deploy has ever succeeded.
+	// * `out_of_memory` — It exceeded its memory limit and was killed.
+	// * `crash_on_boot` — It has never started successfully since its last deploy.
+	// * `dead` — It ran and then stopped.
+	// * `unit_missing` — Its service d …
+	Cause string `json:"cause"`
+
+	// When the check ran, in ISO 8601 format.
+	CheckedAt string `json:"checked_at"`
+
+	// When the application was last seen healthy, in ISO 8601 format, or `null` if it never has been. An application that has not been healthy since its last deploy has never started successfully, which a restart cannot fix.
+	HealthyAt *string `json:"healthy_at"`
+
+	// How many incidents were recorded for this application in the last 24 hours. Only the most recent incidents are kept, so this figure stops climbing once enough of them have been recorded to show the pattern.
+	Incidents int64 `json:"incidents"`
+
+	// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+	Memory WebAppConfigureDataHealthMemory `json:"memory"`
+
+	// How many of the last 24 hours' incidents were the application exceeding its memory limit, counted over the same kept incidents as `incidents`. Past a few of these, raising the limit is the only thing that will help, and that is your decision.
+	OomIncidents int64 `json:"oom_incidents"`
+
+	// How many times the service has been restarted, as the system's own retry counter reports it. Omitted when that counter could not be read.
+	Restarts int64 `json:"restarts"`
+
+	// A summary of `cause` suitable for a status badge.
+	//
+	// * `healthy` — Nothing is wrong.
+	// * `stopped` — You stopped it.
+	// * `pending` — It is deploying, or has never deployed.
+	// * `recovering` — Something is wrong and a repair is available.
+	// * `needs_attention` — Something is wrong that only you can resolve.
+	// * `unreachable` — The application is fine and its domain is not.
+	// * `unknown` — Nothing could be read a …
+	State string `json:"state"`
 }
 
 // Information about the most recent deploy, or `null` if the application has never deployed.
@@ -183,6 +312,15 @@ type WebAppConfigureDataSource struct {
 
 // The application with its updated configuration.
 type WebAppConfigureData struct {
+	// Whether the scheduled health check may act on this
+	// application: `1` if it may, `0` if the application
+	// is to be left alone entirely, and `null` when it
+	// follows the server-wide setting.
+	//
+	// An application set to `0` is not checked at all, so
+	// its `health` block stops being updated.
+	AutoRecovery *int64 `json:"auto_recovery"`
+
 	// The application's configured build command, or `null` if it has no build step. Set from the preflight-suggested default at `stage`, and overridable via `configure`.
 	BuildCommand *string `json:"build_command"`
 
@@ -214,6 +352,9 @@ type WebAppConfigureData struct {
 	// record even when several applications share a base
 	// name.
 	ContainerName *string `json:"container_name"`
+
+	// The application's linked database, or `null` if none is configured.
+	DB WebAppConfigureDataDB `json:"db"`
 
 	// Suggested configuration values for the detected framework. Present only when this call changed `appdir` and re-ran the preflight.
 	Defaults WebAppConfigureDataDefaults `json:"defaults"`
@@ -252,6 +393,13 @@ type WebAppConfigureData struct {
 
 	// The application's detected or user-selected framework, or `null` if unknown.
 	Framework *string `json:"framework"`
+
+	// What the most recent health check found, or `null`
+	// if the application has not been checked yet. This
+	// is read from the last check rather than measured
+	// when you call this function, so it is at most one
+	// check interval old.
+	Health WebAppConfigureDataHealth `json:"health"`
 
 	// Information about the most recent deploy, or `null` if the application has never deployed.
 	LastDeploy WebAppConfigureDataLastDeploy `json:"last_deploy"`
@@ -334,6 +482,17 @@ type WebAppDeleteArgs struct {
 	// This parameter is required.
 	Verify int64 `cpanel:"verify"`
 
+	// Whether to also delete the application's database and its user.
+	//
+	// * `1` — Delete the database along with the application.
+	// * `0` — Delete the application and leave the database in place.
+	//
+	// **Warning:** for a database this application `create`d, `1`
+	// destroys it and everything in it, and this cannot be undone. For a
+	// **linked** one (`db.origin` is `link`), `1` is refused instead —
+	// see below. …
+	DeleteDatabase *int64 `cpanel:"delete_database,omitempty"`
+
 	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
 	Extra cpanel.Args `cpanel:"-"`
 }
@@ -370,6 +529,20 @@ func (c *WebAppClient) Delete(ctx context.Context, args *WebAppDeleteArgs) (*cpa
 
 // WebAppDeleteData is a generated payload type.
 type WebAppDeleteData struct {
+	// Whether this call deleted a database the
+	// application created. Always `0` for a linked
+	// database — deleting it removes only the
+	// dedicated dbuser created for the link, which
+	// this field does not report.
+	//
+	// * `1` — The created database and its user were
+	//   deleted.
+	// * `0` — They were not. Either the application
+	//   had no database, its database was linked
+	//   rather than created, `delete_database` was
+	//   `0`, o …
+	DatabaseRemoved int64 `json:"database_removed"`
+
 	// Whether the application was removed.
 	//
 	// * `1` — Removed.
@@ -434,6 +607,341 @@ type WebAppDeployData struct {
 
 	// The task id of the SSE process.
 	TaskID string `json:"task_id"`
+}
+
+// WebAppDiagnoseArgs are the parameters of the UAPI function `WebApp::diagnose`.
+type WebAppDiagnoseArgs struct {
+	// The application's unique name (slug).
+	//
+	// This parameter is required.
+	Name string `cpanel:"name"`
+
+	// Extra carries any additional arguments (e.g. UAPI/WHM meta arguments such as api.filter.*, api.sort.*, api.paginate.*).
+	Extra cpanel.Args `cpanel:"-"`
+}
+
+// Diagnose calls the UAPI function `WebApp::diagnose` — Check a web app now and report what is wrong.
+//
+// This function checks one web application now and reports what is
+// wrong with it, the evidence for that, and what would repair it.
+//
+// This is the escalation path from `list`. `list` reports what the
+// scheduled health check last found, so it is at most one check
+// interval old; this function runs the check live.
+//
+// It is read-only. It makes no start, stop, restart or redeploy call,
+// and it rewrites no reverse-proxy configuration, even when the
+// `action` it reports recommends one.
+//
+// It records what it found as the application's `health`, so a
+// subsequent `list` reports this verdict rather than the older one. It
+// does not add to the application's incident history: that history is
+// the scheduled check's record of what it found, and this function can
+// be called at will.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-diagnose.md
+func (c *WebAppClient) Diagnose(ctx context.Context, args *WebAppDiagnoseArgs) (*cpanel.UAPIResult[WebAppDiagnoseData], error) {
+	return cpanel.UAPICall[WebAppDiagnoseData](ctx, c.c, http.MethodGet, "WebApp", "diagnose", args)
+}
+
+// What the container runtime reports, or `null` if it could not be read.
+type WebAppDiagnoseDataEvidenceContainer struct {
+	// The exit code of the last run, or `null` while it is still running.
+	ExitCode *int64 `json:"exit_code"`
+
+	// The port the container is published on, or `null` if it publishes none.
+	HostPort *int64 `json:"host_port"`
+
+	// Whether the last run was killed for exceeding its memory limit.
+	OomKilled bool `json:"oom_killed"`
+
+	// The container's state.
+	State string `json:"state"`
+}
+
+// The application's own memory accounting, or `null` when neither a live figure nor a configured limit could be read.
+type WebAppDiagnoseDataEvidenceMemory struct {
+	// The memory limit, or `null` if it is not capped.
+	LimitBytes *int64 `json:"limit_bytes"`
+
+	// How many times a process was killed for exceeding the limit during this run.
+	OomKills int64 `json:"oom_kills"`
+
+	// The highest memory use recorded during this run, or `null` once the run is over or if this server does not keep that figure.
+	PeakBytes *int64 `json:"peak_bytes"`
+}
+
+// The container runtime's own health probe, or `null` for an application whose container has none configured.
+type WebAppDiagnoseDataEvidenceProbe struct {
+	// The last few probe results, newest last.
+	Log []map[string]json.RawMessage `json:"log"`
+
+	// The probe's verdict.
+	//
+	// * `healthy` — The probe passes.
+	// * `unhealthy` — The probe fails.
+	// * `starting` — The application is still inside its start period, so the probe is not yet evidence of anything.
+	// * empty — The container has no health probe configured, which is the case for every application deployed before probes existed. This is not a fault.
+	Status string `json:"status"`
+}
+
+// Two records of the same fact, compared rather
+// than probed: the port the container is
+// published on, and the port the web server was
+// told to proxy to. They disagree after a
+// restore, which no restart can fix.
+type WebAppDiagnoseDataEvidenceProxy struct {
+	// The port the container is published on, or `null` if it publishes none.
+	PublishedPort *int64 `json:"published_port"`
+
+	// The port the reverse-proxy configuration names, `null` if there is no configuration for the domain or if it could not be read.
+	WiredPort *int64 `json:"wired_port"`
+
+	// Whether the reverse-proxy configuration
+	// could be read at all. When this is `0`,
+	// `wired_port` means "not known" rather
+	// than "not configured", and no proxy
+	// verdict is reached.
+	//
+	// Possible values: `0`, `1`.
+	WiringKnown int64 `json:"wiring_known"`
+}
+
+// What a visitor to the application's URL gets, or `null` when the fetch was not made — it is only worth making once the local tiers are known good.
+type WebAppDiagnoseDataEvidencePublic struct {
+	// Why the request never arrived, when it did not.
+	Error *string `json:"error"`
+
+	// Whether the response was below `500`. An
+	// API-only application answering `404` at
+	// `/` is not a fault.
+	Ok bool `json:"ok"`
+
+	// Whether an HTTP response came back at all.
+	// A request that never arrived is a DNS, TLS
+	// or virtual-host problem; one that arrived
+	// and was answered with an error is the
+	// application's own answer.
+	RespondEd bool `json:"responded"`
+
+	// The HTTP status returned, or `null` if the request never arrived.
+	Status *int64 `json:"status"`
+}
+
+// What the service manager reports, or `null` if it could not be read.
+type WebAppDiagnoseDataEvidenceUnit struct {
+	// The unit's active state.
+	Active string `json:"active"`
+
+	// The exit status the unit last recorded.
+	ExitStatus *int64 `json:"exit_status"`
+
+	// Whether the service manager has a definition for the unit at all. When it does not, the definition has to be regenerated, which is a redeploy.
+	Loaded bool `json:"loaded"`
+
+	// How many times the service has been restarted, as the system's own retry counter reports it.
+	Restarts *int64 `json:"restarts"`
+
+	// The unit's last result.
+	Result string `json:"result"`
+
+	// The unit's detailed state.
+	SubState string `json:"sub_state"`
+}
+
+// What was observed, tier by tier, so an interface
+// can show why the verdict is what it is. A tier
+// that could not be read is `null` rather than
+// empty: an unreadable signal is not the same as a
+// signal that reported nothing.
+type WebAppDiagnoseDataEvidence struct {
+	// What the container runtime reports, or `null` if it could not be read.
+	Container WebAppDiagnoseDataEvidenceContainer `json:"container"`
+
+	// Whether the application accepts a connection
+	// on its published port: `1` yes, `0` no, and
+	// `null` when there was no port to try.
+	//
+	// This is a connection, not a request: the
+	// question is whether the application's process
+	// is listening, so an API-only application that
+	// answers `404` at `/` is not reported as broken.
+	Loopback *int64 `json:"loopback"`
+
+	// The application's own memory accounting, or `null` when neither a live figure nor a configured limit could be read.
+	Memory WebAppDiagnoseDataEvidenceMemory `json:"memory"`
+
+	// The container runtime's own health probe, or `null` for an application whose container has none configured.
+	Probe WebAppDiagnoseDataEvidenceProbe `json:"probe"`
+
+	// Two records of the same fact, compared rather
+	// than probed: the port the container is
+	// published on, and the port the web server was
+	// told to proxy to. They disagree after a
+	// restore, which no restart can fix.
+	Proxy WebAppDiagnoseDataEvidenceProxy `json:"proxy"`
+
+	// What a visitor to the application's URL gets, or `null` when the fetch was not made — it is only worth making once the local tiers are known good.
+	Public WebAppDiagnoseDataEvidencePublic `json:"public"`
+
+	// Which side is broken, which is the value of
+	// this check: everything but `app` is a case
+	// restarting the application cannot fix.
+	//
+	// * `ok` — Every tier is fine, the public URL included.
+	// * `app` — The container itself is not answering.
+	// * `port` — The container is up and its published port is not usable.
+	// * `domain` — Both are fine and the public URL is not.
+	// * `unknown` — Not enough could be observed to s …
+	ThreeWay string `json:"three_way"`
+
+	// What the service manager reports, or `null` if it could not be read.
+	Unit WebAppDiagnoseDataEvidenceUnit `json:"unit"`
+}
+
+// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+type WebAppDiagnoseDataHealthMemory struct {
+	// The memory limit, or `null` if it is not capped.
+	LimitBytes *int64 `json:"limit_bytes"`
+
+	// How many times a process was killed for exceeding the limit during this run.
+	OomKills int64 `json:"oom_kills"`
+
+	// The highest memory use recorded during this run, or `null` once the run is over or if this server does not keep that figure.
+	PeakBytes *int64 `json:"peak_bytes"`
+}
+
+// What the most recent health check found, or `null`
+// if the application has not been checked yet. This
+// is read from the last check rather than measured
+// when you call this function, so it is at most one
+// check interval old.
+type WebAppDiagnoseDataHealth struct {
+	// What would repair the cause, which is not
+	// always a restart.
+	//
+	// * `none` — Nothing should be done to the application.
+	// * `restart` — Restarting it is a reasonable repair.
+	// * `rewire_proxy` — Its reverse-proxy configuration needs rewriting.
+	// * `notify` — Only a person can resolve this.
+	//
+	// Possible values: `none`, `restart`, `rewire_proxy`, `notify`.
+	Action string `json:"action"`
+
+	// What is wrong with the application.
+	//
+	// * `healthy` — Nothing.
+	// * `stopped_by_user` — You stopped it.
+	// * `deploying` — A deploy is in progress.
+	// * `never_deployed` — No deploy has ever succeeded.
+	// * `out_of_memory` — It exceeded its memory limit and was killed.
+	// * `crash_on_boot` — It has never started successfully since its last deploy.
+	// * `dead` — It ran and then stopped.
+	// * `unit_missing` — Its service d …
+	Cause string `json:"cause"`
+
+	// When the check ran, in ISO 8601 format.
+	CheckedAt string `json:"checked_at"`
+
+	// When the application was last seen healthy, in ISO 8601 format, or `null` if it never has been. An application that has not been healthy since its last deploy has never started successfully, which a restart cannot fix.
+	HealthyAt *string `json:"healthy_at"`
+
+	// How many incidents were recorded for this application in the last 24 hours. Only the most recent incidents are kept, so this figure stops climbing once enough of them have been recorded to show the pattern.
+	Incidents int64 `json:"incidents"`
+
+	// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+	Memory WebAppDiagnoseDataHealthMemory `json:"memory"`
+
+	// How many of the last 24 hours' incidents were the application exceeding its memory limit, counted over the same kept incidents as `incidents`. Past a few of these, raising the limit is the only thing that will help, and that is your decision.
+	OomIncidents int64 `json:"oom_incidents"`
+
+	// How many times the service has been restarted, as the system's own retry counter reports it. Omitted when that counter could not be read.
+	Restarts int64 `json:"restarts"`
+
+	// A summary of `cause` suitable for a status badge.
+	//
+	// * `healthy` — Nothing is wrong.
+	// * `stopped` — You stopped it.
+	// * `pending` — It is deploying, or has never deployed.
+	// * `recovering` — Something is wrong and a repair is available.
+	// * `needs_attention` — Something is wrong that only you can resolve.
+	// * `unreachable` — The application is fine and its domain is not.
+	// * `unknown` — Nothing could be read a …
+	State string `json:"state"`
+}
+
+// What the check found.
+type WebAppDiagnoseData struct {
+	// What would repair the cause, which is not always
+	// a restart. This function does not carry it out.
+	//
+	// * `none` — Nothing should be done to the application.
+	// * `restart` — Restarting it is a reasonable repair.
+	// * `rewire_proxy` — Its reverse-proxy configuration needs rewriting.
+	// * `notify` — Only a person can resolve this.
+	//
+	// Possible values: `none`, `restart`, `rewire_proxy`, `notify`.
+	Action string `json:"action"`
+
+	// What is wrong with the application.
+	//
+	// * `healthy` — Nothing.
+	// * `stopped_by_user` — You stopped it.
+	// * `deploying` — A deploy is in progress.
+	// * `never_deployed` — No deploy has ever succeeded.
+	// * `out_of_memory` — It exceeded its memory limit and was killed.
+	// * `crash_on_boot` — It has never started successfully since its last deploy.
+	// * `dead` — It ran and then stopped.
+	// * `unit_missing` — Its service d …
+	Cause string `json:"cause"`
+
+	// When this check ran, in ISO 8601 format.
+	CheckedAt string `json:"checked_at"`
+
+	// What the cause needs to say to be specific, and
+	// nothing more. The keys depend on the `cause`: an
+	// `out_of_memory` verdict carries `peak_bytes`,
+	// `limit_bytes` and `oom_kills`, a
+	// `stale_proxy_port` carries the ports that
+	// disagree as `was` and `now`, and a healthy
+	// application carries nothing.
+	Detail map[string]json.RawMessage `json:"detail"`
+
+	// The domain the application is bound to.
+	Domain string `json:"domain"`
+
+	// What was observed, tier by tier, so an interface
+	// can show why the verdict is what it is. A tier
+	// that could not be read is `null` rather than
+	// empty: an unreadable signal is not the same as a
+	// signal that reported nothing.
+	Evidence WebAppDiagnoseDataEvidence `json:"evidence"`
+
+	// What the most recent health check found, or `null`
+	// if the application has not been checked yet. This
+	// is read from the last check rather than measured
+	// when you call this function, so it is at most one
+	// check interval old.
+	Health WebAppDiagnoseDataHealth `json:"health"`
+
+	// The application's name (slug).
+	Name string `json:"name"`
+
+	// A summary of `cause` suitable for a status badge.
+	//
+	// * `healthy` — Nothing is wrong.
+	// * `stopped` — You stopped it.
+	// * `pending` — It is deploying, or has never deployed.
+	// * `recovering` — Something is wrong and a repair is available.
+	// * `needs_attention` — Something is wrong that only you can resolve.
+	// * `unreachable` — The application is fine and its domain is not.
+	// * `unknown` — Nothing could be read a …
+	State string `json:"state"`
+
+	// The application's live HTTPS URL.
+	URL string `json:"url"`
 }
 
 // WebAppFetchLogsArgs are the parameters of the UAPI function `WebApp::fetch_logs`.
@@ -552,6 +1060,34 @@ type WebAppGetAvailableData struct {
 	Runtimes map[string]WebAppGetAvailableDataRuntimesValue `json:"runtimes"`
 }
 
+// GetOwnedDomains calls the UAPI function `WebApp::get_owned_domains` — Return application domains
+//
+// This function reports which of the account's domains are served by a
+// deployed web application.
+//
+// **Note:**
+//
+// This function does not require the `webapp`
+// account feature. Turning the feature off does not stop or remove a
+// running application, so an interface needs a way to tell that an
+// application still owns a domain.
+//
+// Available since cPanel & WHM version cPanel 138.
+//
+// Documentation: https://api.docs.cpanel.net/specifications/cpanel.openapi/web-apps/webapp-get_owned_domains.md
+func (c *WebAppClient) GetOwnedDomains(ctx context.Context, extra ...cpanel.Args) (*cpanel.UAPIResult[[]WebAppGetOwnedDomainsDataItem], error) {
+	return cpanel.UAPICall[[]WebAppGetOwnedDomainsDataItem](ctx, c.c, http.MethodGet, "WebApp", "get_owned_domains", cpanel.CombineArgs(extra...))
+}
+
+// WebAppGetOwnedDomainsDataItem is a generated payload type.
+type WebAppGetOwnedDomainsDataItem struct {
+	// The domain the application serves.
+	Domain string `json:"domain"`
+
+	// The application's software system (runtime).
+	Runtime string `json:"runtime"`
+}
+
 // HasFeature calls the UAPI function `WebApp::has_feature` — Report whether the Web Apps feature is available.
 //
 // This function reports whether the Web Apps feature is available
@@ -593,10 +1129,126 @@ func (c *WebAppClient) List(ctx context.Context, extra ...cpanel.Args) (*cpanel.
 	return cpanel.UAPICall[[]WebAppListDataItem](ctx, c.c, http.MethodGet, "WebApp", "list", cpanel.CombineArgs(extra...))
 }
 
+// The application's linked database, or `null` if none is configured.
+type WebAppListDataItemDB struct {
+	// The environment variable names the database's
+	// connection details are injected under, directly
+	// into the deployed container's environment.
+	// These are not part of this application's own
+	// `env` field, and are never echoed back by any
+	// call.
+	EnvKeys []string `json:"env_keys"`
+
+	// The database server hostname.
+	Host string `json:"host"`
+
+	// The database name.
+	Name string `json:"name"`
+
+	// How the application got this database.
+	//
+	// * `create` — Provisioned by this application; `remove`
+	//   deletes the database itself.
+	// * `link` — An existing database this account owns
+	//   independently; `remove` only detaches the
+	//   dedicated dbuser created for it.
+	//
+	// Possible values: `create`, `link`.
+	Origin string `json:"origin"`
+
+	// The database server port.
+	Port int64 `json:"port"`
+}
+
+// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+type WebAppListDataItemHealthMemory struct {
+	// The memory limit, or `null` if it is not capped.
+	LimitBytes *int64 `json:"limit_bytes"`
+
+	// How many times a process was killed for exceeding the limit during this run.
+	OomKills int64 `json:"oom_kills"`
+
+	// The highest memory use recorded during this run, or `null` once the run is over or if this server does not keep that figure.
+	PeakBytes *int64 `json:"peak_bytes"`
+}
+
+// What the most recent health check found, or `null`
+// if the application has not been checked yet. This
+// is read from the last check rather than measured
+// when you call this function, so it is at most one
+// check interval old.
+type WebAppListDataItemHealth struct {
+	// What would repair the cause, which is not
+	// always a restart.
+	//
+	// * `none` — Nothing should be done to the application.
+	// * `restart` — Restarting it is a reasonable repair.
+	// * `rewire_proxy` — Its reverse-proxy configuration needs rewriting.
+	// * `notify` — Only a person can resolve this.
+	//
+	// Possible values: `none`, `restart`, `rewire_proxy`, `notify`.
+	Action string `json:"action"`
+
+	// What is wrong with the application.
+	//
+	// * `healthy` — Nothing.
+	// * `stopped_by_user` — You stopped it.
+	// * `deploying` — A deploy is in progress.
+	// * `never_deployed` — No deploy has ever succeeded.
+	// * `out_of_memory` — It exceeded its memory limit and was killed.
+	// * `crash_on_boot` — It has never started successfully since its last deploy.
+	// * `dead` — It ran and then stopped.
+	// * `unit_missing` — Its service d …
+	Cause string `json:"cause"`
+
+	// When the check ran, in ISO 8601 format.
+	CheckedAt string `json:"checked_at"`
+
+	// When the application was last seen healthy, in ISO 8601 format, or `null` if it never has been. An application that has not been healthy since its last deploy has never started successfully, which a restart cannot fix.
+	HealthyAt *string `json:"healthy_at"`
+
+	// How many incidents were recorded for this application in the last 24 hours. Only the most recent incidents are kept, so this figure stops climbing once enough of them have been recorded to show the pattern.
+	Incidents int64 `json:"incidents"`
+
+	// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+	Memory WebAppListDataItemHealthMemory `json:"memory"`
+
+	// How many of the last 24 hours' incidents were the application exceeding its memory limit, counted over the same kept incidents as `incidents`. Past a few of these, raising the limit is the only thing that will help, and that is your decision.
+	OomIncidents int64 `json:"oom_incidents"`
+
+	// How many times the service has been restarted, as the system's own retry counter reports it. Omitted when that counter could not be read.
+	Restarts int64 `json:"restarts"`
+
+	// A summary of `cause` suitable for a status badge.
+	//
+	// * `healthy` — Nothing is wrong.
+	// * `stopped` — You stopped it.
+	// * `pending` — It is deploying, or has never deployed.
+	// * `recovering` — Something is wrong and a repair is available.
+	// * `needs_attention` — Something is wrong that only you can resolve.
+	// * `unreachable` — The application is fine and its domain is not.
+	// * `unknown` — Nothing could be read a …
+	State string `json:"state"`
+}
+
 // Information about the most recent deploy, or `null` if the application has never deployed.
 type WebAppListDataItemLastDeploy struct {
 	// The unique identifier of the deploy.
 	DeployID string `json:"deploy_id"`
+
+	// The failure category of a failed deploy. Absent for a successful deploy.
+	ErrorCategory string `json:"error_category"`
+
+	// A short, single-line explanation of a failed deploy, limited to 2048 characters with control characters removed. Absent when there is nothing to add.
+	ErrorDetail string `json:"error_detail"`
+
+	// The stage of the deploy that failed. Absent for a successful deploy and for a deploy recorded before this field existed.
+	//
+	// Possible values: `source`, `pull`, `provision`, `build`, `output`, `config_sync`, `recreate`, `start`, `listen`, `internal`.
+	ErrorPhase string `json:"error_phase"`
+
+	// What went wrong within the failed phase, for example `oom_suspected`, `timeout`, `nonzero_exit`, `toolchain_missing`, `disk_quota`, `image_pull`, `ea_podman_missing`, `session`, `create_failed`, `not_listening` or `worker_exception`. The set can grow; treat an unrecognized value as unknown.
+	ErrorReason string `json:"error_reason"`
 
 	// The result of the deploy.
 	//
@@ -626,6 +1278,15 @@ type WebAppListDataItemSource struct {
 
 // WebAppListDataItem is a generated payload type.
 type WebAppListDataItem struct {
+	// Whether the scheduled health check may act on this
+	// application: `1` if it may, `0` if the application
+	// is to be left alone entirely, and `null` when it
+	// follows the server-wide setting.
+	//
+	// An application set to `0` is not checked at all, so
+	// its `health` block stops being updated.
+	AutoRecovery *int64 `json:"auto_recovery"`
+
 	// The application's configured build command, or `null` if it has no build step. Set from the preflight-suggested default at `stage`, and overridable via `configure`.
 	BuildCommand *string `json:"build_command"`
 
@@ -646,6 +1307,9 @@ type WebAppListDataItem struct {
 	// record even when several applications share a
 	// base name.
 	ContainerName *string `json:"container_name"`
+
+	// The application's linked database, or `null` if none is configured.
+	DB WebAppListDataItemDB `json:"db"`
 
 	// Whether a deploy has put the application live. This is `true` once the application holds a container or a deploy has completed successfully, and `false` for a freshly staged application or one whose only deploy failed.
 	Deployed bool `json:"deployed"`
@@ -682,6 +1346,13 @@ type WebAppListDataItem struct {
 
 	// The application's detected or user-selected framework, or `null` if unknown.
 	Framework *string `json:"framework"`
+
+	// What the most recent health check found, or `null`
+	// if the application has not been checked yet. This
+	// is read from the last check rather than measured
+	// when you call this function, so it is at most one
+	// check interval old.
+	Health WebAppListDataItemHealth `json:"health"`
 
 	// Information about the most recent deploy, or `null` if the application has never deployed.
 	LastDeploy WebAppListDataItemLastDeploy `json:"last_deploy"`
@@ -1074,6 +1745,36 @@ func (c *WebAppClient) Stage(ctx context.Context, args *WebAppStageArgs) (*cpane
 	return cpanel.UAPICall[WebAppStageData](ctx, c.c, http.MethodGet, "WebApp", "stage", args)
 }
 
+// The application's linked database, or `null` if none is configured. `null` for a newly staged app — a database is attached later via `configure` — but re-staging an existing, not-yet-deployed application preserves its existing database attachment.
+type WebAppStageDataDB struct {
+	// The environment variable names the database's
+	// connection details are injected under, directly
+	// into the deployed container's environment. These
+	// are not part of this application's own `env`
+	// field, and are never echoed back by any call.
+	EnvKeys []string `json:"env_keys"`
+
+	// The database server hostname.
+	Host string `json:"host"`
+
+	// The database name.
+	Name string `json:"name"`
+
+	// How the application got this database.
+	//
+	// * `create` — Provisioned by this application; `remove`
+	//   deletes the database itself.
+	// * `link` — An existing database this account owns
+	//   independently; `remove` only detaches the
+	//   dedicated dbuser created for it.
+	//
+	// Possible values: `create`, `link`.
+	Origin string `json:"origin"`
+
+	// The database server port.
+	Port int64 `json:"port"`
+}
+
 // Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
 type WebAppStageDataDefaults struct {
 	// The suggested build command, or `null` if no build step is needed.
@@ -1087,6 +1788,77 @@ type WebAppStageDataDefaults struct {
 
 	// The suggested startup command, or `null` for `static` applications.
 	StartupCommand *string `json:"startup_command"`
+}
+
+// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+type WebAppStageDataHealthMemory struct {
+	// The memory limit, or `null` if it is not capped.
+	LimitBytes *int64 `json:"limit_bytes"`
+
+	// How many times a process was killed for exceeding the limit during this run.
+	OomKills int64 `json:"oom_kills"`
+
+	// The highest memory use recorded during this run, or `null` once the run is over or if this server does not keep that figure.
+	PeakBytes *int64 `json:"peak_bytes"`
+}
+
+// What the most recent health check found, or `null`
+// if the application has not been checked yet. This
+// is read from the last check rather than measured
+// when you call this function, so it is at most one
+// check interval old.
+type WebAppStageDataHealth struct {
+	// What would repair the cause, which is not
+	// always a restart.
+	//
+	// * `none` — Nothing should be done to the application.
+	// * `restart` — Restarting it is a reasonable repair.
+	// * `rewire_proxy` — Its reverse-proxy configuration needs rewriting.
+	// * `notify` — Only a person can resolve this.
+	//
+	// Possible values: `none`, `restart`, `rewire_proxy`, `notify`.
+	Action string `json:"action"`
+
+	// What is wrong with the application.
+	//
+	// * `healthy` — Nothing.
+	// * `stopped_by_user` — You stopped it.
+	// * `deploying` — A deploy is in progress.
+	// * `never_deployed` — No deploy has ever succeeded.
+	// * `out_of_memory` — It exceeded its memory limit and was killed.
+	// * `crash_on_boot` — It has never started successfully since its last deploy.
+	// * `dead` — It ran and then stopped.
+	// * `unit_missing` — Its service d …
+	Cause string `json:"cause"`
+
+	// When the check ran, in ISO 8601 format.
+	CheckedAt string `json:"checked_at"`
+
+	// When the application was last seen healthy, in ISO 8601 format, or `null` if it never has been. An application that has not been healthy since its last deploy has never started successfully, which a restart cannot fix.
+	HealthyAt *string `json:"healthy_at"`
+
+	// How many incidents were recorded for this application in the last 24 hours. Only the most recent incidents are kept, so this figure stops climbing once enough of them have been recorded to show the pattern.
+	Incidents int64 `json:"incidents"`
+
+	// The application's own memory accounting at the time of the check, or `null` when neither a live figure nor a configured limit could be read.
+	Memory WebAppStageDataHealthMemory `json:"memory"`
+
+	// How many of the last 24 hours' incidents were the application exceeding its memory limit, counted over the same kept incidents as `incidents`. Past a few of these, raising the limit is the only thing that will help, and that is your decision.
+	OomIncidents int64 `json:"oom_incidents"`
+
+	// How many times the service has been restarted, as the system's own retry counter reports it. Omitted when that counter could not be read.
+	Restarts int64 `json:"restarts"`
+
+	// A summary of `cause` suitable for a status badge.
+	//
+	// * `healthy` — Nothing is wrong.
+	// * `stopped` — You stopped it.
+	// * `pending` — It is deploying, or has never deployed.
+	// * `recovering` — Something is wrong and a repair is available.
+	// * `needs_attention` — Something is wrong that only you can resolve.
+	// * `unreachable` — The application is fine and its domain is not.
+	// * `unknown` — Nothing could be read a …
+	State string `json:"state"`
 }
 
 // Information about the most recent deploy, or `null` if the application has never deployed.
@@ -1155,6 +1927,9 @@ type WebAppStageData struct {
 	// name.
 	ContainerName *string `json:"container_name"`
 
+	// The application's linked database, or `null` if none is configured. `null` for a newly staged app — a database is attached later via `configure` — but re-staging an existing, not-yet-deployed application preserves its existing database attachment.
+	DB WebAppStageDataDB `json:"db"`
+
 	// Suggested configuration values for the detected framework. Pass them to `WebApp::configure` as-is or after user adjustment.
 	Defaults WebAppStageDataDefaults `json:"defaults"`
 
@@ -1189,6 +1964,13 @@ type WebAppStageData struct {
 
 	// The application's detected or user-selected framework, or `null` if unknown.
 	Framework *string `json:"framework"`
+
+	// What the most recent health check found, or `null`
+	// if the application has not been checked yet. This
+	// is read from the last check rather than measured
+	// when you call this function, so it is at most one
+	// check interval old.
+	Health WebAppStageDataHealth `json:"health"`
 
 	// Information about the most recent deploy, or `null` if the application has never deployed.
 	LastDeploy WebAppStageDataLastDeploy `json:"last_deploy"`

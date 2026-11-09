@@ -67,7 +67,7 @@ type EA4GetRecommendationsDataValueItemOptionsItem struct {
 	//
 	// * The function **only** returns this value if one exists.
 	// * If the function does **not** return this value, then the interface will display informational text.
-	ReCommEndEd bool `json:"recommended"`
+	Recommended bool `json:"recommended"`
 
 	// The text that the user interface displays.
 	Text string `json:"text"`
